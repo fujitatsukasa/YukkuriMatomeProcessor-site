@@ -1,0 +1,100 @@
+[ 
+ 
+{ 
+"title"    : "「ゆっくりまとめプロセッサー」公式サイト公開！", 
+"desc"     : "「ゆっくりまとめプロセッサー」公式サイト公開！", 
+"category" : "製品紹介, ローンチ, 自動動画編集", 
+"url"      : "/2025-02-03-%E5%85%AC%E5%BC%8F%E3%82%B5%E3%82%A4%E3%83%88%E5%85%AC%E9%96%8B/", 
+"date"     : "February  3, 2025" 
+}, 
+ 
+{ 
+"title"    : "Sample blog post to learn markdown tips", 
+"desc"     : "Sample blog post to learn markdown tips", 
+"category" : "test", 
+"url"      : "/2020-02-28-sample-markdown/", 
+"date"     : "February 28, 2020" 
+}, 
+ 
+{ 
+"title"    : "Flake it till you make it", 
+"desc"     : "Flake it till you make it", 
+"category" : "books, test", 
+"url"      : "/2020-02-26-flake-it-till-you-make-it/", 
+"date"     : "February 26, 2020" 
+}, 
+ 
+ 
+{ 
+"title"    : "よくある質問", 
+"desc"     : "よくある質問", 
+"category" : "page", 
+"url"      : "/FAQ/", 
+"date"     : "January 1, 1970" 
+}, 
+ 
+{ 
+"title"    : "使い方", 
+"desc"     : "使い方", 
+"category" : "page", 
+"url"      : "/Instructions/", 
+"date"     : "January 1, 1970" 
+}, 
+ 
+{ 
+"title"    : "製品概要", 
+"desc"     : "製品概要", 
+"category" : "page", 
+"url"      : "/aboutme/", 
+"date"     : "January 1, 1970" 
+}, 
+ 
+{ 
+"title"    : "お問い合わせ", 
+"desc"     : "お問い合わせ", 
+"category" : "page", 
+"url"      : "/contact/", 
+"date"     : "January 1, 1970" 
+}, 
+ 
+{ 
+"title"    : "ダウンロード", 
+"desc"     : "ダウンロード", 
+"category" : "page", 
+"url"      : "/download/", 
+"date"     : "January 1, 1970" 
+}, 
+ 
+{ 
+"title"    : "ゆっくりまとめプロセッサー", 
+"desc"     : "ゆっくりまとめプロセッサー", 
+"category" : "page", 
+"url"      : "/", 
+"date"     : "January 1, 1970" 
+}, 
+ 
+{ 
+"title"    : "購入ページ", 
+"desc"     : "購入ページ", 
+"category" : "page", 
+"url"      : "/purchase/", 
+"date"     : "January 1, 1970" 
+}, 
+ 
+{ 
+"title"    : "Tag Index", 
+"desc"     : "Tag Index", 
+"category" : "page", 
+"url"      : "/tags/", 
+"date"     : "January 1, 1970" 
+}, 
+ 
+{ 
+"title"    : "アップデート履歴", 
+"desc"     : "アップデート履歴", 
+"category" : "page", 
+"url"      : "/update/", 
+"date"     : "January 1, 1970" 
+} 
+ 
+]
