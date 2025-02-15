@@ -89,7 +89,7 @@
   <meta property="og:description" content="ゆっくりまとめプロセッサーの全貌をご紹介">
 
   
-  <meta property="og:image" content="http://localhost:4000/assets/img/avatar-icon.png">
+  <meta property="og:image" content="http://localhost:4000/assets/img/%E6%94%BE%E5%B0%84%E7%B7%9A%E3%82%B5%E3%83%B3%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E5%9B%B3.png">
   
 
   
@@ -108,7 +108,7 @@
   <meta property="twitter:description" content="ゆっくりまとめプロセッサーの全貌をご紹介">
 
   
-  <meta name="twitter:image" content="http://localhost:4000/assets/img/avatar-icon.png">
+  <meta name="twitter:image" content="http://localhost:4000/assets/img/%E6%94%BE%E5%B0%84%E7%B7%9A%E3%82%B5%E3%83%B3%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E5%9B%B3.png">
   
 
   
@@ -152,9 +152,6 @@
           <li class="nav-item">
             <a class="nav-link" href="/contact">お問い合わせ</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/purchase">購入</a>
-          </li>
         <li class="nav-item">
           <a class="nav-link" id="nav-search-link" href="#" title="Search">
             <span id="nav-search-icon" class="fa fa-search"></span>
@@ -169,7 +166,7 @@
     <div class="avatar-container">
       <div class="avatar-img-border">
         <a href="http://localhost:4000/">
-          <img alt="Navigation bar avatar" class="avatar-img" src="/assets/img/avatar-icon.png" />
+          <img alt="Navigation bar avatar" class="avatar-img" src="/assets/img/%E6%94%BE%E5%B0%84%E7%B7%9A%E3%82%B5%E3%83%B3%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E5%9B%B3.png" />
         </a>
       </div>
     </div>
@@ -241,28 +238,69 @@
   /* Google Fonts の読み込み */
   @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
-  /* 全体の基本設定 */
+  /* ★★★ 全体の基本設定 ★★★ */
+  body {
+    background: #f7f8fa; /* ページ全体の背景色をやや明るいグレーに */
+    margin: 0; /* ブラウザデフォルト余白リセット */
+    padding: 0;
+  }
   .page-content {
     font-family: 'Roboto', sans-serif;
     line-height: 1.6;
     color: #333;
     max-width: 900px;
     margin: 0 auto;
-    padding: 1em;
+    padding: 1em 1em 2em;
+    background: #fff; /* 背景を白で囲んでカード風にする */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-radius: 12px;
+    text-align: center; /* 全文中央寄せ */
   }
-  /* セクション見出し */
+
+  /* ★★★ セクションカード全体を包むクラス ★★★ */
+  .section-card {
+    margin: 2em auto;
+    padding: 1.2em;
+    border-radius: 16px;
+    background: linear-gradient(to bottom right, #ffffff, #f0f7ff);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    text-align: center; /* 見出しと内容を中央揃え */
+    max-width: 800px;
+  }
+  /* 見出し（タイトル）のデザインをカード内でより豪華に */
   .section-title {
-    text-align: center;
-    font-size: 2.4em;
-    margin-top: 1em;
-    margin-bottom: 0.7em;
+    font-size: 2.2em;
+    margin: 0;          /* 不要な余白を削除してスッキリ */
     color: #222;
-    border-bottom: 3px solid #007BFF;
-    padding-bottom: 0.3em;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 0.2em;
   }
-  /* カルーセル全体：必ず position: relative; を指定 */
+  /* 虹色線を太く + シャドウを付けて目立たせる */
+  .section-title::after {
+    content: "";
+    display: block;
+    width: 60%;
+    height: 6px; /* 太さ調整(以前は3px) */
+    background: linear-gradient(to right, #007BFF, #28A745, #FFC107, #DC3545);
+    margin: 0.4em auto 0;
+    border-radius: 3px;
+    box-shadow: 0 0 6px rgba(0,0,0,0.2);
+  }
+
+  /* hr（ページ区切り線）をリッチに */
+  hr {
+    border: none;
+    height: 4px;  /* ちょっと太め */
+    margin: 2em 0;
+    border-radius: 2px;
+    background: linear-gradient(to right, #007BFF, #28A745, #FFC107, #DC3545);
+    box-shadow: 0 0 8px rgba(0,0,0,0.15);
+  }
+
+  /* ★★★ カルーセル ★★★ */
   .carousel {
-    position: relative; /* ここが重要 */
+    position: relative;
     width: 100%;
     overflow: hidden;
     margin: 2em auto;
@@ -270,6 +308,7 @@
     border-radius: 12px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     background: #fff;
+    text-align: left; /* 画像やボタンを自然に配置するため */
   }
   .carousel-track {
     display: flex;
@@ -286,23 +325,33 @@
     transition: transform 0.3s ease;
   }
   .carousel-slide img:hover {
-    transform: scale(1.05);
+    transform: scale(1.03);
   }
+
   /* ナビゲーション矢印 */
   .carousel-button {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: none;
+    background: rgba(0,0,0,0.4);
     border: none;
     color: #fff;
-    font-size: 3em;
+    font-size: 2em;
     cursor: pointer;
     z-index: 10;
-    transition: transform 0.2s ease;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .carousel-button:hover {
+    background: rgba(0,0,0,0.6);
+    transform: translateY(-50%) scale(1.1);
   }
   .carousel-button:active {
-    transform: translateY(-50%) scale(0.9);
+    transform: translateY(-50%) scale(0.95);
   }
   .carousel-button--left {
     left: 10px;
@@ -310,15 +359,16 @@
   .carousel-button--right {
     right: 10px;
   }
-  /* インジケーターをカルーセル内に配置 */
+
+  /* インジケーター */
   .carousel-indicators {
     position: absolute;
-    bottom: 5px; /* 下から5px */
-    left: 0%;  /* 中央寄せの基準 */
-    transform: translateX(0%);
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 0;
     display: flex;
-    gap: 5px;
+    gap: 8px;
   }
   .carousel-indicator {
     width: 12px;
@@ -326,12 +376,16 @@
     background: rgba(255,255,255,0.6);
     border-radius: 50%;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: background 0.3s ease, transform 0.3s ease;
+  }
+  .carousel-indicator:hover {
+    transform: scale(1.1);
   }
   .carousel-indicator.active {
     background: #007BFF;
   }
-  /* 全画面モーダル */
+
+  /* ★★★ 全画面モーダル（拡大表示用） ★★★ */
   .modal {
     display: none;
     position: fixed;
@@ -348,11 +402,13 @@
   .modal img {
     max-width: 60vw;
     max-height: 80vh;
+    box-shadow: 0 4px 15px rgba(255,255,255,0.2);
   }
   .modal .modal-info {
     color: #fff;
     margin-top: 1em;
     font-size: 1.2em;
+    text-align: center;
   }
   .modal .close-modal {
     position: absolute;
@@ -361,76 +417,121 @@
     font-size: 2.5em;
     color: #fff;
     cursor: pointer;
+    transition: transform 0.2s ease;
   }
-  /* 以下は既存コンテンツのスタイル（特徴など） */
+  .modal .close-modal:hover {
+    transform: scale(1.15);
+  }
+
+  /* ★★★ 特徴などのコンテンツブロック ★★★ */
   .feature-item {
     text-align: center;
     padding: 1.2em;
     margin: 2em auto;
     border: 1px solid #eee;
     border-radius: 12px;
-    background-color: #fafafa;
+    background: linear-gradient(to bottom right, #ffffff, #f7fafc);
     max-width: 700px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   .feature-item:hover {
     transform: translateY(-5px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
   }
   .feature-item h3 {
-    margin-bottom: 0.7em;
+    margin-bottom: 0.5em; /* やや詰める */
     font-size: 1.6em;
+    font-weight: 700;
   }
-  .usage-list {
-    max-width: 800px;
-    margin: 0 auto 2em;
-    font-size: 1.15em;
-    line-height: 1.8;
-    list-style-type: decimal;
-    padding-left: 1.2em;
-  }
+
+  /* ★★★ blockquote（お客様の声）をリッチに ★★★ */
   blockquote {
-    border-left: 4px solid #ccc;
-    margin: 1.8em 0;
-    padding-left: 1em;
-    font-style: italic;
-    color: #555;
+    position: relative;
+    margin: 1.8em auto;
+    padding: 1.2em 1.5em;
+    border: none;
+    border-radius: 12px;
+    background: #fefefe;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    font-style: normal;
+    color: #444;
+    max-width: 700px;
+    display: inline-block;
+    text-align: left; /* 引用テキストは左寄せ */
   }
+  blockquote::before {
+    content: "“";
+    font-family: serif;
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    font-size: 3em;
+    color: #999;
+  }
+  blockquote::after {
+    content: "”";
+    font-family: serif;
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    font-size: 3em;
+    color: #999;
+  }
+  blockquote span {
+    display: block;
+    margin-top: 1em;
+    text-align: right;
+    color: #666;
+    font-style: italic;
+  }
+
+  /* リンクホバー */
   a {
     color: #007BFF;
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
   }
   a:hover {
     color: #0056b3;
-    text-decoration: underline;
+    text-shadow: 0 0 3px rgba(0,123,255,0.5);
   }
+
   @media screen and (max-width: 768px) {
-    .section-title { font-size: 2em; }
+    .section-title { font-size: 1.8em; }
+    .section-title::after {
+      width: 80%;
+      height: 4px;
+    }
+    .modal img {
+      max-width: 90vw;
+      max-height: 60vh;
+    }
   }
 </style>
 
 <div class="page-content">
-  <h2 class="section-title">製品概要</h2>
-  <p style="text-align: center;">
-    <strong>「ゆっくりまとめプロセッサー」</strong>は、OTM株式会社が社内で開発した<strong>自動動画編集ソフトウェア</strong>です。<br />
-    サイトから台本や画像、掲示板からスレッド情報を瞬時に取得し、動画編集プロセスを半自動化。<br />
-    動画配信者、動画クリエイター、未経験者、副業を模索する社会人など、幅広いユーザーに支持されています。
-  </p>
 
-  <!-- カルーセル -->
+  <!-- 製品概要 セクションカード -->
+  <div class="section-card">
+    <h2 class="section-title">製品概要</h2>
+    <p>
+      <strong>「ゆっくりまとめプロセッサー」</strong>は、OTM株式会社が社内で開発した<br />
+      <strong>自動動画編集ソフトウェア</strong>です。<br />
+      サイトから台本や画像、掲示板からスレッド情報を瞬時に取得し<br />
+      動画編集プロセスを半自動化。<br />
+      動画配信者、動画クリエイター、未経験者、副業を模索する社会人など<br />
+      幅広いユーザーに支持されています。
+    </p>
+  </div>
+
+  <!-- カルーセルのみページ全体 -->
   <div class="carousel">
     <div class="carousel-track">
       <div class="carousel-slide">
         <img src="/assets/img/製品イメージ1.png" alt="製品イメージ1" title="クリックして拡大表示（全画面）" />
       </div>
-      <div class="carousel-slide">
-        <img src="/assets/img/製品イメージ2.png" alt="製品イメージ2" title="クリックして拡大表示（全画面）" />
-      </div>
-      <div class="carousel-slide">
-        <img src="/assets/img/製品イメージ3.png" alt="製品イメージ3" title="クリックして拡大表示（全画面）" />
-      </div>
+      <!-- 画像を増やしたければ同様に <div class="carousel-slide">...</div> を追加 -->
     </div>
     <button class="carousel-button carousel-button--left">&#10094;</button>
     <button class="carousel-button carousel-button--right">&#10095;</button>
@@ -439,97 +540,80 @@
 
   <hr />
 
-  <!-- 既存のセクション -->
-  <h2 class="section-title">特徴</h2>
-  <div class="feature-item">
-    <h3 style="color:#007BFF;">直感的な操作性</h3>
-    <p>ゆっくりムービーメーカー4に最適化したUIで、初心者でもすぐに使いこなせます。</p>
+  <!-- 特徴 セクションカード -->
+  <div class="section-card">
+    <h2 class="section-title">特徴</h2>
+    <div class="feature-item">
+      <h3 style="color:#007BFF;">圧倒的な業務効率化</h3>
+      <p>最も時間を要する動画編集の工程を自動化<br />
+      大幅なコスト削減と生産性の向上を実現します。</p>
+    </div>
+    <div class="feature-item">
+      <h3 style="color:#28A745;">先進的な自動編集技術</h3>
+      <p>台本、画像素材、掲示板情報などを瞬時に取得し単調作業を一掃。<br />
+      社内リソースをより戦略的な業務に集中させられます。</p>
+    </div>
+    <div class="feature-item">
+      <h3 style="color:#DC3545;">柔軟なサポートと改善サイクル</h3>
+      <p>お客様のフィードバックを迅速に反映し、製品を常に最適化。<br />
+      ビジネス価値を最大化するためのパートナーとして伴走いたします。</p>
+    </div>
   </div>
-  <div class="feature-item">
-    <h3 style="color:#28A745;">自動動画編集機能</h3>
-    <p>台本、画像、掲示板のスレッド情報を瞬時に取得し、編集プロセスを自動化。手間を大幅に削減します。</p>
+
+  <hr />
+
+  <!-- お客様の声 セクションカード -->
+  <div class="section-card">
+    <h2 class="section-title">お客様の声</h2>
+    <blockquote>
+      「<strong>ゆっくりまとめプロセッサー</strong>の導入で、1日2本だった動画が半分の時間で20本に増加。<br />
+      収益面でも10倍の効果を実感！」
+      <span>*— 動画クリエイター 高橋様*</span>
+    </blockquote>
+    <blockquote>
+      「毎日の動画編集によるストレスが軽減され、余裕を持って新たなことに挑戦できるようになりました。」
+      <span>*— ゆっくり系配信者 S様*</span>
+    </blockquote>
+    <blockquote>
+      「台本作成時の煩雑な作業が自動入れ替え機能で解消。作業効率が格段に向上しました！」
+      <span>*— IT系個人事業主 A様*</span>
+    </blockquote>
+    <blockquote>
+      「チーム全体の動画編集がシンプルになり、最終チェックのみで多数の動画が完成。売上と士気の向上に貢献！」
+      <span>*— タブナジア合同会社様*</span>
+    </blockquote>
+    <p>
+      弊社はお客様の声をもとに製品を進化させています。ご不明点やご要望はお気軽にお知らせください。
+    </p>
   </div>
-  <div class="feature-item">
-    <h3 style="color:#FFC107;">柔軟なデータ連携</h3>
-    <p>複数のまとめサイトや掲示板から最新情報を効率的に収集。ユーザーのニーズに合わせたカスタム設定も可能です。</p>
+
+  <hr />
+
+  <!-- 開発者情報 セクションカード -->
+  <div class="section-card">
+    <h2 class="section-title">開発者情報</h2>
+    <p>
+      <strong>開発者</strong>: 藤田僚&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+      <strong>所属</strong>: OTM株式会社&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+      <strong>公式サイト</strong>: <a href="https://your-company-website.example" target="_blank">OTM株式会社</a>
+    </p>
   </div>
-  <div class="feature-item">
-    <h3 style="color:#DC3545;">高い信頼性と安全性</h3>
-    <p>最新のセキュリティ対策と安定した動作により、個人・法人問わず安心してご利用いただけます。</p>
+
+  <hr />
+
+  <!-- 今後の展望 セクションカード -->
+  <div class="section-card">
+    <h2 class="section-title">今後の展望</h2>
+    <p>
+      当社は<strong>定期的なアップデート</strong>と<strong>新機能の追加</strong>を計画しております。<br />
+      最新情報やアップデートは、公式サイトおよび各種SNSで随時発信いたしますのでご期待ください。
+    </p>
   </div>
 
   <hr />
 
-  <h2 class="section-title">詳細機能</h2>
-  <h3 class="subsection-title">自動スレッド＆画像取得</h3>
-  <p style="text-align: center;">
-    指定のまとめサイトから最新のスレッドと画像を自動で取得し、整理。<br />
-    <em>(利点：手作業を排除し、常に最新のコンテンツを活用可能)</em>
-  </p>
-  <h3 class="subsection-title">ゆっくりムービーメーカー4連携</h3>
-  <p style="text-align: center;">
-    取得した台本と画像を、ゆっくりムービーメーカー4の編集環境に即座に反映。<br />
-    <em>(利点：動画制作時間の短縮と作業効率の向上)</em>
-  </p>
-  <h3 class="subsection-title">カスタム編集テンプレート</h3>
-  <p style="text-align: center;">
-    ユーザーの好みに合わせた編集テンプレートを多数用意。<br />
-    <em>(利点：ブランドイメージやコンテンツスタイルに合わせた柔軟な編集が実現)</em>
-  </p>
-
-  <hr />
-
-  <h2 class="section-title">使い方の流れ</h2>
-  <ol class="usage-list">
-    <li><strong>インストール:</strong> 公式サイトからインストーラーをダウンロードし、ウィザード形式でセットアップ。</li>
-    <li><strong>初期設定:</strong> 画面上のガイドに従い、各連携設定を実施。</li>
-    <li><strong>自動編集開始:</strong> 台本、画像、スレッドの自動取得と編集テンプレートの適用で、瞬時に高品質な動画を生成。</li>
-  </ol>
-
-  <hr />
-
-  <h2 class="section-title">お客様の声</h2>
-  <blockquote>
-    「<strong>ゆっくりまとめプロセッサー</strong>の導入で、1日2本だった動画が半分の時間で20本に増加。<br />
-    収益面でも10倍の効果を実感！」<br />
-    <span style="font-size:0.9em;">*— 動画クリエイター 高橋様*</span>
-  </blockquote>
-  <blockquote>
-    「毎日の動画編集によるストレスが軽減され、余裕を持って新たなことに挑戦できるようになりました。」<br />
-    <span style="font-size:0.9em;">*— ゆっくり系配信者 S様*</span>
-  </blockquote>
-  <blockquote>
-    「台本作成時の煩雑な作業が自動入れ替え機能で解消。作業効率が格段に向上しました！」<br />
-    <span style="font-size:0.9em;">*— IT系個人事業主 A様*</span>
-  </blockquote>
-  <blockquote>
-    「チーム全体の動画編集がシンプルになり、最終チェックのみで多数の動画が完成。売上と士気の向上に貢献！」<br />
-    <span style="font-size:0.9em;">*— タブナジア合同会社様*</span>
-  </blockquote>
-  <p style="text-align: center;">
-    弊社はお客様の声をもとに製品を進化させています。ご不明点やご要望はお気軽にお知らせください。
-  </p>
-
-  <hr />
-
-  <h2 class="section-title">開発者情報</h2>
-  <p style="text-align: center;">
-    <strong>開発者</strong>: 藤田僚&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-    <strong>所属</strong>: OTM株式会社&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-    <strong>公式サイト</strong>: <a href="https://your-company-website.example" target="_blank">OTM株式会社</a>
-  </p>
-
-  <hr />
-
-  <h2 class="section-title">今後の展望</h2>
-  <p style="text-align: center;">
-    当社は<strong>定期的なアップデート</strong>と<strong>新機能の追加</strong>を計画しております。<br />
-    最新情報やアップデートは、公式サイトおよび各種SNSで随時発信いたしますのでご期待ください。
-  </p>
-
-  <hr />
-
-  <p style="text-align: center; font-size: 0.9em;">
+  <!-- お問い合わせ -->
+  <p style="font-size: 0.9em;">
     本製品に関するお問い合わせは、<a href="mailto:fujita.otm@gmail.com">こちら</a>までお気軽にご連絡ください。
   </p>
 </div>
@@ -555,7 +639,7 @@
   };
   setSlidePosition();
 
-  // Create carousel indicators inside the carousel container
+  // Create carousel indicators
   const indicatorsContainer = document.querySelector('.carousel-indicators');
   for (let i = 0; i < slideCount; i++) {
     const dot = document.createElement('div');
@@ -593,7 +677,7 @@
     moveToSlide(nextIndex);
   }, 5000);
 
-  // Modal for full-screen image display
+  // Modal for full-screen image
   const modal = document.getElementById('modal');
   const modalImage = document.getElementById('modal-image');
   const modalInfo = document.getElementById('modal-info');
