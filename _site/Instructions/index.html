@@ -259,7 +259,13 @@
     margin-bottom: 1.5em;
     color: #856404;
     text-align: center;
+    white-space: pre-line;
+  }
+  /* 「※初期設定※」用のスタイル */
+  .initial-setting {
+    font-size: 1.5em;
     font-weight: bold;
+    margin-top: 0.5em;
   }
   .toc {
     background: #f0f8ff;
@@ -356,9 +362,16 @@
 
 <div class="page-content">
 
-  <!-- 注意書き -->
+  <!-- 注意書き（起動時のショートカットについて） -->
   <div class="notice">
     起動時にYMM4のショートカット「台本ファイルを開く」がF2キーに割り当てされます。
+  </div>
+
+  <!-- 初期設定の注意書き -->
+  <div class="notice">
+    <div class="initial-setting">※初期設定※</div>
+    一番最初に「台本編集」の設定【YMM4パス】で
+    YukkuriMovieMaker.exeのパスを通してから台本取得してください。
   </div>
 
   <!-- 目次 -->
