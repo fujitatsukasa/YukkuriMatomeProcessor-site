@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>http://localhost:4000/2025-02-03-%E5%85%AC%E5%BC%8F%E3%82%B5%E3%82%A4%E3%83%88%E5%85%AC%E9%96%8B/</loc>
-<lastmod>2025-02-03T00:00:00-04:00</lastmod>
-</url>
-<url>
 <loc>http://localhost:4000/old/2020-02-26-flake-it-till-you-make-it/</loc>
 </url>
 <url>
