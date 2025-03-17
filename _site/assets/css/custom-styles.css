@@ -162,3 +162,9 @@
     display: block;     /* ブロック要素にして margin が有効になるように */
     margin: 0 auto;     /* 横方向の中央揃え */
   }
+
+  
+/* ナビゲーションバー内のリンクのテキストサイズを変更 */
+.navbar-custom .navbar-nav .nav-link {
+  font-size: 20px; /* お好みのサイズに調整してください */
+}

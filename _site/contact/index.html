@@ -130,7 +130,7 @@
   
 
 
-  <nav class="navbar navbar-expand-xl navbar-light fixed-top navbar-custom top-nav-regular"><a class="navbar-brand" href="http://localhost:4000/">ゆっくりまとめプロセッサー</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+  <nav class="navbar navbar-expand-xl navbar-light fixed-top navbar-custom top-nav-regular"><a class="navbar-brand" href="http://localhost:4000/aboutme">ゆっくりまとめプロセッサー</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
@@ -144,9 +144,6 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/Instructions">使い方</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/FAQ">よくある質問</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/update">アップデート</a>
@@ -167,7 +164,7 @@
   
     <div class="avatar-container">
       <div class="avatar-img-border">
-        <a href="http://localhost:4000/">
+        <a href="http://localhost:4000/aboutme">
           <img alt="Navigation bar avatar" class="avatar-img" src="/assets/img/%E6%94%BE%E5%B0%84%E7%B7%9A%E3%82%B5%E3%83%B3%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E5%9B%B3.png" />
         </a>
       </div>
@@ -228,6 +225,7 @@
 
 
 
+
 </header>
 
 
@@ -240,7 +238,12 @@
   /* Google Fonts の読み込み */
   @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
-  /* 全体の基本設定 */
+  /* ★ ページ全体の背景を明るいグレーに、ページコンテンツをカード風に ★ */
+  body {
+    background: #f7f8fa;
+    margin: 0;
+    padding: 0;
+  }
   .page-content {
     font-family: 'Roboto', sans-serif;
     max-width: 800px;
@@ -248,7 +251,22 @@
     padding: 1.5em;
     color: #333;
     line-height: 1.6;
+    background: #fff; /* カード風の背景 */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-radius: 12px;
   }
+
+  /* ★ 虹色ライン (hr) ★ */
+  hr {
+    border: none;
+    height: 4px;
+    margin: 2em 0;
+    border-radius: 2px;
+    background: linear-gradient(to right, #007BFF, #28A745, #FFC107, #DC3545);
+    box-shadow: 0 0 8px rgba(0,0,0,0.15);
+  }
+
+  /* ★ ページタイトル (h2.section-title) ★ */
   h2.section-title {
     text-align: center;
     font-size: 2em;
@@ -257,126 +275,91 @@
     border-bottom: 2px solid #007BFF;
     padding-bottom: 0.3em;
   }
-  /* 問い合わせフォーム */
-  .contact-form {
-    background: #f8f8f8;
-    border: 1px solid #ccc;
-    padding: 1.5em;
-    border-radius: 8px;
-    margin-bottom: 2em;
-  }
-  .contact-form label {
-    display: block;
-    margin: 1em 0 0.5em;
-    font-weight: 500;
-  }
-  .contact-form input,
-  .contact-form textarea,
-  .contact-form input[type="file"] {
-    width: 100%;
-    padding: 0.8em;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  .contact-form button {
-    margin-top: 1em;
-    padding: 0.8em 1.2em;
-    background-color: #007BFF;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  .contact-form button:hover {
-    background-color: #0056b3;
-  }
-  /* 添付ファイルに関する注意 */
-  .file-note {
-    font-size: 0.9em;
-    color: #777;
-    margin-top: 0.5em;
-  }
-  /* その他の連絡手段 */
-  .other-contacts {
-    text-align: center;
-    margin-top: 2em;
-    padding: 1em;
+
+  /* ★ 「連絡手段」をカード風にまとめる ★ */
+  .other-contacts-card {
+    background: #f0f8ff;
     border: 1px solid #007BFF;
-    background-color: #f0f8ff;
     border-radius: 8px;
+    padding: 1.5em;
+    margin-top: 2em;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-align: center;
   }
-  .other-contacts h3 {
-    font-size: 1.6em;
+  .other-contacts-card h3 {
+    font-size: 1.8em;
     color: #007BFF;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.8em;
   }
-  .other-contacts ul {
+  .other-contacts-card ul {
     list-style: none;
     padding-left: 0;
-    margin: 0;
+    margin: 0 auto;
+    max-width: 400px; /* 項目の横幅を抑えるなら */
+    text-align: left; /* リンクなどは左寄せに */
   }
-  .other-contacts li {
-    margin: 0.8em 0;
+  .other-contacts-card li {
+    margin: 1em 0;
     font-size: 1em;
   }
-  .other-contacts a {
-    text-decoration: underline;
+  .other-contacts-card a {
     color: #007BFF;
+    text-decoration: underline;
     font-weight: 500;
     transition: color 0.3s ease;
   }
-  .other-contacts a:hover {
+  .other-contacts-card a:hover {
     color: #0056b3;
+  }
+
+  /* ★ 問い合わせ方法のサンプルリストに少し余白を追加 */
+  .contact-example {
+    margin-top: 1em;
+    line-height: 1.8;
+  }
+
+  /* リンクのホバーエフェクト（お好みで） */
+  a {
+    color: #007BFF;
+    text-decoration: none;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+  }
+  a:hover {
+    color: #0056b3;
+    text-shadow: 0 0 3px rgba(0,123,255,0.5);
   }
 </style>
 
 <div class="page-content">
   <h2 class="section-title">お問い合わせ</h2>
-  <p style="text-align: center;">下記のフォームまたは各連絡手段から、お気軽にご連絡ください。</p>
+  <p style="text-align: center;">
+    ご不明な点やご要望がございましたら、以下の連絡手段をご利用ください。
+  </p>
 
-  <!-- メールフォーム (Formspree を利用) -->
-  <div class="contact-form">
-    <form action="https://formspree.io/f/yourFormID" method="POST" enctype="multipart/form-data">
-      <label for="name">お名前</label>
-      <input type="text" id="name" name="name" required="" />
+  <hr />
 
-      <label for="email">メールアドレス</label>
-      <input type="email" id="email" name="_replyto" required="" />
-
-      <label for="message">お問い合わせ内容</label>
-      <textarea id="message" name="message" rows="6" required=""></textarea>
-
-      <label for="attachment">画像または映像の添付（任意）（zipファイル推奨）</label>
-      <input type="file" id="attachment" name="attachment" accept="image/*,video/*" />
-      <p class="file-note">
-        ※ファイルサイズが大きい場合は、自動でアップロードできません。<br />
-        その場合は、<a href="https://gigafile.nu" target="_blank">ギガファイル便</a>をご利用ください。
-      </p>
-
-      <button type="submit">送信する</button>
-    </form>
-  </div>
-
-  <!-- その他の連絡手段 -->
-  <div class="other-contacts">
-    <h3>その他の連絡手段</h3>
+  <!-- 連絡手段（カード風） -->
+  <div class="other-contacts-card">
+    <h3>連絡手段</h3>
     <ul>
       <li>
-        <strong>メール:</strong> 
-        <a href="mailto:fujita.otm@gmail.com">https://mailto:fujita.otm@gmail.com</a>
+        <strong>メール:</strong><br />
+        <a href="mailto:fujita.otm@gmail.com">fujita.otm@gmail.com</a>
       </li>
       <li>
-        <strong>Twitter:</strong> 
+        <strong>Twitter (X):</strong><br />
         <a href="https://x.com/OTM_corp" target="_blank">https://x.com/OTM_corp</a>
       </li>
       <li>
-        <strong>Discord:</strong> 
-        <a href="https://discordapp.com/users/762244902124912695" target="_blank">https://discordapp.com/users/762244902124912695</a>
+        <strong>Discord:</strong><br />
+        <a href="https://discordapp.com/users/762244902124912695" target="_blank">discordapp.com/users/762244902124912695</a>
       </li>
-    </ul>
-  </div>
-</div>
+      <li>
+        <strong>Chatwork:</strong><br />
+        <a href="https://www.chatwork.com/fujita_otm" target="_blank">https://www.chatwork.com/fujita_otm</a>
+      </li>
+
+</ul></div></div>
 
 
       

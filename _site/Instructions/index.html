@@ -130,7 +130,7 @@
   
 
 
-  <nav class="navbar navbar-expand-xl navbar-light fixed-top navbar-custom top-nav-regular"><a class="navbar-brand" href="http://localhost:4000/">ゆっくりまとめプロセッサー</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+  <nav class="navbar navbar-expand-xl navbar-light fixed-top navbar-custom top-nav-regular"><a class="navbar-brand" href="http://localhost:4000/aboutme">ゆっくりまとめプロセッサー</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
@@ -144,9 +144,6 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/Instructions">使い方</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/FAQ">よくある質問</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/update">アップデート</a>
@@ -167,7 +164,7 @@
   
     <div class="avatar-container">
       <div class="avatar-img-border">
-        <a href="http://localhost:4000/">
+        <a href="http://localhost:4000/aboutme">
           <img alt="Navigation bar avatar" class="avatar-img" src="/assets/img/%E6%94%BE%E5%B0%84%E7%B7%9A%E3%82%B5%E3%83%B3%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E5%9B%B3.png" />
         </a>
       </div>
@@ -228,6 +225,7 @@
 
 
 
+
 </header>
 
 
@@ -240,9 +238,12 @@
   /* Google Fonts の読み込み */
   @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
-  /* ====================== */
-  /* 基本スタイル */
-  /* ====================== */
+  /* ★★★ ページ全体の背景とカード風デザイン ★★★ */
+  body {
+    background: #f7f8fa; /* ページ全体の背景色をやや明るいグレーに */
+    margin: 0;
+    padding: 0;
+  }
   .page-content {
     font-family: 'Roboto', sans-serif;
     max-width: 900px;
@@ -250,7 +251,22 @@
     padding: 1.5em;
     color: #333;
     line-height: 1.6;
+    background: #fff; /* 白背景でカード風 */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-radius: 12px;
   }
+
+  /* ★★★ 虹色ライン (hr) ★★★ */
+  hr {
+    border: none;
+    height: 4px;  /* ちょっと太め */
+    margin: 2em 0;
+    border-radius: 2px;
+    background: linear-gradient(to right, #007BFF, #28A745, #FFC107, #DC3545);
+    box-shadow: 0 0 8px rgba(0,0,0,0.15);
+  }
+
+  /* ★★★ 注意書き（.notice） ★★★ */
   .notice {
     background: #fff3cd;
     border: 1px solid #ffeeba;
@@ -260,6 +276,7 @@
     color: #856404;
     text-align: center;
     white-space: pre-line;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   }
   /* 「※初期設定※」用のスタイル */
   .initial-setting {
@@ -267,12 +284,15 @@
     font-weight: bold;
     margin-top: 0.5em;
   }
+
+  /* ★★★ 目次 (TOC) をカード風に ★★★ */
   .toc {
     background: #f0f8ff;
     border: 1px solid #007BFF;
     border-radius: 8px;
     padding: 1em 1.2em;
     margin-bottom: 2em;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   }
   .toc h3 {
     margin: 0;
@@ -304,6 +324,8 @@
     color: #0056b3;
     text-decoration: underline;
   }
+
+  /* ★★★ 見出し (セクションタイトル) ★★★ */
   h2.section-title {
     font-size: 2.4em;
     margin: 1.5em 0 0.5em;
@@ -318,14 +340,14 @@
     color: #444;
     text-align: center;
   }
+
+  /* セクションの本文 */
   .section-content p {
     text-align: center;
     margin: 0.8em 0;
   }
 
-  /* ====================== */
-  /* YouTube埋め込み用スタイル */
-  /* ====================== */
+  /* ★★★ YouTube埋め込み用 ★★★ */
   .video-container {
     position: relative;
     padding-bottom: 56.25%; /* 16:9 アスペクト比 */
@@ -341,9 +363,7 @@
     height: 100%;
   }
 
-  /* ====================== */
-  /* カードスタイル */
-  /* ====================== */
+  /* ★★★ カードスタイル (.subsection-card) ★★★ */
   .subsection-card {
     background: #fff;
     border: 1px solid #ddd;
@@ -357,6 +377,17 @@
   .subsection-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  /* ★★★ リンクのホバーエフェクト ★★★ */
+  a {
+    color: #007BFF;
+    text-decoration: none;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+  }
+  a:hover {
+    color: #0056b3;
+    text-shadow: 0 0 3px rgba(0,123,255,0.5);
   }
 </style>
 
@@ -374,7 +405,7 @@
     YukkuriMovieMaker.exeのパスを通してから台本取得してください。
   </div>
 
-  <!-- 目次 -->
+  <!-- 目次 (TOC) -->
   <div class="toc">
     <h3>目次</h3>
     <ul>
@@ -382,6 +413,8 @@
       <li class="toc-h2"><a href="#script-editing">台本編集</a></li>
     </ul>
   </div>
+
+  <hr />
 
   <!-- セクション: 台本取得 -->
   <div id="script-retrieval" class="section-content">
