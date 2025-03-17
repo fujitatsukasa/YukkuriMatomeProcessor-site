@@ -2,7 +2,9 @@
 layout: page
 title: 製品概要
 subtitle: ゆっくりまとめプロセッサーの全貌をご紹介
+permalink: /
 ---
+
 
 <style>
   /* Google Fonts の読み込み */
