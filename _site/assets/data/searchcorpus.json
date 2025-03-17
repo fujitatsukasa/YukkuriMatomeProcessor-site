@@ -42,14 +42,6 @@
 }, 
  
 { 
-"title"    : "製品概要", 
-"desc"     : "製品概要", 
-"category" : "page", 
-"url"      : "/aboutme/", 
-"date"     : "January 1, 1970" 
-}, 
- 
-{ 
 "title"    : "お問い合わせ", 
 "desc"     : "お問い合わせ", 
 "category" : "page", 
@@ -74,8 +66,8 @@
 }, 
  
 { 
-"title"    : "製品概要", 
-"desc"     : "製品概要", 
+"title"    : "ホーム", 
+"desc"     : "ホーム", 
 "category" : "page", 
 "url"      : "/", 
 "date"     : "January 1, 1970" 

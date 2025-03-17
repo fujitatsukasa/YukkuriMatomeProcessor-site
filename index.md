@@ -1,7 +1,7 @@
 ---
 layout: page
-title: 製品概要
-subtitle: ゆっくりまとめプロセッサーの全貌をご紹介
+title: ホーム
+subtitle: 動画編集効率化ツール【ゆっくりまとめプロセッサー】
 permalink: /
 ---
 
