@@ -74,6 +74,14 @@
 }, 
  
 { 
+"title"    : "製品概要", 
+"desc"     : "製品概要", 
+"category" : "page", 
+"url"      : "/", 
+"date"     : "January 1, 1970" 
+}, 
+ 
+{ 
 "title"    : "購入ページ", 
 "desc"     : "購入ページ", 
 "category" : "page", 
