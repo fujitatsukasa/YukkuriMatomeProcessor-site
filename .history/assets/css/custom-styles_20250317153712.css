@@ -171,6 +171,11 @@
 
 
 .navbar-brand.navbar-brand-logo img {
-  max-height: 60px !important; /* お好みの高さに調整 */
+  max-height: 100px !important; /* お好みの高さに調整 */
   height: auto !important;
+}
+
+
+.navbar {
+  min-height: 100px;  /* 必要に応じて調整 */
 }
