@@ -191,7 +191,11 @@ subtitle: ログインから7日間は全機能が試用できます。
       // 最新リリースの設定
       if (releases.length > 0) {
         const latest = releases[0];
-        document.getElementById('latest-release-button').href = latest.zipball_url;
+        // 「YukkuriMatomeProcessor.zip」アセットを優先で取得
+        const latestAsset = latest.assets.find(a => a.name === 'YukkuriMatomeProcessor.zip')
+                        || latest.assets[0];
+        document.getElementById('latest-release-button').href =
+          latestAsset ? latestAsset.browser_download_url : '#';
         // リリースノートは Markdown 形式
         const notesMarkdown = latest.body || 'リリースノートはありません。';
         const notesHTML = marked.parse(notesMarkdown);
@@ -208,10 +212,12 @@ subtitle: ログインから7日間は全機能が試用できます。
       releases.forEach((release, index) => {
         if (index === 0) return; // 最新は除外
         const li = document.createElement('li');
-        
+
         // リリースリンク
+        const asset = release.assets.find(a => a.name === 'YukkuriMatomeProcessor.zip')
+                    || release.assets[0];
         const a = document.createElement('a');
-        a.href = release.zipball_url;
+        a.href = asset ? asset.browser_download_url : '#';
         a.target = '_blank';
         a.textContent = release.name || release.tag_name;
 
