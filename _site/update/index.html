@@ -202,9 +202,9 @@
 <header class="header-section ">
 <div class="intro-header ">
   
-  <div class="container-md">
+  <div class="container-fluid">
     <div class="row">
-      <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
+      <div class="col-12">
         <div class="page-heading">
           <h1>アップデート履歴</h1>
           
@@ -229,256 +229,271 @@
 </header>
 
 
-<main class=" container-md ">
-  <div class="row">
-    <div class=" col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 ">
+<main class="container-fluid p-0">
+  <div class="row no-gutters">
+    <div class="col-12">
       
 
       <style>
-  /* Google Fonts の読み込み */
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;600;700;800&display=swap');
 
-  /* ★★★ ページ全体の背景を明るいグレーにし、カード風に ★★★ */
+  * {
+    box-sizing: border-box;
+  }
+
   body {
-    background: #f7f8fa; /* ページ全体の背景色をやや明るいグレーに */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: 'Noto Sans JP', 'Inter', sans-serif;
     margin: 0;
     padding: 0;
   }
-  /* ★★★ ページ本体 .page-content をカード風に ★★★ */
+
   .page-content {
-    font-family: 'Roboto', sans-serif;
-    max-width: 1200px !important; /* 横幅を 1200px に拡大 */
-    margin: 0 auto;
-    padding: 1.5em;
-    color: #333;
-    line-height: 1.6;
-    background: #fff; /* 白背景でカード風 */
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    border-radius: 12px;
-    text-align: center;
-  }
-
-  /* ★★★ 区切り線 (hr) を虹色に ★★★ */
-  hr {
-    border: none;
-    height: 4px;  /* ちょっと太め */
-    margin: 2em 0;
-    border-radius: 2px;
-    background: linear-gradient(to right, #007BFF, #28A745, #FFC107, #DC3545);
-    box-shadow: 0 0 8px rgba(0,0,0,0.15);
-  }
-
-  /* 目次 (TOC) カード風にしてもOKなら下記スタイルを適用 */
-  .toc {
-    background: #f0f8ff;
-    border: 1px solid #007BFF;
-    border-radius: 8px;
-    padding: 1em 1.2em;
-    margin-bottom: 2em;
-    text-align: center; /* 内部は左寄せ */
-  }
-  .toc h3 {
+    max-width: 100%;
     margin: 0;
-    font-size: 1.6em;
-    color: #007BFF;
-    border-bottom: 1px dashed #007BFF;
-    padding-bottom: 0.3em;
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  /* ヒーローセクション */
+  .hero-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 100px 20px 60px;
     text-align: center;
   }
-  .toc ul {
-    list-style: none;
-    padding-left: 0;
-    margin: 1em 0 0 0;
-  }
-  .toc li {
-    margin: 0.5em 0;
-  }
-  .toc a {
-    text-decoration: none;
-    color: #007BFF;
-    font-weight: 500;
-    transition: color 0.3s ease;
-  }
-  .toc a:hover {
-    color: #0056b3;
-    text-decoration: underline;
+
+  .hero-section h1 {
+    font-size: 3.5em;
+    font-weight: 900;
+    margin-bottom: 20px;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    color: #ffffff;
   }
 
-  /* ★★★ アップデート（リリース）セクションのカード風 ★★★ */
-  .release-section {
-    margin-bottom: 2.5em;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 1em;
-    background: #f9f9ff;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    border-radius: 8px;
-    padding: 1.5em;
-    text-align: left; /* リリース情報は左寄せ推奨 */
-    margin-top: 2em;
+  .hero-section p {
+    font-size: 1.4em;
+    opacity: 1;
+    color: #ffffff;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    max-width: 800px;
+    margin: 0 auto;
+    font-weight: 600;
   }
 
-  /* リリースタイトルを中央寄せしたい場合は text-align:center; に */
+  /* リリースセクション */
+  .releases-section {
+    background: white;
+    padding: 80px 20px;
+    min-height: 100vh;
+  }
+
+  .releases-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .loading {
+    text-align: center;
+    padding: 60px 20px;
+    font-size: 1.5em;
+    color: #667eea;
+    font-weight: 700;
+  }
+
+  .release-card {
+    background: linear-gradient(135deg, #f5f7fa 0%, #ffffff 100%);
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 40px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    border-left: 6px solid #667eea;
+    transition: all 0.3s ease;
+  }
+
+  .release-card:hover {
+    transform: translateX(10px);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+  }
+
+  .release-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
   .release-title {
-    font-size: 1.8em;
-    text-align: center;
-    margin-bottom: 0.3em;
-    color: #222;
-    position: relative;
-    display: inline-block;
-    padding-bottom: 0.2em;
-    margin-top: 0;
-  }
-  /* 虹色下線を少し太めに */
-  .release-title::after {
-    content: "";
-    display: block;
-    width: 50%;
-    height: 3px;
-    background: linear-gradient(to right, #007BFF, #28A745, #FFC107, #DC3545);
-    margin: 0.4em auto 0;
-    border-radius: 2px;
+    font-size: 2em;
+    font-weight: 900;
+    color: #2d3748;
+    margin: 0;
   }
 
   .release-date {
-    text-align: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 50px;
     font-size: 0.9em;
-    color: #777;
-    margin-bottom: 1em;
-  }
-  /* リリースノート本文 */
-  .release-note {
-    margin: 1em auto;
-    padding: 1em;
-    background: #fafafa;
-    border: 1px solid #eee;
-    border-radius: 8px;
-    max-width: 1000px; /* 幅を限定 */
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
   }
 
-  /* リリースノート内リンクの装飾 */
-  .release-note a {
-    color: #007BFF;
+  .release-body {
+    color: #2d3748;
+    line-height: 1.9;
+    font-size: 1.05em;
+    font-weight: 500;
+  }
+
+  .release-body h1,
+  .release-body h2,
+  .release-body h3 {
+    color: #1a202c;
+    font-weight: 800;
+    margin-top: 30px;
+    margin-bottom: 15px;
+  }
+
+  .release-body h2 {
+    font-size: 1.6em;
+    border-bottom: 3px solid #667eea;
+    padding-bottom: 10px;
+  }
+
+  .release-body ul {
+    padding-left: 25px;
+  }
+
+  .release-body li {
+    margin: 12px 0;
+    color: #2d3748;
+    font-weight: 500;
+  }
+
+  .release-body strong {
+    color: #1a202c;
+    font-weight: 800;
+  }
+
+  .release-body code {
+    background: #f7fafc;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    color: #e53e3e;
+    font-weight: 700;
+  }
+
+  .release-body a {
+    color: #667eea;
     text-decoration: none;
-  }
-  .release-note a:hover {
-    text-decoration: underline;
+    font-weight: 700;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
   }
 
-  /* メディアクエリで小さな画面用に調整 */
+  .release-body a:hover {
+    border-bottom-color: #667eea;
+  }
+
   @media (max-width: 768px) {
+    .hero-section h1 {
+      font-size: 2.2em;
+    }
+
     .release-title {
       font-size: 1.5em;
     }
-    .release-title::after {
-      width: 70%;
-      height: 2px;
+
+    .release-header {
+      flex-direction: column;
+      align-items: flex-start;
     }
-    .release-note {
-      max-width: 90%;
-    }
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 </style>
 
-<!-- marked.js の読み込み（Markdown → HTML 用） -->
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-
-<div class="page-content">
-  
-  <!-- 目次 (TOC) -->
-  <div class="toc">
-    <h3>目次</h3>
-    <ul id="update-toc">
-      <li>ロード中…</li>
-    </ul>
-  </div>
-
-  <hr />
-
-  <!-- リリース情報表示エリア -->
-  <div id="updates">
-    ロード中…
-  </div>
-
+<!-- ヒーローセクション -->
+<div class="hero-section">
+  <h1>📦 アップデート履歴</h1>
+  <p>最新のリリースノートと変更履歴をご確認ください</p>
 </div>
 
+<!-- リリースセクション -->
+<div class="releases-section">
+  <div id="releases-container" class="releases-container">
+    <div class="loading">リリース情報を読み込んでいます...</div>
+  </div>
+</div>
+
+<!-- marked.js -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
 <script>
-  // GitHub のリポジトリ情報
   const owner = 'fujitatsukasa';
   const repo = 'YukkuriMatomeProcessor';
   const apiUrl = `https://api.github.com/repos/${owner}/${repo}/releases`;
 
-  // ヘルパー関数: 日付を整形 (YYYY-MM-DD)
   function formatDate(dateString) {
     const date = new Date(dateString);
     const year = date.getFullYear();
     const month = ('0' + (date.getMonth() + 1)).slice(-2);
     const day = ('0' + date.getDate()).slice(-2);
-    return `${year}-${month}-${day}`;
+    return `${year}年${month}月${day}日`;
   }
 
   fetch(apiUrl)
     .then(response => response.json())
     .then(releases => {
-      const tocEl = document.getElementById('update-toc');
-      const updatesEl = document.getElementById('updates');
-      
-      // クリア
-      tocEl.innerHTML = '';
-      updatesEl.innerHTML = '';
+      const container = document.getElementById('releases-container');
 
       if (!Array.isArray(releases) || releases.length === 0) {
-        tocEl.innerHTML = '<li>リリース情報がありません。</li>';
-        updatesEl.innerHTML = '<p>リリース情報がありません。</p>';
+        container.innerHTML = '<div class="loading">リリース情報がありません</div>';
         return;
       }
-      
-      // 各リリースを降順（最新順）に表示
-      releases.forEach((release, idx) => {
-        // 各リリースのセクションID（tag_name or id）
-        const releaseId = 'release-' + (release.tag_name || release.id);
-        
-        // 目次項目の生成
-        const li = document.createElement('li');
-        li.innerHTML = `<a href="#${releaseId}">${release.name || release.tag_name} (${formatDate(release.published_at)})</a>`;
-        tocEl.appendChild(li);
-        
-        // リリースセクションの生成（カード風）
-        const section = document.createElement('div');
-        section.className = 'release-section';
-        section.id = releaseId;
-        
-        // タイトルと日付
+
+      container.innerHTML = '';
+
+      releases.forEach(release => {
+        const card = document.createElement('div');
+        card.className = 'release-card';
+        card.id = 'release-' + (release.tag_name || release.id);
+
+        const header = document.createElement('div');
+        header.className = 'release-header';
+
         const title = document.createElement('h2');
         title.className = 'release-title';
         title.textContent = release.name || release.tag_name;
-        section.appendChild(title);
-        
-        const dateEl = document.createElement('div');
-        dateEl.className = 'release-date';
-        dateEl.textContent = formatDate(release.published_at);
-        section.appendChild(dateEl);
-        
-        // リリースノート (Markdown → HTML via marked.js)
-        const note = document.createElement('div');
-        note.className = 'release-note';
-        const markdown = release.body || 'リリースノートはありません。';
-        note.innerHTML = marked.parse(markdown);
-        section.appendChild(note);
-        
-        // セクションを追加
-        updatesEl.appendChild(section);
 
-        // リリース間の区切り線を挿入（もし必要なら）
-        if (idx < releases.length - 1) {
-          // ここに <hr> を挿入したければ追加
-          // const hr = document.createElement('hr');
-          // updatesEl.appendChild(hr);
-        }
+        const date = document.createElement('div');
+        date.className = 'release-date';
+        date.textContent = formatDate(release.published_at);
+
+        header.appendChild(title);
+        header.appendChild(date);
+
+        const body = document.createElement('div');
+        body.className = 'release-body';
+        const markdown = release.body || 'リリースノートはありません。';
+        body.innerHTML = marked.parse(markdown);
+
+        card.appendChild(header);
+        card.appendChild(body);
+        container.appendChild(card);
       });
     })
     .catch(error => {
-      document.getElementById('update-toc').innerHTML = '<li>リリース情報の取得に失敗しました。</li>';
-      document.getElementById('updates').innerHTML = '<p>リリース情報の取得に失敗しました。</p>';
+      document.getElementById('releases-container').innerHTML =
+        '<div class="loading" style="color: #e53e3e;">リリース情報の取得に失敗しました</div>';
       console.error(error);
     });
 </script>
@@ -495,9 +510,9 @@
 
 
   <footer>
-  <div class="container-md beautiful-jekyll-footer">
+  <div class="container-fluid beautiful-jekyll-footer">
     <div class="row">
-      <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
+      <div class="col-12">
       
 <ul class="list-inline text-center footer-links"><li class="list-inline-item">
     <a href="mailto:fujita.otm@gmail.com" title="Email me">
