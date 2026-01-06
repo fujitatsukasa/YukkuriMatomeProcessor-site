@@ -31,141 +31,229 @@ permalink: /
     border-radius: 0;
   }
 
-  /* ========== ヒーローセクション ========== */
+  /* ========== ヒーローセクション - 超カッコいいスライダー ========== */
   .hero-section {
     position: relative;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 140px 20px 100px;
-    text-align: center;
+    height: 100vh;
+    min-height: 700px;
+    overflow: hidden;
+    margin-top: -5rem;
+  }
+
+  /* スライダーコンテナ */
+  .hero-slider {
+    position: relative;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
   }
 
-  .hero-section::before {
+  .hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+    z-index: 1;
+  }
+
+  .hero-slide.active {
+    opacity: 1;
+    z-index: 2;
+  }
+
+  .hero-slide::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    opacity: 0.3;
-    animation: backgroundScroll 20s linear infinite;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.8) 100%);
+    z-index: 1;
   }
 
-  /* アニメーション背景効果 */
-  .hero-section::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background:
-      radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
-      radial-gradient(circle at 40% 20%, rgba(118, 75, 162, 0.2) 0%, transparent 50%);
-    animation: morphBackground 15s ease-in-out infinite;
-  }
-
-  @keyframes backgroundScroll {
-    0% { transform: translate(0, 0); }
-    100% { transform: translate(60px, 60px); }
-  }
-
-  @keyframes morphBackground {
-    0%, 100% { transform: translate(0, 0) rotate(0deg); }
-    33% { transform: translate(-5%, 5%) rotate(120deg); }
-    66% { transform: translate(5%, -5%) rotate(240deg); }
-  }
-
-  .hero-content {
-    position: relative;
-    z-index: 2;
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  /* ヒーローイラストレーション */
-  .hero-illustration {
+  .hero-slide-image {
     width: 100%;
-    max-width: 600px;
-    margin: 40px auto 0;
-    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.2));
-    animation: float 3s ease-in-out infinite;
+    height: 100%;
+    object-fit: cover;
+    animation: kenBurns 20s ease-in-out infinite alternate;
+  }
+
+  @keyframes kenBurns {
+    0% {
+      transform: scale(1) translate(0, 0);
+    }
+    100% {
+      transform: scale(1.1) translate(-20px, -20px);
+    }
+  }
+
+  /* マスコットキャラクター専用スタイル */
+  .hero-slide.mascot-slide .hero-slide-image {
+    object-fit: contain;
+    animation: float 4s ease-in-out infinite;
+  }
+
+  .hero-slide.mascot-slide::before {
+    background: linear-gradient(135deg, rgba(255, 107, 107, 0.85) 0%, rgba(238, 90, 111, 0.85) 100%);
   }
 
   @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
+    0%, 100% {
+      transform: translateY(0) scale(1);
+    }
+    50% {
+      transform: translateY(-30px) scale(1.05);
+    }
   }
 
-  .hero-badge {
-    display: inline-block;
-    background: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(10px);
-    padding: 10px 24px;
-    border-radius: 50px;
-    font-size: 1em;
-    font-weight: 800;
-    margin-bottom: 20px;
-    border: 2px solid rgba(255, 255, 255, 0.5);
-    animation: fadeInDown 0.6s ease-out;
-    color: #ffffff;
-    text-shadow:
-      2px 2px 6px rgba(0, 0, 0, 0.6),
-      0 0 15px rgba(0, 0, 0, 0.4);
-    -webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.3);
+  /* スライダーコンテンツオーバーレイ */
+  .hero-slide-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 3;
+    width: 90%;
+    max-width: 1200px;
   }
 
-  .hero-title {
-    font-size: 4.5em;
+  .hero-slide-title {
+    font-size: 5em;
     font-weight: 900;
-    margin: 20px 0;
-    line-height: 1.1;
-    animation: fadeInUp 0.6s ease-out 0.2s both;
-    letter-spacing: -0.03em;
     color: #ffffff !important;
+    margin-bottom: 30px;
     text-shadow:
-      3px 3px 8px rgba(0, 0, 0, 0.7),
-      -2px -2px 4px rgba(0, 0, 0, 0.5),
-      0 0 30px rgba(0, 0, 0, 0.5) !important;
-    -webkit-text-stroke: 1.5px rgba(0, 0, 0, 0.4);
+      4px 4px 12px rgba(0, 0, 0, 0.9),
+      0 0 40px rgba(0, 0, 0, 0.6);
+    -webkit-text-stroke: 2px rgba(0, 0, 0, 0.5);
+    animation: slideInUp 1s ease-out;
   }
 
-  .hero-subtitle {
-    font-size: 1.6em;
-    margin: 20px auto 40px;
-    max-width: 850px;
-    line-height: 1.8;
-    animation: fadeInUp 0.6s ease-out 0.4s both;
+  .hero-slide-subtitle {
+    font-size: 2em;
     font-weight: 700;
     color: #ffffff !important;
-    text-shadow:
-      2px 2px 6px rgba(0, 0, 0, 0.7),
-      0 0 15px rgba(0, 0, 0, 0.4);
-    -webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.3);
-  }
-
-  .hero-subtitle strong {
-    font-weight: 900;
-    font-size: 1.15em;
+    margin-bottom: 40px;
     text-shadow:
       3px 3px 8px rgba(0, 0, 0, 0.8),
       0 0 20px rgba(0, 0, 0, 0.5);
-    -webkit-text-stroke: 0.8px rgba(0, 0, 0, 0.4);
+    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.4);
+    animation: slideInUp 1s ease-out 0.2s both;
   }
 
-  .hero-cta {
+  .hero-slide-cta {
+    animation: slideInUp 1s ease-out 0.4s both;
+  }
+
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(60px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* スライダーナビゲーションドット */
+  .hero-slider-dots {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
     display: flex;
-    gap: 20px;
+    gap: 15px;
+  }
+
+  .hero-slider-dot {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  }
+
+  .hero-slider-dot:hover {
+    background: rgba(255, 255, 255, 0.7);
+    transform: scale(1.3);
+  }
+
+  .hero-slider-dot.active {
+    background: #ffffff;
+    width: 45px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.5);
+  }
+
+  /* スライダー矢印 */
+  .hero-slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 40px;
-    animation: fadeInUp 0.6s ease-out 0.6s both;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    font-size: 2.5em;
+    color: #ffffff;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+  }
+
+  .hero-slider-arrow:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: translateY(-50%) scale(1.15);
+    box-shadow: 0 10px 40px rgba(255, 255, 255, 0.3);
+  }
+
+  .hero-slider-arrow.left {
+    left: 40px;
+  }
+
+  .hero-slider-arrow.right {
+    right: 40px;
+  }
+
+  /* スライド番号インジケーター */
+  .hero-slider-counter {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    padding: 15px 30px;
+    border-radius: 50px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .hero-slider-counter span {
+    font-size: 1.5em;
+    font-weight: 900;
+    color: #ffffff;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+  }
+
+  .hero-slider-counter .current {
+    font-size: 2em;
+    color: #ffd700;
   }
 
   .btn {
@@ -798,12 +886,58 @@ permalink: /
 
   /* ========== レスポンシブ ========== */
   @media (max-width: 768px) {
-    .hero-title {
-      font-size: 2.2em;
+    .hero-section {
+      min-height: 600px;
     }
 
-    .hero-subtitle {
-      font-size: 1.1em;
+    .hero-slide-title {
+      font-size: 2.5em;
+    }
+
+    .hero-slide-subtitle {
+      font-size: 1.3em;
+    }
+
+    .hero-slider-arrow {
+      width: 50px;
+      height: 50px;
+      font-size: 1.8em;
+    }
+
+    .hero-slider-arrow.left {
+      left: 15px;
+    }
+
+    .hero-slider-arrow.right {
+      right: 15px;
+    }
+
+    .hero-slider-counter {
+      top: 20px;
+      right: 20px;
+      padding: 10px 20px;
+    }
+
+    .hero-slider-counter span {
+      font-size: 1.2em;
+    }
+
+    .hero-slider-counter .current {
+      font-size: 1.6em;
+    }
+
+    .hero-slider-dots {
+      bottom: 20px;
+      gap: 10px;
+    }
+
+    .hero-slider-dot {
+      width: 12px;
+      height: 12px;
+    }
+
+    .hero-slider-dot.active {
+      width: 35px;
     }
 
     .section-title {
@@ -824,13 +958,27 @@ permalink: /
       transform: scale(1);
     }
 
-    .hero-cta {
-      flex-direction: column;
-    }
-
     .btn {
       width: 100%;
       max-width: 300px;
+      padding: 15px 35px;
+      font-size: 1em;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-slide-title {
+      font-size: 2em;
+    }
+
+    .hero-slide-subtitle {
+      font-size: 1.1em;
+    }
+
+    .hero-slider-arrow {
+      width: 40px;
+      height: 40px;
+      font-size: 1.5em;
     }
   }
 
@@ -840,61 +988,75 @@ permalink: /
   }
 </style>
 
-<!-- ヒーローセクション -->
+<!-- 超カッコいいヒーロースライダー -->
 <div class="hero-section">
-  <div class="hero-content">
-    <div class="hero-badge">🚀 動画編集の革命がここに</div>
-    <h1 class="hero-title">ゆっくりまとめプロセッサー</h1>
-    <p class="hero-subtitle">
-      <strong>1日2本だった動画制作が20本に。</strong><br>
-      AI技術を活用した最先端の自動動画編集ソフトウェアで、<br>
-      あなたの創造性を最大限に解放します。
-    </p>
-    <div class="hero-cta">
-      <a href="/download" class="btn btn-primary">🎬 今すぐ無料トライアル</a>
-      <a href="#features" class="btn btn-secondary">📖 詳しく見る</a>
+  <div class="hero-slider">
+    <!-- スライド1: マスコットキャラクター「柳生おたま」 -->
+    <div class="hero-slide mascot-slide active">
+      <img src="/assets/img/mascot-otama.png" alt="柳生おたま - ゆっくりまとめプロセッサーのマスコット" class="hero-slide-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 800%22%3E%3Crect fill=%22%23ff6b6b%22 width=%22800%22 height=%22800%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2260%22 fill=%22white%22%3E柳生おたま%3C/text%3E%3C/svg%3E'">
+      <div class="hero-slide-content">
+        <h1 class="hero-slide-title">ゆっくりまとめプロセッサー</h1>
+        <p class="hero-slide-subtitle">
+          可愛いマスコット「柳生おたま」と一緒に<br>
+          <strong>動画制作を10倍効率化</strong>
+        </p>
+        <div class="hero-slide-cta">
+          <a href="/download" class="btn btn-primary">🎬 今すぐ無料トライアル</a>
+          <a href="#features" class="btn btn-secondary">📖 詳しく見る</a>
+        </div>
+      </div>
     </div>
 
-    <!-- SVGイラストレーション -->
-    <svg class="hero-illustration" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- モニター画面 -->
-      <rect x="100" y="100" width="600" height="400" rx="20" fill="white" opacity="0.95"/>
-      <rect x="100" y="100" width="600" height="50" rx="20" fill="url(#gradient1)"/>
-      <rect x="120" y="170" width="260" height="150" rx="10" fill="#667eea" opacity="0.2"/>
-      <rect x="400" y="170" width="260" height="150" rx="10" fill="#764ba2" opacity="0.2"/>
-      <rect x="120" y="340" width="540" height="140" rx="10" fill="#f093fb" opacity="0.2"/>
+    <!-- スライド2: 編集画面 -->
+    <div class="hero-slide">
+      <img src="/assets/img/screenshot-editor.png" alt="動画編集画面 - 直感的で使いやすいインターフェース" class="hero-slide-image" onerror="this.src='/assets/img/製品イメージ1.png'">
+      <div class="hero-slide-content">
+        <h1 class="hero-slide-title">直感的な編集画面</h1>
+        <p class="hero-slide-subtitle">
+          ドラッグ&ドロップで簡単編集<br>
+          <strong>初心者でもプロ級の動画が作れる</strong>
+        </p>
+        <div class="hero-slide-cta">
+          <a href="/Instructions" class="btn btn-primary">使い方を見る</a>
+          <a href="/download" class="btn btn-secondary">ダウンロード</a>
+        </div>
+      </div>
+    </div>
 
-      <!-- 装飾的な要素 -->
-      <circle cx="150" cy="125" r="8" fill="white" opacity="0.9"/>
-      <circle cx="180" cy="125" r="8" fill="white" opacity="0.9"/>
-      <circle cx="210" cy="125" r="8" fill="white" opacity="0.9"/>
+    <!-- スライド3: 取得画面 -->
+    <div class="hero-slide">
+      <img src="/assets/img/screenshot-getter.png" alt="自動取得画面 - AI が自動で素材を収集" class="hero-slide-image" onerror="this.src='/assets/img/製品イメージ2.png'">
+      <div class="hero-slide-content">
+        <h1 class="hero-slide-title">自動素材収集</h1>
+        <p class="hero-slide-subtitle">
+          AIが自動で最適な素材を取得<br>
+          <strong>1日2本だった動画が20本に</strong>
+        </p>
+        <div class="hero-slide-cta">
+          <a href="/purchase" class="btn btn-primary">今すぐ購入</a>
+          <a href="/FAQ" class="btn btn-secondary">よくある質問</a>
+        </div>
+      </div>
+    </div>
 
-      <!-- 動画アイコン -->
-      <circle cx="250" cy="245" r="30" fill="white"/>
-      <path d="M240 235 L265 245 L240 255 Z" fill="#667eea"/>
+    <!-- 左矢印 -->
+    <div class="hero-slider-arrow left" onclick="heroSliderPrev()">❮</div>
 
-      <circle cx="530" cy="245" r="30" fill="white"/>
-      <path d="M520 235 L545 245 L520 255 Z" fill="#764ba2"/>
+    <!-- 右矢印 -->
+    <div class="hero-slider-arrow right" onclick="heroSliderNext()">❯</div>
 
-      <!-- AI処理を表す矢印 -->
-      <path d="M 380 245 L 420 245" stroke="white" stroke-width="4" stroke-linecap="round"/>
-      <path d="M 410 235 L 420 245 L 410 255" fill="white"/>
+    <!-- ナビゲーションドット -->
+    <div class="hero-slider-dots">
+      <div class="hero-slider-dot active" onclick="heroSliderGoTo(0)"></div>
+      <div class="hero-slider-dot" onclick="heroSliderGoTo(1)"></div>
+      <div class="hero-slider-dot" onclick="heroSliderGoTo(2)"></div>
+    </div>
 
-      <!-- 魔法のエフェクト -->
-      <g opacity="0.8">
-        <path d="M 400 200 L 405 210 L 415 213 L 405 218 L 400 228 L 395 218 L 385 213 L 395 210 Z" fill="#ffd700"/>
-        <path d="M 450 190 L 453 197 L 460 199 L 453 202 L 450 209 L 447 202 L 440 199 L 447 197 Z" fill="#ffd700"/>
-        <path d="M 350 210 L 353 217 L 360 219 L 353 222 L 350 229 L 347 222 L 340 219 L 347 217 Z" fill="#ffd700"/>
-      </g>
-
-      <!-- グラデーション定義 -->
-      <defs>
-        <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
-          <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
-        </linearGradient>
-      </defs>
-    </svg>
+    <!-- スライド番号 -->
+    <div class="hero-slider-counter">
+      <span class="current">1</span>
+      <span> / 3</span>
+    </div>
   </div>
 </div>
 
@@ -1133,6 +1295,104 @@ permalink: /
 </div>
 
 <script>
+  // ========== ヒーロースライダー機能 ==========
+  let currentHeroSlide = 0;
+  const heroSlides = document.querySelectorAll('.hero-slide');
+  const heroDots = document.querySelectorAll('.hero-slider-dot');
+  const heroSlideCount = heroSlides.length;
+  let heroSlideInterval;
+
+  // スライドを表示する関数
+  function showHeroSlide(index) {
+    // 範囲外チェック
+    if (index >= heroSlideCount) {
+      currentHeroSlide = 0;
+    } else if (index < 0) {
+      currentHeroSlide = heroSlideCount - 1;
+    } else {
+      currentHeroSlide = index;
+    }
+
+    // 全スライドを非表示
+    heroSlides.forEach(slide => {
+      slide.classList.remove('active');
+    });
+
+    // 全ドットを非アクティブ
+    heroDots.forEach(dot => {
+      dot.classList.remove('active');
+    });
+
+    // 現在のスライドとドットをアクティブに
+    heroSlides[currentHeroSlide].classList.add('active');
+    heroDots[currentHeroSlide].classList.add('active');
+
+    // カウンターを更新
+    document.querySelector('.hero-slider-counter .current').textContent = currentHeroSlide + 1;
+  }
+
+  // 次のスライド
+  function heroSliderNext() {
+    showHeroSlide(currentHeroSlide + 1);
+    resetHeroSlideInterval();
+  }
+
+  // 前のスライド
+  function heroSliderPrev() {
+    showHeroSlide(currentHeroSlide - 1);
+    resetHeroSlideInterval();
+  }
+
+  // 特定のスライドに移動
+  function heroSliderGoTo(index) {
+    showHeroSlide(index);
+    resetHeroSlideInterval();
+  }
+
+  // 自動再生をリセット
+  function resetHeroSlideInterval() {
+    clearInterval(heroSlideInterval);
+    heroSlideInterval = setInterval(() => {
+      heroSliderNext();
+    }, 5000); // 5秒ごとに切り替え
+  }
+
+  // 自動再生開始
+  heroSlideInterval = setInterval(() => {
+    heroSliderNext();
+  }, 5000);
+
+  // キーボード操作対応
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') {
+      heroSliderPrev();
+    } else if (e.key === 'ArrowRight') {
+      heroSliderNext();
+    }
+  });
+
+  // タッチスワイプ対応
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  document.querySelector('.hero-slider').addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+
+  document.querySelector('.hero-slider').addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  });
+
+  function handleSwipe() {
+    if (touchEndX < touchStartX - 50) {
+      heroSliderNext();
+    }
+    if (touchEndX > touchStartX + 50) {
+      heroSliderPrev();
+    }
+  }
+
   // カウントアップアニメーション
   const animateCount = (element, target, suffix = '') => {
     const duration = 2000;
