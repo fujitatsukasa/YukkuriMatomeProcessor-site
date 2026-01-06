@@ -1,43 +1,472 @@
 ---
 layout: page
-title: 購入ページ
+title: 購入
+subtitle: あなたに最適なプランを選んでください
 permalink: /purchase/
 ---
 
 <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;600;700;800&display=swap');
+
+  * {
+    box-sizing: border-box;
+  }
+
   body {
-    background: #f9f9f9;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: 'Noto Sans JP', 'Inter', sans-serif;
   }
-  .container {
-    width: 100%;
-    max-width: 1200px; /* コンテナ横幅を1200pxに */
-    margin: 50px auto;
-    padding: 20px;
+
+  .page-content {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px 80px;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  /* ========== ヒーローエリア ========== */
+  .purchase-hero {
+    background: white;
+    border-radius: 20px;
+    padding: 60px 40px;
     text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    margin-bottom: 60px;
   }
+
+  .purchase-hero h1 {
+    font-size: 3em;
+    font-weight: 900;
+    color: #2d3748;
+    margin-bottom: 20px;
+  }
+
+  .purchase-hero p {
+    font-size: 1.3em;
+    color: #718096;
+    max-width: 700px;
+    margin: 0 auto 40px;
+    line-height: 1.6;
+  }
+
+  .purchase-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+    color: white;
+    padding: 10px 25px;
+    border-radius: 50px;
+    font-size: 0.9em;
+    font-weight: 700;
+    margin-bottom: 30px;
+  }
+
+  /* ========== 料金プラン ========== */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
+    margin-bottom: 60px;
+  }
+
+  .pricing-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px 30px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    position: relative;
+    border: 2px solid #e2e8f0;
+  }
+
+  .pricing-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+    border-color: #667eea;
+  }
+
+  .pricing-card.featured {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    transform: scale(1.05);
+    border: none;
+  }
+
+  .pricing-card.featured:hover {
+    transform: scale(1.08);
+  }
+
+  .pricing-badge-card {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+    color: white;
+    padding: 5px 20px;
+    border-radius: 50px;
+    font-size: 0.85em;
+    font-weight: 700;
+  }
+
+  .pricing-name {
+    font-size: 1.8em;
+    font-weight: 700;
+    margin-bottom: 15px;
+  }
+
+  .pricing-price {
+    font-size: 3.5em;
+    font-weight: 900;
+    margin: 20px 0;
+  }
+
+  .pricing-period {
+    font-size: 0.4em;
+    font-weight: 400;
+    opacity: 0.7;
+  }
+
+  .pricing-description {
+    font-size: 1em;
+    margin-bottom: 30px;
+    opacity: 0.8;
+  }
+
+  .pricing-features {
+    list-style: none;
+    padding: 0;
+    margin: 30px 0;
+    text-align: left;
+  }
+
+  .pricing-features li {
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+  }
+
+  .pricing-card.featured .pricing-features li {
+    border-bottom-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .pricing-features li::before {
+    content: '✓';
+    margin-right: 12px;
+    color: #48bb78;
+    font-weight: 700;
+    font-size: 1.2em;
+    flex-shrink: 0;
+  }
+
+  .pricing-card.featured .pricing-features li::before {
+    color: #ffd700;
+  }
+
+  .pricing-button {
+    display: block;
+    width: 100%;
+    padding: 18px 40px;
+    margin-top: 30px;
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+    color: white;
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: 700;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px rgba(238, 90, 111, 0.4);
+  }
+
+  .pricing-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(238, 90, 111, 0.6);
+  }
+
+  .pricing-card.featured .pricing-button {
+    background: white;
+    color: #667eea;
+  }
+
+  .pricing-card.featured .pricing-button:hover {
+    background: #f7fafc;
+  }
+
+  /* ========== Stripe ボタンカスタマイズ ========== */
   .stripe-card-container {
-    background: #fff;
-    border: 1px solid #ddd;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    padding: 20px;
-    margin-top: 20px;
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    margin-bottom: 40px;
   }
+
   .stripe-card-container stripe-buy-button {
     width: 100%;
-    display: block;
+  }
+
+  /* ========== 保証セクション ========== */
+  .guarantee-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 60px;
+  }
+
+  .guarantee-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .guarantee-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+  }
+
+  .guarantee-icon {
+    font-size: 3.5em;
+    margin-bottom: 15px;
+  }
+
+  .guarantee-title {
+    font-size: 1.3em;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 10px;
+  }
+
+  .guarantee-text {
+    color: #718096;
+    line-height: 1.6;
+  }
+
+  /* ========== FAQ セクション ========== */
+  .faq-section {
+    background: white;
+    border-radius: 20px;
+    padding: 50px 40px;
+    margin-top: 60px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  }
+
+  .faq-title {
+    font-size: 2.5em;
+    font-weight: 900;
+    color: #2d3748;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid #e2e8f0;
+    padding: 25px 0;
+  }
+
+  .faq-item:last-child {
+    border-bottom: none;
+  }
+
+  .faq-question {
+    font-size: 1.2em;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+  }
+
+  .faq-question::before {
+    content: 'Q.';
+    color: #667eea;
+    font-size: 1.2em;
+    margin-right: 10px;
+    font-weight: 900;
+  }
+
+  .faq-answer {
+    color: #718096;
+    line-height: 1.8;
+    padding-left: 30px;
+  }
+
+  /* ========== レスポンシブ ========== */
+  @media (max-width: 768px) {
+    .purchase-hero {
+      padding: 40px 20px;
+    }
+
+    .purchase-hero h1 {
+      font-size: 2.2em;
+    }
+
+    .pricing-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .pricing-card.featured {
+      transform: scale(1);
+    }
+
+    .pricing-card.featured:hover {
+      transform: scale(1.02);
+    }
+
+    .faq-title {
+      font-size: 2em;
+    }
   }
 </style>
 
-<div class="container">
-  <div class="stripe-card-container">
-    <stripe-buy-button
-      buy-button-id="buy_btn_1QshtOChh4Fm0GSYwfZLWVwC"
-      publishable-key="pk_test_51QnFDQChh4Fm0GSYyQzyFlYjy6AhNb5M5oNX36bjZ9SBblVeWAnhr9REqhnyP4ZruBesYv1oczyAjHrt1YBKFdCG00b5H1m9GQ">
-    </stripe-buy-button>
+<!-- ヒーローエリア -->
+<div class="purchase-hero">
+  <div class="purchase-badge">🎉 7日間無料トライアル実施中</div>
+  <h1>あなたに最適なプランを</h1>
+  <p>
+    動画制作の効率を劇的に向上させる「ゆっくりまとめプロセッサー」。<br>
+    まずは7日間の無料トライアルで、その効果を実感してください。
+  </p>
+</div>
+
+<!-- 料金プラン -->
+<div class="pricing-grid">
+  <div class="pricing-card">
+    <div class="pricing-name">無料トライアル</div>
+    <div class="pricing-price">¥0<span class="pricing-period">/7日間</span></div>
+    <p class="pricing-description">まずはお試しで全機能を体験</p>
+    <ul class="pricing-features">
+      <li>7日間全機能利用可能</li>
+      <li>無制限の動画作成</li>
+      <li>基本サポート</li>
+      <li>チュートリアル動画</li>
+      <li>コミュニティアクセス</li>
+    </ul>
+    <a href="/download" class="pricing-button">今すぐ無料で始める</a>
+  </div>
+
+  <div class="pricing-card featured">
+    <div class="pricing-badge-card">人気No.1</div>
+    <div class="pricing-name">プロフェッショナル</div>
+    <div class="pricing-price">お問い合わせ</div>
+    <p class="pricing-description">本格的に使いたい方向け</p>
+    <ul class="pricing-features">
+      <li>全ての機能が使い放題</li>
+      <li>無制限の動画作成</li>
+      <li>優先サポート</li>
+      <li>定期アップデート</li>
+      <li>カスタマイズ対応</li>
+      <li>専用サポートチャット</li>
+    </ul>
+    <a href="/contact" class="pricing-button">詳しく問い合わせる</a>
+  </div>
+
+  <div class="pricing-card">
+    <div class="pricing-name">エンタープライズ</div>
+    <div class="pricing-price">カスタム</div>
+    <p class="pricing-description">企業・チーム向けプラン</p>
+    <ul class="pricing-features">
+      <li>専用サポート担当</li>
+      <li>オンボーディング支援</li>
+      <li>カスタム機能開発</li>
+      <li>複数ライセンス対応</li>
+      <li>SLA保証</li>
+      <li>専用トレーニング</li>
+    </ul>
+    <a href="/contact" class="pricing-button">企業向けプラン相談</a>
+  </div>
+</div>
+
+<!-- Stripe 購入フォーム（オプション） -->
+<div class="stripe-card-container">
+  <h2 style="text-align: center; color: #2d3748; margin-bottom: 30px; font-size: 2em; font-weight: 700;">
+    💳 クレジットカード決済
+  </h2>
+  <p style="text-align: center; color: #718096; margin-bottom: 30px; font-size: 1.1em;">
+    安全・簡単な決済システムで今すぐご利用いただけます
+  </p>
+  <stripe-buy-button
+    buy-button-id="buy_btn_1QshtOChh4Fm0GSYwfZLWVwC"
+    publishable-key="pk_test_51QnFDQChh4Fm0GSYyQzyFlYjy6AhNb5M5oNX36bjZ9SBblVeWAnhr9REqhnyP4ZruBesYv1oczyAjHrt1YBKFdCG00b5H1m9GQ">
+  </stripe-buy-button>
+</div>
+
+<!-- 保証セクション -->
+<div class="guarantee-section">
+  <div class="guarantee-card">
+    <div class="guarantee-icon">🛡️</div>
+    <h3 class="guarantee-title">安心保証</h3>
+    <p class="guarantee-text">
+      7日間の無料トライアルで、リスクなく製品をお試しいただけます。
+    </p>
+  </div>
+  <div class="guarantee-card">
+    <div class="guarantee-icon">💳</div>
+    <h3 class="guarantee-title">安全決済</h3>
+    <p class="guarantee-text">
+      Stripe決済システムを採用。クレジットカード情報は安全に保護されます。
+    </p>
+  </div>
+  <div class="guarantee-card">
+    <div class="guarantee-icon">📞</div>
+    <h3 class="guarantee-title">充実サポート</h3>
+    <p class="guarantee-text">
+      専任スタッフが迅速にサポート。困ったときもすぐに解決できます。
+    </p>
+  </div>
+  <div class="guarantee-card">
+    <div class="guarantee-icon">🔄</div>
+    <h3 class="guarantee-title">継続アップデート</h3>
+    <p class="guarantee-text">
+      定期的なアップデートで、常に最新の機能をご利用いただけます。
+    </p>
+  </div>
+</div>
+
+<!-- FAQ セクション -->
+<div class="faq-section">
+  <h2 class="faq-title">よくある質問</h2>
+
+  <div class="faq-item">
+    <div class="faq-question">無料トライアル後はどうなりますか?</div>
+    <p class="faq-answer">
+      7日間の無料トライアル終了後、自動的に課金されることはありません。継続してご利用いただく場合は、お問い合わせフォームからご連絡ください。
+    </p>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">支払い方法は何がありますか?</div>
+    <p class="faq-answer">
+      クレジットカード決済（Stripe）、銀行振込、請求書払いに対応しています。詳細はお問い合わせください。
+    </p>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">返金保証はありますか?</div>
+    <p class="faq-answer">
+      製品の性質上、返金には対応しておりません。そのため7日間の無料トライアルで十分にお試しいただくことをお勧めします。
+    </p>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">複数のPCで使用できますか?</div>
+    <p class="faq-answer">
+      ライセンスは1ライセンスにつき1台のPCでご利用いただけます。複数台でのご利用をご希望の場合は、エンタープライズプランをご検討ください。
+    </p>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">サポートはどのように受けられますか?</div>
+    <p class="faq-answer">
+      メール、チャット、お問い合わせフォームでサポートを提供しています。プロフェッショナルプラン以上では優先サポートをご利用いただけます。
+    </p>
   </div>
 </div>
