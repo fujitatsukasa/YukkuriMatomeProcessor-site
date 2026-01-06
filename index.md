@@ -169,39 +169,68 @@ permalink: /
   }
 
   .btn {
-    padding: 18px 40px;
-    font-size: 1.1em;
-    font-weight: 700;
-    border: none;
+    padding: 20px 50px;
+    font-size: 1.2em;
+    font-weight: 900;
+    border: 4px solid rgba(0, 0, 0, 0.4);
     border-radius: 50px;
     cursor: pointer;
     transition: all 0.3s ease;
-    text-decoration: none;
+    text-decoration: none !important;
     display: inline-block;
     position: relative;
     overflow: hidden;
+    text-shadow:
+      3px 3px 8px rgba(0, 0, 0, 0.8),
+      0 0 20px rgba(0, 0, 0, 0.5);
+    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.3);
   }
 
   .btn-primary {
     background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
-    color: white;
-    box-shadow: 0 10px 30px rgba(238, 90, 111, 0.4);
+    color: #ffffff !important;
+    box-shadow:
+      0 15px 40px rgba(238, 90, 111, 0.6),
+      inset 0 2px 5px rgba(255, 255, 255, 0.3);
+    border-color: rgba(238, 90, 111, 0.5);
   }
 
   .btn-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(238, 90, 111, 0.6);
+    transform: translateY(-6px) scale(1.08);
+    box-shadow:
+      0 25px 60px rgba(238, 90, 111, 0.8),
+      inset 0 2px 5px rgba(255, 255, 255, 0.4);
+    border-color: #ffd700;
+    text-shadow:
+      4px 4px 12px rgba(0, 0, 0, 1),
+      0 0 30px rgba(255, 215, 0, 0.8);
   }
 
   .btn-secondary {
-    background: white;
-    color: #667eea;
-    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+    background: linear-gradient(135deg, #ffffff 0%, #f5f7fa 100%);
+    color: #667eea !important;
+    box-shadow:
+      0 15px 40px rgba(0, 0, 0, 0.4),
+      inset 0 2px 5px rgba(255, 255, 255, 0.5);
+    border: 4px solid #667eea;
+    text-shadow:
+      2px 2px 6px rgba(0, 0, 0, 0.4),
+      0 0 15px rgba(102, 126, 234, 0.4);
+    -webkit-text-stroke: 0.8px rgba(102, 126, 234, 0.3);
   }
 
   .btn-secondary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(255, 255, 255, 0.5);
+    transform: translateY(-6px) scale(1.08);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #ffffff !important;
+    box-shadow:
+      0 25px 60px rgba(102, 126, 234, 0.8),
+      inset 0 2px 5px rgba(255, 255, 255, 0.4);
+    border-color: #ffd700;
+    text-shadow:
+      4px 4px 12px rgba(0, 0, 0, 1),
+      0 0 30px rgba(255, 255, 255, 0.6);
+    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.3);
   }
 
   @keyframes fadeInDown {
