@@ -36,7 +36,7 @@ permalink: /
     position: relative;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-    padding: 120px 20px 80px;
+    padding: 140px 20px 100px;
     text-align: center;
     overflow: hidden;
   }
@@ -53,9 +53,30 @@ permalink: /
     animation: backgroundScroll 20s linear infinite;
   }
 
+  /* アニメーション背景効果 */
+  .hero-section::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background:
+      radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 40% 20%, rgba(118, 75, 162, 0.2) 0%, transparent 50%);
+    animation: morphBackground 15s ease-in-out infinite;
+  }
+
   @keyframes backgroundScroll {
     0% { transform: translate(0, 0); }
     100% { transform: translate(60px, 60px); }
+  }
+
+  @keyframes morphBackground {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    33% { transform: translate(-5%, 5%) rotate(120deg); }
+    66% { transform: translate(5%, -5%) rotate(240deg); }
   }
 
   .hero-content {
@@ -84,45 +105,58 @@ permalink: /
 
   .hero-badge {
     display: inline-block;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(10px);
-    padding: 8px 20px;
+    padding: 10px 24px;
     border-radius: 50px;
-    font-size: 0.9em;
+    font-size: 1em;
+    font-weight: 800;
     margin-bottom: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.5);
     animation: fadeInDown 0.6s ease-out;
+    color: #ffffff;
+    text-shadow:
+      2px 2px 6px rgba(0, 0, 0, 0.6),
+      0 0 15px rgba(0, 0, 0, 0.4);
+    -webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.3);
   }
 
   .hero-title {
-    font-size: 4em;
+    font-size: 4.5em;
     font-weight: 900;
     margin: 20px 0;
     line-height: 1.1;
     animation: fadeInUp 0.6s ease-out 0.2s both;
-    text-shadow: 0 6px 30px rgba(0, 0, 0, 0.4);
     letter-spacing: -0.03em;
-    background: linear-gradient(to bottom, #ffffff 0%, #f0f0f0 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #ffffff !important;
+    text-shadow:
+      3px 3px 8px rgba(0, 0, 0, 0.7),
+      -2px -2px 4px rgba(0, 0, 0, 0.5),
+      0 0 30px rgba(0, 0, 0, 0.5) !important;
+    -webkit-text-stroke: 1.5px rgba(0, 0, 0, 0.4);
   }
 
   .hero-subtitle {
-    font-size: 1.5em;
+    font-size: 1.6em;
     margin: 20px auto 40px;
     max-width: 850px;
-    opacity: 0.98;
     line-height: 1.8;
     animation: fadeInUp 0.6s ease-out 0.4s both;
-    font-weight: 500;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    font-weight: 700;
+    color: #ffffff !important;
+    text-shadow:
+      2px 2px 6px rgba(0, 0, 0, 0.7),
+      0 0 15px rgba(0, 0, 0, 0.4);
+    -webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.3);
   }
 
   .hero-subtitle strong {
     font-weight: 900;
     font-size: 1.15em;
-    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    text-shadow:
+      3px 3px 8px rgba(0, 0, 0, 0.8),
+      0 0 20px rgba(0, 0, 0, 0.5);
+    -webkit-text-stroke: 0.8px rgba(0, 0, 0, 0.4);
   }
 
   .hero-cta {
@@ -224,20 +258,25 @@ permalink: /
   }
 
   .stat-number {
-    font-size: 3.5em;
+    font-size: 3.8em;
     font-weight: 900;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     margin-bottom: 10px;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
+    -webkit-text-stroke: 1px rgba(102, 126, 234, 0.3);
   }
 
   .stat-label {
-    font-size: 1.2em;
-    color: #2d3748;
-    font-weight: 700;
+    font-size: 1.25em;
+    color: #0a0e1a !important;
+    font-weight: 800;
     letter-spacing: 0.02em;
+    text-shadow:
+      1px 1px 2px rgba(0, 0, 0, 0.15),
+      0 1px 3px rgba(255, 255, 255, 0.8);
   }
 
   /* ========== 特徴セクション ========== */
@@ -253,12 +292,16 @@ permalink: /
   }
 
   .section-title {
-    font-size: 2.8em;
+    font-size: 3em;
     font-weight: 900;
-    color: #2d3748;
+    color: #0a0e1a !important;
     margin-bottom: 20px;
     position: relative;
     display: inline-block;
+    text-shadow:
+      2px 2px 5px rgba(0, 0, 0, 0.2),
+      -1px -1px 2px rgba(255, 255, 255, 0.8);
+    -webkit-text-stroke: 0.8px rgba(0, 0, 0, 0.1);
   }
 
   .section-title::after {
@@ -267,16 +310,19 @@ permalink: /
     bottom: -10px;
     left: 50%;
     transform: translateX(-50%);
-    width: 100px;
-    height: 4px;
+    width: 120px;
+    height: 5px;
     background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-    border-radius: 2px;
+    border-radius: 3px;
+    box-shadow: 0 3px 10px rgba(102, 126, 234, 0.4);
   }
 
   .section-subtitle {
-    font-size: 1.2em;
-    color: #718096;
+    font-size: 1.3em;
+    font-weight: 700;
+    color: #2d3748 !important;
     margin-top: 30px;
+    text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
   }
 
   .features-grid {
@@ -319,16 +365,32 @@ permalink: /
   }
 
   .feature-icon {
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2em;
-    margin-bottom: 20px;
-    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+    font-size: 2.5em;
+    margin-bottom: 25px;
+    box-shadow:
+      0 15px 35px rgba(102, 126, 234, 0.4),
+      inset 0 -5px 15px rgba(0, 0, 0, 0.2);
+    animation: iconFloat 3s ease-in-out infinite;
+    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.2));
+  }
+
+  @keyframes iconFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(5deg); }
+  }
+
+  .feature-card:hover .feature-icon {
+    transform: scale(1.1) rotate(10deg);
+    box-shadow:
+      0 20px 45px rgba(102, 126, 234, 0.6),
+      inset 0 -5px 15px rgba(0, 0, 0, 0.3);
   }
 
   .feature-title {
@@ -482,10 +544,16 @@ permalink: /
   }
 
   .testimonial-text {
-    font-size: 1.05em;
-    line-height: 1.8;
+    font-size: 1.1em;
+    font-weight: 600;
+    line-height: 1.9;
     margin-bottom: 20px;
     font-style: italic;
+    color: #ffffff !important;
+    text-shadow:
+      2px 2px 5px rgba(0, 0, 0, 0.6),
+      0 0 10px rgba(0, 0, 0, 0.3);
+    -webkit-text-stroke: 0.3px rgba(0, 0, 0, 0.2);
   }
 
   .testimonial-author {
@@ -494,19 +562,23 @@ permalink: /
     gap: 15px;
     margin-top: 20px;
     padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: 2px solid rgba(255, 255, 255, 0.3);
   }
 
   .testimonial-avatar {
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 55px;
     border-radius: 50%;
     background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5em;
-    font-weight: 700;
+    font-size: 1.6em;
+    font-weight: 900;
+    color: #ffffff;
+    text-shadow:
+      2px 2px 4px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   }
 
   .testimonial-info {
@@ -514,13 +586,20 @@ permalink: /
   }
 
   .testimonial-name {
-    font-weight: 700;
-    font-size: 1.1em;
+    font-weight: 900;
+    font-size: 1.15em;
+    color: #ffffff !important;
+    text-shadow:
+      2px 2px 4px rgba(0, 0, 0, 0.5),
+      0 0 10px rgba(0, 0, 0, 0.3);
+    -webkit-text-stroke: 0.4px rgba(0, 0, 0, 0.2);
   }
 
   .testimonial-role {
-    opacity: 0.8;
-    font-size: 0.9em;
+    font-weight: 700;
+    font-size: 0.95em;
+    color: rgba(255, 255, 255, 0.95) !important;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
   }
 
   /* ========== 料金セクション ========== */
@@ -631,15 +710,25 @@ permalink: /
   }
 
   .cta-title {
-    font-size: 2.5em;
+    font-size: 2.8em;
     font-weight: 900;
     margin-bottom: 20px;
+    color: #ffffff !important;
+    text-shadow:
+      3px 3px 8px rgba(0, 0, 0, 0.7),
+      0 0 20px rgba(0, 0, 0, 0.5);
+    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.3);
   }
 
   .cta-text {
-    font-size: 1.3em;
+    font-size: 1.35em;
+    font-weight: 700;
     margin-bottom: 40px;
-    opacity: 0.9;
+    color: #ffffff !important;
+    text-shadow:
+      2px 2px 6px rgba(0, 0, 0, 0.7),
+      0 0 15px rgba(0, 0, 0, 0.4);
+    -webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.2);
   }
 
   /* ========== モーダル ========== */
