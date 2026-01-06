@@ -1,0 +1,409 @@
+/* =========================================
+   モダン・カッコいいサイトデザイン
+   ========================================= */
+
+/* Google Fonts - モダンで読みやすいフォント */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Poppins:wght@400;600;700;800;900&family=Inter:wght@400;600;700;800&display=swap');
+
+:root {
+  /* 新しいカラーパレット */
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --dark-gradient: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  --accent-color: #667eea;
+  --accent-hover: #5568d3;
+  --text-primary: #1a202c;
+  --text-secondary: #4a5568;
+  --text-light: #718096;
+}
+
+/* =========================================
+   フォントシステムの刷新
+   ========================================= */
+
+body {
+  font-family: 'Noto Sans JP', 'Inter', sans-serif !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.02em;
+  background: linear-gradient(to bottom, #f7fafc 0%, #edf2f7 100%);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', 'Noto Sans JP', sans-serif !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.02em;
+  color: var(--text-primary) !important;
+}
+
+h1 {
+  font-size: 3.5rem !important;
+  font-weight: 900 !important;
+  line-height: 1.2 !important;
+}
+
+h2 {
+  font-size: 2.5rem !important;
+  font-weight: 800 !important;
+  line-height: 1.3 !important;
+}
+
+h3 {
+  font-size: 2rem !important;
+  font-weight: 700 !important;
+}
+
+h4 {
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+}
+
+/* 強調テキスト */
+strong, b {
+  font-weight: 800 !important;
+  color: var(--text-primary) !important;
+}
+
+em {
+  font-style: italic;
+  color: var(--accent-color);
+  font-weight: 600;
+}
+
+/* =========================================
+   超モダンなナビゲーションバー
+   ========================================= */
+
+.navbar-custom {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: none !important;
+  border-bottom: 1px solid rgba(102, 126, 234, 0.1) !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08) !important;
+  padding: 1rem 0 !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.navbar-custom:hover {
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12) !important;
+}
+
+.navbar-brand {
+  font-family: 'Poppins', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: 1.8rem !important;
+  background: var(--primary-gradient) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  letter-spacing: -0.03em;
+  transition: transform 0.3s ease !important;
+}
+
+.navbar-brand:hover {
+  transform: scale(1.05) !important;
+}
+
+/* ナビゲーションリンク */
+.navbar-custom .navbar-nav .nav-link {
+  font-family: 'Poppins', 'Noto Sans JP', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 1rem !important;
+  color: var(--text-primary) !important;
+  padding: 0.75rem 1.5rem !important;
+  margin: 0 0.25rem !important;
+  border-radius: 12px !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.navbar-custom .navbar-nav .nav-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-gradient);
+  transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: -1;
+  border-radius: 12px;
+}
+
+.navbar-custom .navbar-nav .nav-link:hover {
+  color: white !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.navbar-custom .navbar-nav .nav-link:hover::before {
+  left: 0;
+}
+
+/* アクティブリンク */
+.navbar-custom .navbar-nav .nav-link.active {
+  background: var(--primary-gradient) !important;
+  color: white !important;
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+/* ドロップダウンメニュー */
+.dropdown-menu {
+  background: rgba(255, 255, 255, 0.98) !important;
+  backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(102, 126, 234, 0.1) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15) !important;
+  padding: 1rem !important;
+  margin-top: 0.5rem !important;
+}
+
+.dropdown-item {
+  font-family: 'Poppins', 'Noto Sans JP', sans-serif !important;
+  font-weight: 600 !important;
+  padding: 0.75rem 1.25rem !important;
+  border-radius: 10px !important;
+  transition: all 0.2s ease !important;
+  color: var(--text-primary) !important;
+}
+
+.dropdown-item:hover {
+  background: var(--primary-gradient) !important;
+  color: white !important;
+  transform: translateX(5px);
+}
+
+/* =========================================
+   モダンなフッター
+   ========================================= */
+
+footer {
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%) !important;
+  color: white !important;
+  padding: 3rem 0 !important;
+  margin-top: 5rem !important;
+  position: relative;
+  overflow: hidden;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #f5576c, #4facfe);
+  background-size: 200% auto;
+  animation: gradientMove 3s linear infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+footer p, footer a, footer span {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-weight: 500;
+}
+
+footer a:hover {
+  color: white !important;
+  text-decoration: underline;
+}
+
+/* =========================================
+   ボタンスタイル
+   ========================================= */
+
+.btn {
+  font-family: 'Poppins', 'Noto Sans JP', sans-serif !important;
+  font-weight: 700 !important;
+  border-radius: 12px !important;
+  padding: 1rem 2.5rem !important;
+  font-size: 1.1rem !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  border: none !important;
+  letter-spacing: 0.02em;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary {
+  background: var(--primary-gradient) !important;
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3) !important;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4) !important;
+}
+
+.btn-success {
+  background: var(--success-gradient) !important;
+  box-shadow: 0 10px 30px rgba(79, 172, 254, 0.3) !important;
+}
+
+.btn-success:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 15px 40px rgba(79, 172, 254, 0.4) !important;
+}
+
+/* =========================================
+   カードスタイル
+   ========================================= */
+
+.card, .product-card {
+  border: none !important;
+  border-radius: 20px !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08) !important;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  overflow: hidden;
+  background: white !important;
+}
+
+.card:hover, .product-card:hover {
+  transform: translateY(-10px) !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15) !important;
+}
+
+.card-header {
+  background: var(--primary-gradient) !important;
+  color: white !important;
+  font-weight: 800 !important;
+  font-size: 1.3rem !important;
+  border: none !important;
+  padding: 1.5rem !important;
+}
+
+/* =========================================
+   背景パターン
+   ========================================= */
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(102, 126, 234, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(118, 75, 162, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(79, 172, 254, 0.05) 0%, transparent 50%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* =========================================
+   アニメーション効果
+   ========================================= */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* =========================================
+   レスポンシブ対応
+   ========================================= */
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem !important;
+  }
+
+  h2 {
+    font-size: 2rem !important;
+  }
+
+  .navbar-custom .navbar-nav .nav-link {
+    padding: 0.75rem 1rem !important;
+    margin: 0.25rem 0 !important;
+  }
+
+  .btn {
+    padding: 0.85rem 2rem !important;
+    font-size: 1rem !important;
+  }
+}
+
+/* =========================================
+   リンクスタイル
+   ========================================= */
+
+a {
+  color: var(--accent-color) !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease !important;
+}
+
+a:hover {
+  color: var(--accent-hover) !important;
+  text-decoration: underline !important;
+}
+
+/* =========================================
+   テーブルスタイル
+   ========================================= */
+
+table {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+th {
+  background: var(--primary-gradient) !important;
+  color: white !important;
+  font-weight: 800 !important;
+  padding: 1.2rem !important;
+  font-family: 'Poppins', sans-serif !important;
+}
+
+td {
+  padding: 1rem !important;
+  font-weight: 500;
+}
+
+tr:nth-child(even) {
+  background-color: rgba(102, 126, 234, 0.03);
+}
+
+/* =========================================
+   コードブロック
+   ========================================= */
+
+code {
+  background: linear-gradient(135deg, #667eea15, #764ba215) !important;
+  color: #667eea !important;
+  padding: 0.2rem 0.5rem !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+}
+
+pre {
+  background: #1e3c72 !important;
+  border-radius: 12px !important;
+  padding: 1.5rem !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+}
+
+pre code {
+  background: transparent !important;
+  color: #a8dadc !important;
+}

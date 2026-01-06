@@ -63,6 +63,23 @@ permalink: /
     z-index: 2;
     max-width: 1200px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* ヒーローイラストレーション */
+  .hero-illustration {
+    width: 100%;
+    max-width: 600px;
+    margin: 40px auto 0;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.2));
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
   }
 
   .hero-badge {
@@ -78,21 +95,34 @@ permalink: /
   }
 
   .hero-title {
-    font-size: 3.5em;
+    font-size: 4em;
     font-weight: 900;
     margin: 20px 0;
-    line-height: 1.2;
+    line-height: 1.1;
     animation: fadeInUp 0.6s ease-out 0.2s both;
-    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 6px 30px rgba(0, 0, 0, 0.4);
+    letter-spacing: -0.03em;
+    background: linear-gradient(to bottom, #ffffff 0%, #f0f0f0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .hero-subtitle {
-    font-size: 1.4em;
+    font-size: 1.5em;
     margin: 20px auto 40px;
-    max-width: 800px;
-    opacity: 0.95;
-    line-height: 1.6;
+    max-width: 850px;
+    opacity: 0.98;
+    line-height: 1.8;
     animation: fadeInUp 0.6s ease-out 0.4s both;
+    font-weight: 500;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .hero-subtitle strong {
+    font-weight: 900;
+    font-size: 1.15em;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   }
 
   .hero-cta {
@@ -204,9 +234,10 @@ permalink: /
   }
 
   .stat-label {
-    font-size: 1.1em;
-    color: #555;
-    font-weight: 600;
+    font-size: 1.2em;
+    color: #2d3748;
+    font-weight: 700;
+    letter-spacing: 0.02em;
   }
 
   /* ========== 特徴セクション ========== */
@@ -301,16 +332,18 @@ permalink: /
   }
 
   .feature-title {
-    font-size: 1.5em;
-    font-weight: 700;
-    color: #2d3748;
+    font-size: 1.6em;
+    font-weight: 800;
+    color: #1a202c;
     margin-bottom: 15px;
+    letter-spacing: -0.01em;
   }
 
   .feature-description {
-    color: #718096;
-    line-height: 1.8;
-    font-size: 1.05em;
+    color: #4a5568;
+    line-height: 1.9;
+    font-size: 1.1em;
+    font-weight: 500;
   }
 
   /* ========== スクリーンショットセクション ========== */
@@ -695,14 +728,55 @@ permalink: /
     <div class="hero-badge">🚀 動画編集の革命がここに</div>
     <h1 class="hero-title">ゆっくりまとめプロセッサー</h1>
     <p class="hero-subtitle">
-      1日2本だった動画制作が20本に。<br>
+      <strong>1日2本だった動画制作が20本に。</strong><br>
       AI技術を活用した最先端の自動動画編集ソフトウェアで、<br>
       あなたの創造性を最大限に解放します。
     </p>
     <div class="hero-cta">
-      <a href="/download" class="btn btn-primary">今すぐ無料トライアル</a>
-      <a href="#features" class="btn btn-secondary">詳しく見る</a>
+      <a href="/download" class="btn btn-primary">🎬 今すぐ無料トライアル</a>
+      <a href="#features" class="btn btn-secondary">📖 詳しく見る</a>
     </div>
+
+    <!-- SVGイラストレーション -->
+    <svg class="hero-illustration" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- モニター画面 -->
+      <rect x="100" y="100" width="600" height="400" rx="20" fill="white" opacity="0.95"/>
+      <rect x="100" y="100" width="600" height="50" rx="20" fill="url(#gradient1)"/>
+      <rect x="120" y="170" width="260" height="150" rx="10" fill="#667eea" opacity="0.2"/>
+      <rect x="400" y="170" width="260" height="150" rx="10" fill="#764ba2" opacity="0.2"/>
+      <rect x="120" y="340" width="540" height="140" rx="10" fill="#f093fb" opacity="0.2"/>
+
+      <!-- 装飾的な要素 -->
+      <circle cx="150" cy="125" r="8" fill="white" opacity="0.9"/>
+      <circle cx="180" cy="125" r="8" fill="white" opacity="0.9"/>
+      <circle cx="210" cy="125" r="8" fill="white" opacity="0.9"/>
+
+      <!-- 動画アイコン -->
+      <circle cx="250" cy="245" r="30" fill="white"/>
+      <path d="M240 235 L265 245 L240 255 Z" fill="#667eea"/>
+
+      <circle cx="530" cy="245" r="30" fill="white"/>
+      <path d="M520 235 L545 245 L520 255 Z" fill="#764ba2"/>
+
+      <!-- AI処理を表す矢印 -->
+      <path d="M 380 245 L 420 245" stroke="white" stroke-width="4" stroke-linecap="round"/>
+      <path d="M 410 235 L 420 245 L 410 255" fill="white"/>
+
+      <!-- 魔法のエフェクト -->
+      <g opacity="0.8">
+        <path d="M 400 200 L 405 210 L 415 213 L 405 218 L 400 228 L 395 218 L 385 213 L 395 210 Z" fill="#ffd700"/>
+        <path d="M 450 190 L 453 197 L 460 199 L 453 202 L 450 209 L 447 202 L 440 199 L 447 197 Z" fill="#ffd700"/>
+        <path d="M 350 210 L 353 217 L 360 219 L 353 222 L 350 229 L 347 222 L 340 219 L 347 217 Z" fill="#ffd700"/>
+      </g>
+
+      <!-- グラデーション定義 -->
+      <defs>
+        <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+        </linearGradient>
+      </defs>
+    </svg>
   </div>
 </div>
 
