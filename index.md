@@ -7,67 +7,137 @@ permalink: /
 
 
 <style>
-  /* Google Fonts の読み込み */
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
-
   /* ★★★ 全体の基本設定 ★★★ */
-  body {
-    background: #f7f8fa; /* ページ全体の背景色をやや明るいグレーに */
-    margin: 0; /* ブラウザデフォルト余白リセット */
-    padding: 0;
-  }
   .page-content {
-    font-family: 'Roboto', sans-serif;
-    line-height: 1.6;
+    font-family: 'Noto Sans JP', 'Poppins', sans-serif;
+    line-height: 1.8;
     color: #333;
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 1em 1em 2em;
-    background: #fff; /* 背景を白で囲んでカード風にする */
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    border-radius: 12px;
-    text-align: center; /* 全文中央寄せ */
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 2em 2em 3em;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+    box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3), 0 8px 20px rgba(0,0,0,0.1);
+    border-radius: 30px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    animation: slideInFromBottom 0.8s ease-out;
+  }
+
+  @keyframes slideInFromBottom {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .page-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #4facfe);
+    background-size: 300% 100%;
+    animation: gradientMove 4s ease infinite;
   }
 
   /* ★★★ セクションカード全体を包むクラス ★★★ */
   .section-card {
-    margin: 2em auto;
-    padding: 1.2em;
-    border-radius: 16px;
-    background: linear-gradient(to bottom right, #ffffff, #f0f7ff);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    text-align: center; /* 見出しと内容を中央揃え */
-    max-width: 800px;
+    margin: 3em auto;
+    padding: 2.5em;
+    border-radius: 25px;
+    background: linear-gradient(135deg, #ffffff 0%, #f0f7ff 100%);
+    box-shadow: 0 15px 40px rgba(102, 126, 234, 0.2), 0 5px 15px rgba(0,0,0,0.08);
+    text-align: center;
+    max-width: 900px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: fadeInScale 0.8s ease-out;
   }
+
+  @keyframes fadeInScale {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .section-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #4facfe);
+    background-size: 200% 100%;
+    animation: gradientMove 3s ease infinite;
+  }
+
+  @keyframes gradientMove {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  .section-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 25px 60px rgba(102, 126, 234, 0.35), 0 10px 25px rgba(0,0,0,0.15);
+  }
+
   /* 見出し（タイトル）のデザインをカード内でより豪華に */
   .section-title {
-    font-size: 2.2em;
-    margin: 0;          /* 不要な余白を削除してスッキリ */
-    color: #222;
+    font-size: 2.8em;
+    margin: 0.5em 0;
+    font-weight: 800;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     position: relative;
     display: inline-block;
-    padding-bottom: 0.2em;
+    padding-bottom: 0.3em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
   }
+
   /* 虹色線を太く + シャドウを付けて目立たせる */
   .section-title::after {
     content: "";
     display: block;
-    width: 60%;
-    height: 6px; /* 太さ調整(以前は3px) */
-    background: linear-gradient(to right, #007BFF, #28A745, #FFC107, #DC3545);
-    margin: 0.4em auto 0;
-    border-radius: 3px;
-    box-shadow: 0 0 6px rgba(0,0,0,0.2);
+    width: 80%;
+    height: 8px;
+    background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #4facfe);
+    margin: 0.5em auto 0;
+    border-radius: 4px;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    animation: pulse 2s ease infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scaleX(1); }
+    50% { opacity: 0.8; transform: scaleX(0.95); }
   }
 
   /* hr（ページ区切り線）をリッチに */
   hr {
     border: none;
-    height: 4px;  /* ちょっと太め */
-    margin: 2em 0;
-    border-radius: 2px;
-    background: linear-gradient(to right, #007BFF, #28A745, #FFC107, #DC3545);
-    box-shadow: 0 0 8px rgba(0,0,0,0.15);
+    height: 6px;
+    margin: 3em 0;
+    border-radius: 3px;
+    background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #4facfe);
+    background-size: 200% 100%;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    animation: gradientMove 3s ease infinite;
   }
 
   /* ★★★ カルーセル ★★★ */
@@ -75,12 +145,18 @@ permalink: /
     position: relative;
     width: 100%;
     overflow: hidden;
-    margin: 2em auto;
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    background: #fff;
-    text-align: left; /* 画像やボタンを自然に配置するため */
+    margin: 3em auto;
+    border: none;
+    border-radius: 25px;
+    box-shadow: 0 20px 60px rgba(102, 126, 234, 0.25), 0 8px 25px rgba(0,0,0,0.1);
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+    text-align: left;
+    transition: all 0.4s ease;
+  }
+
+  .carousel:hover {
+    transform: scale(1.02);
+    box-shadow: 0 30px 80px rgba(102, 126, 234, 0.35), 0 12px 35px rgba(0,0,0,0.15);
   }
   .carousel-track {
     display: flex;
@@ -105,25 +181,29 @@ permalink: /
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0,0,0,0.4);
-    border: none;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9));
+    border: 2px solid rgba(255, 255, 255, 0.8);
     color: #fff;
     font-size: 2em;
     cursor: pointer;
     z-index: 10;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     text-align: center;
-    line-height: 40px;
-    transition: background 0.2s ease, transform 0.2s ease;
+    line-height: 46px;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
   }
+
   .carousel-button:hover {
-    background: rgba(0,0,0,0.6);
-    transform: translateY(-50%) scale(1.1);
+    background: linear-gradient(135deg, rgba(118, 75, 162, 0.95), rgba(102, 126, 234, 0.95));
+    transform: translateY(-50%) scale(1.15);
+    box-shadow: 0 12px 30px rgba(102, 126, 234, 0.6);
   }
+
   .carousel-button:active {
-    transform: translateY(-50%) scale(0.95);
+    transform: translateY(-50%) scale(1.05);
   }
   .carousel-button--left {
     left: 10px;
@@ -135,26 +215,36 @@ permalink: /
   /* インジケーター */
   .carousel-indicators {
     position: absolute;
-    bottom: 10px;
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 0;
+    z-index: 10;
     display: flex;
-    gap: 8px;
+    gap: 12px;
   }
+
   .carousel-indicator {
-    width: 12px;
-    height: 12px;
-    background: rgba(255,255,255,0.6);
+    width: 14px;
+    height: 14px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 2px solid rgba(102, 126, 234, 0.6);
     border-radius: 50%;
     cursor: pointer;
-    transition: background 0.3s ease, transform 0.3s ease;
+    transition: all 0.4s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   }
+
   .carousel-indicator:hover {
-    transform: scale(1.1);
+    transform: scale(1.2);
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(102, 126, 234, 1);
   }
+
   .carousel-indicator.active {
-    background: #007BFF;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-color: #ffffff;
+    transform: scale(1.3);
+    box-shadow: 0 6px 15px rgba(102, 126, 234, 0.6);
   }
 
   /* ★★★ 全画面モーダル（拡大表示用） ★★★ */
@@ -198,75 +288,152 @@ permalink: /
   /* ★★★ 特徴などのコンテンツブロック ★★★ */
   .feature-item {
     text-align: center;
-    padding: 1.2em;
-    margin: 2em auto;
-    border: 1px solid #eee;
-    border-radius: 12px;
-    background: linear-gradient(to bottom right, #ffffff, #f7fafc);
-    max-width: 700px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 2em;
+    margin: 2.5em auto;
+    border: none;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #ffffff 0%, #f7fafc 100%);
+    max-width: 750px;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15), 0 3px 10px rgba(0,0,0,0.08);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
   }
+
+  .feature-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, currentColor, transparent);
+    opacity: 0.6;
+  }
+
   .feature-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 20px 50px rgba(102, 126, 234, 0.3), 0 8px 20px rgba(0,0,0,0.15);
   }
+
   .feature-item h3 {
-    margin-bottom: 0.5em; /* やや詰める */
-    font-size: 1.6em;
-    font-weight: 700;
+    margin-bottom: 0.8em;
+    font-size: 2em;
+    font-weight: 800;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    display: inline-block;
+  }
+
+  .feature-item h3::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: currentColor;
+    border-radius: 2px;
+    opacity: 0.3;
   }
 
   /* ★★★ blockquote（お客様の声）をリッチに ★★★ */
   blockquote {
     position: relative;
-    margin: 1.8em auto;
-    padding: 1.2em 1.5em;
+    margin: 2.5em auto;
+    padding: 2em 2.5em;
     border: none;
-    border-radius: 12px;
-    background: #fefefe;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border-radius: 20px;
+    background: linear-gradient(135deg, #ffffff 0%, #fefefe 100%);
+    box-shadow: 0 15px 40px rgba(102, 126, 234, 0.15), 0 5px 15px rgba(0,0,0,0.08);
     font-style: normal;
-    color: #444;
-    max-width: 700px;
+    color: #333;
+    max-width: 750px;
     display: inline-block;
-    text-align: left; /* 引用テキストは左寄せ */
+    text-align: left;
+    transition: all 0.4s ease;
+    overflow: hidden;
   }
+
   blockquote::before {
-    content: "“";
-    font-family: serif;
+    content: """;
+    font-family: 'Georgia', serif;
     position: absolute;
-    top: 5px;
-    left: 10px;
-    font-size: 3em;
-    color: #999;
+    top: 10px;
+    left: 15px;
+    font-size: 5em;
+    font-weight: bold;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    opacity: 0.3;
+    line-height: 1;
   }
+
   blockquote::after {
-    content: "”";
-    font-family: serif;
+    content: """;
+    font-family: 'Georgia', serif;
     position: absolute;
-    bottom: 5px;
-    right: 10px;
-    font-size: 3em;
-    color: #999;
+    bottom: -10px;
+    right: 15px;
+    font-size: 5em;
+    font-weight: bold;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    opacity: 0.3;
+    line-height: 1;
   }
+
+  blockquote:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 50px rgba(102, 126, 234, 0.25), 0 8px 20px rgba(0,0,0,0.12);
+  }
+
   blockquote span {
     display: block;
-    margin-top: 1em;
+    margin-top: 1.2em;
     text-align: right;
-    color: #666;
+    font-weight: 600;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     font-style: italic;
   }
 
   /* リンクホバー */
   a {
-    color: #007BFF;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     text-decoration: none;
-    transition: color 0.3s ease, text-shadow 0.3s ease;
+    font-weight: 600;
+    position: relative;
+    transition: all 0.3s ease;
   }
+
+  a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    transition: width 0.3s ease;
+  }
+
+  a:hover::after {
+    width: 100%;
+  }
+
   a:hover {
-    color: #0056b3;
-    text-shadow: 0 0 3px rgba(0,123,255,0.5);
+    text-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+    transform: translateY(-2px);
   }
 
   @media screen and (max-width: 768px) {
@@ -286,11 +453,32 @@ permalink: /
   margin: 0;
   padding: 0;
   overflow: hidden;
+  position: relative;
+  box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
+  border-radius: 0 0 30px 30px;
 }
+
+.full-width-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 10px;
+  background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #4facfe);
+  background-size: 200% 100%;
+  animation: gradientMove 3s ease infinite;
+}
+
 .full-width-header img {
   display: block;
   width: 100%;
   height: auto;
+  transition: transform 0.5s ease;
+}
+
+.full-width-header:hover img {
+  transform: scale(1.02);
 }
 
 
