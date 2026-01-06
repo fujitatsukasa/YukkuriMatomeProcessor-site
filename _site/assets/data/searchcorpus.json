@@ -58,8 +58,8 @@
 }, 
  
 { 
-"title"    : "購入ページ", 
-"desc"     : "購入ページ", 
+"title"    : "購入", 
+"desc"     : "購入", 
 "category" : "page", 
 "url"      : "/purchase/", 
 "date"     : "January 1, 1970" 
