@@ -34,8 +34,9 @@ permalink: /
   /* ========== ヒーローセクション - 超カッコいいスライダー ========== */
   .hero-section {
     position: relative;
-    height: 100vh;
-    min-height: 700px;
+    height: 85vh;
+    min-height: 650px;
+    max-height: 900px;
     overflow: hidden;
     margin-top: -5rem;
   }
@@ -71,7 +72,7 @@ permalink: /
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.8) 100%);
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.75) 0%, rgba(118, 75, 162, 0.75) 100%);
     z-index: 1;
   }
 
@@ -98,7 +99,7 @@ permalink: /
   }
 
   .hero-slide.mascot-slide::before {
-    background: linear-gradient(135deg, rgba(255, 107, 107, 0.85) 0%, rgba(238, 90, 111, 0.85) 100%);
+    background: linear-gradient(135deg, rgba(255, 107, 107, 0.75) 0%, rgba(238, 90, 111, 0.75) 100%);
   }
 
   @keyframes float {
@@ -123,31 +124,41 @@ permalink: /
   }
 
   .hero-slide-title {
-    font-size: 5em;
+    font-size: 3.8em;
     font-weight: 900;
     color: #ffffff !important;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
+    line-height: 1.2;
     text-shadow:
-      4px 4px 12px rgba(0, 0, 0, 0.9),
+      4px 4px 16px rgba(0, 0, 0, 0.95),
+      2px 2px 8px rgba(0, 0, 0, 0.8),
       0 0 40px rgba(0, 0, 0, 0.6);
-    -webkit-text-stroke: 2px rgba(0, 0, 0, 0.5);
+    -webkit-text-stroke: 2.5px rgba(0, 0, 0, 0.6);
+    letter-spacing: 0.02em;
     animation: slideInUp 1s ease-out;
   }
 
   .hero-slide-subtitle {
-    font-size: 2em;
+    font-size: 1.6em;
     font-weight: 700;
     color: #ffffff !important;
-    margin-bottom: 40px;
+    margin-bottom: 35px;
+    line-height: 1.6;
     text-shadow:
-      3px 3px 8px rgba(0, 0, 0, 0.8),
-      0 0 20px rgba(0, 0, 0, 0.5);
-    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.4);
+      3px 3px 10px rgba(0, 0, 0, 0.9),
+      2px 2px 6px rgba(0, 0, 0, 0.8),
+      0 0 25px rgba(0, 0, 0, 0.6);
+    -webkit-text-stroke: 1.5px rgba(0, 0, 0, 0.5);
     animation: slideInUp 1s ease-out 0.2s both;
   }
 
   .hero-slide-cta {
     animation: slideInUp 1s ease-out 0.4s both;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
   }
 
   @keyframes slideInUp {
@@ -164,35 +175,45 @@ permalink: /
   /* スライダーナビゲーションドット */
   .hero-slider-dots {
     position: absolute;
-    bottom: 40px;
+    bottom: 35px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 10;
     display: flex;
     gap: 15px;
+    padding: 12px 20px;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(15px);
+    border-radius: 50px;
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
   }
 
   .hero-slider-dot {
-    width: 15px;
-    height: 15px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.4);
-    border: 3px solid rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.35);
+    border: 2px solid rgba(255, 255, 255, 0.7);
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
   }
 
   .hero-slider-dot:hover {
-    background: rgba(255, 255, 255, 0.7);
-    transform: scale(1.3);
+    background: rgba(255, 255, 255, 0.65);
+    transform: scale(1.25);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
   }
 
   .hero-slider-dot.active {
-    background: #ffffff;
-    width: 45px;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.5);
+    background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+    width: 50px;
+    border-radius: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.95);
+    box-shadow:
+      0 6px 25px rgba(255, 255, 255, 0.6),
+      0 3px 10px rgba(0, 0, 0, 0.3);
   }
 
   /* スライダー矢印 */
@@ -201,124 +222,150 @@ permalink: /
     top: 50%;
     transform: translateY(-50%);
     z-index: 10;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-    width: 70px;
-    height: 70px;
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(15px);
+    width: 75px;
+    height: 75px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.3s ease;
-    border: 3px solid rgba(255, 255, 255, 0.5);
-    font-size: 2.5em;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 3px solid rgba(255, 255, 255, 0.45);
+    font-size: 2.6em;
     color: #ffffff;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+    text-shadow:
+      3px 3px 10px rgba(0, 0, 0, 0.9),
+      0 0 20px rgba(0, 0, 0, 0.6);
+    box-shadow:
+      0 10px 35px rgba(0, 0, 0, 0.4),
+      inset 0 2px 8px rgba(255, 255, 255, 0.2);
   }
 
   .hero-slider-arrow:hover {
-    background: rgba(255, 255, 255, 0.4);
-    transform: translateY(-50%) scale(1.15);
-    box-shadow: 0 10px 40px rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.35);
+    transform: translateY(-50%) scale(1.2);
+    border-color: rgba(255, 255, 255, 0.8);
+    box-shadow:
+      0 15px 50px rgba(255, 255, 255, 0.4),
+      0 5px 20px rgba(0, 0, 0, 0.5),
+      inset 0 2px 10px rgba(255, 255, 255, 0.3);
   }
 
   .hero-slider-arrow.left {
-    left: 40px;
+    left: 35px;
   }
 
   .hero-slider-arrow.right {
-    right: 40px;
+    right: 35px;
   }
 
   /* スライド番号インジケーター */
   .hero-slider-counter {
     position: absolute;
-    top: 40px;
-    right: 40px;
+    top: 35px;
+    right: 35px;
     z-index: 10;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px);
-    padding: 15px 30px;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(15px);
+    padding: 16px 32px;
     border-radius: 50px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    box-shadow:
+      0 10px 40px rgba(0, 0, 0, 0.5),
+      inset 0 2px 8px rgba(255, 255, 255, 0.1);
   }
 
   .hero-slider-counter span {
     font-size: 1.5em;
     font-weight: 900;
     color: #ffffff;
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+    text-shadow:
+      3px 3px 8px rgba(0, 0, 0, 0.9),
+      0 0 15px rgba(0, 0, 0, 0.6);
   }
 
   .hero-slider-counter .current {
-    font-size: 2em;
+    font-size: 2.1em;
     color: #ffd700;
+    text-shadow:
+      3px 3px 10px rgba(0, 0, 0, 1),
+      0 0 25px rgba(255, 215, 0, 0.6);
   }
 
   .btn {
-    padding: 20px 50px;
-    font-size: 1.2em;
+    padding: 18px 45px;
+    font-size: 1.15em;
     font-weight: 900;
-    border: 4px solid rgba(0, 0, 0, 0.4);
+    border: 3px solid rgba(0, 0, 0, 0.5);
     border-radius: 50px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     text-decoration: none !important;
     display: inline-block;
     position: relative;
     overflow: hidden;
+    margin: 8px;
     text-shadow:
-      3px 3px 8px rgba(0, 0, 0, 0.8),
-      0 0 20px rgba(0, 0, 0, 0.5);
-    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.3);
+      3px 3px 10px rgba(0, 0, 0, 0.9),
+      2px 2px 6px rgba(0, 0, 0, 0.8),
+      0 0 25px rgba(0, 0, 0, 0.6);
+    -webkit-text-stroke: 1.2px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(5px);
   }
 
   .btn-primary {
     background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
     color: #ffffff !important;
     box-shadow:
-      0 15px 40px rgba(238, 90, 111, 0.6),
-      inset 0 2px 5px rgba(255, 255, 255, 0.3);
-    border-color: rgba(238, 90, 111, 0.5);
+      0 20px 50px rgba(238, 90, 111, 0.7),
+      0 10px 25px rgba(0, 0, 0, 0.4),
+      inset 0 3px 8px rgba(255, 255, 255, 0.3);
+    border-color: rgba(238, 90, 111, 0.6);
   }
 
   .btn-primary:hover {
-    transform: translateY(-6px) scale(1.08);
+    transform: translateY(-8px) scale(1.1);
     box-shadow:
-      0 25px 60px rgba(238, 90, 111, 0.8),
-      inset 0 2px 5px rgba(255, 255, 255, 0.4);
+      0 30px 70px rgba(238, 90, 111, 0.9),
+      0 15px 35px rgba(0, 0, 0, 0.5),
+      inset 0 3px 10px rgba(255, 255, 255, 0.5);
     border-color: #ffd700;
+    border-width: 4px;
     text-shadow:
-      4px 4px 12px rgba(0, 0, 0, 1),
-      0 0 30px rgba(255, 215, 0, 0.8);
+      4px 4px 15px rgba(0, 0, 0, 1),
+      0 0 35px rgba(255, 215, 0, 0.9);
   }
 
   .btn-secondary {
-    background: linear-gradient(135deg, #ffffff 0%, #f5f7fa 100%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(245, 247, 250, 0.95) 100%);
     color: #667eea !important;
     box-shadow:
-      0 15px 40px rgba(0, 0, 0, 0.4),
-      inset 0 2px 5px rgba(255, 255, 255, 0.5);
-    border: 4px solid #667eea;
+      0 20px 50px rgba(0, 0, 0, 0.5),
+      0 10px 25px rgba(0, 0, 0, 0.3),
+      inset 0 3px 8px rgba(255, 255, 255, 0.6);
+    border: 3px solid rgba(102, 126, 234, 0.9);
     text-shadow:
-      2px 2px 6px rgba(0, 0, 0, 0.4),
-      0 0 15px rgba(102, 126, 234, 0.4);
-    -webkit-text-stroke: 0.8px rgba(102, 126, 234, 0.3);
+      3px 3px 8px rgba(0, 0, 0, 0.5),
+      0 0 20px rgba(102, 126, 234, 0.5);
+    -webkit-text-stroke: 1px rgba(102, 126, 234, 0.4);
   }
 
   .btn-secondary:hover {
-    transform: translateY(-6px) scale(1.08);
+    transform: translateY(-8px) scale(1.1);
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: #ffffff !important;
     box-shadow:
-      0 25px 60px rgba(102, 126, 234, 0.8),
-      inset 0 2px 5px rgba(255, 255, 255, 0.4);
+      0 30px 70px rgba(102, 126, 234, 0.9),
+      0 15px 35px rgba(0, 0, 0, 0.5),
+      inset 0 3px 10px rgba(255, 255, 255, 0.5);
     border-color: #ffd700;
+    border-width: 4px;
     text-shadow:
-      4px 4px 12px rgba(0, 0, 0, 1),
-      0 0 30px rgba(255, 255, 255, 0.6);
-    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.3);
+      4px 4px 15px rgba(0, 0, 0, 1),
+      0 0 35px rgba(255, 255, 255, 0.7);
+    -webkit-text-stroke: 1.5px rgba(0, 0, 0, 0.4);
   }
 
   @keyframes fadeInDown {
@@ -887,65 +934,71 @@ permalink: /
   /* ========== レスポンシブ ========== */
   @media (max-width: 768px) {
     .hero-section {
-      min-height: 600px;
+      min-height: 550px;
+      height: 75vh;
     }
 
     .hero-slide-title {
-      font-size: 2.5em;
+      font-size: 2.2em;
+      margin-bottom: 20px;
+      -webkit-text-stroke: 2px rgba(0, 0, 0, 0.6);
     }
 
     .hero-slide-subtitle {
-      font-size: 1.3em;
+      font-size: 1.2em;
+      margin-bottom: 25px;
+      -webkit-text-stroke: 1.2px rgba(0, 0, 0, 0.5);
     }
 
     .hero-slider-arrow {
-      width: 50px;
-      height: 50px;
-      font-size: 1.8em;
-    }
-
-    .hero-slider-arrow.left {
-      left: 15px;
-    }
-
-    .hero-slider-arrow.right {
-      right: 15px;
-    }
-
-    .hero-slider-counter {
-      top: 20px;
-      right: 20px;
-      padding: 10px 20px;
-    }
-
-    .hero-slider-counter span {
-      font-size: 1.2em;
-    }
-
-    .hero-slider-counter .current {
-      font-size: 1.6em;
-    }
-
-    .hero-slider-dots {
-      bottom: 20px;
-      gap: 10px;
-    }
-
-    .hero-slider-dot {
-      width: 12px;
-      height: 12px;
-    }
-
-    .hero-slider-dot.active {
-      width: 35px;
-    }
-
-    .section-title {
+      width: 55px;
+      height: 55px;
       font-size: 2em;
     }
 
+    .hero-slider-arrow.left {
+      left: 12px;
+    }
+
+    .hero-slider-arrow.right {
+      right: 12px;
+    }
+
+    .hero-slider-counter {
+      top: 15px;
+      right: 15px;
+      padding: 8px 18px;
+    }
+
+    .hero-slider-counter span {
+      font-size: 1.1em;
+    }
+
+    .hero-slider-counter .current {
+      font-size: 1.5em;
+    }
+
+    .hero-slider-dots {
+      bottom: 18px;
+      gap: 12px;
+    }
+
+    .hero-slider-dot {
+      width: 13px;
+      height: 13px;
+      border: 2px solid rgba(255, 255, 255, 0.8);
+    }
+
+    .hero-slider-dot.active {
+      width: 38px;
+    }
+
+    .section-title {
+      font-size: 2.2em;
+    }
+
     .stat-number {
-      font-size: 2.5em;
+      font-size: 2.8em;
     }
 
     .features-grid,
@@ -959,26 +1012,64 @@ permalink: /
     }
 
     .btn {
-      width: 100%;
-      max-width: 300px;
-      padding: 15px 35px;
-      font-size: 1em;
+      width: auto;
+      max-width: 320px;
+      padding: 16px 38px;
+      font-size: 1.05em;
+      margin: 6px;
     }
   }
 
   @media (max-width: 480px) {
+    .hero-section {
+      min-height: 500px;
+      height: 70vh;
+    }
+
     .hero-slide-title {
-      font-size: 2em;
+      font-size: 1.8em;
+      margin-bottom: 15px;
     }
 
     .hero-slide-subtitle {
-      font-size: 1.1em;
+      font-size: 1em;
+      margin-bottom: 20px;
     }
 
     .hero-slider-arrow {
-      width: 40px;
-      height: 40px;
-      font-size: 1.5em;
+      width: 45px;
+      height: 45px;
+      font-size: 1.6em;
+    }
+
+    .hero-slider-arrow.left {
+      left: 8px;
+    }
+
+    .hero-slider-arrow.right {
+      right: 8px;
+    }
+
+    .hero-slider-counter {
+      top: 12px;
+      right: 12px;
+      padding: 6px 15px;
+    }
+
+    .hero-slider-counter span {
+      font-size: 0.95em;
+    }
+
+    .hero-slider-counter .current {
+      font-size: 1.3em;
+    }
+
+    .btn {
+      width: auto;
+      max-width: 280px;
+      padding: 14px 32px;
+      font-size: 0.95em;
+      margin: 5px;
     }
   }
 
@@ -993,7 +1084,7 @@ permalink: /
   <div class="hero-slider">
     <!-- スライド1: マスコットキャラクター「柳生おたま」 -->
     <div class="hero-slide mascot-slide active">
-      <img src="/assets/img/mascot-otama.png" alt="柳生おたま - ゆっくりまとめプロセッサーのマスコット" class="hero-slide-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 800%22%3E%3Crect fill=%22%23ff6b6b%22 width=%22800%22 height=%22800%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2260%22 fill=%22white%22%3E柳生おたま%3C/text%3E%3C/svg%3E'">
+      <img src="/assets/img/柳生おたま.png" alt="柳生おたま - ゆっくりまとめプロセッサーのマスコット" class="hero-slide-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 800%22%3E%3Crect fill=%22%23ff6b6b%22 width=%22800%22 height=%22800%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2260%22 fill=%22white%22%3E柳生おたま%3C/text%3E%3C/svg%3E'">
       <div class="hero-slide-content">
         <h1 class="hero-slide-title">ゆっくりまとめプロセッサー</h1>
         <p class="hero-slide-subtitle">
@@ -1009,7 +1100,7 @@ permalink: /
 
     <!-- スライド2: 編集画面 -->
     <div class="hero-slide">
-      <img src="/assets/img/screenshot-editor.png" alt="動画編集画面 - 直感的で使いやすいインターフェース" class="hero-slide-image" onerror="this.src='/assets/img/製品イメージ1.png'">
+      <img src="/assets/img/製品画像_1.png" alt="動画編集画面 - 直感的で使いやすいインターフェース" class="hero-slide-image" onerror="this.src='/assets/img/製品イメージ1.png'">
       <div class="hero-slide-content">
         <h1 class="hero-slide-title">直感的な編集画面</h1>
         <p class="hero-slide-subtitle">
@@ -1025,7 +1116,7 @@ permalink: /
 
     <!-- スライド3: 取得画面 -->
     <div class="hero-slide">
-      <img src="/assets/img/screenshot-getter.png" alt="自動取得画面 - AI が自動で素材を収集" class="hero-slide-image" onerror="this.src='/assets/img/製品イメージ2.png'">
+      <img src="/assets/img/製品画像_2.png" alt="自動取得画面 - AI が自動で素材を収集" class="hero-slide-image" onerror="this.src='/assets/img/製品イメージ2.png'">
       <div class="hero-slide-content">
         <h1 class="hero-slide-title">自動素材収集</h1>
         <p class="hero-slide-subtitle">
@@ -1354,13 +1445,13 @@ permalink: /
     clearInterval(heroSlideInterval);
     heroSlideInterval = setInterval(() => {
       heroSliderNext();
-    }, 5000); // 5秒ごとに切り替え
+    }, 8000); // 8秒ごとに切り替え
   }
 
   // 自動再生開始
   heroSlideInterval = setInterval(() => {
     heroSliderNext();
-  }, 5000);
+  }, 8000);
 
   // キーボード操作対応
   document.addEventListener('keydown', (e) => {
