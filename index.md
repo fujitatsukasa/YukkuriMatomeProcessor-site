@@ -909,12 +909,6 @@ permalink: /
     height: 480px;
     perspective: 1500px;
     overflow: visible;
-  }
-
-  .testimonials-track {
-    position: relative;
-    width: 100%;
-    height: 100%;
     transform-style: preserve-3d;
   }
 
@@ -1125,98 +1119,215 @@ permalink: /
     box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
   }
 
-  /* ========== 料金セクション ========== */
+  /* ========== 料金セクション（リッチデザイン） ========== */
   .pricing-section {
-    background: white;
-    padding: 100px 20px;
+    background: linear-gradient(135deg, #1a1f35 0%, #2d3561 100%);
+    padding: 120px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pricing-section .section-title {
+    color: #ffffff !important;
+  }
+
+  .pricing-section .section-subtitle {
+    color: rgba(255, 255, 255, 0.85) !important;
+  }
+
+  .pricing-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(118, 75, 162, 0.15) 0%, transparent 50%);
+    pointer-events: none;
   }
 
   .pricing-container {
-    max-width: 1200px;
+    max-width: 1300px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 40px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 50px;
+    position: relative;
+    z-index: 1;
   }
 
   .pricing-card {
-    background: white;
-    border: 2px solid #e2e8f0;
-    border-radius: 20px;
-    padding: 40px 30px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    border-radius: 30px;
+    padding: 50px 35px;
     text-align: center;
-    transition: all 0.3s ease;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+  }
+
+  .pricing-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
   }
 
   .pricing-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-    border-color: #667eea;
+    transform: translateY(-15px) scale(1.02);
+    box-shadow:
+      0 35px 80px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2),
+      0 0 50px rgba(102, 126, 234, 0.3);
+    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .pricing-card:hover::before {
+    opacity: 1;
   }
 
   .pricing-card.featured {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    transform: scale(1.05);
-    border: none;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.3) 100%);
+    border: 3px solid rgba(255, 215, 0, 0.5);
+    transform: scale(1.08);
+    box-shadow:
+      0 30px 80px rgba(102, 126, 234, 0.5),
+      inset 0 2px 20px rgba(255, 255, 255, 0.15),
+      0 0 80px rgba(255, 215, 0, 0.4);
+  }
+
+  .pricing-card.featured:hover {
+    transform: translateY(-15px) scale(1.1);
+    box-shadow:
+      0 45px 100px rgba(102, 126, 234, 0.6),
+      inset 0 2px 30px rgba(255, 255, 255, 0.2),
+      0 0 100px rgba(255, 215, 0, 0.6);
+    border-color: rgba(255, 215, 0, 0.8);
   }
 
   .pricing-badge {
     position: absolute;
-    top: -15px;
+    top: -20px;
     left: 50%;
     transform: translateX(-50%);
-    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
-    color: white;
-    padding: 5px 20px;
+    background: linear-gradient(135deg, #ffd700 0%, #ffa000 100%);
+    color: #1a1f35;
+    padding: 10px 30px;
     border-radius: 50px;
-    font-size: 0.9em;
-    font-weight: 700;
+    font-size: 1em;
+    font-weight: 900;
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 0.05em;
+    box-shadow:
+      0 10px 30px rgba(255, 215, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    animation: badgePulse 2s ease-in-out infinite;
+  }
+
+  @keyframes badgePulse {
+    0%, 100% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.05); }
   }
 
   .pricing-name {
-    font-size: 1.5em;
-    font-weight: 700;
-    margin-bottom: 15px;
+    font-size: 2em;
+    font-weight: 900;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    font-family: 'Oswald', 'Noto Sans JP', sans-serif;
+    color: #ffffff;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    letter-spacing: 0.05em;
   }
 
   .pricing-price {
-    font-size: 3em;
+    font-size: 3.5em;
     font-weight: 900;
-    margin: 20px 0;
+    margin: 30px 0;
+    background: linear-gradient(135deg, #ffd700 0%, #ffeb3b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.5));
+    font-family: 'Oswald', sans-serif;
+  }
+
+  .pricing-card:not(.featured) .pricing-price {
+    background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
   }
 
   .pricing-price sup {
-    font-size: 0.4em;
+    font-size: 0.35em;
     vertical-align: super;
   }
 
   .pricing-features {
     list-style: none;
     padding: 0;
-    margin: 30px 0;
+    margin: 40px 0;
     text-align: left;
   }
 
   .pricing-features li {
-    padding: 12px 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 15px 20px;
+    margin: 10px 0;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 1.05em;
+    transition: all 0.3s ease;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  }
+
+  .pricing-features li:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateX(5px);
   }
 
   .pricing-card.featured .pricing-features li {
-    border-bottom-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 215, 0, 0.3);
+  }
+
+  .pricing-card.featured .pricing-features li:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 215, 0, 0.5);
   }
 
   .pricing-features li::before {
     content: '✓';
-    margin-right: 10px;
+    margin-right: 15px;
     color: #48bb78;
-    font-weight: 700;
+    font-weight: 900;
+    font-size: 1.3em;
+    text-shadow: 0 0 10px rgba(72, 187, 120, 0.6);
   }
 
   .pricing-card.featured .pricing-features li::before {
     color: #ffd700;
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
   }
 
   /* ========== CTAセクション ========== */
@@ -1764,8 +1875,7 @@ permalink: /
   <div class="testimonials-slider-wrapper">
     <button class="testimonial-arrow testimonial-arrow-left">←</button>
     <div class="testimonials-slider">
-      <div class="testimonials-track">
-      <div class="testimonial-slide">
+      <div class="testimonial-slide active">
         <div class="testimonial-card-luxury">
           <div class="testimonial-quote">"</div>
           <div class="testimonial-stars">★★★★★</div>
@@ -1975,7 +2085,6 @@ permalink: /
           </div>
         </div>
       </div>
-      </div>
     </div>
     <button class="testimonial-arrow testimonial-arrow-right">→</button>
   </div>
@@ -1985,7 +2094,7 @@ permalink: /
 <!-- 料金セクション -->
 <div class="pricing-section">
   <div class="section-header">
-    <h2 class="section-title">シンプルな料金プラン</h2>
+    <h2 class="section-title">料金プラン</h2>
     <p class="section-subtitle">7日間の無料トライアル付き</p>
   </div>
   <div class="pricing-container">
@@ -2002,7 +2111,7 @@ permalink: /
     </div>
     <div class="pricing-card featured">
       <div class="pricing-badge">人気No.1</div>
-      <div class="pricing-name">プロフェッショナル</div>
+      <div class="pricing-name">プレミアム</div>
       <div class="pricing-price">お問い合わせ</div>
       <ul class="pricing-features">
         <li>全ての機能が使い放題</li>
