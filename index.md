@@ -46,7 +46,7 @@ permalink: /
     position: relative;
     width: 100%;
     height: 100%;
-    perspective: 2000px;
+    perspective: 1500px;
     overflow: hidden;
   }
 
@@ -57,7 +57,7 @@ permalink: /
     width: 100%;
     height: 100%;
     transform: translateX(-50%);
-    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     opacity: 0;
     pointer-events: none;
     transform-style: preserve-3d;
@@ -71,14 +71,14 @@ permalink: /
   }
 
   .hero-slide.prev {
-    transform: translateX(-85%) translateZ(-400px) scale(0.6) rotateY(35deg);
-    opacity: 0.5;
+    transform: translateX(-90%) translateZ(-250px) scale(0.7) rotateY(25deg);
+    opacity: 0.6;
     z-index: 5;
   }
 
   .hero-slide.next {
-    transform: translateX(-15%) translateZ(-400px) scale(0.6) rotateY(-35deg);
-    opacity: 0.5;
+    transform: translateX(-10%) translateZ(-250px) scale(0.7) rotateY(-25deg);
+    opacity: 0.6;
     z-index: 5;
   }
 
@@ -907,7 +907,7 @@ permalink: /
   .testimonials-slider {
     position: relative;
     height: 480px;
-    perspective: 1500px;
+    perspective: 1200px;
     overflow: visible;
     transform-style: preserve-3d;
   }
@@ -919,7 +919,7 @@ permalink: /
     width: 450px;
     height: 100%;
     transform: translateX(-50%);
-    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     opacity: 0;
     pointer-events: none;
   }
@@ -932,15 +932,15 @@ permalink: /
   }
 
   .testimonial-slide.prev {
-    transform: translateX(-120%) translateZ(-200px) scale(0.75) rotateY(25deg);
-    opacity: 0.7;
+    transform: translateX(-115%) translateZ(-180px) scale(0.75) rotateY(20deg);
+    opacity: 0.65;
     z-index: 5;
     pointer-events: auto;
   }
 
   .testimonial-slide.next {
-    transform: translateX(20%) translateZ(-200px) scale(0.75) rotateY(-25deg);
-    opacity: 0.7;
+    transform: translateX(15%) translateZ(-180px) scale(0.75) rotateY(-20deg);
+    opacity: 0.65;
     z-index: 5;
     pointer-events: auto;
   }
@@ -1159,45 +1159,20 @@ permalink: /
   }
 
   .pricing-card {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 2px solid rgba(255, 255, 255, 0.15);
-    border-radius: 30px;
-    padding: 50px 35px;
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 40px 30px;
     text-align: center;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s ease;
     position: relative;
-    box-shadow:
-      0 20px 60px rgba(0, 0, 0, 0.3),
-      inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    overflow: hidden;
-  }
-
-  .pricing-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 5px;
-    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-    opacity: 0;
-    transition: opacity 0.5s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 
   .pricing-card:hover {
-    transform: translateY(-15px) scale(1.02);
-    box-shadow:
-      0 35px 80px rgba(0, 0, 0, 0.5),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2),
-      0 0 50px rgba(102, 126, 234, 0.3);
-    border-color: rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.08);
-  }
-
-  .pricing-card:hover::before {
-    opacity: 1;
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+    border-color: #667eea;
   }
 
   .pricing-card.featured {
@@ -1219,36 +1194,18 @@ permalink: /
     border-color: rgba(255, 215, 0, 0.8);
   }
 
-  .pricing-badge {
-    position: absolute;
-    top: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: linear-gradient(135deg, #ffd700 0%, #ffa000 100%);
-    color: #1a1f35;
-    padding: 10px 30px;
-    border-radius: 50px;
-    font-size: 1em;
-    font-weight: 900;
-    font-family: 'Oswald', sans-serif;
-    letter-spacing: 0.05em;
-    box-shadow:
-      0 10px 30px rgba(255, 215, 0, 0.5),
-      inset 0 1px 0 rgba(255, 255, 255, 0.5);
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-    animation: badgePulse 2s ease-in-out infinite;
-  }
-
-  @keyframes badgePulse {
-    0%, 100% { transform: translateX(-50%) scale(1); }
-    50% { transform: translateX(-50%) scale(1.05); }
-  }
 
   .pricing-name {
+    font-size: 1.5em;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #2d3748;
+  }
+
+  .pricing-card.featured .pricing-name {
     font-size: 2em;
     font-weight: 900;
     margin-bottom: 20px;
-    margin-top: 10px;
     font-family: 'Oswald', 'Noto Sans JP', sans-serif;
     color: #ffffff;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
@@ -1256,8 +1213,14 @@ permalink: /
   }
 
   .pricing-price {
-    font-size: 3.5em;
+    font-size: 3em;
     font-weight: 900;
+    margin: 20px 0;
+    color: #2d3748;
+  }
+
+  .pricing-card.featured .pricing-price {
+    font-size: 3.5em;
     margin: 30px 0;
     background: linear-gradient(135deg, #ffd700 0%, #ffeb3b 100%);
     -webkit-background-clip: text;
@@ -1265,14 +1228,6 @@ permalink: /
     background-clip: text;
     filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.5));
     font-family: 'Oswald', sans-serif;
-  }
-
-  .pricing-card:not(.featured) .pricing-price {
-    background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
   }
 
   .pricing-price sup {
@@ -1283,16 +1238,27 @@ permalink: /
   .pricing-features {
     list-style: none;
     padding: 0;
-    margin: 40px 0;
+    margin: 30px 0;
     text-align: left;
   }
 
   .pricing-features li {
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    color: #4a5568;
+  }
+
+  .pricing-card.featured .pricing-features {
+    margin: 40px 0;
+  }
+
+  .pricing-card.featured .pricing-features li {
     padding: 15px 20px;
     margin: 10px 0;
     border-radius: 12px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: none;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.3);
     color: #ffffff;
     font-weight: 600;
     font-size: 1.05em;
@@ -1300,33 +1266,24 @@ permalink: /
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
   }
 
-  .pricing-features li:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.2);
-    transform: translateX(5px);
-  }
-
-  .pricing-card.featured .pricing-features li {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 215, 0, 0.3);
-  }
-
   .pricing-card.featured .pricing-features li:hover {
     background: rgba(255, 255, 255, 0.15);
     border-color: rgba(255, 215, 0, 0.5);
+    transform: translateX(5px);
   }
 
   .pricing-features li::before {
     content: '✓';
-    margin-right: 15px;
+    margin-right: 10px;
     color: #48bb78;
-    font-weight: 900;
-    font-size: 1.3em;
-    text-shadow: 0 0 10px rgba(72, 187, 120, 0.6);
+    font-weight: 700;
   }
 
   .pricing-card.featured .pricing-features li::before {
+    margin-right: 15px;
     color: #ffd700;
+    font-weight: 900;
+    font-size: 1.3em;
     text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
   }
 
@@ -1875,7 +1832,7 @@ permalink: /
   <div class="testimonials-slider-wrapper">
     <button class="testimonial-arrow testimonial-arrow-left">←</button>
     <div class="testimonials-slider">
-      <div class="testimonial-slide active">
+      <div class="testimonial-slide">
         <div class="testimonial-card-luxury">
           <div class="testimonial-quote">"</div>
           <div class="testimonial-stars">★★★★★</div>
@@ -2110,7 +2067,6 @@ permalink: /
       <a href="/download" class="btn btn-secondary" style="width: 100%;">今すぐ始める</a>
     </div>
     <div class="pricing-card featured">
-      <div class="pricing-badge">人気No.1</div>
       <div class="pricing-name">プレミアム</div>
       <div class="pricing-price">お問い合わせ</div>
       <ul class="pricing-features">
