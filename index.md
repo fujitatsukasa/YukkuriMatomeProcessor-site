@@ -46,23 +46,40 @@ permalink: /
     position: relative;
     width: 100%;
     height: 100%;
+    perspective: 2000px;
     overflow: hidden;
   }
 
   .hero-slide {
     position: absolute;
     top: 0;
-    left: 0;
+    left: 50%;
     width: 100%;
     height: 100%;
+    transform: translateX(-50%);
+    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
     opacity: 0;
-    transition: opacity 1.5s ease-in-out;
-    z-index: 1;
+    pointer-events: none;
+    transform-style: preserve-3d;
   }
 
   .hero-slide.active {
+    transform: translateX(-50%) translateZ(0) scale(1);
     opacity: 1;
-    z-index: 2;
+    z-index: 10;
+    pointer-events: auto;
+  }
+
+  .hero-slide.prev {
+    transform: translateX(-85%) translateZ(-400px) scale(0.6) rotateY(35deg);
+    opacity: 0.5;
+    z-index: 5;
+  }
+
+  .hero-slide.next {
+    transform: translateX(-15%) translateZ(-400px) scale(0.6) rotateY(-35deg);
+    opacity: 0.5;
+    z-index: 5;
   }
 
   .hero-slide::before {
@@ -502,7 +519,7 @@ permalink: /
   }
 
   .stat-number.stat-stars {
-    font-size: 3.5em;
+    font-size: 2.8em;
     color: #ffd700 !important;
     text-shadow:
       3px 3px 10px rgba(0, 0, 0, 0.9),
@@ -859,7 +876,7 @@ permalink: /
     transform: scale(1.05);
   }
 
-  /* ========== お客様の声セクション（3つ横並びスライダー） ========== */
+  /* ========== お客様の声セクション（3D カルーセル） ========== */
   .testimonials-section {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     padding: 120px 20px;
@@ -889,30 +906,61 @@ permalink: /
 
   .testimonials-slider {
     position: relative;
-    overflow: hidden;
+    height: 480px;
+    perspective: 1500px;
+    overflow: visible;
   }
 
   .testimonials-track {
-    display: flex;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    gap: 30px;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
   }
 
   .testimonial-slide {
-    min-width: calc(33.333% - 20px);
-    flex-shrink: 0;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 450px;
+    height: 100%;
+    transform: translateX(-50%);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .testimonial-slide.active {
+    transform: translateX(-50%) translateZ(0) scale(1);
+    opacity: 1;
+    z-index: 10;
+    pointer-events: auto;
+  }
+
+  .testimonial-slide.prev {
+    transform: translateX(-120%) translateZ(-200px) scale(0.75) rotateY(25deg);
+    opacity: 0.7;
+    z-index: 5;
+    pointer-events: auto;
+  }
+
+  .testimonial-slide.next {
+    transform: translateX(20%) translateZ(-200px) scale(0.75) rotateY(-25deg);
+    opacity: 0.7;
+    z-index: 5;
+    pointer-events: auto;
   }
 
   .testimonial-card-luxury {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(20, 25, 50, 0.7);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     padding: 40px 30px;
     border-radius: 25px;
-    border: 2px solid rgba(255, 255, 255, 0.25);
+    border: 2px solid rgba(255, 255, 255, 0.3);
     box-shadow:
-      0 20px 60px rgba(0, 0, 0, 0.3),
-      inset 0 2px 15px rgba(255, 255, 255, 0.15);
+      0 20px 60px rgba(0, 0, 0, 0.5),
+      inset 0 2px 15px rgba(255, 255, 255, 0.1);
     position: relative;
     transition: all 0.4s ease;
     height: 100%;
@@ -920,13 +968,12 @@ permalink: /
     flex-direction: column;
   }
 
-  .testimonial-card-luxury:hover {
-    transform: translateY(-8px);
+  .testimonial-slide.active .testimonial-card-luxury {
+    background: rgba(20, 25, 50, 0.85);
+    border-color: rgba(255, 255, 255, 0.5);
     box-shadow:
-      0 30px 80px rgba(0, 0, 0, 0.4),
-      inset 0 2px 20px rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.4);
-    background: rgba(255, 255, 255, 0.2);
+      0 30px 80px rgba(0, 0, 0, 0.6),
+      inset 0 2px 20px rgba(255, 255, 255, 0.15);
   }
 
   .testimonial-quote {
@@ -1722,7 +1769,7 @@ permalink: /
         <div class="testimonial-card-luxury">
           <div class="testimonial-quote">"</div>
           <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text-luxury">動画制作時間が<strong>10分の1</strong>に！月の収益が<strong>300万円</strong>を超えました。このツールなしでは考えられません。</p>
+          <p class="testimonial-text-luxury">動画制作時間が<strong>劇的に短縮</strong>！作業効率が格段に上がり、このツールなしでは考えられません。</p>
           <div class="testimonial-author-luxury">
             <div class="testimonial-avatar-luxury">高</div>
             <div>
@@ -1736,7 +1783,7 @@ permalink: /
         <div class="testimonial-card-luxury">
           <div class="testimonial-quote">"</div>
           <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text-luxury">完全に<strong>人生が変わりました</strong>。1日2本だった投稿が20本に。チャンネル登録者も<strong>10倍</strong>に急増しています。</p>
+          <p class="testimonial-text-luxury">完全に<strong>人生が変わりました</strong>。投稿本数が大幅に増え、チャンネル登録者も<strong>急増</strong>しています。</p>
           <div class="testimonial-author-luxury">
             <div class="testimonial-avatar-luxury">佐</div>
             <div>
@@ -1764,7 +1811,7 @@ permalink: /
         <div class="testimonial-card-luxury">
           <div class="testimonial-quote">"</div>
           <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text-luxury">チーム全員の作業効率が<strong>劇的に向上</strong>。月間動画本数が<strong>500本</strong>を突破し、売上も<strong>5倍</strong>になりました。</p>
+          <p class="testimonial-text-luxury">チーム全員の作業効率が<strong>劇的に向上</strong>。月間動画本数が大幅に増え、売上も<strong>大幅アップ</strong>しました。</p>
           <div class="testimonial-author-luxury">
             <div class="testimonial-avatar-luxury">鈴</div>
             <div>
@@ -1792,7 +1839,7 @@ permalink: /
         <div class="testimonial-card-luxury">
           <div class="testimonial-quote">"</div>
           <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text-luxury">導入前は月50本が限界でしたが、今は<strong>毎日30本</strong>投稿しています。収益は<strong>15倍</strong>、まさに革命です。</p>
+          <p class="testimonial-text-luxury">導入前は限界を感じていましたが、今は<strong>大量投稿</strong>が可能になりました。収益も<strong>大幅アップ</strong>、まさに革命です。</p>
           <div class="testimonial-author-luxury">
             <div class="testimonial-avatar-luxury">伊</div>
             <div>
@@ -1806,7 +1853,7 @@ permalink: /
         <div class="testimonial-card-luxury">
           <div class="testimonial-quote">"</div>
           <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text-luxury">テンプレート機能が<strong>神レベル</strong>。1本5分で完成するので、<strong>副業でも月100万円</strong>稼げるようになりました。</p>
+          <p class="testimonial-text-luxury">テンプレート機能が<strong>神レベル</strong>。短時間で完成するので、<strong>副業でも十分な収益</strong>を得られるようになりました。</p>
           <div class="testimonial-author-luxury">
             <div class="testimonial-avatar-luxury">山</div>
             <div>
@@ -1834,7 +1881,7 @@ permalink: /
         <div class="testimonial-card-luxury">
           <div class="testimonial-quote">"</div>
           <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text-luxury">法人での大量制作に<strong>完璧</strong>。月間<strong>1,000本</strong>の動画を3人で回せています。コスト削減効果は<strong>年間5,000万円</strong>。</p>
+          <p class="testimonial-text-luxury">法人での大量制作に<strong>完璧</strong>。少人数で大量の動画を制作でき、<strong>大幅なコスト削減</strong>を実現しています。</p>
           <div class="testimonial-author-luxury">
             <div class="testimonial-avatar-luxury">渡</div>
             <div>
@@ -1848,7 +1895,7 @@ permalink: /
         <div class="testimonial-card-luxury">
           <div class="testimonial-quote">"</div>
           <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text-luxury">初心者でも<strong>プロ級の動画</strong>が作れます。開始1ヶ月で登録者<strong>1万人</strong>達成しました！</p>
+          <p class="testimonial-text-luxury">初心者でも<strong>プロ級の動画</strong>が作れます。開始直後から<strong>急成長</strong>を実現できました！</p>
           <div class="testimonial-author-luxury">
             <div class="testimonial-avatar-luxury">加</div>
             <div>
@@ -1876,7 +1923,7 @@ permalink: /
         <div class="testimonial-card-luxury">
           <div class="testimonial-quote">"</div>
           <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text-luxury">サポートも<strong>超迅速</strong>。質問したら<strong>1時間以内</strong>に返答が来ます。安心して使える最高のツールです。</p>
+          <p class="testimonial-text-luxury">サポートも<strong>超迅速</strong>。質問への返答が早く、安心して使える最高のツールです。</p>
           <div class="testimonial-author-luxury">
             <div class="testimonial-avatar-luxury">林</div>
             <div>
@@ -1904,7 +1951,7 @@ permalink: /
         <div class="testimonial-card-luxury">
           <div class="testimonial-quote">"</div>
           <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text-luxury">価格が<strong>圧倒的に安い</strong>。この機能でこの価格は信じられません。<strong>投資回収まで1週間</strong>でした。</p>
+          <p class="testimonial-text-luxury">価格が<strong>圧倒的に安い</strong>。この機能でこの価格は信じられません。<strong>すぐに元が取れました</strong>。</p>
           <div class="testimonial-author-luxury">
             <div class="testimonial-avatar-luxury">松</div>
             <div>
@@ -2010,7 +2057,7 @@ permalink: /
   const heroSlideCount = heroSlides.length;
   let heroSlideInterval;
 
-  // スライドを表示する関数
+  // スライドを表示する関数（3Dカルーセル対応）
   function showHeroSlide(index) {
     // 範囲外チェック
     if (index >= heroSlideCount) {
@@ -2021,9 +2068,17 @@ permalink: /
       currentHeroSlide = index;
     }
 
-    // 全スライドを非表示
-    heroSlides.forEach(slide => {
-      slide.classList.remove('active');
+    // 全スライドの状態をリセット
+    heroSlides.forEach((slide, i) => {
+      slide.classList.remove('active', 'prev', 'next');
+
+      if (i === currentHeroSlide) {
+        slide.classList.add('active');
+      } else if (i === (currentHeroSlide - 1 + heroSlideCount) % heroSlideCount) {
+        slide.classList.add('prev');
+      } else if (i === (currentHeroSlide + 1) % heroSlideCount) {
+        slide.classList.add('next');
+      }
     });
 
     // 全ドットを非アクティブ
@@ -2031,8 +2086,7 @@ permalink: /
       dot.classList.remove('active');
     });
 
-    // 現在のスライドとドットをアクティブに
-    heroSlides[currentHeroSlide].classList.add('active');
+    // 現在のドットをアクティブに
     heroDots[currentHeroSlide].classList.add('active');
 
     // カウンターを更新
@@ -2237,81 +2291,84 @@ permalink: /
     }
   });
 
-  // Testimonials Slider (3つずつ表示)
-  const testimonialsTrack = document.querySelector('.testimonials-track');
+  // Testimonials 3D Carousel
   const testimonialSlides = document.querySelectorAll('.testimonial-slide');
   const testimonialDotsContainer = document.querySelector('.testimonials-dots');
   const testimonialLeftArrow = document.querySelector('.testimonial-arrow-left');
   const testimonialRightArrow = document.querySelector('.testimonial-arrow-right');
 
   const totalTestimonials = testimonialSlides.length;
-  const slidesPerView = window.innerWidth > 768 ? 3 : 1;
-  const totalPages = Math.ceil(totalTestimonials / slidesPerView);
-  let currentPage = 0;
+  let currentTestimonialIndex = 0;
 
-  // Create dots (ページ数分)
-  for (let i = 0; i < totalPages; i++) {
+  // Create dots
+  for (let i = 0; i < totalTestimonials; i++) {
     const dot = document.createElement('div');
     dot.classList.add('testimonial-dot');
     if (i === 0) dot.classList.add('active');
-    dot.addEventListener('click', () => moveToPage(i));
+    dot.addEventListener('click', () => goToTestimonial(i));
     testimonialDotsContainer.appendChild(dot);
   }
 
   const testimonialDots = document.querySelectorAll('.testimonial-dot');
 
-  function moveToPage(page) {
-    currentPage = page;
+  function updateTestimonialCarousel() {
+    testimonialSlides.forEach((slide, index) => {
+      slide.classList.remove('active', 'prev', 'next');
 
-    // スライド位置を計算（3つずつ移動）
-    const slideWidth = testimonialSlides[0].offsetWidth + 30; // gap含む
-    const offset = -currentPage * slideWidth * slidesPerView;
+      if (index === currentTestimonialIndex) {
+        slide.classList.add('active');
+      } else if (index === (currentTestimonialIndex - 1 + totalTestimonials) % totalTestimonials) {
+        slide.classList.add('prev');
+      } else if (index === (currentTestimonialIndex + 1) % totalTestimonials) {
+        slide.classList.add('next');
+      }
+    });
 
-    testimonialsTrack.style.transform = `translateX(${offset}px)`;
+    // Update dots
+    testimonialDots.forEach((dot, index) => {
+      dot.classList.toggle('active', index === currentTestimonialIndex);
+    });
+  }
 
-    // ドットを更新
-    testimonialDots.forEach(dot => dot.classList.remove('active'));
-    testimonialDots[currentPage].classList.add('active');
+  function goToTestimonial(index) {
+    currentTestimonialIndex = index;
+    updateTestimonialCarousel();
+  }
+
+  function nextTestimonial() {
+    currentTestimonialIndex = (currentTestimonialIndex + 1) % totalTestimonials;
+    updateTestimonialCarousel();
+  }
+
+  function prevTestimonial() {
+    currentTestimonialIndex = (currentTestimonialIndex - 1 + totalTestimonials) % totalTestimonials;
+    updateTestimonialCarousel();
   }
 
   // Arrow controls
   if (testimonialLeftArrow) {
-    testimonialLeftArrow.addEventListener('click', () => {
-      const prevPage = (currentPage - 1 + totalPages) % totalPages;
-      moveToPage(prevPage);
-    });
+    testimonialLeftArrow.addEventListener('click', prevTestimonial);
   }
 
   if (testimonialRightArrow) {
-    testimonialRightArrow.addEventListener('click', () => {
-      const nextPage = (currentPage + 1) % totalPages;
-      moveToPage(nextPage);
-    });
+    testimonialRightArrow.addEventListener('click', nextTestimonial);
   }
 
-  // Auto-play testimonials
-  let autoplayInterval = setInterval(() => {
-    const nextPage = (currentPage + 1) % totalPages;
-    moveToPage(nextPage);
-  }, 5000);
+  // Auto-play
+  let testimonialAutoplay = setInterval(nextTestimonial, 5000);
 
-  // ウィンドウリサイズ時に再計算
-  window.addEventListener('resize', () => {
-    moveToPage(currentPage);
-  });
-
-  // マウスホバーで自動再生停止
+  // Pause on hover
   const testimonialsSection = document.querySelector('.testimonials-section');
   if (testimonialsSection) {
     testimonialsSection.addEventListener('mouseenter', () => {
-      clearInterval(autoplayInterval);
+      clearInterval(testimonialAutoplay);
     });
 
     testimonialsSection.addEventListener('mouseleave', () => {
-      autoplayInterval = setInterval(() => {
-        const nextPage = (currentPage + 1) % totalPages;
-        moveToPage(nextPage);
-      }, 5000);
+      testimonialAutoplay = setInterval(nextTestimonial, 5000);
     });
   }
+
+  // Initialize
+  updateTestimonialCarousel();
 </script>
