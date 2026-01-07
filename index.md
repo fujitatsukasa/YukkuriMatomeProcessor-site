@@ -124,21 +124,19 @@ permalink: /
   }
 
   .hero-slide-title {
-    font-family: 'Bebas Neue', 'Anton', 'Montserrat', sans-serif !important;
+    font-family: 'Bebas Neue', 'Montserrat', 'Noto Sans JP', sans-serif !important;
     font-size: 4.5em;
     font-weight: 900;
     color: #ffffff !important;
     margin-bottom: 25px;
-    line-height: 1.1;
+    line-height: 1.15;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    background: linear-gradient(135deg, #ffffff 0%, #fff5e6 50%, #ffffff 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    filter: drop-shadow(4px 4px 16px rgba(0, 0, 0, 0.95))
-            drop-shadow(2px 2px 8px rgba(0, 0, 0, 0.9))
-            drop-shadow(0 0 60px rgba(255, 215, 0, 0.8));
+    text-shadow:
+      5px 5px 0px rgba(0, 0, 0, 0.8),
+      3px 3px 15px rgba(0, 0, 0, 0.9),
+      0 0 40px rgba(255, 215, 0, 0.6);
+    -webkit-text-stroke: 2.5px rgba(0, 0, 0, 0.7);
     animation: titlePulseGlow 3s ease-in-out infinite, slideInUp 1s ease-out;
     transform-origin: center;
   }
@@ -146,16 +144,18 @@ permalink: /
   @keyframes titlePulseGlow {
     0%, 100% {
       transform: scale(1);
-      filter: drop-shadow(4px 4px 16px rgba(0, 0, 0, 0.95))
-              drop-shadow(2px 2px 8px rgba(0, 0, 0, 0.9))
-              drop-shadow(0 0 60px rgba(255, 215, 0, 0.8));
+      text-shadow:
+        5px 5px 0px rgba(0, 0, 0, 0.8),
+        3px 3px 15px rgba(0, 0, 0, 0.9),
+        0 0 40px rgba(255, 215, 0, 0.6);
     }
     50% {
       transform: scale(1.03);
-      filter: drop-shadow(5px 5px 20px rgba(0, 0, 0, 1))
-              drop-shadow(3px 3px 10px rgba(0, 0, 0, 0.95))
-              drop-shadow(0 0 80px rgba(255, 215, 0, 1))
-              drop-shadow(0 0 40px rgba(255, 255, 255, 0.8));
+      text-shadow:
+        6px 6px 0px rgba(0, 0, 0, 0.9),
+        4px 4px 20px rgba(0, 0, 0, 1),
+        0 0 60px rgba(255, 215, 0, 0.9),
+        0 0 30px rgba(255, 255, 255, 0.7);
     }
   }
 
@@ -317,37 +317,9 @@ permalink: /
     right: 35px;
   }
 
-  /* スライド番号インジケーター */
+  /* スライド番号インジケーター - 非表示 */
   .hero-slider-counter {
-    position: absolute;
-    top: 35px;
-    right: 35px;
-    z-index: 10;
-    background: rgba(0, 0, 0, 0.55);
-    backdrop-filter: blur(15px);
-    padding: 16px 32px;
-    border-radius: 50px;
-    border: 2px solid rgba(255, 255, 255, 0.35);
-    box-shadow:
-      0 10px 40px rgba(0, 0, 0, 0.5),
-      inset 0 2px 8px rgba(255, 255, 255, 0.1);
-  }
-
-  .hero-slider-counter span {
-    font-size: 1.5em;
-    font-weight: 900;
-    color: #ffffff;
-    text-shadow:
-      3px 3px 8px rgba(0, 0, 0, 0.9),
-      0 0 15px rgba(0, 0, 0, 0.6);
-  }
-
-  .hero-slider-counter .current {
-    font-size: 2.1em;
-    color: #ffd700;
-    text-shadow:
-      3px 3px 10px rgba(0, 0, 0, 1),
-      0 0 25px rgba(255, 215, 0, 0.6);
+    display: none !important;
   }
 
   .btn {
@@ -446,13 +418,14 @@ permalink: /
     }
   }
 
-  /* ========== 統計セクション ========== */
+  /* ========== 統計セクション - 統一感のあるプロフェッショナルデザイン ========== */
   .stats-section {
-    background: white;
-    padding: 80px 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 100px 20px;
     margin-top: -50px;
     position: relative;
     z-index: 3;
+    box-shadow: 0 -10px 50px rgba(0, 0, 0, 0.3);
   }
 
   .stats-container {
@@ -465,38 +438,87 @@ permalink: /
 
   .stat-card {
     text-align: center;
-    padding: 30px;
-    border-radius: 20px;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 40px 30px;
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    box-shadow:
+      0 15px 45px rgba(0, 0, 0, 0.2),
+      inset 0 2px 10px rgba(255, 255, 255, 0.15);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.15) 50%,
+      transparent 70%
+    );
+    transform: rotate(45deg);
+    transition: all 0.6s ease;
+  }
+
+  .stat-card:hover::before {
+    left: 100%;
   }
 
   .stat-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    transform: translateY(-15px) scale(1.05);
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.45);
+    box-shadow:
+      0 25px 60px rgba(0, 0, 0, 0.35),
+      0 0 40px rgba(255, 255, 255, 0.2),
+      inset 0 2px 15px rgba(255, 255, 255, 0.25);
   }
 
   .stat-number {
-    font-size: 3.8em;
+    font-family: 'Bebas Neue', 'Anton', sans-serif !important;
+    font-size: 4.5em;
     font-weight: 900;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 10px;
-    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
-    -webkit-text-stroke: 1px rgba(102, 126, 234, 0.3);
+    color: #ffffff !important;
+    margin-bottom: 15px;
+    line-height: 1;
+    text-shadow:
+      4px 4px 0px rgba(0, 0, 0, 0.4),
+      2px 2px 15px rgba(0, 0, 0, 0.6),
+      0 0 30px rgba(255, 215, 0, 0.5);
+    -webkit-text-stroke: 2px rgba(0, 0, 0, 0.5);
+    letter-spacing: 0.05em;
+    animation: statPulse 3s ease-in-out infinite;
+  }
+
+  @keyframes statPulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
   }
 
   .stat-label {
-    font-size: 1.25em;
-    color: #0a0e1a !important;
+    font-family: 'Montserrat', 'Noto Sans JP', sans-serif !important;
+    font-size: 1.15em;
+    color: #ffffff !important;
     font-weight: 800;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
     text-shadow:
-      1px 1px 2px rgba(0, 0, 0, 0.15),
-      0 1px 3px rgba(255, 255, 255, 0.8);
+      2px 2px 6px rgba(0, 0, 0, 0.7),
+      0 0 15px rgba(0, 0, 0, 0.5);
+    -webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.3);
   }
 
   /* ========== 特徴セクション ========== */
@@ -998,8 +1020,10 @@ permalink: /
       font-size: 2.5em;
       margin-bottom: 20px;
       letter-spacing: 0.06em;
-      filter: drop-shadow(3px 3px 12px rgba(0, 0, 0, 0.95))
-              drop-shadow(0 0 50px rgba(255, 215, 0, 0.7));
+      text-shadow:
+        4px 4px 0px rgba(0, 0, 0, 0.8),
+        2px 2px 12px rgba(0, 0, 0, 0.9),
+        0 0 35px rgba(255, 215, 0, 0.6);
     }
 
     .hero-slide-subtitle {
@@ -1029,19 +1053,6 @@ permalink: /
       right: 12px;
     }
 
-    .hero-slider-counter {
-      top: 15px;
-      right: 15px;
-      padding: 8px 18px;
-    }
-
-    .hero-slider-counter span {
-      font-size: 1.1em;
-    }
-
-    .hero-slider-counter .current {
-      font-size: 1.5em;
-    }
 
     .hero-slider-dots {
       bottom: 18px;
@@ -1063,7 +1074,11 @@ permalink: /
     }
 
     .stat-number {
-      font-size: 2.8em;
+      font-size: 3.5em;
+    }
+
+    .stat-label {
+      font-size: 1em;
     }
 
     .features-grid,
@@ -1095,6 +1110,18 @@ permalink: /
       font-size: 2em;
       margin-bottom: 15px;
       letter-spacing: 0.05em;
+      text-shadow:
+        3px 3px 0px rgba(0, 0, 0, 0.8),
+        2px 2px 10px rgba(0, 0, 0, 0.9),
+        0 0 25px rgba(255, 215, 0, 0.5);
+    }
+
+    .stat-number {
+      font-size: 2.8em;
+    }
+
+    .stat-label {
+      font-size: 0.9em;
     }
 
     .hero-slide-subtitle {
@@ -1120,19 +1147,6 @@ permalink: /
       right: 8px;
     }
 
-    .hero-slider-counter {
-      top: 12px;
-      right: 12px;
-      padding: 6px 15px;
-    }
-
-    .hero-slider-counter span {
-      font-size: 0.95em;
-    }
-
-    .hero-slider-counter .current {
-      font-size: 1.3em;
-    }
 
     .btn {
       width: auto;
@@ -1158,8 +1172,8 @@ permalink: /
       <div class="hero-slide-content">
         <h1 class="hero-slide-title">ゆっくりまとめプロセッサー</h1>
         <p class="hero-slide-subtitle">
-          可愛いマスコット「柳生おたま」と一緒に<br>
-          <strong>動画制作を<span class="highlight-keyword">10倍効率化</span></strong>
+          <strong>動画制作の<span class="highlight-keyword">全工程を自動化</span></strong><br>
+          台本作成から編集まで<span class="highlight-keyword">10倍速</span>で完結
         </p>
         <div class="hero-slide-cta">
           <a href="/download" class="btn btn-primary">🎬 今すぐ無料トライアル</a>
@@ -1174,8 +1188,8 @@ permalink: /
       <div class="hero-slide-content">
         <h1 class="hero-slide-title">直感的な編集画面</h1>
         <p class="hero-slide-subtitle">
-          ドラッグ&ドロップで簡単編集<br>
-          <strong><span class="highlight-keyword">初心者でもプロ級</span>の動画が作れる</strong>
+          <strong><span class="highlight-keyword">ドラッグ&ドロップ</span>だけで</strong><br>
+          プロ級の動画が<span class="highlight-keyword">数分で完成</span>
         </p>
         <div class="hero-slide-cta">
           <a href="/Instructions" class="btn btn-primary">使い方を見る</a>
@@ -1188,10 +1202,10 @@ permalink: /
     <div class="hero-slide">
       <img src="/assets/img/製品画像_2.png" alt="自動取得画面 - AI が自動で素材を収集" class="hero-slide-image" onerror="this.src='/assets/img/製品イメージ2.png'">
       <div class="hero-slide-content">
-        <h1 class="hero-slide-title">自動素材収集</h1>
+        <h1 class="hero-slide-title">AI自動素材収集</h1>
         <p class="hero-slide-subtitle">
-          AIが自動で最適な素材を取得<br>
-          <strong>1日2本だった動画が<span class="highlight-keyword">20本に</span></strong>
+          <strong>最適な素材を<span class="highlight-keyword">自動取得</span></strong><br>
+          1日の動画本数が<span class="highlight-keyword">10倍に増加</span>
         </p>
         <div class="hero-slide-cta">
           <a href="/purchase" class="btn btn-primary">今すぐ購入</a>
