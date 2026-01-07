@@ -6,8 +6,8 @@ permalink: /
 ---
 
 <style>
-  /* Google Fonts の読み込み */
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;600;700;800&display=swap');
+  /* Google Fonts の読み込み - 超インパクトのあるフォント追加 */
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;600;700;800&family=Bebas+Neue&family=Montserrat:wght@700;800;900&family=Anton&display=swap');
 
   /* ========== グローバル設定 ========== */
   * {
@@ -124,32 +124,88 @@ permalink: /
   }
 
   .hero-slide-title {
-    font-size: 3.8em;
+    font-family: 'Bebas Neue', 'Anton', 'Montserrat', sans-serif !important;
+    font-size: 4.5em;
     font-weight: 900;
     color: #ffffff !important;
     margin-bottom: 25px;
-    line-height: 1.2;
-    text-shadow:
-      4px 4px 16px rgba(0, 0, 0, 0.95),
-      2px 2px 8px rgba(0, 0, 0, 0.8),
-      0 0 40px rgba(0, 0, 0, 0.6);
-    -webkit-text-stroke: 2.5px rgba(0, 0, 0, 0.6);
-    letter-spacing: 0.02em;
-    animation: slideInUp 1s ease-out;
+    line-height: 1.1;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #ffffff 0%, #fff5e6 50%, #ffffff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(4px 4px 16px rgba(0, 0, 0, 0.95))
+            drop-shadow(2px 2px 8px rgba(0, 0, 0, 0.9))
+            drop-shadow(0 0 60px rgba(255, 215, 0, 0.8));
+    animation: titlePulseGlow 3s ease-in-out infinite, slideInUp 1s ease-out;
+    transform-origin: center;
+  }
+
+  @keyframes titlePulseGlow {
+    0%, 100% {
+      transform: scale(1);
+      filter: drop-shadow(4px 4px 16px rgba(0, 0, 0, 0.95))
+              drop-shadow(2px 2px 8px rgba(0, 0, 0, 0.9))
+              drop-shadow(0 0 60px rgba(255, 215, 0, 0.8));
+    }
+    50% {
+      transform: scale(1.03);
+      filter: drop-shadow(5px 5px 20px rgba(0, 0, 0, 1))
+              drop-shadow(3px 3px 10px rgba(0, 0, 0, 0.95))
+              drop-shadow(0 0 80px rgba(255, 215, 0, 1))
+              drop-shadow(0 0 40px rgba(255, 255, 255, 0.8));
+    }
   }
 
   .hero-slide-subtitle {
-    font-size: 1.6em;
+    font-family: 'Noto Sans JP', 'Montserrat', sans-serif !important;
+    font-size: 1.65em;
     font-weight: 700;
     color: #ffffff !important;
     margin-bottom: 35px;
-    line-height: 1.6;
+    line-height: 1.7;
     text-shadow:
       3px 3px 10px rgba(0, 0, 0, 0.9),
       2px 2px 6px rgba(0, 0, 0, 0.8),
       0 0 25px rgba(0, 0, 0, 0.6);
     -webkit-text-stroke: 1.5px rgba(0, 0, 0, 0.5);
     animation: slideInUp 1s ease-out 0.2s both;
+  }
+
+  /* キーワード強調スタイル */
+  .hero-slide-subtitle .highlight-keyword {
+    font-family: 'Montserrat', 'Noto Sans JP', sans-serif !important;
+    font-size: 1.25em;
+    font-weight: 900;
+    color: #ff3b3b !important;
+    background: linear-gradient(135deg, #ff3b3b 0%, #ff6b6b 50%, #ffeb3b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-decoration: underline;
+    text-decoration-color: #ff3b3b;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 4px;
+    text-shadow: none;
+    filter: drop-shadow(0 0 15px rgba(255, 59, 59, 0.8))
+            drop-shadow(2px 2px 6px rgba(0, 0, 0, 0.9));
+    animation: keywordGlow 2s ease-in-out infinite;
+    display: inline-block;
+    padding: 0 8px;
+  }
+
+  @keyframes keywordGlow {
+    0%, 100% {
+      filter: drop-shadow(0 0 15px rgba(255, 59, 59, 0.8))
+              drop-shadow(2px 2px 6px rgba(0, 0, 0, 0.9));
+    }
+    50% {
+      filter: drop-shadow(0 0 30px rgba(255, 59, 59, 1))
+              drop-shadow(0 0 15px rgba(255, 235, 59, 0.8))
+              drop-shadow(3px 3px 8px rgba(0, 0, 0, 1));
+    }
   }
 
   .hero-slide-cta {
@@ -939,15 +995,24 @@ permalink: /
     }
 
     .hero-slide-title {
-      font-size: 2.2em;
+      font-size: 2.5em;
       margin-bottom: 20px;
-      -webkit-text-stroke: 2px rgba(0, 0, 0, 0.6);
+      letter-spacing: 0.06em;
+      filter: drop-shadow(3px 3px 12px rgba(0, 0, 0, 0.95))
+              drop-shadow(0 0 50px rgba(255, 215, 0, 0.7));
     }
 
     .hero-slide-subtitle {
-      font-size: 1.2em;
+      font-size: 1.3em;
       margin-bottom: 25px;
-      -webkit-text-stroke: 1.2px rgba(0, 0, 0, 0.5);
+      text-shadow:
+        3px 3px 10px rgba(0, 0, 0, 0.9),
+        2px 2px 6px rgba(0, 0, 0, 0.8),
+        0 0 25px rgba(0, 0, 0, 0.6);
+    }
+
+    .hero-slide-subtitle .highlight-keyword {
+      font-size: 1.15em;
     }
 
     .hero-slider-arrow {
@@ -1027,13 +1092,18 @@ permalink: /
     }
 
     .hero-slide-title {
-      font-size: 1.8em;
+      font-size: 2em;
       margin-bottom: 15px;
+      letter-spacing: 0.05em;
     }
 
     .hero-slide-subtitle {
-      font-size: 1em;
+      font-size: 1.05em;
       margin-bottom: 20px;
+    }
+
+    .hero-slide-subtitle .highlight-keyword {
+      font-size: 1.1em;
     }
 
     .hero-slider-arrow {
@@ -1089,7 +1159,7 @@ permalink: /
         <h1 class="hero-slide-title">ゆっくりまとめプロセッサー</h1>
         <p class="hero-slide-subtitle">
           可愛いマスコット「柳生おたま」と一緒に<br>
-          <strong>動画制作を10倍効率化</strong>
+          <strong>動画制作を<span class="highlight-keyword">10倍効率化</span></strong>
         </p>
         <div class="hero-slide-cta">
           <a href="/download" class="btn btn-primary">🎬 今すぐ無料トライアル</a>
@@ -1105,7 +1175,7 @@ permalink: /
         <h1 class="hero-slide-title">直感的な編集画面</h1>
         <p class="hero-slide-subtitle">
           ドラッグ&ドロップで簡単編集<br>
-          <strong>初心者でもプロ級の動画が作れる</strong>
+          <strong><span class="highlight-keyword">初心者でもプロ級</span>の動画が作れる</strong>
         </p>
         <div class="hero-slide-cta">
           <a href="/Instructions" class="btn btn-primary">使い方を見る</a>
@@ -1121,7 +1191,7 @@ permalink: /
         <h1 class="hero-slide-title">自動素材収集</h1>
         <p class="hero-slide-subtitle">
           AIが自動で最適な素材を取得<br>
-          <strong>1日2本だった動画が20本に</strong>
+          <strong>1日2本だった動画が<span class="highlight-keyword">20本に</span></strong>
         </p>
         <div class="hero-slide-cta">
           <a href="/purchase" class="btn btn-primary">今すぐ購入</a>
@@ -1184,48 +1254,48 @@ permalink: /
       <div class="feature-icon">⚡</div>
       <h3 class="feature-title">圧倒的な自動化</h3>
       <p class="feature-description">
-        台本作成から素材収集、編集まで全て自動化。
-        従来数時間かかっていた作業が数分で完了します。
+        台本作成から素材収集、編集まで<span class="text-highlight">全て自動化</span>。
+        従来数時間かかっていた作業が<span class="highlight-keyword">数分で完了</span>します。
       </p>
     </div>
     <div class="feature-card">
       <div class="feature-icon">🎯</div>
       <h3 class="feature-title">高精度な編集</h3>
       <p class="feature-description">
-        AI技術を活用した高精度な自動編集で、
-        プロフェッショナルな仕上がりを実現します。
+        <span class="text-underline">AI技術を活用</span>した高精度な自動編集で、
+        <span class="text-highlight">プロフェッショナルな仕上がり</span>を実現します。
       </p>
     </div>
     <div class="feature-card">
       <div class="feature-icon">🔄</div>
       <h3 class="feature-title">継続的な進化</h3>
       <p class="feature-description">
-        お客様のフィードバックを元に定期的にアップデート。
-        常に最新の機能をご利用いただけます。
+        お客様のフィードバックを元に<span class="text-underline">定期的にアップデート</span>。
+        常に<span class="text-highlight">最新の機能</span>をご利用いただけます。
       </p>
     </div>
     <div class="feature-card">
       <div class="feature-icon">💡</div>
       <h3 class="feature-title">直感的な操作性</h3>
       <p class="feature-description">
-        初心者でも簡単に使える直感的なUI/UX設計。
-        マニュアル不要で今日から使えます。
+        <span class="text-highlight">初心者でも簡単</span>に使える直感的なUI/UX設計。
+        <span class="text-underline">マニュアル不要</span>で今日から使えます。
       </p>
     </div>
     <div class="feature-card">
       <div class="feature-icon">🛡️</div>
       <h3 class="feature-title">安心のサポート</h3>
       <p class="feature-description">
-        専任スタッフによる迅速なサポート体制。
-        困ったときもすぐに解決できます。
+        <span class="text-underline">専任スタッフ</span>による迅速なサポート体制。
+        困ったときも<span class="text-highlight">すぐに解決</span>できます。
       </p>
     </div>
     <div class="feature-card">
       <div class="feature-icon">📈</div>
       <h3 class="feature-title">収益の最大化</h3>
       <p class="feature-description">
-        効率化により動画本数が大幅増加。
-        収益10倍も夢ではありません。
+        効率化により<span class="text-underline">動画本数が大幅増加</span>。
+        収益<span class="number-highlight">10倍</span>も夢ではありません。
       </p>
     </div>
   </div>
@@ -1265,8 +1335,8 @@ permalink: /
     <div class="testimonial-card">
       <div class="testimonial-stars">★★★★★</div>
       <p class="testimonial-text">
-        「ゆっくりまとめプロセッサーの導入で、1日2本だった動画が半分の時間で20本に増加。
-        収益面でも10倍の効果を実感しています！」
+        「ゆっくりまとめプロセッサーの導入で、1日2本だった動画が<span class="text-underline">半分の時間</span>で<span class="number-highlight">20本</span>に増加。
+        収益面でも<span class="number-highlight">10倍</span>の効果を実感しています！」
       </p>
       <div class="testimonial-author">
         <div class="testimonial-avatar">高</div>
@@ -1279,7 +1349,7 @@ permalink: /
     <div class="testimonial-card">
       <div class="testimonial-stars">★★★★★</div>
       <p class="testimonial-text">
-        「毎日の動画編集によるストレスが軽減され、余裕を持って新たなことに挑戦できるようになりました。本当に革命的なツールです。」
+        「毎日の動画編集による<span class="text-underline">ストレスが軽減</span>され、余裕を持って新たなことに挑戦できるようになりました。本当に<span class="text-highlight">革命的なツール</span>です。」
       </p>
       <div class="testimonial-author">
         <div class="testimonial-avatar">S</div>
@@ -1292,7 +1362,7 @@ permalink: /
     <div class="testimonial-card">
       <div class="testimonial-stars">★★★★★</div>
       <p class="testimonial-text">
-        「台本作成時の煩雑な作業が自動入れ替え機能で解消。作業効率が格段に向上しました！コスパ最高です。」
+        「台本作成時の煩雑な作業が<span class="text-highlight">自動入れ替え機能</span>で解消。<span class="text-underline">作業効率が格段に向上</span>しました！<span class="badge-highlight">コスパ最高</span>です。」
       </p>
       <div class="testimonial-author">
         <div class="testimonial-avatar">A</div>
@@ -1305,7 +1375,7 @@ permalink: /
     <div class="testimonial-card">
       <div class="testimonial-stars">★★★★★</div>
       <p class="testimonial-text">
-        「チーム全体の動画編集がシンプルになり、最終チェックのみで多数の動画が完成。売上と士気の向上に大きく貢献しています！」
+        「チーム全体の動画編集が<span class="text-underline">シンプルに</span>なり、<span class="text-highlight">最終チェックのみ</span>で多数の動画が完成。<span class="text-large">売上と士気の向上</span>に大きく貢献しています！」
       </p>
       <div class="testimonial-author">
         <div class="testimonial-avatar">タ</div>
