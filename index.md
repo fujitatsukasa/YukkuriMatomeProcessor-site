@@ -540,7 +540,6 @@ permalink: /
     text-shadow:
       2px 2px 5px rgba(0, 0, 0, 0.2),
       -1px -1px 2px rgba(255, 255, 255, 0.8);
-    -webkit-text-stroke: 0.8px rgba(0, 0, 0, 0.1);
   }
 
   .section-title::after {
@@ -792,7 +791,6 @@ permalink: /
     text-shadow:
       2px 2px 5px rgba(0, 0, 0, 0.6),
       0 0 10px rgba(0, 0, 0, 0.3);
-    -webkit-text-stroke: 0.3px rgba(0, 0, 0, 0.2);
   }
 
   .testimonial-author {
@@ -831,7 +829,6 @@ permalink: /
     text-shadow:
       2px 2px 4px rgba(0, 0, 0, 0.5),
       0 0 10px rgba(0, 0, 0, 0.3);
-    -webkit-text-stroke: 0.4px rgba(0, 0, 0, 0.2);
   }
 
   .testimonial-role {
@@ -956,7 +953,6 @@ permalink: /
     text-shadow:
       3px 3px 8px rgba(0, 0, 0, 0.7),
       0 0 20px rgba(0, 0, 0, 0.5);
-    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.3);
   }
 
   .cta-text {
@@ -967,7 +963,6 @@ permalink: /
     text-shadow:
       2px 2px 6px rgba(0, 0, 0, 0.7),
       0 0 15px rgba(0, 0, 0, 0.4);
-    -webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.2);
   }
 
   /* ========== モーダル ========== */
