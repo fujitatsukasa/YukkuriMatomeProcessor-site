@@ -6,8 +6,8 @@ permalink: /
 ---
 
 <style>
-  /* Google Fonts の読み込み - 超インパクトのあるフォント追加 */
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;600;700;800&family=Bebas+Neue&family=Montserrat:wght@700;800;900&family=Anton&display=swap');
+  /* Google Fonts の読み込み - 読みやすいフォント */
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;600;700;800&family=Oswald:wght@400;600;700&family=Raleway:wght@700;800;900&family=Roboto:wght@700;900&display=swap');
 
   /* ========== グローバル設定 ========== */
   * {
@@ -124,19 +124,19 @@ permalink: /
   }
 
   .hero-slide-title {
-    font-family: 'Bebas Neue', 'Montserrat', 'Noto Sans JP', sans-serif !important;
+    font-family: 'Oswald', 'Raleway', 'Noto Sans JP', sans-serif !important;
     font-size: 4.5em;
-    font-weight: 900;
+    font-weight: 700;
     color: #ffffff !important;
     margin-bottom: 25px;
     line-height: 1.15;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
     text-shadow:
-      5px 5px 0px rgba(0, 0, 0, 0.8),
-      3px 3px 15px rgba(0, 0, 0, 0.9),
-      0 0 40px rgba(255, 215, 0, 0.6);
-    -webkit-text-stroke: 2.5px rgba(0, 0, 0, 0.7);
+      4px 4px 8px rgba(0, 0, 0, 0.9),
+      2px 2px 15px rgba(0, 0, 0, 0.8),
+      0 0 40px rgba(0, 0, 0, 0.7),
+      0 0 20px rgba(255, 215, 0, 0.5);
     animation: titlePulseGlow 3s ease-in-out infinite, slideInUp 1s ease-out;
     transform-origin: center;
   }
@@ -145,22 +145,24 @@ permalink: /
     0%, 100% {
       transform: scale(1);
       text-shadow:
-        5px 5px 0px rgba(0, 0, 0, 0.8),
-        3px 3px 15px rgba(0, 0, 0, 0.9),
-        0 0 40px rgba(255, 215, 0, 0.6);
+        4px 4px 8px rgba(0, 0, 0, 0.9),
+        2px 2px 15px rgba(0, 0, 0, 0.8),
+        0 0 40px rgba(0, 0, 0, 0.7),
+        0 0 20px rgba(255, 215, 0, 0.5);
     }
     50% {
       transform: scale(1.03);
       text-shadow:
-        6px 6px 0px rgba(0, 0, 0, 0.9),
-        4px 4px 20px rgba(0, 0, 0, 1),
-        0 0 60px rgba(255, 215, 0, 0.9),
-        0 0 30px rgba(255, 255, 255, 0.7);
+        5px 5px 10px rgba(0, 0, 0, 1),
+        3px 3px 20px rgba(0, 0, 0, 0.9),
+        0 0 50px rgba(0, 0, 0, 0.8),
+        0 0 35px rgba(255, 215, 0, 0.8),
+        0 0 20px rgba(255, 255, 255, 0.6);
     }
   }
 
   .hero-slide-subtitle {
-    font-family: 'Noto Sans JP', 'Montserrat', sans-serif !important;
+    font-family: 'Noto Sans JP', 'Raleway', sans-serif !important;
     font-size: 1.65em;
     font-weight: 700;
     color: #ffffff !important;
@@ -170,13 +172,12 @@ permalink: /
       3px 3px 10px rgba(0, 0, 0, 0.9),
       2px 2px 6px rgba(0, 0, 0, 0.8),
       0 0 25px rgba(0, 0, 0, 0.6);
-    -webkit-text-stroke: 1.5px rgba(0, 0, 0, 0.5);
     animation: slideInUp 1s ease-out 0.2s both;
   }
 
   /* キーワード強調スタイル */
   .hero-slide-subtitle .highlight-keyword {
-    font-family: 'Montserrat', 'Noto Sans JP', sans-serif !important;
+    font-family: 'Raleway', 'Noto Sans JP', sans-serif !important;
     font-size: 1.25em;
     font-weight: 900;
     color: #ff3b3b !important;
@@ -339,7 +340,6 @@ permalink: /
       3px 3px 10px rgba(0, 0, 0, 0.9),
       2px 2px 6px rgba(0, 0, 0, 0.8),
       0 0 25px rgba(0, 0, 0, 0.6);
-    -webkit-text-stroke: 1.2px rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(5px);
   }
 
@@ -377,7 +377,6 @@ permalink: /
     text-shadow:
       3px 3px 8px rgba(0, 0, 0, 0.5),
       0 0 20px rgba(102, 126, 234, 0.5);
-    -webkit-text-stroke: 1px rgba(102, 126, 234, 0.4);
   }
 
   .btn-secondary:hover {
@@ -393,7 +392,6 @@ permalink: /
     text-shadow:
       4px 4px 15px rgba(0, 0, 0, 1),
       0 0 35px rgba(255, 255, 255, 0.7);
-    -webkit-text-stroke: 1.5px rgba(0, 0, 0, 0.4);
   }
 
   @keyframes fadeInDown {
@@ -484,17 +482,17 @@ permalink: /
   }
 
   .stat-number {
-    font-family: 'Bebas Neue', 'Anton', sans-serif !important;
+    font-family: 'Oswald', 'Roboto', sans-serif !important;
     font-size: 4.5em;
-    font-weight: 900;
+    font-weight: 700;
     color: #ffffff !important;
     margin-bottom: 15px;
     line-height: 1;
     text-shadow:
-      4px 4px 0px rgba(0, 0, 0, 0.4),
+      3px 3px 8px rgba(0, 0, 0, 0.8),
       2px 2px 15px rgba(0, 0, 0, 0.6),
-      0 0 30px rgba(255, 215, 0, 0.5);
-    -webkit-text-stroke: 2px rgba(0, 0, 0, 0.5);
+      0 0 30px rgba(0, 0, 0, 0.5),
+      0 0 15px rgba(255, 215, 0, 0.4);
     letter-spacing: 0.05em;
     animation: statPulse 3s ease-in-out infinite;
   }
@@ -509,7 +507,7 @@ permalink: /
   }
 
   .stat-label {
-    font-family: 'Montserrat', 'Noto Sans JP', sans-serif !important;
+    font-family: 'Raleway', 'Noto Sans JP', sans-serif !important;
     font-size: 1.15em;
     color: #ffffff !important;
     font-weight: 800;
@@ -518,7 +516,6 @@ permalink: /
     text-shadow:
       2px 2px 6px rgba(0, 0, 0, 0.7),
       0 0 15px rgba(0, 0, 0, 0.5);
-    -webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.3);
   }
 
   /* ========== 特徴セクション ========== */
@@ -1019,11 +1016,12 @@ permalink: /
     .hero-slide-title {
       font-size: 2.5em;
       margin-bottom: 20px;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.05em;
       text-shadow:
-        4px 4px 0px rgba(0, 0, 0, 0.8),
-        2px 2px 12px rgba(0, 0, 0, 0.9),
-        0 0 35px rgba(255, 215, 0, 0.6);
+        3px 3px 6px rgba(0, 0, 0, 0.9),
+        2px 2px 12px rgba(0, 0, 0, 0.8),
+        0 0 30px rgba(0, 0, 0, 0.7),
+        0 0 15px rgba(255, 215, 0, 0.5);
     }
 
     .hero-slide-subtitle {
@@ -1109,11 +1107,12 @@ permalink: /
     .hero-slide-title {
       font-size: 2em;
       margin-bottom: 15px;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.04em;
       text-shadow:
-        3px 3px 0px rgba(0, 0, 0, 0.8),
-        2px 2px 10px rgba(0, 0, 0, 0.9),
-        0 0 25px rgba(255, 215, 0, 0.5);
+        2px 2px 5px rgba(0, 0, 0, 0.9),
+        2px 2px 10px rgba(0, 0, 0, 0.8),
+        0 0 20px rgba(0, 0, 0, 0.7),
+        0 0 10px rgba(255, 215, 0, 0.4);
     }
 
     .stat-number {
