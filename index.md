@@ -859,9 +859,9 @@ permalink: /
     transform: scale(1.05);
   }
 
-  /* ========== お客様の声セクション（スライダー） ========== */
+  /* ========== お客様の声セクション（3つ横並びスライダー） ========== */
   .testimonials-section {
-    background: linear-gradient(135deg, #1a1f35 0%, #2d3561 100%);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     padding: 120px 20px;
     color: white;
     position: relative;
@@ -875,154 +875,154 @@ permalink: /
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: radial-gradient(circle at 20% 30%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
-                      radial-gradient(circle at 80% 70%, rgba(118, 75, 162, 0.15) 0%, transparent 50%);
+    background-image: radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
+                      radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
     pointer-events: none;
   }
 
   .testimonials-slider-wrapper {
-    max-width: 900px;
+    max-width: 1400px;
     margin: 60px auto;
     position: relative;
+    padding: 0 80px;
   }
 
   .testimonials-slider {
     position: relative;
     overflow: hidden;
-    min-height: 400px;
+  }
+
+  .testimonials-track {
+    display: flex;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    gap: 30px;
   }
 
   .testimonial-slide {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    opacity: 0;
-    transform: translateX(100px);
-    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    pointer-events: none;
-  }
-
-  .testimonial-slide.active {
-    opacity: 1;
-    transform: translateX(0);
-    pointer-events: auto;
+    min-width: calc(33.333% - 20px);
+    flex-shrink: 0;
   }
 
   .testimonial-card-luxury {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
-    padding: 60px 50px;
-    border-radius: 30px;
-    border: 2px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 40px 30px;
+    border-radius: 25px;
+    border: 2px solid rgba(255, 255, 255, 0.25);
     box-shadow:
-      0 30px 90px rgba(0, 0, 0, 0.5),
-      inset 0 2px 20px rgba(255, 255, 255, 0.1);
+      0 20px 60px rgba(0, 0, 0, 0.3),
+      inset 0 2px 15px rgba(255, 255, 255, 0.15);
     position: relative;
     transition: all 0.4s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   .testimonial-card-luxury:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
     box-shadow:
-      0 40px 110px rgba(0, 0, 0, 0.6),
-      inset 0 2px 25px rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.25);
+      0 30px 80px rgba(0, 0, 0, 0.4),
+      inset 0 2px 20px rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.2);
   }
 
   .testimonial-quote {
     position: absolute;
-    top: 30px;
-    left: 40px;
-    font-size: 8em;
+    top: 20px;
+    left: 25px;
+    font-size: 6em;
     font-weight: 900;
-    color: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.1);
     font-family: Georgia, serif;
     line-height: 0.8;
   }
 
   .testimonial-stars {
     color: #ffd700;
-    font-size: 2em;
-    margin-bottom: 25px;
-    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.5));
-    letter-spacing: 0.1em;
+    font-size: 1.6em;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6));
+    letter-spacing: 0.08em;
   }
 
   .testimonial-text-luxury {
-    font-size: 1.35em;
+    font-size: 1.1em;
     font-weight: 600;
-    line-height: 2;
-    margin-bottom: 40px;
+    line-height: 1.8;
+    margin-bottom: 30px;
     color: #ffffff !important;
     text-shadow:
-      2px 2px 8px rgba(0, 0, 0, 0.7),
-      0 0 15px rgba(0, 0, 0, 0.4);
+      2px 2px 6px rgba(0, 0, 0, 0.7),
+      0 0 12px rgba(0, 0, 0, 0.4);
     position: relative;
     z-index: 1;
+    flex-grow: 1;
   }
 
   .testimonial-text-luxury strong {
-    color: #ffd700 !important;
+    color: #ffeb3b !important;
     font-weight: 900;
     text-shadow:
-      2px 2px 6px rgba(0, 0, 0, 0.9),
-      0 0 20px rgba(255, 215, 0, 0.4);
+      2px 2px 4px rgba(0, 0, 0, 0.8),
+      0 0 15px rgba(255, 235, 59, 0.5);
   }
 
   .testimonial-author-luxury {
     display: flex;
     align-items: center;
-    gap: 20px;
-    padding-top: 30px;
-    border-top: 2px solid rgba(255, 255, 255, 0.2);
+    gap: 15px;
+    padding-top: 25px;
+    border-top: 2px solid rgba(255, 255, 255, 0.25);
   }
 
   .testimonial-avatar-luxury {
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #ffd700 0%, #ffa000 100%);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2em;
+    font-size: 1.6em;
     font-weight: 900;
-    color: #ffffff;
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
-    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
-    border: 3px solid rgba(255, 255, 255, 0.3);
+    color: #1a1f35;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    flex-shrink: 0;
   }
 
   .testimonial-name-luxury {
     font-weight: 900;
-    font-size: 1.4em;
+    font-size: 1.15em;
     color: #ffffff !important;
     margin-bottom: 5px;
     text-shadow:
-      2px 2px 6px rgba(0, 0, 0, 0.7),
-      0 0 15px rgba(0, 0, 0, 0.4);
+      2px 2px 5px rgba(0, 0, 0, 0.7),
+      0 0 12px rgba(0, 0, 0, 0.4);
   }
 
   .testimonial-role-luxury {
     font-weight: 700;
-    font-size: 1em;
-    color: rgba(255, 215, 0, 0.95) !important;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+    font-size: 0.95em;
+    color: rgba(255, 235, 59, 0.95) !important;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
   }
 
   .testimonial-arrow {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(20px);
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(255, 255, 255, 0.4);
     color: white;
-    font-size: 3em;
-    width: 70px;
-    height: 70px;
+    font-size: 2em;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -1030,51 +1030,52 @@ permalink: /
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 300;
+    font-weight: 700;
   }
 
   .testimonial-arrow:hover {
-    background: rgba(255, 255, 255, 0.25);
-    transform: translateY(-50%) scale(1.1);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    background: rgba(255, 255, 255, 0.35);
+    transform: translateY(-50%) scale(1.15);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.6);
   }
 
   .testimonial-arrow-left {
-    left: -35px;
+    left: 10px;
   }
 
   .testimonial-arrow-right {
-    right: -35px;
+    right: 10px;
   }
 
   .testimonials-dots {
     display: flex;
     justify-content: center;
-    gap: 15px;
-    margin-top: 50px;
+    gap: 12px;
+    margin-top: 40px;
   }
 
   .testimonial-dot {
-    width: 14px;
-    height: 14px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.4);
     cursor: pointer;
     transition: all 0.3s ease;
     border: 2px solid transparent;
   }
 
   .testimonial-dot:hover {
-    background: rgba(255, 255, 255, 0.5);
-    transform: scale(1.2);
+    background: rgba(255, 255, 255, 0.6);
+    transform: scale(1.3);
   }
 
   .testimonial-dot.active {
     background: #ffd700;
-    width: 40px;
-    border-radius: 10px;
-    border-color: rgba(255, 215, 0, 0.5);
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+    width: 35px;
+    border-radius: 8px;
+    border-color: rgba(255, 215, 0, 0.6);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
   }
 
   /* ========== 料金セクション ========== */
@@ -1345,50 +1346,54 @@ permalink: /
     }
 
     /* お客様の声スライダー - モバイル */
-    .testimonials-slider {
-      min-height: 450px;
+    .testimonials-slider-wrapper {
+      padding: 0 60px;
+    }
+
+    .testimonial-slide {
+      min-width: 100%;
     }
 
     .testimonial-card-luxury {
-      padding: 45px 30px;
+      padding: 35px 25px;
     }
 
     .testimonial-quote {
-      font-size: 6em;
-      left: 25px;
+      font-size: 5em;
+      left: 20px;
     }
 
     .testimonial-text-luxury {
-      font-size: 1.2em;
-      line-height: 1.9;
+      font-size: 1em;
+      line-height: 1.7;
     }
 
     .testimonial-arrow {
-      width: 60px;
-      height: 60px;
-      font-size: 2.5em;
+      width: 50px;
+      height: 50px;
+      font-size: 1.6em;
     }
 
     .testimonial-arrow-left {
-      left: -10px;
+      left: 5px;
     }
 
     .testimonial-arrow-right {
-      right: -10px;
+      right: 5px;
     }
 
     .testimonial-avatar-luxury {
-      width: 60px;
-      height: 60px;
-      font-size: 1.7em;
+      width: 55px;
+      height: 55px;
+      font-size: 1.4em;
     }
 
     .testimonial-name-luxury {
-      font-size: 1.2em;
+      font-size: 1.05em;
     }
 
     .testimonial-role-luxury {
-      font-size: 0.9em;
+      font-size: 0.85em;
     }
   }
 
@@ -1467,50 +1472,50 @@ permalink: /
     }
 
     /* お客様の声スライダー - 小型モバイル */
-    .testimonials-slider {
-      min-height: 500px;
+    .testimonials-slider-wrapper {
+      padding: 0 50px;
     }
 
     .testimonial-card-luxury {
-      padding: 40px 25px;
+      padding: 30px 20px;
     }
 
     .testimonial-quote {
-      font-size: 5em;
-      left: 20px;
+      font-size: 4em;
+      left: 15px;
     }
 
     .testimonial-text-luxury {
-      font-size: 1.1em;
-      line-height: 1.8;
+      font-size: 0.95em;
+      line-height: 1.6;
     }
 
     .testimonial-arrow {
-      width: 50px;
-      height: 50px;
-      font-size: 2em;
+      width: 45px;
+      height: 45px;
+      font-size: 1.4em;
     }
 
     .testimonial-arrow-left {
-      left: 5px;
+      left: 2px;
     }
 
     .testimonial-arrow-right {
-      right: 5px;
+      right: 2px;
     }
 
     .testimonial-avatar-luxury {
-      width: 55px;
-      height: 55px;
-      font-size: 1.5em;
+      width: 50px;
+      height: 50px;
+      font-size: 1.3em;
     }
 
     .testimonial-name-luxury {
-      font-size: 1.1em;
+      font-size: 1em;
     }
 
     .testimonial-role-luxury {
-      font-size: 0.85em;
+      font-size: 0.8em;
     }
   }
 
@@ -1707,12 +1712,13 @@ permalink: /
 <div class="testimonials-section">
   <div class="section-header">
     <h2 class="section-title">お客様の声</h2>
-    <p class="section-subtitle">15,000人以上のクリエイターに選ばれています</p>
+    <p class="section-subtitle">様々なクリエイターに選ばれています</p>
   </div>
   <div class="testimonials-slider-wrapper">
-    <button class="testimonial-arrow testimonial-arrow-left">‹</button>
+    <button class="testimonial-arrow testimonial-arrow-left">←</button>
     <div class="testimonials-slider">
-      <div class="testimonial-slide active">
+      <div class="testimonials-track">
+      <div class="testimonial-slide">
         <div class="testimonial-card-luxury">
           <div class="testimonial-quote">"</div>
           <div class="testimonial-stars">★★★★★</div>
@@ -1922,8 +1928,9 @@ permalink: /
           </div>
         </div>
       </div>
+      </div>
     </div>
-    <button class="testimonial-arrow testimonial-arrow-right">›</button>
+    <button class="testimonial-arrow testimonial-arrow-right">→</button>
   </div>
   <div class="testimonials-dots"></div>
 </div>
@@ -2230,51 +2237,81 @@ permalink: /
     }
   });
 
-  // Testimonials Slider
+  // Testimonials Slider (3つずつ表示)
+  const testimonialsTrack = document.querySelector('.testimonials-track');
   const testimonialSlides = document.querySelectorAll('.testimonial-slide');
   const testimonialDotsContainer = document.querySelector('.testimonials-dots');
   const testimonialLeftArrow = document.querySelector('.testimonial-arrow-left');
   const testimonialRightArrow = document.querySelector('.testimonial-arrow-right');
-  let currentTestimonialIndex = 0;
-  const totalTestimonials = testimonialSlides.length;
 
-  // Create dots
-  testimonialSlides.forEach((_, index) => {
+  const totalTestimonials = testimonialSlides.length;
+  const slidesPerView = window.innerWidth > 768 ? 3 : 1;
+  const totalPages = Math.ceil(totalTestimonials / slidesPerView);
+  let currentPage = 0;
+
+  // Create dots (ページ数分)
+  for (let i = 0; i < totalPages; i++) {
     const dot = document.createElement('div');
     dot.classList.add('testimonial-dot');
-    if (index === 0) dot.classList.add('active');
-    dot.addEventListener('click', () => moveToTestimonial(index));
+    if (i === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => moveToPage(i));
     testimonialDotsContainer.appendChild(dot);
-  });
+  }
 
   const testimonialDots = document.querySelectorAll('.testimonial-dot');
 
-  function moveToTestimonial(index) {
-    // Remove active class from all slides and dots
-    testimonialSlides.forEach(slide => slide.classList.remove('active'));
+  function moveToPage(page) {
+    currentPage = page;
+
+    // スライド位置を計算（3つずつ移動）
+    const slideWidth = testimonialSlides[0].offsetWidth + 30; // gap含む
+    const offset = -currentPage * slideWidth * slidesPerView;
+
+    testimonialsTrack.style.transform = `translateX(${offset}px)`;
+
+    // ドットを更新
     testimonialDots.forEach(dot => dot.classList.remove('active'));
-
-    // Add active class to current slide and dot
-    testimonialSlides[index].classList.add('active');
-    testimonialDots[index].classList.add('active');
-
-    currentTestimonialIndex = index;
+    testimonialDots[currentPage].classList.add('active');
   }
 
   // Arrow controls
-  testimonialLeftArrow.addEventListener('click', () => {
-    const prevIndex = (currentTestimonialIndex - 1 + totalTestimonials) % totalTestimonials;
-    moveToTestimonial(prevIndex);
-  });
+  if (testimonialLeftArrow) {
+    testimonialLeftArrow.addEventListener('click', () => {
+      const prevPage = (currentPage - 1 + totalPages) % totalPages;
+      moveToPage(prevPage);
+    });
+  }
 
-  testimonialRightArrow.addEventListener('click', () => {
-    const nextIndex = (currentTestimonialIndex + 1) % totalTestimonials;
-    moveToTestimonial(nextIndex);
-  });
+  if (testimonialRightArrow) {
+    testimonialRightArrow.addEventListener('click', () => {
+      const nextPage = (currentPage + 1) % totalPages;
+      moveToPage(nextPage);
+    });
+  }
 
   // Auto-play testimonials
-  setInterval(() => {
-    const nextIndex = (currentTestimonialIndex + 1) % totalTestimonials;
-    moveToTestimonial(nextIndex);
-  }, 7000);
+  let autoplayInterval = setInterval(() => {
+    const nextPage = (currentPage + 1) % totalPages;
+    moveToPage(nextPage);
+  }, 5000);
+
+  // ウィンドウリサイズ時に再計算
+  window.addEventListener('resize', () => {
+    moveToPage(currentPage);
+  });
+
+  // マウスホバーで自動再生停止
+  const testimonialsSection = document.querySelector('.testimonials-section');
+  if (testimonialsSection) {
+    testimonialsSection.addEventListener('mouseenter', () => {
+      clearInterval(autoplayInterval);
+    });
+
+    testimonialsSection.addEventListener('mouseleave', () => {
+      autoplayInterval = setInterval(() => {
+        const nextPage = (currentPage + 1) % totalPages;
+        moveToPage(nextPage);
+      }, 5000);
+    });
+  }
 </script>
