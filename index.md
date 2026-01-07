@@ -411,6 +411,33 @@ permalink: /
       0 0 35px rgba(255, 255, 255, 0.7);
   }
 
+  .btn-premium {
+    background: linear-gradient(135deg, #ffd700 0%, #ffeb3b 100%);
+    color: #1a1f35 !important;
+    box-shadow:
+      0 20px 50px rgba(255, 215, 0, 0.7),
+      0 10px 25px rgba(0, 0, 0, 0.4),
+      inset 0 3px 8px rgba(255, 255, 255, 0.6);
+    border: 3px solid rgba(255, 215, 0, 0.9);
+    font-weight: 900;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    width: 100%;
+  }
+
+  .btn-premium:hover {
+    transform: translateY(-8px) scale(1.1);
+    background: linear-gradient(135deg, #ffeb3b 0%, #ffd700 100%);
+    box-shadow:
+      0 30px 70px rgba(255, 215, 0, 0.9),
+      0 15px 35px rgba(0, 0, 0, 0.5),
+      inset 0 3px 10px rgba(255, 255, 255, 0.7);
+    border-color: #fff;
+    border-width: 4px;
+    text-shadow:
+      2px 2px 4px rgba(0, 0, 0, 0.5),
+      0 0 20px rgba(255, 255, 255, 0.8);
+  }
+
   @keyframes fadeInDown {
     from {
       opacity: 0;
@@ -1129,10 +1156,13 @@ permalink: /
 
   .pricing-section .section-title {
     color: #ffffff !important;
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8);
   }
 
   .pricing-section .section-subtitle {
-    color: rgba(255, 255, 255, 0.85) !important;
+    color: #f7fafc !important;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+    font-weight: 600;
   }
 
   .pricing-section::before {
@@ -1285,6 +1315,11 @@ permalink: /
     font-weight: 900;
     font-size: 1.3em;
     text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+  }
+
+  .pricing-btn {
+    width: 100%;
+    margin-top: 10px;
   }
 
   /* ========== CTAセクション ========== */
@@ -2064,7 +2099,7 @@ permalink: /
         <li>基本サポート</li>
         <li>アップデート対応</li>
       </ul>
-      <a href="/download" class="btn btn-secondary" style="width: 100%;">今すぐ始める</a>
+      <a href="/download" class="btn btn-primary pricing-btn">今すぐ始める</a>
     </div>
     <div class="pricing-card featured">
       <div class="pricing-name">プレミアム</div>
@@ -2076,7 +2111,7 @@ permalink: /
         <li>定期アップデート</li>
         <li>カスタマイズ対応</li>
       </ul>
-      <a href="/contact" class="btn btn-primary" style="width: 100%; background: white; color: #667eea;">お問い合わせ</a>
+      <a href="/contact" class="btn btn-premium pricing-btn">今すぐ申し込む</a>
     </div>
     <div class="pricing-card">
       <div class="pricing-name">エンタープライズ</div>
@@ -2088,7 +2123,7 @@ permalink: /
         <li>複数ライセンス対応</li>
         <li>SLA保証</li>
       </ul>
-      <a href="/contact" class="btn btn-secondary" style="width: 100%;">お問い合わせ</a>
+      <a href="/contact" class="btn btn-secondary pricing-btn">詳しく見る</a>
     </div>
   </div>
 </div>
@@ -2362,78 +2397,80 @@ permalink: /
   const testimonialLeftArrow = document.querySelector('.testimonial-arrow-left');
   const testimonialRightArrow = document.querySelector('.testimonial-arrow-right');
 
-  const totalTestimonials = testimonialSlides.length;
-  let currentTestimonialIndex = 0;
+  if (testimonialSlides.length > 0) {
+    const totalTestimonials = testimonialSlides.length;
+    let currentTestimonialIndex = 0;
 
-  // Create dots
-  for (let i = 0; i < totalTestimonials; i++) {
-    const dot = document.createElement('div');
-    dot.classList.add('testimonial-dot');
-    if (i === 0) dot.classList.add('active');
-    dot.addEventListener('click', () => goToTestimonial(i));
-    testimonialDotsContainer.appendChild(dot);
-  }
+    // Create dots
+    for (let i = 0; i < totalTestimonials; i++) {
+      const dot = document.createElement('div');
+      dot.classList.add('testimonial-dot');
+      if (i === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => goToTestimonial(i));
+      testimonialDotsContainer.appendChild(dot);
+    }
 
-  const testimonialDots = document.querySelectorAll('.testimonial-dot');
+    const testimonialDots = document.querySelectorAll('.testimonial-dot');
 
-  function updateTestimonialCarousel() {
-    testimonialSlides.forEach((slide, index) => {
-      slide.classList.remove('active', 'prev', 'next');
+    function updateTestimonialCarousel() {
+      testimonialSlides.forEach((slide, index) => {
+        slide.classList.remove('active', 'prev', 'next');
 
-      if (index === currentTestimonialIndex) {
-        slide.classList.add('active');
-      } else if (index === (currentTestimonialIndex - 1 + totalTestimonials) % totalTestimonials) {
-        slide.classList.add('prev');
-      } else if (index === (currentTestimonialIndex + 1) % totalTestimonials) {
-        slide.classList.add('next');
-      }
-    });
+        if (index === currentTestimonialIndex) {
+          slide.classList.add('active');
+        } else if (index === (currentTestimonialIndex - 1 + totalTestimonials) % totalTestimonials) {
+          slide.classList.add('prev');
+        } else if (index === (currentTestimonialIndex + 1) % totalTestimonials) {
+          slide.classList.add('next');
+        }
+      });
 
-    // Update dots
-    testimonialDots.forEach((dot, index) => {
-      dot.classList.toggle('active', index === currentTestimonialIndex);
-    });
-  }
+      // Update dots
+      testimonialDots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentTestimonialIndex);
+      });
+    }
 
-  function goToTestimonial(index) {
-    currentTestimonialIndex = index;
+    function goToTestimonial(index) {
+      currentTestimonialIndex = index;
+      updateTestimonialCarousel();
+    }
+
+    function nextTestimonial() {
+      currentTestimonialIndex = (currentTestimonialIndex + 1) % totalTestimonials;
+      updateTestimonialCarousel();
+    }
+
+    function prevTestimonial() {
+      currentTestimonialIndex = (currentTestimonialIndex - 1 + totalTestimonials) % totalTestimonials;
+      updateTestimonialCarousel();
+    }
+
+    // Arrow controls
+    if (testimonialLeftArrow) {
+      testimonialLeftArrow.addEventListener('click', prevTestimonial);
+    }
+
+    if (testimonialRightArrow) {
+      testimonialRightArrow.addEventListener('click', nextTestimonial);
+    }
+
+    // Auto-play
+    let testimonialAutoplay = setInterval(nextTestimonial, 5000);
+
+    // Pause on hover
+    const testimonialsSection = document.querySelector('.testimonials-section');
+    if (testimonialsSection) {
+      testimonialsSection.addEventListener('mouseenter', () => {
+        clearInterval(testimonialAutoplay);
+      });
+
+      testimonialsSection.addEventListener('mouseleave', () => {
+        testimonialAutoplay = setInterval(nextTestimonial, 5000);
+      });
+    }
+
+    // Initialize
     updateTestimonialCarousel();
   }
-
-  function nextTestimonial() {
-    currentTestimonialIndex = (currentTestimonialIndex + 1) % totalTestimonials;
-    updateTestimonialCarousel();
-  }
-
-  function prevTestimonial() {
-    currentTestimonialIndex = (currentTestimonialIndex - 1 + totalTestimonials) % totalTestimonials;
-    updateTestimonialCarousel();
-  }
-
-  // Arrow controls
-  if (testimonialLeftArrow) {
-    testimonialLeftArrow.addEventListener('click', prevTestimonial);
-  }
-
-  if (testimonialRightArrow) {
-    testimonialRightArrow.addEventListener('click', nextTestimonial);
-  }
-
-  // Auto-play
-  let testimonialAutoplay = setInterval(nextTestimonial, 5000);
-
-  // Pause on hover
-  const testimonialsSection = document.querySelector('.testimonials-section');
-  if (testimonialsSection) {
-    testimonialsSection.addEventListener('mouseenter', () => {
-      clearInterval(testimonialAutoplay);
-    });
-
-    testimonialsSection.addEventListener('mouseleave', () => {
-      testimonialAutoplay = setInterval(nextTestimonial, 5000);
-    });
-  }
-
-  // Initialize
-  updateTestimonialCarousel();
 </script>
