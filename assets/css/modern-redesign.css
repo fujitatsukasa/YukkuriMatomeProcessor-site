@@ -328,7 +328,6 @@ li {
   text-shadow:
     2px 2px 6px rgba(0, 0, 0, 0.5),
     0 0 20px rgba(102, 126, 234, 0.5) !important;
-  -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.3);
   padding: 0.5rem 1.5rem !important;
   border-radius: 10px;
   background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2)) !important;
@@ -360,7 +359,6 @@ li {
   text-shadow:
     1px 1px 3px rgba(0, 0, 0, 0.5),
     0 0 10px rgba(102, 126, 234, 0.3) !important;
-  -webkit-text-stroke: 0.3px rgba(255, 255, 255, 0.2);
   border: 1px solid transparent;
 }
 
@@ -423,7 +421,6 @@ li {
   text-shadow:
     1px 1px 3px rgba(0, 0, 0, 0.5),
     0 0 10px rgba(102, 126, 234, 0.3) !important;
-  -webkit-text-stroke: 0.3px rgba(255, 255, 255, 0.1);
   border: 1px solid transparent;
 }
 
@@ -490,7 +487,6 @@ footer p, footer a, footer span {
   text-shadow:
     2px 2px 4px rgba(0, 0, 0, 0.5),
     0 0 10px rgba(0, 0, 0, 0.3) !important;
-  -webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.2);
 }
 
 footer a:hover {
@@ -520,7 +516,6 @@ footer a:hover {
   text-shadow:
     2px 2px 6px rgba(0, 0, 0, 0.8),
     0 0 15px rgba(0, 0, 0, 0.5) !important;
-  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.3);
 }
 
 .btn-primary {
@@ -552,7 +547,6 @@ footer a:hover {
   text-shadow:
     1px 1px 3px rgba(0, 0, 0, 0.3),
     0 0 10px rgba(102, 126, 234, 0.3) !important;
-  -webkit-text-stroke: 0.5px rgba(102, 126, 234, 0.3);
 }
 
 .btn-secondary:hover {
@@ -566,7 +560,6 @@ footer a:hover {
   text-shadow:
     3px 3px 10px rgba(0, 0, 0, 1),
     0 0 25px rgba(255, 255, 255, 0.5) !important;
-  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.3);
 }
 
 .btn-success {
@@ -618,7 +611,6 @@ footer a:hover {
   text-shadow:
     2px 2px 6px rgba(0, 0, 0, 0.6),
     0 0 15px rgba(0, 0, 0, 0.4) !important;
-  -webkit-text-stroke: 0.8px rgba(0, 0, 0, 0.3);
 }
 
 /* =========================================
@@ -731,7 +723,6 @@ th {
   text-shadow:
     2px 2px 6px rgba(0, 0, 0, 0.6),
     0 0 15px rgba(0, 0, 0, 0.4) !important;
-  -webkit-text-stroke: 0.8px rgba(0, 0, 0, 0.3);
 }
 
 td {
