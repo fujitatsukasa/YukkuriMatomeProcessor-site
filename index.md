@@ -552,26 +552,28 @@ permalink: /
     }
   }
 
-  @keyframes premiumDoubleShine {
+  @keyframes premiumShineSwipe {
     0%, 100% {
-      background: linear-gradient(135deg, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.3) 100%);
-      border-color: rgba(255, 215, 0, 0.5);
+      left: -200%;
+      opacity: 0;
+    }
+    5% {
+      opacity: 0.9;
     }
     15% {
-      background: linear-gradient(135deg, rgba(255, 215, 0, 0.4) 0%, rgba(255, 235, 59, 0.4) 100%);
-      border-color: rgba(255, 215, 0, 1);
+      left: 200%;
+      opacity: 0;
     }
-    30% {
-      background: linear-gradient(135deg, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.3) 100%);
-      border-color: rgba(255, 215, 0, 0.5);
+    40% {
+      left: -200%;
+      opacity: 0;
     }
     45% {
-      background: linear-gradient(135deg, rgba(255, 215, 0, 0.4) 0%, rgba(255, 235, 59, 0.4) 100%);
-      border-color: rgba(255, 215, 0, 1);
+      opacity: 0.9;
     }
-    60% {
-      background: linear-gradient(135deg, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.3) 100%);
-      border-color: rgba(255, 215, 0, 0.5);
+    55% {
+      left: 200%;
+      opacity: 0;
     }
   }
 
@@ -1258,7 +1260,29 @@ permalink: /
       0 30px 80px rgba(102, 126, 234, 0.5),
       inset 0 2px 20px rgba(255, 255, 255, 0.15),
       0 0 80px rgba(255, 215, 0, 0.4);
-    animation: premiumDoubleShine 4s ease-in-out infinite;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pricing-card.featured::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -200%;
+    width: 100%;
+    height: 200%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.1) 30%,
+      rgba(255, 215, 0, 0.6) 50%,
+      rgba(255, 255, 255, 0.1) 70%,
+      transparent 100%
+    );
+    transform: skewX(-25deg);
+    animation: premiumShineSwipe 5s ease-in-out infinite;
+    z-index: 1;
+    pointer-events: none;
   }
 
   .pricing-card.featured:hover {
@@ -1276,19 +1300,24 @@ permalink: /
     font-weight: 700;
     margin-bottom: 15px;
     color: #2d3748;
+    position: relative;
+    z-index: 2;
   }
 
   .pricing-card.featured .pricing-name {
     font-size: 2em;
     font-weight: 900;
     margin-bottom: 20px;
-    font-family: 'Oswald', 'Noto Sans JP', sans-serif;
+    font-family: 'Noto Sans JP', sans-serif;
     color: #ffffff;
     text-shadow:
+      -1px -1px 0 #000,
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+      1px 1px 0 #000,
       2px 2px 8px rgba(0, 0, 0, 0.8),
       0 0 20px rgba(0, 0, 0, 0.5);
     letter-spacing: 0.05em;
-    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.5);
   }
 
   .pricing-price {
@@ -1296,6 +1325,8 @@ permalink: /
     font-weight: 900;
     margin: 20px 0;
     color: #2d3748;
+    position: relative;
+    z-index: 2;
   }
 
   .pricing-card.featured .pricing-price {
@@ -1306,10 +1337,13 @@ permalink: /
     -webkit-text-fill-color: transparent;
     background-clip: text;
     filter:
+      drop-shadow(-1px -1px 0 #000)
+      drop-shadow(1px -1px 0 #000)
+      drop-shadow(-1px 1px 0 #000)
+      drop-shadow(1px 1px 0 #000)
       drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.8))
-      drop-shadow(0 0 20px rgba(255, 215, 0, 0.6))
-      drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
-    font-family: 'Oswald', sans-serif;
+      drop-shadow(0 0 20px rgba(255, 215, 0, 0.6));
+    font-family: 'Noto Sans JP', sans-serif;
   }
 
   .pricing-price sup {
@@ -1322,6 +1356,8 @@ permalink: /
     padding: 0;
     margin: 30px 0;
     text-align: left;
+    position: relative;
+    z-index: 2;
   }
 
   .pricing-features li {
@@ -1346,9 +1382,12 @@ permalink: /
     font-size: 1.1em;
     transition: all 0.3s ease;
     text-shadow:
+      -1px -1px 0 #000,
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+      1px 1px 0 #000,
       2px 2px 8px rgba(0, 0, 0, 0.9),
       0 0 20px rgba(0, 0, 0, 0.6);
-    -webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.6);
   }
 
   .pricing-card.featured .pricing-features li:hover {
@@ -1376,6 +1415,8 @@ permalink: /
   .pricing-btn {
     width: 100%;
     margin-top: 10px;
+    position: relative;
+    z-index: 2;
   }
 
   /* ========== CTAセクション ========== */
