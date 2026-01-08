@@ -378,9 +378,10 @@ permalink: /
       inset 0 3px 10px rgba(255, 255, 255, 0.5);
     border-color: #ffd700;
     border-width: 4px;
+    color: #ffffff !important;
     text-shadow:
-      4px 4px 15px rgba(0, 0, 0, 1),
-      0 0 35px rgba(255, 215, 0, 0.9);
+      2px 2px 8px rgba(0, 0, 0, 0.6),
+      0 0 20px rgba(255, 215, 0, 0.6);
   }
 
   .btn-secondary {
@@ -407,8 +408,8 @@ permalink: /
     border-color: #ffd700;
     border-width: 4px;
     text-shadow:
-      4px 4px 15px rgba(0, 0, 0, 1),
-      0 0 35px rgba(255, 255, 255, 0.7);
+      2px 2px 8px rgba(0, 0, 0, 0.5),
+      0 0 20px rgba(255, 255, 255, 0.7);
   }
 
   .btn-premium {
@@ -429,6 +430,7 @@ permalink: /
   .btn-premium:hover {
     transform: translateY(-8px) scale(1.1);
     background: linear-gradient(135deg, #ffeb3b 0%, #fff5cc 100%);
+    color: #1a1f35 !important;
     box-shadow:
       0 30px 70px rgba(255, 215, 0, 0.9),
       0 15px 35px rgba(0, 0, 0, 0.5),
@@ -436,8 +438,8 @@ permalink: /
     border-color: #fff;
     border-width: 4px;
     text-shadow:
-      4px 4px 12px rgba(0, 0, 0, 1),
-      0 0 25px rgba(0, 0, 0, 0.6);
+      1px 1px 3px rgba(0, 0, 0, 0.3),
+      0 0 15px rgba(255, 255, 255, 0.5);
   }
 
   @keyframes fadeInDown {
@@ -2029,6 +2031,42 @@ permalink: /
         <div>
           <div class="testimonial-name-luxury">リオン様</div>
           <div class="testimonial-role-luxury">フリーランス動画クリエイター</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card-luxury">
+      <div class="testimonial-quote">"</div>
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text-luxury">複数チャンネルを運営していますが、このツールのおかげで<strong>全て効率化</strong>できました。投資対効果が抜群です。</p>
+      <div class="testimonial-author-luxury">
+        <div class="testimonial-avatar-luxury">匿</div>
+        <div>
+          <div class="testimonial-name-luxury">匿名希望様</div>
+          <div class="testimonial-role-luxury">複数チャンネル運営者</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card-luxury">
+      <div class="testimonial-quote">"</div>
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text-luxury">他のツールと比べて<strong>圧倒的に使いやすい</strong>です。UIも洗練されていて、操作に迷うことがありません。</p>
+      <div class="testimonial-author-luxury">
+        <div class="testimonial-avatar-luxury">匿</div>
+        <div>
+          <div class="testimonial-name-luxury">匿名希望様</div>
+          <div class="testimonial-role-luxury">動画クリエイター</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card-luxury">
+      <div class="testimonial-quote">"</div>
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text-luxury">導入してから<strong>収益が3倍</strong>になりました。このツールに出会えて本当に良かったです。</p>
+      <div class="testimonial-author-luxury">
+        <div class="testimonial-avatar-luxury">匿</div>
+        <div>
+          <div class="testimonial-name-luxury">匿名希望様</div>
+          <div class="testimonial-role-luxury">専業配信者</div>
         </div>
       </div>
     </div>
