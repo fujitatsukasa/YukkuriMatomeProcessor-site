@@ -1243,14 +1243,14 @@ permalink: /
   }
 
   .pricing-price {
-    font-size: 3em;
+    font-size: 2.5em;
     font-weight: 900;
     margin: 20px 0;
     color: #2d3748;
   }
 
   .pricing-card.featured .pricing-price {
-    font-size: 3.5em;
+    font-size: 2em;
     margin: 30px 0;
     background: linear-gradient(135deg, #ffd700 0%, #ffeb3b 100%);
     -webkit-background-clip: text;
@@ -1287,13 +1287,13 @@ permalink: /
     margin: 10px 0;
     border-radius: 12px;
     border-bottom: none;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 215, 0, 0.3);
-    color: #ffffff;
-    font-weight: 600;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 215, 0, 0.4);
+    color: #fff;
+    font-weight: 700;
     font-size: 1.05em;
     transition: all 0.3s ease;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
   }
 
   .pricing-card.featured .pricing-features li:hover {
@@ -2150,6 +2150,7 @@ permalink: /
 </div>
 
 <script>
+document.addEventListener('DOMContentLoaded', function() {
   // ========== ヒーロースライダー機能 ==========
   let currentHeroSlide = 0;
   const heroSlides = document.querySelectorAll('.hero-slide');
@@ -2473,4 +2474,5 @@ permalink: /
     // Initialize
     updateTestimonialCarousel();
   }
+});
 </script>
