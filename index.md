@@ -554,36 +554,24 @@ permalink: /
 
   @keyframes premiumDoubleShine {
     0%, 100% {
-      box-shadow:
-        0 30px 80px rgba(102, 126, 234, 0.5),
-        inset 0 2px 20px rgba(255, 255, 255, 0.15),
-        0 0 80px rgba(255, 215, 0, 0.4);
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.3) 100%);
+      border-color: rgba(255, 215, 0, 0.5);
     }
     15% {
-      box-shadow:
-        0 30px 80px rgba(102, 126, 234, 0.7),
-        inset 0 2px 20px rgba(255, 255, 255, 0.3),
-        0 0 120px rgba(255, 215, 0, 0.8),
-        0 0 150px rgba(255, 255, 255, 0.5);
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.4) 0%, rgba(255, 235, 59, 0.4) 100%);
+      border-color: rgba(255, 215, 0, 1);
     }
     30% {
-      box-shadow:
-        0 30px 80px rgba(102, 126, 234, 0.5),
-        inset 0 2px 20px rgba(255, 255, 255, 0.15),
-        0 0 80px rgba(255, 215, 0, 0.4);
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.3) 100%);
+      border-color: rgba(255, 215, 0, 0.5);
     }
     45% {
-      box-shadow:
-        0 30px 80px rgba(102, 126, 234, 0.7),
-        inset 0 2px 20px rgba(255, 255, 255, 0.3),
-        0 0 120px rgba(255, 215, 0, 0.8),
-        0 0 150px rgba(255, 255, 255, 0.5);
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.4) 0%, rgba(255, 235, 59, 0.4) 100%);
+      border-color: rgba(255, 215, 0, 1);
     }
     60% {
-      box-shadow:
-        0 30px 80px rgba(102, 126, 234, 0.5),
-        inset 0 2px 20px rgba(255, 255, 255, 0.15),
-        0 0 80px rgba(255, 215, 0, 0.4);
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.3) 100%);
+      border-color: rgba(255, 215, 0, 0.5);
     }
   }
 
@@ -1296,8 +1284,11 @@ permalink: /
     margin-bottom: 20px;
     font-family: 'Oswald', 'Noto Sans JP', sans-serif;
     color: #ffffff;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    text-shadow:
+      2px 2px 8px rgba(0, 0, 0, 0.8),
+      0 0 20px rgba(0, 0, 0, 0.5);
     letter-spacing: 0.05em;
+    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.5);
   }
 
   .pricing-price {
@@ -1314,7 +1305,10 @@ permalink: /
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.5));
+    filter:
+      drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.8))
+      drop-shadow(0 0 20px rgba(255, 215, 0, 0.6))
+      drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
     font-family: 'Oswald', sans-serif;
   }
 
@@ -1354,6 +1348,7 @@ permalink: /
     text-shadow:
       2px 2px 8px rgba(0, 0, 0, 0.9),
       0 0 20px rgba(0, 0, 0, 0.6);
+    -webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.6);
   }
 
   .pricing-card.featured .pricing-features li:hover {
