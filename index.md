@@ -249,7 +249,7 @@ permalink: /
   /* スライダーナビゲーションドット */
   .hero-slider-dots {
     position: absolute;
-    bottom: 35px;
+    bottom: 50px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 10;
@@ -296,34 +296,33 @@ permalink: /
     top: 50%;
     transform: translateY(-50%);
     z-index: 10;
-    background: rgba(255, 255, 255, 0.18);
-    backdrop-filter: blur(15px);
-    width: 75px;
-    height: 75px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(245, 247, 250, 0.95) 100%);
+    backdrop-filter: blur(20px);
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 3px solid rgba(255, 255, 255, 0.45);
-    font-size: 2.6em;
-    color: #ffffff;
-    text-shadow:
-      3px 3px 10px rgba(0, 0, 0, 0.9),
-      0 0 20px rgba(0, 0, 0, 0.6);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid rgba(102, 126, 234, 0.6);
+    font-size: 1.8em;
+    color: #667eea;
+    font-weight: 900;
     box-shadow:
-      0 10px 35px rgba(0, 0, 0, 0.4),
-      inset 0 2px 8px rgba(255, 255, 255, 0.2);
+      0 10px 30px rgba(0, 0, 0, 0.3),
+      inset 0 2px 8px rgba(255, 255, 255, 0.8);
   }
 
   .hero-slider-arrow:hover {
-    background: rgba(255, 255, 255, 0.35);
-    transform: translateY(-50%) scale(1.2);
-    border-color: rgba(255, 255, 255, 0.8);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #ffffff;
+    transform: translateY(-50%) scale(1.15);
+    border-color: rgba(255, 255, 255, 0.9);
     box-shadow:
-      0 15px 50px rgba(255, 255, 255, 0.4),
-      0 5px 20px rgba(0, 0, 0, 0.5),
+      0 15px 50px rgba(102, 126, 234, 0.6),
+      0 5px 20px rgba(0, 0, 0, 0.4),
       inset 0 2px 10px rgba(255, 255, 255, 0.3);
   }
 
@@ -2185,19 +2184,19 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // 次のスライド
-  function heroSliderNext() {
+  window.heroSliderNext = function() {
     showHeroSlide(currentHeroSlide + 1);
     resetHeroSlideInterval();
   }
 
   // 前のスライド
-  function heroSliderPrev() {
+  window.heroSliderPrev = function() {
     showHeroSlide(currentHeroSlide - 1);
     resetHeroSlideInterval();
   }
 
   // 特定のスライドに移動
-  function heroSliderGoTo(index) {
+  window.heroSliderGoTo = function(index) {
     showHeroSlide(index);
     resetHeroSlideInterval();
   }
