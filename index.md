@@ -462,6 +462,20 @@ permalink: /
     }
   }
 
+  @keyframes shineSwipe {
+    0% {
+      left: -150%;
+      opacity: 0;
+    }
+    20% {
+      opacity: 1;
+    }
+    100% {
+      left: 150%;
+      opacity: 0;
+    }
+  }
+
   /* ========== 統計セクション - 統一感のあるプロフェッショナルデザイン ========== */
   .stats-section {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -500,21 +514,24 @@ permalink: /
     content: '';
     position: absolute;
     top: -50%;
-    left: -50%;
-    width: 200%;
+    left: -150%;
+    width: 80%;
     height: 200%;
     background: linear-gradient(
-      45deg,
-      transparent 30%,
-      rgba(255, 255, 255, 0.15) 50%,
-      transparent 70%
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.1) 40%,
+      rgba(255, 255, 255, 0.6) 50%,
+      rgba(255, 255, 255, 0.1) 60%,
+      transparent 100%
     );
-    transform: rotate(45deg);
-    transition: all 0.6s ease;
+    transform: skewX(-25deg);
+    animation: shineSwipe 4s ease-in-out infinite;
+    animation-delay: calc(var(--card-index) * 0.3s);
   }
 
   .stat-card:hover::before {
-    left: 100%;
+    animation-duration: 2s;
   }
 
   .stat-card:hover {
@@ -1615,19 +1632,19 @@ permalink: /
 <!-- 統計セクション -->
 <div class="stats-section">
   <div class="stats-container">
-    <div class="stat-card">
+    <div class="stat-card" style="--card-index: 0">
       <div class="stat-number" data-count="10">0</div>
       <div class="stat-label">生産性向上</div>
     </div>
-    <div class="stat-card">
+    <div class="stat-card" style="--card-index: 1">
       <div class="stat-number" data-count="95">0</div>
       <div class="stat-label">時間削減率</div>
     </div>
-    <div class="stat-card">
+    <div class="stat-card" style="--card-index: 2">
       <div class="stat-number" data-count="300">0</div>
       <div class="stat-label">アクティブユーザー</div>
     </div>
-    <div class="stat-card">
+    <div class="stat-card" style="--card-index: 3">
       <div class="stat-number stat-stars">★★★★★</div>
       <div class="stat-label">ユーザー満足度</div>
     </div>
@@ -1735,9 +1752,9 @@ permalink: /
       <div class="testimonial-stars">★★★★★</div>
       <p class="testimonial-text-luxury">動画制作時間が<strong>劇的に短縮</strong>！作業効率が格段に上がり、このツールなしでは考えられません。</p>
       <div class="testimonial-author-luxury">
-        <div class="testimonial-avatar-luxury">@</div>
+        <div class="testimonial-avatar-luxury">T</div>
         <div>
-          <div class="testimonial-name-luxury">@takahashi_pro</div>
+          <div class="testimonial-name-luxury">タカハシ</div>
           <div class="testimonial-role-luxury">プロ動画クリエイター</div>
         </div>
       </div>
@@ -1747,9 +1764,9 @@ permalink: /
       <div class="testimonial-stars">★★★★★</div>
       <p class="testimonial-text-luxury">完全に<strong>人生が変わりました</strong>。投稿本数が大幅に増え、チャンネル登録者も<strong>急増</strong>しています。</p>
       <div class="testimonial-author-luxury">
-        <div class="testimonial-avatar-luxury">@</div>
+        <div class="testimonial-avatar-luxury">M</div>
         <div>
-          <div class="testimonial-name-luxury">@yukkuri_misaki</div>
+          <div class="testimonial-name-luxury">みさき</div>
           <div class="testimonial-role-luxury">ゆっくり系トップ配信者</div>
         </div>
       </div>
@@ -1759,9 +1776,9 @@ permalink: /
       <div class="testimonial-stars">★★★★★</div>
       <p class="testimonial-text-luxury">AI機能が<strong>圧倒的</strong>。素材収集から編集まで全自動。クオリティも従来の手作業を<strong>完全に超えています</strong>。</p>
       <div class="testimonial-author-luxury">
-        <div class="testimonial-avatar-luxury">@</div>
+        <div class="testimonial-avatar-luxury">T</div>
         <div>
-          <div class="testimonial-name-luxury">@tanaka_ceo</div>
+          <div class="testimonial-name-luxury">田中社長</div>
           <div class="testimonial-role-luxury">IT企業CEO</div>
         </div>
       </div>
@@ -1771,9 +1788,9 @@ permalink: /
       <div class="testimonial-stars">★★★★★</div>
       <p class="testimonial-text-luxury">チーム全員の作業効率が<strong>劇的に向上</strong>。月間動画本数が大幅に増え、売上も<strong>大幅アップ</strong>しました。</p>
       <div class="testimonial-author-luxury">
-        <div class="testimonial-avatar-luxury">@</div>
+        <div class="testimonial-avatar-luxury">S</div>
         <div>
-          <div class="testimonial-name-luxury">@suzuki_media</div>
+          <div class="testimonial-name-luxury">スズキ企画</div>
           <div class="testimonial-role-luxury">メディア制作会社代表</div>
         </div>
       </div>
@@ -1783,9 +1800,9 @@ permalink: /
       <div class="testimonial-stars">★★★★★</div>
       <p class="testimonial-text-luxury"><strong>編集作業のストレスがゼロ</strong>に。クリエイティブな部分に集中できるようになり、動画のクオリティが格段に上がりました。</p>
       <div class="testimonial-author-luxury">
-        <div class="testimonial-avatar-luxury">@</div>
+        <div class="testimonial-avatar-luxury">N</div>
         <div>
-          <div class="testimonial-name-luxury">@nakamura_edu</div>
+          <div class="testimonial-name-luxury">なかむら</div>
           <div class="testimonial-role-luxury">教育系YouTuber</div>
         </div>
       </div>
@@ -1795,9 +1812,9 @@ permalink: /
       <div class="testimonial-stars">★★★★★</div>
       <p class="testimonial-text-luxury">導入前は限界を感じていましたが、今は<strong>大量投稿</strong>が可能になりました。収益も<strong>大幅アップ</strong>、まさに革命です。</p>
       <div class="testimonial-author-luxury">
-        <div class="testimonial-avatar-luxury">@</div>
+        <div class="testimonial-avatar-luxury">I</div>
         <div>
-          <div class="testimonial-name-luxury">@ito_gaming</div>
+          <div class="testimonial-name-luxury">いとう</div>
           <div class="testimonial-role-luxury">ゲーム実況者</div>
         </div>
       </div>
@@ -1807,9 +1824,9 @@ permalink: /
       <div class="testimonial-stars">★★★★★</div>
       <p class="testimonial-text-luxury">テンプレート機能が<strong>神レベル</strong>。短時間で完成するので、<strong>副業でも十分な収益</strong>を得られるようになりました。</p>
       <div class="testimonial-author-luxury">
-        <div class="testimonial-avatar-luxury">@</div>
+        <div class="testimonial-avatar-luxury">Y</div>
         <div>
-          <div class="testimonial-name-luxury">@yamada_side</div>
+          <div class="testimonial-name-luxury">やまだ</div>
           <div class="testimonial-role-luxury">副業クリエイター</div>
         </div>
       </div>
@@ -1819,9 +1836,9 @@ permalink: /
       <div class="testimonial-stars">★★★★★</div>
       <p class="testimonial-text-luxury">音声合成のクオリティに<strong>感動</strong>。自然な抑揚で、視聴者からの評価も<strong>過去最高</strong>です。</p>
       <div class="testimonial-author-luxury">
-        <div class="testimonial-avatar-luxury">@</div>
+        <div class="testimonial-avatar-luxury">K</div>
         <div>
-          <div class="testimonial-name-luxury">@kobayashi_exp</div>
+          <div class="testimonial-name-luxury">こばやし</div>
           <div class="testimonial-role-luxury">解説系配信者</div>
         </div>
       </div>
@@ -1831,10 +1848,10 @@ permalink: /
       <div class="testimonial-stars">★★★★★</div>
       <p class="testimonial-text-luxury">法人での大量制作に<strong>完璧</strong>。少人数で大量の動画を制作でき、<strong>大幅なコスト削減</strong>を実現しています。</p>
       <div class="testimonial-author-luxury">
-        <div class="testimonial-avatar-luxury">@</div>
+        <div class="testimonial-avatar-luxury">M</div>
         <div>
-          <div class="testimonial-name-luxury">@watanabe_works</div>
-          <div class="testimonial-role-luxury">メディアワークス 取締役</div>
+          <div class="testimonial-name-luxury">メディアワークス</div>
+          <div class="testimonial-role-luxury">取締役</div>
         </div>
       </div>
     </div>
@@ -1843,9 +1860,9 @@ permalink: /
       <div class="testimonial-stars">★★★★★</div>
       <p class="testimonial-text-luxury">初心者でも<strong>プロ級の動画</strong>が作れます。開始直後から<strong>急成長</strong>を実現できました！</p>
       <div class="testimonial-author-luxury">
-        <div class="testimonial-avatar-luxury">@</div>
+        <div class="testimonial-avatar-luxury">K</div>
         <div>
-          <div class="testimonial-name-luxury">@kato_newbie</div>
+          <div class="testimonial-name-luxury">かとう</div>
           <div class="testimonial-role-luxury">新人クリエイター</div>
         </div>
       </div>
@@ -1855,9 +1872,9 @@ permalink: /
       <div class="testimonial-stars">★★★★★</div>
       <p class="testimonial-text-luxury">自動素材収集が<strong>天才的</strong>。台本を書くだけで、最適な画像や動画が自動で揃います。時間の節約が半端ない。</p>
       <div class="testimonial-author-luxury">
-        <div class="testimonial-avatar-luxury">@</div>
+        <div class="testimonial-avatar-luxury">K</div>
         <div>
-          <div class="testimonial-name-luxury">@kimura_news</div>
+          <div class="testimonial-name-luxury">きむら</div>
           <div class="testimonial-role-luxury">ニュース系チャンネル運営</div>
         </div>
       </div>
@@ -1867,9 +1884,9 @@ permalink: /
       <div class="testimonial-stars">★★★★★</div>
       <p class="testimonial-text-luxury">サポートも<strong>超迅速</strong>。質問への返答が早く、安心して使える最高のツールです。</p>
       <div class="testimonial-author-luxury">
-        <div class="testimonial-avatar-luxury">@</div>
+        <div class="testimonial-avatar-luxury">H</div>
         <div>
-          <div class="testimonial-name-luxury">@hayashi_biz</div>
+          <div class="testimonial-name-luxury">はやし</div>
           <div class="testimonial-role-luxury">ビジネス系配信者</div>
         </div>
       </div>
@@ -1879,9 +1896,9 @@ permalink: /
       <div class="testimonial-stars">★★★★★</div>
       <p class="testimonial-text-luxury">アップデートが<strong>頻繁</strong>で、常に最新機能が使えます。開発チームの情熱を感じる<strong>唯一無二</strong>のツール。</p>
       <div class="testimonial-author-luxury">
-        <div class="testimonial-avatar-luxury">@</div>
+        <div class="testimonial-avatar-luxury">S</div>
         <div>
-          <div class="testimonial-name-luxury">@saito_tech</div>
+          <div class="testimonial-name-luxury">さいとう</div>
           <div class="testimonial-role-luxury">テック系レビュアー</div>
         </div>
       </div>
@@ -1891,9 +1908,9 @@ permalink: /
       <div class="testimonial-stars">★★★★★</div>
       <p class="testimonial-text-luxury">価格が<strong>圧倒的に安い</strong>。この機能でこの価格は信じられません。<strong>すぐに元が取れました</strong>。</p>
       <div class="testimonial-author-luxury">
-        <div class="testimonial-avatar-luxury">@</div>
+        <div class="testimonial-avatar-luxury">M</div>
         <div>
-          <div class="testimonial-name-luxury">@matsumoto_start</div>
+          <div class="testimonial-name-luxury">まつもと</div>
           <div class="testimonial-role-luxury">スタートアップ経営者</div>
         </div>
       </div>
@@ -1903,9 +1920,9 @@ permalink: /
       <div class="testimonial-stars">★★★★★</div>
       <p class="testimonial-text-luxury">もう<strong>手放せません</strong>。ゆっくりまとめプロセッサーは私のビジネスの<strong>生命線</strong>です。心から感謝しています。</p>
       <div class="testimonial-author-luxury">
-        <div class="testimonial-avatar-luxury">@</div>
+        <div class="testimonial-avatar-luxury">I</div>
         <div>
-          <div class="testimonial-name-luxury">@inoue_freelance</div>
+          <div class="testimonial-name-luxury">いのうえ</div>
           <div class="testimonial-role-luxury">フリーランス動画クリエイター</div>
         </div>
       </div>
