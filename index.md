@@ -1730,187 +1730,186 @@ permalink: /
     <p class="section-subtitle">様々なクリエイターに選ばれています</p>
   </div>
   <div class="testimonials-grid">
-      <div class="testimonial-card-luxury">
-        <div class="testimonial-quote">"</div>
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text-luxury">動画制作時間が<strong>劇的に短縮</strong>！作業効率が格段に上がり、このツールなしでは考えられません。</p>
-        <div class="testimonial-author-luxury">
-            <div class="testimonial-avatar-luxury">高</div>
-            <div>
-              <div class="testimonial-name-luxury">高橋 健太様</div>
-              <div class="testimonial-role-luxury">プロ動画クリエイター</div>
-            </div>
-          </div>
+    <div class="testimonial-card-luxury">
+      <div class="testimonial-quote">"</div>
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text-luxury">動画制作時間が<strong>劇的に短縮</strong>！作業効率が格段に上がり、このツールなしでは考えられません。</p>
+      <div class="testimonial-author-luxury">
+        <div class="testimonial-avatar-luxury">@</div>
+        <div>
+          <div class="testimonial-name-luxury">@takahashi_pro</div>
+          <div class="testimonial-role-luxury">プロ動画クリエイター</div>
         </div>
       </div>
-      <div class="testimonial-card-luxury">
-        <div class="testimonial-quote">"</div>
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text-luxury">完全に<strong>人生が変わりました</strong>。投稿本数が大幅に増え、チャンネル登録者も<strong>急増</strong>しています。</p>
-        <div class="testimonial-author-luxury">
-          <div class="testimonial-avatar-luxury">佐</div>
-          <div>
-            <div class="testimonial-name-luxury">佐藤 美咲様</div>
-            <div class="testimonial-role-luxury">ゆっくり系トップ配信者</div>
-          </div>
+    </div>
+    <div class="testimonial-card-luxury">
+      <div class="testimonial-quote">"</div>
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text-luxury">完全に<strong>人生が変わりました</strong>。投稿本数が大幅に増え、チャンネル登録者も<strong>急増</strong>しています。</p>
+      <div class="testimonial-author-luxury">
+        <div class="testimonial-avatar-luxury">@</div>
+        <div>
+          <div class="testimonial-name-luxury">@yukkuri_misaki</div>
+          <div class="testimonial-role-luxury">ゆっくり系トップ配信者</div>
         </div>
       </div>
-      <div class="testimonial-card-luxury">
-        <div class="testimonial-quote">"</div>
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text-luxury">AI機能が<strong>圧倒的</strong>。素材収集から編集まで全自動。クオリティも従来の手作業を<strong>完全に超えています</strong>。</p>
-        <div class="testimonial-author-luxury">
-          <div class="testimonial-avatar-luxury">田</div>
-          <div>
-            <div class="testimonial-name-luxury">田中 誠様</div>
-            <div class="testimonial-role-luxury">IT企業CEO</div>
-          </div>
+    </div>
+    <div class="testimonial-card-luxury">
+      <div class="testimonial-quote">"</div>
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text-luxury">AI機能が<strong>圧倒的</strong>。素材収集から編集まで全自動。クオリティも従来の手作業を<strong>完全に超えています</strong>。</p>
+      <div class="testimonial-author-luxury">
+        <div class="testimonial-avatar-luxury">@</div>
+        <div>
+          <div class="testimonial-name-luxury">@tanaka_ceo</div>
+          <div class="testimonial-role-luxury">IT企業CEO</div>
         </div>
       </div>
-      <div class="testimonial-card-luxury">
-        <div class="testimonial-quote">"</div>
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text-luxury">チーム全員の作業効率が<strong>劇的に向上</strong>。月間動画本数が大幅に増え、売上も<strong>大幅アップ</strong>しました。</p>
-        <div class="testimonial-author-luxury">
-          <div class="testimonial-avatar-luxury">鈴</div>
-          <div>
-            <div class="testimonial-name-luxury">鈴木 大輔様</div>
-            <div class="testimonial-role-luxury">メディア制作会社代表</div>
-          </div>
+    </div>
+    <div class="testimonial-card-luxury">
+      <div class="testimonial-quote">"</div>
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text-luxury">チーム全員の作業効率が<strong>劇的に向上</strong>。月間動画本数が大幅に増え、売上も<strong>大幅アップ</strong>しました。</p>
+      <div class="testimonial-author-luxury">
+        <div class="testimonial-avatar-luxury">@</div>
+        <div>
+          <div class="testimonial-name-luxury">@suzuki_media</div>
+          <div class="testimonial-role-luxury">メディア制作会社代表</div>
         </div>
       </div>
-      <div class="testimonial-card-luxury">
-        <div class="testimonial-quote">"</div>
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text-luxury"><strong>編集作業のストレスがゼロ</strong>に。クリエイティブな部分に集中できるようになり、動画のクオリティが格段に上がりました。</p>
-        <div class="testimonial-author-luxury">
-          <div class="testimonial-avatar-luxury">中</div>
-          <div>
-            <div class="testimonial-name-luxury">中村 愛様</div>
-            <div class="testimonial-role-luxury">教育系YouTuber</div>
-          </div>
+    </div>
+    <div class="testimonial-card-luxury">
+      <div class="testimonial-quote">"</div>
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text-luxury"><strong>編集作業のストレスがゼロ</strong>に。クリエイティブな部分に集中できるようになり、動画のクオリティが格段に上がりました。</p>
+      <div class="testimonial-author-luxury">
+        <div class="testimonial-avatar-luxury">@</div>
+        <div>
+          <div class="testimonial-name-luxury">@nakamura_edu</div>
+          <div class="testimonial-role-luxury">教育系YouTuber</div>
         </div>
       </div>
-      <div class="testimonial-card-luxury">
-        <div class="testimonial-quote">"</div>
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text-luxury">導入前は限界を感じていましたが、今は<strong>大量投稿</strong>が可能になりました。収益も<strong>大幅アップ</strong>、まさに革命です。</p>
-        <div class="testimonial-author-luxury">
-          <div class="testimonial-avatar-luxury">伊</div>
-          <div>
-            <div class="testimonial-name-luxury">伊藤 隆様</div>
-            <div class="testimonial-role-luxury">ゲーム実況者</div>
-          </div>
+    </div>
+    <div class="testimonial-card-luxury">
+      <div class="testimonial-quote">"</div>
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text-luxury">導入前は限界を感じていましたが、今は<strong>大量投稿</strong>が可能になりました。収益も<strong>大幅アップ</strong>、まさに革命です。</p>
+      <div class="testimonial-author-luxury">
+        <div class="testimonial-avatar-luxury">@</div>
+        <div>
+          <div class="testimonial-name-luxury">@ito_gaming</div>
+          <div class="testimonial-role-luxury">ゲーム実況者</div>
         </div>
       </div>
-      <div class="testimonial-card-luxury">
-        <div class="testimonial-quote">"</div>
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text-luxury">テンプレート機能が<strong>神レベル</strong>。短時間で完成するので、<strong>副業でも十分な収益</strong>を得られるようになりました。</p>
-        <div class="testimonial-author-luxury">
-          <div class="testimonial-avatar-luxury">山</div>
-          <div>
-            <div class="testimonial-name-luxury">山田 翔太様</div>
-            <div class="testimonial-role-luxury">副業クリエイター</div>
-          </div>
+    </div>
+    <div class="testimonial-card-luxury">
+      <div class="testimonial-quote">"</div>
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text-luxury">テンプレート機能が<strong>神レベル</strong>。短時間で完成するので、<strong>副業でも十分な収益</strong>を得られるようになりました。</p>
+      <div class="testimonial-author-luxury">
+        <div class="testimonial-avatar-luxury">@</div>
+        <div>
+          <div class="testimonial-name-luxury">@yamada_side</div>
+          <div class="testimonial-role-luxury">副業クリエイター</div>
         </div>
       </div>
-      <div class="testimonial-card-luxury">
-        <div class="testimonial-quote">"</div>
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text-luxury">音声合成のクオリティに<strong>感動</strong>。自然な抑揚で、視聴者からの評価も<strong>過去最高</strong>です。</p>
-        <div class="testimonial-author-luxury">
-          <div class="testimonial-avatar-luxury">小</div>
-          <div>
-            <div class="testimonial-name-luxury">小林 真由様</div>
-            <div class="testimonial-role-luxury">解説系配信者</div>
-          </div>
+    </div>
+    <div class="testimonial-card-luxury">
+      <div class="testimonial-quote">"</div>
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text-luxury">音声合成のクオリティに<strong>感動</strong>。自然な抑揚で、視聴者からの評価も<strong>過去最高</strong>です。</p>
+      <div class="testimonial-author-luxury">
+        <div class="testimonial-avatar-luxury">@</div>
+        <div>
+          <div class="testimonial-name-luxury">@kobayashi_exp</div>
+          <div class="testimonial-role-luxury">解説系配信者</div>
         </div>
       </div>
-      <div class="testimonial-card-luxury">
-        <div class="testimonial-quote">"</div>
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text-luxury">法人での大量制作に<strong>完璧</strong>。少人数で大量の動画を制作でき、<strong>大幅なコスト削減</strong>を実現しています。</p>
-        <div class="testimonial-author-luxury">
-          <div class="testimonial-avatar-luxury">渡</div>
-          <div>
-            <div class="testimonial-name-luxury">渡辺 浩二様</div>
-            <div class="testimonial-role-luxury">株式会社メディアワークス 取締役</div>
-          </div>
+    </div>
+    <div class="testimonial-card-luxury">
+      <div class="testimonial-quote">"</div>
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text-luxury">法人での大量制作に<strong>完璧</strong>。少人数で大量の動画を制作でき、<strong>大幅なコスト削減</strong>を実現しています。</p>
+      <div class="testimonial-author-luxury">
+        <div class="testimonial-avatar-luxury">@</div>
+        <div>
+          <div class="testimonial-name-luxury">@watanabe_works</div>
+          <div class="testimonial-role-luxury">メディアワークス 取締役</div>
         </div>
       </div>
-      <div class="testimonial-card-luxury">
-        <div class="testimonial-quote">"</div>
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text-luxury">初心者でも<strong>プロ級の動画</strong>が作れます。開始直後から<strong>急成長</strong>を実現できました！</p>
-        <div class="testimonial-author-luxury">
-          <div class="testimonial-avatar-luxury">加</div>
-          <div>
-            <div class="testimonial-name-luxury">加藤 萌様</div>
-            <div class="testimonial-role-luxury">新人クリエイター</div>
-          </div>
+    </div>
+    <div class="testimonial-card-luxury">
+      <div class="testimonial-quote">"</div>
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text-luxury">初心者でも<strong>プロ級の動画</strong>が作れます。開始直後から<strong>急成長</strong>を実現できました！</p>
+      <div class="testimonial-author-luxury">
+        <div class="testimonial-avatar-luxury">@</div>
+        <div>
+          <div class="testimonial-name-luxury">@kato_newbie</div>
+          <div class="testimonial-role-luxury">新人クリエイター</div>
         </div>
       </div>
-      <div class="testimonial-card-luxury">
-        <div class="testimonial-quote">"</div>
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text-luxury">自動素材収集が<strong>天才的</strong>。台本を書くだけで、最適な画像や動画が自動で揃います。時間の節約が半端ない。</p>
-        <div class="testimonial-author-luxury">
-          <div class="testimonial-avatar-luxury">木</div>
-          <div>
-            <div class="testimonial-name-luxury">木村 拓也様</div>
-            <div class="testimonial-role-luxury">ニュース系チャンネル運営</div>
-          </div>
+    </div>
+    <div class="testimonial-card-luxury">
+      <div class="testimonial-quote">"</div>
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text-luxury">自動素材収集が<strong>天才的</strong>。台本を書くだけで、最適な画像や動画が自動で揃います。時間の節約が半端ない。</p>
+      <div class="testimonial-author-luxury">
+        <div class="testimonial-avatar-luxury">@</div>
+        <div>
+          <div class="testimonial-name-luxury">@kimura_news</div>
+          <div class="testimonial-role-luxury">ニュース系チャンネル運営</div>
         </div>
       </div>
-      <div class="testimonial-card-luxury">
-        <div class="testimonial-quote">"</div>
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text-luxury">サポートも<strong>超迅速</strong>。質問への返答が早く、安心して使える最高のツールです。</p>
-        <div class="testimonial-author-luxury">
-          <div class="testimonial-avatar-luxury">林</div>
-          <div>
-            <div class="testimonial-name-luxury">林 優香様</div>
-            <div class="testimonial-role-luxury">ビジネス系配信者</div>
-          </div>
+    </div>
+    <div class="testimonial-card-luxury">
+      <div class="testimonial-quote">"</div>
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text-luxury">サポートも<strong>超迅速</strong>。質問への返答が早く、安心して使える最高のツールです。</p>
+      <div class="testimonial-author-luxury">
+        <div class="testimonial-avatar-luxury">@</div>
+        <div>
+          <div class="testimonial-name-luxury">@hayashi_biz</div>
+          <div class="testimonial-role-luxury">ビジネス系配信者</div>
         </div>
       </div>
-      <div class="testimonial-card-luxury">
-        <div class="testimonial-quote">"</div>
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text-luxury">アップデートが<strong>頻繁</strong>で、常に最新機能が使えます。開発チームの情熱を感じる<strong>唯一無二</strong>のツール。</p>
-        <div class="testimonial-author-luxury">
-          <div class="testimonial-avatar-luxury">斎</div>
-          <div>
-            <div class="testimonial-name-luxury">斎藤 健様</div>
-            <div class="testimonial-role-luxury">テック系レビュアー</div>
-          </div>
+    </div>
+    <div class="testimonial-card-luxury">
+      <div class="testimonial-quote">"</div>
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text-luxury">アップデートが<strong>頻繁</strong>で、常に最新機能が使えます。開発チームの情熱を感じる<strong>唯一無二</strong>のツール。</p>
+      <div class="testimonial-author-luxury">
+        <div class="testimonial-avatar-luxury">@</div>
+        <div>
+          <div class="testimonial-name-luxury">@saito_tech</div>
+          <div class="testimonial-role-luxury">テック系レビュアー</div>
         </div>
       </div>
-      <div class="testimonial-card-luxury">
-        <div class="testimonial-quote">"</div>
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text-luxury">価格が<strong>圧倒的に安い</strong>。この機能でこの価格は信じられません。<strong>すぐに元が取れました</strong>。</p>
-        <div class="testimonial-author-luxury">
-          <div class="testimonial-avatar-luxury">松</div>
-          <div>
-            <div class="testimonial-name-luxury">松本 裕介様</div>
-            <div class="testimonial-role-luxury">スタートアップ経営者</div>
-          </div>
+    </div>
+    <div class="testimonial-card-luxury">
+      <div class="testimonial-quote">"</div>
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text-luxury">価格が<strong>圧倒的に安い</strong>。この機能でこの価格は信じられません。<strong>すぐに元が取れました</strong>。</p>
+      <div class="testimonial-author-luxury">
+        <div class="testimonial-avatar-luxury">@</div>
+        <div>
+          <div class="testimonial-name-luxury">@matsumoto_start</div>
+          <div class="testimonial-role-luxury">スタートアップ経営者</div>
         </div>
       </div>
-      <div class="testimonial-card-luxury">
-        <div class="testimonial-quote">"</div>
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text-luxury">もう<strong>手放せません</strong>。ゆっくりまとめプロセッサーは私のビジネスの<strong>生命線</strong>です。心から感謝しています。</p>
-        <div class="testimonial-author-luxury">
-          <div class="testimonial-avatar-luxury">井</div>
-          <div>
-            <div class="testimonial-name-luxury">井上 千鶴様</div>
-            <div class="testimonial-role-luxury">フリーランス動画クリエイター</div>
-          </div>
+    </div>
+    <div class="testimonial-card-luxury">
+      <div class="testimonial-quote">"</div>
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text-luxury">もう<strong>手放せません</strong>。ゆっくりまとめプロセッサーは私のビジネスの<strong>生命線</strong>です。心から感謝しています。</p>
+      <div class="testimonial-author-luxury">
+        <div class="testimonial-avatar-luxury">@</div>
+        <div>
+          <div class="testimonial-name-luxury">@inoue_freelance</div>
+          <div class="testimonial-role-luxury">フリーランス動画クリエイター</div>
         </div>
       </div>
+    </div>
   </div>
 </div>
 
