@@ -930,7 +930,7 @@ permalink: /
     max-width: 1400px;
     margin: 60px auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 40px;
     padding: 0 20px;
   }
@@ -947,17 +947,18 @@ permalink: /
       inset 0 2px 15px rgba(255, 255, 255, 0.1);
     position: relative;
     transition: all 0.4s ease;
+    min-height: 400px;
     height: 100%;
     display: flex;
     flex-direction: column;
   }
 
-  .testimonial-slide.active .testimonial-card-luxury {
-    background: rgba(20, 25, 50, 0.85);
-    border-color: rgba(255, 255, 255, 0.5);
+  .testimonial-card-luxury:hover {
+    transform: translateY(-8px);
     box-shadow:
       0 30px 80px rgba(0, 0, 0, 0.6),
       inset 0 2px 20px rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.5);
   }
 
   .testimonial-quote {
