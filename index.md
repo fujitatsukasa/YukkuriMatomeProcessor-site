@@ -524,6 +524,33 @@ permalink: /
     }
   }
 
+  @keyframes titlePulseGlow {
+    0%, 100% {
+      text-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+    }
+    50% {
+      text-shadow:
+        0 0 15px rgba(102, 126, 234, 0.6),
+        0 0 25px rgba(102, 126, 234, 0.4);
+    }
+  }
+
+  @keyframes barShine {
+    0% {
+      transform: scaleX(0);
+      opacity: 0;
+    }
+    50% {
+      transform: scaleX(1);
+      opacity: 1;
+    }
+    100% {
+      transform: scaleX(0);
+      transform-origin: right;
+      opacity: 0;
+    }
+  }
+
   /* ========== 統計セクション - 統一感のあるプロフェッショナルデザイン ========== */
   .stats-section {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -729,10 +756,12 @@ permalink: /
     height: 4px;
     background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
     transform: scaleX(0);
-    transition: transform 0.3s ease;
+    transform-origin: left;
+    animation: barShine 3s ease-in-out infinite;
   }
 
   .feature-card:hover::before {
+    animation: none;
     transform: scaleX(1);
   }
 
@@ -776,6 +805,7 @@ permalink: /
     color: #1a202c;
     margin-bottom: 15px;
     letter-spacing: -0.01em;
+    animation: titlePulseGlow 2.5s ease-in-out infinite;
   }
 
   .feature-description {
@@ -925,10 +955,12 @@ permalink: /
     height: 6px;
     background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
     transform: scaleX(0);
-    transition: transform 0.4s ease;
+    transform-origin: left;
+    animation: barShine 3.5s ease-in-out infinite;
   }
 
   .howto-card:hover::before {
+    animation: none;
     transform: scaleX(1);
   }
 
@@ -962,6 +994,7 @@ permalink: /
     font-weight: 900;
     color: #0a0e1a;
     margin-bottom: 20px;
+    animation: titlePulseGlow 2.5s ease-in-out infinite;
   }
 
   .howto-text {
