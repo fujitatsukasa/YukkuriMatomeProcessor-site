@@ -428,8 +428,8 @@ permalink: /
 
   .btn-premium:hover {
     transform: translateY(-8px) scale(1.1);
-    background: linear-gradient(135deg, #ffeb3b 0%, #fff5cc 100%);
-    color: #1a1f35 !important;
+    background: linear-gradient(135deg, #ffd700 0%, #ffeb3b 100%);
+    color: #ffffff !important;
     box-shadow:
       0 30px 70px rgba(255, 215, 0, 0.9),
       0 15px 35px rgba(0, 0, 0, 0.5),
@@ -437,8 +437,8 @@ permalink: /
     border-color: #fff;
     border-width: 4px;
     text-shadow:
-      1px 1px 3px rgba(0, 0, 0, 0.3),
-      0 0 15px rgba(255, 255, 255, 0.5);
+      2px 2px 6px rgba(0, 0, 0, 0.8),
+      0 0 20px rgba(255, 255, 255, 0.6);
   }
 
   @keyframes fadeInDown {
@@ -549,6 +549,41 @@ permalink: /
       transform: scaleX(0);
       transform-origin: right;
       opacity: 0;
+    }
+  }
+
+  @keyframes premiumDoubleShine {
+    0%, 100% {
+      box-shadow:
+        0 30px 80px rgba(102, 126, 234, 0.5),
+        inset 0 2px 20px rgba(255, 255, 255, 0.15),
+        0 0 80px rgba(255, 215, 0, 0.4);
+    }
+    15% {
+      box-shadow:
+        0 30px 80px rgba(102, 126, 234, 0.7),
+        inset 0 2px 20px rgba(255, 255, 255, 0.3),
+        0 0 120px rgba(255, 215, 0, 0.8),
+        0 0 150px rgba(255, 255, 255, 0.5);
+    }
+    30% {
+      box-shadow:
+        0 30px 80px rgba(102, 126, 234, 0.5),
+        inset 0 2px 20px rgba(255, 255, 255, 0.15),
+        0 0 80px rgba(255, 215, 0, 0.4);
+    }
+    45% {
+      box-shadow:
+        0 30px 80px rgba(102, 126, 234, 0.7),
+        inset 0 2px 20px rgba(255, 255, 255, 0.3),
+        0 0 120px rgba(255, 215, 0, 0.8),
+        0 0 150px rgba(255, 255, 255, 0.5);
+    }
+    60% {
+      box-shadow:
+        0 30px 80px rgba(102, 126, 234, 0.5),
+        inset 0 2px 20px rgba(255, 255, 255, 0.15),
+        0 0 80px rgba(255, 215, 0, 0.4);
     }
   }
 
@@ -1235,6 +1270,7 @@ permalink: /
       0 30px 80px rgba(102, 126, 234, 0.5),
       inset 0 2px 20px rgba(255, 255, 255, 0.15),
       0 0 80px rgba(255, 215, 0, 0.4);
+    animation: premiumDoubleShine 4s ease-in-out infinite;
   }
 
   .pricing-card.featured:hover {
@@ -1311,11 +1347,13 @@ permalink: /
     border-bottom: none;
     background: rgba(255, 255, 255, 0.25);
     border: 2px solid rgba(255, 215, 0, 0.6);
-    color: #ffffff;
+    color: #ffffff !important;
     font-weight: 900;
     font-size: 1.1em;
     transition: all 0.3s ease;
-    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.9);
+    text-shadow:
+      2px 2px 8px rgba(0, 0, 0, 0.9),
+      0 0 20px rgba(0, 0, 0, 0.6);
   }
 
   .pricing-card.featured .pricing-features li:hover {
