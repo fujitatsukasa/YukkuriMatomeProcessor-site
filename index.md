@@ -413,20 +413,22 @@ permalink: /
 
   .btn-premium {
     background: linear-gradient(135deg, #ffd700 0%, #ffeb3b 100%);
-    color: #1a1f35 !important;
+    color: #ffffff !important;
     box-shadow:
       0 20px 50px rgba(255, 215, 0, 0.7),
       0 10px 25px rgba(0, 0, 0, 0.4),
       inset 0 3px 8px rgba(255, 255, 255, 0.6);
     border: 3px solid rgba(255, 215, 0, 0.9);
     font-weight: 900;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    text-shadow:
+      3px 3px 8px rgba(0, 0, 0, 0.9),
+      0 0 20px rgba(0, 0, 0, 0.5);
     width: 100%;
   }
 
   .btn-premium:hover {
     transform: translateY(-8px) scale(1.1);
-    background: linear-gradient(135deg, #ffeb3b 0%, #ffd700 100%);
+    background: linear-gradient(135deg, #ffeb3b 0%, #fff5cc 100%);
     box-shadow:
       0 30px 70px rgba(255, 215, 0, 0.9),
       0 15px 35px rgba(0, 0, 0, 0.5),
@@ -434,8 +436,8 @@ permalink: /
     border-color: #fff;
     border-width: 4px;
     text-shadow:
-      2px 2px 4px rgba(0, 0, 0, 0.5),
-      0 0 20px rgba(255, 255, 255, 0.8);
+      4px 4px 12px rgba(0, 0, 0, 1),
+      0 0 25px rgba(0, 0, 0, 0.6);
   }
 
   @keyframes fadeInDown {
@@ -924,52 +926,13 @@ permalink: /
     pointer-events: none;
   }
 
-  .testimonials-slider-wrapper {
+  .testimonials-grid {
     max-width: 1400px;
     margin: 60px auto;
-    position: relative;
-    padding: 0 80px;
-  }
-
-  .testimonials-slider {
-    position: relative;
-    height: 480px;
-    perspective: 1200px;
-    overflow: visible;
-    transform-style: preserve-3d;
-  }
-
-  .testimonial-slide {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 450px;
-    height: 100%;
-    transform: translateX(-50%);
-    transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  .testimonial-slide.active {
-    transform: translateX(-50%) translateZ(0) scale(1);
-    opacity: 1;
-    z-index: 10;
-    pointer-events: auto;
-  }
-
-  .testimonial-slide.prev {
-    transform: translateX(-115%) translateZ(-180px) scale(0.75) rotateY(20deg);
-    opacity: 0.65;
-    z-index: 5;
-    pointer-events: auto;
-  }
-
-  .testimonial-slide.next {
-    transform: translateX(15%) translateZ(-180px) scale(0.75) rotateY(-20deg);
-    opacity: 0.65;
-    z-index: 5;
-    pointer-events: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+    padding: 0 20px;
   }
 
   .testimonial-card-luxury {
@@ -1080,71 +1043,6 @@ permalink: /
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
   }
 
-  .testimonial-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(15px);
-    border: 2px solid rgba(255, 255, 255, 0.4);
-    color: white;
-    font-size: 2em;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-  }
-
-  .testimonial-arrow:hover {
-    background: rgba(255, 255, 255, 0.35);
-    transform: translateY(-50%) scale(1.15);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-    border-color: rgba(255, 255, 255, 0.6);
-  }
-
-  .testimonial-arrow-left {
-    left: 10px;
-  }
-
-  .testimonial-arrow-right {
-    right: 10px;
-  }
-
-  .testimonials-dots {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 40px;
-  }
-
-  .testimonial-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.4);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-  }
-
-  .testimonial-dot:hover {
-    background: rgba(255, 255, 255, 0.6);
-    transform: scale(1.3);
-  }
-
-  .testimonial-dot.active {
-    background: #ffd700;
-    width: 35px;
-    border-radius: 8px;
-    border-color: rgba(255, 215, 0, 0.6);
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
-  }
 
   /* ========== 料金セクション（リッチデザイン） ========== */
   .pricing-section {
@@ -1287,19 +1185,20 @@ permalink: /
     margin: 10px 0;
     border-radius: 12px;
     border-bottom: none;
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 215, 0, 0.4);
-    color: #fff;
-    font-weight: 700;
-    font-size: 1.05em;
+    background: rgba(255, 255, 255, 0.25);
+    border: 2px solid rgba(255, 215, 0, 0.6);
+    color: #ffffff;
+    font-weight: 900;
+    font-size: 1.1em;
     transition: all 0.3s ease;
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.9);
   }
 
   .pricing-card.featured .pricing-features li:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 215, 0, 0.5);
-    transform: translateX(5px);
+    background: rgba(255, 255, 255, 0.35);
+    border-color: rgba(255, 215, 0, 0.9);
+    transform: translateX(5px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(255, 215, 0, 0.5);
   }
 
   .pricing-features li::before {
@@ -1495,13 +1394,10 @@ permalink: /
       font-size: 1.6em;
     }
 
-    /* お客様の声スライダー - モバイル */
-    .testimonials-slider-wrapper {
-      padding: 0 60px;
-    }
-
-    .testimonial-slide {
-      min-width: 100%;
+    /* お客様の声グリッド - モバイル */
+    .testimonials-grid {
+      grid-template-columns: 1fr;
+      gap: 30px;
     }
 
     .testimonial-card-luxury {
@@ -1516,20 +1412,6 @@ permalink: /
     .testimonial-text-luxury {
       font-size: 1em;
       line-height: 1.7;
-    }
-
-    .testimonial-arrow {
-      width: 50px;
-      height: 50px;
-      font-size: 1.6em;
-    }
-
-    .testimonial-arrow-left {
-      left: 5px;
-    }
-
-    .testimonial-arrow-right {
-      right: 5px;
     }
 
     .testimonial-avatar-luxury {
@@ -1621,11 +1503,7 @@ permalink: /
       font-size: 1em;
     }
 
-    /* お客様の声スライダー - 小型モバイル */
-    .testimonials-slider-wrapper {
-      padding: 0 50px;
-    }
-
+    /* お客様の声グリッド - 小型モバイル */
     .testimonial-card-luxury {
       padding: 30px 20px;
     }
@@ -1638,20 +1516,6 @@ permalink: /
     .testimonial-text-luxury {
       font-size: 0.95em;
       line-height: 1.6;
-    }
-
-    .testimonial-arrow {
-      width: 45px;
-      height: 45px;
-      font-size: 1.4em;
-    }
-
-    .testimonial-arrow-left {
-      left: 2px;
-    }
-
-    .testimonial-arrow-right {
-      right: 2px;
     }
 
     .testimonial-avatar-luxury {
@@ -1864,15 +1728,12 @@ permalink: /
     <h2 class="section-title">お客様の声</h2>
     <p class="section-subtitle">様々なクリエイターに選ばれています</p>
   </div>
-  <div class="testimonials-slider-wrapper">
-    <button class="testimonial-arrow testimonial-arrow-left">←</button>
-    <div class="testimonials-slider">
-      <div class="testimonial-slide">
-        <div class="testimonial-card-luxury">
-          <div class="testimonial-quote">"</div>
-          <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text-luxury">動画制作時間が<strong>劇的に短縮</strong>！作業効率が格段に上がり、このツールなしでは考えられません。</p>
-          <div class="testimonial-author-luxury">
+  <div class="testimonials-grid">
+      <div class="testimonial-card-luxury">
+        <div class="testimonial-quote">"</div>
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text-luxury">動画制作時間が<strong>劇的に短縮</strong>！作業効率が格段に上がり、このツールなしでは考えられません。</p>
+        <div class="testimonial-author-luxury">
             <div class="testimonial-avatar-luxury">高</div>
             <div>
               <div class="testimonial-name-luxury">高橋 健太様</div>
@@ -1881,8 +1742,7 @@ permalink: /
           </div>
         </div>
       </div>
-      <div class="testimonial-slide">
-        <div class="testimonial-card-luxury">
+      <div class="testimonial-card-luxury">
           <div class="testimonial-quote">"</div>
           <div class="testimonial-stars">★★★★★</div>
           <p class="testimonial-text-luxury">完全に<strong>人生が変わりました</strong>。投稿本数が大幅に増え、チャンネル登録者も<strong>急増</strong>しています。</p>
@@ -1895,8 +1755,7 @@ permalink: /
           </div>
         </div>
       </div>
-      <div class="testimonial-slide">
-        <div class="testimonial-card-luxury">
+      <div class="testimonial-card-luxury">
           <div class="testimonial-quote">"</div>
           <div class="testimonial-stars">★★★★★</div>
           <p class="testimonial-text-luxury">AI機能が<strong>圧倒的</strong>。素材収集から編集まで全自動。クオリティも従来の手作業を<strong>完全に超えています</strong>。</p>
@@ -1909,8 +1768,7 @@ permalink: /
           </div>
         </div>
       </div>
-      <div class="testimonial-slide">
-        <div class="testimonial-card-luxury">
+      <div class="testimonial-card-luxury">
           <div class="testimonial-quote">"</div>
           <div class="testimonial-stars">★★★★★</div>
           <p class="testimonial-text-luxury">チーム全員の作業効率が<strong>劇的に向上</strong>。月間動画本数が大幅に増え、売上も<strong>大幅アップ</strong>しました。</p>
@@ -1923,8 +1781,7 @@ permalink: /
           </div>
         </div>
       </div>
-      <div class="testimonial-slide">
-        <div class="testimonial-card-luxury">
+      <div class="testimonial-card-luxury">
           <div class="testimonial-quote">"</div>
           <div class="testimonial-stars">★★★★★</div>
           <p class="testimonial-text-luxury"><strong>編集作業のストレスがゼロ</strong>に。クリエイティブな部分に集中できるようになり、動画のクオリティが格段に上がりました。</p>
@@ -1937,8 +1794,7 @@ permalink: /
           </div>
         </div>
       </div>
-      <div class="testimonial-slide">
-        <div class="testimonial-card-luxury">
+      <div class="testimonial-card-luxury">
           <div class="testimonial-quote">"</div>
           <div class="testimonial-stars">★★★★★</div>
           <p class="testimonial-text-luxury">導入前は限界を感じていましたが、今は<strong>大量投稿</strong>が可能になりました。収益も<strong>大幅アップ</strong>、まさに革命です。</p>
@@ -1951,8 +1807,7 @@ permalink: /
           </div>
         </div>
       </div>
-      <div class="testimonial-slide">
-        <div class="testimonial-card-luxury">
+      <div class="testimonial-card-luxury">
           <div class="testimonial-quote">"</div>
           <div class="testimonial-stars">★★★★★</div>
           <p class="testimonial-text-luxury">テンプレート機能が<strong>神レベル</strong>。短時間で完成するので、<strong>副業でも十分な収益</strong>を得られるようになりました。</p>
@@ -1965,8 +1820,7 @@ permalink: /
           </div>
         </div>
       </div>
-      <div class="testimonial-slide">
-        <div class="testimonial-card-luxury">
+      <div class="testimonial-card-luxury">
           <div class="testimonial-quote">"</div>
           <div class="testimonial-stars">★★★★★</div>
           <p class="testimonial-text-luxury">音声合成のクオリティに<strong>感動</strong>。自然な抑揚で、視聴者からの評価も<strong>過去最高</strong>です。</p>
@@ -1979,8 +1833,7 @@ permalink: /
           </div>
         </div>
       </div>
-      <div class="testimonial-slide">
-        <div class="testimonial-card-luxury">
+      <div class="testimonial-card-luxury">
           <div class="testimonial-quote">"</div>
           <div class="testimonial-stars">★★★★★</div>
           <p class="testimonial-text-luxury">法人での大量制作に<strong>完璧</strong>。少人数で大量の動画を制作でき、<strong>大幅なコスト削減</strong>を実現しています。</p>
@@ -1993,8 +1846,7 @@ permalink: /
           </div>
         </div>
       </div>
-      <div class="testimonial-slide">
-        <div class="testimonial-card-luxury">
+      <div class="testimonial-card-luxury">
           <div class="testimonial-quote">"</div>
           <div class="testimonial-stars">★★★★★</div>
           <p class="testimonial-text-luxury">初心者でも<strong>プロ級の動画</strong>が作れます。開始直後から<strong>急成長</strong>を実現できました！</p>
@@ -2007,8 +1859,7 @@ permalink: /
           </div>
         </div>
       </div>
-      <div class="testimonial-slide">
-        <div class="testimonial-card-luxury">
+      <div class="testimonial-card-luxury">
           <div class="testimonial-quote">"</div>
           <div class="testimonial-stars">★★★★★</div>
           <p class="testimonial-text-luxury">自動素材収集が<strong>天才的</strong>。台本を書くだけで、最適な画像や動画が自動で揃います。時間の節約が半端ない。</p>
@@ -2021,8 +1872,7 @@ permalink: /
           </div>
         </div>
       </div>
-      <div class="testimonial-slide">
-        <div class="testimonial-card-luxury">
+      <div class="testimonial-card-luxury">
           <div class="testimonial-quote">"</div>
           <div class="testimonial-stars">★★★★★</div>
           <p class="testimonial-text-luxury">サポートも<strong>超迅速</strong>。質問への返答が早く、安心して使える最高のツールです。</p>
@@ -2035,8 +1885,7 @@ permalink: /
           </div>
         </div>
       </div>
-      <div class="testimonial-slide">
-        <div class="testimonial-card-luxury">
+      <div class="testimonial-card-luxury">
           <div class="testimonial-quote">"</div>
           <div class="testimonial-stars">★★★★★</div>
           <p class="testimonial-text-luxury">アップデートが<strong>頻繁</strong>で、常に最新機能が使えます。開発チームの情熱を感じる<strong>唯一無二</strong>のツール。</p>
@@ -2049,8 +1898,7 @@ permalink: /
           </div>
         </div>
       </div>
-      <div class="testimonial-slide">
-        <div class="testimonial-card-luxury">
+      <div class="testimonial-card-luxury">
           <div class="testimonial-quote">"</div>
           <div class="testimonial-stars">★★★★★</div>
           <p class="testimonial-text-luxury">価格が<strong>圧倒的に安い</strong>。この機能でこの価格は信じられません。<strong>すぐに元が取れました</strong>。</p>
@@ -2063,8 +1911,7 @@ permalink: /
           </div>
         </div>
       </div>
-      <div class="testimonial-slide">
-        <div class="testimonial-card-luxury">
+      <div class="testimonial-card-luxury">
           <div class="testimonial-quote">"</div>
           <div class="testimonial-stars">★★★★★</div>
           <p class="testimonial-text-luxury">もう<strong>手放せません</strong>。ゆっくりまとめプロセッサーは私のビジネスの<strong>生命線</strong>です。心から感謝しています。</p>
@@ -2077,10 +1924,7 @@ permalink: /
           </div>
         </div>
       </div>
-    </div>
-    <button class="testimonial-arrow testimonial-arrow-right">→</button>
   </div>
-  <div class="testimonials-dots"></div>
 </div>
 
 <!-- 料金セクション -->
@@ -2392,87 +2236,5 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Testimonials 3D Carousel
-  const testimonialSlides = document.querySelectorAll('.testimonial-slide');
-  const testimonialDotsContainer = document.querySelector('.testimonials-dots');
-  const testimonialLeftArrow = document.querySelector('.testimonial-arrow-left');
-  const testimonialRightArrow = document.querySelector('.testimonial-arrow-right');
-
-  if (testimonialSlides.length > 0) {
-    const totalTestimonials = testimonialSlides.length;
-    let currentTestimonialIndex = 0;
-
-    // Create dots
-    for (let i = 0; i < totalTestimonials; i++) {
-      const dot = document.createElement('div');
-      dot.classList.add('testimonial-dot');
-      if (i === 0) dot.classList.add('active');
-      dot.addEventListener('click', () => goToTestimonial(i));
-      testimonialDotsContainer.appendChild(dot);
-    }
-
-    const testimonialDots = document.querySelectorAll('.testimonial-dot');
-
-    function updateTestimonialCarousel() {
-      testimonialSlides.forEach((slide, index) => {
-        slide.classList.remove('active', 'prev', 'next');
-
-        if (index === currentTestimonialIndex) {
-          slide.classList.add('active');
-        } else if (index === (currentTestimonialIndex - 1 + totalTestimonials) % totalTestimonials) {
-          slide.classList.add('prev');
-        } else if (index === (currentTestimonialIndex + 1) % totalTestimonials) {
-          slide.classList.add('next');
-        }
-      });
-
-      // Update dots
-      testimonialDots.forEach((dot, index) => {
-        dot.classList.toggle('active', index === currentTestimonialIndex);
-      });
-    }
-
-    function goToTestimonial(index) {
-      currentTestimonialIndex = index;
-      updateTestimonialCarousel();
-    }
-
-    function nextTestimonial() {
-      currentTestimonialIndex = (currentTestimonialIndex + 1) % totalTestimonials;
-      updateTestimonialCarousel();
-    }
-
-    function prevTestimonial() {
-      currentTestimonialIndex = (currentTestimonialIndex - 1 + totalTestimonials) % totalTestimonials;
-      updateTestimonialCarousel();
-    }
-
-    // Arrow controls
-    if (testimonialLeftArrow) {
-      testimonialLeftArrow.addEventListener('click', prevTestimonial);
-    }
-
-    if (testimonialRightArrow) {
-      testimonialRightArrow.addEventListener('click', nextTestimonial);
-    }
-
-    // Auto-play
-    let testimonialAutoplay = setInterval(nextTestimonial, 5000);
-
-    // Pause on hover
-    const testimonialsSection = document.querySelector('.testimonials-section');
-    if (testimonialsSection) {
-      testimonialsSection.addEventListener('mouseenter', () => {
-        clearInterval(testimonialAutoplay);
-      });
-
-      testimonialsSection.addEventListener('mouseleave', () => {
-        testimonialAutoplay = setInterval(nextTestimonial, 5000);
-      });
-    }
-
-    // Initialize
-    updateTestimonialCarousel();
-  }
 });
 </script>
