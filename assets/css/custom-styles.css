@@ -174,3 +174,10 @@
   max-height: 60px !important; /* お好みの高さに調整 */
   height: auto !important;
 }
+/* Footer override: ensure white text/icons */
+footer p.text-muted,
+footer .copyright,
+footer .footer-links a,
+footer .footer-links .fa-inverse {
+  color: #fff !important;
+}
