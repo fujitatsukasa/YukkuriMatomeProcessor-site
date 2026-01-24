@@ -1,5 +1,29 @@
 [ 
  
+{ 
+"title"    : "お知らせ: サイトリニューアルのお知らせ", 
+"desc"     : "お知らせ: サイトリニューアルのお知らせ", 
+"category" : "", 
+"url"      : "/2026-01-23-site-renewal/", 
+"date"     : "January 23, 2026" 
+}, 
+ 
+{ 
+"title"    : "お知らせ: よくある質問ページを追加しました", 
+"desc"     : "お知らせ: よくある質問ページを追加しました", 
+"category" : "", 
+"url"      : "/2026-01-19-faq-update/", 
+"date"     : "January 19, 2026" 
+}, 
+ 
+{ 
+"title"    : "お知らせ: ダウンロード手順を更新しました", 
+"desc"     : "お知らせ: ダウンロード手順を更新しました", 
+"category" : "", 
+"url"      : "/2026-01-15-download-guide/", 
+"date"     : "January 15, 2026" 
+}, 
+ 
  
 { 
 "title"    : "Flake it till you make it", 
@@ -54,6 +78,14 @@
 "desc"     : "ホーム", 
 "category" : "page", 
 "url"      : "/", 
+"date"     : "January 1, 1970" 
+}, 
+ 
+{ 
+"title"    : "お知らせ", 
+"desc"     : "お知らせ", 
+"category" : "page", 
+"url"      : "/news/", 
 "date"     : "January 1, 1970" 
 }, 
  

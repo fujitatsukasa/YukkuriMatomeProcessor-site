@@ -1,0 +1,20 @@
+<div class="sidebar-card is-window">
+  <div class="sidebar-chrome">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="sidebar-title">お知らせ</div>
+  {% assign news_posts = site.categories.news | sort: "date" | reverse %}
+  {% if news_posts and news_posts.size > 0 %}
+    <ul class="sidebar-list">
+      {% for post in news_posts limit: 3 %}
+        <li>
+          <a href="{{ post.url | relative_url }}">{{ post.title | strip_html }}</a>
+          <span class="sidebar-meta">{{ post.date | date: site.date_format | default: "%Y-%m-%d" }}</span>
+        </li>
+      {% endfor %}
+    </ul>
+    <a class="sidebar-more" href="{{ '/news/' | relative_url }}">お知らせ一覧 →</a>
+  {% else %}
+    <p class="sidebar-empty">現在お知らせはありません。</p>
+  {% endif %}
+</div>

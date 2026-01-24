@@ -151,6 +151,9 @@
             <a class="nav-link" href="/update">アップデート</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="/news">お知らせ</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="/contact">お問い合わせ</a>
           </li>
         <li class="nav-item">
@@ -248,9 +251,38 @@
 </header>
 
 
-<main class=" container-md ">
-  <div class="row">
-    <div class=" col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 ">
+<main class="container-fluid p-0">
+  <div class="layout-shell">
+    <aside class="side-panel side-left">
+      <div class="sidebar-card is-control">
+  <div class="sidebar-title">コントロール</div>
+  <div class="sidebar-actions">
+    <a class="sidebar-btn primary" href="/download">ダウンロード</a>
+    <a class="sidebar-btn ghost" href="/contact">相談する</a>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-subtitle">クイック</div>
+    <ul class="sidebar-pills">
+      <li><a href="/Instructions">使い方</a></li>
+      <li><a href="/update">アップデート</a></li>
+      <li><a href="/news">お知らせ</a></li>
+    </ul>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-subtitle">現在の状況</div>
+    <div class="sidebar-metrics">
+      <div class="sidebar-metric"><span class="value">3</span><span class="label">最新告知</span></div>
+      <div class="sidebar-metric"><span class="value">7日</span><span class="label">無料トライアル</span></div>
+    </div>
+  </div>
+</div>
+    </aside>
+    <div class="content-panel">
+      <div class=" container-md ">
+        <div class="row">
+          <div class=" col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 ">
 
       
 
@@ -286,9 +318,42 @@
         
         
       </ul>
-      
+            
 
+          </div>
+        </div>
+      </div>
     </div>
+    <aside class="side-panel side-right">
+      <div class="sidebar-card is-window">
+  <div class="sidebar-chrome">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="sidebar-title">お知らせ</div>
+  
+  
+    <ul class="sidebar-list">
+      
+        <li>
+          <a href="/2026-01-23-site-renewal/">お知らせ: サイトリニューアルのお知らせ</a>
+          <span class="sidebar-meta">2026年01月23日</span>
+        </li>
+      
+        <li>
+          <a href="/2026-01-19-faq-update/">お知らせ: よくある質問ページを追加しました</a>
+          <span class="sidebar-meta">2026年01月19日</span>
+        </li>
+      
+        <li>
+          <a href="/2026-01-15-download-guide/">お知らせ: ダウンロード手順を更新しました</a>
+          <span class="sidebar-meta">2026年01月15日</span>
+        </li>
+      
+    </ul>
+    <a class="sidebar-more" href="/news/">お知らせ一覧 →</a>
+  
+</div>
+    </aside>
   </div>
 </main>
 

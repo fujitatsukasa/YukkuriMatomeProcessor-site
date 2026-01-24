@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://localhost:4000/2026-01-15-download-guide/</loc>
+<lastmod>2026-01-15T04:30:00-05:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/2026-01-19-faq-update/</loc>
+<lastmod>2026-01-19T20:00:00-05:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/2026-01-23-site-renewal/</loc>
+<lastmod>2026-01-23T19:00:00-05:00</lastmod>
+</url>
+<url>
 <loc>http://localhost:4000/old/2020-02-26-flake-it-till-you-make-it/</loc>
 </url>
 <url>
@@ -20,6 +32,9 @@
 </url>
 <url>
 <loc>http://localhost:4000/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/news/</loc>
 </url>
 <url>
 <loc>http://localhost:4000/purchase/</loc>

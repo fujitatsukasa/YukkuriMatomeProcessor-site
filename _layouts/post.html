@@ -4,9 +4,15 @@ layout: base
 
 {% include header.html type="post" %}
 
-<main class="{% if page.full-width %} container-fluid {% else %} container-md {% endif %}">
-  <div class="row">
-    <div class="{% if page.full-width %} col {% else %} col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 {% endif %}">
+<main class="container-fluid p-0">
+  <div class="layout-shell">
+    <aside class="side-panel side-left">
+      {% include sidebar-left.html %}
+    </aside>
+    <div class="content-panel">
+      <div class="{% if page.full-width %} container-fluid {% else %} container-md {% endif %}">
+        <div class="row">
+          <div class="{% if page.full-width %} col {% else %} col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 {% endif %}">
 
       {% if page.gh-repo %}
         {% assign gh_split =  page.gh-repo | split:'/'  %}
@@ -82,7 +88,13 @@ layout: base
         </li>
         {% endif %}
       </ul>
-      {% include comments.html %}
+            {% include comments.html %}
+          </div>
+        </div>
+      </div>
     </div>
+    <aside class="side-panel side-right">
+      {% include sidebar-right.html %}
+    </aside>
   </div>
 </main>
