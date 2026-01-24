@@ -1,8 +1,12 @@
 <div class="sidebar-card is-window">
+  <div class="window-glow"></div>
   <div class="sidebar-chrome">
     <span></span><span></span><span></span>
   </div>
-  <div class="sidebar-title">お知らせ</div>
+  <div class="window-title">
+    <span class="label">NEWS WINDOW</span>
+    <span class="chip">LIVE</span>
+  </div>
   {% assign news_posts = site.categories.news | sort: "date" | reverse %}
   {% if news_posts and news_posts.size > 0 %}
     <ul class="sidebar-list">
