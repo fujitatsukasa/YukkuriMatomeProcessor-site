@@ -9,6 +9,8 @@ import time
 import socket
 import webbrowser
 import subprocess
+import threading
+import queue
 from pathlib import Path
 
 
@@ -56,18 +58,144 @@ def _env_bool(name: str, default: bool) -> bool:
     return raw.strip().lower() in ("1", "true", "yes", "y", "on")
 
 
+def _strip_quotes(value: str) -> str:
+    if not value:
+        return value
+    if (value.startswith("'") and value.endswith("'")) or (
+        value.startswith('"') and value.endswith('"')
+    ):
+        return value[1:-1]
+    return value
+
+
+def _parse_front_matter(path: Path) -> dict[str, str]:
+    try:
+        text = path.read_text(encoding="utf-8")
+    except Exception:
+        text = path.read_text(encoding="utf-8", errors="ignore")
+    # UTF-8 BOM を許容して先頭判定を安定させる
+    if text.startswith("\ufeff"):
+        text = text.lstrip("\ufeff")
+    if not text.startswith("---"):
+        return {}
+    end = text.find("\n---", 3)
+    if end == -1:
+        return {}
+    block = text[3:end].strip().splitlines()
+    data: dict[str, str] = {}
+    for line in block:
+        if not line or line.strip().startswith("#"):
+            continue
+        if ":" not in line:
+            continue
+        key, value = line.split(":", 1)
+        data[key.strip()] = _strip_quotes(value.strip())
+    return data
+
+
+def _normalize_baseurl(value: str) -> str:
+    if not value:
+        return ""
+    value = value.strip()
+    if not value or value == "/":
+        return ""
+    return "/" + value.strip("/")
+
+
+def _read_baseurl(config_path: Path) -> str:
+    if not config_path.exists():
+        return ""
+    try:
+        text = config_path.read_text(encoding="utf-8")
+    except Exception:
+        text = config_path.read_text(encoding="utf-8", errors="ignore")
+    for line in text.splitlines():
+        if line.strip().startswith("baseurl:"):
+            _, value = line.split(":", 1)
+            return _strip_quotes(value.strip())
+    return ""
+
+
+def _derive_page_path(path: Path, front_matter: dict[str, str]) -> str:
+    permalink = front_matter.get("permalink")
+    if permalink:
+        if not permalink.startswith("/"):
+            permalink = "/" + permalink
+        return permalink
+    if path.stem.lower() == "index":
+        return "/"
+    return f"/{path.stem}/"
+
+
+def _collect_pages(project_dir: Path) -> list[dict[str, str]]:
+    pages: list[dict[str, str]] = []
+    for entry in project_dir.iterdir():
+        if not entry.is_file():
+            continue
+        if entry.name.startswith("_"):
+            continue
+        if entry.suffix.lower() not in (".md", ".html"):
+            continue
+        fm = _parse_front_matter(entry)
+        if not fm or "layout" not in fm:
+            continue
+        title = fm.get("title") or entry.stem
+        path = _derive_page_path(entry, fm)
+        pages.append({"title": title, "path": path, "file": entry.name})
+    pages.sort(key=lambda item: (0 if item["path"] == "/" else 1, item["title"]))
+    return pages
+
+
+def _collect_posts(project_dir: Path) -> list[dict[str, str]]:
+    posts_dir = project_dir / "_posts"
+    if not posts_dir.exists():
+        return []
+    posts: list[dict[str, str]] = []
+    for entry in posts_dir.glob("*.md"):
+        fm = _parse_front_matter(entry)
+        title = fm.get("title") or entry.stem
+        permalink = fm.get("permalink")
+        if permalink:
+            path = permalink if permalink.startswith("/") else f"/{permalink}"
+        else:
+            path = f"/{entry.stem}/"
+        posts.append({"title": title, "path": path, "file": entry.name})
+    posts.sort(key=lambda item: item["file"], reverse=True)
+    return posts
+
+
+def _build_full_url(base_url: str, path: str) -> str:
+    base = base_url.rstrip("/")
+    if not path.startswith("/"):
+        path = "/" + path
+    return base + path
+
+
+def _start_output_reader(proc: subprocess.Popen, output_queue: queue.Queue) -> None:
+    def _reader() -> None:
+        if not proc.stdout:
+            return
+        for line in proc.stdout:
+            output_queue.put(line)
+
+    threading.Thread(target=_reader, daemon=True).start()
+
+
 def _parse_args() -> tuple[argparse.Namespace, list[str]]:
     default_port = int(os.getenv("JEKYLL_PORT", "4000"))
     default_host = os.getenv("JEKYLL_HOST", "127.0.0.1")
     default_open = _env_bool("JEKYLL_OPEN", True)
     default_livereload = _env_bool("JEKYLL_LIVERELOAD", True)
     default_incremental = _env_bool("JEKYLL_INCREMENTAL", False)
+    default_gui = _env_bool("JEKYLL_GUI", True)
 
     parser = argparse.ArgumentParser(description="Run local Jekyll server with sane defaults.")
     parser.add_argument("--port", type=int, default=default_port, help="Preferred port.")
     parser.add_argument("--host", default=default_host, help="Host to bind.")
     parser.add_argument("--open", dest="open_browser", action="store_true", default=default_open, help="Open browser.")
     parser.add_argument("--no-open", dest="open_browser", action="store_false", help="Do not open browser.")
+    parser.add_argument("--gui", dest="open_gui", action="store_true", default=default_gui, help="Open GUI launcher.")
+    parser.add_argument("--no-gui", dest="open_gui", action="store_false", help="Do not open GUI launcher.")
     parser.add_argument("--livereload", dest="livereload", action="store_true", default=default_livereload)
     parser.add_argument("--no-livereload", dest="livereload", action="store_false")
     parser.add_argument("--incremental", dest="incremental", action="store_true", default=default_incremental)
@@ -93,7 +221,9 @@ def main() -> int:
         print(f"[INFO] Port {args.port} is busy; using {port} instead.")
 
     open_host = "127.0.0.1" if args.host in ("0.0.0.0", "::") else args.host
-    url = f"http://{open_host}:{port}/"
+    baseurl = _normalize_baseurl(_read_baseurl(project_dir / "_config.yml"))
+    site_base = f"http://{open_host}:{port}{baseurl}"
+    url = f"{site_base}/"
 
     # Jekyll 起動コマンド
     cmd_parts = ["bundle", "exec", "jekyll", "serve"]
@@ -127,52 +257,61 @@ def main() -> int:
     warned_wdm = False
     start = time.time()
 
-    try:
-        # 出力を読みつつ、起動っぽくなったらブラウザを開く
-        while True:
-            line = p.stdout.readline() if p.stdout else ""
-            if line:
-                print(line, end="")
+    output_queue: queue.Queue[str] = queue.Queue()
+    _start_output_reader(p, output_queue)
 
-                if (not opened) and args.open_browser and (
-                    "Server address:" in line
-                    or "running on" in line.lower()
-                    or "http://127.0.0.1" in line
-                    or "http://localhost" in line
-                ):
-                    webbrowser.open(url)
-                    opened = True
+    pages = _collect_pages(project_dir)
+    posts = _collect_posts(project_dir)
+    gui_enabled = bool(args.open_gui)
 
-                if (not warned_pagination) and (
-                    "Pagination is enabled, but I couldn't find an index.html page" in line
-                ):
-                    print(
-                        "[HINT] Pagination is enabled but no index.html template was found. "
-                        "Either add an index.html with a posts list, or remove "
-                        "'paginate' and 'jekyll-paginate' from _config.yml."
-                    )
-                    warned_pagination = True
+    def handle_line(line: str) -> None:
+        nonlocal opened, warned_pagination, warned_wdm
+        print(line, end="")
+        if (not opened) and args.open_browser and (
+            "Server address:" in line
+            or "running on" in line.lower()
+            or "http://127.0.0.1" in line
+            or "http://localhost" in line
+        ):
+            webbrowser.open(url)
+            opened = True
+        if (not warned_pagination) and (
+            "Pagination is enabled, but I couldn't find an index.html page" in line
+        ):
+            print(
+                "[HINT] Pagination is enabled but no index.html template was found. "
+                "Either add an index.html with a posts list, or remove "
+                "'paginate' and 'jekyll-paginate' from _config.yml."
+            )
+            warned_pagination = True
+        if (not warned_wdm) and (
+            "Please add the following to your Gemfile to avoid polling for changes" in line
+        ):
+            print(
+                "[HINT] On Windows, add "
+                "\"gem \\\"wdm\\\", \\\">= 0.1.0\\\" if Gem.win_platform?\" "
+                "to your Gemfile and run bundle install."
+            )
+            warned_wdm = True
 
-                if (not warned_wdm) and (
-                    "Please add the following to your Gemfile to avoid polling for changes" in line
-                ):
-                    print(
-                        "[HINT] On Windows, add "
-                        "\"gem \\\"wdm\\\", \\\">= 0.1.0\\\" if Gem.win_platform?\" "
-                        "to your Gemfile and run bundle install."
-                    )
-                    warned_wdm = True
+    def pump_output() -> None:
+        try:
+            while True:
+                line = output_queue.get_nowait()
+                if line:
+                    handle_line(line)
+        except queue.Empty:
+            pass
 
-            # 何も出ないままでも数秒経ったら一旦開く（保険）
-            if (not opened) and args.open_browser and (time.time() - start > 3.0):
-                webbrowser.open(url)
-                opened = True
+    def maybe_open_fallback() -> None:
+        nonlocal opened
+        if (not opened) and args.open_browser and (time.time() - start > 3.0):
+            webbrowser.open(url)
+            opened = True
 
-            # プロセス終了
-            if p.poll() is not None:
-                return int(p.returncode or 0)
-
-    except KeyboardInterrupt:
+    def stop_process() -> None:
+        if p.poll() is not None:
+            return
         print("\n[INFO] Stopping...")
         try:
             p.terminate()
@@ -182,6 +321,89 @@ def main() -> int:
                 p.kill()
             except Exception:
                 pass
+
+    if gui_enabled:
+        try:
+            import tkinter as tk
+            from tkinter import ttk
+        except Exception:
+            print("[WARN] tkinter is not available; GUI launcher is disabled.")
+            gui_enabled = False
+
+    if gui_enabled:
+        def open_path(path: str) -> None:
+            webbrowser.open(_build_full_url(site_base, path))
+
+        root = tk.Tk()
+        root.title("ローカルページランチャー")
+        root.geometry("460x640")
+        root.minsize(380, 420)
+
+        header = ttk.Frame(root, padding=12)
+        header.pack(fill="x")
+        ttk.Label(header, text="ページランチャー", font=("Segoe UI", 12, "bold")).pack(anchor="w")
+        ttk.Label(header, text=site_base, font=("Segoe UI", 9)).pack(anchor="w", pady=(4, 8))
+        ttk.Button(header, text="ホームを開く", command=lambda: open_path("/")).pack(anchor="w")
+
+        container = ttk.Frame(root, padding=(12, 4, 12, 12))
+        container.pack(fill="both", expand=True)
+
+        canvas = tk.Canvas(container, highlightthickness=0)
+        scrollbar = ttk.Scrollbar(container, orient="vertical", command=canvas.yview)
+        scroll_frame = ttk.Frame(canvas)
+        scroll_frame.bind(
+            "<Configure>",
+            lambda e: canvas.configure(scrollregion=canvas.bbox("all")),
+        )
+        canvas.create_window((0, 0), window=scroll_frame, anchor="nw")
+        canvas.configure(yscrollcommand=scrollbar.set)
+        canvas.pack(side="left", fill="both", expand=True)
+        scrollbar.pack(side="right", fill="y")
+
+        def add_section(title: str, items: list[dict[str, str]]) -> None:
+            if not items:
+                return
+            ttk.Label(scroll_frame, text=title, font=("Segoe UI", 10, "bold")).pack(
+                anchor="w", pady=(10, 4)
+            )
+            for item in items:
+                label = f"{item['title']}  ({item['path']})"
+                ttk.Button(
+                    scroll_frame,
+                    text=label,
+                    command=lambda p=item["path"]: open_path(p),
+                ).pack(fill="x", pady=2)
+
+        add_section("ページ", pages)
+        add_section("投稿", posts)
+
+        def on_close() -> None:
+            stop_process()
+            root.destroy()
+
+        root.protocol("WM_DELETE_WINDOW", on_close)
+
+        def tick() -> None:
+            pump_output()
+            maybe_open_fallback()
+            if p.poll() is not None:
+                root.after(200, root.destroy)
+                return
+            root.after(120, tick)
+
+        root.after(120, tick)
+        root.mainloop()
+        return int(p.returncode or 0)
+
+    try:
+        while True:
+            pump_output()
+            maybe_open_fallback()
+            if p.poll() is not None:
+                return int(p.returncode or 0)
+            time.sleep(0.1)
+    except KeyboardInterrupt:
+        stop_process()
         return 0
 
 

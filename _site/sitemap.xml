@@ -28,6 +28,9 @@
 <loc>http://localhost:4000/contact/</loc>
 </url>
 <url>
+<loc>http://localhost:4000/design-01/</loc>
+</url>
+<url>
 <loc>http://localhost:4000/download/</loc>
 </url>
 <url>
@@ -44,6 +47,9 @@
 </url>
 <url>
 <loc>http://localhost:4000/update/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/widgets/</loc>
 </url>
 <url>
 <loc>http://localhost:4000/googledfbcce7726d912f9.html</loc>

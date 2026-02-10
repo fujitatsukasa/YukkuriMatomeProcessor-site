@@ -66,6 +66,14 @@
 }, 
  
 { 
+"title"    : "デザイン01 | ゆっくりまとめプロセッサー", 
+"desc"     : "デザイン01 | ゆっくりまとめプロセッサー", 
+"category" : "page", 
+"url"      : "/design-01/", 
+"date"     : "January 1, 1970" 
+}, 
+ 
+{ 
 "title"    : "ダウンロード", 
 "desc"     : "ダウンロード", 
 "category" : "page", 
@@ -110,6 +118,14 @@
 "desc"     : "アップデート履歴", 
 "category" : "page", 
 "url"      : "/update/", 
+"date"     : "January 1, 1970" 
+}, 
+ 
+{ 
+"title"    : "ウィジェット・ライブラリ", 
+"desc"     : "ウィジェット・ライブラリ", 
+"category" : "page", 
+"url"      : "/widgets/", 
 "date"     : "January 1, 1970" 
 } 
  
