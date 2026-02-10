@@ -1,0 +1,14 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="YMP monogram">
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f7e7c7"/>
+      <stop offset="0.55" stop-color="#d6b27c"/>
+      <stop offset="1" stop-color="#b28a56"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="26" fill="none" stroke="url(#gold)" stroke-width="3"/>
+  <path d="M20 18 L32 30 L44 18" stroke="url(#gold)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M32 30 L32 46" stroke="url(#gold)" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+  <path d="M18 34 H26" stroke="url(#gold)" stroke-width="2.5" stroke-linecap="round" opacity="0.85"/>
+  <path d="M38 34 H46" stroke="url(#gold)" stroke-width="2.5" stroke-linecap="round" opacity="0.85"/>
+</svg>
