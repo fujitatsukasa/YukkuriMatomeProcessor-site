@@ -1,0 +1,29 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "bundle: install",
+      "type": "shell",
+      "command": "bundle install",
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PATH": "${env:PATH};C:\\\\Ruby40-x64\\\\bin"
+        }
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "bundle: jekyll -v",
+      "type": "shell",
+      "command": "bundle exec jekyll -v",
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PATH": "${env:PATH};C:\\\\Ruby40-x64\\\\bin"
+        }
+      },
+      "problemMatcher": []
+    }
+  ]
+}

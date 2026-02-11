@@ -1,0 +1,31 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Serve: No GUI",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/serve_local.py",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "env": {
+        "PATH": "${env:PATH};C:\\\\Ruby40-x64\\\\bin"
+      },
+      "justMyCode": true,
+      "args": ["--no-gui", "--open"]
+    },
+    {
+      "name": "Serve: GUI",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/serve_local.py",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "env": {
+        "PATH": "${env:PATH};C:\\\\Ruby40-x64\\\\bin"
+      },
+      "justMyCode": true,
+      "args": ["--gui", "--open"]
+    }
+  ]
+}

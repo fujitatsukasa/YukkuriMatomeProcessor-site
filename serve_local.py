@@ -2,8 +2,11 @@
 from __future__ import annotations
 
 import argparse
+import glob
+import locale
 import os
 import shlex
+import shutil
 import sys
 import time
 import socket
@@ -34,17 +37,23 @@ def _find_free_port(preferred: int = 4000) -> int:
         return int(s.getsockname()[1])
 
 
-def _run(cmd: str, cwd: Path) -> subprocess.Popen:
+def _run(cmd: str, cwd: Path, env: dict[str, str] | None = None) -> subprocess.Popen:
     # Windows の bundle(.bat) 対応のため、Windows は shell=True で動かす
     shell = (os.name == "nt")
+    # Windows の cmd.exe エラーメッセージ等は環境のコードページ(CP932など)になるため、
+    # UTF-8 固定で読むと文字化けしやすい。既定ロケールでデコードする。
+    encoding = "utf-8"
+    if os.name == "nt":
+        encoding = locale.getpreferredencoding(False) or "utf-8"
     return subprocess.Popen(
         cmd,
         cwd=str(cwd),
         shell=shell,
+        env=env,
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
         text=True,
-        encoding="utf-8",
+        encoding=encoding,
         errors="replace",
         bufsize=1,
         universal_newlines=True,
@@ -212,6 +221,44 @@ def _join_args(args: list[str]) -> str:
     return shlex.join(args)
 
 
+def _find_ruby_bindir() -> Path | None:
+    ruby = shutil.which("ruby") or shutil.which("ruby.exe")
+    if ruby:
+        return Path(ruby).resolve().parent
+
+    # VSCode/デバッグ環境で PATH が欠けるケース向けに、よくあるインストール先も見る
+    patterns = [
+        r"C:\Ruby*\bin\ruby.exe",
+        r"C:\Program Files\Ruby*\bin\ruby.exe",
+        r"C:\Program Files (x86)\Ruby*\bin\ruby.exe",
+    ]
+    for pat in patterns:
+        matches = glob.glob(pat)
+        if matches:
+            return Path(matches[0]).resolve().parent
+    return None
+
+
+def _which_bundle(ruby_bindir: Path | None = None) -> str | None:
+    # `bundle` は RubyGems が `.bat`/`.cmd` を生成する場合がある
+    if ruby_bindir:
+        for name in ("bundle.bat", "bundle.cmd", "bundle"):
+            p = ruby_bindir / name
+            if p.exists():
+                return str(p)
+    return shutil.which("bundle") or shutil.which("bundle.bat") or shutil.which("bundle.cmd")
+
+
+def _hint_install_ruby_bundler() -> None:
+    print("[HINT] Windows では Ruby(+DevKit) と Bundler が必要です。")
+    print("[HINT] 例:")
+    print("       1) RubyInstaller (Ruby+DevKit) をインストールし、PATH に追加")
+    print("       2) (必要なら) RubyInstaller の DevKit セットアップ(ridk)")
+    print("       3) このフォルダで `bundle install`")
+    print("       4) `bundle exec jekyll serve` が通ることを確認")
+    print("[HINT] すでに Ruby がある場合は `gem install bundler` で bundle を追加できます。")
+
+
 def main() -> int:
     project_dir = Path(__file__).resolve().parent
     args, extra_args = _parse_args()
@@ -239,6 +286,28 @@ def main() -> int:
     if extra_args:
         cmd_parts.extend(extra_args)
 
+    env: dict[str, str] | None = None
+    if os.name == "nt":
+        # shell=True の場合、`bundle`/`ruby` が無くても cmd.exe 自体は起動してしまい、
+        # FileNotFoundError にならない。事前に存在チェックして、分かりやすく案内する。
+        ruby_bindir = _find_ruby_bindir()
+        if not ruby_bindir:
+            print("[ERROR] Ruby が見つかりません (ruby.exe が見つからない/ PATH にありません)。")
+            _hint_install_ruby_bundler()
+            return 1
+
+        env = os.environ.copy()
+        env["PATH"] = str(ruby_bindir) + os.pathsep + env.get("PATH", "")
+
+        bundle_path = _which_bundle(ruby_bindir)
+        if not bundle_path:
+            print("[ERROR] 'bundle' が見つかりません。Ruby/Bundler を入れてから実行してください。")
+            _hint_install_ruby_bundler()
+            return 1
+
+        # 環境差異(WindowsApps の shim 等)を避けるため、Ruby 同梱側の bundle を優先する
+        cmd_parts[0] = bundle_path
+
     cmd = _join_args(cmd_parts)
 
     print(f"[INFO] Project: {project_dir}")
@@ -247,9 +316,10 @@ def main() -> int:
     print("[INFO] Starting Jekyll... (Ctrl+C to stop)")
 
     try:
-        p = _run(cmd, project_dir)
+        p = _run(cmd, project_dir, env=env)
     except FileNotFoundError:
         print("[ERROR] 'bundle' が見つかりません。Ruby/Bundler を入れてから実行してください。")
+        _hint_install_ruby_bundler()
         return 1
 
     opened = False

@@ -487,3 +487,54 @@ subtitle: ゆっくりまとめプロセッサーの操作ガイド
     <a href="/contact" class="btn btn-secondary">お問い合わせ</a>
   </div>
 </div>
+
+<!-- 開発者向け: ローカルプレビュー -->
+<div class="steps-section">
+  <div class="section-header">
+    <h2 class="section-title">開発者向け: ローカルプレビュー(Jekyll)</h2>
+    <p class="section-subtitle">VSCode からワンクリックで起動して、実行ディレクトリ事故を防止します</p>
+  </div>
+
+  <div class="steps-container">
+    <div class="step-item">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        <h3>VSCode を再起動</h3>
+        <p>
+          Ruby をインストールした後に VSCode を起動した場合、PATH が反映されないことがあります。
+          まず VSCode を一度終了して再起動してください。
+        </p>
+      </div>
+    </div>
+
+    <div class="step-item">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        <h3>依存を導入 (bundle install)</h3>
+        <p>VSCode のタスクで実行すると、常にリポジトリ直下をカレントにして動きます。</p>
+        <pre><code>Task: bundle: install</code></pre>
+      </div>
+    </div>
+
+    <div class="step-item">
+      <div class="step-number">3</div>
+      <div class="step-content">
+        <h3>ローカルサーバ起動</h3>
+        <p>VSCode のデバッグから起動すると、作業フォルダ(ワークスペースのルート)をカレントに固定できます。</p>
+        <pre><code>Debug: Serve: No GUI</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width: 980px; margin: 30px auto 0; padding: 0 20px;">
+    <h3 style="margin: 0 0 10px;">コマンドで起動したい場合</h3>
+    <p style="margin: 0 0 10px;">
+      どのフォルダから実行しても、必ずこのリポジトリ直下に移動して起動するラッパを用意しています。
+    </p>
+    <pre><code>serve_local.cmd --no-gui --open</code></pre>
+
+    <h3 style="margin: 26px 0 10px;">トラブルシュート</h3>
+    <p style="margin: 0 0 8px;"><strong>Could not locate Gemfile</strong>: 実行ディレクトリが違います。VSCode タスク/デバッグ、または serve_local.cmd を使ってください。</p>
+    <p style="margin: 0 0 8px;"><strong>'bundle' が見つからない</strong>: Ruby/Bundler が PATH にありません。VSCode を再起動し、ターミナルで <code>ruby -v</code> と <code>bundle -v</code> を確認してください。</p>
+  </div>
+</div>
