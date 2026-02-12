@@ -4,6 +4,8 @@ title: ウィジェット・ライブラリ
 subtitle: 目的別に選んで即反映できるUIウィジェット集
 permalink: /widgets/
 share-description: "目的別のUIウィジェットを番号付きで整理。選んでコピーできるギャラリー。"
+noindex: true
+sitemap: false
 ext-css:
   - href: "https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
 css:

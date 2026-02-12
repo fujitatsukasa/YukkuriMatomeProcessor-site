@@ -1,0 +1,43 @@
+{% assign nav_items = site.data.navigation.items %}
+{% assign page_path = page.url | replace: 'index.html', '' %}
+
+<a class="skip-link" href="#main-content">本文へスキップ</a>
+<header class="site-header brand-header" data-header>
+  <div class="brand-header__inner">
+    <a class="logo brand-logo" href="{{ '/' | relative_url }}" aria-label="{{ site.title }} ホーム">
+      <span class="logo-badge brand-logo__mark" aria-hidden="true">
+        <img class="logo-mark" src="{{ '/assets/showcase/aurora/logo-mark.svg' | relative_url }}" alt="">
+      </span>
+      <span class="logo-text brand-logo__text">
+        <span class="logo-title">{{ site.title }}</span>
+        <span class="logo-sub">Yukkuri Matome Processor</span>
+      </span>
+    </a>
+
+    <button class="brand-nav-toggle" type="button" aria-expanded="false" aria-controls="brand-primary-nav" data-nav-toggle>
+      <span class="sr-only">メニューを開閉</span>
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="nav brand-nav" id="brand-primary-nav" aria-label="主要ナビゲーション" data-nav>
+      {% for item in nav_items %}
+        {% assign item_url = item.url | relative_url %}
+        {% assign is_active = false %}
+        {% if page.nav_key and page.nav_key == item.key %}
+          {% assign is_active = true %}
+        {% elsif page.layout == 'brand-post' and item.key == 'news' %}
+          {% assign is_active = true %}
+        {% elsif page_path == item.url %}
+          {% assign is_active = true %}
+        {% endif %}
+        <a href="{{ item_url }}"{% if is_active %} aria-current="page" class="is-active"{% endif %}>{{ item.label }}</a>
+      {% endfor %}
+    </nav>
+
+    <div class="header-actions brand-header__actions">
+      <a class="btn header-cta brand-btn brand-btn--ghost" href="{{ site.data.navigation.cta.secondary.url | relative_url }}">{{ site.data.navigation.cta.secondary.label }}</a>
+      <a class="btn header-cta primary brand-btn brand-btn--primary" href="{{ site.data.navigation.cta.primary.url | relative_url }}">{{ site.data.navigation.cta.primary.label }}</a>
+    </div>
+  </div>
+  <div class="brand-scroll-progress" aria-hidden="true"><span data-scroll-progress></span></div>
+</header>

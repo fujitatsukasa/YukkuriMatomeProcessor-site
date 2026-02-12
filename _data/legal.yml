@@ -1,0 +1,85 @@
+organization:
+  seller_name: OTM株式会社
+  operator_name: 代表取締役社長 藤田 僚
+  postal_code: 〒242-0017
+  address_line: 神奈川県大和市大和東3-5-24 2F
+  phone: 090-6170-2570
+  email: fujita.otm@gmail.com
+  business_hours: 平日 10:00-18:00（土日祝・年末年始を除く）
+
+links:
+  - label: 特定商取引法に基づく表記
+    url: /legal/commercial-transactions/
+  - label: 利用規約
+    url: /legal/terms/
+  - label: プライバシーポリシー
+    url: /legal/privacy/
+  - label: 返金・キャンセルポリシー
+    url: /legal/refund-policy/
+
+pricing:
+  product_name: プレミアムLicense
+  amount_including_tax: 100,000円（税込）
+  unit_price: "100000"
+  currency: JPY
+  model_label: 買い切り（継続課金プラン準備中）
+  subscription_preparing_label: 継続課金プラン（提供準備中）
+  subscription_notice: 継続課金プランは現在提供準備中です。提供開始時期・料金・条件は確定次第、本サイトのお知らせで告知します。
+  plan_summary:
+    - "プレミアムLicense: 100,000円（税込）"
+  additional_fees: 銀行振込手数料およびコンビニ支払い手数料は購入者負担
+
+payment:
+  methods:
+    - 銀行振込
+    - PayPal
+    - クレジットカード
+    - コンビニ支払い
+  timing: 注文確定時（前払い）
+  note_bank_paypal: 銀行振込・PayPalをご希望の場合はお問い合わせ窓口で案内します。
+  note_online: クレジットカード・コンビニ支払いはオンライン決済で対応します。
+  deadline_rules:
+    - method: 銀行振込
+      limit: 注文日を含む3日以内
+    - method: PayPal
+      limit: 注文手続き時に即時決済
+    - method: クレジットカード
+      limit: 注文手続き時に即時決済
+    - method: コンビニ支払い
+      limit: 注文日を含む2日以内（決済画面に表示される期限に準拠）
+  unpaid_policy: 支払期限を経過した注文は自動的にキャンセルとなり、契約は不成立とします。
+  bank_account_policy: 銀行振込先情報は不正請求防止のため、問い合わせ受付後に個別案内します。
+
+delivery:
+  timing: 入金確認後1営業日以内に利用案内を送付
+  method: メールにてダウンロード情報またはライセンス情報を提供
+
+refund:
+  summary: デジタル商品の性質上、購入後の返金・キャンセルは原則不可
+  defective_response: 提供不備または重大な不具合がある場合は個別対応
+  procedure: 問い合わせ窓口へ申告後、事実確認のうえ対応方針を案内
+  defect_claim_deadline: 提供日から7日以内に不備内容を申告してください。
+  remedy_policy: 不備が確認された場合は、原則として修補または代替手段の提供で対応します。
+  refund_method: 修補対応が困難な場合に限り、当社判断で返金対応を行います（返金は原則として元の決済手段で実施）。
+  refund_fee_burden: 当社責に基づく返金時の手数料は当社負担とします。
+
+cancellation:
+  subscription: 継続課金プランは現在提供準備中です。提供開始時期・料金・条件は確定次第、本サイトのお知らせで告知します。現在は買い切りで提供しています。購入後のキャンセルは返金ポリシーに準じます。
+
+support:
+  operation_hours: 平日 10:00-18:00（土日祝・年末年始を除く）
+  first_response_sla: 2営業日以内を目安に一次回答
+
+terms:
+  governing_law: 日本法
+  jurisdiction: 東京地方裁判所を第一審の専属的合意管轄裁判所
+
+privacy:
+  analytics_tools:
+    - Google Analytics
+
+meta:
+  legal_last_updated: 2026-02-11
+  terms_last_updated: 2026-02-11
+  privacy_last_updated: 2026-02-11
+  refund_last_updated: 2026-02-11

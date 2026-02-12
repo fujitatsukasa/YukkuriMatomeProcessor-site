@@ -1,13 +1,40 @@
 ---
-layout: default
-title: 404 - Page not found
+layout: brand-page
+title: 404 - ページが見つかりません
 permalink: /404.html
+hide_breadcrumbs: true
+noindex: true
+seo_title: 404 | ゆっくりまとめプロセッサー
+seo_description: 指定したページが見つかりません。主要ページから目的の情報へ戻れます。
 ---
 
-<div class="text-center">
-  <h1>Whoops, this page doesn't exist.</h1>
-  <h1>Move along. (404 error)</h1>
-  <br/>
-
-  <img src="{{ 'assets/img/404-southpark.jpg' | relative_url }}" alt="Not found" />
-</div>
+<section class="brand-section brand-404">
+  <div class="brand-shell">
+    <p class="brand-kicker">404</p>
+    <h1>ページが見つかりません</h1>
+    <p>URLが変更されたか、公開が終了している可能性があります。以下の主要ページから目的の情報へ戻ってください。</p>
+    <div class="brand-grid brand-grid--2" style="text-align: left; margin-top: 1rem;">
+      <article class="brand-card premium-glass">
+        <h2>よく使うページ</h2>
+        <ul class="brand-list">
+          <li><a href="/">ホーム</a></li>
+          <li><a href="/download/">ダウンロード</a></li>
+          <li><a href="/instructions/">使い方</a></li>
+          <li><a href="/faq/">FAQ</a></li>
+        </ul>
+      </article>
+      <article class="brand-card premium-glass">
+        <h2>サポートページ</h2>
+        <p>必要ページが見つからない場合はお問い合わせから直接ご連絡ください。</p>
+        <div class="brand-inline-actions">
+          <a class="brand-btn brand-btn--ghost" href="/news/">お知らせ</a>
+          <a class="brand-btn brand-btn--ghost" href="/contact/">お問い合わせ</a>
+        </div>
+      </article>
+    </div>
+    <div class="brand-inline-actions" style="justify-content: center; margin-top: 1.1rem;">
+      <a class="brand-btn brand-btn--primary" href="/">ホームへ戻る</a>
+      <a class="brand-btn brand-btn--ghost" href="/download/">無料トライアルを開始</a>
+    </div>
+  </div>
+</section>

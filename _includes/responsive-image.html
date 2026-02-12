@@ -1,0 +1,27 @@
+{% assign source = include.src | default: "" | strip %}
+{% assign image_alt = include.alt | default: "" %}
+{% assign image_class = include.class | default: "" %}
+{% assign image_sizes = include.sizes | default: "(max-width: 900px) 100vw, 70vw" %}
+{% assign image_loading = include.loading | default: "lazy" %}
+{% assign image_decoding = include.decoding | default: "async" %}
+{% assign filename = source | split: "/" | last %}
+{% assign basename = filename | split: "." | first %}
+{% assign directory = source | replace: filename, "" %}
+{% assign responsive_base = directory | append: "responsive/" | append: basename %}
+
+<picture>
+  <source
+    type="image/webp"
+    srcset="{{ responsive_base | append: '-480.webp' | relative_url }} 480w, {{ responsive_base | append: '-768.webp' | relative_url }} 768w, {{ responsive_base | append: '-1200.webp' | relative_url }} 1200w"
+    sizes="{{ image_sizes }}">
+  <source
+    type="image/jpeg"
+    srcset="{{ responsive_base | append: '-480.jpg' | relative_url }} 480w, {{ responsive_base | append: '-768.jpg' | relative_url }} 768w, {{ responsive_base | append: '-1200.jpg' | relative_url }} 1200w"
+    sizes="{{ image_sizes }}">
+  <img
+    src="{{ source | relative_url }}"
+    alt="{{ image_alt | escape }}"
+    {% if image_class != "" %}class="{{ image_class }}"{% endif %}
+    loading="{{ image_loading }}"
+    decoding="{{ image_decoding }}">
+</picture>

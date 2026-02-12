@@ -1,0 +1,243 @@
+{% assign seo = site.data.seo %}
+{% assign legal = site.data.legal %}
+{% assign org = seo.organization %}
+{% assign legal_org = legal.organization %}
+{% assign canonical = page.canonical_url | default: page.url | absolute_url | strip_index %}
+{% capture image_url %}
+  {% if page.seo_image %}
+    {{ page.seo_image | absolute_url }}
+  {% elsif org.image %}
+    {{ org.image | absolute_url }}
+  {% endif %}
+{% endcapture %}
+{% assign image_url = image_url | strip %}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": {{ org.name | jsonify }},
+  "legalName": {{ org.legal_name | jsonify }},
+  "url": {{ org.url | jsonify }},
+  "logo": {{ org.logo | absolute_url | jsonify }},
+  "description": {{ org.description | jsonify }},
+  "email": {{ org.contact_email | jsonify }},
+  "telephone": {{ legal_org.phone | default: "" | jsonify }},
+  "address": {
+    "@type": "PostalAddress",
+    "postalCode": {{ legal_org.postal_code | default: "" | jsonify }},
+    "streetAddress": {{ legal_org.address_line | default: "" | jsonify }},
+    "addressCountry": "JP"
+  },
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "contactType": "customer support",
+      "email": {{ legal_org.email | default: org.contact_email | jsonify }},
+      "telephone": {{ legal_org.phone | default: "" | jsonify }},
+      "availableLanguage": "ja"
+    }
+  ],
+  "sameAs": {{ org.same_as | jsonify }}
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": {{ site.title | jsonify }},
+  "url": {{ site.url | append: site.baseurl | jsonify }},
+  "inLanguage": {{ site.lang | default: "ja" | jsonify }},
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ org.name | jsonify }}
+  }
+}
+</script>
+
+{% assign schema_type = page.schema_type | default: "page" %}
+{% if schema_type == 'home' or schema_type == 'download' or schema_type == 'software' %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": {{ seo.software.name | jsonify }},
+  "applicationCategory": {{ seo.software.category | jsonify }},
+  "operatingSystem": {{ seo.software.operating_system | jsonify }},
+  "applicationSuite": {{ seo.software.application_suite | jsonify }},
+  "description": {{ org.description | jsonify }},
+  "url": {{ canonical | jsonify }},
+  "image": {{ image_url | jsonify }},
+  "offers": {
+    "@type": "Offer",
+    "price": {{ seo.software.offer_price | jsonify }},
+    "priceCurrency": {{ seo.software.offer_currency | jsonify }}
+  }
+}
+</script>
+{% endif %}
+
+{% if schema_type == 'faq' %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {% assign faq_items = page.faq_schema | default: seo.default_faq %}
+    {% for item in faq_items %}
+    {
+      "@type": "Question",
+      "name": {{ item.q | jsonify }},
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": {{ item.a | jsonify }}
+      }
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ]
+}
+</script>
+{% endif %}
+
+{% if schema_type == 'news' %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": {{ page.title | jsonify }},
+  "url": {{ canonical | jsonify }},
+  "description": {{ page.seo_description | default: page.subtitle | default: org.description | jsonify }}
+}
+</script>
+{% endif %}
+
+{% if page.layout == 'brand-post' or schema_type == 'article' %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {{ page.title | jsonify }},
+  "datePublished": {{ page.date | date_to_xmlschema | jsonify }},
+  "dateModified": {{ page.last-updated | default: page.date | date_to_xmlschema | jsonify }},
+  "author": {
+    "@type": "Person",
+    "name": {{ page.author | default: site.author | jsonify }}
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ org.name | jsonify }},
+    "logo": {
+      "@type": "ImageObject",
+      "url": {{ org.logo | absolute_url | jsonify }}
+    }
+  },
+  "mainEntityOfPage": {{ canonical | jsonify }}
+}
+</script>
+{% endif %}
+
+{% if schema_type == 'contact' %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "name": {{ page.title | jsonify }},
+  "url": {{ canonical | jsonify }}
+}
+</script>
+{% endif %}
+
+{% if schema_type == 'purchase' %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Offer",
+  "url": {{ canonical | jsonify }},
+  "price": {{ legal.pricing.unit_price | default: seo.software.offer_price | jsonify }},
+  "priceCurrency": {{ legal.pricing.currency | default: seo.software.offer_currency | jsonify }},
+  "availability": "https://schema.org/InStock",
+  "category": "SoftwareApplication",
+  "seller": {
+    "@type": "Organization",
+    "name": {{ org.legal_name | default: org.name | jsonify }}
+  },
+  "itemOffered": {
+    "@type": "SoftwareApplication",
+    "name": {{ legal.pricing.product_name | default: seo.software.name | jsonify }},
+    "applicationCategory": {{ seo.software.category | jsonify }}
+  },
+  "hasMerchantReturnPolicy": {
+    "@type": "MerchantReturnPolicy",
+    "applicableCountry": "JP",
+    "returnPolicyCountry": "JP",
+    "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted",
+    "description": {{ legal.refund.summary | default: "返金条件は返金・キャンセルポリシーを参照してください。" | jsonify }}
+  }
+}
+</script>
+{% endif %}
+
+{% if schema_type == 'legal' %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": {{ page.title | jsonify }},
+  "url": {{ canonical | jsonify }},
+  "description": {{ page.seo_description | default: page.subtitle | default: org.description | jsonify }},
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": {{ site.title | jsonify }},
+    "url": {{ site.url | append: site.baseurl | jsonify }}
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ org.name | jsonify }}
+  },
+  "inLanguage": {{ site.lang | default: "ja" | jsonify }}
+}
+</script>
+{% endif %}
+
+{% assign home_url = '/' | absolute_url | strip_index %}
+{% assign breadcrumb_name = page.title | default: 'ページ' %}
+{% assign breadcrumb_position = 2 %}
+{% assign nav_current = site.data.navigation.items | where: "key", page.nav_key | first %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "ホーム",
+      "item": {{ home_url | jsonify }}
+    }
+    {% if page.layout == 'brand-post' %}
+    ,
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "お知らせ",
+      "item": {{ '/news/' | absolute_url | strip_index | jsonify }}
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": {{ page.title | jsonify }},
+      "item": {{ canonical | jsonify }}
+    }
+    {% elsif page.url != '/' %}
+    ,
+    {
+      "@type": "ListItem",
+      "position": {{ breadcrumb_position }},
+      "name": {{ nav_current.label | default: breadcrumb_name | jsonify }},
+      "item": {{ canonical | jsonify }}
+    }
+    {% endif %}
+  ]
+}
+</script>

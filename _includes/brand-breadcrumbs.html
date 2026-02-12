@@ -1,0 +1,17 @@
+{% if page.hide_breadcrumbs != true %}
+  {% assign nav_items = site.data.navigation.items %}
+  {% assign current = nav_items | where: "key", page.nav_key | first %}
+  <nav class="brand-breadcrumbs" aria-label="パンくず">
+    <ol>
+      <li><a href="{{ '/' | relative_url }}">ホーム</a></li>
+      {% if page.layout == 'brand-post' %}
+        <li><a href="{{ '/news/' | relative_url }}">お知らせ</a></li>
+        <li aria-current="page">{{ page.title }}</li>
+      {% elsif page.nav_key and page.nav_key != 'home' %}
+        <li aria-current="page">{{ current.label | default: page.title }}</li>
+      {% elsif page.title and page.nav_key != 'home' %}
+        <li aria-current="page">{{ page.title }}</li>
+      {% endif %}
+    </ol>
+  </nav>
+{% endif %}

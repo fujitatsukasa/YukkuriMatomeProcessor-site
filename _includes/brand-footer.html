@@ -1,0 +1,45 @@
+<footer class="brand-footer">
+  <div class="brand-footer__inner">
+    <div class="brand-footer__lead">
+      <h2>{{ site.title }}</h2>
+      <p>編集運用の再現性を高めるため、導入判断から運用定着までを継続的に支援します。</p>
+    </div>
+
+    <div class="brand-footer__grid">
+      <section>
+        <h3>主要ページ</h3>
+        <ul>
+          {% for item in site.data.navigation.items %}
+          <li><a href="{{ item.url | relative_url }}">{{ item.label }}</a></li>
+          {% endfor %}
+        </ul>
+      </section>
+      <section>
+        <h3>サポート</h3>
+        <ul>
+          <li><a href="mailto:{{ site.data.seo.organization.contact_email }}">メール</a></li>
+          <li><a href="https://x.com/OTM_corp" target="_blank" rel="noopener noreferrer">X (Twitter)</a></li>
+          <li><a href="https://discordapp.com/users/762244902124912695" target="_blank" rel="noopener noreferrer">Discord</a></li>
+          <li><a href="https://github.com/fujitatsukasa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        </ul>
+      </section>
+      <section>
+        <h3>クイックリンク</h3>
+        <ul>
+          <li><a href="{{ '/download/' | relative_url }}">無料トライアルを開始</a></li>
+          <li><a href="{{ '/purchase/' | relative_url }}">料金を確認</a></li>
+          <li><a href="{{ '/news/' | relative_url }}">最新のお知らせ</a></li>
+        </ul>
+      </section>
+      <section>
+        <h3>法務・ポリシー</h3>
+        <ul>
+          {% for item in site.data.legal.links %}
+          <li><a href="{{ item.url | relative_url }}">{{ item.label }}</a></li>
+          {% endfor %}
+        </ul>
+      </section>
+    </div>
+  </div>
+  <p class="brand-footer__copyright">© {{ 'now' | date: "%Y" }} OTM株式会社</p>
+</footer>

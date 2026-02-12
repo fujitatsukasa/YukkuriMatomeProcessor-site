@@ -1,540 +1,133 @@
 ---
-layout: page
+layout: brand-page
 title: 使い方
-subtitle: ゆっくりまとめプロセッサーの操作ガイド
+subtitle: 最短で立ち上げるための操作ガイド
+permalink: /instructions/
+nav_key: instructions
+schema_type: software
+seo_title: 使い方ガイド | ゆっくりまとめプロセッサー
+seo_description: 初期設定、台本取得、編集開始、失敗時の対処、開発者向けローカル実行手順をまとめた公式ガイドです。
+seo_keywords: 使い方, 初期設定, 台本取得, ローカルプレビュー, Jekyll, VSCode
+seo_image: /assets/showcase/premium/images/vertical-monitor-15249470.jpg
 ---
 
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;600;700;800&display=swap');
-
-  * {
-    box-sizing: border-box;
-  }
-
-  body {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    font-family: 'Noto Sans JP', 'Inter', sans-serif;
-    margin: 0;
-    padding: 0;
-  }
-
-  .page-content {
-    max-width: 100%;
-    margin: 0;
-    padding: 0;
-    background: transparent;
-    box-shadow: none;
-  }
-
-  /* ========== ヒーローエリア ========== */
-  .hero-section {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 100px 20px 60px;
-    text-align: center;
-  }
-
-  .hero-section h1 {
-    font-size: 3.5em;
-    font-weight: 900;
-    margin-bottom: 20px;
-    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  }
-
-  .hero-section p {
-    font-size: 1.4em;
-    opacity: 0.95;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  /* ========== 注意事項エリア ========== */
-  .notice-section {
-    background: white;
-    padding: 60px 20px;
-  }
-
-  .notice-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-  }
-
-  .notice-card {
-    background: linear-gradient(135deg, #fff3cd 0%, #ffe8a1 100%);
-    border: 2px solid #ffc107;
-    border-radius: 20px;
-    padding: 30px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(255, 193, 7, 0.3);
-    transition: all 0.3s ease;
-  }
-
-  .notice-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 40px rgba(255, 193, 7, 0.5);
-  }
-
-  .notice-icon {
-    font-size: 3em;
-    margin-bottom: 15px;
-  }
-
-  .notice-title {
-    font-size: 1.5em;
-    font-weight: 700;
-    color: #856404;
-    margin-bottom: 10px;
-  }
-
-  .notice-text {
-    color: #856404;
-    line-height: 1.8;
-    font-size: 1.05em;
-  }
-
-  /* ========== ビデオセクション ========== */
-  .video-sections {
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    padding: 100px 20px;
-  }
-
-  .section-header {
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto 60px;
-  }
-
-  .section-title {
-    font-size: 2.8em;
-    font-weight: 900;
-    color: #2d3748;
-    margin-bottom: 20px;
-    position: relative;
-    display: inline-block;
-  }
-
-  .section-title::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px;
-    height: 4px;
-    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-    border-radius: 2px;
-  }
-
-  .section-subtitle {
-    font-size: 1.2em;
-    color: #718096;
-    margin-top: 30px;
-  }
-
-  .video-grid {
-    max-width: 1400px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-    gap: 50px;
-  }
-
-  .video-card {
-    background: white;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-    transition: all 0.3s ease;
-  }
-
-  .video-card:hover {
-    transform: translateY(-15px);
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
-  }
-
-  .video-card-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 25px;
-    text-align: center;
-  }
-
-  .video-card-header h3 {
-    font-size: 1.8em;
-    font-weight: 700;
-    margin: 0;
-  }
-
-  .video-card-body {
-    padding: 0;
-  }
-
-  .video-container {
-    position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-    overflow: hidden;
-  }
-
-  .video-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
-  }
-
-  .video-card-footer {
-    padding: 25px;
-    background: #f7fafc;
-    text-align: center;
-  }
-
-  .video-description {
-    color: #718096;
-    font-size: 1.05em;
-    line-height: 1.6;
-  }
-
-  /* ========== ステップガイド ========== */
-  .steps-section {
-    background: white;
-    padding: 100px 20px;
-  }
-
-  .steps-container {
-    max-width: 1000px;
-    margin: 0 auto;
-  }
-
-  .step-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 30px;
-    margin-bottom: 50px;
-    padding: 30px;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    border-radius: 20px;
-    transition: all 0.3s ease;
-  }
-
-  .step-item:hover {
-    transform: translateX(10px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  }
-
-  .step-number {
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.8em;
-    font-weight: 900;
-    flex-shrink: 0;
-    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
-  }
-
-  .step-content {
-    flex: 1;
-  }
-
-  .step-content h3 {
-    font-size: 1.6em;
-    color: #2d3748;
-    margin-bottom: 10px;
-  }
-
-  .step-content p {
-    color: #718096;
-    line-height: 1.8;
-    font-size: 1.05em;
-  }
-
-  /* ========== CTA Section ========== */
-  .cta-section {
-    background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
-    color: white;
-    padding: 100px 20px;
-    text-align: center;
-  }
-
-  .cta-title {
-    font-size: 2.5em;
-    font-weight: 900;
-    margin-bottom: 20px;
-  }
-
-  .cta-text {
-    font-size: 1.3em;
-    margin-bottom: 40px;
-    opacity: 0.9;
-  }
-
-  .cta-buttons {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  .btn {
-    padding: 18px 40px;
-    font-size: 1.1em;
-    font-weight: 700;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    display: inline-block;
-  }
-
-  .btn-primary {
-    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
-    color: white;
-    box-shadow: 0 10px 30px rgba(238, 90, 111, 0.4);
-  }
-
-  .btn-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(238, 90, 111, 0.6);
-  }
-
-  .btn-secondary {
-    background: white;
-    color: #667eea;
-    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
-  }
-
-  .btn-secondary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(255, 255, 255, 0.5);
-  }
-
-  /* ========== レスポンシブ ========== */
-  @media (max-width: 768px) {
-    .hero-section h1 {
-      font-size: 2.2em;
-    }
-
-    .section-title {
-      font-size: 2em;
-    }
-
-    .video-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .step-item {
-      flex-direction: column;
-      text-align: center;
-    }
-
-    .step-number {
-      margin: 0 auto 20px;
-    }
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-</style>
-
-<!-- ヒーローセクション -->
-<div class="hero-section">
-  <h1>📖 使い方ガイド</h1>
-  <p>ゆっくりまとめプロセッサーを使って、効率的な動画制作を始めましょう</p>
-</div>
-
-<!-- 注意事項エリア -->
-<div class="notice-section">
-  <div class="notice-container">
-    <div class="notice-card">
-      <div class="notice-icon">⌨️</div>
-      <h3 class="notice-title">ショートカット設定</h3>
-      <p class="notice-text">
-        起動時にYMM4のショートカット<br>
-        「台本ファイルを開く」が<br>
-        <strong>F2キー</strong>に自動で割り当てられます
-      </p>
-    </div>
-    <div class="notice-card">
-      <div class="notice-icon">⚙️</div>
-      <h3 class="notice-title">初期設定が必要です</h3>
-      <p class="notice-text">
-        一番最初に「台本編集」の設定で<br>
-        <strong>【YMM4パス】</strong><br>
-        YukkuriMovieMaker.exeの<br>
-        パスを通してください
-      </p>
-    </div>
-  </div>
-</div>
-
-<!-- ビデオチュートリアルセクション -->
-<div class="video-sections">
-  <div class="section-header">
-    <h2 class="section-title">チュートリアル動画</h2>
-    <p class="section-subtitle">実際の操作を動画で確認できます</p>
-  </div>
-
-  <div class="video-grid">
-    <!-- 台本取得 -->
-    <div class="video-card">
-      <div class="video-card-header">
-        <h3>📄 台本取得</h3>
-      </div>
-      <div class="video-card-body">
-        <div class="video-container">
-          <iframe
-            src="https://www.youtube.com/embed/E97yjZgjK8c"
-            title="台本取得解説動画"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
-          </iframe>
-        </div>
-      </div>
-      <div class="video-card-footer">
-        <p class="video-description">
-          サイトや掲示板から台本を自動取得する方法を学びます
-        </p>
-      </div>
-    </div>
-
-    <!-- 台本編集 -->
-    <div class="video-card">
-      <div class="video-card-header">
-        <h3>✏️ 台本編集</h3>
-      </div>
-      <div class="video-card-body">
-        <div class="video-container">
-          <iframe
-            src="https://www.youtube.com/embed/oNdAwpbjFPI"
-            title="台本編集解説動画"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
-          </iframe>
-        </div>
-      </div>
-      <div class="video-card-footer">
-        <p class="video-description">
-          取得した台本を編集し、動画制作に活用する方法を学びます
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ステップガイド -->
-<div class="steps-section">
-  <div class="section-header">
-    <h2 class="section-title">クイックスタートガイド</h2>
-    <p class="section-subtitle">3ステップで動画制作を開始</p>
-  </div>
-
-  <div class="steps-container">
-    <div class="step-item">
-      <div class="step-number">1</div>
-      <div class="step-content">
-        <h3>初期設定を行う</h3>
-        <p>
-          「台本編集」の設定画面で、YukkuriMovieMaker.exeのパスを設定します。
-          これにより、ソフトウェアが動画編集ツールと連携できるようになります。
-        </p>
-      </div>
-    </div>
-
-    <div class="step-item">
-      <div class="step-number">2</div>
-      <div class="step-content">
-        <h3>台本を取得する</h3>
-        <p>
-          サイトやまとめ掲示板のURLを入力するだけで、自動的に台本を取得します。
-          取得した台本は自動的に整形され、すぐに編集可能な状態になります。
-        </p>
-      </div>
-    </div>
-
-    <div class="step-item">
-      <div class="step-number">3</div>
-      <div class="step-content">
-        <h3>台本を編集して動画を作成</h3>
-        <p>
-          内蔵エディタで台本を編集し、F2キーでYMM4に送信。
-          あとは動画編集ツールで仕上げるだけで、プロフェッショナルな動画が完成します。
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- CTA Section -->
-<div class="cta-section">
-  <h2 class="cta-title">今すぐ始めましょう</h2>
-  <p class="cta-text">
-    分からないことがあれば、お気軽にお問い合わせください
-  </p>
-  <div class="cta-buttons">
-    <a href="/download" class="btn btn-primary">ダウンロード</a>
-    <a href="/contact" class="btn btn-secondary">お問い合わせ</a>
-  </div>
-</div>
-
-<!-- 開発者向け: ローカルプレビュー -->
-<div class="steps-section">
-  <div class="section-header">
-    <h2 class="section-title">開発者向け: ローカルプレビュー(Jekyll)</h2>
-    <p class="section-subtitle">VSCode からワンクリックで起動して、実行ディレクトリ事故を防止します</p>
-  </div>
-
-  <div class="steps-container">
-    <div class="step-item">
-      <div class="step-number">1</div>
-      <div class="step-content">
-        <h3>VSCode を再起動</h3>
-        <p>
-          Ruby をインストールした後に VSCode を起動した場合、PATH が反映されないことがあります。
-          まず VSCode を一度終了して再起動してください。
-        </p>
-      </div>
-    </div>
-
-    <div class="step-item">
-      <div class="step-number">2</div>
-      <div class="step-content">
-        <h3>依存を導入 (bundle install)</h3>
-        <p>VSCode のタスクで実行すると、常にリポジトリ直下をカレントにして動きます。</p>
-        <pre><code>Task: bundle: install</code></pre>
-      </div>
-    </div>
-
-    <div class="step-item">
-      <div class="step-number">3</div>
-      <div class="step-content">
-        <h3>ローカルサーバ起動</h3>
-        <p>VSCode のデバッグから起動すると、作業フォルダ(ワークスペースのルート)をカレントに固定できます。</p>
-        <pre><code>Debug: Serve: No GUI</code></pre>
-      </div>
-    </div>
-  </div>
-
-  <div style="max-width: 980px; margin: 30px auto 0; padding: 0 20px;">
-    <h3 style="margin: 0 0 10px;">コマンドで起動したい場合</h3>
-    <p style="margin: 0 0 10px;">
-      どのフォルダから実行しても、必ずこのリポジトリ直下に移動して起動するラッパを用意しています。
+<section class="brand-section">
+  <div class="brand-shell">
+    <p class="brand-kicker">Onboarding Guide</p>
+    <h1>初期設定から編集開始までを3ステップで進める</h1>
+    <p class="brand-lead">
+      目的は、最短で安定運用に入ることです。
+      「初期設定 → 台本取得 → 編集開始」の順で進め、最後に失敗例を確認してください。
     </p>
-    <pre><code>serve_local.cmd --no-gui --open</code></pre>
-
-    <h3 style="margin: 26px 0 10px;">トラブルシュート</h3>
-    <p style="margin: 0 0 8px;"><strong>Could not locate Gemfile</strong>: 実行ディレクトリが違います。VSCode タスク/デバッグ、または serve_local.cmd を使ってください。</p>
-    <p style="margin: 0 0 8px;"><strong>'bundle' が見つからない</strong>: Ruby/Bundler が PATH にありません。VSCode を再起動し、ターミナルで <code>ruby -v</code> と <code>bundle -v</code> を確認してください。</p>
+    <div class="brand-grid brand-grid--3">
+      <article class="brand-card premium-glass">
+        <h2>STEP 1 初期設定</h2>
+        <p><code>YukkuriMovieMaker.exe</code> の実行パスと台本保存先を固定します。</p>
+      </article>
+      <article class="brand-card premium-glass">
+        <h2>STEP 2 台本取得</h2>
+        <p>対象URLから記事を選択し、編集用に整形済み台本を作成します。</p>
+      </article>
+      <article class="brand-card premium-glass">
+        <h2>STEP 3 編集開始</h2>
+        <p>整形結果を確認し、YMM4への受け渡しと編集作業へ進みます。</p>
+      </article>
+    </div>
+    <nav class="flow-links" aria-label="関連ページ">
+      <a href="/download/">先にダウンロードする</a>
+      <a href="/faq/">次: FAQを確認</a>
+      <a href="/purchase/">次: 購入条件を確認</a>
+      <a href="/contact/">解決しない場合はお問い合わせ</a>
+    </nav>
   </div>
-</div>
+</section>
+
+<section class="brand-section brand-section--alt">
+  <div class="brand-shell brand-grid brand-grid--2">
+    <article class="brand-card premium-glass">
+      <h2>初期設定（必須）</h2>
+      <ul class="brand-list">
+        <li>YMM4実行ファイルの絶対パスを登録</li>
+        <li>台本保存先フォルダを運用単位で固定</li>
+        <li>試用中は設定変更内容を記録</li>
+        <li>権限エラーを防ぐため、書き込み可能フォルダを利用</li>
+      </ul>
+    </article>
+    <article class="brand-card premium-glass">
+      <h2>台本取得</h2>
+      <ol class="brand-list">
+        <li>対象サイトを選択</li>
+        <li>記事一覧を取得</li>
+        <li>使用する記事を選択</li>
+        <li>台本をダウンロードして整形</li>
+      </ol>
+    </article>
+    <article class="brand-card premium-glass">
+      <h2>編集開始前チェック</h2>
+      <ul class="brand-list">
+        <li>不要行・注釈の除去が完了しているか</li>
+        <li>見出しと本文の区切りが崩れていないか</li>
+        <li>読み上げ速度・尺の確認をしたか</li>
+      </ul>
+    </article>
+    <article class="brand-card premium-glass">
+      <h2>よくある失敗</h2>
+      <ul class="brand-list">
+        <li>YMM4パス未設定で連携に失敗</li>
+        <li>URL形式エラーで台本取得に失敗</li>
+        <li>保存先権限不足で出力に失敗</li>
+      </ul>
+      <div class="brand-inline-actions">
+        <a class="brand-btn brand-btn--ghost" href="/faq/#faq-trouble">トラブルFAQへ</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="brand-section">
+  <div class="brand-shell">
+    <p class="brand-kicker">Developer Notes</p>
+    <h2>開発者向けローカル実行（Jekyll）</h2>
+    <p class="brand-lead">VSCodeのデバッグ定義を使い、実行ディレクトリずれを防いでください。</p>
+    <div class="brand-grid brand-grid--2">
+      <article class="notice-box">
+        <h3>VSCode デバッグ起動</h3>
+        <ul class="brand-list">
+          <li>既定プロファイル: <code>Serve: GUI (Default)</code></li>
+          <li>フォールバック: <code>Serve: No GUI</code></li>
+          <li>F5実行: <code>Serve: GUI (Default)</code>（<code>--gui --open</code>）</li>
+          <li>CLI実行: <code>serve_local.cmd --no-gui --open</code></li>
+        </ul>
+      </article>
+      <article class="notice-box">
+        <h3>トラブルシュート</h3>
+        <ul class="brand-list">
+          <li><code>Could not locate Gemfile</code>: 実行ディレクトリをリポジトリ直下へ戻す</li>
+          <li><code>'bundle' が見つからない</code>: Ruby/BundlerのPATHを確認して再起動</li>
+          <li>ポート競合: 既存Jekyllプロセスを停止して再起動</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="brand-section brand-section--alt">
+  <div class="brand-shell brand-grid brand-grid--2">
+    <article class="brand-card premium-glass">
+      <h2>次アクション</h2>
+      <ul class="brand-list">
+        <li><a href="/download/">ダウンロード</a>で試用開始</li>
+        <li><a href="/faq/">FAQ</a>で失敗例を確認</li>
+        <li><a href="/purchase/">購入</a>で契約条件を確認</li>
+        <li><a href="/contact/">お問い合わせ</a>で導入相談</li>
+      </ul>
+    </article>
+    <article class="brand-card premium-glass">
+      <h2>関連情報</h2>
+      <div class="brand-inline-actions">
+        <a class="brand-btn brand-btn--ghost" href="/update/">アップデート履歴</a>
+        <a class="brand-btn brand-btn--ghost" href="/news/">お知らせ</a>
+      </div>
+    </article>
+  </div>
+</section>

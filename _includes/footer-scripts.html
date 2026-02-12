@@ -1,3 +1,7 @@
+{% if jekyll.environment == "development" %}
+  {% assign dev_asset_timestamp = site.time | date: "%s" %}
+{% endif %}
+
 {% if layout.common-ext-js %}
   {% for js in layout.common-ext-js %}
     {% include ext-js.html js=js %}
@@ -6,22 +10,38 @@
 
 {% if layout.common-js %}
   {% for js in layout.common-js %}
+    {% assign js_url = js | relative_url %}
+    {% if jekyll.environment == "development" %}
+      {% assign version_sep = "?v=" %}
+      {% if js_url contains "?" %}
+        {% assign version_sep = "&v=" %}
+      {% endif %}
+      {% assign js_url = js_url | append: version_sep | append: dev_asset_timestamp %}
+    {% endif %}
     <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
     {% if js contains 'jquery' %}
       <script>
         if (typeof jQuery == 'undefined') {
-          document.write('<script src="{{ js | relative_url }}"></scr' + 'ipt>');
+          document.write('<script src="{{ js_url }}"></scr' + 'ipt>');
         }
       </script>
     {% else %}
-      <script src="{{ js | relative_url }}"></script>
+      <script src="{{ js_url }}"></script>
     {% endif %}
   {% endfor %}
 {% endif %}
 
 {% if site.site-js %}
   {% for js in site.site-js %}
-    <script src="{{ js | relative_url }}"></script>
+    {% assign js_url = js | relative_url %}
+    {% if jekyll.environment == "development" %}
+      {% assign version_sep = "?v=" %}
+      {% if js_url contains "?" %}
+        {% assign version_sep = "&v=" %}
+      {% endif %}
+      {% assign js_url = js_url | append: version_sep | append: dev_asset_timestamp %}
+    {% endif %}
+    <script src="{{ js_url }}"></script>
   {% endfor %}
 {% endif %}
 
@@ -33,6 +53,14 @@
 
 {% if page.js %}
   {% for js in page.js %}
-    <script src="{{ js | relative_url }}"></script>
+    {% assign js_url = js | relative_url %}
+    {% if jekyll.environment == "development" %}
+      {% assign version_sep = "?v=" %}
+      {% if js_url contains "?" %}
+        {% assign version_sep = "&v=" %}
+      {% endif %}
+      {% assign js_url = js_url | append: version_sep | append: dev_asset_timestamp %}
+    {% endif %}
+    <script src="{{ js_url }}"></script>
   {% endfor %}
 {% endif %}

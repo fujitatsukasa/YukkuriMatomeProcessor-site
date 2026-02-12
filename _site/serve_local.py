@@ -17,6 +17,19 @@ import queue
 from pathlib import Path
 
 
+def _is_debugger_session() -> bool:
+    return (sys.gettrace() is not None) or ("debugpy" in sys.modules)
+
+
+def _report_nonzero_exit(code: int) -> None:
+    if code == 0:
+        return
+    if os.name == "nt" and code >= 0xC0000000:
+        print(f"[ERROR] Jekyll process crashed with Windows status 0x{code:08X} ({code}).")
+    else:
+        print(f"[ERROR] Jekyll process exited with code {code}.")
+
+
 def _find_free_port(preferred: int = 4000) -> int:
     # preferred が空いていればそれ、ダメなら空きポートを探す
     def is_free(port: int) -> bool:
@@ -173,6 +186,33 @@ def _collect_posts(project_dir: Path) -> list[dict[str, str]]:
     return posts
 
 
+def _collect_section_index_pages(project_dir: Path, section: str) -> list[dict[str, str]]:
+    section_dir = project_dir / section
+    if not section_dir.exists() or not section_dir.is_dir():
+        return []
+
+    pages: list[dict[str, str]] = []
+    for entry in sorted(section_dir.glob("*/index.*")):
+        if not entry.is_file():
+            continue
+        if entry.suffix.lower() not in (".md", ".html"):
+            continue
+        fm = _parse_front_matter(entry)
+        if not fm or "layout" not in fm:
+            continue
+
+        title = fm.get("title") or entry.parent.name
+        permalink = fm.get("permalink")
+        if permalink:
+            path = permalink if permalink.startswith("/") else f"/{permalink}"
+        else:
+            path = f"/{entry.parent.as_posix().strip('/')}/"
+        pages.append({"title": title, "path": path, "file": str(entry.relative_to(project_dir))})
+
+    pages.sort(key=lambda item: item["title"])
+    return pages
+
+
 def _build_full_url(base_url: str, path: str) -> str:
     base = base_url.rstrip("/")
     if not path.startswith("/"):
@@ -188,6 +228,28 @@ def _start_output_reader(proc: subprocess.Popen, output_queue: queue.Queue) -> N
             output_queue.put(line)
 
     threading.Thread(target=_reader, daemon=True).start()
+
+
+def _safe_echo(text: str) -> None:
+    # 端末のエンコーディングで表示できない文字が混ざっても落とさない
+    try:
+        print(text, end="")
+        return
+    except UnicodeEncodeError:
+        pass
+
+    out = sys.stdout
+    enc = out.encoding or locale.getpreferredencoding(False) or "utf-8"
+    safe_text = text.encode(enc, errors="replace").decode(enc, errors="replace")
+    try:
+        out.write(safe_text)
+        out.flush()
+    except Exception:
+        try:
+            out.buffer.write(safe_text.encode(enc, errors="replace"))
+            out.buffer.flush()
+        except Exception:
+            pass
 
 
 def _parse_args() -> tuple[argparse.Namespace, list[str]]:
@@ -332,11 +394,12 @@ def main() -> int:
 
     pages = _collect_pages(project_dir)
     posts = _collect_posts(project_dir)
+    legal_pages = _collect_section_index_pages(project_dir, "legal")
     gui_enabled = bool(args.open_gui)
 
     def handle_line(line: str) -> None:
         nonlocal opened, warned_pagination, warned_wdm
-        print(line, end="")
+        _safe_echo(line)
         if (not opened) and args.open_browser and (
             "Server address:" in line
             or "running on" in line.lower()
@@ -396,15 +459,22 @@ def main() -> int:
         try:
             import tkinter as tk
             from tkinter import ttk
-        except Exception:
-            print("[WARN] tkinter is not available; GUI launcher is disabled.")
+        except Exception as exc:
+            print(f"[WARN] tkinter is not available ({exc}); GUI launcher is disabled.")
             gui_enabled = False
 
+    root = None
     if gui_enabled:
         def open_path(path: str) -> None:
             webbrowser.open(_build_full_url(site_base, path))
 
-        root = tk.Tk()
+        try:
+            root = tk.Tk()
+        except Exception as exc:
+            print(f"[WARN] GUI launcher failed to initialize ({exc}); continuing without GUI.")
+            gui_enabled = False
+
+    if gui_enabled and root is not None:
         root.title("ローカルページランチャー")
         root.geometry("460x640")
         root.minsize(380, 420)
@@ -445,6 +515,7 @@ def main() -> int:
                 ).pack(fill="x", pady=2)
 
         add_section("ページ", pages)
+        add_section("法務", legal_pages)
         add_section("投稿", posts)
 
         def on_close() -> None:
@@ -457,6 +528,7 @@ def main() -> int:
             pump_output()
             maybe_open_fallback()
             if p.poll() is not None:
+                _report_nonzero_exit(int(p.returncode or 0))
                 root.after(200, root.destroy)
                 return
             root.after(120, tick)
@@ -470,7 +542,9 @@ def main() -> int:
             pump_output()
             maybe_open_fallback()
             if p.poll() is not None:
-                return int(p.returncode or 0)
+                code = int(p.returncode or 0)
+                _report_nonzero_exit(code)
+                return code
             time.sleep(0.1)
     except KeyboardInterrupt:
         stop_process()
@@ -478,4 +552,10 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    exit_code = int(main())
+    # debugpy 上では SystemExit が「例外」として止まりやすいため、明示終了を避ける
+    if _is_debugger_session():
+        if exit_code != 0:
+            print(f"[INFO] serve_local.py finished with exit code {exit_code}.")
+    else:
+        raise SystemExit(exit_code)

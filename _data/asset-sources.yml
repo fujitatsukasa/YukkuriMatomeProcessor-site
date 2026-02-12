@@ -1,0 +1,134 @@
+license:
+  provider: Pexels
+  license_url: https://www.pexels.com/license/
+  retrieved_on: 2026-02-11
+  note: "19162269の動画は取得制限があったため、同系統のPexels素材(6266437)を代替採用"
+
+assets:
+  - title: Modern luxury office interior design with open workspace
+    source_url: https://www.pexels.com/photo/modern-luxury-office-interior-design-with-open-workspace-33342702/
+    creator: Pexels contributor
+    license_url: https://www.pexels.com/license/
+    local_path: /assets/showcase/premium/images/office-luxury-33342702.jpg
+    used_in:
+      - /index/
+      - /purchase/
+  - title: Modern neon-lit workstation with digital clocks
+    source_url: https://www.pexels.com/photo/modern-neon-lit-workstation-with-digital-clocks-34793102/
+    creator: Pexels contributor
+    license_url: https://www.pexels.com/license/
+    local_path: /assets/showcase/premium/images/neon-workstation-34793102.jpg
+    used_in:
+      - /index/
+  - title: Modern desk setup with a vertical monitor laptop and a neon light on the wall
+    source_url: https://www.pexels.com/photo/modern-desk-setup-with-a-vertical-monitor-laptop-and-a-neon-light-on-the-wall-15249470/
+    creator: Pexels contributor
+    license_url: https://www.pexels.com/license/
+    local_path: /assets/showcase/premium/images/vertical-monitor-15249470.jpg
+    used_in:
+      - /instructions/
+  - title: Interior of modern workspace with computer on table
+    source_url: https://www.pexels.com/photo/interior-of-modern-workspace-with-computer-on-table-6044911/
+    creator: Pexels contributor
+    license_url: https://www.pexels.com/license/
+    local_path: /assets/showcase/premium/images/workspace-computer-6044911.jpg
+    used_in:
+      - /contact/
+  - title: Modern workspace
+    source_url: https://www.pexels.com/photo/modern-workspace-10889348/
+    creator: Pexels contributor
+    license_url: https://www.pexels.com/license/
+    local_path: /assets/showcase/premium/images/modern-workspace-10889348.jpg
+    used_in:
+      - /download/
+  - title: Abstract dark textured wall art with gold
+    source_url: https://www.pexels.com/photo/abstract-dark-textured-wall-art-with-gold-30715673/
+    creator: Pexels contributor
+    license_url: https://www.pexels.com/license/
+    local_path: /assets/showcase/premium/images/abstract-gold-30715673.jpg
+    used_in:
+      - /update/
+  - title: Triangle illuminated by rainbow-colored lights
+    source_url: https://www.pexels.com/photo/triangle-illuminated-by-rainbow-colored-lights-11734794/
+    creator: Pexels contributor
+    license_url: https://www.pexels.com/license/
+    local_path: /assets/showcase/premium/images/rainbow-triangle-11734794.jpg
+    used_in:
+      - /index/
+  - title: Rainbow prism light refraction on grey wall
+    source_url: https://www.pexels.com/photo/rainbow-prism-light-refraction-on-grey-wall-30880049/
+    creator: Pexels contributor
+    license_url: https://www.pexels.com/license/
+    local_path: /assets/showcase/premium/images/rainbow-wall-30880049.jpg
+    used_in:
+      - /index/
+  - title: Colorful prism light dispersion
+    source_url: https://www.pexels.com/photo/colorful-prism-light-dispersion-32489613/
+    creator: Pexels contributor
+    license_url: https://www.pexels.com/license/
+    local_path: /assets/showcase/premium/images/prism-dispersion-32489613.jpg
+    used_in:
+      - /index/
+  - title: Abstract gold metallic texture background
+    source_url: https://www.pexels.com/photo/abstract-gold-metallic-texture-background-35058966/
+    creator: Pexels contributor
+    license_url: https://www.pexels.com/license/
+    local_path: /assets/showcase/premium/images/gold-metallic-35058966.jpg
+    used_in:
+      - /faq/
+  - title: Abstract bokeh light pattern with golden tones
+    source_url: https://www.pexels.com/photo/abstract-bokeh-light-pattern-with-golden-tones-29735307/
+    creator: Pexels contributor
+    license_url: https://www.pexels.com/license/
+    local_path: /assets/showcase/premium/images/gold-bokeh-29735307.jpg
+    used_in:
+      - /news/
+  - title: Close-up of a rainbow light reflection on a wall
+    source_url: https://www.pexels.com/photo/close-up-of-a-rainbow-light-reflection-on-a-wall-7456500/
+    creator: Pexels contributor
+    license_url: https://www.pexels.com/license/
+    local_path: /assets/showcase/premium/images/rainbow-reflection-7456500.jpg
+    used_in:
+      - /index/
+  - title: Creative workspace vlog in neon-lit studio
+    source_url: https://www.pexels.com/video/creative-workspace-vlog-in-neon-lit-studio-33812581/
+    creator: Pexels contributor
+    license_url: https://www.pexels.com/license/
+    local_path: /assets/showcase/premium/videos/creative-workspace-33812581.mp4
+    used_in:
+      - /index/
+  - title: Modern desktop coding setup with neon glow
+    source_url: https://www.pexels.com/video/modern-desktop-coding-setup-with-neon-glow-34279721/
+    creator: Pexels contributor
+    license_url: https://www.pexels.com/license/
+    local_path: /assets/showcase/premium/videos/desktop-coding-34279721.mp4
+    used_in:
+      - /index/
+  - title: Vibrant light streaks in abstract motion
+    source_url: https://www.pexels.com/video/vibrant-light-streaks-in-abstract-motion-31930757/
+    creator: Pexels contributor
+    license_url: https://www.pexels.com/license/
+    local_path: /assets/showcase/premium/videos/light-streaks-31930757.mp4
+    used_in:
+      - /index/
+  - title: Vivid neon abstract moving light patterns
+    source_url: https://www.pexels.com/video/vivid-neon-abstract-moving-light-patterns-35966276/
+    creator: Pexels contributor
+    license_url: https://www.pexels.com/license/
+    local_path: /assets/showcase/premium/videos/neon-patterns-35966276.mp4
+    used_in:
+      - /index/
+  - title: Abstract neon light patterns with dynamic motion
+    source_url: https://www.pexels.com/video/abstract-neon-light-patterns-with-dynamic-motion-34246072/
+    creator: Pexels contributor
+    license_url: https://www.pexels.com/license/
+    local_path: /assets/showcase/premium/videos/dynamic-neon-34246072.mp4
+    used_in:
+      - /index/
+  - title: A modern home office setup with a computer screen and speaker
+    source_url: https://www.pexels.com/video/a-modern-home-office-setup-with-a-computer-screen-and-speaker-6266437/
+    creator: Pexels contributor
+    license_url: https://www.pexels.com/license/
+    local_path: /assets/showcase/premium/videos/modern-home-office-6266437.mp4
+    used_in:
+      - /index/

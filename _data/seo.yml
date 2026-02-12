@@ -1,0 +1,31 @@
+organization:
+  name: ゆっくりまとめプロセッサー
+  legal_name: OTM株式会社
+  url: https://yukkurimatomeprocessor.com
+  logo: /assets/showcase/aurora/logo-mark.svg
+  image: /assets/img/製品画像_1.png
+  description: 動画編集の前処理から台本整理、制作運用までを効率化する日本語向けワークフロー支援ツール。
+  contact_email: fujita.otm@gmail.com
+  same_as:
+    - https://x.com/OTM_corp
+    - https://github.com/fujitatsukasa
+    - https://youtube.com/@tsukasa_otm
+
+software:
+  name: ゆっくりまとめプロセッサー
+  category: VideoEditingApplication
+  operating_system: Windows
+  application_suite: YukkuriMatomeProcessor Suite
+  offer_price: "100000"
+  offer_currency: JPY
+
+social:
+  twitter_handle: OTM_corp
+
+default_faq:
+  - q: 無料で試せますか？
+    a: 7日間の無料トライアルで全機能を確認できます。
+  - q: どのような環境で利用できますか？
+    a: Windows環境での利用を前提に設計されています。
+  - q: 問い合わせはどこからできますか？
+    a: お問い合わせページからメール・SNS経由で連絡できます。

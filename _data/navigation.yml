@@ -1,0 +1,33 @@
+items:
+  - key: home
+    label: ホーム
+    url: /
+  - key: download
+    label: ダウンロード
+    url: /download/
+  - key: instructions
+    label: 使い方
+    url: /instructions/
+  - key: update
+    label: アップデート
+    url: /update/
+  - key: news
+    label: お知らせ
+    url: /news/
+  - key: faq
+    label: FAQ
+    url: /faq/
+  - key: purchase
+    label: 購入
+    url: /purchase/
+  - key: contact
+    label: お問い合わせ
+    url: /contact/
+
+cta:
+  primary:
+    label: 無料トライアル
+    url: /download/
+  secondary:
+    label: お問い合わせ
+    url: /contact/

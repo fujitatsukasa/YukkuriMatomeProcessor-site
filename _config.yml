@@ -15,20 +15,24 @@ title-img: "/assets/img/header.png"
 # Your name to show in the footer
 author: 藤田 僚
 
+url: https://yukkurimatomeprocessor.com
+baseurl: ""
+description: 動画編集運用を効率化する「ゆっくりまとめプロセッサー」の公式サイト。導入情報、使い方、最新更新、サポート情報を提供します。
+keywords: ゆっくりまとめプロセッサー, 動画編集, 自動化, 台本取得, YMM4, ワークフロー
+
 ###############################################
 # --- List of links in the navigation bar --- #
 ###############################################
 
 navbar-links:
-  ホーム: "index"
-  ダウンロード: "download"
-  使い方: "Instructions"
-  # よくある質問: "FAQ"
-  アップデート: "update"
-  お知らせ: "news"
-  お問い合わせ: "contact"
-  # 購入: "purchase"
-  
+  ホーム: "/"
+  ダウンロード: "/download/"
+  使い方: "/instructions/"
+  アップデート: "/update/"
+  お知らせ: "/news/"
+  FAQ: "/faq/"
+  購入: "/purchase/"
+  お問い合わせ: "/contact/"
 
 ################
 # --- Logo --- #
@@ -167,11 +171,12 @@ footer-hover-col: "#0085A1"
 # カスタムCSSファイルを追加
 site-css:
   - "/assets/css/custom-styles.css"
+  - "/assets/css/rich-interactions.css"
 
 
 # If you have common JavaScript files that should be included in every page, list them here
 #site-js:
-#  - "/assets/js/custom-script.js"
+#  - "/assets/js/site-interactions.js"
 
 #################################
 # --- Web Analytics Section --- #
@@ -268,7 +273,7 @@ date_format: "%Y年%m月%d日"
 #################################################################################
 
 # Output options (more information on Jekyll's site)
-timezone: "America/Toronto"
+timezone: "Asia/Tokyo"
 markdown: kramdown
 highlighter: rouge
 permalink: /:year-:month-:day-:title/
@@ -302,9 +307,13 @@ exclude:
   - README.md
   - screenshot.png
   - docs/
+  - .tmp_site_check/
+  - .history/
+  - scripts/
 
 plugins:
   - jekyll-sitemap
 
 # Beautiful Jekyll / Dean Attali
 # 2fc73a3a967e97599c9763d05e564189
+

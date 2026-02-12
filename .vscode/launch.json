@@ -2,6 +2,20 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Serve: GUI (Default)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/serve_local.py",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "purpose": ["debug-in-terminal"],
+      "env": {
+        "PATH": "${env:PATH};C:\\\\Ruby40-x64\\\\bin"
+      },
+      "justMyCode": true,
+      "args": ["--gui", "--open"]
+    },
+    {
       "name": "Serve: No GUI",
       "type": "python",
       "request": "launch",
@@ -11,21 +25,11 @@
       "env": {
         "PATH": "${env:PATH};C:\\\\Ruby40-x64\\\\bin"
       },
-      "justMyCode": true,
-      "args": ["--no-gui", "--open"]
-    },
-    {
-      "name": "Serve: GUI",
-      "type": "python",
-      "request": "launch",
-      "program": "${workspaceFolder}/serve_local.py",
-      "cwd": "${workspaceFolder}",
-      "console": "integratedTerminal",
-      "env": {
-        "PATH": "${env:PATH};C:\\\\Ruby40-x64\\\\bin"
+      "presentation": {
+        "hidden": true
       },
       "justMyCode": true,
-      "args": ["--gui", "--open"]
+      "args": ["--no-gui", "--open"]
     }
   ]
 }

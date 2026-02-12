@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+  
+  
+
+  <title>使い方ガイド | ゆっくりまとめプロセッサー</title>
+  <meta name="description" content="初期設定、台本取得、編集開始、失敗時の対処、開発者向けローカル実行手順をまとめた公式ガイドです。">
+
+  
+  <meta name="keywords" content="使い方, 初期設定, 台本取得, ローカルプレビュー, Jekyll, VSCode">
+  
+
+  
+  <meta name="robots" content="index, follow">
+  
+
+  
+  
+  
+  <meta name="author" content="藤田 僚">
+  
+
+  
+
+  
+  <link rel="alternate" type="application/rss+xml" title="ゆっくりまとめプロセッサー" href="https://yukkurimatomeprocessor.com/feed.xml">
+  
+
+  <link rel="canonical" href="https://yukkurimatomeprocessor.com/instructions/">
+
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ゆっくりまとめプロセッサー">
+  <meta property="og:title" content="使い方ガイド | ゆっくりまとめプロセッサー">
+  <meta property="og:description" content="初期設定、台本取得、編集開始、失敗時の対処、開発者向けローカル実行手順をまとめた公式ガイドです。">
+  <meta property="og:url" content="https://yukkurimatomeprocessor.com/instructions/">
+  
+  <meta property="og:image" content="https://yukkurimatomeprocessor.com/assets/showcase/premium/images/vertical-monitor-15249470.jpg">
+  
+
+  
+
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <meta name="twitter:site" content="@OTM_corp">
+  <meta name="twitter:creator" content="@OTM_corp">
+  
+  <meta name="twitter:title" content="使い方ガイド | ゆっくりまとめプロセッサー">
+  <meta name="twitter:description" content="初期設定、台本取得、編集開始、失敗時の対処、開発者向けローカル実行手順をまとめた公式ガイドです。">
+  
+  <meta name="twitter:image" content="https://yukkurimatomeprocessor.com/assets/showcase/premium/images/vertical-monitor-15249470.jpg">
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+    
+      
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Shippori+Mincho+B1:wght@500;600;700&display=swap">
+
+
+    
+  
+
+  
+    
+      <link rel="stylesheet" href="/assets/css/brand-system.css">
+    
+      <link rel="stylesheet" href="/assets/css/brand-pages.css">
+    
+  
+
+  
+    
+      <link rel="stylesheet" href="/assets/css/custom-styles.css">
+    
+  
+
+  
+
+  
+
+  
+  
+  <link rel="icon" href="/assets/img/favicon.ico">
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "ゆっくりまとめプロセッサー",
+  "legalName": "OTM株式会社",
+  "url": "https://yukkurimatomeprocessor.com",
+  "logo": "https://yukkurimatomeprocessor.com/assets/showcase/aurora/logo-mark.svg",
+  "description": "動画編集の前処理から台本整理、制作運用までを効率化する日本語向けワークフロー支援ツール。",
+  "email": "fujita.otm@gmail.com",
+  "telephone": "090-6170-2570",
+  "address": {
+    "@type": "PostalAddress",
+    "postalCode": "〒242-0017",
+    "streetAddress": "神奈川県大和市大和東3-5-24 2F",
+    "addressCountry": "JP"
+  },
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "contactType": "customer support",
+      "email": "fujita.otm@gmail.com",
+      "telephone": "090-6170-2570",
+      "availableLanguage": "ja"
+    }
+  ],
+  "sameAs": ["https://x.com/OTM_corp","https://github.com/fujitatsukasa","https://youtube.com/@tsukasa_otm"]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "ゆっくりまとめプロセッサー",
+  "url": "https://yukkurimatomeprocessor.com",
+  "inLanguage": "ja",
+  "publisher": {
+    "@type": "Organization",
+    "name": "ゆっくりまとめプロセッサー"
+  }
+}
+</script>
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "ゆっくりまとめプロセッサー",
+  "applicationCategory": "VideoEditingApplication",
+  "operatingSystem": "Windows",
+  "applicationSuite": "YukkuriMatomeProcessor Suite",
+  "description": "動画編集の前処理から台本整理、制作運用までを効率化する日本語向けワークフロー支援ツール。",
+  "url": "https://yukkurimatomeprocessor.com/instructions/",
+  "image": "https://yukkurimatomeprocessor.com/assets/showcase/premium/images/vertical-monitor-15249470.jpg",
+  "offers": {
+    "@type": "Offer",
+    "price": "100000",
+    "priceCurrency": "JPY"
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "ホーム",
+      "item": "https://yukkurimatomeprocessor.com/"
+    }
+    
+    ,
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "使い方",
+      "item": "https://yukkurimatomeprocessor.com/instructions/"
+    }
+    
+  ]
+}
+</script>
+
+
+  
+</head>
+
+<body class="brand-body">
+  
+
+
+<a class="skip-link" href="#main-content">本文へスキップ</a>
+<header class="site-header brand-header" data-header>
+  <div class="brand-header__inner">
+    <a class="logo brand-logo" href="/" aria-label="ゆっくりまとめプロセッサー ホーム">
+      <span class="logo-badge brand-logo__mark" aria-hidden="true">
+        <img class="logo-mark" src="/assets/showcase/aurora/logo-mark.svg" alt="">
+      </span>
+      <span class="logo-text brand-logo__text">
+        <span class="logo-title">ゆっくりまとめプロセッサー</span>
+        <span class="logo-sub">Video Workflow Suite</span>
+      </span>
+    </a>
+
+    <button class="brand-nav-toggle" type="button" aria-expanded="false" aria-controls="brand-primary-nav" data-nav-toggle>
+      <span class="sr-only">メニューを開閉</span>
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="nav brand-nav" id="brand-primary-nav" aria-label="主要ナビゲーション" data-nav>
+      
+        
+        
+        
+        <a href="/">ホーム</a>
+      
+        
+        
+        
+        <a href="/download/">ダウンロード</a>
+      
+        
+        
+        
+        <a href="/instructions/" aria-current="page" class="is-active">使い方</a>
+      
+        
+        
+        
+        <a href="/update/">アップデート</a>
+      
+        
+        
+        
+        <a href="/news/">お知らせ</a>
+      
+        
+        
+        
+        <a href="/faq/">FAQ</a>
+      
+        
+        
+        
+        <a href="/purchase/">購入</a>
+      
+        
+        
+        
+        <a href="/contact/">お問い合わせ</a>
+      
+    </nav>
+
+    <div class="header-actions brand-header__actions">
+      <a class="btn header-cta brand-btn brand-btn--ghost" href="/contact/">法人デモ</a>
+      <a class="btn header-cta primary brand-btn brand-btn--primary" href="/download/">無料トライアル</a>
+    </div>
+  </div>
+  <div class="brand-scroll-progress" aria-hidden="true"><span data-scroll-progress></span></div>
+</header>
+
+  <main id="main-content" class="brand-main" tabindex="-1">
+    
+  
+  
+  <nav class="brand-breadcrumbs" aria-label="パンくず">
+    <ol>
+      <li><a href="/">ホーム</a></li>
+      
+        <li aria-current="page">使い方</li>
+      
+    </ol>
+  </nav>
+
+
+    <section class="brand-section">
+  <div class="brand-shell">
+    <p class="brand-kicker">Onboarding Guide</p>
+    <h1>初期設定から編集開始までを3ステップで進める</h1>
+    <p class="brand-lead">
+      目的は、最短で安定運用に入ることです。
+      「初期設定 → 台本取得 → 編集開始」の順で進め、最後に失敗例を確認してください。
+    </p>
+    <div class="brand-grid brand-grid--3">
+      <article class="brand-card premium-glass">
+        <h2>STEP 1 初期設定</h2>
+        <p><code>YukkuriMovieMaker.exe</code> の実行パスと台本保存先を固定します。</p>
+      </article>
+      <article class="brand-card premium-glass">
+        <h2>STEP 2 台本取得</h2>
+        <p>対象URLから記事を選択し、編集用に整形済み台本を作成します。</p>
+      </article>
+      <article class="brand-card premium-glass">
+        <h2>STEP 3 編集開始</h2>
+        <p>整形結果を確認し、YMM4への受け渡しと編集作業へ進みます。</p>
+      </article>
+    </div>
+    <nav class="flow-links" aria-label="関連ページ">
+      <a href="/download/">先にダウンロードする</a>
+      <a href="/faq/">次: FAQを確認</a>
+      <a href="/purchase/">次: 購入条件を確認</a>
+      <a href="/contact/">解決しない場合はお問い合わせ</a>
+    </nav>
+  </div>
+</section>
+
+<section class="brand-section brand-section--alt">
+  <div class="brand-shell brand-grid brand-grid--2">
+    <article class="brand-card premium-glass">
+      <h2>初期設定（必須）</h2>
+      <ul class="brand-list">
+        <li>YMM4実行ファイルの絶対パスを登録</li>
+        <li>台本保存先フォルダを運用単位で固定</li>
+        <li>試用中は設定変更内容を記録</li>
+        <li>権限エラーを防ぐため、書き込み可能フォルダを利用</li>
+      </ul>
+    </article>
+    <article class="brand-card premium-glass">
+      <h2>台本取得</h2>
+      <ol class="brand-list">
+        <li>対象サイトを選択</li>
+        <li>記事一覧を取得</li>
+        <li>使用する記事を選択</li>
+        <li>台本をダウンロードして整形</li>
+      </ol>
+    </article>
+    <article class="brand-card premium-glass">
+      <h2>編集開始前チェック</h2>
+      <ul class="brand-list">
+        <li>不要行・注釈の除去が完了しているか</li>
+        <li>見出しと本文の区切りが崩れていないか</li>
+        <li>読み上げ速度・尺の確認をしたか</li>
+      </ul>
+    </article>
+    <article class="brand-card premium-glass">
+      <h2>よくある失敗</h2>
+      <ul class="brand-list">
+        <li>YMM4パス未設定で連携に失敗</li>
+        <li>URL形式エラーで台本取得に失敗</li>
+        <li>保存先権限不足で出力に失敗</li>
+      </ul>
+      <div class="brand-inline-actions">
+        <a class="brand-btn brand-btn--ghost" href="/faq/#faq-trouble">トラブルFAQへ</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="brand-section">
+  <div class="brand-shell">
+    <p class="brand-kicker">Developer Notes</p>
+    <h2>開発者向けローカル実行（Jekyll）</h2>
+    <p class="brand-lead">VSCodeのデバッグ定義を使い、実行ディレクトリずれを防いでください。</p>
+    <div class="brand-grid brand-grid--2">
+      <article class="notice-box">
+        <h3>VSCode デバッグ起動</h3>
+        <ul class="brand-list">
+          <li>既定プロファイル: <code>Serve: GUI (Default)</code></li>
+          <li>フォールバック: <code>Serve: No GUI</code></li>
+          <li>F5実行: <code>Serve: GUI (Default)</code>（<code>--gui --open</code>）</li>
+          <li>CLI実行: <code>serve_local.cmd --no-gui --open</code></li>
+        </ul>
+      </article>
+      <article class="notice-box">
+        <h3>トラブルシュート</h3>
+        <ul class="brand-list">
+          <li><code>Could not locate Gemfile</code>: 実行ディレクトリをリポジトリ直下へ戻す</li>
+          <li><code>'bundle' が見つからない</code>: Ruby/BundlerのPATHを確認して再起動</li>
+          <li>ポート競合: 既存Jekyllプロセスを停止して再起動</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="brand-section brand-section--alt">
+  <div class="brand-shell brand-grid brand-grid--2">
+    <article class="brand-card premium-glass">
+      <h2>次アクション</h2>
+      <ul class="brand-list">
+        <li><a href="/download/">ダウンロード</a>で試用開始</li>
+        <li><a href="/faq/">FAQ</a>で失敗例を確認</li>
+        <li><a href="/purchase/">購入</a>で契約条件を確認</li>
+        <li><a href="/contact/">お問い合わせ</a>で導入相談</li>
+      </ul>
+    </article>
+    <article class="brand-card premium-glass">
+      <h2>関連情報</h2>
+      <div class="brand-inline-actions">
+        <a class="brand-btn brand-btn--ghost" href="/update/">アップデート履歴</a>
+        <a class="brand-btn brand-btn--ghost" href="/news/">お知らせ</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+  </main>
+  <footer class="brand-footer">
+  <div class="brand-footer__inner">
+    <div class="brand-footer__lead">
+      <h2>ゆっくりまとめプロセッサー</h2>
+      <p>編集運用の再現性を高めるため、導入判断から運用定着までを継続的に支援します。</p>
+    </div>
+
+    <div class="brand-footer__grid">
+      <section>
+        <h3>主要ページ</h3>
+        <ul>
+          
+          <li><a href="/">ホーム</a></li>
+          
+          <li><a href="/download/">ダウンロード</a></li>
+          
+          <li><a href="/instructions/">使い方</a></li>
+          
+          <li><a href="/update/">アップデート</a></li>
+          
+          <li><a href="/news/">お知らせ</a></li>
+          
+          <li><a href="/faq/">FAQ</a></li>
+          
+          <li><a href="/purchase/">購入</a></li>
+          
+          <li><a href="/contact/">お問い合わせ</a></li>
+          
+        </ul>
+      </section>
+      <section>
+        <h3>サポート</h3>
+        <ul>
+          <li><a href="mailto:fujita.otm@gmail.com">メール</a></li>
+          <li><a href="https://x.com/OTM_corp" target="_blank" rel="noopener noreferrer">X (Twitter)</a></li>
+          <li><a href="https://discordapp.com/users/762244902124912695" target="_blank" rel="noopener noreferrer">Discord</a></li>
+          <li><a href="https://github.com/fujitatsukasa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        </ul>
+      </section>
+      <section>
+        <h3>クイックリンク</h3>
+        <ul>
+          <li><a href="/download/">無料トライアルを開始</a></li>
+          <li><a href="/purchase/">料金を確認</a></li>
+          <li><a href="/news/">最新のお知らせ</a></li>
+        </ul>
+      </section>
+      <section>
+        <h3>法務・ポリシー</h3>
+        <ul>
+          
+          <li><a href="/legal/commercial-transactions/">特定商取引法に基づく表記</a></li>
+          
+          <li><a href="/legal/terms/">利用規約</a></li>
+          
+          <li><a href="/legal/privacy/">プライバシーポリシー</a></li>
+          
+          <li><a href="/legal/refund-policy/">返金・キャンセルポリシー</a></li>
+          
+        </ul>
+      </section>
+    </div>
+  </div>
+  <p class="brand-footer__copyright">© 2026 OTM株式会社</p>
+</footer>
+
+  
+
+
+
+
+  
+    
+    
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+      <script src="/assets/js/brand-ui.js?v=1770862579"></script>
+    
+  
+
+
+
+
+
+
+
+
+</body>
+</html>

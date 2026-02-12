@@ -1,0 +1,16 @@
+{% assign legal_links = site.data.legal.links %}
+{% if legal_links and legal_links.size > 0 %}
+<div class="legal-links{% if include.compact %} legal-links--compact{% endif %}">
+  {% unless include.title == false %}
+  <h3 class="legal-links__title">{{ include.title | default: "法務・ポリシー" }}</h3>
+  {% endunless %}
+  <ul class="legal-links__list">
+    {% for item in legal_links %}
+    <li><a href="{{ item.url | relative_url }}">{{ item.label }}</a></li>
+    {% endfor %}
+  </ul>
+  {% if include.note %}
+  <p class="legal-links__note">{{ include.note }}</p>
+  {% endif %}
+</div>
+{% endif %}

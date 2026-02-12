@@ -1,0 +1,22 @@
+---
+common-ext-css:
+  - href: "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Shippori+Mincho+B1:wght@500;600;700&display=swap"
+common-css:
+  - "/assets/css/brand-system.css"
+  - "/assets/css/brand-pages.css"
+common-js:
+  - "/assets/js/brand-ui.js"
+---
+<!DOCTYPE html>
+<html lang="{{ page.language | default: site.lang | default: 'ja' }}">
+{% include head.html %}
+<body class="brand-body{% if page.body_class %} {{ page.body_class }}{% endif %}">
+  {% include brand-header.html %}
+  <main id="main-content" class="brand-main" tabindex="-1">
+    {% include brand-breadcrumbs.html %}
+    {{ content }}
+  </main>
+  {% include brand-footer.html %}
+  {% include footer-scripts.html %}
+</body>
+</html>

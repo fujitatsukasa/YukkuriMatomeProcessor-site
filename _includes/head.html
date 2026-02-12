@@ -2,60 +2,167 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  {% capture pagetitle %}
-    {%- if page.share-title -%}
-      {{ page.share-title | strip_html | xml_escape }}
-    {%- elsif page.title -%}
-      {{ page.title | strip_html | xml_escape  }}
-    {%- else -%}
-      {{ site.title | strip_html | xml_escape }}
-    {%- endif -%}
-  {% endcapture %}
+  {% assign seo_data = site.data.seo %}
 
-  {% capture title %}
-    {%- if site.title and site.title-on-all-pages and (site.title != pagetitle) -%}
-      {{ pagetitle }} | {{ site.title }}
-    {%- else -%}
-      {{ pagetitle }}
-    {%- endif -%}
+  {% capture raw_page_title %}
+    {% if page.seo_title %}
+      {{ page.seo_title | strip_html | strip }}
+    {% elsif page.share-title %}
+      {{ page.share-title | strip_html | strip }}
+    {% elsif page.title %}
+      {{ page.title | strip_html | strip }}
+    {% else %}
+      {{ site.title | strip_html | strip }}
+    {% endif %}
   {% endcapture %}
+  {% assign raw_page_title = raw_page_title | strip %}
 
-  {% capture description %}
-    {%- if page.share-description -%}
-      {{ page.share-description | strip_html | xml_escape }}
-    {%- elsif page.subtitle -%}
-      {{ page.subtitle | strip_html | xml_escape }}
-    {%- else -%}
-      {%- assign excerpt_length = site.excerpt_length | default: 50 -%}
-      {{ page.content | strip_html | xml_escape | truncatewords: excerpt_length | strip }}
-    {%- endif -%}
-  {% endcapture %}
-
-  <title>{{ title }}</title>
-
-  {% capture author %}
-    {%- if page.author -%}
-      {{  page.author | strip_html }}
-    {%- elsif site.author -%}
-      {{ site.author }}
-    {%- endif -%}
-  {% endcapture %}
-  {% if author != "" %}
-  <meta name="author" content="{{ author }}">
+  {% assign title_has_site_name = false %}
+  {% if site.title and raw_page_title contains site.title %}
+    {% assign title_has_site_name = true %}
   {% endif %}
 
-  <meta name="description" content="{{ description }}">
+  {% capture full_title %}
+    {% if site.title and site.title-on-all-pages and site.title != raw_page_title and title_has_site_name == false %}
+      {{ raw_page_title }} | {{ site.title }}
+    {% else %}
+      {{ raw_page_title }}
+    {% endif %}
+  {% endcapture %}
+  {% assign full_title = full_title | strip %}
+
+  {% capture description %}
+    {% if page.seo_description %}
+      {{ page.seo_description | strip_html | strip }}
+    {% elsif page.share-description %}
+      {{ page.share-description | strip_html | strip }}
+    {% elsif page.subtitle %}
+      {{ page.subtitle | strip_html | strip }}
+    {% elsif site.description %}
+      {{ site.description | strip_html | strip }}
+    {% else %}
+      {% assign excerpt_length = site.excerpt_length | default: 50 %}
+      {{ page.content | strip_html | strip | truncatewords: excerpt_length }}
+    {% endif %}
+  {% endcapture %}
+  {% assign description = description | strip %}
+
+  {% capture keywords %}
+    {% if page.seo_keywords %}
+      {{ page.seo_keywords }}
+    {% elsif page.keywords %}
+      {{ page.keywords }}
+    {% elsif site.keywords %}
+      {{ site.keywords }}
+    {% endif %}
+  {% endcapture %}
+  {% assign keywords = keywords | strip %}
+
+  {% capture canonical_url %}
+    {% if page.canonical_url %}
+      {{ page.canonical_url }}
+    {% else %}
+      {{ page.url | absolute_url | strip_index }}
+    {% endif %}
+  {% endcapture %}
+  {% assign canonical_url = canonical_url | strip %}
+
+  {% capture og_image %}
+    {% if page.seo_image %}
+      {{ page.seo_image | absolute_url }}
+    {% elsif page.share-img %}
+      {{ page.share-img | absolute_url }}
+    {% elsif page.cover-img %}
+      {% if page.cover-img.first %}
+        {{ page.cover-img[0].first.first | absolute_url }}
+      {% else %}
+        {{ page.cover-img | absolute_url }}
+      {% endif %}
+    {% elsif page.thumbnail-img %}
+      {{ page.thumbnail-img | absolute_url }}
+    {% elsif seo_data.organization.image %}
+      {{ seo_data.organization.image | absolute_url }}
+    {% elsif site.avatar %}
+      {{ site.avatar | absolute_url }}
+    {% endif %}
+  {% endcapture %}
+  {% assign og_image = og_image | strip %}
+
+  {% capture twitter_handle %}
+    {% if seo_data.social.twitter_handle %}
+      {{ seo_data.social.twitter_handle }}
+    {% elsif site.social-network-links.twitter %}
+      {{ site.social-network-links.twitter }}
+    {% endif %}
+  {% endcapture %}
+  {% assign twitter_handle = twitter_handle | strip %}
+  {% if twitter_handle contains "http" %}
+    {% assign tw_parts = twitter_handle | split: "/" %}
+    {% assign twitter_handle = tw_parts | last %}
+  {% endif %}
+  {% assign twitter_handle = twitter_handle | remove: "@" | strip %}
+
+  <title>{{ full_title }}</title>
+  <meta name="description" content="{{ description | xml_escape }}">
+
+  {% if keywords != "" %}
+  <meta name="keywords" content="{{ keywords | xml_escape }}">
+  {% endif %}
+
+  {% if page.noindex %}
+  <meta name="robots" content="noindex, nofollow">
+  {% else %}
+  <meta name="robots" content="index, follow">
+  {% endif %}
+
+  {% capture author %}
+    {% if page.author %}
+      {{ page.author | strip_html | strip }}
+    {% elsif site.author %}
+      {{ site.author | strip_html | strip }}
+    {% endif %}
+  {% endcapture %}
+  {% assign author = author | strip %}
+  {% if author != "" %}
+  <meta name="author" content="{{ author | xml_escape }}">
+  {% endif %}
 
   {% if site.mobile-theme-col %}
   <meta name="theme-color" content="{{ site.mobile-theme-col }}">
   {% endif %}
 
-  {% if site.keywords %}
-  <meta name="keywords" content="{{ site.keywords }}">
-  {% endif %}
-
   {% if site.rss-description %}
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | absolute_url }}">
+  {% endif %}
+
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:type" content="{% if page.layout == 'brand-post' or page.id %}article{% else %}website{% endif %}">
+  <meta property="og:site_name" content="{{ site.title | xml_escape }}">
+  <meta property="og:title" content="{{ full_title | xml_escape }}">
+  <meta property="og:description" content="{{ description | xml_escape }}">
+  <meta property="og:url" content="{{ canonical_url }}">
+  {% if og_image != "" %}
+  <meta property="og:image" content="{{ og_image }}">
+  {% endif %}
+
+  {% if page.layout == 'brand-post' or page.id %}
+  <meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+  {% if page.last-updated %}
+  <meta property="article:modified_time" content="{{ page.last-updated | date_to_xmlschema }}">
+  {% endif %}
+  {% endif %}
+
+  <meta name="twitter:card" content="{% if og_image != '' %}summary_large_image{% else %}summary{% endif %}">
+  {% if twitter_handle != "" %}
+  <meta name="twitter:site" content="@{{ twitter_handle }}">
+  <meta name="twitter:creator" content="@{{ twitter_handle }}">
+  {% endif %}
+  <meta name="twitter:title" content="{{ full_title | xml_escape }}">
+  <meta name="twitter:description" content="{{ description | xml_escape }}">
+  {% if og_image != "" %}
+  <meta name="twitter:image" content="{{ og_image }}">
   {% endif %}
 
   {% include gtag.html %}
@@ -87,89 +194,28 @@
       {% include ext-css.html css=css %}
     {% endfor %}
   {% endif %}
-  
+
   {% if page.css %}
     {% for css in page.css %}
       <link rel="stylesheet" href="{{ css | relative_url }}">
     {% endfor %}
   {% endif %}
 
-  {% if site.fb_app_id %}
-  <meta property="fb:app_id" content="{{ site.fb_app_id }}">
+  {% assign favicon_exists = site.static_files | where: "path", "/assets/img/favicon.ico" | size %}
+  {% if favicon_exists == 1 %}
+  <link rel="icon" href="{{ '/assets/img/favicon.ico' | relative_url }}">
   {% endif %}
 
-  {% if site.title %}
-  <meta property="og:site_name" content="{{ site.title }}">
-  {% endif %}
-
-  {%- capture img -%}
-    {%- if page.share-img -%}
-      {{ page.share-img }}
-    {%- elsif page.cover-img -%}
-      {%- if page.cover-img.first -%}
-        {{ page.cover-img[0].first.first }}
-      {%- else -%}
-        {{ page.cover-img }}
-      {%- endif -%}
-    {%- elsif page.thumbnail-img -%}
-      {{ page.thumbnail-img }}
-    {%- elsif site.avatar -%}
-      {{ site.avatar }}
-    {% endif %}
-  {%- endcapture -%}
-  {%- assign img=img | strip -%}
-
-  <meta property="og:title" content="{{ title }}">
-  <meta property="og:description" content="{{ description }}">
-
-  {% if img != "" %}
-  <meta property="og:image" content="{{ img | absolute_url }}">
-  {% endif %}
-
-  {% if page.id %}
-  <meta property="og:type" content="article">
-  {% if author != "" %}
-  <meta property="og:article:author" content="{{ author }}">
-  {% endif %}
-  <meta property="og:article:published_time" content="{{ page.date | date_to_xmlschema }}">
-  <meta property="og:url" content="{{ page.url | absolute_url }}">
-  <link rel="canonical" href="{{ page.url | absolute_url }}">
-  {% else %}
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="{{ page.url | absolute_url | strip_index }}">
-  <link rel="canonical" href="{{ page.url | absolute_url | strip_index }}">
-  {% endif %}
-
-  {% if img != "" and img != site.avatar %}
-  <meta name="twitter:card" content="summary_large_image">
-  {% else %}
-  <meta name="twitter:card" content="summary">
-  {% endif %}
-  <meta name="twitter:site" content="@{{ site.social-network-links.twitter }}">
-  <meta name="twitter:creator" content="@{{ site.social-network-links.twitter }}">
-
-  <meta property="twitter:title" content="{{ title }}">
-  <meta property="twitter:description" content="{{ description }}">
-
-  {% if img != "" %}
-  <meta name="twitter:image" content="{{ img | absolute_url }}">
+  {% if page.comments and site.staticman.repository and site.staticman.branch %}
+  <link rel="stylesheet" href="{{ '/assets/css/staticman.css' | relative_url }}">
   {% endif %}
 
   {% include matomo.html %}
-
-  {% if page.comments and site.staticman.repository and site.staticman.branch %}
-  <link rel="stylesheet" href="{{ "/assets/css/staticman.css" | relative_url }}">
-  {% endif %}
-
-  {% assign favicon_exists = site.static_files | where: "path", "/assets/img/favicon.ico" | size %}
-  {% if favicon_exists == 1 %}
-  <link rel="icon" href="/assets/img/favicon.ico" />
-  {% endif %}
+  {% include brand-schema.html %}
 
   {% if page.head-extra %}
     {% for file in page.head-extra %}
       {% include {{ file }} %}
     {% endfor %}
   {% endif %}
-
 </head>

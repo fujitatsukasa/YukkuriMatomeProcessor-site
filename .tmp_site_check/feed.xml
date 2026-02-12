@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    
+    <title>ゆっくりまとめプロセッサー</title>
+    
+    
+    <description>ゆっくりまとめプロセッサーは、編集時間の効率革命を起こしムダを排除し、利益を生むツールです。</description>
+    
+    <link>https://yukkurimatomeprocessor.com/</link>
+    <atom:link href="https://yukkurimatomeprocessor.com/feed.xml" rel="self" type="application/rss+xml" />
+    
+    
+      <item>
+        <title>お知らせ: サイトリニューアルのお知らせ</title>
+        <description>
+          
+          サイトのデザインと情報導線を見直し、必要情報へ到達しやすい構成に改善しました。
+今後も導入判断に必要な情報を継続的に更新します。
+
+        </description>
+        <pubDate>Sat, 24 Jan 2026 09:00:00 +0900</pubDate>
+        <link>https://yukkurimatomeprocessor.com/2026-01-24-site-renewal/</link>
+        <guid isPermaLink="true">https://yukkurimatomeprocessor.com/2026-01-24-site-renewal/</guid>
+      </item>
+    
+      <item>
+        <title>お知らせ: よくある質問ページを追加しました</title>
+        <description>
+          
+          導入前後の疑問を整理し、FAQページを更新しました。
+解決しない場合は、お問い合わせページからご連絡ください。
+
+        </description>
+        <pubDate>Tue, 20 Jan 2026 10:00:00 +0900</pubDate>
+        <link>https://yukkurimatomeprocessor.com/2026-01-20-faq-update/</link>
+        <guid isPermaLink="true">https://yukkurimatomeprocessor.com/2026-01-20-faq-update/</guid>
+      </item>
+    
+      <item>
+        <title>お知らせ: ダウンロード手順を更新しました</title>
+        <description>
+          
+          最新版のダウンロード手順を更新しました。
+導入時の確認項目も合わせて見直し、迷わず開始できる構成に整えています。
+
+        </description>
+        <pubDate>Thu, 15 Jan 2026 18:30:00 +0900</pubDate>
+        <link>https://yukkurimatomeprocessor.com/2026-01-15-download-guide/</link>
+        <guid isPermaLink="true">https://yukkurimatomeprocessor.com/2026-01-15-download-guide/</guid>
+      </item>
+    
+  </channel>
+</rss>

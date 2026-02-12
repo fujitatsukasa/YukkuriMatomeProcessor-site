@@ -1,284 +1,209 @@
 ---
-layout: page
+layout: brand-page
 title: よくある質問
-subtitle: FAQ
+subtitle: 導入前後の疑問をカテゴリ別に整理
+permalink: /faq/
+nav_key: faq
+schema_type: faq
+seo_title: FAQ | ゆっくりまとめプロセッサー
+seo_description: 全般、導入、台本取得、設定、トラブル、購入・契約の6カテゴリで疑問を整理したFAQです。
+seo_keywords: FAQ, 質問, トラブルシューティング, サポート, 購入条件
+seo_image: /assets/showcase/premium/images/gold-metallic-35058966.jpg
+faq_schema:
+  - q: 無料で試せますか？
+    a: 7日間の無料トライアルで全機能を確認できます。
+  - q: 台本は自動取得できますか？
+    a: 対応サイトのURL入力により、台本を取得して編集用に整形できます。
+  - q: サポートはどこから連絡できますか？
+    a: お問い合わせページからメール・SNS経由で連絡できます。
 ---
+{% assign legal = site.data.legal %}
 
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;600;700;800&display=swap');
-
-  * {
-    box-sizing: border-box;
-  }
-
-  body {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    font-family: 'Noto Sans JP', 'Inter', sans-serif;
-    margin: 0;
-    padding: 0;
-  }
-
-  .page-content {
-    max-width: 100%;
-    margin: 0;
-    padding: 0;
-    background: transparent;
-    box-shadow: none;
-  }
-
-  .hero-section {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 100px 20px 60px;
-    text-align: center;
-  }
-
-  .hero-section h1 {
-    font-size: 3.5em;
-    font-weight: 900;
-    margin-bottom: 20px;
-    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-    color: #ffffff;
-  }
-
-  .hero-section p {
-    font-size: 1.4em;
-    color: #ffffff;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    font-weight: 600;
-  }
-
-  .faq-section {
-    background: white;
-    padding: 80px 20px;
-    min-height: 100vh;
-  }
-
-  .faq-container {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .category-section {
-    margin-bottom: 60px;
-  }
-
-  .category-title {
-    font-size: 2.2em;
-    font-weight: 900;
-    color: #1a202c;
-    margin-bottom: 30px;
-    padding-bottom: 15px;
-    border-bottom: 4px solid;
-    border-image: linear-gradient(90deg, #667eea 0%, #764ba2 100%) 1;
-  }
-
-  .faq-item {
-    background: linear-gradient(135deg, #f5f7fa 0%, #ffffff 100%);
-    border-radius: 15px;
-    margin-bottom: 20px;
-    border: 2px solid transparent;
-    transition: all 0.3s ease;
-    overflow: hidden;
-  }
-
-  .faq-item:hover {
-    border-color: #667eea;
-    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
-  }
-
-  .faq-item[open] {
-    border-color: #667eea;
-    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
-  }
-
-  .faq-question {
-    font-size: 1.3em;
-    font-weight: 800;
-    color: #1a202c;
-    padding: 25px 30px;
-    cursor: pointer;
-    list-style: none;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    transition: all 0.3s ease;
-  }
-
-  .faq-question:hover {
-    background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
-  }
-
-  .faq-question::before {
-    content: 'Q';
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 900;
-    font-size: 1.2em;
-    flex-shrink: 0;
-  }
-
-  .faq-question::-webkit-details-marker {
-    display: none;
-  }
-
-  .faq-answer {
-    padding: 0 30px 30px 85px;
-    color: #2d3748;
-    line-height: 1.9;
-    font-size: 1.05em;
-    font-weight: 500;
-  }
-
-  .faq-answer strong {
-    color: #1a202c;
-    font-weight: 800;
-  }
-
-  @media (max-width: 768px) {
-    .hero-section h1 {
-      font-size: 2.2em;
-    }
-
-    .category-title {
-      font-size: 1.7em;
-    }
-
-    .faq-question {
-      font-size: 1.1em;
-      padding: 20px;
-    }
-
-    .faq-answer {
-      padding: 0 20px 20px 65px;
-    }
-  }
-</style>
-
-<div class="hero-section">
-  <h1>❓ よくある質問</h1>
-  <p>お客様からよく寄せられる質問とその回答</p>
-</div>
-
-<div class="faq-section">
-  <div class="faq-container">
-
-    <!-- 全般 -->
-    <div class="category-section">
-      <h2 class="category-title">🔹 全般</h2>
-
-      <details class="faq-item">
-        <summary class="faq-question">ソフトウェアの概要は？</summary>
-        <div class="faq-answer">
-          <p><strong>ゆっくりまとめプロセッサー</strong>は、動画編集の半自動化を実現するツールです。台本・画像・スレッド情報を瞬時に取得して、効率的な動画制作をサポートします。</p>
-        </div>
-      </details>
-
-      <details class="faq-item">
-        <summary class="faq-question">必要な動作環境は？</summary>
-        <div class="faq-answer">
-          <p>推奨環境は<strong>Windows 10以上</strong>または<strong>macOS 10.15以上</strong>です。最新のブラウザや動画編集ソフトがインストールされていることが望ましいです。</p>
-        </div>
-      </details>
-
-      <details class="faq-item">
-        <summary class="faq-question">利用料金は？</summary>
-        <div class="faq-answer">
-          <p><strong>7日間の無料トライアル</strong>で全機能をお試しいただけます。継続利用の料金については<a href="/purchase" style="color: #667eea; font-weight: 800;">購入ページ</a>をご確認ください。</p>
-        </div>
-      </details>
-
-      <details class="faq-item">
-        <summary class="faq-question">サポート体制は？</summary>
-        <div class="faq-answer">
-          <p>メール、Discord、Twitter、Chatworkで<strong>24〜48時間以内</strong>に返信いたします。詳しくは<a href="/contact" style="color: #667eea; font-weight: 800;">お問い合わせページ</a>をご覧ください。</p>
-        </div>
-      </details>
-    </div>
-
-    <!-- 動画編集関連 -->
-    <div class="category-section">
-      <h2 class="category-title">🎬 動画編集関連</h2>
-
-      <details class="faq-item">
-        <summary class="faq-question">動画編集の基本操作は？</summary>
-        <div class="faq-answer">
-          <p>動画のトリミング、結合、テキスト挿入などの基本操作は、<strong>直感的なUI</strong>で簡単に実行できます。各ボタン操作で迅速に編集できます。</p>
-        </div>
-      </details>
-
-      <details class="faq-item">
-        <summary class="faq-question">編集用テンプレートはありますか？</summary>
-        <div class="faq-answer">
-          <p>はい、<strong>標準テンプレート</strong>がいくつか用意されています。ユーザー独自のテンプレートも作成・保存可能です。</p>
-        </div>
-      </details>
-
-      <details class="faq-item">
-        <summary class="faq-question">保存形式の推奨は？</summary>
-        <div class="faq-answer">
-          <p>編集後の動画は、一般的な<strong>MP4形式</strong>が推奨されます。高品質保存のため、ビットレートの調整が可能です。</p>
-        </div>
-      </details>
-    </div>
-
-    <!-- 台本取得・設定 -->
-    <div class="category-section">
-      <h2 class="category-title">📄 台本取得・設定</h2>
-
-      <details class="faq-item">
-        <summary class="faq-question">台本取得は自動で行えますか？</summary>
-        <div class="faq-answer">
-          <p>はい、サイトやまとめ掲示板から<strong>台本を自動で取得</strong>し、編集に利用できる形式に整形します。取得先は設定で変更可能です。</p>
-        </div>
-      </details>
-
-      <details class="faq-item">
-        <summary class="faq-question">台本はどのように編集できますか？</summary>
-        <div class="faq-answer">
-          <p>取得した台本は、<strong>内蔵エディタ</strong>で直接編集可能です。また、テンプレート適用機能で自動補正も行えます。</p>
-        </div>
-      </details>
-
-      <details class="faq-item">
-        <summary class="faq-question">自動補完機能はありますか？</summary>
-        <div class="faq-answer">
-          <p>はい、入力中の台本に対して、<strong>自動補完機能</strong>が搭載されています。キーワードや定型文を自動で提案します。</p>
-        </div>
-      </details>
-    </div>
-
-    <!-- トラブルシューティング -->
-    <div class="category-section">
-      <h2 class="category-title">🔧 トラブルシューティング</h2>
-
-      <details class="faq-item">
-        <summary class="faq-question">エラー発生時の対処法は？</summary>
-        <div class="faq-answer">
-          <p>エラーメッセージに従い、<strong>システムの再起動</strong>や設定の見直しを行ってください。解決しない場合は、<a href="/contact" style="color: #667eea; font-weight: 800;">サポート</a>にお問い合わせください。</p>
-        </div>
-      </details>
-
-      <details class="faq-item">
-        <summary class="faq-question">ソフトウェアが起動しない場合は？</summary>
-        <div class="faq-answer">
-          <p>起動しない場合は、システム要件の再確認、ソフトウェアの<strong>再インストール</strong>、または最新アップデートの適用を試みてください。</p>
-        </div>
-      </details>
-
-      <details class="faq-item">
-        <summary class="faq-question">動作が遅い場合の対策は？</summary>
-        <div class="faq-answer">
-          <p>動作が遅い場合は、<strong>不要なバックグラウンドアプリケーションの停止</strong>、設定の最適化、またはシステムのアップグレードを検討してください。</p>
-        </div>
-      </details>
-    </div>
-
+<section class="brand-section">
+  <div class="brand-shell">
+    <p class="brand-kicker">FAQ</p>
+    <h1>導入前後によくある質問</h1>
+    <p class="brand-lead">目的に合うカテゴリから確認してください。解決しない場合はお問い合わせへ進んでください。</p>
+    <article class="brand-card premium-glass">
+      <h2>目次</h2>
+      <div class="brand-grid brand-grid--3">
+        <ul class="brand-list">
+          <li><a href="#faq-general">全般</a></li>
+          <li><a href="#faq-onboarding">導入</a></li>
+        </ul>
+        <ul class="brand-list">
+          <li><a href="#faq-script">台本取得</a></li>
+          <li><a href="#faq-settings">設定</a></li>
+        </ul>
+        <ul class="brand-list">
+          <li><a href="#faq-trouble">トラブル</a></li>
+          <li><a href="#faq-purchase">購入・契約</a></li>
+        </ul>
+      </div>
+    </article>
   </div>
-</div>
+</section>
+
+<section class="brand-section brand-section--alt" id="faq-general">
+  <div class="brand-shell">
+    <h2>全般</h2>
+    <div class="faq-list" role="list">
+      <details class="faq-item" open>
+        <summary>ゆっくりまとめプロセッサーは何を解決するツールですか？</summary>
+        <div class="faq-answer">台本取得から編集開始までの前工程を半自動化し、準備時間の短縮と品質の再現性を高めます。</div>
+      </details>
+      <details class="faq-item">
+        <summary>無料で試せますか？</summary>
+        <div class="faq-answer">はい。7日間の無料トライアルで全機能を確認できます。</div>
+      </details>
+      <details class="faq-item">
+        <summary>想定ユーザーは誰ですか？</summary>
+        <div class="faq-answer">個人配信者、副業クリエイター、チーム運用担当者を想定しています。</div>
+      </details>
+      <details class="faq-item">
+        <summary>導入前に必ず確認すべきページは？</summary>
+        <div class="faq-answer"><a href="/download/">ダウンロード</a>、<a href="/instructions/">使い方</a>、<a href="/faq/">FAQ</a>、<a href="/purchase/">購入</a> の順で確認してください。</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="brand-section" id="faq-onboarding">
+  <div class="brand-shell">
+    <h2>導入</h2>
+    <div class="faq-list" role="list">
+      <details class="faq-item">
+        <summary>導入時に最初にやるべきことは？</summary>
+        <div class="faq-answer">最新版をダウンロードし、YMM4実行パスと保存先フォルダを設定してください。</div>
+      </details>
+      <details class="faq-item">
+        <summary>対応OSは何ですか？</summary>
+        <div class="faq-answer">Windows環境での利用を前提に設計しています。</div>
+      </details>
+      <details class="faq-item">
+        <summary>初期設定を早く終えるコツは？</summary>
+        <div class="faq-answer">使い方ページのSTEP順で設定し、変更内容をメモすると再作業を減らせます。</div>
+      </details>
+      <details class="faq-item">
+        <summary>チーム導入時に決めるべき項目は？</summary>
+        <div class="faq-answer">保存先命名ルール、連携パス、運用チェックリストの3点を先に揃えてください。</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="brand-section brand-section--alt" id="faq-script">
+  <div class="brand-shell">
+    <h2>台本取得</h2>
+    <div class="faq-list" role="list">
+      <details class="faq-item">
+        <summary>台本取得はどのように行いますか？</summary>
+        <div class="faq-answer">対応サイトのURL入力後、記事を選択して取得し、編集用に整形します。</div>
+      </details>
+      <details class="faq-item">
+        <summary>取得した台本は再編集できますか？</summary>
+        <div class="faq-answer">はい。不要行削除、見出し整理、読み上げ向け調整が可能です。</div>
+      </details>
+      <details class="faq-item">
+        <summary>URLエラーで取得できない場合は？</summary>
+        <div class="faq-answer">URL形式、対象対応状況、ネットワークの順で確認してください。</div>
+      </details>
+      <details class="faq-item">
+        <summary>取得件数が多いときの運用は？</summary>
+        <div class="faq-answer">まず試用用サンプルで手順を固定し、その後に本番件数へ拡張してください。</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="brand-section" id="faq-settings">
+  <div class="brand-shell">
+    <h2>設定</h2>
+    <div class="faq-list" role="list">
+      <details class="faq-item">
+        <summary>設定で優先すべき項目は？</summary>
+        <div class="faq-answer">YMM4パス、台本保存先、運用フォルダルールを優先して固定してください。</div>
+      </details>
+      <details class="faq-item">
+        <summary>複数人で設定を揃えるには？</summary>
+        <div class="faq-answer">初期値を定義した手順書を用意し、更新時は同じチェックリストで確認します。</div>
+      </details>
+      <details class="faq-item">
+        <summary>設定変更が反映されない場合は？</summary>
+        <div class="faq-answer">再起動、権限確認、保存先アクセス権の順に確認してください。</div>
+      </details>
+      <details class="faq-item">
+        <summary>設定バックアップは必要ですか？</summary>
+        <div class="faq-answer">チーム運用では必須です。変更履歴とあわせて保持してください。</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="brand-section brand-section--alt" id="faq-trouble">
+  <div class="brand-shell">
+    <h2>トラブル</h2>
+    <div class="faq-list" role="list">
+      <details class="faq-item">
+        <summary>起動しない場合の基本対応は？</summary>
+        <div class="faq-answer">実行権限、依存ソフト、セキュリティ設定を確認してください。</div>
+      </details>
+      <details class="faq-item">
+        <summary>YMM4連携が失敗する場合は？</summary>
+        <div class="faq-answer">YMM4パスを絶対パスで再指定し、設定保存後に再起動してください。</div>
+      </details>
+      <details class="faq-item">
+        <summary>保存エラーが出る場合は？</summary>
+        <div class="faq-answer">保存先の空き容量と書き込み権限を確認してください。</div>
+      </details>
+      <details class="faq-item">
+        <summary>問い合わせ時に必要な情報は？</summary>
+        <div class="faq-answer">OS、再現手順、発生時刻、エラー全文、回避可否を記載してください。</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="brand-section" id="faq-purchase">
+  <div class="brand-shell">
+    <h2>購入・契約</h2>
+    <div class="faq-list" role="list">
+      <details class="faq-item">
+        <summary>プレミアムLicenseの価格はいくらですか？</summary>
+        <div class="faq-answer">現在の販売価格は{{ legal.pricing.amount_including_tax }}で、販売モデルは{{ legal.pricing.model_label }}です。{{ legal.pricing.subscription_notice }} 詳細は<a href="/purchase/">購入ページ</a>で確認してください。</div>
+      </details>
+      <details class="faq-item">
+        <summary>購入申し込みはどのように進めますか？</summary>
+        <div class="faq-answer">購入ページで契約条件を確認後、<a href="/contact/">お問い合わせ</a>から購入希望をご連絡ください。</div>
+      </details>
+      <details class="faq-item">
+        <summary>購入前に確認すべき情報は？</summary>
+        <div class="faq-answer">価格、販売モデル（提供中/準備中）、提供時期、返金条件、支払期限を購入ページと法務ページで確認してください。</div>
+      </details>
+      <details class="faq-item">
+        <summary>契約・請求に関する相談先は？</summary>
+        <div class="faq-answer">記録の残るメール窓口を推奨します。詳細は<a href="/contact/">お問い合わせ</a>を参照してください。</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="brand-section brand-section--alt">
+  <div class="brand-shell brand-grid brand-grid--2">
+    <article class="brand-card premium-glass">
+      <h2>関連ページ</h2>
+      <ul class="brand-list">
+        <li><a href="/download/">ダウンロード</a></li>
+        <li><a href="/instructions/">使い方</a></li>
+        <li><a href="/purchase/">購入</a></li>
+        <li><a href="/update/">アップデート履歴</a></li>
+      </ul>
+    </article>
+    <article class="brand-card premium-glass">
+      <h2>解決しない場合</h2>
+      <div class="brand-inline-actions">
+        <a class="brand-btn brand-btn--primary" href="/contact/">お問い合わせ</a>
+      </div>
+    </article>
+  </div>
+</section>

@@ -1,0 +1,36 @@
+---
+layout: brand-page
+---
+<article class="brand-article">
+  {% assign hero_src = page.seo_image | default: '/assets/showcase/aurora/lobby-2.jpg' %}
+  {% assign hero_alt = page.hero_image_alt | default: '' %}
+  <header class="brand-article__header brand-shell">
+    <p class="brand-kicker">News</p>
+    <h1>{{ page.title }}</h1>
+    <p class="brand-article__meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: site.date_format | default: "%Y年%m月%d日" }}</time>
+      <span>{{ page.author | default: site.author }}</span>
+    </p>
+    <figure class="brand-panorama" style="margin-top: 14px;">
+      {% include responsive-image.html
+        src=hero_src
+        alt=hero_alt
+        class="brand-panorama__image"
+        sizes="(max-width: 900px) 100vw, 70vw"
+        loading="lazy"
+        decoding="async"
+      %}
+    </figure>
+  </header>
+  <div class="brand-article__body brand-shell">
+    {{ content }}
+  </div>
+  <aside class="brand-article__cta brand-shell">
+    <h2>次のアクション</h2>
+    <p>導入判断を進める場合は、無料トライアルとお問い合わせをご利用ください。</p>
+    <div class="brand-inline-actions">
+      <a class="brand-btn brand-btn--primary" href="{{ '/download/' | relative_url }}">無料トライアルを開始</a>
+      <a class="brand-btn brand-btn--ghost" href="{{ '/contact/' | relative_url }}">導入について問い合わせる</a>
+    </div>
+  </aside>
+</article>

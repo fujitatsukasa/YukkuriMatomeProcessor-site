@@ -3,6 +3,8 @@ layout: showcase
 title: デザイン01 | ゆっくりまとめプロセッサー
 description: "動画編集ソフト「ゆっくりまとめプロセッサー」の最先端UIランディングページ。"
 permalink: /design-01/
+noindex: true
+sitemap: false
 ---
 
 <style>
@@ -1301,7 +1303,7 @@ h1, h2, h3 {
   </nav>
     <div class="header-actions">
       <a class="btn header-cta" href="#pricing">無料トライアル</a>
-      <a class="btn header-cta primary" href="#contact">法人デモ</a>
+      <a class="btn header-cta primary" href="#contact">お問い合わせ</a>
     </div>
   </header>
 
@@ -1329,7 +1331,7 @@ h1, h2, h3 {
       </div>
       <div class="cta-row">
         <a class="btn primary" href="#pricing">無料トライアル</a>
-        <a class="btn" href="#contact">法人デモ</a>
+        <a class="btn" href="#contact">お問い合わせ</a>
       </div>
     </div>
   </section>
@@ -1633,7 +1635,7 @@ h1, h2, h3 {
           <li>AI自動カット・字幕</li>
           <li>カラー/オーディオ統合</li>
         </ul>
-        <a class="btn primary" href="#contact">法人デモ</a>
+        <a class="btn primary" href="#contact">お問い合わせ</a>
       </div>
       <div class="card pricing-card">
         <span class="card-kicker">STUDIO</span>
@@ -1852,7 +1854,7 @@ h1, h2, h3 {
     <div class="cta">
       <div>
         <p class="eyebrow">GET STARTED</p>
-        <h2>無料トライアルと法人デモを用意しています</h2>
+        <h2>無料トライアルとお問い合わせ窓口を用意しています</h2>
         <p>案件規模やワークフローに合わせ、最適な導入方法をご提案します。</p>
         <div class="cta-points">
           <span class="chip chip-small" style="--chip-img: url('/assets/showcase/aurora/hero-poster.jpg');">14日間の全機能トライアル</span>
@@ -1862,7 +1864,7 @@ h1, h2, h3 {
       </div>
       <div class="cta-actions">
         <a class="btn" href="#pricing">無料トライアル</a>
-        <a class="btn secondary" href="#contact">法人デモ</a>
+        <a class="btn secondary" href="#contact">お問い合わせ</a>
       </div>
     </div>
   </section>

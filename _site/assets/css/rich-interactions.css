@@ -1,0 +1,292 @@
+:root {
+  --chip-media-rise: -3px;
+  --chip-media-scale: 1.04;
+  --chip-media-shadow: 0 12px 24px rgba(216, 177, 114, 0.3);
+  --chip-media-border: rgba(255, 224, 164, 0.76);
+  --chip-text-border: rgba(255, 224, 164, 0.58);
+  --chip-text-bg: rgba(255, 231, 183, 0.1);
+  --card-hover-rise: -3px;
+  --card-hover-shadow:
+    0 14px 28px rgba(5, 7, 14, 0.32),
+    0 0 0 1px rgba(255, 225, 171, 0.14);
+  --card-hover-border: rgba(255, 226, 173, 0.52);
+  --card-hover-overlay: rgba(255, 220, 163, 0.06);
+  --card-hover-overlay-mobile: rgba(255, 220, 163, 0.04);
+  --card-hover-duration: 0.22s;
+}
+
+/* Text-like chips: no move/scale (prevents blur while animating) */
+.brand-pill,
+.flow-links a,
+.sidebar-badges span,
+.sidebar-pills a,
+.window-title .chip,
+.widget-tags span,
+.wl-filter,
+.wl-toggle,
+.wl-modal__tags span,
+.blog-tags a,
+.tag-btn,
+.mini-pill,
+.status-pill {
+  transition:
+    border-color 0.16s ease,
+    background-color 0.16s ease,
+    color 0.16s ease,
+    box-shadow 0.16s ease;
+  transform: none;
+  filter: none;
+  text-shadow: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .brand-pill:hover,
+  .brand-pill:focus-visible,
+  .flow-links a:hover,
+  .flow-links a:focus-visible,
+  .sidebar-badges span:hover,
+  .sidebar-badges span:focus-visible,
+  .sidebar-pills a:hover,
+  .sidebar-pills a:focus-visible,
+  .window-title .chip:hover,
+  .window-title .chip:focus-visible,
+  .widget-tags span:hover,
+  .widget-tags span:focus-visible,
+  .wl-filter:hover,
+  .wl-filter:focus-visible,
+  .wl-toggle:hover,
+  .wl-toggle:focus-visible,
+  .wl-modal__tags span:hover,
+  .wl-modal__tags span:focus-visible,
+  .blog-tags a:hover,
+  .blog-tags a:focus-visible,
+  .tag-btn:hover,
+  .tag-btn:focus-visible,
+  .mini-pill:hover,
+  .mini-pill:focus-visible,
+  .status-pill:hover,
+  .status-pill:focus-visible {
+    border-color: var(--chip-text-border);
+    background-color: var(--chip-text-bg);
+    box-shadow: 0 0 0 1px rgba(255, 238, 206, 0.18);
+    transform: none;
+    filter: none;
+  }
+}
+
+/* Image-like chips only: motion + sheen */
+[style*="--chip-img"],
+.mini-chip {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  transition:
+    transform 0.22s cubic-bezier(0.23, 0.82, 0.32, 1),
+    box-shadow 0.24s cubic-bezier(0.23, 0.82, 0.32, 1),
+    border-color 0.2s ease;
+}
+
+[style*="--chip-img"]::after,
+.mini-chip::after {
+  content: "";
+  position: absolute;
+  inset: -130% 55% 55% -130%;
+  pointer-events: none;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 30%,
+    rgba(255, 255, 255, 0.42) 50%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  opacity: 0;
+  transform: translate3d(-12%, 0, 0) rotate(12deg);
+  transition: opacity 0.18s ease, transform 0.56s cubic-bezier(0.23, 0.82, 0.32, 1);
+  z-index: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  [style*="--chip-img"]:hover,
+  [style*="--chip-img"]:focus-visible,
+  .mini-chip:hover,
+  .mini-chip:focus-visible {
+    transform: translateY(var(--chip-media-rise)) scale(var(--chip-media-scale)) translateZ(0);
+    box-shadow: var(--chip-media-shadow), 0 0 0 1px rgba(255, 231, 183, 0.38);
+    border-color: var(--chip-media-border);
+  }
+
+  [style*="--chip-img"]:hover::after,
+  [style*="--chip-img"]:focus-visible::after,
+  .mini-chip:hover::after,
+  .mini-chip:focus-visible::after {
+    opacity: 0.85;
+    transform: translate3d(220%, 0, 0) rotate(12deg);
+  }
+}
+
+@media (max-width: 900px) {
+  :root {
+    --chip-media-rise: -1px;
+    --chip-media-scale: 1.02;
+    --chip-media-shadow: 0 6px 12px rgba(216, 177, 114, 0.2);
+    --card-hover-rise: -2px;
+    --card-hover-shadow:
+      0 10px 18px rgba(6, 8, 16, 0.24),
+      0 0 0 1px rgba(255, 225, 171, 0.1);
+    --card-hover-overlay: var(--card-hover-overlay-mobile);
+  }
+}
+
+/* Card hover: subtle, readable, non-annoying */
+.brand-card,
+.premium-stat,
+.price-card,
+.metric,
+.showcase-card,
+.news-card,
+.release-panel,
+.release-notes,
+.release-list,
+.notice-box,
+.timeline-item,
+.faq-item,
+.channel,
+.post-preview,
+.product-card,
+.sidebar-card,
+.brand-feature-showcase,
+.brand-panorama,
+.legal-table-wrap,
+.purchase-summary,
+.purchase-consent,
+.purchase-button-wrap,
+.brand-article__cta,
+.card {
+  transition:
+    transform var(--card-hover-duration) cubic-bezier(0.23, 0.82, 0.32, 1),
+    box-shadow var(--card-hover-duration) cubic-bezier(0.23, 0.82, 0.32, 1),
+    border-color var(--card-hover-duration) ease;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .brand-card:hover,
+  .brand-card:focus-within,
+  .premium-stat:hover,
+  .premium-stat:focus-within,
+  .price-card:hover,
+  .price-card:focus-within,
+  .metric:hover,
+  .metric:focus-within,
+  .showcase-card:hover,
+  .showcase-card:focus-within,
+  .news-card:hover,
+  .news-card:focus-within,
+  .release-panel:hover,
+  .release-panel:focus-within,
+  .release-notes:hover,
+  .release-notes:focus-within,
+  .release-list:hover,
+  .release-list:focus-within,
+  .notice-box:hover,
+  .notice-box:focus-within,
+  .timeline-item:hover,
+  .timeline-item:focus-within,
+  .faq-item:hover,
+  .faq-item:focus-within,
+  .channel:hover,
+  .channel:focus-within,
+  .post-preview:hover,
+  .post-preview:focus-within,
+  .product-card:hover,
+  .product-card:focus-within,
+  .sidebar-card:hover,
+  .sidebar-card:focus-within,
+  .brand-feature-showcase:hover,
+  .brand-feature-showcase:focus-within,
+  .brand-panorama:hover,
+  .brand-panorama:focus-within,
+  .legal-table-wrap:hover,
+  .legal-table-wrap:focus-within,
+  .purchase-summary:hover,
+  .purchase-summary:focus-within,
+  .purchase-consent:hover,
+  .purchase-consent:focus-within,
+  .purchase-button-wrap:hover,
+  .purchase-button-wrap:focus-within,
+  .brand-article__cta:hover,
+  .brand-article__cta:focus-within,
+  .card:hover,
+  .card:focus-within {
+    transform: translateY(var(--card-hover-rise)) translateZ(0);
+    box-shadow:
+      var(--card-hover-shadow),
+      inset 0 0 0 999px var(--card-hover-overlay);
+    border-color: var(--card-hover-border);
+  }
+
+  /* Override custom-styles sidebar hover reset with equal specificity */
+  .side-panel .sidebar-card:hover,
+  .side-panel .sidebar-card:focus-within {
+    transform: translateY(var(--card-hover-rise)) translateZ(0);
+    box-shadow:
+      var(--card-hover-shadow),
+      inset 0 0 0 999px var(--card-hover-overlay);
+    border-color: var(--card-hover-border);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-pill,
+  .flow-links a,
+  .sidebar-badges span,
+  .sidebar-pills a,
+  .window-title .chip,
+  .widget-tags span,
+  .wl-filter,
+  .wl-toggle,
+  .wl-modal__tags span,
+  .blog-tags a,
+  .tag-btn,
+  .mini-pill,
+  .status-pill,
+  [style*="--chip-img"],
+  .mini-chip,
+  .brand-card,
+  .premium-stat,
+  .price-card,
+  .metric,
+  .showcase-card,
+  .news-card,
+  .release-panel,
+  .release-notes,
+  .release-list,
+  .notice-box,
+  .timeline-item,
+  .faq-item,
+  .channel,
+  .post-preview,
+  .product-card,
+  .sidebar-card,
+  .brand-feature-showcase,
+  .brand-panorama,
+  .legal-table-wrap,
+  .purchase-summary,
+  .purchase-consent,
+  .purchase-button-wrap,
+  .brand-article__cta,
+  .card {
+    transition: none !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  [style*="--chip-img"]::after,
+  .mini-chip::after {
+    display: none !important;
+  }
+}

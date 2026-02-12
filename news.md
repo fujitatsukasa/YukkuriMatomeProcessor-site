@@ -1,87 +1,73 @@
 ---
-layout: page
+layout: brand-page
 title: お知らせ
+subtitle: 最新情報と運用アップデート
 permalink: /news/
+nav_key: news
+schema_type: news
+seo_title: お知らせ | ゆっくりまとめプロセッサー
+seo_description: 台本取得・整形・YMM4連携準備など、ゆっくりまとめプロセッサー本体の機能更新と運用告知を確認できます。
+seo_keywords: お知らせ, 更新情報, リリース, サポート
+seo_image: /assets/showcase/premium/images/gold-bokeh-29735307.jpg
 ---
 
-{% assign news_posts = site.categories.news | sort: "date" | reverse %}
-{% if news_posts and news_posts.size > 0 %}
-<ul class="posts-list list-unstyled" role="list">
-  {% for post in news_posts %}
-  <li class="post-preview">
-    <article>
-      {%- capture thumbnail -%}
-        {% if post.thumbnail-img %}
-          {{ post.thumbnail-img }}
-        {% elsif post.cover-img %}
-          {% if post.cover-img.first %}
-            {{ post.cover-img[0].first.first }}
-          {% else %}
-            {{ post.cover-img }}
-          {% endif %}
-        {% else %}
-        {% endif %}
-      {% endcapture %}
-      {% assign thumbnail=thumbnail | strip %}
+<section class="brand-section">
+  <div class="brand-shell">
+    <p class="brand-kicker">Newsroom</p>
+    <h1>最新のお知らせ</h1>
+    <p class="brand-lead">公開日・要約・詳細リンクを時系列で確認できます。台本取得・整形・編集準備の改善点を中心に掲載します。</p>
+    <nav class="flow-links" aria-label="関連ページ">
+      <a href="/update/">次: 更新履歴を確認</a>
+      <a href="/download/">次: ダウンロードへ進む</a>
+      <a href="/faq/">次: FAQを確認</a>
+      <a href="/contact/">不明点はお問い合わせ</a>
+    </nav>
+  </div>
+</section>
 
-      {% if site.feed_show_excerpt == false %}
-      {% if thumbnail != "" %}
-      <div class="post-image post-image-normal">
-        <a href="{{ post.url | absolute_url }}" aria-label="Thumbnail">
-          <img src="{{ thumbnail | absolute_url }}" alt="Post thumbnail">
-        </a>
-      </div>
-      {% endif %}
-      {% endif %}
-
-      <a href="{{ post.url | absolute_url }}">
-        <h2 class="post-title">{{ post.title | strip_html }}</h2>
-
+<section class="brand-section brand-section--alt">
+  <div class="brand-shell">
+    {% assign news_posts = site.categories.news | sort: "date" | reverse %}
+    {% if news_posts and news_posts.size > 0 %}
+    <ol class="timeline">
+      {% for post in news_posts %}
+      <li class="timeline-item premium-glass">
+        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y年%m月%d日" }}</time>
+        <h2><a href="{{ post.url | relative_url }}">{{ post.title | strip_html }}</a></h2>
         {% if post.subtitle %}
-          <h3 class="post-subtitle">
-          {{ post.subtitle | strip_html }}
-          </h3>
+        <p>{{ post.subtitle | strip_html }}</p>
         {% endif %}
-      </a>
-
-      {% if post.author %}
-        <span>By <strong>{{ post.author | strip_html }}</strong></span>
-      {% endif %}
-      <p class="post-meta">
-        {% assign date_format = site.date_format | default: "%B %-d, %Y" %}
-        {{ post.date | date: date_format }}
-      </p>
-
-      {% if thumbnail != "" %}
-      <div class="post-image post-image-small">
-        <a href="{{ post.url | absolute_url }}" aria-label="Thumbnail">
-          <img src="{{ thumbnail | absolute_url }}" alt="Post thumbnail">
-        </a>
-      </div>
-      {% endif %}
-
-      {% unless site.feed_show_excerpt == false %}
-      {% if thumbnail != "" %}
-      <div class="post-image post-image-short">
-        <a href="{{ post.url | absolute_url }}" aria-label="Thumbnail">
-          <img src="{{ thumbnail | absolute_url }}" alt="Post thumbnail">
-        </a>
-      </div>
-      {% endif %}
-
-      <div class="post-entry">
-        {% assign excerpt_length = site.excerpt_length | default: 50 %}
-        {{ post.excerpt | strip_html | truncatewords: excerpt_length }}
-        {% assign excerpt_word_count = post.excerpt | number_of_words %}
-        {% if post.content != post.excerpt or excerpt_word_count > excerpt_length %}
-          <a href="{{ post.url | absolute_url }}" class="post-read-more">[Read&nbsp;More]</a>
-        {% endif %}
-      </div>
-      {% endunless %}
+        <p>{{ post.excerpt | strip_html | truncate: 170 }}</p>
+        <div class="brand-inline-actions">
+          <a class="brand-btn brand-btn--ghost" href="{{ post.url | relative_url }}">詳細を見る</a>
+        </div>
+      </li>
+      {% endfor %}
+    </ol>
+    {% else %}
+    <article class="brand-card premium-glass">
+      <h2>現在お知らせはありません</h2>
+      <p>新しい更新情報はこのページで公開します。急ぎの相談はお問い合わせをご利用ください。</p>
     </article>
-  </li>
-  {% endfor %}
-</ul>
-{% else %}
-<p>現在お知らせはありません。</p>
-{% endif %}
+    {% endif %}
+  </div>
+</section>
+
+<section class="brand-section">
+  <div class="brand-shell brand-grid brand-grid--2">
+    <article class="brand-card premium-glass">
+      <h2>機能確認ページ</h2>
+      <ul class="brand-list">
+        <li><a href="/update/">アップデート履歴</a>: 変更内容の時系列確認</li>
+        <li><a href="/faq/">FAQ</a>: 導入・運用時の疑問解消</li>
+      </ul>
+    </article>
+    <article class="brand-card premium-glass">
+      <h2>次アクション</h2>
+      <div class="brand-inline-actions">
+        <a class="brand-btn brand-btn--primary" href="/download/">無料トライアルを開始</a>
+        <a class="brand-btn brand-btn--ghost" href="/contact/">お問い合わせ</a>
+      </div>
+    </article>
+  </div>
+</section>

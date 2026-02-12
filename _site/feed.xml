@@ -7,47 +7,48 @@
     
     <description>ゆっくりまとめプロセッサーは、編集時間の効率革命を起こしムダを排除し、利益を生むツールです。</description>
     
-    <link>http://localhost:4002/</link>
-    <atom:link href="http://localhost:4002/feed.xml" rel="self" type="application/rss+xml" />
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
     
     
       <item>
         <title>お知らせ: サイトリニューアルのお知らせ</title>
         <description>
           
-          サイトのデザインと構成を見直し、情報が探しやすくなるよう改善しました。
-今後もアップデートを継続していきます。
+          サイトのデザインと情報導線を見直し、必要情報へ到達しやすい構成に改善しました。
+あわせて、ゆっくりまとめプロセッサー本来の機能である「対応URLからの台本取得」「編集用の台本整形」「YMM4向け初期設定」をホーム・使い方・FAQで明確に確認できるようにしました。
+今後も機能追加や運用変更がある際は、お知らせで継続的に案内します。
 
         </description>
-        <pubDate>Fri, 23 Jan 2026 19:00:00 -0500</pubDate>
-        <link>http://localhost:4002/2026-01-23-site-renewal/</link>
-        <guid isPermaLink="true">http://localhost:4002/2026-01-23-site-renewal/</guid>
+        <pubDate>Sat, 24 Jan 2026 09:00:00 +0900</pubDate>
+        <link>http://localhost:4000/2026-01-24-site-renewal/</link>
+        <guid isPermaLink="true">http://localhost:4000/2026-01-24-site-renewal/</guid>
       </item>
     
       <item>
         <title>お知らせ: よくある質問ページを追加しました</title>
         <description>
           
-          サポート情報を探しやすくするため、FAQページを更新しました。
-ご不明点がある場合はお問い合わせフォームからご連絡ください。
+          導入前後の疑問を整理し、FAQページを更新しました。
+解決しない場合は、お問い合わせページからご連絡ください。
 
         </description>
-        <pubDate>Mon, 19 Jan 2026 20:00:00 -0500</pubDate>
-        <link>http://localhost:4002/2026-01-19-faq-update/</link>
-        <guid isPermaLink="true">http://localhost:4002/2026-01-19-faq-update/</guid>
+        <pubDate>Tue, 20 Jan 2026 10:00:00 +0900</pubDate>
+        <link>http://localhost:4000/2026-01-20-faq-update/</link>
+        <guid isPermaLink="true">http://localhost:4000/2026-01-20-faq-update/</guid>
       </item>
     
       <item>
         <title>お知らせ: ダウンロード手順を更新しました</title>
         <description>
           
-          最新版のダウンロード手順を追記しました。
-手順に沿って進めれば、よりスムーズに導入できます。
+          最新版のダウンロード手順を更新しました。
+導入時の確認項目も合わせて見直し、迷わず開始できる構成に整えています。
 
         </description>
-        <pubDate>Thu, 15 Jan 2026 04:30:00 -0500</pubDate>
-        <link>http://localhost:4002/2026-01-15-download-guide/</link>
-        <guid isPermaLink="true">http://localhost:4002/2026-01-15-download-guide/</guid>
+        <pubDate>Thu, 15 Jan 2026 18:30:00 +0900</pubDate>
+        <link>http://localhost:4000/2026-01-15-download-guide/</link>
+        <guid isPermaLink="true">http://localhost:4000/2026-01-15-download-guide/</guid>
       </item>
     
   </channel>
