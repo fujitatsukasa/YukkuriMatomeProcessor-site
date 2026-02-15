@@ -252,6 +252,20 @@ def _safe_echo(text: str) -> None:
             pass
 
 
+def _is_econnaborted_header(line: str) -> bool:
+    lower = line.lower()
+    return (
+        "error" in lower
+        and "errno::econnaborted" in lower
+        and "@ io_fillbuf" in lower
+    )
+
+
+def _is_webrick_trace_line(line: str) -> bool:
+    lower = line.lower()
+    return ("webrick/httpserver.rb" in lower) or ("webrick/server.rb" in lower)
+
+
 def _parse_args() -> tuple[argparse.Namespace, list[str]]:
     default_port = int(os.getenv("JEKYLL_PORT", "4000"))
     default_host = os.getenv("JEKYLL_HOST", "127.0.0.1")
@@ -387,6 +401,9 @@ def main() -> int:
     opened = False
     warned_pagination = False
     warned_wdm = False
+    pending_econnaborted_header: str | None = None
+    suppress_webrick_trace = False
+    suppressed_econnaborted_count = 0
     start = time.time()
 
     output_queue: queue.Queue[str] = queue.Queue()
@@ -397,8 +414,46 @@ def main() -> int:
     legal_pages = _collect_section_index_pages(project_dir, "legal")
     gui_enabled = bool(args.open_gui)
 
+    def _emit_disconnect_summary() -> None:
+        nonlocal suppressed_econnaborted_count
+        suppressed_econnaborted_count += 1
+        if suppressed_econnaborted_count == 1:
+            print("[INFO] Ignored benign WEBrick client disconnect (Errno::ECONNABORTED).")
+        elif suppressed_econnaborted_count % 10 == 0:
+            print(
+                "[INFO] Ignored benign WEBrick client disconnects so far: "
+                f"{suppressed_econnaborted_count}."
+            )
+
+    def _flush_pending_econnaborted_header() -> None:
+        nonlocal pending_econnaborted_header
+        if pending_econnaborted_header is None:
+            return
+        _safe_echo(pending_econnaborted_header)
+        pending_econnaborted_header = None
+
     def handle_line(line: str) -> None:
         nonlocal opened, warned_pagination, warned_wdm
+        nonlocal pending_econnaborted_header, suppress_webrick_trace
+
+        if pending_econnaborted_header is not None:
+            if _is_webrick_trace_line(line):
+                _emit_disconnect_summary()
+                pending_econnaborted_header = None
+                suppress_webrick_trace = True
+                return
+            _safe_echo(pending_econnaborted_header)
+            pending_econnaborted_header = None
+
+        if suppress_webrick_trace:
+            if _is_webrick_trace_line(line):
+                return
+            suppress_webrick_trace = False
+
+        if _is_econnaborted_header(line):
+            pending_econnaborted_header = line
+            return
+
         _safe_echo(line)
         if (not opened) and args.open_browser and (
             "Server address:" in line
@@ -528,6 +583,7 @@ def main() -> int:
             pump_output()
             maybe_open_fallback()
             if p.poll() is not None:
+                _flush_pending_econnaborted_header()
                 _report_nonzero_exit(int(p.returncode or 0))
                 root.after(200, root.destroy)
                 return
@@ -542,6 +598,7 @@ def main() -> int:
             pump_output()
             maybe_open_fallback()
             if p.poll() is not None:
+                _flush_pending_econnaborted_header()
                 code = int(p.returncode or 0)
                 _report_nonzero_exit(code)
                 return code
