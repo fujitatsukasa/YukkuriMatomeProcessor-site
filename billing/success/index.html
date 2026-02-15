@@ -3,28 +3,53 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex,nofollow,noarchive">
-  <title>決済完了 | ゆっくりまとめプロセッサー</title>
-  <link rel="stylesheet" href="/assets/site.css">
+  <meta name="robots" content="noindex,nofollow">
+  <title>決済が完了しました</title>
+  <style>
+    :root {
+      color-scheme: light;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+    }
+    body {
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+      color: #0f172a;
+      background: linear-gradient(160deg, #f8fbff, #eef4ff);
+      line-height: 1.7;
+    }
+    main {
+      width: min(640px, 100%);
+      background: #ffffff;
+      border: 1px solid #d7e3ff;
+      border-radius: 14px;
+      padding: 28px 22px;
+      text-align: center;
+      box-shadow: 0 12px 34px rgba(15, 23, 42, 0.08);
+    }
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(1.5rem, 2.4vw, 1.9rem);
+      line-height: 1.4;
+    }
+    p {
+      margin: 0;
+      color: #334155;
+    }
+  </style>
 </head>
 <body>
-  <main class="return-page" aria-labelledby="page-title">
-    <p class="eyebrow">Stripe Checkout</p>
-    <h1 id="page-title">決済が完了しました</h1>
-    <p class="message">ご利用ありがとうございます。アプリに戻ってください。</p>
-    <p class="sub-message">5秒後にトップページへ移動します。</p>
-    <div class="actions">
-      <a class="btn btn-primary" href="https://yukkurimatomeprocessor.com/">アプリに戻る</a>
-      <a class="btn btn-secondary" href="https://yukkurimatomeprocessor.com/">トップへ戻る</a>
-    </div>
-    <noscript>
-      <p class="sub-message">自動遷移が無効です。上のボタンからお戻りください。</p>
-    </noscript>
+  <main>
+    <h1>決済が完了しました</h1>
+    <p>決済が完了しました。このタブを閉じてアプリに戻ってください。</p>
   </main>
-  <script>
-    setTimeout(function () {
-      location.href = "https://yukkurimatomeprocessor.com/";
-    }, 5000);
-  </script>
 </body>
 </html>

@@ -412,6 +412,17 @@ def main() -> int:
     pages = _collect_pages(project_dir)
     posts = _collect_posts(project_dir)
     legal_pages = _collect_section_index_pages(project_dir, "legal")
+    billing_shortcuts: list[dict[str, str]] = []
+    billing_entries = [
+        ("Billing success", "/billing/success/", project_dir / "billing" / "success" / "index.html"),
+        ("Billing cancel", "/billing/cancel/", project_dir / "billing" / "cancel" / "index.html"),
+        ("Account return", "/account/", project_dir / "account" / "index.html"),
+    ]
+    for title, path, source in billing_entries:
+        if source.exists():
+            billing_shortcuts.append(
+                {"title": title, "path": path, "file": str(source.relative_to(project_dir))}
+            )
     gui_enabled = bool(args.open_gui)
 
     def _emit_disconnect_summary() -> None:
@@ -570,6 +581,7 @@ def main() -> int:
                 ).pack(fill="x", pady=2)
 
         add_section("ページ", pages)
+        add_section("Billing", billing_shortcuts)
         add_section("法務", legal_pages)
         add_section("投稿", posts)
 
