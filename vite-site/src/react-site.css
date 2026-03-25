@@ -1117,6 +1117,10 @@ code {
   align-content: center;
 }
 
+.lp-hero__copy > .brand-kicker {
+  display: none;
+}
+
 .lp-hero__copy .brand-title {
   display: grid;
   gap: 0.18em;
