@@ -327,7 +327,7 @@ export function HomePage() {
 
             <ActionGroup
               actions={[
-                { label: '無料で開始', href: '/download/', variant: 'primary' },
+                { label: '無料で始める！', href: '/download/', variant: 'primary' },
                 { label: '使い方を見る', href: '/instructions/', variant: 'ghost' },
                 { label: '導入について問い合わせる', href: '/contact/', variant: 'ghost' },
               ]}
@@ -476,7 +476,7 @@ export function HomePage() {
               <div className="lp-scene__links">
                 <Link to="/instructions/">使い方を見る</Link>
                 <Link to="/faq/#faq-trouble">トラブルFAQ</Link>
-                <Link to="/download/">無料で開始</Link>
+                <Link to="/download/">無料で始める！</Link>
               </div>
             </div>
           </div>
@@ -721,7 +721,7 @@ export function HomePage() {
               使い方、FAQ、法務、サポートまで先に見せることで、最後の CTA を押す時点で不安が残りにくい構成にしています。
             </p>
             <p>
-              まず始めるなら <Link to="/download/">無料で開始</Link>、
+              まず始めるなら <Link to="/download/">無料で始める！</Link>、
               実運用の流れを見たいなら <Link to="/instructions/">使い方</Link>、
               導入前提を相談したいなら <Link to="/contact/">お問い合わせ</Link> へ進んでください。
             </p>
@@ -749,7 +749,7 @@ export function HomePage() {
 
             <ActionGroup
               actions={[
-                { label: '無料で開始', href: '/download/', variant: 'primary' },
+                { label: '無料で始める！', href: '/download/', variant: 'primary' },
                 { label: '使い方を見る', href: '/instructions/', variant: 'ghost' },
                 { label: '導入について問い合わせる', href: '/contact/', variant: 'ghost' },
               ]}
