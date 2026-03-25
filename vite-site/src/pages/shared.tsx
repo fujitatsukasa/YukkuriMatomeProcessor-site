@@ -1,167 +1,91 @@
-import { type PointerEvent, useRef } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { InteractiveCard, PageMeta } from '@/components/ui'
 import { media } from '@/data/assets'
 import { legal, type NewsPost } from '@/data/site-content'
 
-const heroPipeline = [
-  { step: '01', title: 'ネタ収集', note: '記事と話題を保存' },
-  { step: '02', title: '台本化', note: '見せる順番を整理' },
-  { step: '03', title: '会話化', note: '役割ごとに分解' },
-  { step: '04', title: '素材設計', note: '立ち絵と音声を配置' },
-  { step: '05', title: 'YMM4準備', note: '話者と素材を整列' },
-] as const
-
-const heroTopics = [
-  '保存した記事候補を一覧で比較',
-  '切り抜く話題をその場で選別',
-  '使う順番を決めて台本へ渡す',
-] as const
-
-const heroConversation = [
+const productViews = [
   {
-    speaker: '霊夢',
-    body: '最初に結論を置いて、反応集向けにテンポを作ろう。',
-    align: 'left',
+    key: 'topics',
+    label: 'ネタ一覧',
+    title: '記事や話題を一覧で見比べる',
+    body: '保存した候補を比較して、反応集や解説に使うネタを絞り込みます。',
+    image: media.productImage2,
+    alt: '保存した記事や話題を一覧で見比べるネタ一覧画面',
   },
   {
-    speaker: '魔理沙',
-    body: '補足は後半へ回して、見せ場に合わせて素材も先に決めるぜ。',
-    align: 'right',
+    key: 'script',
+    label: '会話台本',
+    title: '話者ごとの会話台本を整理する',
+    body: '台本作成と会話形式の整理を同じ流れで進め、字幕や読み上げの前提を揃えます。',
+    image: media.settingsShot,
+    alt: '会話台本と読み上げ設定を確認する画面',
   },
   {
-    speaker: '霊夢',
-    body: '最後に話者と順番を整えて、そのままYMM4へ渡せる形にするよ。',
-    align: 'left',
+    key: 'ymm4',
+    label: 'YMM4準備',
+    title: 'YMM4前の素材と話者を揃える',
+    body: '立ち絵・画像・音声の並びを整理して、編集前の再調整を減らします。',
+    image: media.productImage1,
+    alt: 'YMM4前の準備内容を確認できる画面',
   },
 ] as const
 
-const heroAssets = ['立ち絵差分', '場面画像', '読み上げ音声', 'テロップ方針'] as const
+const productFlow = ['ネタ収集', '台本作成', '会話台本', '素材整理', 'YMM4準備'] as const
 
-export function HomeHeroStage() {
-  const ref = useRef<HTMLDivElement | null>(null)
+type ProductDemoTabsProps = {
+  className?: string
+  compact?: boolean
+}
 
-  const handlePointerMove = (event: PointerEvent<HTMLDivElement>) => {
-    const node = ref.current
-    if (!node || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      return
-    }
-
-    const rect = node.getBoundingClientRect()
-    const x = ((event.clientX - rect.left) / rect.width) * 100
-    const y = ((event.clientY - rect.top) / rect.height) * 100
-    const rotateX = ((50 - y) / 50) * 4
-    const rotateY = ((x - 50) / 50) * 4
-
-    node.style.setProperty('--hero-pointer-x', `${x}%`)
-    node.style.setProperty('--hero-pointer-y', `${y}%`)
-    node.style.setProperty('--hero-rotate-x', `${rotateX}deg`)
-    node.style.setProperty('--hero-rotate-y', `${rotateY}deg`)
-  }
-
-  const handlePointerLeave = () => {
-    const node = ref.current
-    if (!node) {
-      return
-    }
-
-    node.style.setProperty('--hero-pointer-x', '50%')
-    node.style.setProperty('--hero-pointer-y', '30%')
-    node.style.setProperty('--hero-rotate-x', '0deg')
-    node.style.setProperty('--hero-rotate-y', '0deg')
-  }
+export function ProductDemoTabs({ className = '', compact = false }: ProductDemoTabsProps) {
+  const [activeKey, setActiveKey] = useState<(typeof productViews)[number]['key']>(productViews[0].key)
+  const activeView = productViews.find((item) => item.key === activeKey) ?? productViews[0]
 
   return (
-    <div
-      ref={ref}
-      className="brand-hero__media premium-rainbow-media hero-stage hero-stage--product home-lp-stage"
-      data-reveal
-      onPointerMove={handlePointerMove}
-      onPointerLeave={handlePointerLeave}
-    >
-      <img
-        className="home-lp-stage__background"
-        src={media.externalEditingMonitor}
-        alt=""
-        aria-hidden="true"
-      />
+    <div className={`product-demo${compact ? ' product-demo--compact' : ''}${className ? ` ${className}` : ''}`}>
+      <div className="product-demo__topline">
+        <span>実画面で確認</span>
+        <strong>ネタ収集からYMM4準備まで</strong>
+      </div>
 
-      <div className="home-lp-stage__frame">
-        <div className="home-lp-stage__head">
-          <div>
-            <span>制作フローが一目で分かる</span>
-            <strong>ネタ収集 → 台本化 → 会話化 → 素材設計 → YMM4準備</strong>
-          </div>
-          <small>前工程を一本化</small>
+      <div className="product-demo__tabs" role="tablist" aria-label="実画面タブ">
+        {productViews.map((item) => (
+          <button
+            key={item.key}
+            type="button"
+            role="tab"
+            aria-selected={item.key === activeKey}
+            className={`product-demo__tab${item.key === activeKey ? ' is-active' : ''}`}
+            onClick={() => setActiveKey(item.key)}
+          >
+            {item.label}
+          </button>
+        ))}
+      </div>
+
+      <div className="product-demo__panel" role="tabpanel" aria-label={activeView.label}>
+        <div className="product-demo__screen">
+          <img src={activeView.image} alt={activeView.alt} />
         </div>
 
-        <div className="home-lp-stage__workspace">
-          <section className="home-lp-stage__panel home-lp-stage__panel--topics">
-            <header className="home-lp-stage__panel-head">
-              <span>ネタ一覧</span>
-              <strong>保存した記事・話題を一覧で比較</strong>
-            </header>
-            <div className="home-lp-stage__preview">
-              <img src={media.productImage2} alt="記事候補の一覧を見比べている画面" />
-            </div>
-            <ul className="home-lp-stage__topic-list">
-              {heroTopics.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </section>
-
-          <section className="home-lp-stage__panel home-lp-stage__panel--script">
-            <header className="home-lp-stage__panel-head">
-              <span>会話台本</span>
-              <strong>キャラごとの役割で掛け合いに整理</strong>
-            </header>
-            <div className="home-lp-stage__chat">
-              {heroConversation.map((item) => (
-                <div
-                  key={`${item.speaker}-${item.body}`}
-                  className={`home-lp-stage__chat-line home-lp-stage__chat-line--${item.align}`}
-                >
-                  <strong>{item.speaker}</strong>
-                  <p>{item.body}</p>
-                </div>
-              ))}
-            </div>
-            <div className="home-lp-stage__script-tags" aria-label="会話台本の整理項目">
-              <span>見せ場</span>
-              <span>補足</span>
-              <span>ツッコミ</span>
-            </div>
-          </section>
-
-          <section className="home-lp-stage__panel home-lp-stage__panel--assets">
-            <header className="home-lp-stage__panel-head">
-              <span>立ち絵・画像・音声</span>
-              <strong>素材と見せ方を先に揃える</strong>
-            </header>
-            <div className="home-lp-stage__asset-preview">
-              <img src={media.settingsShot} alt="台本設定と読み上げ条件を確認する画面" />
-            </div>
-            <ul className="home-lp-stage__asset-list">
-              {heroAssets.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </section>
-        </div>
-
-        <div className="home-lp-stage__pipeline" aria-label="制作の流れ">
-          {heroPipeline.map((item) => (
-            <div key={item.step} className="home-lp-stage__pipeline-item">
-              <span>{item.step}</span>
-              <strong>{item.title}</strong>
-              <small>{item.note}</small>
-            </div>
-          ))}
+        <div className="product-demo__body">
+          <strong>{activeView.title}</strong>
+          <p>{activeView.body}</p>
         </div>
       </div>
+
+      <ul className="product-demo__flow" aria-label="制作フロー">
+        {productFlow.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
     </div>
   )
+}
+
+export function HomeHeroStage() {
+  return <ProductDemoTabs className="home-compact-stage" compact />
 }
 
 export function LegalLinksBlock({ note }: { note?: string }) {
