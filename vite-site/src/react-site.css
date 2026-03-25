@@ -1224,15 +1224,13 @@ code {
   border: 3px solid transparent;
   border-radius: 999px;
   background:
-    linear-gradient(136deg, #c7ddff, #d5ccff 44%, #efbddf) padding-box,
+    linear-gradient(128deg, #f3dfa8 0, #e7be6f 52%, #b47b34 100%) padding-box,
     linear-gradient(180deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.02)) border-box;
-  color: #17192d;
+  color: #1f1407;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.94),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.26),
-    0 0 16px rgba(122, 196, 255, 0.26),
-    0 0 30px rgba(182, 159, 255, 0.2),
-    0 18px 28px -22px rgba(111, 139, 204, 0.46),
+    inset 0 1px 0 rgba(255, 244, 212, 0.72),
+    inset 0 0 0 1px rgba(255, 235, 188, 0.22),
+    0 12px 24px -18px rgba(232, 188, 102, 0.42),
     0 0 8px rgba(84, 219, 255, 0.4),
     0 0 16px rgba(145, 92, 255, 0.28);
 }
@@ -1241,15 +1239,15 @@ code {
 .lp-hero__actions .brand-btn--primary::after {
   content: "";
   position: absolute;
-  inset: -2px;
+  inset: -5px;
   border-radius: inherit;
   pointer-events: none;
 }
 
 .lp-hero__actions .brand-btn--primary::before {
   z-index: -2;
-  inset: -2px;
-  padding: 2px;
+  inset: -5px;
+  padding: 4px;
   background: conic-gradient(
     from var(--lp-hero-neon-angle),
     rgba(86, 160, 255, 0.52) 0deg,
@@ -1279,33 +1277,33 @@ code {
   mask-composite: exclude;
   display: block;
   opacity: 1;
-  filter: drop-shadow(0 0 4px rgba(84, 219, 255, 0.9))
-    drop-shadow(0 0 12px rgba(145, 92, 255, 0.58));
+  filter: drop-shadow(0 0 6px rgba(84, 219, 255, 0.96))
+    drop-shadow(0 0 16px rgba(145, 92, 255, 0.62));
   animation: lp-hero-neon-orbit 2.2s linear infinite;
 }
 
 .lp-hero__actions .brand-btn--primary::after {
   z-index: -1;
-  inset: 1px;
-  border: 1px solid rgba(255, 255, 255, 0.26);
+  inset: 2px;
+  border: 1px solid rgba(255, 245, 221, 0.26);
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.03) 38%, rgba(255, 255, 255, 0) 68%),
-    radial-gradient(circle at 18% 20%, rgba(132, 240, 255, 0.16), transparent 34%),
-    radial-gradient(circle at 82% 82%, rgba(213, 139, 255, 0.14), transparent 38%);
+    linear-gradient(180deg, rgba(255, 252, 242, 0.24), rgba(255, 255, 255, 0.04) 38%, rgba(255, 255, 255, 0) 68%),
+    radial-gradient(circle at 18% 20%, rgba(255, 236, 177, 0.16), transparent 34%),
+    radial-gradient(circle at 82% 82%, rgba(188, 120, 42, 0.18), transparent 38%);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.34),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+    inset 0 0 0 1px rgba(255, 237, 198, 0.08);
 }
 
 .lp-hero__actions .brand-btn--primary:hover,
 .lp-hero__actions .brand-btn--primary:focus-visible {
   transform: none;
   box-shadow:
-    inset 0 1px 0 #ffffff,
-    inset 0 0 0 1px rgba(255, 255, 255, 0.34),
+    inset 0 1px 0 #fff8e9,
+    inset 0 0 0 1px rgba(255, 244, 216, 0.34),
     0 0 18px rgba(132, 209, 255, 0.38),
     0 0 34px rgba(198, 164, 255, 0.26),
-    0 22px 34px -18px rgba(124, 161, 255, 0.58),
+    0 18px 28px -14px rgba(231, 178, 72, 0.52),
     0 0 10px rgba(84, 219, 255, 0.48),
     0 0 18px rgba(145, 92, 255, 0.34);
 }
