@@ -253,7 +253,7 @@ export function HomePage() {
 
             <ActionGroup
               actions={[
-                { label: '無料で始める', href: '/download/', variant: 'primary' },
+                { label: '無料で始める！', href: '/download/', variant: 'primary' },
                 { label: '使い方を見る', href: '/instructions/', variant: 'ghost' },
               ]}
               className="brand-inline-actions home-lp-hero__actions"
@@ -514,7 +514,7 @@ export function HomePage() {
               </p>
               <ActionGroup
                 actions={[
-                  { label: '無料で始める', href: '/download/', variant: 'primary' },
+                  { label: '無料で始める！', href: '/download/', variant: 'primary' },
                   { label: '使い方を見る', href: '/instructions/', variant: 'ghost' },
                 ]}
                 className="brand-inline-actions home-lp-cta__actions"
