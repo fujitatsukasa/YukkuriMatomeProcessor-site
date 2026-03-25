@@ -203,9 +203,9 @@ export function HomePage() {
               </p>
 
               <div className="brand-inline-actions home-compact-hero__actions">
-                <a className="brand-btn brand-btn--primary" href="#demo">
-                  デモを見る
-                </a>
+                <Link className="brand-btn brand-btn--primary" to="/download/">
+                  無料で開始する！
+                </Link>
                 <Link className="brand-btn brand-btn--ghost" to="/instructions/">
                   使い方を見る
                 </Link>
@@ -379,9 +379,9 @@ export function HomePage() {
               </p>
 
               <div className="brand-inline-actions home-compact-cta__actions">
-                <a className="brand-btn brand-btn--primary" href="#demo">
-                  デモを見る
-                </a>
+                <Link className="brand-btn brand-btn--primary" to="/download/">
+                  無料で開始する！
+                </Link>
                 <Link className="brand-btn brand-btn--ghost" to="/instructions/">
                   使い方を見る
                 </Link>
