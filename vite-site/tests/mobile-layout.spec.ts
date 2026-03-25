@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test'
 
 const pages = [
-  { path: '/', heading: '反応集・ゆっくり解説のネタ収集、台本作成、YMM4準備を1つに。' },
+  { path: '/', heading: '反応集・ゆっくり解説の台本作成とYMM4準備を、ネタ収集から。' },
   { path: '/download/', heading: '最新版を安全に入手する' },
   { path: '/instructions/', heading: '初期設定から編集開始までを3ステップで進める' },
   { path: '/faq/', heading: '導入前後によくある質問' },
