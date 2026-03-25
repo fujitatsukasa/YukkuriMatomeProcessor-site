@@ -1093,6 +1093,7 @@ code {
   .hero-stage__satellite,
   .workflow-director__visual img,
   .scenario-card__media img,
+  .lp-hero__actions .brand-btn--primary,
   .lp-hero__actions .brand-btn--primary::before {
     animation: none !important;
     transform: none !important;
@@ -1226,6 +1227,8 @@ code {
   background:
     linear-gradient(128deg, #f3dfa8 0, #e7be6f 52%, #b47b34 100%) padding-box,
     linear-gradient(180deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.02)) border-box;
+  background-size: 180% 180%, 100% 100%;
+  background-position: 0% 50%, 0 0;
   color: #1f1407;
   box-shadow:
     inset 0 1px 0 rgba(255, 244, 212, 0.72),
@@ -1233,6 +1236,7 @@ code {
     0 12px 24px -18px rgba(232, 188, 102, 0.42),
     0 0 8px rgba(84, 219, 255, 0.4),
     0 0 16px rgba(145, 92, 255, 0.28);
+  animation: lp-hero-gold-flow 6.8s ease-in-out infinite;
 }
 
 .lp-hero__actions .brand-btn--primary::before,
@@ -1320,6 +1324,18 @@ code {
   }
   100% {
     --lp-hero-neon-angle: 360deg;
+  }
+}
+
+@keyframes lp-hero-gold-flow {
+  0% {
+    background-position: 0% 50%, 0 0;
+  }
+  50% {
+    background-position: 100% 50%, 0 0;
+  }
+  100% {
+    background-position: 0% 50%, 0 0;
   }
 }
 
