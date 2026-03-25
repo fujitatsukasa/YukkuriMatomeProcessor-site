@@ -1117,7 +1117,14 @@ code {
   align-content: center;
 }
 
-.lp-hero__copy > .brand-kicker {
+.homepage-hero .brand-kicker,
+.lp-manifesto-section .brand-kicker,
+.lp-editorial-section .brand-kicker,
+.lp-comparison-section .brand-kicker,
+.lp-atlas-section .brand-kicker,
+.lp-proofstream-section .brand-kicker,
+.lp-proofstream-showcase-section .brand-kicker,
+.lp-finale-section .brand-kicker {
   display: none;
 }
 
