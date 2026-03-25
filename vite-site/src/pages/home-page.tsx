@@ -1,225 +1,162 @@
-import { startTransition, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ActionGroup, PageMeta, Section } from '@/components/ui'
+import { ActionGroup, InteractiveCard, PageMeta, Section } from '@/components/ui'
 import { media } from '@/data/assets'
-import {
-  downloadUrl,
-  legal,
-  newsPosts,
-  siteDescription,
-  siteOrigin,
-  siteSubtitle,
-  siteTitle,
-} from '@/data/site-content'
+import { downloadUrl, legal, siteOrigin, siteSubtitle, siteTitle } from '@/data/site-content'
 import { HomeHeroStage } from '@/pages/shared'
 
-const workflowScenes = [
+const heroChips = ['反応集', 'まとめ動画', 'Short動画', 'ゆっくり解説', 'YMM4向け'] as const
+
+const workflowSteps = [
   {
-    id: 'capture',
     step: '01',
-    label: '取得',
-    nav: 'URLから候補記事を並べる',
-    micro: '最初の選別を一覧で終える',
-    title: 'URLを入れると、候補記事がすぐに並ぶ。',
-    summary: '対応URLから候補記事を一覧化。最初の選別を、その場で済ませやすい。',
-    image: media.workstation1,
-    imageAlt: 'URLから台本候補を取得している制作ワークステーション',
-    points: [
-      '対応URLをそのまま投入',
-      '候補記事を一覧で見比べる',
-      '台本化の前提を早く固める',
-    ],
-    metrics: [
-      ['入口', 'URLを入れる'],
-      ['一覧', '候補を並べる'],
-      ['初動', '迷いを減らす'],
-    ],
+    title: 'ネタを集める',
+    body: '記事や話題を保存し、動画化したい候補を一覧で絞り込みます。',
   },
   {
-    id: 'shape',
     step: '02',
-    label: '整形',
-    nav: '台本の形と設定を揃える',
-    micro: '読み上げ前の手戻りを減らす',
-    title: '台本の形と保存条件を先に揃える。',
-    summary: '整形ルールと保存先を固定し、編集前に戻る回数を減らしやすい。',
-    image: media.settingsShot,
-    imageAlt: '台本取得と設定確認の画面',
-    points: [
-      '整形ルールを先に固定',
-      '保存先と設定差を減らす',
-      '担当者ごとの差を出しにくくする',
-    ],
-    metrics: [
-      ['整形', 'ルールを揃える'],
-      ['保存', '出力先を固定'],
-      ['共有', '再現しやすい'],
-    ],
+    title: '動画向けに整理する',
+    body: 'メモではなく、見せる順番が分かる形で台本の骨組みを整えます。',
   },
   {
-    id: 'launch',
     step: '03',
-    label: '受け渡し',
-    nav: 'YMM4前の条件をまとめて固める',
-    micro: '編集開始の立ち上がりを整える',
-    title: 'YMM4前の条件まで、同じ流れで固める。',
-    summary: '実行パスと保存条件を最後に確認し、編集開始の立ち上がりを安定させる。',
-    image: media.productImage2,
-    imageAlt: '制作ラインが整った製品画面のイメージ',
-    points: [
-      '実行パスをまとめて確認',
-      '保存条件を最後に揃える',
-      '試用から導入判断まで迷いにくい',
-    ],
-    metrics: [
-      ['起動前', '条件を確認'],
-      ['受け渡し', '前提を揃える'],
-      ['判断', '導線が分断しない'],
-    ],
+    title: 'キャラ会話に落とす',
+    body: '説明役、補足役、ツッコミ役を分けて、掛け合いとして組み替えます。',
+  },
+  {
+    step: '04',
+    title: '素材込みで構成する',
+    body: '立ち絵、画像、音声の置きどころまで先に決めて、見せ方を固めます。',
+  },
+  {
+    step: '05',
+    title: 'YMM4向けに整える',
+    body: '話者や素材の並びを整理して、編集前の組み直しを減らします。',
   },
 ] as const
 
-const comparisonSpotlight = {
-  label: '準備時間',
-  note: 'URL取得から台本整形完了までの前工程。',
-  delta: '-27分',
-  rate: '-60%',
-  before: { value: 45, unit: '分' },
-  after: { value: 18, unit: '分' },
-} as const
-
-const manifestoSignals = [
+const painPoints = [
   {
-    value: '3',
-    label: '主要工程',
-    detail: 'URL取得 / 台本整形 / YMM4準備',
-  },
-  {
-    value: '無料',
-    label: 'すぐ開始',
-    detail: 'ダウンロード後すぐ使える',
-  },
-  {
-    value: '買い切り',
-    label: '販売形態',
-    detail: legal.pricing.amountIncludingTax,
-  },
-] as const
-
-const manifestoSteps = [
-  {
-    id: 'capture',
     index: '01',
-    label: '取得',
-    title: 'URLを入れると、候補記事が並ぶ。',
-    body: '最初の選別を一覧のまま終わらせやすい。',
-    image: media.productImage2,
-    imageAlt: '対応URLから記事一覧を取得して選択する画面',
-    caption: '一覧取得と見比べを、最初の画面でまとめる。',
+    title: 'ネタだけ保存して終わる',
+    body: '候補を集めても、どれを使うか決める前に散らかってしまう。',
   },
   {
-    id: 'shape',
     index: '02',
-    label: '整形',
-    title: '台本の形と設定を揃える。',
-    body: '整形ルールと保存先を先に固定して手戻りを減らす。',
-    image: media.settingsShot,
-    imageAlt: '台本整形と設定確認の画面',
-    caption: '整形ルールと保存先を先に決める。',
+    title: '台本を作ってから会話化で詰まる',
+    body: '説明の順番は見えても、誰が何を話すかを後から考え直している。',
   },
   {
-    id: 'launch',
     index: '03',
-    label: '受け渡し',
-    title: 'YMM4前の条件まで揃える。',
-    body: '実行パスと保存条件を最後にまとめて確認できる。',
-    image: media.productImage1,
-    imageAlt: 'YMM4編集開始へつながる画面',
-    caption: '編集開始へ渡す条件まで同じ流れで揃える。',
+    title: 'YMM4前に素材と話者を整理し直す',
+    body: '立ち絵、画像、音声、話者設定が別々に残り、編集開始で手が止まる。',
   },
 ] as const
 
-const scenarioAtlas = [
+const genreCards = [
   {
-    title: '個人クリエイター',
-    body:
-      '投稿頻度を落とさずに、毎回の台本準備で迷う時間を減らしたいケース向けです。短い作業時間でも、次に見るべきページが明確です。',
-    note: '無料で始めてから導入判断までを一本の導線で追えます。',
-    href: '/download/',
-    linkLabel: 'まず試用する',
+    title: '反応集・まとめ動画',
+    body: '記事や話題を拾って、会話型の流れへ落とし込みやすい構成です。',
   },
   {
-    title: '副業・小規模運用',
-    body:
-      '限られた時間で複数本を回したいケース向けです。案件ごとの条件を揃え、再開時の立ち上がりを速くします。',
-    note: '夜間や隙間時間でも、途中から再開しやすい構成です。',
-    href: '/instructions/',
-    linkLabel: '手順を見る',
+    title: 'ゆっくり解説',
+    body: '説明役、補足役、ツッコミ役を分けて、会話台本にしやすくします。',
   },
   {
-    title: 'チーム制作',
-    body:
-      '引き継ぎや担当変更があるケース向けです。属人化しやすい前工程を、共通ルールとページ導線で標準化しやすくします。',
-    note: 'FAQ と法務情報まで同じ場所で確認できるため、説明が分断されません。',
-    href: '/faq/',
-    linkLabel: '失敗例を見る',
+    title: 'Short動画',
+    body: '短い尺でも、見せ場とテンポが分かる順番で整理しやすくなります。',
+  },
+  {
+    title: '会話形式の説明動画',
+    body: '誰が何を話すかを先に決めて、字幕や読み上げの前提を揃えやすくします。',
   },
 ] as const
 
-const proofRoutes = [
+const featureCards = [
   {
-    label: '使い方',
-    title: '使い方',
-    href: '/instructions/',
-    body: '初期設定、YMM4 実行パス、保存先、URL取得から編集開始までの流れを順番に追えます。',
-    meta: '最初に何を確認すべきかを迷わないためのページです。',
+    title: 'ネタ収集',
+    value: '記事や話題をそのまま制作素材として扱える',
   },
   {
-    label: 'FAQ',
-    title: 'FAQ',
-    href: '/faq/',
-    body: '導入前の疑問、提供時期、トラブル時の切り分けをカテゴリ別に確認できます。',
-    meta: '失敗例と復旧方針を先回りで把握したい人向けです。',
+    title: '動画向け台本作成',
+    value: 'メモではなく、動画として見せる順番に整理できる',
   },
   {
-    label: '購入',
-    title: '購入と法務',
-    href: '/purchase/',
-    body: '価格、販売形態、返金条件、特定商取引法に基づく表記まで同じ判断導線で読めます。',
-    meta: '社内説明や稟議前の確認材料をまとめて見たい時に向きます。',
+    title: '会話形式の台本化',
+    value: 'キャラごとの役割で掛け合いに落とし込める',
   },
   {
-    label: '更新',
-    title: '更新履歴とお知らせ',
-    href: '/update/',
-    body: '実装の変化や導入判断に関わる更新を、最近の情報から追えます。',
-    meta: '試用前後で前提が変わっていないか確かめるためのページです。',
+    title: '立ち絵・画像・音声を含む構成設計',
+    value: 'セリフだけでなく見せ方まで組める',
+  },
+  {
+    title: '読み上げ・テロップ品質の調整',
+    value: '不自然な読みや字幕の粗を減らせる',
+  },
+  {
+    title: 'YMM4向け準備',
+    value: '編集前に素材や話者の整理を済ませやすい',
   },
 ] as const
 
-const proofScreens = [
+const screenExamples = [
   {
-    label: '一覧取得',
-    title: 'URLを入れると、候補がすぐ並ぶ。',
-    body: '記事候補の一覧を先に出して、拾う素材を迷わず選べます。',
+    label: '実画面 01',
+    title: 'ネタ一覧の画面',
+    body: '保存した記事や話題を一覧で見比べて、使うネタを決めやすくします。',
     image: media.productImage2,
-    alt: '対応URLから記事候補を一覧取得して選択する画面',
+    alt: '記事候補の一覧を見比べながらネタを選ぶ画面',
   },
   {
-    label: '整形設定',
-    title: '台本の形と設定を、その場で揃える。',
-    body: 'タイトル、セリフ、保存先まで編集前の前提を一気に固められます。',
+    label: '実画面 02',
+    title: '台本・設定の画面',
+    body: '台本の形や読み上げ設定をまとめて確認し、会話構成へつなげます。',
     image: media.settingsShot,
-    alt: '台本整形と設定をまとめて確認できる画面',
+    alt: '台本取得と整形設定をまとめて確認する画面',
   },
   {
-    label: '開始直前',
-    title: 'YMM4に入る直前の形まで持っていく。',
-    body: '編集開始の直前まで前工程を片付けて、作業にそのまま移れます。',
+    label: '実画面 03',
+    title: 'YMM4準備の画面',
+    body: '編集前に必要な前提を整理して、そのまま次工程へ渡しやすくします。',
     image: media.productImage1,
-    alt: 'YMM4編集開始前の準備が整った画面',
+    alt: 'YMM4前に整理した内容を確認できる画面',
   },
 ] as const
+
+const faqItems = [
+  {
+    question: 'どんな動画に向いていますか？',
+    answer:
+      'ゆっくり解説、反応集、まとめ動画、Short動画、会話形式の説明動画の前工程に向いています。ネタ収集から会話台本、素材設計までをつなげたいケースで特に相性が良いです。',
+  },
+  {
+    question: '反応集やまとめ動画にも使えますか？',
+    answer:
+      '使えます。記事や話題を拾って保存し、そのまま会話型の台本へ整理しやすい構成にしています。',
+  },
+  {
+    question: 'Short動画にも使えますか？',
+    answer:
+      '使えます。短尺向けに見せ場と順番を絞り込み、短い会話構成へ整理しやすくします。',
+  },
+  {
+    question: 'YMM4専用ですか？',
+    answer:
+      'YMM4専用ではありませんが、YMM4へ持っていく前の話者整理、素材整理、構成整理が強みです。編集前の準備をまとめたい人に向いています。',
+  },
+  {
+    question: 'AIが全部自動で作るツールですか？',
+    answer:
+      'いいえ。自動生成そのものを主役にするのではなく、ネタ収集から台本、会話化、素材設計、YMM4準備までの前工程を一本の流れで整理するための動画制作支援ツールです。',
+  },
+  {
+    question: 'VOICEROIDやA.I.VOICE系にも向いていますか？',
+    answer:
+      '向いています。話者ごとの役割やセリフの流れを先に整理したい運用で使いやすい構成です。',
+  },
+] as const
+
+const homeMetaDescription =
+  'ゆっくり解説、反応集、まとめ動画、Short動画向けに、ネタ収集から台本作成、キャラ会話化、立ち絵・素材込みの構成設計、YMM4向け準備までを一気通貫で支援する動画制作ツール。'
 
 const homeStructuredData = [
   {
@@ -229,7 +166,7 @@ const homeStructuredData = [
     alternateName: siteSubtitle,
     url: siteOrigin,
     inLanguage: 'ja-JP',
-    description: siteDescription,
+    description: homeMetaDescription,
   },
   {
     '@context': 'https://schema.org',
@@ -255,11 +192,11 @@ const homeStructuredData = [
     alternateName: siteSubtitle,
     applicationCategory: 'MultimediaApplication',
     operatingSystem: 'Windows',
-    description: '対応URLから台本を取得し、編集向けに整形して YMM4 連携準備まで進められる制作支援ツールです。',
+    description: homeMetaDescription,
     url: siteOrigin,
     downloadUrl,
-    image: media.productImage1,
-    screenshot: [media.productImage1, media.productImage2, media.settingsShot],
+    image: media.productImage2,
+    screenshot: [media.productImage2, media.settingsShot, media.productImage1],
     offers: {
       '@type': 'Offer',
       price: legal.pricing.unitPrice,
@@ -273,487 +210,335 @@ const homeStructuredData = [
       url: siteOrigin,
     },
   },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  },
 ]
 
 export function HomePage() {
-  const [activeSceneId, setActiveSceneId] = useState<(typeof workflowScenes)[number]['id']>(
-    workflowScenes[0].id,
-  )
-  const [monthlyVideos] = useState(16)
-  const [minutesSaved] = useState(24)
-
-  const activeScene = useMemo(
-    () => workflowScenes.find((scene) => scene.id === activeSceneId) ?? workflowScenes[0],
-    [activeSceneId],
-  )
-
-  const monthlyHours = useMemo(
-    () => Number(((monthlyVideos * minutesSaved) / 60).toFixed(1)),
-    [monthlyVideos, minutesSaved],
-  )
-  const yearlyHours = useMemo(() => Number((monthlyHours * 12).toFixed(1)), [monthlyHours])
-  const yearlyDays = useMemo(() => Number((yearlyHours / 8).toFixed(1)), [yearlyHours])
-
   return (
     <>
       <PageMeta
-        title="ゆっくりまとめプロセッサー | 台本取得・整形・YMM4編集準備ツール"
-        description="ゆっくりまとめプロセッサーは、対応URLからの台本取得、編集向け整形、YMM4 連携準備までを一つの制作ラインとして整理する Windows 向けツールです。試用、使い方、FAQ、料金、法務まで同じ LP 内で確認できます。"
-        keywords="ゆっくりまとめプロセッサー, 台本取得, 台本整形, YMM4, Windows, 動画編集ワークフロー"
-        image={media.officeLuxury}
+        title="ゆっくりまとめプロセッサー | ゆっくり解説・反応集・Short動画のネタ収集、台本作成、YMM4準備ツール"
+        description={homeMetaDescription}
+        keywords="ゆっくり解説, 反応集, まとめ動画, Short動画, 台本作成, 会話形式, YMM4, 動画制作支援ツール"
+        image={media.productImage2}
         path="/"
         structuredData={homeStructuredData}
       />
 
-      <section className="brand-hero brand-hero--premium homepage-hero homepage-hero--immersive lp-hero">
-        <div className="brand-hero__layout lp-hero__layout">
-          <div className="lp-hero__copy">
-            <p className="brand-kicker">Windows向け / 台本取得・整形 / YMM4編集準備</p>
+      <section className="brand-hero brand-hero--premium homepage-hero home-lp-hero">
+        <div className="brand-hero__layout home-lp-hero__layout">
+          <div className="home-lp-hero__copy">
+            <p className="brand-kicker">ゆっくり解説・反応集・Short動画の制作支援ツール</p>
             <h1 className="brand-title">
-              <span>URLを入れるだけで、編集前が終わる。</span>
-              <span className="lp-hero__title-accent">台本取得から、YMM4開始直前まで。</span>
+              ネタ収集から会話台本、YMM4準備まで。
+              <br />
+              ゆっくり系動画の前工程をひとつに。
             </h1>
-            <figure className="lp-hero__mobile-preview">
-              <img src={media.productImage2} alt="対応URLから記事一覧を取得して選択する実際の画面" />
-              <figcaption>
-                <span>実際の画面</span>
-                <strong>URL取得 → 記事一覧 → 台本整形 → YMM4準備</strong>
-              </figcaption>
-            </figure>
             <p className="brand-lead">
-              記事候補の取得、台本の整形、編集開始前の準備を一つにまとめた Windows 向けツールです。
-              触った瞬間に、次の工程へ進める状態まで持っていけます。
+              ゆっくりまとめプロセッサーは、記事や話題の収集、動画向け台本化、キャラ会話化、
+              立ち絵・画像・音声を含む構成設計まで、一気通貫で扱える動画制作支援ツールです。
+              反応集、まとめ動画、Short動画、ゆっくり解説の制作準備を、もっと速く、もっと整理しやすくします。
             </p>
 
             <ActionGroup
               actions={[
-                { label: '無料で始める！', href: '/download/', variant: 'primary' },
+                { label: '無料で始める', href: '/download/', variant: 'primary' },
                 { label: '使い方を見る', href: '/instructions/', variant: 'ghost' },
-                { label: '導入について問い合わせる', href: '/contact/', variant: 'ghost' },
               ]}
-              className="lp-hero__actions"
+              className="brand-inline-actions home-lp-hero__actions"
             />
 
-            <p className="lp-hero__support">
-              導入前に確認したい
-              <Link to="/instructions/">使い方</Link>、
-              <Link to="/faq/">FAQ</Link>、
-              <Link to="/purchase/">料金と契約条件</Link>、
-              <Link to="/legal/commercial-transactions/">法務情報</Link>
-              も同じ導線上で追えます。
-            </p>
+            <ul className="home-lp-hero__chips" aria-label="対応ジャンル">
+              {heroChips.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
 
-            <dl className="lp-hero__ledger" data-reveal>
-              <div>
-                <dt>開始方法</dt>
-                <dd>無料でそのまま始められる</dd>
-              </div>
-              <div>
-                <dt>対象環境</dt>
-                <dd>Windows / YMM4 実行パス設定</dd>
-              </div>
-              <div>
-                <dt>想定ユーザー</dt>
-                <dd>個人制作 / 副業運用 / チーム制作</dd>
-              </div>
-              <div>
-                <dt>販売形態</dt>
-                <dd>{legal.pricing.amountIncludingTax} / {legal.pricing.modelLabel}</dd>
-              </div>
-            </dl>
+            <figure className="home-lp-hero__mobile-preview">
+              <img
+                src={media.productImage2}
+                alt="ネタ収集からYMM4準備までの流れが見えるホーム画面モックアップ"
+              />
+              <figcaption>
+                <strong>ネタ収集 → 台本化 → 会話化 → 素材設計 → YMM4準備</strong>
+                <span>保存した話題を、そのまま会話台本と編集前の整理につなげます。</span>
+              </figcaption>
+            </figure>
           </div>
 
           <HomeHeroStage />
         </div>
-
       </section>
 
-      <Section className="lp-manifesto-section">
-        <div className="lp-fullbleed lp-manifesto" data-reveal>
-          <div className="lp-manifesto__hero">
-            <div className="lp-manifesto__intro">
-              <p className="brand-kicker">前工程を一本道に</p>
-              <h2>前工程を一本化する。</h2>
-              <p className="lp-manifesto__lede">
-                取得、整形、受け渡し準備を横並びで見せて、何をするソフトかを一目で伝えます。
-              </p>
+      <Section className="home-lp-ribbon-section">
+        <div className="brand-shell home-lp-shell">
+          <div className="home-lp-ribbon premium-glass" data-reveal>
+            <div className="home-lp-ribbon__lead">
+              <p>反応集・まとめ動画・Short動画・ゆっくり解説に対応</p>
+              <span>ネタ収集 → 台本作成 → 会話構成 → 素材設計 → YMM4準備</span>
             </div>
 
-            <div className="lp-manifesto__aside">
-              <p>
-                判断が散りやすい前工程を、3つの工程で見える化しています。
-              </p>
-
-              <div className="lp-manifesto__signal-list">
-                {manifestoSignals.map((item) => (
-                  <div key={item.label}>
-                    <strong>{item.value}</strong>
-                    <span>{item.label}</span>
-                    <small>{item.detail}</small>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className="lp-manifesto__steps">
-            {manifestoSteps.map((step) => (
-              <article key={step.id} className="lp-manifesto__step">
-                <div className="lp-manifesto__step-copy">
-                  <div className="lp-manifesto__step-head">
-                    <p className="lp-manifesto__step-index">{step.index}</p>
-                    <p className="lp-manifesto__step-label">{step.label}</p>
-                  </div>
-                  <h3>{step.title}</h3>
-                  <p className="lp-manifesto__step-body">{step.body}</p>
-                </div>
-
-                <figure className={`lp-manifesto__step-media lp-manifesto__step-media--${step.id}`}>
-                  <img src={step.image} alt={step.imageAlt} />
-                  <figcaption>{step.caption}</figcaption>
-                </figure>
-              </article>
-            ))}
-          </div>
-        </div>
-      </Section>
-
-      <Section alt className="lp-editorial-section" id="workflow">
-        <div className="brand-shell lp-editorial">
-          <div className="lp-editorial__intro">
-            <div>
-              <p className="brand-kicker">実画面で分かる3ステップ</p>
-              <h2>3ステップで流れが分かる。</h2>
-            </div>
-            <p>
-              URL取得から YMM4 準備までを、画面を見れば理解できる構成です。小さい説明文を追わなくても、
-              今どこにいるかがひと目で分かります。
-            </p>
-          </div>
-
-          <ol className="lp-editorial__index">
-            {workflowScenes.map((scene) => (
-              <li key={scene.id}>
-                <button
-                  type="button"
-                  className={scene.id === activeScene.id ? 'is-active' : undefined}
-                  onClick={() => startTransition(() => setActiveSceneId(scene.id))}
-                >
-                  <span>{`${scene.step} ${scene.label}`}</span>
-                  <strong>{scene.nav}</strong>
-                  <small>{scene.micro}</small>
-                </button>
-              </li>
-            ))}
-          </ol>
-
-          <div className="lp-editorial__stage" data-reveal>
-            <figure className="lp-scene__media">
-              <img src={activeScene.image} alt={activeScene.imageAlt} />
-              <figcaption>{activeScene.label}</figcaption>
-            </figure>
-
-            <div className="lp-scene__content">
-              <p className="brand-kicker">現在の工程</p>
-              <h3>{activeScene.title}</h3>
-              <p className="lp-scene__summary">{activeScene.summary}</p>
-
-              <div className="lp-scene__metrics">
-                {activeScene.metrics.map(([title, body]) => (
-                  <div key={title}>
-                    <strong>{title}</strong>
-                    <span>{body}</span>
-                  </div>
-                ))}
-              </div>
-
-              <ul className="lp-scene__points">
-                {activeScene.points.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-
-              <div className="lp-scene__links">
-                <Link to="/instructions/">使い方を見る</Link>
-                <Link to="/faq/#faq-trouble">トラブルFAQ</Link>
-                <Link to="/download/">無料で始める！</Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Section>
-
-      <Section className="lp-comparison-section">
-        <div className="brand-shell lp-comparison">
-          <div className="lp-comparison__intro">
-            <p className="brand-kicker">導入前後の変化</p>
-            <h2>導入前後の差を見る。</h2>
-            <p>取得から整形完了までの準備時間を、導入前後でひと目で比較します。</p>
-            <p className="lp-comparison__caption">目安イメージ。実測ではなく、運用差を把握するための比較です。</p>
-          </div>
-
-          <div className="lp-comparison__hero-grid">
-            <article className="lp-comparison__spotlight" data-reveal>
-              <div className="lp-comparison__spotlight-head">
-                <div>
-                  <span>最も効く変化</span>
-                  <h3>1本あたり、{comparisonSpotlight.delta}。</h3>
-                </div>
-              </div>
-
-              <p className="lp-comparison__spotlight-note">
-                {comparisonSpotlight.note} どこを短縮できるかではなく、編集開始までがどれだけ早くなるかを先に見せます。
-              </p>
-
-              <div className="lp-comparison__proofline" aria-label={`${comparisonSpotlight.label}の導入前後比較`}>
-                <div className="lp-comparison__proofline-track" aria-hidden="true">
-                  <div className="lp-comparison__proofline-before" />
-                  <div className="lp-comparison__proofline-after" />
-                </div>
-
-                <div className="lp-comparison__proofline-values">
-                  <div className="lp-comparison__proofline-metric is-before">
-                    <span>導入前</span>
-                    <strong>
-                      {comparisonSpotlight.before.value}
-                      <small>{comparisonSpotlight.before.unit}</small>
-                    </strong>
-                  </div>
-
-                  <div className="lp-comparison__proofline-delta" aria-label={`差分 ${comparisonSpotlight.delta}`}>
-                    <span>{comparisonSpotlight.delta}</span>
-                    <small>{comparisonSpotlight.rate}</small>
-                  </div>
-
-                  <div className="lp-comparison__proofline-metric is-after">
-                    <span>導入後</span>
-                    <strong>
-                      {comparisonSpotlight.after.value}
-                      <small>{comparisonSpotlight.after.unit}</small>
-                    </strong>
-                  </div>
-                </div>
-              </div>
-
-              <div className="lp-comparison__spotlight-stats">
-                <div className="lp-comparison__spotlight-stat is-primary">
-                  <span>見えている成果</span>
-                  <strong>{comparisonSpotlight.delta}</strong>
-                  <small>前工程の時短</small>
-                </div>
-
-                <div className="lp-comparison__spotlight-stat is-primary">
-                  <span>短縮率</span>
-                  <strong>{comparisonSpotlight.rate}</strong>
-                  <small>導入前比</small>
-                </div>
-
-                <div className="lp-comparison__spotlight-stat is-primary">
-                  <span>対象</span>
-                  <strong>{comparisonSpotlight.label}</strong>
-                  <small>取得から整形まで</small>
-                </div>
-              </div>
-            </article>
-
-            <aside className="lp-impact-ledger" data-reveal>
-              <div className="lp-impact-ledger__head">
-                <p className="brand-kicker">時間試算</p>
-                <h3>年間で、{yearlyHours}時間浮く。</h3>
-              </div>
-
-              <div className="lp-impact-ledger__hero">
-                <strong>{yearlyHours} 時間</strong>
-                <span>月{monthlyVideos}本、1本{minutesSaved}分短縮した想定</span>
-              </div>
-
-              <div className="lp-impact-ledger__numbers">
-                <div>
-                  <span>月間</span>
-                  <strong>{monthlyHours} 時間</strong>
-                </div>
-                <div>
-                  <span>年間</span>
-                  <strong>{yearlyHours} 時間</strong>
-                </div>
-                <div>
-                  <span>8時間換算</span>
-                  <strong>{yearlyDays} 日</strong>
-                </div>
-              </div>
-
-              <div className="lp-impact-ledger__assumptions">
-                <div className="lp-impact-ledger__assumption">
-                  <span>想定制作本数</span>
-                  <strong>{monthlyVideos}本 / 月</strong>
-                </div>
-                <div className="lp-impact-ledger__assumption">
-                  <span>1本あたり短縮</span>
-                  <strong>{minutesSaved}分</strong>
-                </div>
-              </div>
-            </aside>
-          </div>
-        </div>
-      </Section>
-
-      <Section alt className="lp-atlas-section">
-        <div className="lp-fullbleed lp-atlas" data-reveal>
-          <div className="lp-atlas__lead">
-            <p className="brand-kicker">向いている人</p>
-            <h2>向いている運用が分かる。</h2>
-            <p>
-              個人、少人数、チームでは困る場所が違います。用途別に入口を分けて、自分に関係ある導線を早く見つけやすくしています。
-            </p>
-          </div>
-
-          <figure className="lp-atlas__hero">
-            <img src={media.externalVideoEditorDark} alt="暗い編集室で動画編集を進める制作環境" />
-            <figcaption>
-              <span>向いている運用</span>
-              <strong>個人制作でも、引き継ぎがある運用でも、前工程の揺れを減らしたい時に向く。</strong>
-            </figcaption>
-          </figure>
-
-          <div className="lp-atlas__list">
-            {scenarioAtlas.map((item, index) => (
-              <article key={item.title} className="lp-atlas__item">
-                <span className="lp-atlas__index">{`0${index + 1}`}</span>
-                <h3>{item.title}</h3>
-                <p>{item.body}</p>
-                <p>{item.note}</p>
-                <Link to={item.href}>{item.linkLabel}</Link>
-              </article>
-            ))}
-          </div>
-        </div>
-      </Section>
-
-      <Section className="lp-proofstream-section lp-proofstream-section--legacy">
-        <div className="brand-shell lp-proofstream">
-          <div className="lp-proofstream__copy">
-            <p className="brand-kicker">導入前に見るページ</p>
-            <h2>次に見るページが分かる。</h2>
-            <p>
-              ボタンを並べるだけでなく、各ページで何を確認できるかを文章で先に示しています。
-            </p>
-
-            <div className="lp-proofstream__routes">
-              {proofRoutes.map((route) => (
-                <article key={route.title} className="lp-proofstream__route">
-                  <span>{route.label}</span>
-                  <h3>
-                    <Link to={route.href}>{route.title}</Link>
-                  </h3>
-                  <p>{route.body}</p>
-                  <p className="lp-proofstream__route-meta">{route.meta}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-
-          <div className="lp-proofstream__aside" data-reveal>
-            <p className="brand-kicker">最近の更新情報</p>
-            <h3>最近の更新</h3>
-            <ul className="lp-proofstream__news">
-              {newsPosts.map((post) => (
-                <li key={post.path}>
-                  <time dateTime={post.date}>{post.dateLabel}</time>
-                  <Link to={post.path}>{post.title}</Link>
+            <ol className="home-lp-ribbon__flow" aria-label="制作フロー">
+              {workflowSteps.map((item) => (
+                <li key={item.step}>
+                  <span>{item.step}</span>
+                  <strong>{item.title}</strong>
                 </li>
               ))}
-            </ul>
-            <p className="lp-proofstream__aside-copy">
-              試用の前後で判断材料が変わったときは、更新履歴とお知らせを合わせて確認するとズレが出にくくなります。
-            </p>
+            </ol>
           </div>
         </div>
       </Section>
 
-      <Section className="lp-proofstream-showcase-section">
-        <div className="brand-shell lp-proofstream-showcase" data-reveal>
-          <div className="lp-proofstream-showcase__copy">
-            <p className="brand-kicker">実画面で引き込む</p>
-            <h2>触る前に、流れが目に入る。</h2>
+      <Section alt className="home-lp-problem-section">
+        <div className="brand-shell home-lp-shell">
+          <div className="home-lp-section-head">
+            <p className="brand-kicker">悩みを先に解く</p>
+            <h2>ネタ探し、台本、素材整理が毎回バラバラになっていませんか？</h2>
             <p>
-              説明ページを読む前に、一覧取得、整形設定、開始直前の3画面を大きく見せます。
+              ネタだけ保存して終わる、台本を作ってから会話化で詰まる、YMM4前に素材と話者を整理し直す。
+              前工程が分断されると、制作スピードも判断のしやすさも落ちていきます。
             </p>
           </div>
 
-          <div className="lp-proofstream-showcase__grid">
-            {proofScreens.map((screen) => (
-              <article key={screen.title} className="lp-proofstream-showcase__card interactive-surface">
-                <figure className="lp-proofstream-showcase__media">
-                  <img src={screen.image} alt={screen.alt} />
-                </figure>
-                <div className="lp-proofstream-showcase__body">
-                  <span>{screen.label}</span>
-                  <h3>{screen.title}</h3>
-                  <p>{screen.body}</p>
-                </div>
-              </article>
+          <div className="home-lp-problem-grid">
+            {painPoints.map((item) => (
+              <InteractiveCard key={item.title} as="article" className="brand-card home-lp-problem-card">
+                <span className="home-lp-card-index">{item.index}</span>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </InteractiveCard>
             ))}
           </div>
+        </div>
+      </Section>
 
-          <div className="lp-proofstream-showcase__footer">
-            <div className="lp-proofstream-showcase__newsline">
-              <span>最近の更新</span>
-              <strong>{newsPosts[0]?.title}</strong>
-            </div>
-            <ActionGroup
-              actions={[
-                { label: '使い方を見る', href: '/instructions/', variant: 'ghost' },
-                { label: 'FAQを見る', href: '/faq/', variant: 'ghost' },
-                { label: '購入情報を見る', href: '/purchase/', variant: 'ghost' },
-              ]}
-            />
+      <Section className="home-lp-flow-section" id="workflow">
+        <div className="brand-shell home-lp-shell">
+          <div className="home-lp-section-head">
+            <p className="brand-kicker">解決の流れ</p>
+            <h2>ゆっくりまとめプロセッサーなら、前工程を一本の流れで進められます</h2>
+            <p>
+              反応集・まとめ動画のネタ収集から台本化まで、ゆっくり解説の会話台本、Short動画の構成整理、
+              YMM4向けの制作準備までを、ひとつの制作フローとしてまとめます。
+            </p>
+          </div>
+
+          <div className="home-lp-flow-grid">
+            {workflowSteps.map((item) => (
+              <InteractiveCard key={item.step} as="article" className="brand-card home-lp-flow-card">
+                <div className="home-lp-flow-card__head">
+                  <span>{item.step}</span>
+                  <h3>{item.title}</h3>
+                </div>
+                <p>{item.body}</p>
+              </InteractiveCard>
+            ))}
           </div>
         </div>
       </Section>
 
-      <Section alt className="lp-finale-section">
-        <div className="lp-fullbleed lp-finale" data-reveal>
-          <div className="lp-finale__copy">
-            <p className="brand-kicker">まず試す</p>
-            <h2>まず無料で始める。</h2>
-            <div className="lp-finale__display">使ってから、導入を決める。</div>
+      <Section alt className="home-lp-genre-section">
+        <div className="brand-shell home-lp-shell">
+          <div className="home-lp-section-head">
+            <p className="brand-kicker">向いている動画ジャンル</p>
+            <h2>こんな動画を作る人に向いています</h2>
             <p>
-              使い方、FAQ、法務、サポートまで先に見せることで、最後の CTA を押す時点で不安が残りにくい構成にしています。
-            </p>
-            <p>
-              まず始めるなら <Link to="/download/">無料で始める！</Link>、
-              実運用の流れを見たいなら <Link to="/instructions/">使い方</Link>、
-              導入前提を相談したいなら <Link to="/contact/">お問い合わせ</Link> へ進んでください。
+              自分向けのツールかどうかを、動画ジャンルから判断しやすい構成にしています。
+              ゆっくり系動画の前工程をまとめたい人ほど相性が良いです。
             </p>
           </div>
 
-          <div className="lp-finale__meta">
-            <dl>
-              <div>
-                <dt>トライアル</dt>
-                <dd>7日間 / 全機能を確認</dd>
+          <div className="home-lp-genre-grid">
+            {genreCards.map((item) => (
+              <InteractiveCard key={item.title} as="article" className="brand-card home-lp-genre-card">
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </InteractiveCard>
+            ))}
+          </div>
+        </div>
+      </Section>
+
+      <Section className="home-lp-feature-section">
+        <div className="brand-shell home-lp-shell">
+          <div className="home-lp-section-head">
+            <p className="brand-kicker">主要機能</p>
+            <h2>機能を並べるのではなく、得られる価値で見せます</h2>
+            <p>
+              ネタを集めるだけ、台本を作るだけではなく、動画として見せる順番と素材設計まで含めて前工程を整理できます。
+            </p>
+          </div>
+
+          <div className="home-lp-feature-grid">
+            {featureCards.map((item) => (
+              <InteractiveCard key={item.title} as="article" className="brand-card home-lp-feature-card">
+                <span className="home-lp-card-label">{item.title}</span>
+                <p>{item.value}</p>
+              </InteractiveCard>
+            ))}
+          </div>
+        </div>
+      </Section>
+
+      <Section alt className="home-lp-proof-section">
+        <div className="brand-shell home-lp-shell">
+          <div className="home-lp-section-head">
+            <p className="brand-kicker">実画面と出力例</p>
+            <h2>抽象的な説明より、実物で流れが分かるように</h2>
+            <p>
+              ネタ一覧、台本・設定、YMM4準備の実画面に加えて、会話台本の出力イメージも並べています。
+              ホームの中で「何ができるか」ではなく「どこまで進められるか」を確認できます。
+            </p>
+          </div>
+
+          <div className="home-lp-proof-grid">
+            {screenExamples.map((item) => (
+              <InteractiveCard key={item.title} as="article" className="brand-card home-lp-proof-card">
+                <figure className="home-lp-proof-card__media">
+                  <img src={item.image} alt={item.alt} />
+                </figure>
+                <div className="home-lp-proof-card__body">
+                  <span>{item.label}</span>
+                  <h3>{item.title}</h3>
+                  <p>{item.body}</p>
+                </div>
+              </InteractiveCard>
+            ))}
+
+            <InteractiveCard as="article" className="brand-card home-lp-proof-card home-lp-proof-card--sample">
+              <div className="home-lp-proof-card__body">
+                <span>出力例</span>
+                <h3>会話台本のイメージ</h3>
+                <div className="home-lp-output-sample" aria-label="会話台本の出力例">
+                  <div className="home-lp-output-sample__line">
+                    <strong>霊夢</strong>
+                    <p>今日は話題になっている記事を3本拾って、最初に結論から見せるよ。</p>
+                  </div>
+                  <div className="home-lp-output-sample__line home-lp-output-sample__line--accent">
+                    <strong>魔理沙</strong>
+                    <p>補足は後半に回して、立ち絵と画像の切り替え位置も先に決めておこう。</p>
+                  </div>
+                  <div className="home-lp-output-sample__line">
+                    <strong>霊夢</strong>
+                    <p>最後に話者と素材を整理して、YMM4へそのまま持っていける形にする。</p>
+                  </div>
+                </div>
+                <p className="home-lp-proof-card__note">
+                  会話形式 / テロップ向け / 話者整理済みのイメージを、ホーム上で確認できます。
+                </p>
               </div>
+            </InteractiveCard>
+          </div>
+        </div>
+      </Section>
+
+      <Section className="home-lp-ymm4-section">
+        <div className="brand-shell home-lp-shell">
+          <div className="home-lp-ymm4" data-reveal>
+            <div className="home-lp-ymm4__copy">
+              <p className="brand-kicker">YMM4につながる強み</p>
+              <h2>YMM4に持っていく前の整理を、もっと楽に</h2>
+              <p>
+                ただのAI系ツールではなく、YMM4へ入る前に必要な整理を先回りできることが、このサービスの差別化ポイントです。
+                YMM4専用ではありませんが、YMM4向けの前工程を整えたい人に強く向いています。
+              </p>
+              <p className="home-lp-ymm4__support">
+                詳しい設定手順は <Link to="/instructions/">使い方</Link>、
+                導入前の不安は <Link to="/faq/">FAQ</Link> で確認できます。
+              </p>
+            </div>
+
+            <div className="home-lp-ymm4__points">
+              <InteractiveCard as="article" className="brand-card home-lp-ymm4-card">
+                <h3>話者ごとの整理がしやすい</h3>
+                <p>誰が何を話すかを先に固めて、編集時の並び替えを減らせます。</p>
+              </InteractiveCard>
+              <InteractiveCard as="article" className="brand-card home-lp-ymm4-card">
+                <h3>素材や見せ方を先に決めやすい</h3>
+                <p>立ち絵、画像、音声の置きどころを前工程で整理しておけます。</p>
+              </InteractiveCard>
+              <InteractiveCard as="article" className="brand-card home-lp-ymm4-card">
+                <h3>編集前の組み直しを減らしやすい</h3>
+                <p>会話台本と素材設計を同時に固めて、YMM4での再調整を少なくします。</p>
+              </InteractiveCard>
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      <Section alt className="home-lp-faq-section">
+        <div className="brand-shell home-lp-shell">
+          <div className="home-lp-section-head">
+            <p className="brand-kicker">FAQ</p>
+            <h2>よくある質問</h2>
+            <p>
+              ホームの段階で迷いやすいポイントを先にまとめています。さらに詳しい内容は
+              <Link to="/faq/"> FAQページ</Link>
+              で確認できます。
+            </p>
+          </div>
+
+          <div className="faq-list home-lp-faq-list">
+            {faqItems.map((item, index) => (
+              <details key={item.question} className="faq-item home-lp-faq-item" open={index === 0}>
+                <summary>{item.question}</summary>
+                <div className="faq-answer">
+                  <p>{item.answer}</p>
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </Section>
+
+      <Section className="home-lp-cta-section">
+        <div className="brand-shell home-lp-shell">
+          <div className="home-lp-cta premium-glass" data-reveal>
+            <div className="home-lp-cta__copy">
+              <p className="brand-kicker">最後のCTA</p>
+              <h2>ゆっくり系動画の前工程を、ひとつの流れに。</h2>
+              <p>
+                ネタ収集から会話台本、素材設計、YMM4準備まで。制作前の散らばりを減らして、動画づくりをもっと速く。
+              </p>
+              <ActionGroup
+                actions={[
+                  { label: '無料で始める', href: '/download/', variant: 'primary' },
+                  { label: '使い方を見る', href: '/instructions/', variant: 'ghost' },
+                ]}
+                className="brand-inline-actions home-lp-cta__actions"
+              />
+            </div>
+
+            <dl className="home-lp-cta__meta">
               <div>
-                <dt>価格</dt>
-                <dd>{legal.pricing.amountIncludingTax}</dd>
+                <dt>対応環境</dt>
+                <dd>Windows / YMM4向け</dd>
               </div>
               <div>
                 <dt>販売形態</dt>
                 <dd>{legal.pricing.modelLabel}</dd>
               </div>
               <div>
+                <dt>価格</dt>
+                <dd>{legal.pricing.amountIncludingTax}</dd>
+              </div>
+              <div>
                 <dt>サポート</dt>
                 <dd>{legal.support.firstResponseSla}</dd>
               </div>
             </dl>
-
-            <ActionGroup
-              actions={[
-                { label: '無料で始める！', href: '/download/', variant: 'primary' },
-                { label: '使い方を見る', href: '/instructions/', variant: 'ghost' },
-                { label: '導入について問い合わせる', href: '/contact/', variant: 'ghost' },
-              ]}
-            />
           </div>
         </div>
       </Section>

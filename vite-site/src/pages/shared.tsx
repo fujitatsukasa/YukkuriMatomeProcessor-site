@@ -4,6 +4,40 @@ import { InteractiveCard, PageMeta } from '@/components/ui'
 import { media } from '@/data/assets'
 import { legal, type NewsPost } from '@/data/site-content'
 
+const heroPipeline = [
+  { step: '01', title: 'ネタ収集', note: '記事と話題を保存' },
+  { step: '02', title: '台本化', note: '見せる順番を整理' },
+  { step: '03', title: '会話化', note: '役割ごとに分解' },
+  { step: '04', title: '素材設計', note: '立ち絵と音声を配置' },
+  { step: '05', title: 'YMM4準備', note: '話者と素材を整列' },
+] as const
+
+const heroTopics = [
+  '保存した記事候補を一覧で比較',
+  '切り抜く話題をその場で選別',
+  '使う順番を決めて台本へ渡す',
+] as const
+
+const heroConversation = [
+  {
+    speaker: '霊夢',
+    body: '最初に結論を置いて、反応集向けにテンポを作ろう。',
+    align: 'left',
+  },
+  {
+    speaker: '魔理沙',
+    body: '補足は後半へ回して、見せ場に合わせて素材も先に決めるぜ。',
+    align: 'right',
+  },
+  {
+    speaker: '霊夢',
+    body: '最後に話者と順番を整えて、そのままYMM4へ渡せる形にするよ。',
+    align: 'left',
+  },
+] as const
+
+const heroAssets = ['立ち絵差分', '場面画像', '読み上げ音声', 'テロップ方針'] as const
+
 export function HomeHeroStage() {
   const ref = useRef<HTMLDivElement | null>(null)
 
@@ -40,59 +74,90 @@ export function HomeHeroStage() {
   return (
     <div
       ref={ref}
-      className="brand-hero__media premium-rainbow-media hero-stage hero-stage--product"
+      className="brand-hero__media premium-rainbow-media hero-stage hero-stage--product home-lp-stage"
       data-reveal
       onPointerMove={handlePointerMove}
       onPointerLeave={handlePointerLeave}
     >
       <img
-        className="hero-stage__backdrop"
+        className="home-lp-stage__background"
         src={media.externalEditingMonitor}
         alt=""
         aria-hidden="true"
       />
-      <div className="hero-stage__orb hero-stage__orb--north" aria-hidden="true" />
-      <div className="hero-stage__orb hero-stage__orb--south" aria-hidden="true" />
-      <div className="hero-prism-layer" aria-hidden="true" />
-      <div className="hero-stage__grid" aria-hidden="true" />
-      <div className="hero-product-board">
-        <figure className="hero-product-board__main">
-          <figcaption>
-            <span>手順 1</span>
-            <strong>URLを入れて記事一覧を取得</strong>
-          </figcaption>
-          <img src={media.productImage2} alt="対応URLから記事一覧を取得して選択する画面" />
-        </figure>
 
-        <figure className="hero-product-board__side hero-product-board__side--settings">
-          <figcaption>
-            <span>手順 2</span>
-            <strong>セリフ・タイトル設定</strong>
-          </figcaption>
-          <img src={media.settingsShot} alt="台本取得と整形の設定画面" />
-        </figure>
+      <div className="home-lp-stage__frame">
+        <div className="home-lp-stage__head">
+          <div>
+            <span>制作フローが一目で分かる</span>
+            <strong>ネタ収集 → 台本化 → 会話化 → 素材設計 → YMM4準備</strong>
+          </div>
+          <small>前工程を一本化</small>
+        </div>
 
-        <figure className="hero-product-board__side hero-product-board__side--timeline">
-          <figcaption>
-            <span>手順 3</span>
-            <strong>YMM4で編集開始しやすい形へ</strong>
-          </figcaption>
-          <img src={media.productImage1} alt="取得した台本を編集開始へつなげるタイムライン画面" />
-        </figure>
+        <div className="home-lp-stage__workspace">
+          <section className="home-lp-stage__panel home-lp-stage__panel--topics">
+            <header className="home-lp-stage__panel-head">
+              <span>ネタ一覧</span>
+              <strong>保存した記事・話題を一覧で比較</strong>
+            </header>
+            <div className="home-lp-stage__preview">
+              <img src={media.productImage2} alt="記事候補の一覧を見比べている画面" />
+            </div>
+            <ul className="home-lp-stage__topic-list">
+              {heroTopics.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </section>
 
-        <div className="hero-product-board__summary">
-          <div>
-            <strong>URL取得</strong>
-            <span>候補記事を一覧化</span>
-          </div>
-          <div>
-            <strong>台本整形</strong>
-            <span>編集前に形を揃える</span>
-          </div>
-          <div>
-            <strong>YMM4準備</strong>
-            <span>次工程へ渡しやすい</span>
-          </div>
+          <section className="home-lp-stage__panel home-lp-stage__panel--script">
+            <header className="home-lp-stage__panel-head">
+              <span>会話台本</span>
+              <strong>キャラごとの役割で掛け合いに整理</strong>
+            </header>
+            <div className="home-lp-stage__chat">
+              {heroConversation.map((item) => (
+                <div
+                  key={`${item.speaker}-${item.body}`}
+                  className={`home-lp-stage__chat-line home-lp-stage__chat-line--${item.align}`}
+                >
+                  <strong>{item.speaker}</strong>
+                  <p>{item.body}</p>
+                </div>
+              ))}
+            </div>
+            <div className="home-lp-stage__script-tags" aria-label="会話台本の整理項目">
+              <span>見せ場</span>
+              <span>補足</span>
+              <span>ツッコミ</span>
+            </div>
+          </section>
+
+          <section className="home-lp-stage__panel home-lp-stage__panel--assets">
+            <header className="home-lp-stage__panel-head">
+              <span>立ち絵・画像・音声</span>
+              <strong>素材と見せ方を先に揃える</strong>
+            </header>
+            <div className="home-lp-stage__asset-preview">
+              <img src={media.settingsShot} alt="台本設定と読み上げ条件を確認する画面" />
+            </div>
+            <ul className="home-lp-stage__asset-list">
+              {heroAssets.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </section>
+        </div>
+
+        <div className="home-lp-stage__pipeline" aria-label="制作の流れ">
+          {heroPipeline.map((item) => (
+            <div key={item.step} className="home-lp-stage__pipeline-item">
+              <span>{item.step}</span>
+              <strong>{item.title}</strong>
+              <small>{item.note}</small>
+            </div>
+          ))}
         </div>
       </div>
     </div>
