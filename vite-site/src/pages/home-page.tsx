@@ -152,6 +152,15 @@ export function HomePage() {
 
       <div className="home-compact-shell">
         <section className="home-compact-hero homepage-hero">
+          <video
+            className="home-compact-hero__video-bg"
+            src={media.heroSaasBg}
+            autoPlay
+            loop
+            muted
+            playsInline
+            aria-hidden="true"
+          />
           <div className="home-compact-hero__layout">
             <div className="home-compact-hero__copy">
               <h1 className="brand-title">

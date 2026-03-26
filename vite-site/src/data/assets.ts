@@ -33,4 +33,5 @@ export const media = {
   iconStep4: new URL('../../../assets/img/icon_step_4.png', import.meta.url).href,
   iconStep5: new URL('../../../assets/img/icon_step_5.png', import.meta.url).href,
   timeCompressionBg: new URL('../../../assets/img/time_compression_bg.jpg', import.meta.url).href,
+  heroSaasBg: new URL('../../../assets/showcase/aurora/hero-saas-bg.mp4', import.meta.url).href,
 }

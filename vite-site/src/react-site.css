@@ -3896,10 +3896,30 @@ code {
 .home-compact-hero {
   padding-top: clamp(18px, 2.8vw, 34px);
   padding-bottom: clamp(24px, 3vw, 42px);
+  overflow: hidden;
+}
+
+.home-compact-hero__video-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.18;
+  pointer-events: none;
+  z-index: 0;
+  filter: saturate(1.2) brightness(0.7);
+  animation: hero-video-fade-in 2s ease-out forwards;
+}
+
+@keyframes hero-video-fade-in {
+  from { opacity: 0; }
+  to { opacity: 0.18; }
 }
 
 .home-compact-hero__layout {
   position: relative;
+  z-index: 1;
   width: min(1180px, calc(100% - 48px));
   margin-inline: auto;
   display: grid;
