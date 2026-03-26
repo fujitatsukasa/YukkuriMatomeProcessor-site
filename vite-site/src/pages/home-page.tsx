@@ -20,6 +20,12 @@ const efficiencyRows = [
   { label: 'YMM4前調整', manual: 88, product: 42, gain: '編集前の前提を揃える' },
 ] as const
 
+const efficiencyHighlights = [
+  { label: '平均工程負荷 index', manual: '90', product: '44', delta: '-46pt' },
+  { label: '工程切り替え', manual: '5工程で分断', product: '1フローで進行', delta: '往復を圧縮' },
+  { label: 'YMM4前の再整理', manual: '5項目', product: '2項目', delta: '3項目減' },
+] as const
+
 const useCaseCards = [
   {
     title: '反応集',
@@ -36,44 +42,6 @@ const useCaseCards = [
   {
     title: '会話形式の解説',
     body: '誰が何を話すかを先に決めて、字幕と読み上げを揃える。',
-  },
-] as const
-
-const comparisonRows = [
-  {
-    label: 'ネタ収集',
-    manual: '保存先が分散しやすい',
-    product: '候補を一覧で管理',
-  },
-  {
-    label: '台本作成',
-    manual: '別ツールやメモで整理',
-    product: '動画向けの順番で整理',
-  },
-  {
-    label: '会話台本',
-    manual: '話者分けを後から調整',
-    product: '会話形式の台本を先に固める',
-  },
-  {
-    label: '立ち絵・素材整理',
-    manual: '画像や音声が散らばりやすい',
-    product: '素材の置きどころまで揃える',
-  },
-  {
-    label: 'YMM4前の準備',
-    manual: '編集前に再整理が必要',
-    product: '台本読み込み前に話者と素材を整理',
-  },
-  {
-    label: '買い切り',
-    manual: '工程ごとに手作業で維持',
-    product: legal.pricing.amountIncludingTax,
-  },
-  {
-    label: 'Windows対応',
-    manual: '環境差分を自分で吸収',
-    product: 'Windows向けに提供',
   },
 ] as const
 
@@ -317,94 +285,127 @@ export function HomePage() {
         </Section>
 
         <Section className="home-compact-section home-compact-compare-section">
-          <div className="home-compact-compare">
-            <div className="home-compact-compare__main">
-              <div className="home-compact-section-head">
-                <h2>手作業と比べて、どこまでまとまるか</h2>
-                <p>競合名ではなく、手作業より何を減らせるかで見せています。</p>
-              </div>
+          <div className="home-compact-section-head">
+            <h2>準備時間の差は、手戻りの数で見せます。</h2>
+            <p>比較表ではなく、どの工程でどれだけ負荷が落ちるかをグラフで見せます。</p>
+          </div>
 
-              <div className="home-compact-compare__table-wrap">
-                <table className="home-compact-compare__table">
-                  <thead>
-                    <tr>
-                      <th scope="col">項目</th>
-                      <th scope="col">手作業</th>
-                      <th scope="col">ゆっくりまとめプロセッサー</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {comparisonRows.map((item) => (
-                      <tr key={item.label}>
-                        <th scope="row">{item.label}</th>
-                        <td>{item.manual}</td>
-                        <td>{item.product}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+          <div className="home-compact-impact-board">
+            <div className="home-compact-impact-board__summary">
+              {efficiencyHighlights.map((item) => (
+                <div key={item.label} className="home-compact-impact-board__metric">
+                  <span>{item.label}</span>
+                  <strong>{item.product}</strong>
+                  <small>{item.delta}</small>
+                  <p>手作業: {item.manual}</p>
+                </div>
+              ))}
             </div>
 
-            <InteractiveCard as="aside" className="home-compact-price-card">
-              <strong>{legal.pricing.amountIncludingTax}</strong>
-              <p>
-                買い切りで導入できる Windows 向けツールです。
-                <Link to="/purchase/">購入ページ</Link>で案内条件を確認できます。
-              </p>
-              <ul className="home-compact-price-card__badges" aria-label="導入条件">
-                {closingBadges.map((item) => (
-                  <li key={item}>{item}</li>
+            <div className="home-compact-impact-board__chart" role="img" aria-label="手作業とゆっくりまとめプロセッサーの工程負荷インデックス比較">
+              <div className="home-compact-impact-board__axis" aria-hidden="true">
+                <span>0</span>
+                <span>50</span>
+                <span>100</span>
+              </div>
+
+              <div className="home-compact-impact-board__grid" aria-hidden="true" />
+
+              <div className="home-compact-impact-board__rows">
+                {efficiencyRows.map((item) => (
+                  <div key={item.label} className="home-compact-impact-board__row">
+                    <div className="home-compact-impact-board__label">
+                      <strong>{item.label}</strong>
+                      <span>{item.gain}</span>
+                    </div>
+
+                    <div className="home-compact-impact-board__bars">
+                      <div className="home-compact-impact-board__lane">
+                        <div className="home-compact-impact-board__fill home-compact-impact-board__fill--manual" style={{ width: `${item.manual}%` }}>
+                          <em>{item.manual}</em>
+                        </div>
+                      </div>
+                      <div className="home-compact-impact-board__lane">
+                        <div className="home-compact-impact-board__fill home-compact-impact-board__fill--product" style={{ width: `${item.product}%` }}>
+                          <em>{item.product}</em>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="home-compact-impact-board__delta">-{item.manual - item.product}pt</div>
+                  </div>
                 ))}
-              </ul>
-            </InteractiveCard>
+              </div>
+
+              <div className="home-compact-impact-board__legend" aria-hidden="true">
+                <span className="home-compact-impact-board__legend-item home-compact-impact-board__legend-item--manual">手作業</span>
+                <span className="home-compact-impact-board__legend-item home-compact-impact-board__legend-item--product">ゆっくりまとめプロセッサー</span>
+              </div>
+
+              <p className="home-compact-impact-board__note">※ index は準備工程の分断と手戻り量をもとにした比較イメージです。実測時間ではありません。</p>
+            </div>
           </div>
         </Section>
 
-        <Section alt className="home-compact-section home-compact-closing-section">
-          <div className="home-compact-closing">
-            <div className="home-compact-faq">
-              <div className="home-compact-section-head">
-                <h2>よくある質問</h2>
-                <p>
-                  導入前によくある確認事項だけを短くまとめています。
-                  <Link to="/faq/">FAQページ</Link>ではさらに詳しく確認できます。
-                </p>
-              </div>
+        <Section className="home-compact-section home-compact-price-section">
+          <InteractiveCard className="home-compact-price-card">
+            <strong>{legal.pricing.amountIncludingTax}</strong>
+            <p>
+              買い切りで導入できる Windows 向けツールです。
+              <Link to="/purchase/">購入ページ</Link>で案内条件を確認できます。
+            </p>
+            <ul className="home-compact-price-card__badges" aria-label="導入条件">
+              {closingBadges.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </InteractiveCard>
+        </Section>
 
-              <div className="home-compact-faq__list">
-                {faqItems.map((item) => (
-                  <details key={item.question} className="home-compact-faq__item">
-                    <summary>{item.question}</summary>
-                    <p>{item.answer}</p>
-                  </details>
-                ))}
-              </div>
+        <Section alt className="home-compact-section home-compact-closing-section">
+          <div className="home-compact-faq">
+            <div className="home-compact-section-head">
+              <h2>よくある質問</h2>
+              <p>
+                導入前によくある確認事項だけを短くまとめています。
+                <Link to="/faq/">FAQページ</Link>ではさらに詳しく確認できます。
+              </p>
             </div>
 
-            <InteractiveCard as="aside" className="home-compact-cta-card">
-              <h2>反応集・ゆっくり解説の制作前工程を、ひとつに。</h2>
-              <p>
-                ネタ収集、台本作成、会話台本、素材整理、YMM4準備まで。
-                手作業で分断しがちな工程を、1つの流れにまとめます。
-              </p>
-
-              <div className="brand-inline-actions home-compact-cta__actions">
-                <Link className="brand-btn brand-btn--primary" to="/download/">
-                  無料で開始する！
-                </Link>
-                <Link className="brand-btn brand-btn--ghost" to="/instructions/">
-                  使い方を見る
-                </Link>
-              </div>
-
-              <ul className="home-compact-cta__badges" aria-label="補足情報">
-                {closingBadges.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </InteractiveCard>
+            <div className="home-compact-faq__list">
+              {faqItems.map((item) => (
+                <details key={item.question} className="home-compact-faq__item">
+                  <summary>{item.question}</summary>
+                  <p>{item.answer}</p>
+                </details>
+              ))}
+            </div>
           </div>
+        </Section>
+
+        <Section className="home-compact-section home-compact-cta-section">
+          <InteractiveCard className="home-compact-cta-card">
+            <h2>反応集・ゆっくり解説の制作前工程を、ひとつに。</h2>
+            <p>
+              ネタ収集、台本作成、会話台本、素材整理、YMM4準備まで。
+              手作業で分断しがちな工程を、1つの流れにまとめます。
+            </p>
+
+            <div className="brand-inline-actions home-compact-cta__actions">
+              <Link className="brand-btn brand-btn--primary" to="/download/">
+                無料で開始する！
+              </Link>
+              <Link className="brand-btn brand-btn--ghost" to="/instructions/">
+                使い方を見る
+              </Link>
+            </div>
+
+            <ul className="home-compact-cta__badges" aria-label="補足情報">
+              {closingBadges.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </InteractiveCard>
         </Section>
       </div>
     </>
