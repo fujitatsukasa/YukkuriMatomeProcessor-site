@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { InteractiveCard, PageMeta, Section } from '@/components/ui'
 import { media } from '@/data/assets'
@@ -266,30 +266,8 @@ const homeStructuredData = [
   },
 ]
 
-function useLoopIndex(length: number, intervalMs: number) {
-  const [activeIndex, setActiveIndex] = useState(0)
-
-  useEffect(() => {
-    if (typeof window === 'undefined' || length <= 1) {
-      return
-    }
-
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      return
-    }
-
-    const timer = window.setInterval(() => {
-      setActiveIndex((current) => (current + 1) % length)
-    }, intervalMs)
-
-    return () => window.clearInterval(timer)
-  }, [intervalMs, length])
-
-  return [activeIndex, setActiveIndex] as const
-}
-
 function HeroLoopDemo() {
-  const [activeIndex, setActiveIndex] = useLoopIndex(heroStages.length, 3200)
+  const [activeIndex, setActiveIndex] = useState(0)
   const activeStage = heroStages[activeIndex]
 
   return (
@@ -322,7 +300,7 @@ function HeroLoopDemo() {
 }
 
 function WorkflowShowcase() {
-  const [activeIndex, setActiveIndex] = useLoopIndex(workflowStages.length, 2400)
+  const [activeIndex, setActiveIndex] = useState(0)
   const activeStage = workflowStages[activeIndex]
 
   return (
