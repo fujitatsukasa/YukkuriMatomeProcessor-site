@@ -4287,11 +4287,264 @@ code {
   max-width: 760px;
 }
 
-.home-compact-efficiency,
 .home-compact-compare,
 .home-compact-closing {
   display: grid;
   gap: 1.5rem;
+}
+
+.home-compact-analytics-board {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  gap: 1.15rem;
+  padding: 1.45rem;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 30px;
+  background:
+    radial-gradient(circle at top right, rgba(223, 192, 131, 0.12), transparent 24%),
+    linear-gradient(180deg, rgba(33, 35, 38, 0.99), rgba(17, 18, 21, 0.99));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 28px 68px -40px rgba(0, 0, 0, 0.82);
+}
+
+.home-compact-analytics-board::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(223, 192, 131, 0.08), rgba(255, 255, 255, 0.04));
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.home-compact-analytics-board__summary,
+.home-compact-analytics-board__rows {
+  position: relative;
+  z-index: 1;
+}
+
+.home-compact-analytics-board__summary {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.home-compact-analytics-board__metric {
+  display: grid;
+  gap: 0.18rem;
+  padding: 1rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02)),
+    rgba(255, 255, 255, 0.02);
+}
+
+.home-compact-analytics-board__metric span {
+  color: rgba(236, 233, 226, 0.68);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.home-compact-analytics-board__metric strong {
+  color: #fff4d3;
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  line-height: 1.02;
+}
+
+.home-compact-analytics-board__metric small,
+.home-compact-analytics-board__delta {
+  color: rgba(223, 192, 131, 0.96);
+  font-weight: 800;
+}
+
+.home-compact-analytics-board__metric p {
+  margin: 0.1rem 0 0;
+  color: rgba(236, 233, 226, 0.68);
+}
+
+.home-compact-analytics-board__chart {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  padding: 1.05rem 1.05rem 0.7rem;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.015)),
+    rgba(6, 8, 11, 0.46);
+}
+
+.home-compact-analytics-board__legend {
+  display: flex;
+  gap: 0.9rem;
+  margin-bottom: 0.4rem;
+}
+
+.home-compact-analytics-board__legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: rgba(236, 233, 226, 0.78);
+  font-size: 0.88rem;
+}
+
+.home-compact-analytics-board__legend-item::before {
+  content: "";
+  width: 0.82rem;
+  height: 0.82rem;
+  border-radius: 999px;
+}
+
+.home-compact-analytics-board__legend-item--manual::before {
+  background: linear-gradient(90deg, rgba(245, 241, 233, 0.55), rgba(245, 241, 233, 0.24));
+}
+
+.home-compact-analytics-board__legend-item--product::before {
+  background: linear-gradient(90deg, rgba(255, 245, 219, 0.98), rgba(236, 193, 106, 0.96) 44%, rgba(194, 140, 56, 0.98));
+}
+
+.home-compact-analytics-board__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 560 / 220;
+}
+
+.home-compact-analytics-board__grid-line {
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 1;
+}
+
+.home-compact-analytics-board__axis-label,
+.home-compact-analytics-board__stage-label {
+  fill: rgba(236, 233, 226, 0.56);
+  font-size: 11px;
+}
+
+.home-compact-analytics-board__polyline {
+  fill: none;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.home-compact-analytics-board__polyline--manual {
+  stroke: rgba(245, 241, 233, 0.64);
+}
+
+.home-compact-analytics-board__polyline--product {
+  stroke: rgba(236, 193, 106, 0.98);
+  filter: drop-shadow(0 0 10px rgba(236, 193, 106, 0.28));
+}
+
+.home-compact-analytics-board__dot {
+  stroke-width: 2;
+}
+
+.home-compact-analytics-board__dot--manual {
+  fill: rgba(245, 241, 233, 0.92);
+  stroke: rgba(18, 19, 22, 0.88);
+}
+
+.home-compact-analytics-board__dot--product {
+  fill: rgba(255, 234, 183, 1);
+  stroke: rgba(175, 118, 32, 0.9);
+}
+
+.home-compact-analytics-board__rows {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.home-compact-analytics-board__row {
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: minmax(180px, 0.3fr) minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.home-compact-analytics-board__row-label {
+  display: grid;
+  gap: 0.18rem;
+}
+
+.home-compact-analytics-board__row-label strong {
+  color: #f5f1e9;
+}
+
+.home-compact-analytics-board__row-label span,
+.home-compact-analytics-board__note {
+  color: rgba(236, 233, 226, 0.66);
+}
+
+.home-compact-analytics-board__row-bars {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.home-compact-analytics-board__track {
+  position: relative;
+  overflow: hidden;
+  height: 1.05rem;
+  border-radius: 999px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.02)),
+    rgba(255, 255, 255, 0.025);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.home-compact-analytics-board__fill {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
+  min-width: 2.7rem;
+  padding-right: 0.42rem;
+  border-radius: inherit;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 12px 28px -18px rgba(0, 0, 0, 0.82);
+}
+
+.home-compact-analytics-board__fill em {
+  color: #16120d;
+  font-style: normal;
+  font-size: 0.74rem;
+  font-weight: 800;
+}
+
+.home-compact-analytics-board__fill--manual {
+  background: linear-gradient(90deg, rgba(245, 241, 233, 0.55), rgba(245, 241, 233, 0.24));
+}
+
+.home-compact-analytics-board__fill--product {
+  background: linear-gradient(90deg, rgba(255, 245, 219, 0.98), rgba(236, 193, 106, 0.96) 44%, rgba(194, 140, 56, 0.98));
+}
+
+.home-compact-analytics-board__delta {
+  min-width: 4.8rem;
+  text-align: right;
+  font-size: 0.95rem;
+}
+
+.home-compact-analytics-board__note {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-size: 0.82rem;
 }
 
 .home-compact-impact-board {
@@ -5106,6 +5359,7 @@ code {
     transition: transform 780ms cubic-bezier(0.22, 1, 0.36, 1), opacity 220ms ease;
   }
 
+  .home-compact-analytics-board,
   .home-compact-impact-board,
   .home-compact-efficiency__chart,
   .home-compact-process-card,
@@ -5119,6 +5373,7 @@ code {
       border-color 220ms ease;
   }
 
+  .home-compact-analytics-board:hover,
   .home-compact-impact-board:hover,
   .home-compact-efficiency__chart:hover,
   .home-compact-process-card:hover,
@@ -5141,6 +5396,7 @@ code {
 
 @media (max-width: 1100px) {
   .home-compact-hero__layout,
+  .home-compact-analytics-board__summary,
   .home-compact-efficiency,
   .home-compact-impact-board__summary {
     grid-template-columns: 1fr;
@@ -5150,6 +5406,7 @@ code {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .home-compact-analytics-board__row,
   .home-compact-impact-board__row,
   .home-compact-efficiency__row {
     grid-template-columns: 1fr;
@@ -5174,6 +5431,7 @@ code {
   }
 
   .home-compact-hero__benefits,
+  .home-compact-analytics-board__summary,
   .home-compact-flow__list,
   .home-compact-efficiency,
   .home-compact-usecase-grid,
@@ -5186,6 +5444,7 @@ code {
   }
 
   .product-demo,
+  .home-compact-analytics-board,
   .home-compact-impact-board,
   .home-compact-impact-board__chart,
   .home-compact-efficiency__chart,
@@ -5196,10 +5455,12 @@ code {
     border-radius: 24px;
   }
 
+  .home-compact-analytics-board,
   .home-compact-impact-board {
     padding: 1.15rem;
   }
 
+  .home-compact-analytics-board__chart,
   .home-compact-impact-board__chart,
   .home-compact-efficiency__chart {
     padding: 1.2rem;
@@ -5250,6 +5511,7 @@ code {
   .home-compact-hero__benefits li,
   .home-compact-hero__media,
   .home-compact-flow::after,
+  .home-compact-analytics-board__fill,
   .home-compact-flow__list li,
   .home-compact-impact-board__fill,
   .home-compact-efficiency__bar,
@@ -5265,6 +5527,7 @@ code {
   .home-compact-hero__actions .brand-btn,
   .home-compact-cta__actions .brand-btn,
   .product-demo__tab,
+  .home-compact-analytics-board,
   .home-compact-impact-board,
   .home-compact-efficiency__chart,
   .home-compact-process-card,

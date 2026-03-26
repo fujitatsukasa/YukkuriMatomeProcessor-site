@@ -26,6 +26,24 @@ const efficiencyHighlights = [
   { label: 'YMM4前の再整理', manual: '5項目', product: '2項目', delta: '3項目減' },
 ] as const
 
+const trendChartWidth = 560
+const trendChartHeight = 220
+const trendChartPaddingX = 28
+const trendChartTop = 24
+const trendChartBottom = 42
+const trendChartInnerWidth = trendChartWidth - trendChartPaddingX * 2
+const trendChartInnerHeight = trendChartHeight - trendChartTop - trendChartBottom
+
+const trendDots = efficiencyRows.map((item, index) => {
+  const x = trendChartPaddingX + (trendChartInnerWidth / (efficiencyRows.length - 1)) * index
+  const manualY = trendChartTop + trendChartInnerHeight - (item.manual / 100) * trendChartInnerHeight
+  const productY = trendChartTop + trendChartInnerHeight - (item.product / 100) * trendChartInnerHeight
+  return { ...item, x, manualY, productY }
+})
+
+const manualTrendPath = trendDots.map((item) => `${item.x},${item.manualY}`).join(' ')
+const productTrendPath = trendDots.map((item) => `${item.x},${item.productY}`).join(' ')
+
 const useCaseCards = [
   {
     title: '反応集',
@@ -202,61 +220,88 @@ export function HomePage() {
 
         <Section alt className="home-compact-section home-compact-process-section">
           <div className="home-compact-section-head">
-            <h2>作業時間が減るのは、工程の分断が減るからです。</h2>
-            <p>ネタ探し、台本整理、話者整理、素材整理、YMM4前調整を別々にやり直しにくくすることで、編集前の準備時間を削ります。</p>
+            <h2>準備時間の差は、工程負荷の差として見せます。</h2>
+            <p>ネタ探しからYMM4前調整までの手戻り量を、ダッシュボードとして一目で比較できる形にしています。</p>
           </div>
 
-          <div className="home-compact-efficiency">
-            <div className="home-compact-efficiency__chart" role="img" aria-label="手作業とゆっくりまとめプロセッサーの工程負荷比較グラフ">
-              <div className="home-compact-efficiency__legend" aria-hidden="true">
-                <span className="home-compact-efficiency__legend-item home-compact-efficiency__legend-item--manual">手作業</span>
-                <span className="home-compact-efficiency__legend-item home-compact-efficiency__legend-item--product">ゆっくりまとめプロセッサー</span>
+          <div className="home-compact-analytics-board" role="img" aria-label="手作業とゆっくりまとめプロセッサーの工程負荷ダッシュボード比較">
+            <div className="home-compact-analytics-board__summary">
+              {efficiencyHighlights.map((item) => (
+                <div key={item.label} className="home-compact-analytics-board__metric">
+                  <span>{item.label}</span>
+                  <strong>{item.product}</strong>
+                  <small>{item.delta}</small>
+                  <p>手作業: {item.manual}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="home-compact-analytics-board__chart">
+              <div className="home-compact-analytics-board__legend" aria-hidden="true">
+                <span className="home-compact-analytics-board__legend-item home-compact-analytics-board__legend-item--manual">手作業</span>
+                <span className="home-compact-analytics-board__legend-item home-compact-analytics-board__legend-item--product">ゆっくりまとめプロセッサー</span>
               </div>
 
-              <div className="home-compact-efficiency__rows">
-                {efficiencyRows.map((item) => (
-                  <div key={item.label} className="home-compact-efficiency__row">
-                    <div className="home-compact-efficiency__meta">
-                      <strong>{item.label}</strong>
-                      <span>{item.gain}</span>
-                    </div>
+              <svg
+                className="home-compact-analytics-board__svg"
+                viewBox={`0 0 ${trendChartWidth} ${trendChartHeight}`}
+                aria-hidden="true"
+                preserveAspectRatio="none"
+              >
+                {[0, 25, 50, 75, 100].map((value) => {
+                  const y = trendChartTop + trendChartInnerHeight - (value / 100) * trendChartInnerHeight
+                  return (
+                    <g key={value}>
+                      <line x1={trendChartPaddingX} x2={trendChartWidth - trendChartPaddingX} y1={y} y2={y} className="home-compact-analytics-board__grid-line" />
+                      <text x={trendChartPaddingX - 8} y={y + 4} className="home-compact-analytics-board__axis-label">
+                        {value}
+                      </text>
+                    </g>
+                  )
+                })}
 
-                    <div className="home-compact-efficiency__bars">
-                      <div className="home-compact-efficiency__track">
-                        <div className="home-compact-efficiency__bar home-compact-efficiency__bar--manual" style={{ width: `${item.manual}%` }} />
+                <polyline points={manualTrendPath} className="home-compact-analytics-board__polyline home-compact-analytics-board__polyline--manual" />
+                <polyline points={productTrendPath} className="home-compact-analytics-board__polyline home-compact-analytics-board__polyline--product" />
+
+                {trendDots.map((item) => (
+                  <g key={item.label}>
+                    <circle cx={item.x} cy={item.manualY} r="5" className="home-compact-analytics-board__dot home-compact-analytics-board__dot--manual" />
+                    <circle cx={item.x} cy={item.productY} r="5" className="home-compact-analytics-board__dot home-compact-analytics-board__dot--product" />
+                    <text x={item.x} y={trendChartHeight - 12} textAnchor="middle" className="home-compact-analytics-board__stage-label">
+                      {item.label}
+                    </text>
+                  </g>
+                ))}
+              </svg>
+            </div>
+
+            <div className="home-compact-analytics-board__rows">
+              {efficiencyRows.map((item) => (
+                <div key={item.label} className="home-compact-analytics-board__row">
+                  <div className="home-compact-analytics-board__row-label">
+                    <strong>{item.label}</strong>
+                    <span>{item.gain}</span>
+                  </div>
+
+                  <div className="home-compact-analytics-board__row-bars">
+                    <div className="home-compact-analytics-board__track">
+                      <div className="home-compact-analytics-board__fill home-compact-analytics-board__fill--manual" style={{ width: `${item.manual}%` }}>
+                        <em>{item.manual}</em>
                       </div>
-                      <div className="home-compact-efficiency__track">
-                        <div className="home-compact-efficiency__bar home-compact-efficiency__bar--product" style={{ width: `${item.product}%` }} />
+                    </div>
+                    <div className="home-compact-analytics-board__track">
+                      <div className="home-compact-analytics-board__fill home-compact-analytics-board__fill--product" style={{ width: `${item.product}%` }}>
+                        <em>{item.product}</em>
                       </div>
                     </div>
                   </div>
-                ))}
-              </div>
 
-              <p className="home-compact-efficiency__note">※ グラフは工程量ベースの比較イメージです。実測値ではなく、手戻りの起きやすさを示しています。</p>
+                  <div className="home-compact-analytics-board__delta">-{item.manual - item.product}pt</div>
+                </div>
+              ))}
             </div>
 
-            <div className="home-compact-efficiency__copy">
-              <div className="home-compact-efficiency__headline">
-                <span>時間短縮の理由</span>
-                <h3>ネタ収集からYMM4準備までを、同じ画面の流れで進める。</h3>
-              </div>
-
-              <ul className="home-compact-efficiency__points">
-                <li>
-                  <strong>ネタ探しで止まりにくい</strong>
-                  <span>候補を保存したまま、台本作成の入口までつなげます。</span>
-                </li>
-                <li>
-                  <strong>話者整理を後回しにしない</strong>
-                  <span>会話台本の段階で、誰が何を話すかを先に固められます。</span>
-                </li>
-                <li>
-                  <strong>YMM4前のやり直しを減らす</strong>
-                  <span>立ち絵・画像・音声の置きどころまで前倒しで整理できます。</span>
-                </li>
-              </ul>
-            </div>
+            <p className="home-compact-analytics-board__note">※ index は準備工程の分断と手戻り量をもとにした比較イメージです。実測時間ではありません。</p>
           </div>
         </Section>
 
