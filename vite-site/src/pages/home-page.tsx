@@ -12,37 +12,17 @@ const heroBenefits = [
 
 const flowSteps = ['ネタ収集', '台本作成', '会話台本', '素材整理', 'YMM4準備'] as const
 
-const efficiencyRows = [
-  { label: 'ネタ探し', manual: 100, product: 44, gain: '候補を一覧で管理' },
-  { label: '台本整理', manual: 94, product: 48, gain: '動画向けの順番で整理' },
-  { label: '話者整理', manual: 86, product: 40, gain: '会話台本を先に固める' },
-  { label: '素材整理', manual: 82, product: 46, gain: '立ち絵・画像・音声をまとめる' },
-  { label: 'YMM4前調整', manual: 88, product: 42, gain: '編集前の前提を揃える' },
+const timeReduction = {
+  manualMinutes: 120,
+  productMinutes: 6,
+  reductionRate: 95,
+} as const
+
+const timeBreakdown = [
+  { label: 'ネタ探し', manual: '30分', product: '2分' },
+  { label: '台本整理', manual: '35分', product: '2分' },
+  { label: 'YMM4前調整', manual: '55分', product: '2分' },
 ] as const
-
-const efficiencyHighlights = [
-  { label: '平均工程負荷 index', manual: '90', product: '44', delta: '-46pt' },
-  { label: '工程切り替え', manual: '5工程で分断', product: '1フローで進行', delta: '往復を圧縮' },
-  { label: 'YMM4前の再整理', manual: '5項目', product: '2項目', delta: '3項目減' },
-] as const
-
-const trendChartWidth = 560
-const trendChartHeight = 220
-const trendChartPaddingX = 28
-const trendChartTop = 24
-const trendChartBottom = 42
-const trendChartInnerWidth = trendChartWidth - trendChartPaddingX * 2
-const trendChartInnerHeight = trendChartHeight - trendChartTop - trendChartBottom
-
-const trendDots = efficiencyRows.map((item, index) => {
-  const x = trendChartPaddingX + (trendChartInnerWidth / (efficiencyRows.length - 1)) * index
-  const manualY = trendChartTop + trendChartInnerHeight - (item.manual / 100) * trendChartInnerHeight
-  const productY = trendChartTop + trendChartInnerHeight - (item.product / 100) * trendChartInnerHeight
-  return { ...item, x, manualY, productY }
-})
-
-const manualTrendPath = trendDots.map((item) => `${item.x},${item.manualY}`).join(' ')
-const productTrendPath = trendDots.map((item) => `${item.x},${item.productY}`).join(' ')
 
 const useCaseCards = [
   {
@@ -220,88 +200,66 @@ export function HomePage() {
 
         <Section alt className="home-compact-section home-compact-process-section">
           <div className="home-compact-section-head">
-            <h2>準備時間の差は、工程負荷の差として見せます。</h2>
-            <p>ネタ探しからYMM4前調整までの手戻り量を、ダッシュボードとして一目で比較できる形にしています。</p>
+            <h2>準備時間を、120分から6分へ。</h2>
+            <p>ネタ探しからYMM4前調整までの準備を、約95%削減できる前提で見せています。</p>
           </div>
 
-          <div className="home-compact-analytics-board" role="img" aria-label="手作業とゆっくりまとめプロセッサーの工程負荷ダッシュボード比較">
-            <div className="home-compact-analytics-board__summary">
-              {efficiencyHighlights.map((item) => (
-                <div key={item.label} className="home-compact-analytics-board__metric">
-                  <span>{item.label}</span>
-                  <strong>{item.product}</strong>
-                  <small>{item.delta}</small>
-                  <p>手作業: {item.manual}</p>
-                </div>
-              ))}
-            </div>
-
-            <div className="home-compact-analytics-board__chart">
-              <div className="home-compact-analytics-board__legend" aria-hidden="true">
-                <span className="home-compact-analytics-board__legend-item home-compact-analytics-board__legend-item--manual">手作業</span>
-                <span className="home-compact-analytics-board__legend-item home-compact-analytics-board__legend-item--product">ゆっくりまとめプロセッサー</span>
+          <div className="home-compact-time-board" role="img" aria-label="手作業120分とゆっくりまとめプロセッサー6分の時間比較">
+            <div className="home-compact-time-board__headline">
+              <div className="home-compact-time-board__metric home-compact-time-board__metric--manual">
+                <span>手作業</span>
+                <strong>{timeReduction.manualMinutes}分</strong>
+                <p>ネタ探し、台本整理、YMM4前調整まで個別に進行</p>
               </div>
 
-              <svg
-                className="home-compact-analytics-board__svg"
-                viewBox={`0 0 ${trendChartWidth} ${trendChartHeight}`}
-                aria-hidden="true"
-                preserveAspectRatio="none"
-              >
-                {[0, 25, 50, 75, 100].map((value) => {
-                  const y = trendChartTop + trendChartInnerHeight - (value / 100) * trendChartInnerHeight
-                  return (
-                    <g key={value}>
-                      <line x1={trendChartPaddingX} x2={trendChartWidth - trendChartPaddingX} y1={y} y2={y} className="home-compact-analytics-board__grid-line" />
-                      <text x={trendChartPaddingX - 8} y={y + 4} className="home-compact-analytics-board__axis-label">
-                        {value}
-                      </text>
-                    </g>
-                  )
-                })}
+              <div className="home-compact-time-board__reduction">
+                <strong>{timeReduction.reductionRate}%削減</strong>
+                <span>{timeReduction.manualMinutes}分 → {timeReduction.productMinutes}分</span>
+              </div>
 
-                <polyline points={manualTrendPath} className="home-compact-analytics-board__polyline home-compact-analytics-board__polyline--manual" />
-                <polyline points={productTrendPath} className="home-compact-analytics-board__polyline home-compact-analytics-board__polyline--product" />
-
-                {trendDots.map((item) => (
-                  <g key={item.label}>
-                    <circle cx={item.x} cy={item.manualY} r="5" className="home-compact-analytics-board__dot home-compact-analytics-board__dot--manual" />
-                    <circle cx={item.x} cy={item.productY} r="5" className="home-compact-analytics-board__dot home-compact-analytics-board__dot--product" />
-                    <text x={item.x} y={trendChartHeight - 12} textAnchor="middle" className="home-compact-analytics-board__stage-label">
-                      {item.label}
-                    </text>
-                  </g>
-                ))}
-              </svg>
+              <div className="home-compact-time-board__metric home-compact-time-board__metric--product">
+                <span>ゆっくりまとめプロセッサー</span>
+                <strong>{timeReduction.productMinutes}分</strong>
+                <p>同じ準備を1つの流れで進めて、すぐ編集へ渡せる状態へ</p>
+              </div>
             </div>
 
-            <div className="home-compact-analytics-board__rows">
-              {efficiencyRows.map((item) => (
-                <div key={item.label} className="home-compact-analytics-board__row">
-                  <div className="home-compact-analytics-board__row-label">
-                    <strong>{item.label}</strong>
-                    <span>{item.gain}</span>
-                  </div>
+            <div className="home-compact-time-board__bars" aria-hidden="true">
+              <div className="home-compact-time-board__row">
+                <div className="home-compact-time-board__label">
+                  <strong>手作業</strong>
+                  <span>{timeReduction.manualMinutes}分</span>
+                </div>
+                <div className="home-compact-time-board__track">
+                  <div className="home-compact-time-board__fill home-compact-time-board__fill--manual" style={{ width: '100%' }} />
+                </div>
+              </div>
 
-                  <div className="home-compact-analytics-board__row-bars">
-                    <div className="home-compact-analytics-board__track">
-                      <div className="home-compact-analytics-board__fill home-compact-analytics-board__fill--manual" style={{ width: `${item.manual}%` }}>
-                        <em>{item.manual}</em>
-                      </div>
-                    </div>
-                    <div className="home-compact-analytics-board__track">
-                      <div className="home-compact-analytics-board__fill home-compact-analytics-board__fill--product" style={{ width: `${item.product}%` }}>
-                        <em>{item.product}</em>
-                      </div>
-                    </div>
-                  </div>
+              <div className="home-compact-time-board__row">
+                <div className="home-compact-time-board__label">
+                  <strong>本ツール</strong>
+                  <span>{timeReduction.productMinutes}分</span>
+                </div>
+                <div className="home-compact-time-board__track">
+                  <div
+                    className="home-compact-time-board__fill home-compact-time-board__fill--product"
+                    style={{ width: `${(timeReduction.productMinutes / timeReduction.manualMinutes) * 100}%` }}
+                  />
+                </div>
+              </div>
+            </div>
 
-                  <div className="home-compact-analytics-board__delta">-{item.manual - item.product}pt</div>
+            <div className="home-compact-time-board__breakdown">
+              {timeBreakdown.map((item) => (
+                <div key={item.label} className="home-compact-time-board__breakdown-item">
+                  <strong>{item.label}</strong>
+                  <div>
+                    <span>手作業 {item.manual}</span>
+                    <span>本ツール {item.product}</span>
+                  </div>
                 </div>
               ))}
             </div>
-
-            <p className="home-compact-analytics-board__note">※ index は準備工程の分断と手戻り量をもとにした比較イメージです。実測時間ではありません。</p>
           </div>
         </Section>
 
@@ -331,63 +289,63 @@ export function HomePage() {
 
         <Section className="home-compact-section home-compact-compare-section">
           <div className="home-compact-section-head">
-            <h2>準備時間の差は、手戻りの数で見せます。</h2>
-            <p>比較表ではなく、どの工程でどれだけ負荷が落ちるかをグラフで見せます。</p>
+            <h2>どこで時間が減るかも、6分の内訳で見せます。</h2>
+            <p>95%削減の根拠を、ネタ探し・台本整理・YMM4前調整の時間差でそのまま見せています。</p>
           </div>
 
-          <div className="home-compact-impact-board">
-            <div className="home-compact-impact-board__summary">
-              {efficiencyHighlights.map((item) => (
-                <div key={item.label} className="home-compact-impact-board__metric">
-                  <span>{item.label}</span>
-                  <strong>{item.product}</strong>
-                  <small>{item.delta}</small>
-                  <p>手作業: {item.manual}</p>
+          <div className="home-compact-time-detail-board" role="img" aria-label="手作業120分と本ツール6分の時間内訳比較">
+            <div className="home-compact-time-detail-board__summary">
+              <div className="home-compact-time-detail-board__hero">
+                <span>Time Saved</span>
+                <strong>{timeReduction.reductionRate}%削減</strong>
+                <p>{timeReduction.manualMinutes}分かかっていた準備を、{timeReduction.productMinutes}分まで圧縮。</p>
+              </div>
+
+              <div className="home-compact-time-detail-board__totals">
+                <div>
+                  <span>手作業</span>
+                  <strong>{timeReduction.manualMinutes}分</strong>
                 </div>
-              ))}
+                <div>
+                  <span>本ツール</span>
+                  <strong>{timeReduction.productMinutes}分</strong>
+                </div>
+              </div>
             </div>
 
-            <div className="home-compact-impact-board__chart" role="img" aria-label="手作業とゆっくりまとめプロセッサーの工程負荷インデックス比較">
-              <div className="home-compact-impact-board__axis" aria-hidden="true">
-                <span>0</span>
-                <span>50</span>
-                <span>100</span>
-              </div>
+            <div className="home-compact-time-detail-board__rows">
+              {timeBreakdown.map((item) => {
+                const manual = Number.parseInt(item.manual, 10)
+                const product = Number.parseInt(item.product, 10)
+                const saved = manual - product
 
-              <div className="home-compact-impact-board__grid" aria-hidden="true" />
-
-              <div className="home-compact-impact-board__rows">
-                {efficiencyRows.map((item) => (
-                  <div key={item.label} className="home-compact-impact-board__row">
-                    <div className="home-compact-impact-board__label">
+                return (
+                  <div key={item.label} className="home-compact-time-detail-board__row">
+                    <div className="home-compact-time-detail-board__label">
                       <strong>{item.label}</strong>
-                      <span>{item.gain}</span>
+                      <span>{saved}分短縮</span>
                     </div>
 
-                    <div className="home-compact-impact-board__bars">
-                      <div className="home-compact-impact-board__lane">
-                        <div className="home-compact-impact-board__fill home-compact-impact-board__fill--manual" style={{ width: `${item.manual}%` }}>
-                          <em>{item.manual}</em>
+                    <div className="home-compact-time-detail-board__chart">
+                      <div className="home-compact-time-detail-board__lane">
+                        <span>手作業 {item.manual}</span>
+                        <div className="home-compact-time-detail-board__track">
+                          <div className="home-compact-time-detail-board__fill home-compact-time-detail-board__fill--manual" style={{ width: `${(manual / timeReduction.manualMinutes) * 100}%` }} />
                         </div>
                       </div>
-                      <div className="home-compact-impact-board__lane">
-                        <div className="home-compact-impact-board__fill home-compact-impact-board__fill--product" style={{ width: `${item.product}%` }}>
-                          <em>{item.product}</em>
+
+                      <div className="home-compact-time-detail-board__lane">
+                        <span>本ツール {item.product}</span>
+                        <div className="home-compact-time-detail-board__track">
+                          <div className="home-compact-time-detail-board__fill home-compact-time-detail-board__fill--product" style={{ width: `${(product / timeReduction.manualMinutes) * 100}%` }} />
                         </div>
                       </div>
                     </div>
 
-                    <div className="home-compact-impact-board__delta">-{item.manual - item.product}pt</div>
+                    <div className="home-compact-time-detail-board__delta">-{saved}分</div>
                   </div>
-                ))}
-              </div>
-
-              <div className="home-compact-impact-board__legend" aria-hidden="true">
-                <span className="home-compact-impact-board__legend-item home-compact-impact-board__legend-item--manual">手作業</span>
-                <span className="home-compact-impact-board__legend-item home-compact-impact-board__legend-item--product">ゆっくりまとめプロセッサー</span>
-              </div>
-
-              <p className="home-compact-impact-board__note">※ index は準備工程の分断と手戻り量をもとにした比較イメージです。実測時間ではありません。</p>
+                )
+              })}
             </div>
           </div>
         </Section>
