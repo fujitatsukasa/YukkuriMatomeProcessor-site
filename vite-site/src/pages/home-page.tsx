@@ -304,12 +304,11 @@ function WorkflowShowcase() {
   const activeStage = workflowStages[activeIndex]
 
   return (
-    <div className="home-v3-showcase">
-      <div className="home-v3-showcase__copy">
-        <p className="brand-kicker">Workflow Demo</p>
-        <h2>1本の動画が、ここまで進む</h2>
-        <p>
-          反応集やゆっくり解説の制作前工程を、ネタ収集からYMM4前まで一続きで確認できます。
+      <div className="home-v3-showcase">
+        <div className="home-v3-showcase__copy">
+          <h2>1本の動画が、ここまで進む</h2>
+          <p>
+            反応集やゆっくり解説の制作前工程を、ネタ収集からYMM4前まで一続きで確認できます。
         </p>
 
         <ol className="home-v3-showcase__steps">
@@ -418,7 +417,6 @@ export function HomePage() {
         <section className="home-v3-hero homepage-hero">
           <div className="home-v3-hero__layout">
             <div className="home-v3-hero__copy">
-              <p className="brand-kicker">反応集・ゆっくり解説・ショート動画向け</p>
               <h1 className="brand-title">反応集・ゆっくり解説の台本作成とYMM4準備を、ネタ収集から。</h1>
               <p className="brand-lead">
                 記事や話題を集めて、会話台本・立ち絵・画像・音声の素材整理までまとめて進められる、
@@ -460,7 +458,6 @@ export function HomePage() {
 
         <Section alt className="home-v3-section home-v3-values-section">
           <div className="home-v3-section-head">
-            <p className="brand-kicker">3 Value Pillars</p>
             <h2>制作前工程が、1つの流れで進む</h2>
           </div>
 
@@ -480,7 +477,6 @@ export function HomePage() {
 
         <Section alt className="home-v3-section home-v3-usecase-section">
           <div className="home-v3-section-head">
-            <p className="brand-kicker">Use Cases</p>
             <h2>反応集・ゆっくり解説・ショート動画に対応</h2>
           </div>
 
@@ -489,7 +485,6 @@ export function HomePage() {
 
         <Section className="home-v3-section home-v3-proof-section">
           <div className="home-v3-section-head">
-            <p className="brand-kicker">Proof</p>
             <h2>説明ではなく、制作フローの差で見る</h2>
           </div>
 
@@ -533,7 +528,6 @@ export function HomePage() {
         <Section alt className="home-v3-section home-v3-price-section">
           <div className="home-v3-price">
             <div className="home-v3-price__copy">
-              <p className="brand-kicker">Pricing</p>
               <h2>買い切り10万円で、制作前工程をまとめて持てる</h2>
               <p>
                 別ツールを行き来せず、ネタ収集から会話台本、素材整理、YMM4前の準備までを
@@ -542,7 +536,6 @@ export function HomePage() {
             </div>
 
             <InteractiveCard as="aside" className="home-v3-price-card">
-              <p className="brand-kicker">Price Card</p>
               <strong>{legal.pricing.amountIncludingTax}</strong>
 
               <ul className="home-v3-price-card__badges" aria-label="価格と安心材料">
@@ -588,7 +581,6 @@ export function HomePage() {
           <div className="home-v3-final">
             <div className="home-v3-final__faq">
               <div className="home-v3-section-head">
-                <p className="brand-kicker">FAQ</p>
                 <h2>まずは、ネタからYMM4前までの流れを見てください</h2>
               </div>
 
@@ -603,7 +595,6 @@ export function HomePage() {
             </div>
 
             <InteractiveCard as="aside" className="home-v3-final__cta">
-              <p className="brand-kicker">Final CTA</p>
               <h2>反応集・ゆっくり解説の制作前工程を、1つに。</h2>
               <p>
                 ネタ収集から会話台本、素材整理、YMM4準備まで。
