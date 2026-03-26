@@ -4817,18 +4817,18 @@ code {
 }
 
 .home-v3-hero {
-  padding-top: 0;
-  padding-bottom: clamp(14px, 2.4vw, 24px);
+  padding-top: 6px;
+  padding-bottom: 0;
 }
 
 .home-v3-hero__layout {
-  width: min(1180px, calc(100% - 48px));
+  width: min(1260px, calc(100% - 40px));
   margin-inline: auto;
   display: grid;
-  gap: clamp(18px, 2.4vw, 30px);
-  grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+  gap: clamp(20px, 2.5vw, 34px);
+  grid-template-columns: minmax(0, 0.88fr) minmax(560px, 1.12fr);
   align-items: start;
-  min-height: calc(100svh - 74px);
+  min-height: calc(100svh - 70px);
 }
 
 .home-v3-hero__copy,
@@ -4840,7 +4840,8 @@ code {
 }
 
 .home-v3-hero__copy {
-  gap: 0.65rem;
+  gap: 0.55rem;
+  padding-top: 4px;
 }
 
 .home-v3-hero .brand-kicker,
@@ -4855,11 +4856,11 @@ code {
 }
 
 .home-v3-hero__copy .brand-title {
-  max-width: 13.5ch;
+  max-width: 11.5ch;
   margin: 0;
-  font-size: clamp(2.2rem, 4.8vw, 4.3rem);
-  line-height: 0.96;
-  letter-spacing: -0.045em;
+  font-size: clamp(2.55rem, 4.9vw, 4.9rem);
+  line-height: 0.9;
+  letter-spacing: -0.055em;
 }
 
 .home-v3-hero__copy .brand-lead,
@@ -4875,9 +4876,9 @@ code {
 }
 
 .home-v3-hero__copy .brand-lead {
-  max-width: 48ch;
-  font-size: 0.98rem;
-  line-height: 1.58;
+  max-width: 42ch;
+  font-size: 0.96rem;
+  line-height: 1.48;
 }
 
 .home-v3-hero__actions,
@@ -4886,10 +4887,10 @@ code {
   margin-top: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  gap: 0.65rem;
   align-items: center;
-  padding: 6px;
-  margin-inline: -6px;
+  padding: 4px;
+  margin-inline: -4px;
 }
 
 .home-v3-hero__actions .brand-btn,
@@ -4898,8 +4899,8 @@ code {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 50px;
-  padding: 0.88rem 1.45rem;
+  min-height: 48px;
+  padding: 0.82rem 1.3rem;
   border-radius: 999px;
   text-decoration: none;
   font-family: "Noto Sans JP", var(--body);
@@ -4920,8 +4921,8 @@ code {
   position: relative;
   isolation: isolate;
   overflow: visible;
-  padding: 16px 32px;
-  font-size: 1.08rem;
+  padding: 15px 30px;
+  font-size: 1.02rem;
   font-weight: 900;
   letter-spacing: -0.02em;
   line-height: 1.02;
@@ -5094,7 +5095,7 @@ code {
 .home-v3-price-card__badges {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.55rem;
+  gap: 0.45rem;
 }
 
 .home-v3-hero__badges li,
@@ -5103,13 +5104,15 @@ code {
   border-radius: 999px;
   border: 1px solid rgba(240, 206, 136, 0.18);
   background: rgba(240, 206, 136, 0.08);
-  padding: 0.58rem 0.82rem;
+  padding: 0.48rem 0.75rem;
   color: rgba(245, 241, 233, 0.9);
+  font-size: 0.94rem;
 }
 
 .home-v3-hero__demo {
   display: grid;
   align-self: center;
+  padding-top: 2px;
   filter: drop-shadow(0 28px 60px rgba(0, 0, 0, 0.42));
 }
 
@@ -5165,7 +5168,7 @@ code {
 
 .hero-loop-demo {
   display: grid;
-  gap: 1rem;
+  gap: 0.8rem;
   padding: 1rem;
 }
 
@@ -5197,8 +5200,8 @@ code {
 .hero-loop-demo__overlay,
 .workflow-visual__overlay {
   display: grid;
-  gap: 0.3rem;
-  padding: 0.9rem 1rem;
+  gap: 0.24rem;
+  padding: 0.75rem 0.9rem;
   border-radius: 20px;
   background: rgba(9, 11, 14, 0.62);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -5224,7 +5227,7 @@ code {
 
 .hero-loop-demo__nav {
   display: grid;
-  gap: 0.75rem;
+  gap: 0.6rem;
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
@@ -5240,7 +5243,7 @@ code {
   display: grid;
   gap: 0.15rem;
   text-align: left;
-  padding: 0.9rem;
+  padding: 0.72rem;
   border-radius: 18px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(255, 255, 255, 0.03);

@@ -394,9 +394,15 @@ export function HomePage() {
         <section className="home-v3-hero homepage-hero">
           <div className="home-v3-hero__layout">
             <div className="home-v3-hero__copy">
-              <h1 className="brand-title">反応集・ゆっくり解説の台本作成とYMM4準備を、ネタ収集から。</h1>
+              <h1 className="brand-title">
+                反応集・ゆっくり解説の
+                <br />
+                台本作成とYMM4準備を、
+                <br />
+                ネタ収集から。
+              </h1>
               <p className="brand-lead">
-                記事や話題を集めて、会話台本・立ち絵・画像・音声の素材整理までまとめて進められる、
+                記事や話題を集めて、会話台本・立ち絵・画像・音声の整理までまとめて進められる、
                 動画制作支援ツールです。
               </p>
 
