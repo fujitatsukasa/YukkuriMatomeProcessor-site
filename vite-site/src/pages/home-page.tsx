@@ -300,56 +300,33 @@ function HeroLoopDemo() {
 }
 
 function WorkflowShowcase() {
-  const [activeIndex, setActiveIndex] = useState(0)
-  const activeStage = workflowStages[activeIndex]
-
   return (
-      <div className="home-v3-showcase">
-        <div className="home-v3-showcase__copy">
-          <h2>1本の動画が、ここまで進む</h2>
-          <p>
-            反応集やゆっくり解説の制作前工程を、ネタ収集からYMM4前まで一続きで確認できます。
-        </p>
-
-        <ol className="home-v3-showcase__steps">
-          {workflowStages.map((item, index) => (
-            <li key={item.step} className={index === activeIndex ? 'is-active' : ''}>
-              <button type="button" onClick={() => setActiveIndex(index)}>
-                <span>{item.step}</span>
-                <strong>{item.title}</strong>
-                <p>{item.body}</p>
-              </button>
-            </li>
-          ))}
-        </ol>
+    <div className="home-v3-showcase">
+      <div className="home-v3-section-head home-v3-showcase__head">
+        <h2>1本の動画が、ここまで進む</h2>
+        <p>ネタ収集からYMM4前まで、工程ごとに画面を切り替えず流れで把握できます。</p>
       </div>
 
-      <div className="home-v3-showcase__visual">
-        <div className="workflow-visual">
-          <div className="workflow-visual__screen">
-            <img src={activeStage.image} alt={activeStage.alt} />
-          </div>
-
-          <div className="workflow-visual__overlay">
-            <span>{activeStage.stage}</span>
-            <strong>{activeStage.title}</strong>
-            <p>{activeStage.body}</p>
-          </div>
-
-          <div className="workflow-visual__progress" aria-label="制作フローの進行">
-            {workflowStages.map((item, index) => (
-              <button
-                key={item.step}
-                type="button"
-                className={index === activeIndex ? 'is-active' : ''}
-                onClick={() => setActiveIndex(index)}
-              >
+      <div className="home-v3-stage-flow">
+        {workflowStages.map((item, index) => (
+          <InteractiveCard
+            key={item.step}
+            className={`home-v3-stage ${index % 2 === 1 ? 'home-v3-stage--reverse' : ''}`}
+          >
+            <div className="home-v3-stage__copy">
+              <div className="home-v3-stage__eyebrow">
                 <span>{item.step}</span>
                 <small>{item.stage}</small>
-              </button>
-            ))}
-          </div>
-        </div>
+              </div>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </div>
+
+            <div className="home-v3-stage__media">
+              <img src={item.image} alt={item.alt} />
+            </div>
+          </InteractiveCard>
+        ))}
       </div>
     </div>
   )
