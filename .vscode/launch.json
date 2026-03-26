@@ -3,9 +3,9 @@
   "configurations": [
     {
       "name": "Serve: GUI (Default)",
-      "type": "python",
+      "type": "debugpy",
       "request": "launch",
-      "program": "${workspaceFolder}/serve_local.py",
+      "program": "${workspaceFolder}/serve_vite_site.py",
       "cwd": "${workspaceFolder}",
       "console": "integratedTerminal",
       "purpose": ["debug-in-terminal"],
@@ -17,9 +17,9 @@
     },
     {
       "name": "Serve: No GUI",
-      "type": "python",
+      "type": "debugpy",
       "request": "launch",
-      "program": "${workspaceFolder}/serve_local.py",
+      "program": "${workspaceFolder}/serve_vite_site.py",
       "cwd": "${workspaceFolder}",
       "console": "integratedTerminal",
       "env": {
@@ -30,6 +30,19 @@
       },
       "justMyCode": true,
       "args": ["--no-gui", "--open"]
+    },
+    {
+      "name": "TechTouch Lab: GUI",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/serve_techtouch_lab.py",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "env": {
+        "PATH": "${env:PATH};C:\\\\Ruby40-x64\\\\bin"
+      },
+      "justMyCode": true,
+      "args": ["--gui", "--open"]
     }
   ]
 }
