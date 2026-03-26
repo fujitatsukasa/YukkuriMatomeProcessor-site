@@ -12,20 +12,12 @@ const heroBenefits = [
 
 const flowSteps = ['ネタ収集', '台本作成', '会話台本', '素材整理', 'YMM4準備'] as const
 
-const manualProcess = [
-  { title: 'ネタ探し', note: '保存先が分かれやすい' },
-  { title: '台本整理', note: 'メモと構成が別れる' },
-  { title: '会話台本', note: '話者分けを後から詰める' },
-  { title: '素材整理', note: '立ち絵と画像が散らばる' },
-  { title: 'YMM4前調整', note: '編集前に並び直しが発生' },
-] as const
-
-const productProcess = [
-  { title: 'ネタ収集', note: '候補を一覧で管理' },
-  { title: '台本作成', note: '見せる順番まで整理' },
-  { title: '会話台本', note: '話者ごとに流れを確認' },
-  { title: '素材整理', note: '立ち絵・画像・音声を揃える' },
-  { title: 'YMM4準備', note: '編集前の前提をまとめる' },
+const efficiencyRows = [
+  { label: 'ネタ探し', manual: 100, product: 44, gain: '候補を一覧で管理' },
+  { label: '台本整理', manual: 94, product: 48, gain: '動画向けの順番で整理' },
+  { label: '話者整理', manual: 86, product: 40, gain: '会話台本を先に固める' },
+  { label: '素材整理', manual: 82, product: 46, gain: '立ち絵・画像・音声をまとめる' },
+  { label: 'YMM4前調整', manual: 88, product: 42, gain: '編集前の前提を揃える' },
 ] as const
 
 const useCaseCards = [
@@ -242,36 +234,61 @@ export function HomePage() {
 
         <Section alt className="home-compact-section home-compact-process-section">
           <div className="home-compact-section-head">
-            <h2>手作業で分かれやすい前工程を、1つの流れへ。</h2>
-            <p>時間短縮の誇張ではなく、ネタ探しからYMM4前調整までの分断を減らすための比較です。</p>
+            <h2>作業時間が減るのは、工程の分断が減るからです。</h2>
+            <p>ネタ探し、台本整理、話者整理、素材整理、YMM4前調整を別々にやり直しにくくすることで、編集前の準備時間を削ります。</p>
           </div>
 
-          <div className="home-compact-process">
-            <InteractiveCard className="home-compact-process-card home-compact-process-card--manual">
-              <p className="home-compact-process-card__label">手作業</p>
-              <h3>ネタ探しからYMM4前調整までが分散しやすい</h3>
-              <ol className="home-compact-process-card__list">
-                {manualProcess.map((item) => (
-                  <li key={item.title}>
-                    <strong>{item.title}</strong>
-                    <span>{item.note}</span>
-                  </li>
-                ))}
-              </ol>
-            </InteractiveCard>
+          <div className="home-compact-efficiency">
+            <div className="home-compact-efficiency__chart" role="img" aria-label="手作業とゆっくりまとめプロセッサーの工程負荷比較グラフ">
+              <div className="home-compact-efficiency__legend" aria-hidden="true">
+                <span className="home-compact-efficiency__legend-item home-compact-efficiency__legend-item--manual">手作業</span>
+                <span className="home-compact-efficiency__legend-item home-compact-efficiency__legend-item--product">ゆっくりまとめプロセッサー</span>
+              </div>
 
-            <InteractiveCard className="home-compact-process-card home-compact-process-card--product">
-              <p className="home-compact-process-card__label">ゆっくりまとめプロセッサー</p>
-              <h3>ネタ収集からYMM4準備までをまとめて進める</h3>
-              <ol className="home-compact-process-card__list">
-                {productProcess.map((item) => (
-                  <li key={item.title}>
-                    <strong>{item.title}</strong>
-                    <span>{item.note}</span>
-                  </li>
+              <div className="home-compact-efficiency__rows">
+                {efficiencyRows.map((item) => (
+                  <div key={item.label} className="home-compact-efficiency__row">
+                    <div className="home-compact-efficiency__meta">
+                      <strong>{item.label}</strong>
+                      <span>{item.gain}</span>
+                    </div>
+
+                    <div className="home-compact-efficiency__bars">
+                      <div className="home-compact-efficiency__track">
+                        <div className="home-compact-efficiency__bar home-compact-efficiency__bar--manual" style={{ width: `${item.manual}%` }} />
+                      </div>
+                      <div className="home-compact-efficiency__track">
+                        <div className="home-compact-efficiency__bar home-compact-efficiency__bar--product" style={{ width: `${item.product}%` }} />
+                      </div>
+                    </div>
+                  </div>
                 ))}
-              </ol>
-            </InteractiveCard>
+              </div>
+
+              <p className="home-compact-efficiency__note">※ グラフは工程量ベースの比較イメージです。実測値ではなく、手戻りの起きやすさを示しています。</p>
+            </div>
+
+            <div className="home-compact-efficiency__copy">
+              <div className="home-compact-efficiency__headline">
+                <span>時間短縮の理由</span>
+                <h3>ネタ収集からYMM4準備までを、同じ画面の流れで進める。</h3>
+              </div>
+
+              <ul className="home-compact-efficiency__points">
+                <li>
+                  <strong>ネタ探しで止まりにくい</strong>
+                  <span>候補を保存したまま、台本作成の入口までつなげます。</span>
+                </li>
+                <li>
+                  <strong>話者整理を後回しにしない</strong>
+                  <span>会話台本の段階で、誰が何を話すかを先に固められます。</span>
+                </li>
+                <li>
+                  <strong>YMM4前のやり直しを減らす</strong>
+                  <span>立ち絵・画像・音声の置きどころまで前倒しで整理できます。</span>
+                </li>
+              </ul>
+            </div>
           </div>
         </Section>
 
@@ -289,12 +306,12 @@ export function HomePage() {
             <h2>反応集・ゆっくり解説・ショート動画に対応</h2>
           </div>
 
-          <div className="home-compact-usecase-grid">
+          <div className="home-compact-usecase-grid" role="list">
             {useCaseCards.map((item) => (
-              <InteractiveCard key={item.title} className="home-compact-usecase-card">
+              <article key={item.title} className="home-compact-usecase-card" role="listitem">
                 <h3>{item.title}</h3>
                 <p>{item.body}</p>
-              </InteractiveCard>
+              </article>
             ))}
           </div>
         </Section>
