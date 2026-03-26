@@ -128,7 +128,7 @@ a {
 .brand-header__inner {
   min-height: 72px;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
   gap: 0.9rem;
 }
@@ -181,18 +181,19 @@ a {
 
 .nav {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: center;
-  gap: 12px;
+  gap: 0;
   align-items: center;
-  font-size: 1.02rem;
-  letter-spacing: 0.1em;
+  min-width: 0;
+  font-size: 0.87rem;
+  letter-spacing: 0;
   font-family: var(--ui);
 }
 
 .nav a {
   position: relative;
-  padding: 8px 14px;
+  padding: 8px 8px;
   border-radius: 12px;
   color: var(--muted);
   text-decoration: none;

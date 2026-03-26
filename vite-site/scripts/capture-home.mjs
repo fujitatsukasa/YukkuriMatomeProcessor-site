@@ -87,11 +87,11 @@ const capture = async () => {
 
   const browser = await chromium.launch()
   const sectionShots = [
-    ['.home-v3-hero', 'home-hero-desktop.png'],
-    ['.home-v3-values-section', 'home-values-desktop.png'],
-    ['.home-v3-demo-section', 'home-demo-desktop.png'],
-    ['.home-v3-proof-section', 'home-proof-desktop.png'],
-    ['.home-v3-final-section', 'home-final-desktop.png'],
+    ['.home-compact-hero', 'home-hero-desktop.png'],
+    ['.home-compact-process-section', 'home-process-desktop.png'],
+    ['.home-compact-demo-section', 'home-demo-desktop.png'],
+    ['.home-compact-compare-section', 'home-compare-desktop.png'],
+    ['.home-compact-closing-section', 'home-closing-desktop.png'],
   ]
 
   try {
