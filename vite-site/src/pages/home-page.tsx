@@ -10,7 +10,13 @@ const heroBenefits = [
   'YMM4前の台本読み込み準備を先回り',
 ] as const
 
-const flowSteps = ['ネタ収集', '台本作成', '会話台本', '素材整理', 'YMM4準備'] as const
+const flowSteps = [
+  { label: 'ネタ収集', icon: media.iconStep1 },
+  { label: '台本作成', icon: media.iconStep2 },
+  { label: '会話台本', icon: media.iconStep3 },
+  { label: '素材整理', icon: media.iconStep4 },
+  { label: 'YMM4準備', icon: media.iconStep5 },
+] as const
 
 const timeReduction = {
   manualMinutes: 120,
@@ -192,7 +198,12 @@ export function HomePage() {
 
             <ul className="home-compact-flow__list" aria-label="制作フロー">
               {flowSteps.map((item) => (
-                <li key={item}>{item}</li>
+                <li key={item.label} className="home-compact-flow__item">
+                  <div className="home-compact-flow__icon-wrap">
+                    <img src={item.icon} alt="" className="home-compact-flow__icon" loading="lazy" />
+                  </div>
+                  <span>{item.label}</span>
+                </li>
               ))}
             </ul>
           </div>
@@ -293,7 +304,18 @@ export function HomePage() {
             <p>95%削減の根拠を、ネタ探し・台本整理・YMM4前調整の時間差でそのまま見せています。</p>
           </div>
 
-          <div className="home-compact-time-detail-board" role="img" aria-label="手作業120分と本ツール6分の時間内訳比較">
+          <div 
+            className="home-compact-time-detail-board" 
+            role="img" 
+            aria-label="手作業120分と本ツール6分の時間内訳比較"
+            style={{ 
+              backgroundImage: `url(${media.timeCompressionBg})`, 
+              backgroundSize: 'cover', 
+              backgroundPosition: 'center',
+              backgroundBlendMode: 'overlay',
+              backgroundColor: 'rgba(10, 9, 12, 0.85)'
+            }}
+          >
             <div className="home-compact-time-detail-board__summary">
               <div className="home-compact-time-detail-board__hero">
                 <span>Time Saved</span>
