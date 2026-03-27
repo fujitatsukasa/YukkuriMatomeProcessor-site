@@ -3862,7 +3862,6 @@ code {
 }
 
 html {
-  scroll-snap-type: y proximity;
   scroll-behavior: smooth;
   scroll-padding-top: 64px; /* Optional, fallback if header overlaps */
 }
@@ -3876,8 +3875,6 @@ html {
   flex-direction: column;
   justify-content: center;
   padding: clamp(32px, 5vw, 64px) 0;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
 }
 
 @media (max-height: 940px) {
