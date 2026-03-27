@@ -3879,7 +3879,11 @@ html {
 
 .home-compact-section {
   position: relative;
-  padding: clamp(64px, 8vw, 120px) 0;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(64px, 5vw, 104px) 0;
 }
 
 .home-compact-section::before {
@@ -4395,7 +4399,12 @@ html {
 
 .home-compact-section-head {
   margin-bottom: 1.4rem;
-  max-width: 760px;
+  max-width: 100%;
+}
+
+.home-compact-section-head h2 {
+  max-width: none;
+  word-break: keep-all;
 }
 
 .home-compact-compare,
