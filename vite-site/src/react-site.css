@@ -3861,10 +3861,27 @@ code {
   text-underline-offset: 0.18em;
 }
 
+html {
+  scroll-snap-type: y proximity;
+  scroll-behavior: smooth;
+  scroll-padding-top: 64px; /* Optional, fallback if header overlaps */
+}
+
 .home-compact-hero,
 .home-compact-section {
   position: relative;
-  padding: clamp(64px, 8vw, 104px) 0;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(32px, 5vw, 64px) 0;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.home-compact-hero {
+  padding-top: clamp(64px, 8vw, 104px);
+  overflow: hidden;
 }
 
 .home-compact-section::before {
@@ -3891,12 +3908,6 @@ code {
 .home-compact-section > * {
   width: min(1180px, calc(100% - 48px));
   margin-inline: auto;
-}
-
-.home-compact-hero {
-  padding-top: clamp(18px, 2.8vw, 34px);
-  padding-bottom: clamp(24px, 3vw, 42px);
-  overflow: hidden;
 }
 
 .home-compact-hero__video-bg {
