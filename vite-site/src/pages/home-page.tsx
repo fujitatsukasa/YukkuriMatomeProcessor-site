@@ -92,24 +92,56 @@ const useCaseCards = [
   },
 ] as const
 
-const faqItems = [
+type FAQItem = { question: string; answer: string }
+type FAQCategory = { categoryName: string; items: FAQItem[] }
+
+const faqCategories: FAQCategory[] = [
   {
-    question: '反応集やまとめ動画にも使えますか？',
-    answer: '使えます。記事や話題を集めて、そのまま会話台本へ整理しやすい構成です。',
+    categoryName: '用途・対応ジャンルについて',
+    items: [
+      {
+        question: '反応集やまとめ動画にも使えますか？',
+        answer: 'はい、使えます。2ch/5ch等の記事や話題を集めて、そのまま掛け合い形式の会話台本へ整理しやすい専用の構成になっています。',
+      },
+      {
+        question: 'ショート動画にも使えますか？',
+        answer: 'はい、使えます。短い尺でも「どこを見せ場にするか」の構成と順番を先に固めることができるため、短尺向けの台本作成に最適です。',
+      },
+      {
+        question: 'YMM4専用ですか？他の編集ソフトでも使えますか？',
+        answer: '出力形式は基本的にYMM4（ゆっくりムービーメーカー4）向けのタイムライン・立ち絵情報込みのフォーマットですが、テキスト台本としてコピーすることも可能なため、Premiere ProやAviUtlでの制作の下準備としてもご利用いただけます。',
+      },
+    ]
   },
   {
-    question: 'ショート動画にも使えますか？',
-    answer: '使えます。短い尺でも見せ場と順番を先に固めて、短尺向けの台本作成に使えます。',
+    categoryName: 'システム・動作環境について',
+    items: [
+      {
+        question: 'AIが全部自動で作るツールですか？',
+        answer: 'いいえ、動画を「全自動生成」するツールではありません。クリエイター自身がこだわりたい「ネタ収集」から「会話台本」「素材整理」までを繋ぎ、めんどうなコピペや設定作業をスキップするための「制作支援」ツールです。',
+      },
+      {
+        question: 'Mac環境（macOS）でも利用できますか？',
+        answer: '本ツールはWindows専用のデスクトップアプリケーションとなります。Mac環境では動作保証外となりますのでご注意ください。',
+      },
+    ]
   },
   {
-    question: 'YMM4専用ですか？',
-    answer: '専用ではありませんが、YMM4前の台本整理と素材整理をまとめて進めたい人に向いています。',
-  },
-  {
-    question: 'AIが全部自動で作るツールですか？',
-    answer: '自動化だけを主役にするのではなく、ネタ収集から会話台本、素材整理までをつなぐ制作支援ツールです。',
-  },
-] as const
+    categoryName: 'ご購入・ライセンスについて',
+    items: [
+      {
+        question: '月額料金（サブスクリプション）はかかりますか？',
+        answer: 'いいえ、完全買い切り型のライセンスです。月額費用や制作本数に応じた従量課金は一切発生せず、永続的にご利用いただけます。',
+      },
+      {
+        question: '購入後のアップデートは無料ですか？',
+        answer: 'はい、機能追加や不具合修正などのマイナーアップデートは無償でご提供いたします。ツール内から直接最新版をダウンロード可能です。',
+      },
+    ]
+  }
+]
+
+const faqItems: FAQItem[] = faqCategories.flatMap(c => c.items)
 
 const closingBadges = ['買い切り', 'Windows対応', 'YMM4向け', legal.support.firstResponseSla] as const
 
@@ -458,11 +490,18 @@ export function HomePage() {
             </div>
 
             <div className="home-compact-faq__list">
-              {faqItems.map((item) => (
-                <details key={item.question} className="home-compact-faq__item">
-                  <summary>{item.question}</summary>
-                  <p>{item.answer}</p>
-                </details>
+              {faqCategories.map((category) => (
+                <div key={category.categoryName} className="home-compact-faq__category">
+                  <h3 className="home-compact-faq__category-title">{category.categoryName}</h3>
+                  <div className="home-compact-faq__category-items">
+                    {category.items.map((item) => (
+                      <details key={item.question} className="home-compact-faq__item">
+                        <summary>{item.question}</summary>
+                        <p>{item.answer}</p>
+                      </details>
+                    ))}
+                  </div>
+                </div>
               ))}
             </div>
           </div>

@@ -5797,29 +5797,95 @@ html {
 
 .home-compact-faq__list {
   display: grid;
-  gap: 0.9rem;
+  gap: 3rem;
+  margin-top: 2rem;
+}
+
+.home-compact-faq__category {
+  display: grid;
+  gap: 1.2rem;
+}
+
+.home-compact-faq__category-title {
+  font-size: 1.25rem;
+  color: #e7c98a;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(223, 192, 131, 0.3);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.home-compact-faq__category-title::before {
+  content: "";
+  display: block;
+  width: 10px;
+  height: 10px;
+  background: #e7c98a;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(231, 201, 138, 0.6);
+}
+
+.home-compact-faq__category-items {
+  display: grid;
+  gap: 1rem;
 }
 
 .home-compact-faq__item {
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 24px;
+  border-radius: 20px;
   background: rgba(255, 255, 255, 0.03);
-  padding: 1.1rem 1.2rem;
+  padding: 1.4rem 1.6rem;
+  transition: all 0.3s ease;
+}
+
+.home-compact-faq__item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(223, 192, 131, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
 .home-compact-faq__item summary {
   cursor: pointer;
   font-weight: 700;
   list-style: none;
+  font-size: 1.05rem;
+  color: #f5f1e9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .home-compact-faq__item summary::-webkit-details-marker {
   display: none;
 }
 
+.home-compact-faq__item summary::after {
+  content: "＋";
+  color: #e7c98a;
+  font-size: 1.4rem;
+  font-weight: 400;
+  transition: transform 0.3s ease;
+}
+
+.home-compact-faq__item[open] {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(223, 192, 131, 0.4);
+}
+
+.home-compact-faq__item[open] summary::after {
+  content: "−";
+}
+
 .home-compact-faq__item p {
-  margin-top: 0.8rem;
+  margin-top: 1rem;
   line-height: 1.7;
+  color: rgba(236, 233, 226, 0.85);
+  font-size: 0.95rem;
+  padding-top: 1.2rem;
+  border-top: 1px dashed rgba(255,255,255,0.15);
 }
 
 .home-compact-cta-card {
