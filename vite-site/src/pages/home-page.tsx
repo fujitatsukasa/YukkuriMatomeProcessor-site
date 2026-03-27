@@ -373,58 +373,41 @@ export function HomePage() {
                 const manual = Number.parseInt(item.manual, 10)
                 const product = Number.parseInt(item.product, 10)
                 const saved = manual - product
-                const pctManual = (manual / timeReduction.manualMinutes) * 100
-                const pctProduct = (product / timeReduction.manualMinutes) * 100
 
                 return (
                   <div
                     key={item.label}
                     className={`chart-dashboard__row ${chartAnimation.isInView ? 'is-visible' : ''}`}
-                    style={{ '--row-delay': `${0.3 + index * 0.2}s` } as React.CSSProperties}
+                    style={{ '--row-delay': `${0.3 + index * 0.15}s` } as React.CSSProperties}
                   >
-                    <div className="chart-dashboard__row-head">
+                    <div className="chart-dashboard__row-info">
                       <strong>{item.label}</strong>
+                      <p>{item.desc}</p>
+                    </div>
+
+                    <div className="chart-dashboard__row-stats">
+                      <div className="chart-dashboard__stat-box chart-dashboard__stat-box--manual">
+                        <small>手作業</small>
+                        <span>{item.manual}</span>
+                      </div>
+                      <div className="chart-dashboard__stat-arrow-sm" aria-hidden="true">
+                        <svg width="20" height="20" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                      </div>
+                      <div className="chart-dashboard__stat-box chart-dashboard__stat-box--product">
+                        <small>本ツール</small>
+                        <span>{item.product}</span>
+                      </div>
+                    </div>
+
+                    <div className="chart-dashboard__row-badge">
                       <span className="chart-dashboard__row-saved">
                         <svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 11V3M4 6l3-3 3 3" stroke="currentColor" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                        {saved}分短縮
+                        {saved}分
                       </span>
                     </div>
-
-                    <div className="chart-dashboard__bars">
-                      <div className="chart-dashboard__bar-row">
-                        <span className="chart-dashboard__bar-label">手作業</span>
-                        <div className="chart-dashboard__track">
-                          <div
-                            className={`chart-dashboard__fill chart-dashboard__fill--manual ${chartAnimation.isInView ? 'is-active' : ''}`}
-                            style={{ '--bar-width': `${pctManual}%`, '--bar-delay': `${0.5 + index * 0.2}s` } as React.CSSProperties}
-                          >
-                            <span className="chart-dashboard__fill-tip">{item.manual}</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="chart-dashboard__bar-row">
-                        <span className="chart-dashboard__bar-label">本ツール</span>
-                        <div className="chart-dashboard__track">
-                          <div
-                            className={`chart-dashboard__fill chart-dashboard__fill--product ${chartAnimation.isInView ? 'is-active' : ''}`}
-                            style={{ '--bar-width': `${pctProduct}%`, '--bar-delay': `${0.7 + index * 0.2}s` } as React.CSSProperties}
-                          >
-                            <span className="chart-dashboard__fill-tip">{item.product}</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <p className="chart-dashboard__row-desc">{item.desc}</p>
                   </div>
                 )
               })}
-            </div>
-
-            {/* ── Legend ── */}
-            <div className="chart-dashboard__legend">
-              <span className="chart-dashboard__legend-item chart-dashboard__legend-item--manual">手作業</span>
-              <span className="chart-dashboard__legend-item chart-dashboard__legend-item--product">本ツール使用</span>
             </div>
           </div>
         </Section>
