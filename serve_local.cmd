@@ -7,10 +7,9 @@ cd /d "%~dp0"
 REM Prefer `py` launcher if available, otherwise fall back to `python`.
 where py >nul 2>nul
 if %errorlevel%==0 (
-  py "%~dp0serve_local.py" %*
+  py "%~dp0serve_vite_site.py" %*
   exit /b %errorlevel%
 )
 
-python "%~dp0serve_local.py" %*
+python "%~dp0serve_vite_site.py" %*
 exit /b %errorlevel%
-

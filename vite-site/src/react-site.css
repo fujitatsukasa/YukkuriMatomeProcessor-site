@@ -3937,15 +3937,6 @@ html {
   align-items: center;
 }
 
-.home-compact-hero__layout::before {
-  content: "";
-  position: absolute;
-  inset: auto 12% 8% 0;
-  height: 1px;
-  background: linear-gradient(90deg, rgba(223, 192, 131, 0.42), transparent 78%);
-  opacity: 0.55;
-  pointer-events: none;
-}
 
 .home-compact-hero__copy,
 .home-compact-section-head,
