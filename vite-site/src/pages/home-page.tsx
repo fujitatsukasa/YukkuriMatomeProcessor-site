@@ -261,13 +261,18 @@ export function HomePage() {
           <div className="home-compact-hero__layout">
             <div className="home-compact-hero__copy">
               <h1 className="brand-title">
-                <span className="text-glow-green">反応集・</span>
+                <span className="text-rotator text-glow-green">
+                  <span className="text-rotator__inner">
+                    <span>【 反応集 】</span>
+                    <span>【 ゆっくり解説 】</span>
+                    <span>【 ショート動画 】</span>
+                    <span aria-hidden="true">【 反応集 】</span>
+                  </span>
+                </span>
                 <br />
-                <span className="text-glow-green">ゆっくり解説</span>の
+                のネタ収集、台本作成、
                 <br />
-                ネタ収集、台本作成、
-                <br />
-                <span className="text-glow-gold">YMM4準備</span>を1つに。
+                <span className="text-gradient-animated">YMM4準備</span>を1つに。
               </h1>
               <p className="brand-lead">
                 記事や話題を集めて、会話台本・立ち絵・素材整理までまとめて進められる、
@@ -293,8 +298,12 @@ export function HomePage() {
 
         <Section className="home-compact-section home-compact-flow-section">
           <div className="home-compact-section-head">
-            <h2 className="animate-slide-up">制作フローを統合する、<span className="text-glow-gold">5つのプロセス。</span></h2>
-            <p className="animate-slide-up" style={{ animationDelay: '0.1s' }}>複数ツールを行き来する無駄を排除し、情報収集から出力までを美しい一本のパイプラインに。</p>
+            <h2 className="animate-slide-up" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.2rem' }}>
+              <span className="reveal-mask"><span className="reveal-mask__inner" style={{ '--reveal-delay': '0.1s' } as React.CSSProperties}>制作フローを</span></span>
+              <span className="reveal-mask"><span className="reveal-mask__inner" style={{ '--reveal-delay': '0.2s' } as React.CSSProperties}>統合する、</span></span>
+              <span className="reveal-mask"><span className="reveal-mask__inner" style={{ '--reveal-delay': '0.3s' } as React.CSSProperties}><span className="text-glow-gold">5つのプロセス。</span></span></span>
+            </h2>
+            <p className="animate-slide-up" style={{ animationDelay: '0.4s' }}>複数ツールを行き来する無駄を排除し、情報収集から出力までを美しい一本のパイプラインに。</p>
           </div>
 
           <div className="home-compact-flow" ref={flowAnimation.ref}>
@@ -321,7 +330,13 @@ export function HomePage() {
           </div>
         </Section>
 
-        <Section alt className="home-compact-section home-compact-process-section">
+        <Section alt className="home-compact-section home-compact-process-section bg-marquee-wrap">
+          <div className="bg-marquee-container" aria-hidden="true">
+            <div className="bg-marquee__track">
+              <span>95% TIME REDUCTION FOR YMM4 - PREPARATION REVOLUTION - MASSIVE EFFICIENCY - </span>
+              <span>95% TIME REDUCTION FOR YMM4 - PREPARATION REVOLUTION - MASSIVE EFFICIENCY - </span>
+            </div>
+          </div>
           <div className="home-compact-section-head">
             <h2>準備時間を、<span className="text-glow-gold">120分から6分</span>へ<span className="text-glow-green">圧倒的短縮</span>。</h2>
             <p><strong className="text-glow-muted">95%削減</strong>の根拠を、<span className="text-glow-muted">ネタ探し・台本整理・YMM4前調整</span>の時間差で可視化します。</p>
@@ -354,7 +369,10 @@ export function HomePage() {
                 <div className="chart-dashboard__kpi-group">
                   <div className="chart-dashboard__kpi chart-dashboard__kpi--before">
                     <span className="chart-dashboard__kpi-tag">Before</span>
-                    <strong><AnimatedNumber value={timeReduction.manualMinutes} active={chartAnimation.isInView} /><small>分</small></strong>
+                    <div className="kpi-giant-wrap">
+                      <AnimatedNumber value={timeReduction.manualMinutes} active={chartAnimation.isInView} />
+                      <small>分</small>
+                    </div>
                     <span className="chart-dashboard__kpi-desc">手作業による準備</span>
                   </div>
                   <div className="chart-dashboard__kpi-arrow" aria-hidden="true">
@@ -362,7 +380,10 @@ export function HomePage() {
                   </div>
                   <div className="chart-dashboard__kpi chart-dashboard__kpi--after">
                     <span className="chart-dashboard__kpi-tag">After</span>
-                    <strong><AnimatedNumber value={timeReduction.productMinutes} active={chartAnimation.isInView} /><small>分</small></strong>
+                    <div className="kpi-giant-wrap">
+                      <AnimatedNumber value={timeReduction.productMinutes} active={chartAnimation.isInView} />
+                      <small>分</small>
+                    </div>
                     <span className="chart-dashboard__kpi-desc">本ツールで完了</span>
                   </div>
                 </div>
