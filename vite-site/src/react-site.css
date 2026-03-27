@@ -3869,6 +3869,7 @@ html {
 
 .home-compact-hero,
 .home-compact-section {
+  box-sizing: border-box;
   position: relative;
   min-height: 100dvh;
   display: flex;
@@ -3877,6 +3878,25 @@ html {
   padding: clamp(32px, 5vw, 64px) 0;
   scroll-snap-align: start;
   scroll-snap-stop: always;
+}
+
+@media (max-height: 940px) {
+  .home-compact-hero > *,
+  .home-compact-section > * {
+    zoom: 0.9;
+  }
+}
+@media (max-height: 820px) {
+  .home-compact-hero > *,
+  .home-compact-section > * {
+    zoom: 0.8;
+  }
+}
+@media (max-height: 720px) {
+  .home-compact-hero > *,
+  .home-compact-section > * {
+    zoom: 0.7;
+  }
 }
 
 .home-compact-hero {
