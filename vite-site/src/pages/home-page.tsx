@@ -406,18 +406,56 @@ export function HomePage() {
 
 
         <Section className="home-compact-section home-compact-price-section">
-          <InteractiveCard className="home-compact-price-card">
-            <strong>{legal.pricing.amountIncludingTax}</strong>
-            <p>
-              買い切りで導入できる Windows 向けツールです。
-              <Link to="/purchase/">購入ページ</Link>で案内条件を確認できます。
-            </p>
-            <ul className="home-compact-price-card__badges" aria-label="導入条件">
-              {closingBadges.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </InteractiveCard>
+          <div className="home-compact-section-head">
+            <h2>作業の無駄を削ぎ落とし、動画の純度を高める。</h2>
+            <p>ゆっくりまとめプロセッサーは買い切り型。毎月のランニングコストを気にせず、動画制作のルーチンを即座に効率化できます。</p>
+          </div>
+
+          <div className="home-compact-price-layout">
+            <div className="home-compact-price-visual">
+              <div className="home-compact-price-visual__img">
+                <img src={media.workspaceComputer} alt="" loading="lazy" />
+                <div className="home-compact-price-visual__overlay" />
+              </div>
+              <div className="home-compact-price-floating-badge">
+                <div className="pulse-ring"></div>
+                <span>買い切り<br/>ライセンス</span>
+              </div>
+            </div>
+
+            <InteractiveCard className="home-compact-price-card-rich">
+              <div className="home-compact-price-card-rich__top">
+                <h3>Standard License</h3>
+                <div className="home-compact-price-card-rich__price">
+                  <strong>{legal.pricing.amountIncludingTax}</strong>
+                  <span>(1ライセンス/PC1台)</span>
+                </div>
+                <p>追加費用なしで永続利用可能なWindows向けデスクトップツールです。</p>
+              </div>
+
+              <ul className="home-compact-price-card-rich__features" aria-label="搭載機能">
+                <li><span className="check-icon">✓</span> 複数サイトからのネタ自動収集</li>
+                <li><span className="check-icon">✓</span> 対話形式への台本自動コンバート</li>
+                <li><span className="check-icon">✓</span> YMM4用タイムライン・キャラ立ち絵出力</li>
+                <li><span className="check-icon">✓</span> 永続的なローカル動作と無償アップデート</li>
+              </ul>
+
+              <div className="home-compact-price-card-rich__action">
+                <Link to="/purchase/" className="brand-btn brand-btn--primary home-compact-price-btn">
+                  ご購入ページへ進む
+                </Link>
+                <p className="home-compact-price-card-rich__note">
+                  ※クレジットカード・銀行振込に対応しています。
+                </p>
+              </div>
+
+              <ul className="home-compact-price-card__badges" aria-label="導入条件">
+                {closingBadges.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </InteractiveCard>
+          </div>
         </Section>
 
         <Section alt className="home-compact-section home-compact-closing-section">
