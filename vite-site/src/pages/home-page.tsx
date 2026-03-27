@@ -261,12 +261,12 @@ export function HomePage() {
           <div className="home-compact-hero__layout">
             <div className="home-compact-hero__copy">
               <h1 className="brand-title">
-                <span className="text-rotator text-glow-green">
+                <span className="text-rotator">
                   <span className="text-rotator__inner">
-                    <span>【 反応集 】</span>
-                    <span>【 ゆっくり解説 】</span>
-                    <span>【 ショート動画 】</span>
-                    <span aria-hidden="true">【 反応集 】</span>
+                    <span className="text-glow-green">【 反応集 】</span>
+                    <span className="text-glow-gold">【 ゆっくり解説 】</span>
+                    <span className="text-glow-blue">【 ショート動画 】</span>
+                    <span className="text-glow-green" aria-hidden="true">【 反応集 】</span>
                   </span>
                 </span>
                 <br />
