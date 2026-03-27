@@ -11,11 +11,36 @@ const heroBenefits = [
 ] as const
 
 const flowSteps = [
-  { label: 'ネタ収集', icon: media.iconStep1 },
-  { label: '台本作成', icon: media.iconStep2 },
-  { label: '会話台本', icon: media.iconStep3 },
-  { label: '素材整理', icon: media.iconStep4 },
-  { label: 'YMM4準備', icon: media.iconStep5 },
+  { 
+    label: 'ネタ収集', 
+    icon: media.iconStep1, 
+    desc: '複数サイトから情報を収集・抽出。ワンクリックでストックへ。',
+    stat: '速度 +400%'
+  },
+  { 
+    label: '台本作成', 
+    icon: media.iconStep2, 
+    desc: '集めたネタのノイズを除去し、一本の自然な文章へ強力に再構築。',
+    stat: '精度 98.5%'
+  },
+  { 
+    label: '会話台本', 
+    icon: media.iconStep3, 
+    desc: '説明役と補足役の掛け合い形式へ自動変換。キャラ設定を即反映。',
+    stat: '自動配役化'
+  },
+  { 
+    label: '素材整理', 
+    icon: media.iconStep4, 
+    desc: '立ち絵の表情指定や音声トーン指示をセリフと紐付けて完全一元管理。',
+    stat: 'ミス率 0%'
+  },
+  { 
+    label: 'YMM4準備', 
+    icon: media.iconStep5, 
+    desc: 'ゆっくりムービーメーカー4へそのまま読み込める形式で即出力。',
+    stat: '直結出力'
+  },
 ] as const
 
 const timeReduction = {
@@ -25,9 +50,9 @@ const timeReduction = {
 } as const
 
 const timeBreakdown = [
-  { label: 'ネタ探し', manual: '30分', product: '2分' },
-  { label: '台本整理', manual: '35分', product: '2分' },
-  { label: 'YMM4前調整', manual: '55分', product: '2分' },
+  { label: 'ネタ探し', manual: '30分', product: '2分', desc: '複数サイトからの手動コピペを自動収集へと置き換え' },
+  { label: '台本整理', manual: '35分', product: '2分', desc: '不要なノイズの除去と会話台本形式への一括テキスト変換' },
+  { label: 'YMM4前調整', manual: '55分', product: '2分', desc: '立ち絵の表情指定からタイムライン配置への読み込み定義' },
 ] as const
 
 const useCaseCards = [
@@ -204,18 +229,25 @@ export function HomePage() {
         </section>
 
         <Section className="home-compact-section home-compact-flow-section">
-          <div className="home-compact-flow">
-            <div>
-              <h2>ネタ収集 → 台本作成 → 会話台本 → 素材整理 → YMM4準備</h2>
-            </div>
+          <div className="home-compact-section-head">
+            <h2 className="animate-slide-up">制作フローを統合する、5つのプロセス。</h2>
+            <p className="animate-slide-up" style={{ animationDelay: '0.1s' }}>複数ツールを行き来する無駄を排除し、情報収集から出力までを美しい一本のパイプラインに。</p>
+          </div>
 
-            <ul className="home-compact-flow__list" aria-label="制作フロー">
-              {flowSteps.map((item) => (
-                <li key={item.label} className="home-compact-flow__item">
+          <div className="home-compact-flow">
+            <ul className="home-compact-flow__list-detailed" aria-label="制作フロー詳細">
+              {flowSteps.map((item, index) => (
+                <li key={item.label} className="home-compact-flow__card animate-slide-up" style={{ animationDelay: `${0.2 + (index * 0.15)}s` }}>
+                  <div className="home-compact-flow__card-glow" />
+                  <div className="home-compact-flow__step-num layout-flex-center">0{index + 1}</div>
                   <div className="home-compact-flow__icon-wrap">
                     <img src={item.icon} alt="" className="home-compact-flow__icon" loading="lazy" />
                   </div>
-                  <span>{item.label}</span>
+                  <div className="home-compact-flow__card-content">
+                    <h3>{item.label}</h3>
+                    <p>{item.desc}</p>
+                    <span className="home-compact-flow__badge">{item.stat}</span>
+                  </div>
                 </li>
               ))}
             </ul>
@@ -255,7 +287,7 @@ export function HomePage() {
                   <span>{timeReduction.manualMinutes}分</span>
                 </div>
                 <div className="home-compact-time-board__track">
-                  <div className="home-compact-time-board__fill home-compact-time-board__fill--manual" style={{ width: '100%' }} />
+                  <div className="home-compact-time-board__fill home-compact-time-board__fill--manual" style={{ '--bar-width': '100%' } as React.CSSProperties} />
                 </div>
               </div>
 
@@ -267,7 +299,7 @@ export function HomePage() {
                 <div className="home-compact-time-board__track">
                   <div
                     className="home-compact-time-board__fill home-compact-time-board__fill--product"
-                    style={{ width: `${(timeReduction.productMinutes / timeReduction.manualMinutes) * 100}%` }}
+                    style={{ '--bar-width': `${(timeReduction.productMinutes / timeReduction.manualMinutes) * 100}%` } as React.CSSProperties}
                   />
                 </div>
               </div>
@@ -360,30 +392,37 @@ export function HomePage() {
             </div>
 
             <div className="home-compact-time-detail-board__rows">
-              {timeBreakdown.map((item) => {
+              {timeBreakdown.map((item, index) => {
                 const manual = Number.parseInt(item.manual, 10)
                 const product = Number.parseInt(item.product, 10)
                 const saved = manual - product
 
                 return (
-                  <div key={item.label} className="home-compact-time-detail-board__row">
+                  <div key={item.label} className="home-compact-time-detail-board__row animate-slide-up" style={{ animationDelay: `${0.1 + (index * 0.15)}s` }}>
                     <div className="home-compact-time-detail-board__label">
                       <strong>{item.label}</strong>
                       <span>{saved}分短縮</span>
+                      <small className="chart-subtext">{item.desc}</small>
                     </div>
 
                     <div className="home-compact-time-detail-board__chart">
                       <div className="home-compact-time-detail-board__lane">
                         <span>手作業 {item.manual}</span>
                         <div className="home-compact-time-detail-board__track">
-                          <div className="home-compact-time-detail-board__fill home-compact-time-detail-board__fill--manual" style={{ width: `${(manual / timeReduction.manualMinutes) * 100}%` }} />
+                          <div 
+                            className="home-compact-time-detail-board__fill home-compact-time-detail-board__fill--manual" 
+                            style={{ '--bar-width': `${(manual / timeReduction.manualMinutes) * 100}%` } as React.CSSProperties} 
+                          />
                         </div>
                       </div>
 
                       <div className="home-compact-time-detail-board__lane">
                         <span>本ツール {item.product}</span>
                         <div className="home-compact-time-detail-board__track">
-                          <div className="home-compact-time-detail-board__fill home-compact-time-detail-board__fill--product" style={{ width: `${(product / timeReduction.manualMinutes) * 100}%` }} />
+                          <div 
+                            className="home-compact-time-detail-board__fill home-compact-time-detail-board__fill--product" 
+                            style={{ '--bar-width': `${(product / timeReduction.manualMinutes) * 100}%` } as React.CSSProperties} 
+                          />
                         </div>
                       </div>
                     </div>
