@@ -4788,21 +4788,56 @@ html {
   position: relative;
   display: grid;
   gap: 1.5rem;
-  padding: 1.5rem 2rem;
-  border: 1px solid rgba(223, 192, 131, 0.4);
-  border-radius: 24px;
+  padding: 2px; /* For the animated border */
+  border-radius: 26px;
   background:
-    radial-gradient(circle at 0% 0%, rgba(255, 215, 120, 0.18), transparent 45%),
-    radial-gradient(ellipse at 100% 100%, rgba(200, 150, 60, 0.15), transparent 50%),
-    linear-gradient(135deg, rgba(16, 15, 18, 0.98), rgba(9, 8, 10, 0.99));
+    linear-gradient(135deg, rgba(30, 25, 30, 0.4), rgba(10, 8, 12, 0.6));
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.15),
     0 40px 100px -20px rgba(0, 0, 0, 0.9),
     0 0 40px -10px rgba(223, 192, 131, 0.15);
   overflow: hidden;
 }
 
+/* ── The spinning border pseudo-element ── */
 .chart-dashboard::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  background: conic-gradient(
+    transparent 0deg,
+    transparent 60deg,
+    rgba(255, 215, 112, 0.8) 120deg,
+    #fff 150deg,
+    rgba(255, 215, 112, 0.8) 180deg,
+    transparent 240deg,
+    transparent 360deg
+  );
+  animation: chart-spin-border 6s linear infinite;
+  z-index: 0;
+}
+
+@keyframes chart-spin-border {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ── The actual content container to mask the inner area ── */
+.chart-dashboard__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 1.5rem;
+  padding: 1.5rem 2rem;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(255, 215, 120, 0.18), transparent 45%),
+    radial-gradient(ellipse at 100% 100%, rgba(200, 150, 60, 0.15), transparent 50%),
+    linear-gradient(135deg, rgba(16, 15, 18, 0.98), rgba(9, 8, 10, 0.99));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  overflow: hidden;
+}
+
+.chart-dashboard__inner::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -4810,6 +4845,7 @@ html {
     repeating-linear-gradient(90deg, transparent, transparent 99px, rgba(255,255,255,0.05) 100px),
     repeating-linear-gradient(0deg, transparent, transparent 99px, rgba(255,255,255,0.04) 100px);
   pointer-events: none;
+  z-index: 0;
 }
 
 /* ── Hero Row (Ring + KPIs) ── */
@@ -5133,10 +5169,35 @@ html {
   padding: 0.7rem 1.4rem;
   border-radius: 99px;
   box-shadow: 0 8px 20px rgba(34, 197, 94, 0.4), inset 0 2px 4px rgba(255,255,255,0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.chart-dashboard__row-saved::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-25deg);
+  animation: chart-badge-shimmer 3s ease-in-out infinite;
+}
+
+@keyframes chart-badge-shimmer {
+  0% { left: -100%; }
+  20%, 100% { left: 200%; }
 }
 
 .chart-dashboard__row-saved svg {
   animation: chart-saved-bounce 1.5s ease-in-out infinite;
+  z-index: 1;
 }
 
 @keyframes chart-saved-bounce {

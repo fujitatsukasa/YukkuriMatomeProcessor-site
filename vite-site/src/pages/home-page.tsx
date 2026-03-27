@@ -333,81 +333,83 @@ export function HomePage() {
             role="img" 
             aria-label="手作業120分と本ツール6分の時間内訳比較"
           >
-            {/* ── Hero Stats Row ── */}
-            <div className={`chart-dashboard__hero ${chartAnimation.isInView ? 'is-visible' : ''}`}>
-              <div className="chart-dashboard__ring-wrap">
-                <svg className="chart-dashboard__ring" viewBox="0 0 120 120">
-                  <circle className="chart-dashboard__ring-bg" cx="60" cy="60" r="52" />
-                  <circle
-                    className={`chart-dashboard__ring-fill ${chartAnimation.isInView ? 'is-active' : ''}`}
-                    cx="60" cy="60" r="52"
-                    style={{ '--ring-pct': `${timeReduction.reductionRate}` } as React.CSSProperties}
-                  />
-                </svg>
-                <div className="chart-dashboard__ring-label">
-                  <AnimatedNumber value={timeReduction.reductionRate} active={chartAnimation.isInView} suffix="%" />
-                  <span>削減</span>
-                </div>
-              </div>
-
-              <div className="chart-dashboard__kpi-group">
-                <div className="chart-dashboard__kpi chart-dashboard__kpi--before">
-                  <span className="chart-dashboard__kpi-tag">Before</span>
-                  <strong><AnimatedNumber value={timeReduction.manualMinutes} active={chartAnimation.isInView} /><small>分</small></strong>
-                  <span className="chart-dashboard__kpi-desc">手作業による準備</span>
-                </div>
-                <div className="chart-dashboard__kpi-arrow" aria-hidden="true">
-                  <svg width="40" height="40" viewBox="0 0 40 40"><path d="M8 20h20M22 13l8 7-8 7" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                </div>
-                <div className="chart-dashboard__kpi chart-dashboard__kpi--after">
-                  <span className="chart-dashboard__kpi-tag">After</span>
-                  <strong><AnimatedNumber value={timeReduction.productMinutes} active={chartAnimation.isInView} /><small>分</small></strong>
-                  <span className="chart-dashboard__kpi-desc">本ツールで完了</span>
-                </div>
-              </div>
-            </div>
-
-            {/* ── Breakdown Rows ── */}
-            <div className="chart-dashboard__rows">
-              {timeBreakdown.map((item, index) => {
-                const manual = Number.parseInt(item.manual, 10)
-                const product = Number.parseInt(item.product, 10)
-                const saved = manual - product
-
-                return (
-                  <div
-                    key={item.label}
-                    className={`chart-dashboard__row ${chartAnimation.isInView ? 'is-visible' : ''}`}
-                    style={{ '--row-delay': `${0.3 + index * 0.15}s` } as React.CSSProperties}
-                  >
-                    <div className="chart-dashboard__row-info">
-                      <strong>{item.label}</strong>
-                      <p>{item.desc}</p>
-                    </div>
-
-                    <div className="chart-dashboard__row-stats">
-                      <div className="chart-dashboard__stat-box chart-dashboard__stat-box--manual">
-                        <small>手作業</small>
-                        <span>{item.manual}</span>
-                      </div>
-                      <div className="chart-dashboard__stat-arrow-sm" aria-hidden="true">
-                        <svg width="20" height="20" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                      </div>
-                      <div className="chart-dashboard__stat-box chart-dashboard__stat-box--product">
-                        <small>本ツール</small>
-                        <span>{item.product}</span>
-                      </div>
-                    </div>
-
-                    <div className="chart-dashboard__row-badge">
-                      <span className="chart-dashboard__row-saved">
-                        <svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 11V3M4 6l3-3 3 3" stroke="currentColor" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                        {saved}分
-                      </span>
-                    </div>
+            <div className="chart-dashboard__inner">
+              {/* ── Hero Stats Row ── */}
+              <div className={`chart-dashboard__hero ${chartAnimation.isInView ? 'is-visible' : ''}`}>
+                <div className="chart-dashboard__ring-wrap">
+                  <svg className="chart-dashboard__ring" viewBox="0 0 120 120">
+                    <circle className="chart-dashboard__ring-bg" cx="60" cy="60" r="52" />
+                    <circle
+                      className={`chart-dashboard__ring-fill ${chartAnimation.isInView ? 'is-active' : ''}`}
+                      cx="60" cy="60" r="52"
+                      style={{ '--ring-pct': `${timeReduction.reductionRate}` } as React.CSSProperties}
+                    />
+                  </svg>
+                  <div className="chart-dashboard__ring-label">
+                    <AnimatedNumber value={timeReduction.reductionRate} active={chartAnimation.isInView} suffix="%" />
+                    <span>削減</span>
                   </div>
-                )
-              })}
+                </div>
+
+                <div className="chart-dashboard__kpi-group">
+                  <div className="chart-dashboard__kpi chart-dashboard__kpi--before">
+                    <span className="chart-dashboard__kpi-tag">Before</span>
+                    <strong><AnimatedNumber value={timeReduction.manualMinutes} active={chartAnimation.isInView} /><small>分</small></strong>
+                    <span className="chart-dashboard__kpi-desc">手作業による準備</span>
+                  </div>
+                  <div className="chart-dashboard__kpi-arrow" aria-hidden="true">
+                    <svg width="40" height="40" viewBox="0 0 40 40"><path d="M8 20h20M22 13l8 7-8 7" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                  </div>
+                  <div className="chart-dashboard__kpi chart-dashboard__kpi--after">
+                    <span className="chart-dashboard__kpi-tag">After</span>
+                    <strong><AnimatedNumber value={timeReduction.productMinutes} active={chartAnimation.isInView} /><small>分</small></strong>
+                    <span className="chart-dashboard__kpi-desc">本ツールで完了</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* ── Breakdown Rows ── */}
+              <div className="chart-dashboard__rows">
+                {timeBreakdown.map((item, index) => {
+                  const manual = Number.parseInt(item.manual, 10)
+                  const product = Number.parseInt(item.product, 10)
+                  const saved = manual - product
+
+                  return (
+                    <div
+                      key={item.label}
+                      className={`chart-dashboard__row ${chartAnimation.isInView ? 'is-visible' : ''}`}
+                      style={{ '--row-delay': `${0.3 + index * 0.15}s` } as React.CSSProperties}
+                    >
+                      <div className="chart-dashboard__row-info">
+                        <strong>{item.label}</strong>
+                        <p>{item.desc}</p>
+                      </div>
+
+                      <div className="chart-dashboard__row-stats">
+                        <div className="chart-dashboard__stat-box chart-dashboard__stat-box--manual">
+                          <small>手作業</small>
+                          <span>{item.manual}</span>
+                        </div>
+                        <div className="chart-dashboard__stat-arrow-sm" aria-hidden="true">
+                          <svg width="20" height="20" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                        </div>
+                        <div className="chart-dashboard__stat-box chart-dashboard__stat-box--product">
+                          <small>本ツール</small>
+                          <span>{item.product}</span>
+                        </div>
+                      </div>
+
+                      <div className="chart-dashboard__row-badge">
+                        <span className="chart-dashboard__row-saved">
+                          <svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 11V3M4 6l3-3 3 3" stroke="currentColor" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                          {saved}分
+                        </span>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
             </div>
           </div>
         </Section>
