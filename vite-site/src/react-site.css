@@ -3869,7 +3869,11 @@ html {
 .home-compact-hero,
 .home-compact-section {
   position: relative;
-  padding: clamp(64px, 8vw, 104px) 0;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(64px, 5vw, 104px) 0;
 }
 
 
@@ -4751,6 +4755,9 @@ html {
     inset 0 1px 0 rgba(255, 255, 255, 0.2),
     0 12px 28px -18px rgba(0, 0, 0, 0.82);
   width: 0;
+}
+
+.home-compact-time-detail-board__fill.fill-active {
   animation: grow-bar 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 
@@ -4768,6 +4775,12 @@ html {
   color: rgba(223, 192, 131, 0.96);
   font-size: 1rem;
   font-weight: 800;
+}
+
+.delta-glow {
+  color: #fff4d3;
+  text-shadow: 0 0 12px rgba(224, 193, 132, 0.6);
+  font-weight: 700;
 }
 
 .home-compact-impact-board {

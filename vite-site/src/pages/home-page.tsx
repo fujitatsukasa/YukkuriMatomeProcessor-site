@@ -3,6 +3,26 @@ import { InteractiveCard, PageMeta, Section } from '@/components/ui'
 import { media } from '@/data/assets'
 import { downloadUrl, legal, siteOrigin, siteSubtitle, siteTitle } from '@/data/site-content'
 import { HomeHeroStage, ProductDemoTabs } from '@/pages/shared'
+import React, { useEffect, useRef, useState } from 'react'
+
+function useInView(options = { threshold: 0.1 }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const [isInView, setIsInView] = useState(false)
+  
+  useEffect(() => {
+    if (!ref.current) return
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setIsInView(true)
+        observer.disconnect()
+      }
+    }, options)
+    observer.observe(ref.current)
+    return () => observer.disconnect()
+  }, [])
+  
+  return { ref, isInView }
+}
 
 const heroBenefits = [
   'ネタ収集から台本作成までを一本化',
@@ -169,11 +189,15 @@ const homeStructuredData = [
 ]
 
 export function HomePage() {
+  const flowAnimation = useInView({ threshold: 0.2 })
+  const chartAnimation = useInView({ threshold: 0.2 })
+
   return (
     <>
       <PageMeta
-        title="ゆっくりまとめプロセッサー | 反応集・ゆっくり解説のネタ収集、台本作成、YMM4準備"
-        description={homeMetaDescription}
+        title={`${siteTitle} | ${siteSubtitle}`}
+        description="ネタ収集からゆっくりムービーメーカー4(YMM4)の台本準備までを一本化し、作業時間を約95%短縮する2ch/5ch反応集・ゆっくり解説対応のWindows向け動画制作支援ツール。"
+        keywords="ゆっくり解説,反応集,YMM4,台本自動生成,ショート動画,2chまとめ"
         image={media.productImage2}
         path="/"
         structuredData={homeStructuredData}
@@ -234,10 +258,14 @@ export function HomePage() {
             <p className="animate-slide-up" style={{ animationDelay: '0.1s' }}>複数ツールを行き来する無駄を排除し、情報収集から出力までを美しい一本のパイプラインに。</p>
           </div>
 
-          <div className="home-compact-flow">
+          <div className="home-compact-flow" ref={flowAnimation.ref}>
             <ul className="home-compact-flow__list-detailed" aria-label="制作フロー詳細">
               {flowSteps.map((item, index) => (
-                <li key={item.label} className="home-compact-flow__card animate-slide-up" style={{ animationDelay: `${0.2 + (index * 0.15)}s` }}>
+                <li 
+                  key={item.label} 
+                  className={`home-compact-flow__card ${flowAnimation.isInView ? 'animate-slide-up' : ''}`} 
+                  style={{ animationDelay: `${0.2 + (index * 0.15)}s`, opacity: flowAnimation.isInView ? undefined : 0 }}
+                >
                   <div className="home-compact-flow__card-glow" />
                   <div className="home-compact-flow__step-num layout-flex-center">0{index + 1}</div>
                   <div className="home-compact-flow__icon-wrap">
@@ -256,65 +284,86 @@ export function HomePage() {
 
         <Section alt className="home-compact-section home-compact-process-section">
           <div className="home-compact-section-head">
-            <h2>準備時間を、120分から6分へ。</h2>
-            <p>ネタ探しからYMM4前調整までの準備を、約95%削減できる前提で見せています。</p>
+            <h2>準備時間を、120分から6分へ圧倒的短縮。</h2>
+            <p>95%削減の根拠を、ネタ探し・台本整理・YMM4前調整の時間差で可視化します。</p>
           </div>
 
-          <div className="home-compact-time-board" role="img" aria-label="手作業120分とゆっくりまとめプロセッサー6分の時間比較">
-            <div className="home-compact-time-board__headline">
-              <div className="home-compact-time-board__metric home-compact-time-board__metric--manual">
-                <span>手作業</span>
-                <strong>{timeReduction.manualMinutes}分</strong>
-                <p>ネタ探し、台本整理、YMM4前調整まで個別に進行</p>
-              </div>
-
-              <div className="home-compact-time-board__reduction">
+          <div 
+            ref={chartAnimation.ref}
+            className="home-compact-time-detail-board" 
+            role="img" 
+            aria-label="手作業120分と本ツール6分の時間内訳比較"
+            style={{ 
+              backgroundImage: `url(${media.timeCompressionBg})`, 
+              backgroundSize: 'cover', 
+              backgroundPosition: 'center',
+              backgroundBlendMode: 'overlay',
+              backgroundColor: 'rgba(10, 9, 12, 0.85)'
+            }}
+          >
+            <div className={`home-compact-time-detail-board__summary ${chartAnimation.isInView ? 'animate-slide-up' : ''}`} style={{ opacity: chartAnimation.isInView ? undefined : 0 }}>
+              <div className="home-compact-time-detail-board__hero">
+                <span>Time Saved</span>
                 <strong>{timeReduction.reductionRate}%削減</strong>
-                <span>{timeReduction.manualMinutes}分 → {timeReduction.productMinutes}分</span>
+                <p>{timeReduction.manualMinutes}分かかっていた準備を、圧倒的な{timeReduction.productMinutes}分まで圧縮。</p>
               </div>
 
-              <div className="home-compact-time-board__metric home-compact-time-board__metric--product">
-                <span>ゆっくりまとめプロセッサー</span>
-                <strong>{timeReduction.productMinutes}分</strong>
-                <p>同じ準備を1つの流れで進めて、すぐ編集へ渡せる状態へ</p>
-              </div>
-            </div>
-
-            <div className="home-compact-time-board__bars" aria-hidden="true">
-              <div className="home-compact-time-board__row">
-                <div className="home-compact-time-board__label">
-                  <strong>手作業</strong>
-                  <span>{timeReduction.manualMinutes}分</span>
+              <div className="home-compact-time-detail-board__totals">
+                <div>
+                  <span>手作業</span>
+                  <strong>{timeReduction.manualMinutes}分</strong>
                 </div>
-                <div className="home-compact-time-board__track">
-                  <div className="home-compact-time-board__fill home-compact-time-board__fill--manual" style={{ '--bar-width': '100%' } as React.CSSProperties} />
-                </div>
-              </div>
-
-              <div className="home-compact-time-board__row">
-                <div className="home-compact-time-board__label">
-                  <strong>本ツール</strong>
-                  <span>{timeReduction.productMinutes}分</span>
-                </div>
-                <div className="home-compact-time-board__track">
-                  <div
-                    className="home-compact-time-board__fill home-compact-time-board__fill--product"
-                    style={{ '--bar-width': `${(timeReduction.productMinutes / timeReduction.manualMinutes) * 100}%` } as React.CSSProperties}
-                  />
+                <div>
+                  <span>本ツール</span>
+                  <strong>{timeReduction.productMinutes}分</strong>
                 </div>
               </div>
             </div>
 
-            <div className="home-compact-time-board__breakdown">
-              {timeBreakdown.map((item) => (
-                <div key={item.label} className="home-compact-time-board__breakdown-item">
-                  <strong>{item.label}</strong>
-                  <div>
-                    <span>手作業 {item.manual}</span>
-                    <span>本ツール {item.product}</span>
+            <div className="home-compact-time-detail-board__rows">
+              {timeBreakdown.map((item, index) => {
+                const manual = Number.parseInt(item.manual, 10)
+                const product = Number.parseInt(item.product, 10)
+                const saved = manual - product
+
+                return (
+                  <div 
+                    key={item.label} 
+                    className={`home-compact-time-detail-board__row ${chartAnimation.isInView ? 'animate-slide-up' : ''}`} 
+                    style={{ animationDelay: `${0.1 + (index * 0.15)}s`, opacity: chartAnimation.isInView ? undefined : 0 }}
+                  >
+                    <div className="home-compact-time-detail-board__label">
+                      <strong>{item.label}</strong>
+                      <span className="delta-glow">{saved}分短縮</span>
+                      <small className="chart-subtext">{item.desc}</small>
+                    </div>
+
+                    <div className="home-compact-time-detail-board__chart">
+                      <div className="home-compact-time-detail-board__lane">
+                        <span>手作業 {item.manual}</span>
+                        <div className="home-compact-time-detail-board__track">
+                          <div 
+                            className={`home-compact-time-detail-board__fill home-compact-time-detail-board__fill--manual ${chartAnimation.isInView ? 'fill-active' : ''}`} 
+                            style={{ '--bar-width': `${(manual / timeReduction.manualMinutes) * 100}%` } as React.CSSProperties} 
+                          />
+                        </div>
+                      </div>
+
+                      <div className="home-compact-time-detail-board__lane">
+                        <span>本ツール {item.product}</span>
+                        <div className="home-compact-time-detail-board__track">
+                          <div 
+                            className={`home-compact-time-detail-board__fill home-compact-time-detail-board__fill--product ${chartAnimation.isInView ? 'fill-active' : ''}`} 
+                            style={{ '--bar-width': `${(product / timeReduction.manualMinutes) * 100}%` } as React.CSSProperties} 
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="home-compact-time-detail-board__delta">-{saved}分</div>
                   </div>
-                </div>
-              ))}
+                )
+              })}
             </div>
           </div>
         </Section>
@@ -354,86 +403,7 @@ export function HomePage() {
           </div>
         </Section>
 
-        <Section className="home-compact-section home-compact-compare-section">
-          <div className="home-compact-section-head">
-            <h2>どこで時間が減るかも、6分の内訳で見せます。</h2>
-            <p>95%削減の根拠を、ネタ探し・台本整理・YMM4前調整の時間差でそのまま見せています。</p>
-          </div>
 
-          <div 
-            className="home-compact-time-detail-board" 
-            role="img" 
-            aria-label="手作業120分と本ツール6分の時間内訳比較"
-            style={{ 
-              backgroundImage: `url(${media.timeCompressionBg})`, 
-              backgroundSize: 'cover', 
-              backgroundPosition: 'center',
-              backgroundBlendMode: 'overlay',
-              backgroundColor: 'rgba(10, 9, 12, 0.85)'
-            }}
-          >
-            <div className="home-compact-time-detail-board__summary">
-              <div className="home-compact-time-detail-board__hero">
-                <span>Time Saved</span>
-                <strong>{timeReduction.reductionRate}%削減</strong>
-                <p>{timeReduction.manualMinutes}分かかっていた準備を、{timeReduction.productMinutes}分まで圧縮。</p>
-              </div>
-
-              <div className="home-compact-time-detail-board__totals">
-                <div>
-                  <span>手作業</span>
-                  <strong>{timeReduction.manualMinutes}分</strong>
-                </div>
-                <div>
-                  <span>本ツール</span>
-                  <strong>{timeReduction.productMinutes}分</strong>
-                </div>
-              </div>
-            </div>
-
-            <div className="home-compact-time-detail-board__rows">
-              {timeBreakdown.map((item, index) => {
-                const manual = Number.parseInt(item.manual, 10)
-                const product = Number.parseInt(item.product, 10)
-                const saved = manual - product
-
-                return (
-                  <div key={item.label} className="home-compact-time-detail-board__row animate-slide-up" style={{ animationDelay: `${0.1 + (index * 0.15)}s` }}>
-                    <div className="home-compact-time-detail-board__label">
-                      <strong>{item.label}</strong>
-                      <span>{saved}分短縮</span>
-                      <small className="chart-subtext">{item.desc}</small>
-                    </div>
-
-                    <div className="home-compact-time-detail-board__chart">
-                      <div className="home-compact-time-detail-board__lane">
-                        <span>手作業 {item.manual}</span>
-                        <div className="home-compact-time-detail-board__track">
-                          <div 
-                            className="home-compact-time-detail-board__fill home-compact-time-detail-board__fill--manual" 
-                            style={{ '--bar-width': `${(manual / timeReduction.manualMinutes) * 100}%` } as React.CSSProperties} 
-                          />
-                        </div>
-                      </div>
-
-                      <div className="home-compact-time-detail-board__lane">
-                        <span>本ツール {item.product}</span>
-                        <div className="home-compact-time-detail-board__track">
-                          <div 
-                            className="home-compact-time-detail-board__fill home-compact-time-detail-board__fill--product" 
-                            style={{ '--bar-width': `${(product / timeReduction.manualMinutes) * 100}%` } as React.CSSProperties} 
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="home-compact-time-detail-board__delta">-{saved}分</div>
-                  </div>
-                )
-              })}
-            </div>
-          </div>
-        </Section>
 
         <Section className="home-compact-section home-compact-price-section">
           <InteractiveCard className="home-compact-price-card">
