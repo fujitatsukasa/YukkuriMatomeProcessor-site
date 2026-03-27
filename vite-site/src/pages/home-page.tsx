@@ -323,8 +323,8 @@ export function HomePage() {
 
         <Section alt className="home-compact-section home-compact-process-section">
           <div className="home-compact-section-head">
-            <h2>準備時間を、120分から6分へ圧倒的短縮。</h2>
-            <p>95%削減の根拠を、ネタ探し・台本整理・YMM4前調整の時間差で可視化します。</p>
+            <h2>準備時間を、<span className="text-glow-gold">120分から6分</span>へ<span className="text-glow-green">圧倒的短縮</span>。</h2>
+            <p><strong className="text-glow-muted">95%削減</strong>の根拠を、<span className="text-glow-muted">ネタ探し・台本整理・YMM4前調整</span>の時間差で可視化します。</p>
           </div>
 
           <div 
@@ -382,7 +382,7 @@ export function HomePage() {
                       style={{ '--row-delay': `${0.3 + index * 0.15}s` } as React.CSSProperties}
                     >
                       <div className="chart-dashboard__row-info">
-                        <strong>{item.label}</strong>
+                        <strong className="chart-dashboard__row-title">{item.label}</strong>
                         <p>{item.desc}</p>
                       </div>
 

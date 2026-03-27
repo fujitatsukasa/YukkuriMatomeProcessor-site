@@ -4782,6 +4782,25 @@ html {
   font-weight: 700;
 }
 
+/* ── Text Glow Utilities ── */
+.text-glow-gold {
+  color: #ffd770;
+  text-shadow: 0 0 20px rgba(255, 215, 112, 0.6), 0 0 40px rgba(255, 215, 112, 0.2);
+  font-weight: 900;
+}
+
+.text-glow-green {
+  color: #4ade80;
+  text-shadow: 0 0 20px rgba(74, 222, 128, 0.6), 0 0 40px rgba(74, 222, 128, 0.3);
+  font-weight: 900;
+}
+
+.text-glow-muted {
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+  font-weight: 800;
+}
+
 /* ═══[ Chart Dashboard – Premium Animated Visualization ]═══ */
 
 .chart-dashboard {
@@ -5093,11 +5112,22 @@ html {
   gap: 0.4rem;
 }
 
-.chart-dashboard__row-info strong {
+.chart-dashboard__row-title {
   color: #fff8e7;
   font-size: 1.3rem;
   font-weight: 800;
   text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  transition: all 0.3s ease;
+}
+
+.chart-dashboard__row:hover .chart-dashboard__row-title {
+  color: #ffd770;
+  text-shadow: 0 0 15px rgba(255, 215, 112, 0.8), 0 0 25px rgba(255, 215, 112, 0.4);
+}
+
+.chart-dashboard__row:hover .chart-dashboard__stat-arrow-sm {
+  color: #ffd770;
+  filter: drop-shadow(0 0 10px rgba(255, 215, 112, 0.8));
 }
 
 .chart-dashboard__row-info p {
