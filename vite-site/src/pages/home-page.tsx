@@ -24,6 +24,24 @@ function useInView(options = { threshold: 0.1 }) {
   return { ref, isInView }
 }
 
+function AnimatedNumber({ value, active, suffix = '' }: { value: number; active: boolean; suffix?: string }) {
+  const [display, setDisplay] = useState(0)
+  useEffect(() => {
+    if (!active) return
+    const duration = 1600
+    const t0 = performance.now()
+    function tick(now: number) {
+      const elapsed = now - t0
+      const progress = Math.min(elapsed / duration, 1)
+      const eased = 1 - Math.pow(1 - progress, 4)
+      setDisplay(Math.round(eased * value))
+      if (progress < 1) requestAnimationFrame(tick)
+    }
+    requestAnimationFrame(tick)
+  }, [active, value])
+  return <span className="animated-number">{display}{suffix}</span>
+}
+
 const flowSteps = [
   { 
     label: 'ネタ収集', 
@@ -311,80 +329,102 @@ export function HomePage() {
 
           <div 
             ref={chartAnimation.ref}
-            className="home-compact-time-detail-board" 
+            className="chart-dashboard" 
             role="img" 
             aria-label="手作業120分と本ツール6分の時間内訳比較"
-            style={{ 
-              backgroundImage: `url(${media.timeCompressionBg})`, 
-              backgroundSize: 'cover', 
-              backgroundPosition: 'center',
-              backgroundBlendMode: 'overlay',
-              backgroundColor: 'rgba(10, 9, 12, 0.85)'
-            }}
           >
-            <div className={`home-compact-time-detail-board__summary ${chartAnimation.isInView ? 'animate-slide-up' : ''}`} style={{ opacity: chartAnimation.isInView ? undefined : 0 }}>
-              <div className="home-compact-time-detail-board__hero">
-                <span>Time Saved</span>
-                <strong>{timeReduction.reductionRate}%削減</strong>
-                <p>{timeReduction.manualMinutes}分かかっていた準備を、圧倒的な{timeReduction.productMinutes}分まで圧縮。</p>
+            {/* ── Hero Stats Row ── */}
+            <div className={`chart-dashboard__hero ${chartAnimation.isInView ? 'is-visible' : ''}`}>
+              <div className="chart-dashboard__ring-wrap">
+                <svg className="chart-dashboard__ring" viewBox="0 0 120 120">
+                  <circle className="chart-dashboard__ring-bg" cx="60" cy="60" r="52" />
+                  <circle
+                    className={`chart-dashboard__ring-fill ${chartAnimation.isInView ? 'is-active' : ''}`}
+                    cx="60" cy="60" r="52"
+                    style={{ '--ring-pct': `${timeReduction.reductionRate}` } as React.CSSProperties}
+                  />
+                </svg>
+                <div className="chart-dashboard__ring-label">
+                  <AnimatedNumber value={timeReduction.reductionRate} active={chartAnimation.isInView} suffix="%" />
+                  <span>削減</span>
+                </div>
               </div>
 
-              <div className="home-compact-time-detail-board__totals">
-                <div>
-                  <span>手作業</span>
-                  <strong>{timeReduction.manualMinutes}分</strong>
+              <div className="chart-dashboard__kpi-group">
+                <div className="chart-dashboard__kpi chart-dashboard__kpi--before">
+                  <span className="chart-dashboard__kpi-tag">Before</span>
+                  <strong><AnimatedNumber value={timeReduction.manualMinutes} active={chartAnimation.isInView} /><small>分</small></strong>
+                  <span className="chart-dashboard__kpi-desc">手作業による準備</span>
                 </div>
-                <div>
-                  <span>本ツール</span>
-                  <strong>{timeReduction.productMinutes}分</strong>
+                <div className="chart-dashboard__kpi-arrow" aria-hidden="true">
+                  <svg width="40" height="40" viewBox="0 0 40 40"><path d="M8 20h20M22 13l8 7-8 7" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                </div>
+                <div className="chart-dashboard__kpi chart-dashboard__kpi--after">
+                  <span className="chart-dashboard__kpi-tag">After</span>
+                  <strong><AnimatedNumber value={timeReduction.productMinutes} active={chartAnimation.isInView} /><small>分</small></strong>
+                  <span className="chart-dashboard__kpi-desc">本ツールで完了</span>
                 </div>
               </div>
             </div>
 
-            <div className="home-compact-time-detail-board__rows">
+            {/* ── Breakdown Rows ── */}
+            <div className="chart-dashboard__rows">
               {timeBreakdown.map((item, index) => {
                 const manual = Number.parseInt(item.manual, 10)
                 const product = Number.parseInt(item.product, 10)
                 const saved = manual - product
+                const pctManual = (manual / timeReduction.manualMinutes) * 100
+                const pctProduct = (product / timeReduction.manualMinutes) * 100
 
                 return (
-                  <div 
-                    key={item.label} 
-                    className={`home-compact-time-detail-board__row ${chartAnimation.isInView ? 'animate-slide-up' : ''}`} 
-                    style={{ animationDelay: `${0.1 + (index * 0.15)}s`, opacity: chartAnimation.isInView ? undefined : 0 }}
+                  <div
+                    key={item.label}
+                    className={`chart-dashboard__row ${chartAnimation.isInView ? 'is-visible' : ''}`}
+                    style={{ '--row-delay': `${0.3 + index * 0.2}s` } as React.CSSProperties}
                   >
-                    <div className="home-compact-time-detail-board__label">
+                    <div className="chart-dashboard__row-head">
                       <strong>{item.label}</strong>
-                      <span className="delta-glow">{saved}分短縮</span>
-                      <small className="chart-subtext">{item.desc}</small>
+                      <span className="chart-dashboard__row-saved">
+                        <svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 11V3M4 6l3-3 3 3" stroke="currentColor" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                        {saved}分短縮
+                      </span>
                     </div>
 
-                    <div className="home-compact-time-detail-board__chart">
-                      <div className="home-compact-time-detail-board__lane">
-                        <span>手作業 {item.manual}</span>
-                        <div className="home-compact-time-detail-board__track">
-                          <div 
-                            className={`home-compact-time-detail-board__fill home-compact-time-detail-board__fill--manual ${chartAnimation.isInView ? 'fill-active' : ''}`} 
-                            style={{ '--bar-width': `${(manual / timeReduction.manualMinutes) * 100}%` } as React.CSSProperties} 
-                          />
+                    <div className="chart-dashboard__bars">
+                      <div className="chart-dashboard__bar-row">
+                        <span className="chart-dashboard__bar-label">手作業</span>
+                        <div className="chart-dashboard__track">
+                          <div
+                            className={`chart-dashboard__fill chart-dashboard__fill--manual ${chartAnimation.isInView ? 'is-active' : ''}`}
+                            style={{ '--bar-width': `${pctManual}%`, '--bar-delay': `${0.5 + index * 0.2}s` } as React.CSSProperties}
+                          >
+                            <span className="chart-dashboard__fill-tip">{item.manual}</span>
+                          </div>
                         </div>
                       </div>
-
-                      <div className="home-compact-time-detail-board__lane">
-                        <span>本ツール {item.product}</span>
-                        <div className="home-compact-time-detail-board__track">
-                          <div 
-                            className={`home-compact-time-detail-board__fill home-compact-time-detail-board__fill--product ${chartAnimation.isInView ? 'fill-active' : ''}`} 
-                            style={{ '--bar-width': `${(product / timeReduction.manualMinutes) * 100}%` } as React.CSSProperties} 
-                          />
+                      <div className="chart-dashboard__bar-row">
+                        <span className="chart-dashboard__bar-label">本ツール</span>
+                        <div className="chart-dashboard__track">
+                          <div
+                            className={`chart-dashboard__fill chart-dashboard__fill--product ${chartAnimation.isInView ? 'is-active' : ''}`}
+                            style={{ '--bar-width': `${pctProduct}%`, '--bar-delay': `${0.7 + index * 0.2}s` } as React.CSSProperties}
+                          >
+                            <span className="chart-dashboard__fill-tip">{item.product}</span>
+                          </div>
                         </div>
                       </div>
                     </div>
 
-                    <div className="home-compact-time-detail-board__delta">-{saved}分</div>
+                    <p className="chart-dashboard__row-desc">{item.desc}</p>
                   </div>
                 )
               })}
+            </div>
+
+            {/* ── Legend ── */}
+            <div className="chart-dashboard__legend">
+              <span className="chart-dashboard__legend-item chart-dashboard__legend-item--manual">手作業</span>
+              <span className="chart-dashboard__legend-item chart-dashboard__legend-item--product">本ツール使用</span>
             </div>
           </div>
         </Section>
