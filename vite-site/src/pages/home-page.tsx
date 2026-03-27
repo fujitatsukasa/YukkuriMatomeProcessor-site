@@ -24,12 +24,6 @@ function useInView(options = { threshold: 0.1 }) {
   return { ref, isInView }
 }
 
-const heroBenefits = [
-  'ネタ収集から台本作成までを一本化',
-  '会話台本と素材整理を同じ流れで進行',
-  'YMM4前の台本読み込み準備を先回り',
-] as const
-
 const flowSteps = [
   { 
     label: 'ネタ収集', 
@@ -239,11 +233,6 @@ export function HomePage() {
                 </Link>
               </div>
 
-              <ul className="home-compact-hero__benefits" aria-label="主な価値">
-                {heroBenefits.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
             </div>
 
             <div className="home-compact-hero__media">
