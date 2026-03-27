@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap');
+@import url("../../assets/css/brand-system.css");
+@import url("../../assets/css/brand-pages.css");
+@import url("../../assets/css/rich-interactions.css");
+@import url("./react-site.css");
+
+:root {
+  color-scheme: dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  --font-base: 'Zen Kaku Gothic New', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-numbers: 'Outfit', var(--font-base);
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+  font-family: var(--font-base);
+}
+
+/* Global Premium Typography Overrides */
+h1, h2, h3, h4, h5, h6, .brand-text-display, .home-compact-section-head h2 {
+  font-family: var(--font-base);
+  letter-spacing: -0.02em;
+}
+
+.animated-number, .chart-dashboard__stat-box span, .chart-dashboard__row-saved, .pricing-compact-tier-price, .pricing-compact-feature-val {
+  font-family: var(--font-numbers);
+}
+
+a {
+  color: inherit;
+}

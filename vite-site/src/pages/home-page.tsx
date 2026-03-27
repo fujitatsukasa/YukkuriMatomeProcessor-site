@@ -261,13 +261,13 @@ export function HomePage() {
           <div className="home-compact-hero__layout">
             <div className="home-compact-hero__copy">
               <h1 className="brand-title">
-                反応集・
+                <span className="text-glow-green">反応集・</span>
                 <br />
-                ゆっくり解説の
+                <span className="text-glow-green">ゆっくり解説</span>の
                 <br />
                 ネタ収集、台本作成、
                 <br />
-                YMM4準備を1つに。
+                <span className="text-glow-gold">YMM4準備</span>を1つに。
               </h1>
               <p className="brand-lead">
                 記事や話題を集めて、会話台本・立ち絵・素材整理までまとめて進められる、
@@ -293,7 +293,7 @@ export function HomePage() {
 
         <Section className="home-compact-section home-compact-flow-section">
           <div className="home-compact-section-head">
-            <h2 className="animate-slide-up">制作フローを統合する、5つのプロセス。</h2>
+            <h2 className="animate-slide-up">制作フローを統合する、<span className="text-glow-gold">5つのプロセス。</span></h2>
             <p className="animate-slide-up" style={{ animationDelay: '0.1s' }}>複数ツールを行き来する無駄を排除し、情報収集から出力までを美しい一本のパイプラインに。</p>
           </div>
 
@@ -416,7 +416,7 @@ export function HomePage() {
 
         <Section id="demo" className="home-compact-section home-compact-demo-section">
           <div className="home-compact-section-head">
-            <h2>実画面で分かる、ネタ収集からYMM4準備まで</h2>
+            <h2><span className="text-glow-gold">実画面</span>で分かる、ネタ収集から<span className="text-glow-green">YMM4準備</span>まで</h2>
             <p>ネタ一覧、会話台本、YMM4準備の3枚で、どこまで進められるかを見せます。</p>
           </div>
 
@@ -425,7 +425,7 @@ export function HomePage() {
 
         <Section alt className="home-compact-section home-compact-usecase-section">
           <div className="home-compact-section-head">
-            <h2>反応集・ゆっくり解説・ショート動画に対応</h2>
+            <h2><span className="text-glow-green">反応集・ゆっくり解説</span>・ショート動画に対応</h2>
           </div>
 
           <div className="home-compact-usecase-grid" role="list">
@@ -453,7 +453,7 @@ export function HomePage() {
 
         <Section className="home-compact-section home-compact-price-section">
           <div className="home-compact-section-head">
-            <h2>作業の無駄を削ぎ落とし、動画の純度を高める。</h2>
+            <h2>作業の無駄を削ぎ落とし、動画の<span className="text-glow-gold">純度を高める。</span></h2>
             <p>ゆっくりまとめプロセッサーは買い切り型。毎月のランニングコストを気にせず、動画制作のルーチンを即座に効率化できます。</p>
           </div>
 
@@ -534,10 +534,10 @@ export function HomePage() {
 
         <Section className="home-compact-section home-compact-cta-section">
           <InteractiveCard className="home-compact-cta-card">
-            <h2>反応集・ゆっくり解説の制作前工程を、ひとつに。</h2>
+            <h2><span className="text-glow-green">反応集・ゆっくり解説</span>の制作前工程を、<span className="text-glow-gold">ひとつに。</span></h2>
             <p>
               ネタ収集、台本作成、会話台本、素材整理、YMM4準備まで。
-              手作業で分断しがちな工程を、1つの流れにまとめます。
+              手作業で分断しがちな工程を、<strong className="text-glow-gold">1つの流れ</strong>にまとめます。
             </p>
 
             <div className="brand-inline-actions home-compact-cta__actions">
