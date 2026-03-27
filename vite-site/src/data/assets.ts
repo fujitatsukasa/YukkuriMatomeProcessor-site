@@ -34,4 +34,8 @@ export const media = {
   iconStep5: new URL('../../../assets/img/icon_step_5.png', import.meta.url).href,
   timeCompressionBg: new URL('../../../assets/img/time_compression_bg.jpg', import.meta.url).href,
   heroSaasBg: new URL('../../../assets/showcase/aurora/hero-saas-bg.mp4', import.meta.url).href,
+  usecaseReaction: new URL('../../../assets/img/usecase_reaction_bg.png', import.meta.url).href,
+  usecaseYukkuri: new URL('../../../assets/img/usecase_yukkuri_bg.png', import.meta.url).href,
+  usecaseShorts: new URL('../../../assets/img/usecase_shorts_bg.png', import.meta.url).href,
+  usecaseConversation: new URL('../../../assets/img/usecase_conversation_bg.png', import.meta.url).href,
 }

@@ -5422,13 +5422,24 @@ code {
 }
 
 .home-compact-usecase-card {
-  padding: 1.15rem 0;
-  border: none;
-  border-radius: 0;
-  background: none;
-  box-shadow: none;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 260px;
+  padding: 1.5rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 16px 32px -16px rgba(0, 0, 0, 0.6);
   animation: compact-fade-up 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.home-compact-usecase-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(223, 192, 131, 0.6);
+  box-shadow: 0 24px 48px -12px rgba(223, 192, 131, 0.2), 0 0 24px rgba(84, 219, 255, 0.15);
 }
 
 .home-compact-usecase-card::before,
@@ -5436,13 +5447,46 @@ code {
   display: none;
 }
 
+.home-compact-usecase-card__bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.6s ease;
+  filter: brightness(0.6) saturate(0.8);
+}
+
+.home-compact-usecase-card:hover .home-compact-usecase-card__bg {
+  transform: scale(1.08);
+  filter: brightness(0.8) saturate(1.1);
+}
+
+.home-compact-usecase-card__bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(8, 7, 10, 0.95) 0%, rgba(8, 7, 10, 0.4) 60%, transparent 100%);
+}
+
+.home-compact-usecase-card__content {
+  position: relative;
+  z-index: 1;
+}
+
 .home-compact-usecase-card h3 {
   margin-bottom: 0.35rem;
+  color: #fff4d3;
+  font-size: 1.2rem;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
 }
 
 .home-compact-usecase-card p {
-  color: rgba(236, 233, 226, 0.74);
-  line-height: 1.6;
+  margin: 0;
+  color: rgba(245, 241, 233, 0.85);
+  line-height: 1.5;
+  font-size: 0.92rem;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.8);
 }
 
 .home-compact-usecase-card:nth-child(2) { animation-delay: 90ms; }
