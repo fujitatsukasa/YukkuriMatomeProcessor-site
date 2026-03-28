@@ -4261,31 +4261,12 @@ html {
 
 .home-compact-flow {
   position: relative;
-  overflow: hidden;
-  display: grid;
-  gap: 1.2rem;
-  padding: 1.55rem;
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  border-radius: 28px;
-  background:
-    radial-gradient(circle at top right, rgba(223, 192, 131, 0.12), transparent 28%),
-    linear-gradient(180deg, rgba(33, 36, 40, 0.98), rgba(19, 20, 23, 0.98));
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.06),
-    0 26px 64px -34px rgba(0, 0, 0, 0.78);
-}
-
-.home-compact-flow::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.08) 18%, transparent 36%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 40%);
-  opacity: 0.32;
-  transform: translateX(-35%);
-  animation: compact-sheen-travel 9.5s ease-in-out infinite;
-  pointer-events: none;
+  overflow: visible;
+  padding: clamp(1rem, 3vh, 3rem) 0;
+  margin-top: clamp(1rem, 2vh, 2rem);
+  background: transparent;
+  border: none;
+  box-shadow: none;
 }
 
 .home-compact-flow h2,
@@ -4294,11 +4275,12 @@ html {
   font-size: clamp(1.8rem, 3vw, 2.7rem);
   line-height: 1.12;
   letter-spacing: -0.03em;
+  color: #fff;
 }
 
 .home-compact-flow__list-detailed {
   display: grid;
-  gap: 1.25rem;
+  gap: clamp(1rem, 1.5vw, 1.5rem);
   grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
@@ -4306,13 +4288,16 @@ html {
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: 1.6rem 1.4rem;
-  border-radius: 20px;
-  border: 1px solid rgba(224, 193, 132, 0.16);
-  background: rgba(224, 193, 132, 0.04);
+  padding: clamp(1.8rem, 3.5vh, 2.2rem) clamp(1.2rem, 1.5vw, 1.6rem);
+  border-radius: 24px;
+  border: 1px solid rgba(224, 193, 132, 0.2);
+  border-top: 2px solid rgba(224, 193, 132, 0.5);
+  background: linear-gradient(180deg, rgba(25, 26, 30, 0.95), rgba(12, 13, 16, 0.95));
   text-align: left;
   overflow: hidden;
   transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+  min-height: clamp(340px, 46vh, 480px);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 20px 40px -15px rgba(0,0,0,0.8);
 }
 
 .home-compact-flow__card:hover {
@@ -4340,27 +4325,27 @@ html {
 
 .home-compact-flow__step-num {
   position: absolute;
-  top: 1rem;
-  right: 1.2rem;
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: rgba(255, 255, 255, 0.04);
+  top: -10px;
+  right: 5px;
+  font-size: clamp(4rem, 8vw, 6.5rem);
+  font-weight: 900;
+  color: rgba(224, 193, 132, 0.06);
   line-height: 1;
   pointer-events: none;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
 .home-compact-flow__card-content {
-  margin-top: 1.2rem;
+  margin-top: 1.5rem;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 }
 
 .home-compact-flow__card-content h3 {
-  font-size: 1.2rem;
+  font-size: clamp(1.2rem, 1.5vw, 1.4rem);
   color: #fff4d3;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.8rem;
 }
 
 .home-compact-flow__card-content p {
@@ -8068,4 +8053,135 @@ html {
   .home-compact-proof-stats {
     grid-template-columns: 1fr;
   }
+
+/* --- Social Proof & Testimonial Redesign --- */
+.home-compact-proof-section .brand-shell {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2rem, 4vh, 4rem);
+  padding: clamp(1rem, 2vh, 2rem) 0;
+}
+
+.home-compact-proof-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.5rem, 2vw, 2.5rem);
+}
+
+.home-compact-proof-stat {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(2.5rem, 5vh, 4rem);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: transform 0.4s ease, border-color 0.4s ease;
+}
+
+.home-compact-proof-stat:hover {
+  transform: translateY(-6px);
+  border-color: rgba(223, 192, 131, 0.4);
+  background: rgba(223, 192, 131, 0.04);
+}
+
+.home-compact-proof-stat::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 208, 107, 0.6), transparent);
+}
+
+.home-compact-proof-stat__icon {
+  font-size: 2.5rem;
+  line-height: 1;
+  margin-bottom: 0.8rem;
+  color: #e7c98a;
+}
+
+.home-compact-proof-stat__value {
+  font-size: clamp(3.5rem, 7vw, 5.5rem);
+  font-weight: 900;
+  line-height: 1.1;
+  background: linear-gradient(180deg, #ffffff 0%, #ffd06b 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 4px 16px rgba(255, 208, 107, 0.35));
+  margin: 0.5rem 0;
+}
+
+.home-compact-proof-stat__label {
+  font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+.home-compact-testimonials {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.5rem, 2vw, 2.5rem);
+}
+
+.home-compact-testimonial {
+  padding: clamp(2rem, 4vh, 3rem);
+  background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.05), transparent 80%), rgba(16, 17, 20, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 24px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4);
+}
+
+.home-compact-testimonial::before {
+  content: "“";
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  font-size: 6.5rem;
+  font-family: serif;
+  color: rgba(255, 215, 120, 0.12);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.home-compact-testimonial p {
+  position: relative;
+  z-index: 1;
+  font-size: clamp(1rem, 1.4vw, 1.1rem);
+  line-height: 1.75;
+  color: rgba(245, 241, 233, 0.95);
+  margin-bottom: 2.5rem;
+  flex-grow: 1;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+}
+
+.home-compact-testimonial footer {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.home-compact-testimonial footer strong {
+  font-size: 1.1rem;
+  color: #fff4d3;
+  margin-bottom: 0.2rem;
+}
+
+.home-compact-testimonial footer span {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.55);
+}
 }
