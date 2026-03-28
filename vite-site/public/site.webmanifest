@@ -1,0 +1,15 @@
+{
+  "name": "ゆっくりまとめプロセッサー",
+  "short_name": "YMP",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a090c",
+  "theme_color": "#0a090c",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ]
+}

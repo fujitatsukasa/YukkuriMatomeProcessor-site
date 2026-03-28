@@ -8077,6 +8077,39 @@ html {
   letter-spacing: 0.04em;
 }
 
+/* Inline proof bar inside hero (not a standalone section) */
+.hero-proof-bar {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1.5rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.hero-proof-bar__item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.hero-proof-bar__icon {
+  font-size: 1rem;
+  opacity: 0.7;
+}
+
+.hero-proof-bar__value {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+.hero-proof-bar__label {
+  font-size: 0.8rem;
+  color: rgba(236, 233, 226, 0.5);
+  font-weight: 500;
+}
+
 /* ═══[ Social Proof Section (Ultra Rich SaaS Style) ]═══ */
 .home-compact-proof-section {
   padding-top: clamp(2rem, 4vw, 3.5rem) !important;

@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Redirecting…</title>
+    <script>
+      (function () {
+        var path = window.location.pathname + window.location.search + window.location.hash;
+        var redirect =
+          window.location.protocol +
+          '//' +
+          window.location.host +
+          '/?/' +
+          path.replace(/^\//, '').replace(/&/g, '~and~');
+        window.location.replace(redirect);
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>

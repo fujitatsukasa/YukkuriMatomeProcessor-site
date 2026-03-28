@@ -219,7 +219,6 @@ const homeStructuredData = [
 export function HomePage() {
   const flowAnimation = useInView({ threshold: 0.2 })
   const chartAnimation = useInView({ threshold: 0.2 })
-  const proofAnimation = useInView({ threshold: 0.2 })
 
   const [activeFlowStep, setActiveFlowStep] = useState(0)
   const [progressKey, setProgressKey] = useState(0)
@@ -295,6 +294,16 @@ export function HomePage() {
               </div>
               <p className="hero-microcopy">7日間の無料トライアル・クレジットカード不要・即ダウンロード</p>
 
+              <div className="hero-proof-bar">
+                {socialProofStats.map((stat) => (
+                  <div key={stat.label} className="hero-proof-bar__item">
+                    <span className="hero-proof-bar__icon" aria-hidden="true">{stat.icon}</span>
+                    <span className="hero-proof-bar__value">{stat.value}</span>
+                    <span className="hero-proof-bar__label">{stat.label}</span>
+                  </div>
+                ))}
+              </div>
+
             </div>
 
             <div className="home-compact-hero__media">
@@ -302,25 +311,6 @@ export function HomePage() {
             </div>
           </div>
         </section>
-
-        <Section className="home-compact-section home-compact-proof-section">
-          <div className="brand-shell" ref={proofAnimation.ref}>
-            <div className="home-compact-proof-stats">
-              {socialProofStats.map((stat) => (
-                <div 
-                  key={stat.label} 
-                  className="home-compact-proof-stat"
-                >
-                  <span className="home-compact-proof-stat__icon" aria-hidden="true">{stat.icon}</span>
-                  <div className="home-compact-proof-stat__value">
-                    <AnimatedNumber value={parseInt(stat.value.replace(/[^0-9]/g, ''))} active={true} suffix={stat.value.replace(/[0-9]/g, '')} />
-                  </div>
-                  <span className="home-compact-proof-stat__label">{stat.label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </Section>
 
         <Section className="home-compact-section home-compact-flow-section">
           <div className="home-compact-section-head">
