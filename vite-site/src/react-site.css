@@ -1393,6 +1393,11 @@ code {
     inset 0 1px 0 rgba(255, 255, 255, 0.42),
     inset 0 0 0 1px rgba(255, 237, 198, 0.1);
 }
+@property --lp-hero-neon-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
 
 @keyframes lp-hero-neon-orbit {
   0% {
@@ -3879,10 +3884,9 @@ html {
 
 .home-compact-section {
   position: relative;
-  min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  justify-content: stretch;
+  justify-content: center;
   padding: clamp(12px, 1.5vh, 24px) 0;
 }
 
