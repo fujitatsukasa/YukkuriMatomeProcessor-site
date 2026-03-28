@@ -237,8 +237,20 @@ export function HomePage() {
   const handleTabClick = (index: number) => {
     setActiveFlowStep(index)
     setProgressKey((k) => k + 1)
-    setIsAutoPlaying(false) // ユーザーが触ったら勝手に動くのを完全停止
+    setIsAutoPlaying(false)
   }
+
+  // ━━━[ Scroll Reveal Observer (opacity + translateY only, no height changes) ]━━━
+  useEffect(() => {
+    const els = document.querySelectorAll('[data-reveal]')
+    if (!els.length) return
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-revealed'); io.unobserve(e.target) } }),
+      { threshold: 0.15 }
+    )
+    els.forEach((el) => io.observe(el))
+    return () => io.disconnect()
+  }, [])
 
   return (
     <>
@@ -313,13 +325,13 @@ export function HomePage() {
         </section>
 
         <Section className="home-compact-section home-compact-flow-section">
-          <div className="home-compact-section-head">
-            <h2 className="animate-slide-up" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.2rem' }}>
+          <div className="home-compact-section-head" data-reveal>
+            <h2 style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.2rem' }}>
               <span className="reveal-mask"><span className="reveal-mask__inner" style={{ '--reveal-delay': '0.1s' } as React.CSSProperties}>制作フローを</span></span>
               <span className="reveal-mask"><span className="reveal-mask__inner" style={{ '--reveal-delay': '0.2s' } as React.CSSProperties}>統合する、</span></span>
               <span className="reveal-mask"><span className="reveal-mask__inner" style={{ '--reveal-delay': '0.3s' } as React.CSSProperties}><span className="text-glow-gold">5つのプロセス。</span></span></span>
             </h2>
-            <p className="animate-slide-up" style={{ animationDelay: '0.4s' }}>複数ツールを行き来する無駄を排除し、情報収集から出力までを美しい一本のパイプラインに。</p>
+            <p>複数ツールを行き来する無駄を排除し、情報収集から出力までを美しい一本のパイプラインに。</p>
           </div>
 
           <div className="home-interactive-flow-container" ref={flowAnimation.ref}>
@@ -347,97 +359,9 @@ export function HomePage() {
               })}
             </div>
 
-            {/* Right: Dynamic Multimedia/Video Mockup Dashboard */}
-            <div className="home-interactive-flow__visual">
-              <div className="home-interactive-flow__mockup">
-                <div className="home-interactive-flow__mockup-header">
-                  <span className="dot dot-r" />
-                  <span className="dot dot-y" />
-                  <span className="dot dot-g" />
-                  <div className="mockup-header-search">
-                    <span className="mockup-header-lock">🔒</span> processor.dev/{flowSteps[activeFlowStep].mockupType}
-                  </div>
-                </div>
-                
-                <div className="home-interactive-flow__mockup-screen">
-                  {flowSteps[activeFlowStep].mockupType === 'terminal' && (
-                    <div className="mockup-ui-terminal">
-                      <div className="term-line">~$ python scrape_sources.py --target all</div>
-                      <div className="term-line">[INFO] Connecting to 5-ch index nodes...</div>
-                      <div className="term-line">[SUCCESS] Fetched 1,024 threads. Extracting keywords...</div>
-                      <div className="term-line term-heavy">
-                        <span className="term-highlight">Extracted 42 hot topics. Saving to database.</span>
-                        <div className="term-progress"><div className="term-progress-bar"></div></div>
-                      </div>
-                    </div>
-                  )}
-
-                  {flowSteps[activeFlowStep].mockupType === 'script-ai' && (
-                    <div className="mockup-ui-script">
-                      <div className="mockup-ui-sidebar">
-                        <div className="mockup-ui-skeleton-line short"></div>
-                        <div className="mockup-ui-skeleton-line"></div>
-                        <div className="mockup-ui-skeleton-line short"></div>
-                      </div>
-                      <div className="mockup-ui-editor">
-                        <div className="editor-prompt">Extract pure narrative from raw logs...</div>
-                        <div className="editor-result">
-                          <p>この部分は完全にノイズであるため削除し、話題の核心である「なぜ価格が高騰したのか」という結論に文脈を繋げました。</p>
-                          <br/>
-                          <p className="editor-highlight-block">✨ <strong>AI Analysis:</strong> 自然な導入部分として再構成が完了しました。整合性スコア: 98.5%</p>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {flowSteps[activeFlowStep].mockupType === 'casting' && (
-                    <div className="mockup-ui-casting">
-                      <div className="cast-card">
-                        <div className="cast-avatar reida"></div>
-                        <div className="cast-dialogue">こんにちは。今回のテーマは「価格高騰の裏側」ね。</div>
-                      </div>
-                      <div className="cast-card right">
-                        <div className="cast-avatar marisa"></div>
-                        <div className="cast-dialogue">ふむふむ、一体どんなカラクリが隠されているか気になるぜ！</div>
-                      </div>
-                      <div className="cast-card">
-                        <div className="cast-avatar reida"></div>
-                        <div className="cast-dialogue">実は、需給バランスの崩壊と...</div>
-                      </div>
-                    </div>
-                  )}
-
-                  {flowSteps[activeFlowStep].mockupType === 'assets' && (
-                    <div className="mockup-ui-assets">
-                      <div className="asset-grid">
-                        {[1,2,3,4,5,6,7,8].map((i) => (
-                          <div key={i} className="asset-item">
-                            <div className="asset-thumb"></div>
-                            <div className="asset-label">Expression_{i}</div>
-                          </div>
-                        ))}
-                      </div>
-                      <div className="asset-floating-chip animate-float">YMM4 Link Active</div>
-                    </div>
-                  )}
-
-                  {flowSteps[activeFlowStep].mockupType === 'export' && (
-                    <div className="mockup-ui-export">
-                      <div className="export-circle animate-spin-pulse"></div>
-                      <div className="export-text animate-type delay-1">Generating YMM4 Timeline...</div>
-                      <div className="export-status animate-fade-in delay-3">
-                        <span className="status-badge green">READY</span>
-                        Build Complete. Drag & Drop into YMM4.
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Glassmorphic Tech Overlay for SaaS feel */}
-                  <div className="mockup-tech-overlay">
-                    <div className="mockup-tech-scanner" />
-                  </div>
-                </div>
-              </div>
+            {/* Right: Real product screenshots */}
+            <div className="home-interactive-flow__visual" data-reveal data-reveal-delay="2">
+              <ProductDemoTabs className="home-compact-demo flow-demo-compact" />
             </div>
           </div>
         </Section>
@@ -449,7 +373,7 @@ export function HomePage() {
               <span>95% TIME REDUCTION FOR YMM4 - PREPARATION REVOLUTION - MASSIVE EFFICIENCY - </span>
             </div>
           </div>
-          <div className="home-compact-section-head">
+          <div className="home-compact-section-head" data-reveal>
             <h2>準備時間を、<span className="text-glow-gold">120分から6分</span>へ<span className="text-glow-green">圧倒的短縮</span>。</h2>
             <p><strong className="text-glow-muted">95%削減</strong>の根拠を、<span className="text-glow-muted">ネタ探し・台本整理・YMM4前調整</span>の時間差で可視化します。</p>
           </div>
@@ -548,7 +472,7 @@ export function HomePage() {
         </Section>
 
         <Section id="demo" className="home-compact-section home-compact-demo-section">
-          <div className="home-compact-section-head">
+          <div className="home-compact-section-head" data-reveal>
             <h2><span className="text-glow-gold">実画面</span>で分かる、ネタ収集から<span className="text-glow-green">YMM4準備</span>まで</h2>
             <p>ネタ一覧、会話台本、YMM4準備の3枚で、どこまで進められるかを見せます。</p>
           </div>
@@ -556,8 +480,14 @@ export function HomePage() {
           <ProductDemoTabs className="home-compact-demo" />
         </Section>
 
+        {/* Mid-page CTA */}
+        <div className="home-mid-cta" data-reveal>
+          <p>ネタ収集からYMM4準備まで、<strong>すべてを今すぐ体験</strong>してみませんか？</p>
+          <Link className="brand-btn brand-btn--primary" to="/download/">無料で試してみる</Link>
+        </div>
+
         <Section alt className="home-compact-section home-compact-usecase-section">
-          <div className="home-compact-section-head">
+          <div className="home-compact-section-head" data-reveal>
             <h2><span className="text-glow-green">反応集・ゆっくり解説</span>・ショート動画に対応</h2>
           </div>
 
@@ -586,7 +516,7 @@ export function HomePage() {
 
 
         <Section className="home-compact-section home-compact-price-section">
-          <div className="home-compact-section-head">
+          <div className="home-compact-section-head" data-reveal>
             <h2>作業の無駄を削ぎ落とし、動画の<span className="text-glow-gold">純度を高める。</span></h2>
             <p>ゆっくりまとめプロセッサーは買い切り型。毎月のランニングコストを気にせず、動画制作のルーチンを即座に効率化できます。</p>
           </div>
@@ -640,7 +570,7 @@ export function HomePage() {
 
         <Section alt className="home-compact-section home-compact-closing-section">
           <div className="home-compact-faq">
-            <div className="home-compact-section-head">
+            <div className="home-compact-section-head" data-reveal>
               <h2>よくある質問</h2>
               <p>
                 導入前によくある確認事項だけを短くまとめています。
