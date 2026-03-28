@@ -43,36 +43,11 @@ function AnimatedNumber({ value, active, suffix = '' }: { value: number; active:
 }
 
 const flowSteps = [
-  { 
-    label: 'ネタ収集', 
-    icon: media.iconStep1, 
-    desc: '複数サイトから情報を収集・抽出。ワンクリックでストックへ。',
-    stat: '速度 +400%'
-  },
-  { 
-    label: '台本作成', 
-    icon: media.iconStep2, 
-    desc: '集めたネタのノイズを除去し、一本の自然な文章へ強力に再構築。',
-    stat: '精度 98.5%'
-  },
-  { 
-    label: '会話台本', 
-    icon: media.iconStep3, 
-    desc: '説明役と補足役の掛け合い形式へ自動変換。キャラ設定を即反映。',
-    stat: '自動配役化'
-  },
-  { 
-    label: '素材整理', 
-    icon: media.iconStep4, 
-    desc: '立ち絵の表情指定や音声トーン指示をセリフと紐付けて完全一元管理。',
-    stat: 'ミス率 0%'
-  },
-  { 
-    label: 'YMM4準備', 
-    icon: media.iconStep5, 
-    desc: 'ゆっくりムービーメーカー4へそのまま読み込める形式で即出力。',
-    stat: '直結出力'
-  },
+  { label: 'ネタ収集', stat: '速度 +400%', desc: '複数サイトから情報を収集・抽出。ワンクリックでストックへ。', icon: 'https://cdn-icons-png.flaticon.com/512/814/814867.png', mockupVideo: 'https://cdn.dribbble.com/uploads/39417/original/49dbf46eae15d227fc95a69cee31251e.mp4?1657824906' },
+  { label: '台本作成', stat: '精度 98.5%', desc: '集めたネタのノイズを除去し、一本の自然な文章へ強力に再構築。', icon: 'https://cdn-icons-png.flaticon.com/512/2921/2921136.png', mockupVideo: 'https://cdn.dribbble.com/uploads/39417/original/49dbf46eae15d227fc95a69cee31251e.mp4?1657824906' },
+  { label: '会話台本', stat: '自動配役化', desc: '説明役と補足役の掛け合い形式へ自動変換。キャラ設定を即反映。', icon: 'https://cdn-icons-png.flaticon.com/512/9373/9373973.png', mockupVideo: 'https://cdn.dribbble.com/uploads/39417/original/49dbf46eae15d227fc95a69cee31251e.mp4?1657824906' },
+  { label: '素材整理', stat: 'ミス率 0%', desc: '立ち絵の表情指定や音声トーン指示をセリフと紐付けて完全一元管理。', icon: 'https://cdn-icons-png.flaticon.com/512/3208/3208696.png', mockupVideo: 'https://cdn.dribbble.com/uploads/39417/original/49dbf46eae15d227fc95a69cee31251e.mp4?1657824906' },
+  { label: 'YMM4準備', stat: '直結出力', desc: 'ゆっくりムービーメーカー4へそのまま読み込める形式で即出力。', icon: 'https://cdn-icons-png.flaticon.com/512/4798/4798781.png', mockupVideo: 'https://cdn.dribbble.com/uploads/39417/original/49dbf46eae15d227fc95a69cee31251e.mp4?1657824906' },
 ] as const
 
 const socialProofStats = [
@@ -259,6 +234,9 @@ const homeStructuredData = [
 export function HomePage() {
   const flowAnimation = useInView({ threshold: 0.2 })
   const chartAnimation = useInView({ threshold: 0.2 })
+  const proofAnimation = useInView({ threshold: 0.2 })
+
+  const [activeFlowStep, setActiveFlowStep] = useState(0)
 
   return (
     <>
@@ -322,27 +300,38 @@ export function HomePage() {
           </div>
         </section>
 
-        {/* ── Social Proof Section ── */}
         <Section className="home-compact-section home-compact-proof-section">
-          <div className="brand-shell">
+          <div className="brand-shell" ref={proofAnimation.ref}>
             <div className="home-compact-proof-stats">
-              {socialProofStats.map((stat) => (
-                <div key={stat.label} className="home-compact-proof-stat">
+              {socialProofStats.map((stat, i) => (
+                <div 
+                  key={stat.label} 
+                  className={`home-compact-proof-stat ${proofAnimation.isInView ? 'animate-slide-up-glow' : ''}`}
+                  style={{ animationDelay: `${i * 0.15}s`, opacity: proofAnimation.isInView ? undefined : 0 }}
+                >
                   <span className="home-compact-proof-stat__icon" aria-hidden="true">{stat.icon}</span>
-                  <strong className="home-compact-proof-stat__value">{stat.value}</strong>
+                  <div className="home-compact-proof-stat__value">
+                    <AnimatedNumber value={parseInt(stat.value.replace(/[^0-9]/g, ''))} active={proofAnimation.isInView} suffix={stat.value.replace(/[0-9]/g, '')} />
+                  </div>
                   <span className="home-compact-proof-stat__label">{stat.label}</span>
+                  <div className="home-compact-proof-stat__sparkle" />
                 </div>
               ))}
             </div>
 
             <div className="home-compact-testimonials">
-              {testimonials.map((t) => (
-                <blockquote key={t.name} className="home-compact-testimonial">
+              {testimonials.map((t, i) => (
+                <blockquote 
+                  key={t.name} 
+                  className={`home-compact-testimonial ${proofAnimation.isInView ? 'animate-fade-in-blur' : ''}`}
+                  style={{ animationDelay: `${0.4 + (i * 0.2)}s`, opacity: proofAnimation.isInView ? undefined : 0 }}
+                >
                   <p>{t.body}</p>
                   <footer>
                     <strong>{t.name}</strong>
                     <span>{t.role}</span>
                   </footer>
+                  <div className="home-compact-testimonial__ambient-glow" />
                 </blockquote>
               ))}
             </div>
@@ -359,27 +348,61 @@ export function HomePage() {
             <p className="animate-slide-up" style={{ animationDelay: '0.4s' }}>複数ツールを行き来する無駄を排除し、情報収集から出力までを美しい一本のパイプラインに。</p>
           </div>
 
-          <div className="home-compact-flow" ref={flowAnimation.ref}>
-            <ul className="home-compact-flow__list-detailed" aria-label="制作フロー詳細">
-              {flowSteps.map((item, index) => (
-                <li 
-                  key={item.label} 
-                  className={`home-compact-flow__card ${flowAnimation.isInView ? 'animate-slide-up' : ''}`} 
-                  style={{ animationDelay: `${0.2 + (index * 0.15)}s`, opacity: flowAnimation.isInView ? undefined : 0 }}
-                >
-                  <div className="home-compact-flow__card-glow" />
-                  <div className="home-compact-flow__step-num layout-flex-center">0{index + 1}</div>
-                  <div className="home-compact-flow__icon-wrap">
-                    <img src={item.icon} alt="" className="home-compact-flow__icon" loading="lazy" />
+          <div className="home-interactive-flow-container" ref={flowAnimation.ref}>
+            {/* Left: Interactive Tabs */}
+            <div className="home-interactive-flow__tabs">
+              {flowSteps.map((item, index) => {
+                const isActive = activeFlowStep === index;
+                return (
+                  <button
+                    key={item.label}
+                    onClick={() => setActiveFlowStep(index)}
+                    className={`home-interactive-flow__tab ${isActive ? 'is-active' : ''} ${flowAnimation.isInView ? 'animate-slide-right' : ''}`}
+                    style={{ animationDelay: `${0.1 + (index * 0.1)}s`, opacity: flowAnimation.isInView ? undefined : 0 }}
+                    aria-selected={isActive}
+                  >
+                    <div className="home-interactive-flow__tab-glow" />
+                    <span className="home-interactive-flow__tab-num">0{index + 1}</span>
+                    <div className="home-interactive-flow__tab-content">
+                      <h3>{item.label}</h3>
+                      <p>{item.desc}</p>
+                    </div>
+                    {isActive && <div className="home-interactive-flow__tab-active-indicator" />}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Right: Dynamic Multimedia/Video Mockup Dashboard */}
+            <div className={`home-interactive-flow__visual ${flowAnimation.isInView ? 'animate-scale-up-glow' : ''}`}>
+              <div className="home-interactive-flow__mockup">
+                <div className="home-interactive-flow__mockup-header">
+                  <span className="dot dot-r" />
+                  <span className="dot dot-y" />
+                  <span className="dot dot-g" />
+                  <div className="mockup-header-title">{flowSteps[activeFlowStep].label}</div>
+                </div>
+                <div className="home-interactive-flow__mockup-screen">
+                  {/* Highly demanded animated interactive video placeholder for the showcase */}
+                  <video 
+                    key={activeFlowStep}
+                    src={flowSteps[activeFlowStep].mockupVideo} 
+                    autoPlay loop muted playsInline 
+                    className="home-interactive-flow__video"
+                  />
+                  
+                  {/* Abstract data processing overlay animation to prove "animation & software" */}
+                  <div className="mockup-tech-overlay">
+                    <div className="mockup-tech-scanner" />
+                    <div className="mockup-tech-stats">
+                      <span>Status: ACTIVE</span>
+                      <span>Processing {flowSteps[activeFlowStep].label}...</span>
+                      <span className="mockup-stat-highlight">{flowSteps[activeFlowStep].stat}</span>
+                    </div>
                   </div>
-                  <div className="home-compact-flow__card-content">
-                    <h3>{item.label}</h3>
-                    <p>{item.desc}</p>
-                    <span className="home-compact-flow__badge">{item.stat}</span>
-                  </div>
-                </li>
-              ))}
-            </ul>
+                </div>
+              </div>
+            </div>
           </div>
         </Section>
 
