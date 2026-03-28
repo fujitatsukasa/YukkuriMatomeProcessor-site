@@ -223,19 +223,22 @@ export function HomePage() {
 
   const [activeFlowStep, setActiveFlowStep] = useState(0)
   const [progressKey, setProgressKey] = useState(0)
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true)
 
   // ━━━[ Auto Carousel Logic ]━━━
   useEffect(() => {
+    if (!isAutoPlaying) return
     const timer = setInterval(() => {
       setActiveFlowStep((prev) => (prev + 1) % flowSteps.length)
       setProgressKey((k) => k + 1) // Trigger progress bar reset
     }, 6000)
     return () => clearInterval(timer)
-  }, [activeFlowStep])
+  }, [activeFlowStep, isAutoPlaying])
 
   const handleTabClick = (index: number) => {
     setActiveFlowStep(index)
     setProgressKey((k) => k + 1)
+    setIsAutoPlaying(false) // ユーザーが触ったら勝手に動くのを完全停止
   }
 
   return (
@@ -341,8 +344,8 @@ export function HomePage() {
                     className={`home-interactive-flow__tab ${isActive ? 'is-active' : ''}`}
                     aria-selected={isActive}
                   >
-                    {/* Linear/Stripe style animated progress track */}
-                    <div className="home-interactive-flow__tab-bg-progress" key={isActive ? progressKey : `${item.label}-inactive`} />
+                    {/* Progress track, stops when clicked manually */}
+                    <div className="home-interactive-flow__tab-bg-progress" key={isActive && isAutoPlaying ? progressKey : `${item.label}-inactive`} />
                     <div className="home-interactive-flow__tab-glow" />
                     <span className="home-interactive-flow__tab-num">0{index + 1}</span>
                     <div className="home-interactive-flow__tab-content">
@@ -366,7 +369,7 @@ export function HomePage() {
                   </div>
                 </div>
                 
-                <div className="home-interactive-flow__mockup-screen" key={activeFlowStep}>
+                <div className="home-interactive-flow__mockup-screen">
                   {/* Bespoke interactive UI rendering based on the active step */}
                   {flowSteps[activeFlowStep].mockupType === 'terminal' && (
                     <div className="mockup-ui-terminal">
