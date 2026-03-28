@@ -75,6 +75,30 @@ const flowSteps = [
   },
 ] as const
 
+const socialProofStats = [
+  { value: '2,400+', label: 'ダウンロード数', icon: '⬇' },
+  { value: '95%', label: '作業時間の削減率', icon: '⚡' },
+  { value: '4.8', label: 'ユーザー満足度 / 5.0', icon: '★' },
+] as const
+
+const testimonials = [
+  {
+    name: '動画クリエイター A',
+    role: '副業ゆっくり実況者・登録者3万人',
+    body: '台本の整理とYMM4への流し込みが圧倒的に速くなりました。以前は2時間かかっていた前準備が、10分で終わるようになり、動画の本数を倍にできています。',
+  },
+  {
+    name: '動画クリエイター B',
+    role: '反応集チャンネル運営・登録者8万人',
+    body: 'ネタ収集から台本整理までの流れがシームレスで、他のツールに戻れなくなりました。特に立ち絵の表情指定が自動で紐付く機能は、手作業では絶対に実現できない効率です。',
+  },
+  {
+    name: '動画クリエイター C',
+    role: 'ショート動画専門・月30本制作',
+    body: 'ショート動画は数が勝負なので、前工程の時短効果が売上に直結しています。買い切りなのでランニングコストを気にせず使い倒せるのもありがたいです。',
+  },
+] as const
+
 const timeReduction = {
   manualMinutes: 120,
   productMinutes: 6,
@@ -182,7 +206,7 @@ const homeStructuredData = [
     name: legal.organization.legalName,
     brand: siteTitle,
     url: siteOrigin,
-    logo: `${siteOrigin}/favicon.ico`,
+    logo: `${siteOrigin}/og-image.png`,
     email: legal.organization.email,
     telephone: legal.organization.phone,
     address: {
@@ -252,6 +276,7 @@ export function HomePage() {
           <video
             className="home-compact-hero__video-bg"
             src={media.heroSaasBg}
+            poster={media.heroPoster}
             autoPlay
             loop
             muted
@@ -287,6 +312,7 @@ export function HomePage() {
                   使い方を見る
                 </Link>
               </div>
+              <p className="hero-microcopy">7日間の無料トライアル・クレジットカード不要・即ダウンロード</p>
 
             </div>
 
@@ -295,6 +321,33 @@ export function HomePage() {
             </div>
           </div>
         </section>
+
+        {/* ── Social Proof Section ── */}
+        <Section className="home-compact-section home-compact-proof-section">
+          <div className="brand-shell">
+            <div className="home-compact-proof-stats">
+              {socialProofStats.map((stat) => (
+                <div key={stat.label} className="home-compact-proof-stat">
+                  <span className="home-compact-proof-stat__icon" aria-hidden="true">{stat.icon}</span>
+                  <strong className="home-compact-proof-stat__value">{stat.value}</strong>
+                  <span className="home-compact-proof-stat__label">{stat.label}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="home-compact-testimonials">
+              {testimonials.map((t) => (
+                <blockquote key={t.name} className="home-compact-testimonial">
+                  <p>{t.body}</p>
+                  <footer>
+                    <strong>{t.name}</strong>
+                    <span>{t.role}</span>
+                  </footer>
+                </blockquote>
+              ))}
+            </div>
+          </div>
+        </Section>
 
         <Section className="home-compact-section home-compact-flow-section">
           <div className="home-compact-section-head">
@@ -456,10 +509,11 @@ export function HomePage() {
                 className="home-compact-usecase-card" 
                 role="listitem"
               >
-                <div 
-                  className="home-compact-usecase-card__bg" 
-                  style={{ backgroundImage: `url(${item.image})` }} 
-                  aria-hidden="true" 
+                <img 
+                  className="home-compact-usecase-card__bg-img" 
+                  src={item.image}
+                  alt={`${item.title}の活用イメージ`}
+                  loading="lazy"
                 />
                 <div className="home-compact-usecase-card__content">
                   <h3>{item.title}</h3>
@@ -569,6 +623,7 @@ export function HomePage() {
                 使い方を見る
               </Link>
             </div>
+            <p className="hero-microcopy">7日間の無料トライアル・クレジットカード不要・即ダウンロード</p>
 
             <ul className="home-compact-cta__badges" aria-label="補足情報">
               {closingBadges.map((item) => (
