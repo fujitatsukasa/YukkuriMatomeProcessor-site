@@ -3884,10 +3884,11 @@ html {
 
 .home-compact-section {
   position: relative;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: clamp(12px, 1.5vh, 24px) 0;
+  justify-content: stretch;
+  padding: clamp(32px, 3vh, 48px) 0;
 }
 
 .home-compact-section::before {
@@ -3956,6 +3957,55 @@ html {
 
 .home-compact-section-head {
   margin-bottom: clamp(0.5rem, 1vh, 1rem) !important;
+  flex-shrink: 0;
+  flex-grow: 0 !important;
+}
+
+.bg-marquee-container {
+  flex-grow: 0 !important;
+}
+
+/* Ensure the main blocks take up the rest of the vertical screen estate */
+.chart-dashboard,
+.home-compact-flow,
+.product-demo,
+.home-compact-proof-section > .brand-shell {
+  display: flex !important;
+  flex-direction: column !important;
+  flex-grow: 1 !important;
+  justify-content: stretch !important;
+}
+
+/* Force internal containers to actually stretch their contents to eliminate dead vertical space */
+.chart-dashboard__inner {
+  display: flex !important;
+  flex-direction: column !important;
+  flex-grow: 1 !important;
+  justify-content: space-evenly !important;
+}
+
+/* Keep grid elements as grids, but allow them to expand vertically to fill the layout */
+.home-compact-flow__list-detailed,
+.home-compact-testimonials,
+.home-compact-proof-stats {
+  flex-grow: 1 !important;
+  align-content: center !important; /* Centers grid content within the newly expanded height */
+}
+
+/* For dashboards and flex containers with rows, ensure the rows stretch vertically too */
+.chart-dashboard__rows {
+  display: flex !important;
+  flex-direction: column !important;
+  flex-grow: 1 !important;
+  justify-content: space-evenly !important;
+}
+
+/* Allow individual cards to absorb extra space if needed, or simply let space-evenly separate them perfectly */
+.chart-dashboard__row,
+.home-compact-flow__card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .home-compact-hero__copy > * {
