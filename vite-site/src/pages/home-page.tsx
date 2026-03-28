@@ -42,12 +42,13 @@ function AnimatedNumber({ value, active, suffix = '' }: { value: number; active:
   return <span className="animated-number">{display}{suffix}</span>
 }
 
+// ━━━[ Flow Steps (Dynamic Multimedia Interactive Version) ]━━━
 const flowSteps = [
-  { label: 'ネタ収集', stat: '速度 +400%', desc: '複数サイトから情報を収集・抽出。ワンクリックでストックへ。', icon: 'https://cdn-icons-png.flaticon.com/512/814/814867.png', mockupVideo: 'https://cdn.dribbble.com/uploads/39417/original/49dbf46eae15d227fc95a69cee31251e.mp4?1657824906' },
-  { label: '台本作成', stat: '精度 98.5%', desc: '集めたネタのノイズを除去し、一本の自然な文章へ強力に再構築。', icon: 'https://cdn-icons-png.flaticon.com/512/2921/2921136.png', mockupVideo: 'https://cdn.dribbble.com/uploads/39417/original/49dbf46eae15d227fc95a69cee31251e.mp4?1657824906' },
-  { label: '会話台本', stat: '自動配役化', desc: '説明役と補足役の掛け合い形式へ自動変換。キャラ設定を即反映。', icon: 'https://cdn-icons-png.flaticon.com/512/9373/9373973.png', mockupVideo: 'https://cdn.dribbble.com/uploads/39417/original/49dbf46eae15d227fc95a69cee31251e.mp4?1657824906' },
-  { label: '素材整理', stat: 'ミス率 0%', desc: '立ち絵の表情指定や音声トーン指示をセリフと紐付けて完全一元管理。', icon: 'https://cdn-icons-png.flaticon.com/512/3208/3208696.png', mockupVideo: 'https://cdn.dribbble.com/uploads/39417/original/49dbf46eae15d227fc95a69cee31251e.mp4?1657824906' },
-  { label: 'YMM4準備', stat: '直結出力', desc: 'ゆっくりムービーメーカー4へそのまま読み込める形式で即出力。', icon: 'https://cdn-icons-png.flaticon.com/512/4798/4798781.png', mockupVideo: 'https://cdn.dribbble.com/uploads/39417/original/49dbf46eae15d227fc95a69cee31251e.mp4?1657824906' },
+  { label: 'ネタ収集', stat: '速度 +400%', desc: '複数サイトから情報を収集・抽出。ワンクリックでストックへ。', icon: 'https://cdn-icons-png.flaticon.com/512/814/814867.png', mockupType: 'terminal' },
+  { label: '台本作成', stat: '精度 98.5%', desc: '集めたネタのノイズを除去し、一本の自然な文章へ強力に再構築。', icon: 'https://cdn-icons-png.flaticon.com/512/2921/2921136.png', mockupType: 'script-ai' },
+  { label: '会話台本', stat: '自動配役化', desc: '説明役と補足役の掛け合い形式へ自動変換。キャラ設定を即反映。', icon: 'https://cdn-icons-png.flaticon.com/512/9373/9373973.png', mockupType: 'casting' },
+  { label: '素材整理', stat: 'ミス率 0%', desc: '立ち絵の表情指定や音声トーン指示をセリフと紐付けて完全一元管理。', icon: 'https://cdn-icons-png.flaticon.com/512/3208/3208696.png', mockupType: 'assets' },
+  { label: 'YMM4準備', stat: '直結出力', desc: 'ゆっくりムービーメーカー4へそのまま読み込める形式で即出力。', icon: 'https://cdn-icons-png.flaticon.com/512/4798/4798781.png', mockupType: 'export' },
 ] as const
 
 const socialProofStats = [
@@ -237,6 +238,21 @@ export function HomePage() {
   const proofAnimation = useInView({ threshold: 0.2 })
 
   const [activeFlowStep, setActiveFlowStep] = useState(0)
+  const [progressKey, setProgressKey] = useState(0)
+
+  // ━━━[ Auto Carousel Logic ]━━━
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveFlowStep((prev) => (prev + 1) % flowSteps.length)
+      setProgressKey((k) => k + 1) // Trigger progress bar reset
+    }, 6000)
+    return () => clearInterval(timer)
+  }, [activeFlowStep])
+
+  const handleTabClick = (index: number) => {
+    setActiveFlowStep(index)
+    setProgressKey((k) => k + 1)
+  }
 
   return (
     <>
@@ -307,7 +323,7 @@ export function HomePage() {
                 <div 
                   key={stat.label} 
                   className={`home-compact-proof-stat ${proofAnimation.isInView ? 'animate-slide-up-glow' : ''}`}
-                  style={{ animationDelay: `${i * 0.15}s`, opacity: proofAnimation.isInView ? undefined : 0 }}
+                  style={{ animationDelay: `${i * 0.15}s` }}
                 >
                   <span className="home-compact-proof-stat__icon" aria-hidden="true">{stat.icon}</span>
                   <div className="home-compact-proof-stat__value">
@@ -324,7 +340,7 @@ export function HomePage() {
                 <blockquote 
                   key={t.name} 
                   className={`home-compact-testimonial ${proofAnimation.isInView ? 'animate-fade-in-blur' : ''}`}
-                  style={{ animationDelay: `${0.4 + (i * 0.2)}s`, opacity: proofAnimation.isInView ? undefined : 0 }}
+                  style={{ animationDelay: `${0.4 + (i * 0.2)}s` }}
                 >
                   <p>{t.body}</p>
                   <footer>
@@ -356,18 +372,19 @@ export function HomePage() {
                 return (
                   <button
                     key={item.label}
-                    onClick={() => setActiveFlowStep(index)}
+                    onClick={() => handleTabClick(index)}
                     className={`home-interactive-flow__tab ${isActive ? 'is-active' : ''} ${flowAnimation.isInView ? 'animate-slide-right' : ''}`}
-                    style={{ animationDelay: `${0.1 + (index * 0.1)}s`, opacity: flowAnimation.isInView ? undefined : 0 }}
+                    style={{ animationDelay: `${0.1 + (index * 0.1)}s` }}
                     aria-selected={isActive}
                   >
+                    {/* Linear/Stripe style animated progress track */}
+                    <div className="home-interactive-flow__tab-bg-progress" key={isActive ? progressKey : `${item.label}-inactive`} />
                     <div className="home-interactive-flow__tab-glow" />
                     <span className="home-interactive-flow__tab-num">0{index + 1}</span>
                     <div className="home-interactive-flow__tab-content">
                       <h3>{item.label}</h3>
                       <p>{item.desc}</p>
                     </div>
-                    {isActive && <div className="home-interactive-flow__tab-active-indicator" />}
                   </button>
                 );
               })}
@@ -380,25 +397,88 @@ export function HomePage() {
                   <span className="dot dot-r" />
                   <span className="dot dot-y" />
                   <span className="dot dot-g" />
-                  <div className="mockup-header-title">{flowSteps[activeFlowStep].label}</div>
+                  <div className="mockup-header-search">
+                    <span className="mockup-header-lock">🔒</span> processor.dev/{flowSteps[activeFlowStep].mockupType}
+                  </div>
                 </div>
-                <div className="home-interactive-flow__mockup-screen">
-                  {/* Highly demanded animated interactive video placeholder for the showcase */}
-                  <video 
-                    key={activeFlowStep}
-                    src={flowSteps[activeFlowStep].mockupVideo} 
-                    autoPlay loop muted playsInline 
-                    className="home-interactive-flow__video"
-                  />
-                  
-                  {/* Abstract data processing overlay animation to prove "animation & software" */}
+                
+                <div className="home-interactive-flow__mockup-screen" key={activeFlowStep}>
+                  {/* Bespoke interactive UI rendering based on the active step */}
+                  {flowSteps[activeFlowStep].mockupType === 'terminal' && (
+                    <div className="mockup-ui-terminal">
+                      <div className="term-line animate-type">~$ python scrape_sources.py --target all</div>
+                      <div className="term-line animate-type delay-1">[INFO] Connecting to 5-ch index nodes...</div>
+                      <div className="term-line animate-type delay-2">[SUCCESS] Fetched 1,024 threads. Extracting keywords...</div>
+                      <div className="term-line term-heavy animate-block delay-3">
+                        <span className="term-highlight">Extracted 42 hot topics. Saving to database.</span>
+                        <div className="term-progress"><div className="term-progress-bar"></div></div>
+                      </div>
+                    </div>
+                  )}
+
+                  {flowSteps[activeFlowStep].mockupType === 'script-ai' && (
+                    <div className="mockup-ui-script">
+                      <div className="mockup-ui-sidebar">
+                        <div className="mockup-ui-skeleton-line short"></div>
+                        <div className="mockup-ui-skeleton-line"></div>
+                        <div className="mockup-ui-skeleton-line short"></div>
+                      </div>
+                      <div className="mockup-ui-editor">
+                        <div className="editor-prompt">Extract pure narrative from raw logs...</div>
+                        <div className="editor-result animate-reveal-text">
+                          <p>この部分は完全にノイズであるため削除し、話題の核心である「なぜ価格が高騰したのか」という結論に文脈を繋げました。</p>
+                          <br/>
+                          <p className="editor-highlight-block">✨ <strong>AI Analysis:</strong> 自然な導入部分として再構成が完了しました。整合性スコア: 98.5%</p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {flowSteps[activeFlowStep].mockupType === 'casting' && (
+                    <div className="mockup-ui-casting">
+                      <div className="cast-card animate-slide-in">
+                        <div className="cast-avatar reida"></div>
+                        <div className="cast-dialogue">こんにちは。今回のテーマは「価格高騰の裏側」ね。</div>
+                      </div>
+                      <div className="cast-card right animate-slide-in delay-1">
+                        <div className="cast-avatar marisa"></div>
+                        <div className="cast-dialogue">ふむふむ、一体どんなカラクリが 숨されているか気になるぜ！</div>
+                      </div>
+                      <div className="cast-card animate-slide-in delay-2">
+                        <div className="cast-avatar reida"></div>
+                        <div className="cast-dialogue">実は、需給バランスの崩壊と...</div>
+                      </div>
+                    </div>
+                  )}
+
+                  {flowSteps[activeFlowStep].mockupType === 'assets' && (
+                    <div className="mockup-ui-assets">
+                      <div className="asset-grid">
+                        {[1,2,3,4,5,6,7,8].map((i) => (
+                          <div key={i} className={`asset-item animate-pop delay-${i % 4}`}>
+                            <div className="asset-thumb"></div>
+                            <div className="asset-label">Expression_{i}</div>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="asset-floating-chip animate-float">YMM4 Link Active</div>
+                    </div>
+                  )}
+
+                  {flowSteps[activeFlowStep].mockupType === 'export' && (
+                    <div className="mockup-ui-export">
+                      <div className="export-circle animate-spin-pulse"></div>
+                      <div className="export-text animate-type delay-1">Generating YMM4 Timeline...</div>
+                      <div className="export-status animate-fade-in delay-3">
+                        <span className="status-badge green">READY</span>
+                        Build Complete. Drag & Drop into YMM4.
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Glassmorphic Tech Overlay for SaaS feel */}
                   <div className="mockup-tech-overlay">
                     <div className="mockup-tech-scanner" />
-                    <div className="mockup-tech-stats">
-                      <span>Status: ACTIVE</span>
-                      <span>Processing {flowSteps[activeFlowStep].label}...</span>
-                      <span className="mockup-stat-highlight">{flowSteps[activeFlowStep].stat}</span>
-                    </div>
                   </div>
                 </div>
               </div>
