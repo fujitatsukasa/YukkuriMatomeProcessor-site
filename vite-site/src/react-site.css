@@ -3883,7 +3883,7 @@ html {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: clamp(64px, 5vw, 104px) 0;
+  padding: clamp(32px, 3vh, 48px) 0;
 }
 
 .home-compact-section::before {
@@ -3908,7 +3908,7 @@ html {
 }
 
 .home-compact-section > * {
-  width: min(1180px, calc(100% - 48px));
+  width: min(1400px, calc(100% - 24px));
   margin-inline: auto;
 }
 
