@@ -301,25 +301,18 @@ export function HomePage() {
         </section>
 
         <Section className="home-compact-section home-compact-proof-section">
-          <div className="ambient-orbs-container" aria-hidden="true">
-            <div className="ambient-orb orb-1"></div>
-            <div className="ambient-orb orb-2"></div>
-          </div>
           <div className="brand-shell" ref={proofAnimation.ref}>
             <div className="home-compact-proof-stats">
-              {socialProofStats.map((stat, i) => (
+              {socialProofStats.map((stat) => (
                 <div 
                   key={stat.label} 
-                  className={`rotating-border-card home-compact-proof-stat ${proofAnimation.isInView ? 'animate-slide-up-glow' : ''}`}
-                  style={{ animationDelay: `${i * 0.15}s` }}
+                  className="home-compact-proof-stat"
                 >
-                  <div className="rotating-border-card__inner">
-                    <span className="home-compact-proof-stat__icon" aria-hidden="true">{stat.icon}</span>
-                    <div className="home-compact-proof-stat__value text-shimmer-continuous">
-                      <AnimatedNumber value={parseInt(stat.value.replace(/[^0-9]/g, ''))} active={proofAnimation.isInView} suffix={stat.value.replace(/[0-9]/g, '')} />
-                    </div>
-                    <span className="home-compact-proof-stat__label">{stat.label}</span>
+                  <span className="home-compact-proof-stat__icon" aria-hidden="true">{stat.icon}</span>
+                  <div className="home-compact-proof-stat__value">
+                    <AnimatedNumber value={parseInt(stat.value.replace(/[^0-9]/g, ''))} active={true} suffix={stat.value.replace(/[0-9]/g, '')} />
                   </div>
+                  <span className="home-compact-proof-stat__label">{stat.label}</span>
                 </div>
               ))}
             </div>
@@ -345,8 +338,7 @@ export function HomePage() {
                   <button
                     key={item.label}
                     onClick={() => handleTabClick(index)}
-                    className={`home-interactive-flow__tab ${isActive ? 'is-active' : ''} ${flowAnimation.isInView ? 'animate-slide-right' : ''}`}
-                    style={{ animationDelay: `${0.1 + (index * 0.1)}s` }}
+                    className={`home-interactive-flow__tab ${isActive ? 'is-active' : ''}`}
                     aria-selected={isActive}
                   >
                     {/* Linear/Stripe style animated progress track */}
@@ -363,7 +355,7 @@ export function HomePage() {
             </div>
 
             {/* Right: Dynamic Multimedia/Video Mockup Dashboard */}
-            <div className={`home-interactive-flow__visual ${flowAnimation.isInView ? 'animate-scale-up-glow' : ''}`}>
+            <div className="home-interactive-flow__visual">
               <div className="home-interactive-flow__mockup">
                 <div className="home-interactive-flow__mockup-header">
                   <span className="dot dot-r" />
