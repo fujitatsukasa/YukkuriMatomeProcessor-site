@@ -370,13 +370,12 @@ export function HomePage() {
                 </div>
                 
                 <div className="home-interactive-flow__mockup-screen">
-                  {/* Bespoke interactive UI rendering based on the active step */}
                   {flowSteps[activeFlowStep].mockupType === 'terminal' && (
                     <div className="mockup-ui-terminal">
-                      <div className="term-line animate-type">~$ python scrape_sources.py --target all</div>
-                      <div className="term-line animate-type delay-1">[INFO] Connecting to 5-ch index nodes...</div>
-                      <div className="term-line animate-type delay-2">[SUCCESS] Fetched 1,024 threads. Extracting keywords...</div>
-                      <div className="term-line term-heavy animate-block delay-3">
+                      <div className="term-line">~$ python scrape_sources.py --target all</div>
+                      <div className="term-line">[INFO] Connecting to 5-ch index nodes...</div>
+                      <div className="term-line">[SUCCESS] Fetched 1,024 threads. Extracting keywords...</div>
+                      <div className="term-line term-heavy">
                         <span className="term-highlight">Extracted 42 hot topics. Saving to database.</span>
                         <div className="term-progress"><div className="term-progress-bar"></div></div>
                       </div>
@@ -392,7 +391,7 @@ export function HomePage() {
                       </div>
                       <div className="mockup-ui-editor">
                         <div className="editor-prompt">Extract pure narrative from raw logs...</div>
-                        <div className="editor-result animate-reveal-text">
+                        <div className="editor-result">
                           <p>この部分は完全にノイズであるため削除し、話題の核心である「なぜ価格が高騰したのか」という結論に文脈を繋げました。</p>
                           <br/>
                           <p className="editor-highlight-block">✨ <strong>AI Analysis:</strong> 自然な導入部分として再構成が完了しました。整合性スコア: 98.5%</p>
@@ -403,15 +402,15 @@ export function HomePage() {
 
                   {flowSteps[activeFlowStep].mockupType === 'casting' && (
                     <div className="mockup-ui-casting">
-                      <div className="cast-card animate-slide-in">
+                      <div className="cast-card">
                         <div className="cast-avatar reida"></div>
                         <div className="cast-dialogue">こんにちは。今回のテーマは「価格高騰の裏側」ね。</div>
                       </div>
-                      <div className="cast-card right animate-slide-in delay-1">
+                      <div className="cast-card right">
                         <div className="cast-avatar marisa"></div>
-                        <div className="cast-dialogue">ふむふむ、一体どんなカラクリが 숨されているか気になるぜ！</div>
+                        <div className="cast-dialogue">ふむふむ、一体どんなカラクリが隠されているか気になるぜ！</div>
                       </div>
-                      <div className="cast-card animate-slide-in delay-2">
+                      <div className="cast-card">
                         <div className="cast-avatar reida"></div>
                         <div className="cast-dialogue">実は、需給バランスの崩壊と...</div>
                       </div>
@@ -422,7 +421,7 @@ export function HomePage() {
                     <div className="mockup-ui-assets">
                       <div className="asset-grid">
                         {[1,2,3,4,5,6,7,8].map((i) => (
-                          <div key={i} className={`asset-item animate-pop delay-${i % 4}`}>
+                          <div key={i} className="asset-item">
                             <div className="asset-thumb"></div>
                             <div className="asset-label">Expression_{i}</div>
                           </div>
