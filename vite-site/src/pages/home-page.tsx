@@ -57,23 +57,7 @@ const socialProofStats = [
   { value: '4.8', label: 'ユーザー満足度 / 5.0', icon: '★' },
 ] as const
 
-const testimonials = [
-  {
-    name: '動画クリエイター A',
-    role: '副業ゆっくり実況者・登録者3万人',
-    body: '台本の整理とYMM4への流し込みが圧倒的に速くなりました。以前は2時間かかっていた前準備が、10分で終わるようになり、動画の本数を倍にできています。',
-  },
-  {
-    name: '動画クリエイター B',
-    role: '反応集チャンネル運営・登録者8万人',
-    body: 'ネタ収集から台本整理までの流れがシームレスで、他のツールに戻れなくなりました。特に立ち絵の表情指定が自動で紐付く機能は、手作業では絶対に実現できない効率です。',
-  },
-  {
-    name: '動画クリエイター C',
-    role: 'ショート動画専門・月30本制作',
-    body: 'ショート動画は数が勝負なので、前工程の時短効果が売上に直結しています。買い切りなのでランニングコストを気にせず使い倒せるのもありがたいです。',
-  },
-] as const
+
 
 const timeReduction = {
   manualMinutes: 120,
@@ -317,38 +301,26 @@ export function HomePage() {
         </section>
 
         <Section className="home-compact-section home-compact-proof-section">
+          <div className="ambient-orbs-container" aria-hidden="true">
+            <div className="ambient-orb orb-1"></div>
+            <div className="ambient-orb orb-2"></div>
+          </div>
           <div className="brand-shell" ref={proofAnimation.ref}>
             <div className="home-compact-proof-stats">
               {socialProofStats.map((stat, i) => (
                 <div 
                   key={stat.label} 
-                  className={`home-compact-proof-stat ${proofAnimation.isInView ? 'animate-slide-up-glow' : ''}`}
+                  className={`rotating-border-card home-compact-proof-stat ${proofAnimation.isInView ? 'animate-slide-up-glow' : ''}`}
                   style={{ animationDelay: `${i * 0.15}s` }}
                 >
-                  <span className="home-compact-proof-stat__icon" aria-hidden="true">{stat.icon}</span>
-                  <div className="home-compact-proof-stat__value">
-                    <AnimatedNumber value={parseInt(stat.value.replace(/[^0-9]/g, ''))} active={proofAnimation.isInView} suffix={stat.value.replace(/[0-9]/g, '')} />
+                  <div className="rotating-border-card__inner">
+                    <span className="home-compact-proof-stat__icon" aria-hidden="true">{stat.icon}</span>
+                    <div className="home-compact-proof-stat__value text-shimmer-continuous">
+                      <AnimatedNumber value={parseInt(stat.value.replace(/[^0-9]/g, ''))} active={proofAnimation.isInView} suffix={stat.value.replace(/[0-9]/g, '')} />
+                    </div>
+                    <span className="home-compact-proof-stat__label">{stat.label}</span>
                   </div>
-                  <span className="home-compact-proof-stat__label">{stat.label}</span>
-                  <div className="home-compact-proof-stat__sparkle" />
                 </div>
-              ))}
-            </div>
-
-            <div className="home-compact-testimonials">
-              {testimonials.map((t, i) => (
-                <blockquote 
-                  key={t.name} 
-                  className={`home-compact-testimonial ${proofAnimation.isInView ? 'animate-fade-in-blur' : ''}`}
-                  style={{ animationDelay: `${0.4 + (i * 0.2)}s` }}
-                >
-                  <p>{t.body}</p>
-                  <footer>
-                    <strong>{t.name}</strong>
-                    <span>{t.role}</span>
-                  </footer>
-                  <div className="home-compact-testimonial__ambient-glow" />
-                </blockquote>
               ))}
             </div>
           </div>
