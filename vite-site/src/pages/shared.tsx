@@ -103,8 +103,8 @@ export function ProductDemoTabs({ className = '', compact = false }: ProductDemo
         ))}
       </div>
 
-      <div className="product-demo__panel-container" style={{ position: 'relative', display: 'grid', zIndex: 1, minHeight: 'clamp(340px, 55vh, 500px)', width: '100%' }}>
-        <AnimatePresence mode="popLayout" initial={false}>
+      <div className="product-demo__panel-container" style={{ position: 'relative', display: 'grid', zIndex: 1, width: '100%' }}>
+        <AnimatePresence mode="wait" initial={false}>
           <motion.div 
             key={activeView.key}
             className="product-demo__panel" 

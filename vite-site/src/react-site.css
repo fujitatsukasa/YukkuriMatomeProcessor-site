@@ -3911,28 +3911,6 @@ html {
   pointer-events: none;
 }
 
-/* ═══[ ABSOLUTE 1-SCREEN CONSTRAINT ]═══
-   height (not min-height) + overflow:hidden = physically impossible to exceed 1 viewport.
-   All children use flex-shrink to compress into available space. */
-.home-compact-section {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: calc(100svh - 76px);
-  max-height: calc(100svh - 76px);
-  overflow: hidden;
-  scroll-margin-top: 76px;
-  padding-block: clamp(1.5rem, 3vh, 3rem) !important;
-  box-sizing: border-box;
-}
-
-/* All direct children shrink to fit; never push the section taller */
-.home-compact-section > * {
-  width: min(1180px, calc(100% - 48px));
-  margin-inline: auto;
-  flex-shrink: 1;
-  min-height: 0;
-}
 
 .home-compact-hero__video-bg {
   position: absolute;
@@ -4331,6 +4309,7 @@ html {
 
 .home-compact-hero__media {
   display: grid;
+  align-self: start;
   filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.4));
   animation: compact-panel-float 7.4s ease-in-out infinite;
 }
@@ -9034,6 +9013,7 @@ html {
     transparent 40%
   );
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
