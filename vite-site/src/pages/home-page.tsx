@@ -300,8 +300,8 @@ export function HomePage() {
 
           <div className="hero-massive-title-container">
             <h1 className="hero-massive-title">
-              <span className="text-rotator" style={{ display: 'inline-block', verticalAlign: 'text-bottom' }}>
-                <span className="text-rotator__inner" style={{ alignItems: 'center' }}>
+              <span className="text-rotator">
+                <span className="text-rotator__inner">
                   <span className="text-glow-green">【反応集】</span>
                   <span className="text-glow-gold">【ゆっくり解説】</span>
                   <span className="text-glow-blue">【ショート動画】</span>
@@ -356,12 +356,21 @@ export function HomePage() {
         </section>
 
         <Section className="home-compact-section home-compact-flow-section">
+          {/* Parallax Section Background */}
+          <div style={{
+            position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
+            backgroundImage: "url('/section_bg_features.png')",
+            backgroundSize: 'cover', backgroundPosition: 'center',
+            opacity: 0.15, mixBlendMode: 'screen'
+          }} />
+
           <motion.div 
             className="home-compact-section-head"
             variants={SECTION_HEAD_VARIANTS}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-10%" }}
+            style={{ position: 'relative', zIndex: 1 }}
           >
             <p className="brand-kicker">Features</p>
             <h2 style={{ whiteSpace: 'nowrap' }}>
@@ -627,12 +636,21 @@ export function HomePage() {
         </motion.div>
 
         <Section alt className="home-compact-section home-compact-usecase-section">
+          {/* Parallax Section Background */}
+          <div style={{
+            position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
+            backgroundImage: "url('/section_bg_flow.png')",
+            backgroundSize: 'cover', backgroundPosition: 'center',
+            opacity: 0.15, mixBlendMode: 'screen'
+          }} />
+
           <motion.div 
             className="home-compact-section-head" 
             variants={SECTION_HEAD_VARIANTS}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-10%" }}
+            style={{ position: 'relative', zIndex: 1 }}
           >
             <p className="brand-kicker">Use Cases</p>
             <h2><span className="text-glow-green">反応集・ゆっくり解説</span>・ショート動画に対応</h2>
