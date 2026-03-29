@@ -3965,6 +3965,17 @@ html {
   text-align: center;
 }
 
+.home-compact-section-head h2 {
+  font-family: var(--display);
+  font-size: clamp(2rem, 4.5vw, 3.8rem); /* Re-established massive section headings */
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  line-height: 1.25;
+  margin: 0 0 0.8rem 0;
+  color: var(--ink);
+  text-align: center;
+}
+
 .bg-marquee-container {
   flex-grow: 0 !important;
 }
@@ -4002,10 +4013,11 @@ html {
 
 .hero-massive-title {
   margin: 0;
-  font-size: clamp(2.4rem, 6.5vw, 5rem); /* Re-scaled to be more massive and fill screen safely */
-  font-weight: 900;
-  line-height: 1.1; /* Restored breathing room */
-  letter-spacing: -0.04em;
+  font-family: var(--display); /* Ensuring brand system cohesion */
+  font-size: clamp(2.4rem, 6.5vw, 5rem);
+  font-weight: 800; /* Aligned with standard SaaS extra-bold */
+  line-height: 1.1;
+  letter-spacing: 0.02em; /* Unified letter-spacing instead of cramped -0.04em */
   color: #fff;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   text-align: center;
@@ -4097,9 +4109,9 @@ html {
   isolation: isolate;
   overflow: visible;
   padding: 18px 36px;
-  font-family: "Noto Sans JP", var(--body);
+  font-family: var(--ui);
   font-size: 1.18rem;
-  font-weight: 900;
+  font-weight: 800;
   letter-spacing: -0.02em;
   line-height: 1.02;
   color: #1f1407;
