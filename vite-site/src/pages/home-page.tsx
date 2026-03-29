@@ -340,10 +340,9 @@ export function HomePage() {
 
         <Section className="home-compact-section home-compact-flow-section">
           <div className="home-compact-section-head" data-reveal>
-            <h2 style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.2rem' }}>
-              <span className="reveal-mask"><span className="reveal-mask__inner" style={{ '--reveal-delay': '0.1s' } as React.CSSProperties}>制作フローを</span></span>
-              <span className="reveal-mask"><span className="reveal-mask__inner" style={{ '--reveal-delay': '0.2s' } as React.CSSProperties}>統合する、</span></span>
-              <span className="reveal-mask"><span className="reveal-mask__inner" style={{ '--reveal-delay': '0.3s' } as React.CSSProperties}><span className="text-glow-gold">5つのプロセス。</span></span></span>
+            <p className="brand-kicker">Features</p>
+            <h2 style={{ whiteSpace: 'nowrap' }}>
+              制作フローを統合する、<span className="text-glow-gold">5つのプロセス。</span>
             </h2>
             <p>複数ツールを行き来する無駄を排除し、情報収集から出力までを美しい一本のパイプラインに。</p>
           </div>
@@ -375,7 +374,28 @@ export function HomePage() {
 
             {/* Right: Real product screenshots */}
             <div className="home-interactive-flow__visual" data-reveal data-reveal-delay="2">
-              <ProductDemoTabs className="home-compact-demo flow-demo-compact" />
+              <div className="home-interactive-flow__mockup">
+                <div className="home-interactive-flow__mockup-header">
+                  <div className="dot dot-r" />
+                  <div className="dot dot-y" />
+                  <div className="dot dot-g" />
+                  <div className="mockup-header-title">{flowSteps[activeFlowStep]?.mockupType ?? 'process.exe'}</div>
+                </div>
+                <div className="home-interactive-flow__mockup-body" style={{ display: 'flex', height: 'clamp(200px, 45vh, 480px)' }}>
+                  <img 
+                    key={activeFlowStep}
+                    src={
+                      activeFlowStep === 0 ? media.productImage2 :
+                      activeFlowStep === 1 ? media.productImage1 :
+                      activeFlowStep === 2 ? media.settingsShot :
+                      activeFlowStep === 3 ? media.settingsShot :
+                      media.productImage1
+                    }
+                    alt={`${flowSteps[activeFlowStep]?.label}のイメージ`} 
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'left top', animation: 'fadeZoomIn 0.4s ease forwards' }}
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </Section>
@@ -388,6 +408,7 @@ export function HomePage() {
             </div>
           </div>
           <div className="home-compact-section-head" data-reveal>
+            <p className="brand-kicker">Speed</p>
             <h2>準備時間を、<span className="text-glow-gold">120分から6分</span>へ<span className="text-glow-green">圧倒的短縮</span>。</h2>
             <p><strong className="text-glow-muted">95%削減</strong>の根拠を、<span className="text-glow-muted">ネタ探し・台本整理・YMM4前調整</span>の時間差で可視化します。</p>
           </div>
@@ -487,6 +508,7 @@ export function HomePage() {
 
         <Section id="demo" className="home-compact-section home-compact-demo-section">
           <div className="home-compact-section-head" data-reveal>
+            <p className="brand-kicker">Demo</p>
             <h2><span className="text-glow-gold">実画面</span>で分かる、ネタ収集から<span className="text-glow-green">YMM4準備</span>まで</h2>
             <p>ネタ一覧、会話台本、YMM4準備の3枚で、どこまで進められるかを見せます。</p>
           </div>
@@ -502,7 +524,9 @@ export function HomePage() {
 
         <Section alt className="home-compact-section home-compact-usecase-section">
           <div className="home-compact-section-head" data-reveal>
+            <p className="brand-kicker">Use Cases</p>
             <h2><span className="text-glow-green">反応集・ゆっくり解説</span>・ショート動画に対応</h2>
+            <p>あらゆる形式の解説・まとめ動画に対応し、スタイルに合わせた最適なフォーマットで出力します。</p>
           </div>
 
           <div className="home-compact-usecase-grid" role="list">
@@ -540,6 +564,7 @@ export function HomePage() {
 
         <Section className="home-compact-section home-compact-price-section">
           <div className="home-compact-section-head" data-reveal>
+            <p className="brand-kicker">License</p>
             <h2>作業の無駄を削ぎ落とし、動画の<span className="text-glow-gold">純度を高める。</span></h2>
             <p>ゆっくりまとめプロセッサーは買い切り型。毎月のランニングコストを気にせず、動画制作のルーチンを即座に効率化できます。</p>
           </div>
@@ -594,6 +619,7 @@ export function HomePage() {
         <Section alt className="home-compact-section home-compact-closing-section">
           <div className="home-compact-faq">
             <div className="home-compact-section-head" data-reveal>
+              <p className="brand-kicker">FAQ</p>
               <h2>よくある質問</h2>
               <p>
                 導入前によくある確認事項だけを短くまとめています。
