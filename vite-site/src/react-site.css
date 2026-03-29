@@ -3876,8 +3876,8 @@ html {
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding-top: clamp(64px, 5vh, 80px);
+  justify-content: flex-start;
+  padding-top: clamp(100px, 12vh, 140px); /* Specific top padding */
   padding-bottom: clamp(40px, 4vh, 64px);
   overflow: hidden;
 }
@@ -5025,7 +5025,7 @@ html {
   flex-direction: column;
   overflow: hidden;
   vertical-align: top;
-  height: 1.25em; /* Match typical H1 line height */
+  height: 1.15em; /* Match typical H1 line height */
   position: relative;
   /* Min-width helps prevent jiggling layouts if words change length, but can be auto too */
 }
@@ -5035,16 +5035,16 @@ html {
   animation: rotate-words 9s infinite cubic-bezier(0.25, 1, 0.3, 1);
 }
 .text-rotator__inner span {
-  height: 1.25em;
-  line-height: 1.25em;
+  height: 1.15em;
+  line-height: 1.15em;
   display: inline-flex;
   align-items: center;
 }
 @keyframes rotate-words {
   0%, 25% { transform: translateY(0); }
-  33.3%, 58.3% { transform: translateY(-1.25em); }
-  66.6%, 91.6% { transform: translateY(-2.5em); }
-  100% { transform: translateY(-3.75em); }
+  33.3%, 58.3% { transform: translateY(-1.15em); }
+  66.6%, 91.6% { transform: translateY(-2.3em); }
+  100% { transform: translateY(-3.45em); }
 }
 
 /* 3. Infinite Background Marquee */
