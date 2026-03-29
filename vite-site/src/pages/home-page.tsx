@@ -381,7 +381,7 @@ export function HomePage() {
                   <div className="dot dot-g" />
                   <div className="mockup-header-title">{flowSteps[activeFlowStep]?.mockupType ?? 'process.exe'}</div>
                 </div>
-                <div className="home-interactive-flow__mockup-body" style={{ display: 'flex', height: 'clamp(200px, 45vh, 480px)' }}>
+                <div className="home-interactive-flow__mockup-body" style={{ display: 'flex', flex: '1 1 0', minHeight: 0 }}>
                   <img 
                     key={activeFlowStep}
                     src={

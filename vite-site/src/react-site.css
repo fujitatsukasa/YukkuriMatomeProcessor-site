@@ -3912,9 +3912,27 @@ html {
   pointer-events: none;
 }
 
+/* ═══[ ABSOLUTE 1-SCREEN CONSTRAINT ]═══
+   height (not min-height) + overflow:hidden = physically impossible to exceed 1 viewport.
+   All children use flex-shrink to compress into available space. */
+.home-compact-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: calc(100svh - 76px);
+  max-height: calc(100svh - 76px);
+  overflow: hidden;
+  scroll-margin-top: 76px;
+  padding-block: clamp(1.5rem, 3vh, 3rem) !important;
+  box-sizing: border-box;
+}
+
+/* All direct children shrink to fit; never push the section taller */
 .home-compact-section > * {
   width: min(1180px, calc(100% - 48px));
   margin-inline: auto;
+  flex-shrink: 1;
+  min-height: 0;
 }
 
 .home-compact-hero__video-bg {
@@ -3956,7 +3974,7 @@ html {
 }
 
 .home-compact-section-head {
-  margin-bottom: clamp(1.5rem, 3vh, 2.5rem) !important; /* Spacing below the head */
+  margin-bottom: clamp(1rem, 2vh, 2.5rem) !important; /* Spacing below the head */
   flex-shrink: 0;
   flex-grow: 0 !important;
   display: flex;
@@ -3967,11 +3985,11 @@ html {
 
 .home-compact-section-head h2 {
   font-family: var(--display);
-  font-size: clamp(2rem, 4.5vw, 3.8rem); /* Re-established massive section headings */
+  font-size: clamp(1.4rem, min(3.5vw, 4.5vh), 3rem); /* Much smaller on short screens */
   font-weight: 800;
   letter-spacing: 0.02em;
   line-height: 1.25;
-  margin: 0 0 0.8rem 0;
+  margin: 0 0 clamp(0.1rem, 0.8vh, 0.5rem) 0;
   color: var(--ink);
   text-align: center;
 }
@@ -4318,45 +4336,41 @@ html {
   animation: compact-panel-float 7.4s ease-in-out infinite;
 }
 
-.home-compact-flow-section {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: 100svh;
-  padding-block: clamp(4rem, 10vh, 8rem);
-}
+/* Flow section follows the global 1-screen constraint — no min-height override */
 
-.home-compact-flow-section > * {
-  width: min(1180px, calc(100% - 48px));
-  margin-inline: auto;
+.home-compact-flow-section .home-compact-section-head {
+  margin-bottom: clamp(0.5rem, 1vh, 1.5rem) !important;
 }
 
 /* ═══[ Highly Interactive SaaS Flow Showcase (Tabs + Video Mockup) ]═══ */
 .home-interactive-flow-container {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: clamp(2rem, 4vw, 4rem);
-  margin-top: clamp(2rem, 4vh, 4rem);
-  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.75rem, 1.5vh, 1.5rem);
+  margin-top: clamp(0.5rem, 1vh, 1rem);
+  flex: 1 1 0;
+  min-height: 0;
+  overflow: hidden;
 }
 
 /* Left: Interactive Tabs */
 .home-interactive-flow__tabs {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(0.4rem, 1.5vh, 1rem); /* Dynamic gap to fit short viewports */
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(0.4rem, 1vw, 0.8rem);
 }
 
 .home-interactive-flow__tab {
   position: relative;
   display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  padding: clamp(0.8rem, 2vh, 1.5rem) 1.8rem; /* Dynamic padding to fit 1 screen */
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(0.2rem, 1vh, 0.5rem);
+  padding: clamp(0.8rem, 1.5vh, 1.2rem) clamp(0.6rem, 1vw, 1.2rem);
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid transparent;
-  border-left: 3px solid rgba(255, 255, 255, 0.05);
-  border-radius: 0 16px 16px 0;
+  border-top: 3px solid rgba(255, 255, 255, 0.05);
+  border-radius: 0 0 16px 16px;
   cursor: pointer;
   text-align: left;
   transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -4365,13 +4379,13 @@ html {
 
 .home-interactive-flow__tab:hover {
   background: rgba(255, 255, 255, 0.05);
-  border-left-color: rgba(224, 193, 132, 0.3);
+  border-top-color: rgba(224, 193, 132, 0.3);
 }
 
 .home-interactive-flow__tab.is-active {
-  background: linear-gradient(90deg, rgba(224, 193, 132, 0.08), transparent);
-  border-left-color: #e0c184;
-  box-shadow: 10px 0 30px -10px rgba(224, 193, 132, 0.1) inset;
+  background: linear-gradient(180deg, rgba(224, 193, 132, 0.08), transparent);
+  border-top-color: #e0c184;
+  box-shadow: 0 10px 30px -10px rgba(224, 193, 132, 0.1) inset;
 }
 
 .home-interactive-flow__tab-glow {
@@ -4392,39 +4406,41 @@ html {
   opacity: 1;
 }
 
-.home-interactive-flow__tab-num {
-  font-family: var(--font-numbers);
-  font-size: clamp(1.8rem, 4vh, 2.5rem);
-  font-weight: 800;
-  color: rgba(255, 255, 255, 0.1);
-  transition: color 0.4s ease;
-}
-
-.home-interactive-flow__tab.is-active .home-interactive-flow__tab-num {
-  color: #e0c184;
-}
-
-.home-interactive-flow__tab-content h3 {
-  font-size: clamp(1rem, 2vh, 1.2rem);
-  color: #fff4d3;
-  margin-bottom: clamp(0.2rem, 1vh, 0.4rem);
-  transition: transform 0.3s ease;
-}
-
-.home-interactive-flow__tab-content p {
-  font-size: clamp(0.85rem, 1.5vh, 0.95rem);
-  color: rgba(245, 241, 233, 0.6);
-  line-height: 1.4;
-  margin: 0;
-  transition: color 0.3s ease;
-}
-
 .home-interactive-flow__tab.is-active .home-interactive-flow__tab-content h3 {
-  transform: translateX(4px);
+  transform: translateY(2px);
 }
 
 .home-interactive-flow__tab.is-active .home-interactive-flow__tab-content p {
   color: rgba(245, 241, 233, 0.95);
+}
+
+.home-interactive-flow__tab.is-active .home-interactive-flow__tab-num {
+  transform: translateY(2px);
+  color: #e0c184;
+}
+
+.home-interactive-flow__tab-num {
+  font-family: var(--font-numbers);
+  font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.1);
+  transition: all 0.4s ease;
+  line-height: 1;
+}
+
+.home-interactive-flow__tab-content h3 {
+  font-size: clamp(0.85rem, 1.5vh, 1rem);
+  color: #fff4d3;
+  margin-bottom: clamp(0.1rem, 0.4vh, 0.2rem);
+  transition: transform 0.3s ease;
+}
+
+.home-interactive-flow__tab-content p {
+  font-size: clamp(0.75rem, 1vh, 0.85rem);
+  color: rgba(245, 241, 233, 0.6);
+  line-height: 1.3;
+  margin: 0;
+  transition: color 0.3s ease;
 }
 
 .home-interactive-flow__tab-active-indicator {
@@ -4449,6 +4465,9 @@ html {
               rgba(16, 17, 20, 0.8);
   padding: 2px;
   box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8), inset 0 0 0 1px rgba(255,255,255,0.08);
+  flex: 1 1 0;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .home-interactive-flow__mockup {
@@ -4457,6 +4476,8 @@ html {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  flex: 1 1 0;
+  min-height: 0;
 }
 
 .home-interactive-flow__mockup-header {
@@ -5169,6 +5190,8 @@ html {
     0 40px 100px -20px rgba(0, 0, 0, 0.9),
     0 0 40px -10px rgba(223, 192, 131, 0.15);
   overflow: hidden;
+  flex: 1 1 0;
+  min-height: 0;
 }
 
 /* ── The spinning border pseudo-element ── */
@@ -5199,8 +5222,8 @@ html {
   position: relative;
   z-index: 1;
   display: grid;
-  gap: 1.5rem;
-  padding: 1.5rem 2rem;
+  gap: clamp(0.75rem, 1.5vh, 1.5rem);
+  padding: clamp(1rem, 1.5vh, 1.5rem) clamp(1.2rem, 2vw, 2rem);
   border-radius: 24px;
   background:
     radial-gradient(circle at 0% 0%, rgba(255, 215, 120, 0.18), transparent 45%),
@@ -5225,7 +5248,7 @@ html {
 .chart-dashboard__hero {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: clamp(1rem, 2vw, 2rem);
   opacity: 0;
   transform: translateY(24px);
   transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
@@ -5309,14 +5332,14 @@ html {
 .chart-dashboard__kpi-group {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: clamp(1rem, 2vw, 2rem);
   flex: 1;
 }
 
 .chart-dashboard__kpi {
   display: grid;
-  gap: 0.4rem;
-  padding: 1.6rem 2rem;
+  gap: clamp(0.2rem, 0.5vh, 0.4rem);
+  padding: clamp(0.8rem, 1.5vh, 1.6rem) clamp(1rem, 2vw, 2rem);
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(255, 255, 255, 0.03);
@@ -5423,7 +5446,7 @@ html {
 /* ── Breakdown Rows ── */
 .chart-dashboard__rows {
   display: grid;
-  gap: 1rem;
+  gap: clamp(0.5rem, 1vh, 1rem);
   position: relative;
   z-index: 1;
 }
@@ -5883,13 +5906,13 @@ html {
 }
 
 .home-compact-efficiency__chart {
-  padding: 1.5rem;
+  padding: clamp(0.75rem, 1.5vw, 1.5rem);
 }
 
 .home-compact-process-card,
 .home-compact-price-card,
 .home-compact-cta-card {
-  padding: 1.5rem;
+  padding: clamp(0.75rem, 1.5vw, 1.5rem);
 }
 
 /* --- New Pricing Dual Column Layout --- */
@@ -5898,6 +5921,9 @@ html {
   grid-template-columns: minmax(0, 1.15fr) minmax(380px, 0.85fr);
   gap: clamp(0.5rem, 1vh, 1rem);
   align-items: stretch;
+  flex: 1 1 0;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .home-compact-price-visual {
@@ -5999,7 +6025,7 @@ html {
 
 .home-compact-price-card-rich__top {
   display: grid;
-  gap: 0.8rem;
+  gap: clamp(0.2rem, 1vh, 0.6rem);
 }
 
 .home-compact-price-card-rich__top h3 {
@@ -6014,7 +6040,7 @@ html {
   display: flex;
   align-items: baseline;
   gap: 0.6rem;
-  margin: 0.4rem 0;
+  margin: clamp(0.1rem, 0.5vh, 0.4rem) 0;
 }
 
 .home-compact-price-card-rich__price strong {
@@ -6038,9 +6064,9 @@ html {
 .home-compact-price-card-rich__features li {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: clamp(0.5rem, 1vw, 1rem);
   color: rgba(245, 241, 233, 0.95);
-  font-size: 1.05rem;
+  font-size: clamp(0.95rem, 1.8vh, 1.05rem);
 }
 
 .check-icon {
@@ -6335,7 +6361,8 @@ html {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  flex: 1 1 0;
+  min-height: 0;
   gap: clamp(0.5rem, 1vh, 1rem);
   padding: clamp(0.8rem, 1.5vh, 1.5rem);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -6558,6 +6585,9 @@ html {
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(4, minmax(0, 1fr));
+  flex: 1 1 0;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .home-compact-usecase-card {
@@ -6566,8 +6596,8 @@ html {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  min-height: 260px;
-  padding: 1.5rem;
+  min-height: clamp(140px, 25vh, 260px);
+  padding: clamp(0.75rem, 1.5vh, 1.5rem);
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 16px 32px -16px rgba(0, 0, 0, 0.6);
@@ -6642,18 +6672,21 @@ html {
 .home-compact-cta__badges {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  gap: clamp(0.2rem, 1vh, 0.5rem);
 }
 
 .home-compact-faq__list {
   display: grid;
-  gap: 3rem;
-  margin-top: 2rem;
+  gap: clamp(1rem, 2vh, 3rem);
+  margin-top: clamp(0.5rem, 1vh, 2rem);
+  flex: 1 1 0;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .home-compact-faq__category {
   display: grid;
-  gap: 1.2rem;
+  gap: clamp(0.5rem, 1vh, 1.2rem);
 }
 
 .home-compact-faq__category-title {
