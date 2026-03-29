@@ -383,7 +383,7 @@ export function HomePage() {
                 </div>
                 <div className="home-interactive-flow__mockup-body" style={{ position: 'relative', flex: '1 1 0', minHeight: 0 }}>
                   <img 
-                    key={activeFlowStep}
+                    key={`img-${activeFlowStep}`}
                     src={
                       activeFlowStep === 0 ? media.productImage2 :
                       activeFlowStep === 1 ? media.productImage1 :
@@ -394,6 +394,28 @@ export function HomePage() {
                     alt={`${flowSteps[activeFlowStep]?.label}のイメージ`} 
                     style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'left top', animation: 'fadeZoomIn 0.4s ease forwards' }}
                   />
+                  <div key={`hud-${activeFlowStep}`} style={{
+                    position: 'absolute',
+                    bottom: 'clamp(12px, 2vh, 24px)',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    background: 'rgba(8, 7, 10, 0.85)',
+                    backdropFilter: 'blur(12px)',
+                    padding: 'clamp(10px, 1.5vh, 16px) clamp(20px, 2vw, 32px)',
+                    borderRadius: '100px',
+                    border: '1px solid rgba(255,255,255,0.1)',
+                    boxShadow: '0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)',
+                    color: '#fff',
+                    textAlign: 'center',
+                    maxWidth: '90%',
+                    width: 'max-content',
+                    animation: 'fadeZoomIn 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards'
+                  }}>
+                    <p style={{ margin: 0, fontSize: 'clamp(0.85rem, 1.2vh, 0.95rem)', color: 'rgba(255,255,255,0.9)', fontWeight: 500, letterSpacing: '0.02em' }}>
+                      <span style={{ color: '#e0c184', marginRight: '8px', fontWeight: 700 }}>STEP 0{activeFlowStep + 1}</span>
+                      {flowSteps[activeFlowStep]?.desc}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
