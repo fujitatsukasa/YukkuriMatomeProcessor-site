@@ -4,12 +4,7 @@ import { media } from '@/data/assets'
 import { downloadUrl, legal, siteOrigin, siteSubtitle, siteTitle } from '@/data/site-content'
 import { HomeHeroStage, ProductDemoTabs } from '@/pages/shared'
 import React, { useEffect, useRef, useState } from 'react'
-import { motion, useSpring, useTransform, useInView as useMotionInView, AnimatePresence } from 'framer-motion'
-
-const STAGGER_CHILD_VARIANTS = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { type: 'spring' as const, stiffness: 120, damping: 20 } },
-}
+import { motion, useInView as useMotionInView, AnimatePresence } from 'framer-motion'
 
 const SECTION_HEAD_VARIANTS = {
   hidden: { opacity: 0, y: -20 },
@@ -220,13 +215,13 @@ export function HomePage() {
 
   // ━━━[ Auto Carousel Logic ]━━━
   useEffect(() => {
-    if (!isAutoPlaying) return
+    if (!isAutoPlaying || !isFlowInView) return
     const timer = setInterval(() => {
       setActiveFlowStep((prev) => (prev + 1) % flowSteps.length)
       setProgressKey((k) => k + 1) // Trigger progress bar reset
     }, 6000)
     return () => clearInterval(timer)
-  }, [activeFlowStep, isAutoPlaying])
+  }, [activeFlowStep, isAutoPlaying, isFlowInView])
 
   const handleTabClick = (index: number) => {
     setActiveFlowStep(index)
@@ -354,11 +349,28 @@ export function HomePage() {
                     className={`home-interactive-flow__tab ${isActive ? 'is-active' : ''}`}
                     aria-selected={isActive}
                   >
+                    {/* Magic Move Indicator */}
+                    {isActive && (
+                      <motion.div
+                        layoutId="activeTabIndicator"
+                        className="home-interactive-flow__tab-active-indicator-bg"
+                        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                        style={{
+                          position: 'absolute',
+                          inset: 0,
+                          borderRadius: 'inherit',
+                          background: 'linear-gradient(90deg, rgba(224, 193, 132, 0.1), transparent)',
+                          borderLeft: '2px solid #e0c184',
+                          zIndex: 0
+                        }}
+                      />
+                    )}
+                    
                     {/* Progress track, stops when clicked manually */}
-                    <div className="home-interactive-flow__tab-bg-progress" key={isActive && isAutoPlaying ? progressKey : `${item.label}-inactive`} />
-                    <div className="home-interactive-flow__tab-glow" />
-                    <span className="home-interactive-flow__tab-num">0{index + 1}</span>
-                    <div className="home-interactive-flow__tab-content">
+                    <div className="home-interactive-flow__tab-bg-progress" key={isActive && isAutoPlaying ? progressKey : `${item.label}-inactive`} style={{ zIndex: 1 }} />
+                    <div className="home-interactive-flow__tab-glow" style={{ zIndex: 1 }} />
+                    <span className="home-interactive-flow__tab-num" style={{ zIndex: 2, position: 'relative' }}>0{index + 1}</span>
+                    <div className="home-interactive-flow__tab-content" style={{ zIndex: 2, position: 'relative' }}>
                       <h3>{item.label}</h3>
                       <p>{item.desc}</p>
                     </div>
@@ -372,40 +384,54 @@ export function HomePage() {
               <div className="home-interactive-flow__mockup">
 
                 <div className="home-interactive-flow__mockup-body" style={{ position: 'relative', flex: '1 1 0', minHeight: 0 }}>
-                  <img 
-                    key={`img-${activeFlowStep}`}
-                    src={
-                      activeFlowStep === 0 ? media.productImage2 :
-                      activeFlowStep === 1 ? media.productImage1 :
-                      activeFlowStep === 2 ? media.settingsShot :
-                      activeFlowStep === 3 ? media.settingsShot :
-                      media.productImage1
-                    }
-                    alt={`${flowSteps[activeFlowStep]?.label}のイメージ`} 
-                    style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'left top', animation: 'fadeZoomIn 0.4s ease forwards' }}
-                  />
-                  <div key={`hud-${activeFlowStep}`} style={{
-                    position: 'absolute',
-                    bottom: 'clamp(12px, 2vh, 24px)',
-                    left: '50%',
-                    transform: 'translateX(-50%)',
-                    background: 'rgba(8, 7, 10, 0.85)',
-                    backdropFilter: 'blur(12px)',
-                    padding: 'clamp(10px, 1.5vh, 16px) clamp(20px, 2vw, 32px)',
-                    borderRadius: '100px',
-                    border: '1px solid rgba(255,255,255,0.1)',
-                    boxShadow: '0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)',
-                    color: '#fff',
-                    textAlign: 'center',
-                    maxWidth: '90%',
-                    width: 'max-content',
-                    animation: 'fadeZoomIn 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards'
-                  }}>
-                    <p style={{ margin: 0, fontSize: 'clamp(0.85rem, 1.2vh, 0.95rem)', color: 'rgba(255,255,255,0.9)', fontWeight: 500, letterSpacing: '0.02em' }}>
-                      <span style={{ color: '#e0c184', marginRight: '8px', fontWeight: 700 }}>STEP 0{activeFlowStep + 1}</span>
-                      {flowSteps[activeFlowStep]?.desc}
-                    </p>
-                  </div>
+                  <AnimatePresence mode="popLayout" initial={false}>
+                    <motion.img 
+                      key={`img-${activeFlowStep}`}
+                      src={
+                        activeFlowStep === 0 ? media.productImage2 :
+                        activeFlowStep === 1 ? media.productImage1 :
+                        activeFlowStep === 2 ? media.settingsShot :
+                        activeFlowStep === 3 ? media.settingsShot :
+                        media.productImage1
+                      }
+                      alt={`${flowSteps[activeFlowStep]?.label}のイメージ`} 
+                      initial={{ opacity: 0, scale: 0.96, filter: 'blur(4px)' }}
+                      animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                      exit={{ opacity: 0, scale: 1.04, filter: 'blur(4px)' }}
+                      transition={{ duration: 0.4, type: 'spring', bounce: 0 }}
+                      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'left top' }}
+                    />
+                  </AnimatePresence>
+
+                  <AnimatePresence mode="popLayout" initial={false}>
+                    <motion.div 
+                      key={`hud-${activeFlowStep}`} 
+                      initial={{ opacity: 0, y: 16, x: '-50%', scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, x: '-50%', scale: 1 }}
+                      exit={{ opacity: 0, y: -16, x: '-50%', scale: 0.95 }}
+                      transition={{ duration: 0.4, type: 'spring', bounce: 0, delay: 0.1 }}
+                      style={{
+                        position: 'absolute',
+                        bottom: 'clamp(12px, 2vh, 24px)',
+                        left: '50%',
+                        background: 'rgba(8, 7, 10, 0.85)',
+                        backdropFilter: 'blur(12px)',
+                        padding: 'clamp(10px, 1.5vh, 16px) clamp(20px, 2vw, 32px)',
+                        borderRadius: '100px',
+                        border: '1px solid rgba(255,255,255,0.1)',
+                        boxShadow: '0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)',
+                        color: '#fff',
+                        textAlign: 'center',
+                        maxWidth: '90%',
+                        width: 'max-content'
+                      }}
+                    >
+                      <p style={{ margin: 0, fontSize: 'clamp(0.85rem, 1.2vh, 0.95rem)', color: 'rgba(255,255,255,0.9)', fontWeight: 500, letterSpacing: '0.02em' }}>
+                        <span style={{ color: '#e0c184', marginRight: '8px', fontWeight: 700 }}>STEP 0{activeFlowStep + 1}</span>
+                        {flowSteps[activeFlowStep]?.desc}
+                      </p>
+                    </motion.div>
+                  </AnimatePresence>
                 </div>
               </div>
             </div>

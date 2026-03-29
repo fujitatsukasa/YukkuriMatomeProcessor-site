@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { InteractiveCard, PageMeta } from '@/components/ui'
 import { media } from '@/data/assets'
 import { legal, type NewsPost } from '@/data/site-content'
+import { motion, AnimatePresence } from 'framer-motion'
 
 const productViews = [
   {
@@ -40,13 +41,11 @@ type ProductDemoTabsProps = {
 
 export function ProductDemoTabs({ className = '', compact = false }: ProductDemoTabsProps) {
   const [activeKey, setActiveKey] = useState<(typeof productViews)[number]['key']>(productViews[0].key)
-  const [animKey, setAnimKey] = useState(0)
   const activeView = productViews.find((item) => item.key === activeKey) ?? productViews[0]
 
   const handleTabClick = (key: typeof activeKey) => {
     if (key === activeKey) return
     setActiveKey(key)
-    setAnimKey((k) => k + 1)
   }
 
   return (
@@ -65,27 +64,49 @@ export function ProductDemoTabs({ className = '', compact = false }: ProductDemo
             aria-selected={item.key === activeKey}
             className={`product-demo__tab${item.key === activeKey ? ' is-active' : ''}`}
             onClick={() => handleTabClick(item.key)}
+            style={{ position: 'relative' }}
           >
-            {item.label}
+            {item.key === activeKey && (
+              <motion.div
+                layoutId="demoTabIndicator"
+                transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  borderRadius: 'inherit',
+                  border: '1px solid rgba(255,255,255,0.2)',
+                  background: 'rgba(255,255,255,0.05)',
+                  zIndex: 0
+                }}
+              />
+            )}
+            <span style={{ position: 'relative', zIndex: 1 }}>{item.label}</span>
           </button>
         ))}
       </div>
 
-      <div 
-        key={animKey}
-        className="product-demo__panel" 
-        role="tabpanel" 
-        aria-label={activeView.label}
-        style={{ animation: 'fadeZoomIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards' }}
-      >
-        <div className="product-demo__screen">
-          <img src={activeView.image} alt={activeView.alt} />
-        </div>
+      <div className="product-demo__panel-container" style={{ position: 'relative', display: 'grid' }}>
+        <AnimatePresence mode="popLayout" initial={false}>
+          <motion.div 
+            key={activeView.key}
+            className="product-demo__panel" 
+            role="tabpanel" 
+            aria-label={activeView.label}
+            initial={{ opacity: 0, scale: 0.98, filter: 'blur(4px)' }}
+            animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+            exit={{ opacity: 0, scale: 1.02, filter: 'blur(4px)' }}
+            transition={{ duration: 0.3, type: 'spring', bounce: 0 }}
+          >
+            <div className="product-demo__screen">
+              <img src={activeView.image} alt={activeView.alt} />
+            </div>
 
-        <div className="product-demo__body">
-          <strong>{activeView.title}</strong>
-          <p>{activeView.body}</p>
-        </div>
+            <div className="product-demo__body">
+              <strong>{activeView.title}</strong>
+              <p>{activeView.body}</p>
+            </div>
+          </motion.div>
+        </AnimatePresence>
       </div>
 
       <ul className="product-demo__flow" aria-label="制作フロー">
