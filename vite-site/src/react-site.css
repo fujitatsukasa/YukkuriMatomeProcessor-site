@@ -3876,9 +3876,9 @@ html {
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  padding-top: clamp(8px, 1.5vh, 20px); /* Absolute minimum top padding */
-  padding-bottom: clamp(16px, 2vh, 32px); /* Absolute minimum bottom padding */
+  justify-content: center;
+  padding-top: clamp(64px, 6vh, 80px);
+  padding-bottom: clamp(16px, 3vh, 32px);
   overflow: hidden;
 }
 
@@ -3941,8 +3941,8 @@ html {
   width: min(1180px, calc(100% - 48px));
   margin-inline: auto;
   display: grid;
-  gap: clamp(22px, 3vw, 42px);
-  grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.98fr);
+  gap: clamp(16px, 2.5vw, 32px);
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
   align-items: center;
 }
 
