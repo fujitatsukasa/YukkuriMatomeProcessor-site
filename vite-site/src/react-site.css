@@ -3834,7 +3834,7 @@ code {
 .home-compact-shell::after {
   content: "";
   position: absolute;
-  inset: 0;
+  inset: -10%;
   pointer-events: none;
 }
 
@@ -4007,7 +4007,7 @@ html {
   line-height: 1.15;
   letter-spacing: -0.04em;
   color: #fff;
-  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.6), 0 0 45px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   white-space: nowrap;
 }
 
