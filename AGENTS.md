@@ -14,6 +14,7 @@
 - Commit message format must be `<type>: <summary>` where `<type>` is one of `feat`, `fix`, `refactor`, `docs`, `test`, or `chore`.
 - Write commit message summaries in Japanese while keeping the required `<type>: <summary>` format.
 - Before committing, run the minimal relevant checks for touched files and include a short result summary in the final response.
+- **OBLIGATORY VISUAL QA**: Before committing or concluding any frontend formatting/UI task, you MUST use the `browser_subagent` to capture a screenshot or video of the actual local preview (e.g., `http://localhost:5173`). You must visually verify layout correctness, responsive behavior, and font sizing. NEVER fix or commit blindly without visually confirming the state on the actual screen.
 - Provide user-facing explanations and final responses in Japanese by default.
 - Never revert existing user changes unless explicitly requested.
 
