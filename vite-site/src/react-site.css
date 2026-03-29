@@ -3941,8 +3941,8 @@ html {
   width: min(1180px, calc(100% - 48px));
   margin-inline: auto;
   display: grid;
-  gap: clamp(16px, 2vw, 24px); /* Tighter gap to save space */
-  grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr); /* Smaller right column means shorter image height */
+  gap: clamp(16px, 2.5vw, 32px); /* Slightly increased gap for better breathing room */
+  grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr); /* Re-enlarged right column relative to layout */
   align-items: center;
 }
 
@@ -3996,15 +3996,15 @@ html {
   width: min(1180px, calc(100% - 48px));
   margin-inline: auto;
   text-align: center;
-  margin-bottom: clamp(0.5rem, 1vh, 1rem); /* Tightest possible */
+  margin-bottom: clamp(1.5rem, 4vh, 2.5rem); /* Much wider gap to separate title and content block */
   animation: compact-fade-up 680ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .hero-massive-title {
   margin: 0;
-  font-size: clamp(2.2rem, 5.5vw, 4.4rem); /* Slightly shrunk to save 20+ px height */
+  font-size: clamp(2.4rem, 6.5vw, 5rem); /* Re-scaled to be more massive and fill screen safely */
   font-weight: 900;
-  line-height: 1.05; /* Clean baseline spacing */
+  line-height: 1.1; /* Restored breathing room */
   letter-spacing: -0.04em;
   color: #fff;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
