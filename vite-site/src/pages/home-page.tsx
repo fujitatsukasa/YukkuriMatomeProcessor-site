@@ -4,24 +4,16 @@ import { media } from '@/data/assets'
 import { downloadUrl, legal, siteOrigin, siteSubtitle, siteTitle } from '@/data/site-content'
 import { HomeHeroStage, ProductDemoTabs } from '@/pages/shared'
 import React, { useEffect, useRef, useState } from 'react'
+import { motion, useSpring, useTransform, useInView as useMotionInView, AnimatePresence } from 'framer-motion'
 
-function useInView(options = { threshold: 0.1 }) {
-  const ref = useRef<HTMLDivElement>(null)
-  const [isInView, setIsInView] = useState(false)
-  
-  useEffect(() => {
-    if (!ref.current) return
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        setIsInView(true)
-        observer.disconnect()
-      }
-    }, options)
-    observer.observe(ref.current)
-    return () => observer.disconnect()
-  }, [])
-  
-  return { ref, isInView }
+const STAGGER_CHILD_VARIANTS = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { type: 'spring' as const, stiffness: 120, damping: 20 } },
+}
+
+const SECTION_HEAD_VARIANTS = {
+  hidden: { opacity: 0, y: -20 },
+  visible: { opacity: 1, y: 0, transition: { type: 'spring' as const, stiffness: 80, damping: 20 } },
 }
 
 function AnimatedNumber({ value, active, suffix = '' }: { value: number; active: boolean; suffix?: string }) {
@@ -217,8 +209,10 @@ const homeStructuredData = [
 ]
 
 export function HomePage() {
-  const flowAnimation = useInView({ threshold: 0.2 })
-  const chartAnimation = useInView({ threshold: 0.2 })
+  const flowRef = useRef<HTMLDivElement>(null)
+  const isFlowInView = useMotionInView(flowRef, { amount: 0.2, once: true })
+  const chartRef = useRef<HTMLDivElement>(null)
+  const isChartInView = useMotionInView(chartRef, { amount: 0.2, once: true })
 
   const [activeFlowStep, setActiveFlowStep] = useState(0)
   const [progressKey, setProgressKey] = useState(0)
@@ -240,17 +234,6 @@ export function HomePage() {
     setIsAutoPlaying(false)
   }
 
-  // ━━━[ Scroll Reveal Observer (opacity + translateY only, no height changes) ]━━━
-  useEffect(() => {
-    const els = document.querySelectorAll('[data-reveal]')
-    if (!els.length) return
-    const io = new IntersectionObserver(
-      (entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-revealed'); io.unobserve(e.target) } }),
-      { threshold: 0.15 }
-    )
-    els.forEach((el) => io.observe(el))
-    return () => io.disconnect()
-  }, [])
 
   return (
     <>
@@ -339,15 +322,27 @@ export function HomePage() {
         </section>
 
         <Section className="home-compact-section home-compact-flow-section">
-          <div className="home-compact-section-head" data-reveal>
+          <motion.div 
+            className="home-compact-section-head"
+            variants={SECTION_HEAD_VARIANTS}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-10%" }}
+          >
             <p className="brand-kicker">Features</p>
             <h2 style={{ whiteSpace: 'nowrap' }}>
               制作フローを統合する、<span className="text-glow-gold">5つのプロセス。</span>
             </h2>
             <p>複数ツールを行き来する無駄を排除し、情報収集から出力までを美しい一本のパイプラインに。</p>
-          </div>
+          </motion.div>
 
-          <div className="home-interactive-flow-container" ref={flowAnimation.ref}>
+          <motion.div 
+            className="home-interactive-flow-container" 
+            ref={flowRef}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0, transition: { type: 'spring', stiffness: 80, damping: 20 } }}
+            viewport={{ once: true, margin: "-10%" }}
+          >
             {/* Left: Interactive Tabs */}
             <div className="home-interactive-flow__tabs">
               {flowSteps.map((item, index) => {
@@ -373,7 +368,7 @@ export function HomePage() {
             </div>
 
             {/* Right: Real product screenshots */}
-            <div className="home-interactive-flow__visual" data-reveal data-reveal-delay="2">
+            <div className="home-interactive-flow__visual">
               <div className="home-interactive-flow__mockup">
 
                 <div className="home-interactive-flow__mockup-body" style={{ position: 'relative', flex: '1 1 0', minHeight: 0 }}>
@@ -414,7 +409,7 @@ export function HomePage() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </Section>
 
         <Section alt className="home-compact-section home-compact-process-section bg-marquee-wrap">
@@ -424,32 +419,41 @@ export function HomePage() {
               <span>95% TIME REDUCTION FOR YMM4 - PREPARATION REVOLUTION - MASSIVE EFFICIENCY - </span>
             </div>
           </div>
-          <div className="home-compact-section-head" data-reveal>
+          <motion.div 
+            className="home-compact-section-head"
+            variants={SECTION_HEAD_VARIANTS}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-10%" }}
+          >
             <p className="brand-kicker">Speed</p>
             <h2>準備時間を、<span className="text-glow-gold">120分から6分</span>へ<span className="text-glow-green">圧倒的短縮</span>。</h2>
             <p><strong className="text-glow-muted">95%削減</strong>の根拠を、<span className="text-glow-muted">ネタ探し・台本整理・YMM4前調整</span>の時間差で可視化します。</p>
-          </div>
+          </motion.div>
 
-          <div 
-            ref={chartAnimation.ref}
+          <motion.div 
+            ref={chartRef}
             className="chart-dashboard" 
             role="img" 
             aria-label="手作業120分と本ツール6分の時間内訳比較"
+            initial={{ opacity: 0, scale: 0.95, y: 30 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0, transition: { type: 'spring', stiffness: 80, damping: 20 } }}
+            viewport={{ once: true, margin: "-10%" }}
           >
             <div className="chart-dashboard__inner">
               {/* ── Hero Stats Row ── */}
-              <div className={`chart-dashboard__hero ${chartAnimation.isInView ? 'is-visible' : ''}`}>
+              <div className={`chart-dashboard__hero ${isChartInView ? 'is-visible' : ''}`}>
                 <div className="chart-dashboard__ring-wrap">
                   <svg className="chart-dashboard__ring" viewBox="0 0 120 120">
                     <circle className="chart-dashboard__ring-bg" cx="60" cy="60" r="52" />
                     <circle
-                      className={`chart-dashboard__ring-fill ${chartAnimation.isInView ? 'is-active' : ''}`}
+                      className={`chart-dashboard__ring-fill ${isChartInView ? 'is-active' : ''}`}
                       cx="60" cy="60" r="52"
                       style={{ '--ring-pct': `${timeReduction.reductionRate}` } as React.CSSProperties}
                     />
                   </svg>
                   <div className="chart-dashboard__ring-label">
-                    <AnimatedNumber value={timeReduction.reductionRate} active={chartAnimation.isInView} suffix="%" />
+                    <AnimatedNumber value={timeReduction.reductionRate} active={isChartInView} suffix="%" />
                     <span>削減</span>
                   </div>
                 </div>
@@ -458,7 +462,7 @@ export function HomePage() {
                   <div className="chart-dashboard__kpi chart-dashboard__kpi--before">
                     <span className="chart-dashboard__kpi-tag">Before</span>
                     <div className="kpi-giant-wrap">
-                      <AnimatedNumber value={timeReduction.manualMinutes} active={chartAnimation.isInView} />
+                      <AnimatedNumber value={timeReduction.manualMinutes} active={isChartInView} />
                       <small>分</small>
                     </div>
                     <span className="chart-dashboard__kpi-desc">手作業による準備</span>
@@ -469,7 +473,7 @@ export function HomePage() {
                   <div className="chart-dashboard__kpi chart-dashboard__kpi--after">
                     <span className="chart-dashboard__kpi-tag">After</span>
                     <div className="kpi-giant-wrap">
-                      <AnimatedNumber value={timeReduction.productMinutes} active={chartAnimation.isInView} />
+                      <AnimatedNumber value={timeReduction.productMinutes} active={isChartInView} />
                       <small>分</small>
                     </div>
                     <span className="chart-dashboard__kpi-desc">本ツールで完了</span>
@@ -485,10 +489,17 @@ export function HomePage() {
                   const saved = manual - product
 
                   return (
-                    <div
+                    <motion.div
                       key={item.label}
-                      className={`chart-dashboard__row ${chartAnimation.isInView ? 'is-visible' : ''}`}
-                      style={{ '--row-delay': `${0.3 + index * 0.15}s` } as React.CSSProperties}
+                      className="chart-dashboard__row"
+                      initial={{ opacity: 0, x: -30 }}
+                      animate={isChartInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+                      transition={{ 
+                        type: 'spring', 
+                        stiffness: 100, 
+                        damping: 15,
+                        delay: 0.3 + index * 0.15 
+                      }}
                     >
                       <div className="chart-dashboard__row-info">
                         <strong className="chart-dashboard__row-title">{item.label}</strong>
@@ -515,36 +526,53 @@ export function HomePage() {
                           {saved}分
                         </span>
                       </div>
-                    </div>
+                    </motion.div>
                   )
                 })}
               </div>
             </div>
-          </div>
+          </motion.div>
         </Section>
 
         <Section id="demo" className="home-compact-section home-compact-demo-section">
-          <div className="home-compact-section-head" data-reveal>
+          <motion.div 
+            className="home-compact-section-head" 
+            variants={SECTION_HEAD_VARIANTS}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-10%" }}
+          >
             <p className="brand-kicker">Demo</p>
             <h2><span className="text-glow-gold">実画面</span>で分かる、ネタ収集から<span className="text-glow-green">YMM4準備</span>まで</h2>
             <p>ネタ一覧、会話台本、YMM4準備の3枚で、どこまで進められるかを見せます。</p>
-          </div>
+          </motion.div>
 
           <ProductDemoTabs className="home-compact-demo" />
         </Section>
 
         {/* Mid-page CTA */}
-        <div className="home-mid-cta" data-reveal>
+        <motion.div 
+          className="home-mid-cta" 
+          initial={{ opacity: 0, scale: 0.95, y: 30 }}
+          whileInView={{ opacity: 1, scale: 1, y: 0, transition: { type: 'spring', stiffness: 100, damping: 20 } }}
+          viewport={{ once: true, margin: "-10%" }}
+        >
           <p>ネタ収集からYMM4準備まで、<strong>すべてを今すぐ体験</strong>してみませんか？</p>
           <Link className="brand-btn brand-btn--primary" to="/download/">無料で試してみる</Link>
-        </div>
+        </motion.div>
 
         <Section alt className="home-compact-section home-compact-usecase-section">
-          <div className="home-compact-section-head" data-reveal>
+          <motion.div 
+            className="home-compact-section-head" 
+            variants={SECTION_HEAD_VARIANTS}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-10%" }}
+          >
             <p className="brand-kicker">Use Cases</p>
             <h2><span className="text-glow-green">反応集・ゆっくり解説</span>・ショート動画に対応</h2>
             <p>あらゆる形式の解説・まとめ動画に対応し、スタイルに合わせた最適なフォーマットで出力します。</p>
-          </div>
+          </motion.div>
 
           <div className="home-compact-usecase-grid" role="list">
             {useCaseCards.map((item) => (
@@ -581,11 +609,17 @@ export function HomePage() {
 
 
         <Section className="home-compact-section home-compact-price-section">
-          <div className="home-compact-section-head" data-reveal>
+          <motion.div 
+            className="home-compact-section-head" 
+            variants={SECTION_HEAD_VARIANTS}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-10%" }}
+          >
             <p className="brand-kicker">License</p>
             <h2>作業の無駄を削ぎ落とし、動画の<span className="text-glow-gold">純度を高める。</span></h2>
             <p>ゆっくりまとめプロセッサーは買い切り型。毎月のランニングコストを気にせず、動画制作のルーチンを即座に効率化できます。</p>
-          </div>
+          </motion.div>
 
           <div className="home-compact-price-layout">
             <div className="home-compact-price-visual">
@@ -636,14 +670,20 @@ export function HomePage() {
 
         <Section alt className="home-compact-section home-compact-closing-section">
           <div className="home-compact-faq">
-            <div className="home-compact-section-head" data-reveal>
+            <motion.div 
+              className="home-compact-section-head" 
+              variants={SECTION_HEAD_VARIANTS}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-10%" }}
+            >
               <p className="brand-kicker">FAQ</p>
               <h2>よくある質問</h2>
               <p>
                 導入前によくある確認事項だけを短くまとめています。
                 <Link to="/faq/">FAQページ</Link>ではさらに詳しく確認できます。
               </p>
-            </div>
+            </motion.div>
 
             <div className="home-compact-faq__list">
               {faqCategories.map((category) => (
