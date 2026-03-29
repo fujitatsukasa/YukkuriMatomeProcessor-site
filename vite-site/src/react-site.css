@@ -3877,7 +3877,7 @@ html {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding-top: clamp(100px, 12vh, 140px); /* Specific top padding */
+  padding-top: clamp(68px, 4vh, 76px); /* Completely packed to the top */
   padding-bottom: clamp(40px, 4vh, 64px);
   overflow: hidden;
 }
