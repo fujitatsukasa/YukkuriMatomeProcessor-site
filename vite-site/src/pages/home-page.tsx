@@ -285,7 +285,7 @@ export function HomePage() {
 
           <div className="hero-massive-title-container">
             <h1 className="hero-massive-title">
-              <span className="text-rotator" style={{ display: 'inline-block', verticalAlign: 'top' }}>
+              <span className="text-rotator" style={{ display: 'inline-block', verticalAlign: 'text-bottom' }}>
                 <span className="text-rotator__inner" style={{ alignItems: 'center' }}>
                   <span className="text-glow-green">【反応集】</span>
                   <span className="text-glow-gold">【ゆっくり解説】</span>
@@ -294,20 +294,20 @@ export function HomePage() {
                 </span>
               </span>
               <br />
-              <span>を一瞬で作成！</span>
+              <span>の面倒な作業をゼロに。</span>
             </h1>
           </div>
 
           <div className="home-compact-hero__layout">
             <div className="home-compact-hero__copy">
-              <h2 className="brand-title" style={{ fontSize: 'clamp(2rem, 4.5vw, 3.8rem)' }}>
-                面倒なネタ収集から
+              <h2 className="brand-title" style={{ fontSize: 'clamp(1.8rem, 4vw, 3.4rem)' }}>
+                ネタ集めからYMM4出力まで、
                 <br />
-                <span className="text-gradient-animated">YMM4準備</span>まで1つに。
+                <span className="text-gradient-animated">圧倒的時短</span>で動画を量産。
               </h2>
               <p className="brand-lead">
-                記事や話題を集めて、会話台本・立ち絵・素材整理までまとめて進められる、
-                YMM4向けの動画制作支援ツールです。
+                使いたいスレや記事を集めるだけで、会話台本の編成からYMM4用ファイルの書き出しまで全自動化。
+                誰もが挫折する「面倒なコピペ作業」から解放され、毎日の動画投稿を強力にアシストします。
               </p>
 
               <div className="brand-inline-actions home-compact-hero__actions">
