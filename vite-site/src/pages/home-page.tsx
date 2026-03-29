@@ -285,8 +285,8 @@ export function HomePage() {
 
           <div className="hero-massive-title-container">
             <h1 className="hero-massive-title">
-              <span className="text-rotator" style={{ display: 'inline-block', verticalAlign: 'top', minWidth: '7.8em', textAlign: 'center' }}>
-                <span className="text-rotator__inner">
+              <span className="text-rotator" style={{ display: 'inline-block', verticalAlign: 'top', textAlign: 'right' }}>
+                <span className="text-rotator__inner" style={{ alignItems: 'flex-end' }}>
                   <span className="text-glow-green">【反応集】</span>
                   <span className="text-glow-gold">【ゆっくり解説】</span>
                   <span className="text-glow-blue">【ショート動画】</span>

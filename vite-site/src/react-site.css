@@ -4011,6 +4011,14 @@ html {
   white-space: nowrap;
 }
 
+/* Fix for black bounding box glitch: remove inner heavy shadows so overflow:hidden doesn't clip them */
+.hero-massive-title .text-glow-green,
+.hero-massive-title .text-glow-gold,
+.hero-massive-title .text-glow-blue,
+.hero-massive-title .text-glow-pink {
+  text-shadow: none;
+}
+
 
 
 .home-compact-hero__copy .brand-title {
