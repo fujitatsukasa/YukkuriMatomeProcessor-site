@@ -381,7 +381,7 @@ export function HomePage() {
                   <div className="dot dot-g" />
                   <div className="mockup-header-title">{flowSteps[activeFlowStep]?.mockupType ?? 'process.exe'}</div>
                 </div>
-                <div className="home-interactive-flow__mockup-body" style={{ display: 'flex', flex: '1 1 0', minHeight: 0 }}>
+                <div className="home-interactive-flow__mockup-body" style={{ position: 'relative', flex: '1 1 0', minHeight: 0 }}>
                   <img 
                     key={activeFlowStep}
                     src={
@@ -392,7 +392,7 @@ export function HomePage() {
                       media.productImage1
                     }
                     alt={`${flowSteps[activeFlowStep]?.label}のイメージ`} 
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'left top', animation: 'fadeZoomIn 0.4s ease forwards' }}
+                    style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'left top', animation: 'fadeZoomIn 0.4s ease forwards' }}
                   />
                 </div>
               </div>
@@ -551,6 +551,7 @@ export function HomePage() {
                   alt={`${item.title}の活用イメージ`}
                   loading="lazy"
                 />
+                <div className="home-compact-usecase-card__overlay" />
                 <div className="home-compact-usecase-card__content">
                   <h3>{item.title}</h3>
                   <p>{item.body}</p>
