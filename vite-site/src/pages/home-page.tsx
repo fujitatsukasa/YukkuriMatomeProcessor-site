@@ -285,14 +285,15 @@ export function HomePage() {
 
           <div className="hero-massive-title-container">
             <h1 className="hero-massive-title">
-              <span className="text-rotator" style={{ display: 'inline-block', verticalAlign: 'top', textAlign: 'right' }}>
-                <span className="text-rotator__inner" style={{ alignItems: 'flex-end' }}>
+              <span className="text-rotator" style={{ display: 'inline-block', verticalAlign: 'top' }}>
+                <span className="text-rotator__inner" style={{ alignItems: 'center' }}>
                   <span className="text-glow-green">【反応集】</span>
                   <span className="text-glow-gold">【ゆっくり解説】</span>
                   <span className="text-glow-blue">【ショート動画】</span>
                   <span className="text-glow-green" aria-hidden="true">【反応集】</span>
                 </span>
               </span>
+              <br />
               <span>を一瞬で作成！</span>
             </h1>
           </div>
