@@ -4002,22 +4002,13 @@ html {
 
 .hero-massive-title {
   margin: 0;
-  font-size: clamp(2.4rem, 6.5vw, 5.2rem);
+  font-size: clamp(1.6rem, 5.2vw, 4.3rem);
   font-weight: 900;
   line-height: 1.15;
   letter-spacing: -0.04em;
   color: #fff;
   text-shadow: 0 4px 18px rgba(0, 0, 0, 0.6), 0 0 45px rgba(0, 0, 0, 0.4);
-}
-
-.hero-massive-title__br {
-  display: none;
-}
-
-@media (max-width: 900px) {
-  .hero-massive-title__br {
-    display: block;
-  }
+  white-space: nowrap;
 }
 
 
