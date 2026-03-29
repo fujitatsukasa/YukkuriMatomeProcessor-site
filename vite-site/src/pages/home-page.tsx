@@ -300,14 +300,14 @@ export function HomePage() {
 
           <div className="home-compact-hero__layout">
             <div className="home-compact-hero__copy">
-              <h2 className="brand-title" style={{ fontSize: 'clamp(1.8rem, 4vw, 3.4rem)' }}>
-                ネタ集めからYMM4出力まで、
+              <h2 className="brand-title" style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.8rem)' }}>
+                ネタ収集から出力まで、
                 <br />
-                <span className="text-gradient-animated">圧倒的時短</span>で動画を量産。
+                <span className="text-gradient-animated">圧倒的時短</span>で動画量産。
               </h2>
               <p className="brand-lead">
-                使いたいスレや記事を集めるだけで、会話台本の編成からYMM4用ファイルの書き出しまで全自動化。
-                誰もが挫折する「面倒なコピペ作業」から解放され、毎日の動画投稿を強力にアシストします。
+                使いたい記事などを集めるだけで、会話台本の編成からYMM4ファイルの書き出しまで全自動化。
+                挫折しがちな「単純コピペ作業」から解放され、毎日の動画投稿を徹底アシストします。
               </p>
 
               <div className="brand-inline-actions home-compact-hero__actions">

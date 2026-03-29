@@ -3941,8 +3941,8 @@ html {
   width: min(1180px, calc(100% - 48px));
   margin-inline: auto;
   display: grid;
-  gap: clamp(16px, 2.5vw, 32px); /* Slightly increased gap for better breathing room */
-  grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr); /* Re-enlarged right column relative to layout */
+  gap: clamp(16px, 2vw, 24px); /* Tighter gap */
+  grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr); /* More width for text, less height for media */
   align-items: center;
 }
 
