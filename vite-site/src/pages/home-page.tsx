@@ -4,7 +4,9 @@ import { media } from '@/data/assets'
 import { downloadUrl, legal, siteOrigin, siteSubtitle, siteTitle } from '@/data/site-content'
 import { HomeHeroStage, ProductDemoTabs } from '@/pages/shared'
 import React, { useEffect, useRef, useState } from 'react'
-import { motion, useInView as useMotionInView, AnimatePresence } from 'framer-motion'
+import { motion, useInView as useMotionInView, AnimatePresence, useScroll, useTransform } from 'framer-motion'
+import Tilt from 'react-parallax-tilt'
+import { MessageSquare, Video, Smartphone, Users, Download, Zap, Star } from 'lucide-react'
 
 const SECTION_HEAD_VARIANTS = {
   hidden: { opacity: 0, y: -20 },
@@ -39,9 +41,9 @@ const flowSteps = [
 ] as const
 
 const socialProofStats = [
-  { value: '2,400+', label: 'ダウンロード数', icon: '⬇' },
-  { value: '95%', label: '作業時間の削減率', icon: '⚡' },
-  { value: '4.8', label: 'ユーザー満足度 / 5.0', icon: '★' },
+  { value: '2,400+', label: 'ダウンロード数', Icon: Download },
+  { value: '95%', label: '作業時間の削減率', Icon: Zap },
+  { value: '4.8', label: 'ユーザー満足度 / 5.0', Icon: Star },
 ] as const
 
 
@@ -63,21 +65,25 @@ const useCaseCards = [
     title: '反応集',
     body: '記事や話題を拾って、そのまま会話台本へ。',
     image: media.usecaseReaction,
+    Icon: Users,
   },
   {
     title: 'ゆっくり解説',
     body: '説明役と補足役を分けて、YMM4向けに整理。',
     image: media.usecaseYukkuri,
+    Icon: MessageSquare,
   },
   {
     title: 'ショート動画',
     body: '短い尺でも、見せ場と順番を先に固める。',
     image: media.usecaseShorts,
+    Icon: Smartphone,
   },
   {
     title: '会話形式の解説',
     body: '誰が何を話すかを先に決めて、字幕と読み上げを揃える。',
     image: media.usecaseConversation,
+    Icon: Video,
   },
 ] as const
 
@@ -209,6 +215,10 @@ export function HomePage() {
   const chartRef = useRef<HTMLDivElement>(null)
   const isChartInView = useMotionInView(chartRef, { amount: 0.2, once: true })
 
+  const { scrollY } = useScroll()
+  // Subtle parallax translation
+  const parallaxY = useTransform(scrollY, [0, 8000], [0, 2000])
+
   const [activeFlowStep, setActiveFlowStep] = useState(0)
   const [progressKey, setProgressKey] = useState(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
@@ -240,8 +250,28 @@ export function HomePage() {
         path="/"
         structuredData={homeStructuredData}
       />
-
-      <div className="home-compact-shell">
+      <div className="home-compact-shell" style={{ position: 'relative' }}>
+        {/* Animated Parallax Background using generated asset */}
+        <motion.div
+          className="home-parallax-layer"
+          style={{
+            position: 'absolute',
+            top: '80vh', /* Start below the hero */
+            left: 0,
+            width: '100%',
+            height: '250vh',
+            backgroundImage: "url('/bg_abstract_2.png')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center top',
+            opacity: 0.25,
+            y: parallaxY,
+            pointerEvents: 'none',
+            zIndex: 0,
+            maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 80%, transparent 100%)',
+            WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 80%, transparent 100%)',
+            mixBlendMode: 'screen'
+          }}
+        />
         <section className="home-compact-hero homepage-hero">
           <video
             className="home-compact-hero__video-bg"
@@ -298,10 +328,12 @@ export function HomePage() {
               </div>
               <p className="hero-microcopy">7日間の無料トライアル・クレジットカード不要・即ダウンロード</p>
 
-              <div className="hero-proof-bar">
+              <div className="hero-proof-bar" style={{ position: 'relative', zIndex: 1 }}>
                 {socialProofStats.map((stat) => (
                   <div key={stat.label} className="hero-proof-bar__item">
-                    <span className="hero-proof-bar__icon" aria-hidden="true">{stat.icon}</span>
+                    <span className="hero-proof-bar__icon" aria-hidden="true">
+                      <stat.Icon size={18} color="#e0c184" />
+                    </span>
                     <span className="hero-proof-bar__value">{stat.value}</span>
                     <span className="hero-proof-bar__label">{stat.label}</span>
                   </div>
@@ -602,32 +634,47 @@ export function HomePage() {
 
           <div className="home-compact-usecase-grid" role="list">
             {useCaseCards.map((item) => (
-              <article 
-                key={item.title} 
-                className="home-compact-usecase-card magnetic-card" 
-                role="listitem"
-                onMouseMove={(e) => {
-                  const rect = e.currentTarget.getBoundingClientRect()
-                  const x = e.clientX - rect.left
-                  const y = e.clientY - rect.top
-                  e.currentTarget.style.setProperty('--mouse-x', `${x}px`)
-                  e.currentTarget.style.setProperty('--mouse-y', `${y}px`)
-                }}
+              <Tilt
+                key={item.title}
+                tiltMaxAngleX={4}
+                tiltMaxAngleY={4}
+                glareEnable={true}
+                glareMaxOpacity={0.1}
+                glareColor="#ffffff"
+                glarePosition="all"
+                scale={1.02}
+                style={{ height: '100%' }}
               >
-                <div className="magnetic-spotlight" />
-                <div className="magnetic-border" />
-                <img 
-                  className="home-compact-usecase-card__bg-img" 
-                  src={item.image}
-                  alt={`${item.title}の活用イメージ`}
-                  loading="lazy"
-                />
-                <div className="home-compact-usecase-card__overlay" />
-                <div className="home-compact-usecase-card__content">
-                  <h3>{item.title}</h3>
-                  <p>{item.body}</p>
-                </div>
-              </article>
+                <article 
+                  className="home-compact-usecase-card magnetic-card" 
+                  role="listitem"
+                  style={{ height: '100%' }}
+                  onMouseMove={(e) => {
+                    const rect = e.currentTarget.getBoundingClientRect()
+                    const x = e.clientX - rect.left
+                    const y = e.clientY - rect.top
+                    e.currentTarget.style.setProperty('--mouse-x', `${x}px`)
+                    e.currentTarget.style.setProperty('--mouse-y', `${y}px`)
+                  }}
+                >
+                  <div className="magnetic-spotlight" />
+                  <div className="magnetic-border" />
+                  <img 
+                    className="home-compact-usecase-card__bg-img" 
+                    src={item.image}
+                    alt={`${item.title}の活用イメージ`}
+                    loading="lazy"
+                  />
+                  <div className="home-compact-usecase-card__overlay" />
+                  <div className="home-compact-usecase-card__content">
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+                      <item.Icon size={20} color="#e0c184" />
+                      <h3>{item.title}</h3>
+                    </div>
+                    <p>{item.body}</p>
+                  </div>
+                </article>
+              </Tilt>
             ))}
           </div>
         </Section>

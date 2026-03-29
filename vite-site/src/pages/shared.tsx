@@ -49,13 +49,31 @@ export function ProductDemoTabs({ className = '', compact = false }: ProductDemo
   }
 
   return (
-    <div className={`product-demo${compact ? ' product-demo--compact' : ''}${className ? ` ${className}` : ''}`}>
-      <div className="product-demo__topline">
+    <div className={`product-demo${compact ? ' product-demo--compact' : ''}${className ? ` ${className}` : ''}`} style={{ position: 'relative', zIndex: 1, overflow: 'hidden' }}>
+      {/* Background Image inside Product Demo */}
+      <div 
+        style={{
+          position: 'absolute',
+          inset: 0,
+          backgroundImage: "url('/bg_abstract_2.png')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          opacity: 0.35,
+          zIndex: 0,
+          pointerEvents: 'none',
+          mixBlendMode: 'screen',
+          maskImage: 'radial-gradient(ellipse at center, black 20%, transparent 80%)',
+          WebkitMaskImage: 'radial-gradient(ellipse at center, black 20%, transparent 80%)'
+        }}
+        aria-hidden="true"
+      />
+
+      <div className="product-demo__topline" style={{ position: 'relative', zIndex: 1 }}>
         <span>実画面で確認</span>
         <strong>ネタ収集からYMM4準備まで</strong>
       </div>
 
-      <div className="product-demo__tabs" role="tablist" aria-label="実画面タブ">
+      <div className="product-demo__tabs" role="tablist" aria-label="実画面タブ" style={{ position: 'relative', zIndex: 1 }}>
         {productViews.map((item) => (
           <button
             key={item.key}
@@ -85,7 +103,7 @@ export function ProductDemoTabs({ className = '', compact = false }: ProductDemo
         ))}
       </div>
 
-      <div className="product-demo__panel-container" style={{ position: 'relative', display: 'grid' }}>
+      <div className="product-demo__panel-container" style={{ position: 'relative', display: 'grid', zIndex: 1 }}>
         <AnimatePresence mode="popLayout" initial={false}>
           <motion.div 
             key={activeView.key}
@@ -109,7 +127,7 @@ export function ProductDemoTabs({ className = '', compact = false }: ProductDemo
         </AnimatePresence>
       </div>
 
-      <ul className="product-demo__flow" aria-label="制作フロー">
+      <ul className="product-demo__flow" aria-label="制作フロー" style={{ position: 'relative', zIndex: 1 }}>
         {productFlow.map((item) => (
           <li key={item}>{item}</li>
         ))}
