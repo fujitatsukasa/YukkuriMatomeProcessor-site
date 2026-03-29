@@ -6552,8 +6552,8 @@ html {
 
 .home-compact-usecase-grid {
   display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.5rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   flex: 1 1 0;
   min-height: 0;
   overflow: hidden;
@@ -6565,8 +6565,8 @@ html {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  min-height: clamp(140px, 25vh, 260px);
-  padding: clamp(0.75rem, 1.5vh, 1.5rem);
+  min-height: clamp(200px, 30vh, 320px);
+  padding: clamp(1rem, 2vh, 2rem);
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 16px 32px -16px rgba(0, 0, 0, 0.6);
