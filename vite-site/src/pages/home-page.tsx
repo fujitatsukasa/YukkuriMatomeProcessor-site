@@ -359,7 +359,7 @@ export function HomePage() {
           {/* Parallax Section Background */}
           <div style={{
             position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
-            backgroundImage: "url('/section_bg_features.png')",
+            backgroundImage: "url('/section_bg_flow.png')",
             backgroundSize: 'cover', backgroundPosition: 'center',
             opacity: 0.15, mixBlendMode: 'screen'
           }} />
@@ -487,7 +487,15 @@ export function HomePage() {
         </Section>
 
         <Section alt className="home-compact-section home-compact-process-section bg-marquee-wrap">
-          <div className="bg-marquee-container" aria-hidden="true">
+          {/* Parallax Section Background */}
+          <div style={{
+            position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
+            backgroundImage: "url('/section_bg_speed.png')",
+            backgroundSize: 'cover', backgroundPosition: 'center',
+            opacity: 0.15, mixBlendMode: 'screen'
+          }} />
+
+          <div className="bg-marquee-container" aria-hidden="true" style={{ zIndex: 0 }}>
             <div className="bg-marquee__track">
               <span>95% TIME REDUCTION FOR YMM4 - PREPARATION REVOLUTION - MASSIVE EFFICIENCY - </span>
               <span>95% TIME REDUCTION FOR YMM4 - PREPARATION REVOLUTION - MASSIVE EFFICIENCY - </span>
@@ -499,6 +507,7 @@ export function HomePage() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-10%" }}
+            style={{ position: 'relative', zIndex: 1 }}
           >
             <p className="brand-kicker">Speed</p>
             <h2>準備時間を、<span className="text-glow-gold">120分から6分</span>へ<span className="text-glow-green">圧倒的短縮</span>。</h2>
@@ -513,6 +522,7 @@ export function HomePage() {
             initial={{ opacity: 0, scale: 0.95, y: 30 }}
             whileInView={{ opacity: 1, scale: 1, y: 0, transition: { type: 'spring', stiffness: 80, damping: 20 } }}
             viewport={{ once: true, margin: "-10%" }}
+            style={{ position: 'relative', zIndex: 1 }}
           >
             <div className="chart-dashboard__inner">
               {/* ── Hero Stats Row ── */}
@@ -609,19 +619,30 @@ export function HomePage() {
         </Section>
 
         <Section id="demo" className="home-compact-section home-compact-demo-section">
+          {/* Parallax Section Background */}
+          <div style={{
+            position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
+            backgroundImage: "url('/section_bg_demo.png')",
+            backgroundSize: 'cover', backgroundPosition: 'center',
+            opacity: 0.15, mixBlendMode: 'screen'
+          }} />
+
           <motion.div 
             className="home-compact-section-head" 
             variants={SECTION_HEAD_VARIANTS}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-10%" }}
+            style={{ position: 'relative', zIndex: 1 }}
           >
             <p className="brand-kicker">Demo</p>
             <h2><span className="text-glow-gold">実画面</span>で分かる、ネタ収集から<span className="text-glow-green">YMM4準備</span>まで</h2>
             <p>ネタ一覧、会話台本、YMM4準備の3枚で、どこまで進められるかを見せます。</p>
           </motion.div>
 
-          <ProductDemoTabs className="home-compact-demo" />
+          <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', width: '100%', alignItems: 'center' }}>
+            <ProductDemoTabs className="home-compact-demo" />
+          </div>
         </Section>
 
         {/* Mid-page CTA */}
@@ -639,7 +660,7 @@ export function HomePage() {
           {/* Parallax Section Background */}
           <div style={{
             position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
-            backgroundImage: "url('/section_bg_flow.png')",
+            backgroundImage: "url('/section_bg_usecases.png')",
             backgroundSize: 'cover', backgroundPosition: 'center',
             opacity: 0.15, mixBlendMode: 'screen'
           }} />
@@ -657,7 +678,7 @@ export function HomePage() {
             <p>あらゆる形式の解説・まとめ動画に対応し、スタイルに合わせた最適なフォーマットで出力します。</p>
           </motion.div>
 
-          <div className="home-compact-usecase-grid" role="list">
+          <div className="home-compact-usecase-grid" role="list" style={{ position: 'relative', zIndex: 1 }}>
             {useCaseCards.map((item) => (
               <Tilt
                 key={item.title}
