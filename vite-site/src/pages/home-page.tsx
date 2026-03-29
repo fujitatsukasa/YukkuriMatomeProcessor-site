@@ -356,13 +356,27 @@ export function HomePage() {
         </section>
 
         <Section className="home-compact-section home-compact-flow-section">
-          {/* Parallax Section Background */}
-          <div style={{
-            position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
-            backgroundImage: "url('/section_bg_flow.png')",
-            backgroundSize: 'cover', backgroundPosition: 'center',
-            opacity: 0.45, mixBlendMode: 'screen'
-          }} />
+          {/* Parallax & Animated Section Background */}
+          <div className="page-bg-bleed">
+            <motion.img 
+              src="/section_bg_flow.png"
+              alt=""
+              style={{
+                width: '100%', height: '100%', objectFit: 'cover',
+                opacity: 0.6, mixBlendMode: 'screen',
+                filter: 'brightness(1.5) saturate(1.5)'
+              }}
+              animate={{
+                scale: [1.02, 1.08, 1.02],
+                rotate: [0, 1, 0, -1, 0],
+              }}
+              transition={{
+                duration: 25,
+                ease: "linear",
+                repeat: Infinity
+              }}
+            />
+          </div>
 
           <motion.div 
             className="home-compact-section-head"
@@ -487,13 +501,27 @@ export function HomePage() {
         </Section>
 
         <Section alt className="home-compact-section home-compact-process-section bg-marquee-wrap">
-          {/* Parallax Section Background */}
-          <div style={{
-            position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
-            backgroundImage: "url('/section_bg_speed.png')",
-            backgroundSize: 'cover', backgroundPosition: 'center',
-            opacity: 0.45, mixBlendMode: 'screen'
-          }} />
+          {/* Parallax & Animated Section Background */}
+          <div className="page-bg-bleed">
+            <motion.img 
+              src="/section_bg_speed.png"
+              alt=""
+              style={{
+                width: '100%', height: '100%', objectFit: 'cover',
+                opacity: 0.7, mixBlendMode: 'screen',
+                filter: 'brightness(1.5) saturate(1.5)'
+              }}
+              animate={{
+                scale: [1.05, 1.15, 1.05],
+                objectPosition: ['50% 50%', '55% 55%', '45% 45%', '50% 50%']
+              }}
+              transition={{
+                duration: 20,
+                ease: "easeInOut",
+                repeat: Infinity
+              }}
+            />
+          </div>
 
           <div className="bg-marquee-container" aria-hidden="true" style={{ zIndex: 0 }}>
             <div className="bg-marquee__track">
@@ -619,13 +647,27 @@ export function HomePage() {
         </Section>
 
         <Section id="demo" className="home-compact-section home-compact-demo-section">
-          {/* Parallax Section Background */}
-          <div style={{
-            position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
-            backgroundImage: "url('/section_bg_demo.png')",
-            backgroundSize: 'cover', backgroundPosition: 'center',
-            opacity: 0.45, mixBlendMode: 'screen'
-          }} />
+          {/* Parallax & Animated Section Background */}
+          <div className="page-bg-bleed">
+            <motion.img 
+              src="/section_bg_demo.png"
+              alt=""
+              style={{
+                width: '100%', height: '100%', objectFit: 'cover',
+                opacity: 0.65, mixBlendMode: 'screen',
+                filter: 'brightness(1.5) saturate(1.5) hue-rotate(5deg)'
+              }}
+              animate={{
+                scale: [1.0, 1.06, 1.0],
+                opacity: [0.55, 0.75, 0.55]
+              }}
+              transition={{
+                duration: 18,
+                ease: "easeInOut",
+                repeat: Infinity
+              }}
+            />
+          </div>
 
           <motion.div 
             className="home-compact-section-head" 
@@ -657,13 +699,27 @@ export function HomePage() {
         </motion.div>
 
         <Section alt className="home-compact-section home-compact-usecase-section">
-          {/* Parallax Section Background */}
-          <div style={{
-            position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
-            backgroundImage: "url('/section_bg_usecases.png')",
-            backgroundSize: 'cover', backgroundPosition: 'center',
-            opacity: 0.45, mixBlendMode: 'screen'
-          }} />
+          {/* Parallax & Animated Section Background */}
+          <div className="page-bg-bleed">
+            <motion.img 
+              src="/section_bg_usecases.png"
+              alt=""
+              style={{
+                width: '100%', height: '100%', objectFit: 'cover',
+                opacity: 0.6, mixBlendMode: 'screen',
+                filter: 'brightness(1.6) saturate(1.4) hue-rotate(-5deg)'
+              }}
+              animate={{
+                rotateZ: [0, 2, -2, 0],
+                scale: [1.08, 1.02, 1.08],
+              }}
+              transition={{
+                duration: 30,
+                ease: "linear",
+                repeat: Infinity
+              }}
+            />
+          </div>
 
           <motion.div 
             className="home-compact-section-head" 

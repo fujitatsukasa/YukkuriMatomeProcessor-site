@@ -6537,9 +6537,21 @@ html {
   gap: clamp(0.4rem, 0.8vh, 0.8rem);
 }
 
-.home-compact-section > * {
+.home-compact-section > *:not(.page-bg-bleed) {
   width: min(1180px, calc(100% - 48px));
   margin-inline: auto;
+}
+
+.page-bg-bleed {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
 .home-compact-demo {
