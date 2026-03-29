@@ -40,7 +40,14 @@ type ProductDemoTabsProps = {
 
 export function ProductDemoTabs({ className = '', compact = false }: ProductDemoTabsProps) {
   const [activeKey, setActiveKey] = useState<(typeof productViews)[number]['key']>(productViews[0].key)
+  const [animKey, setAnimKey] = useState(0)
   const activeView = productViews.find((item) => item.key === activeKey) ?? productViews[0]
+
+  const handleTabClick = (key: typeof activeKey) => {
+    if (key === activeKey) return
+    setActiveKey(key)
+    setAnimKey((k) => k + 1)
+  }
 
   return (
     <div className={`product-demo${compact ? ' product-demo--compact' : ''}${className ? ` ${className}` : ''}`}>
@@ -57,14 +64,20 @@ export function ProductDemoTabs({ className = '', compact = false }: ProductDemo
             role="tab"
             aria-selected={item.key === activeKey}
             className={`product-demo__tab${item.key === activeKey ? ' is-active' : ''}`}
-            onClick={() => setActiveKey(item.key)}
+            onClick={() => handleTabClick(item.key)}
           >
             {item.label}
           </button>
         ))}
       </div>
 
-      <div className="product-demo__panel" role="tabpanel" aria-label={activeView.label}>
+      <div 
+        key={animKey}
+        className="product-demo__panel" 
+        role="tabpanel" 
+        aria-label={activeView.label}
+        style={{ animation: 'fadeZoomIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards' }}
+      >
         <div className="product-demo__screen">
           <img src={activeView.image} alt={activeView.alt} />
         </div>

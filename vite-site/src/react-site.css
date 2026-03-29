@@ -8861,3 +8861,104 @@ html {
     align-items: center;
   }
 }
+
+/* ═══[ 120pt Magic: Smooth Crossfade for Tabs ]═══ */
+@keyframes fadeZoomIn {
+  0% { opacity: 0; transform: scale(0.98) translateY(8px); filter: blur(4px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+}
+
+/* ═══[ 120pt Magic: Ambient Hero Background ]═══ */
+.hero-ambient-vortex {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-ambient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.12;
+  animation: orb-breathe 14s ease-in-out infinite alternate;
+}
+.hero-ambient-orb.orb-1 {
+  width: 70vw; height: 70vw; max-width: 800px; max-height: 800px;
+  background: #ffcf70; top: -20%; left: -10%;
+}
+.hero-ambient-orb.orb-2 {
+  width: 60vw; height: 60vw; max-width: 600px; max-height: 600px;
+  background: #3eb57c; bottom: -30%; right: -5%;
+  animation-delay: -7s;
+}
+.hero-ambient-grid {
+  position: absolute;
+  inset: -50%;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  transform: perspective(1000px) rotateX(60deg) translateY(-100px) translateZ(-200px);
+  animation: grid-move 20s linear infinite;
+  mask-image: linear-gradient(to top, transparent, black 80%);
+  -webkit-mask-image: linear-gradient(to top, transparent, black 80%);
+}
+@keyframes orb-breathe {
+  0% { transform: scale(1) translate(0, 0); opacity: 0.06; }
+  100% { transform: scale(1.15) translate(40px, -20px); opacity: 0.16; }
+}
+@keyframes grid-move {
+  0% { transform: perspective(1000px) rotateX(60deg) translateY(0) translateZ(-200px); }
+  100% { transform: perspective(1000px) rotateX(60deg) translateY(60px) translateZ(-200px); }
+}
+
+/* ═══[ 120pt Magic: Magnetic Spotlight Hover ]═══ */
+.magnetic-card {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0.2)) !important;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+.magnetic-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.8);
+}
+.magnetic-card::before { display: none !important; }
+
+/* The actual spotlight overlay (inner glow) */
+.magnetic-spotlight {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+    rgba(255, 255, 255, 0.04),
+    transparent 40%
+  );
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  border-radius: inherit;
+}
+/* The outer shining border (magnetic border) */
+.magnetic-border {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(
+    400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+    rgba(255, 218, 133, 0.9),
+    transparent 40%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 11;
+}
+.magnetic-card:hover .magnetic-spotlight,
+.magnetic-card:hover .magnetic-border { opacity: 1; }

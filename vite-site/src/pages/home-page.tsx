@@ -275,6 +275,14 @@ export function HomePage() {
             playsInline
             aria-hidden="true"
           />
+
+          {/* 120pt Ambient Background */}
+          <div className="hero-ambient-vortex">
+            <div className="hero-ambient-orb orb-1" />
+            <div className="hero-ambient-orb orb-2" />
+            <div className="hero-ambient-grid" />
+          </div>
+
           <div className="home-compact-hero__layout">
             <div className="home-compact-hero__copy">
               <h1 className="brand-title">
@@ -495,9 +503,18 @@ export function HomePage() {
             {useCaseCards.map((item) => (
               <article 
                 key={item.title} 
-                className="home-compact-usecase-card" 
+                className="home-compact-usecase-card magnetic-card" 
                 role="listitem"
+                onMouseMove={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect()
+                  const x = e.clientX - rect.left
+                  const y = e.clientY - rect.top
+                  e.currentTarget.style.setProperty('--mouse-x', `${x}px`)
+                  e.currentTarget.style.setProperty('--mouse-y', `${y}px`)
+                }}
               >
+                <div className="magnetic-spotlight" />
+                <div className="magnetic-border" />
                 <img 
                   className="home-compact-usecase-card__bg-img" 
                   src={item.image}
