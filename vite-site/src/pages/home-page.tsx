@@ -7,6 +7,9 @@ import React, { useEffect, useRef, useState } from 'react'
 import { motion, useInView as useMotionInView, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import Tilt from 'react-parallax-tilt'
 import { MessageSquare, Video, Smartphone, Users, Download, Zap, Star } from 'lucide-react'
+import { ParticlesBackground } from '@/components/ParticlesBackground'
+import { CustomCursorGlow } from '@/components/CustomCursorGlow'
+import { FloatingShapes } from '@/components/FloatingShapes'
 
 const SECTION_HEAD_VARIANTS = {
   hidden: { opacity: 0, y: -20 },
@@ -64,25 +67,25 @@ const useCaseCards = [
   {
     title: '反応集',
     body: '記事や話題を拾って、そのまま会話台本へ。',
-    image: media.usecaseReaction,
+    image: '/usecase_reaction.png',
     Icon: Users,
   },
   {
     title: 'ゆっくり解説',
     body: '説明役と補足役を分けて、YMM4向けに整理。',
-    image: media.usecaseYukkuri,
+    image: '/usecase_yukkuri.png',
     Icon: MessageSquare,
   },
   {
     title: 'ショート動画',
     body: '短い尺でも、見せ場と順番を先に固める。',
-    image: media.usecaseShorts,
+    image: '/usecase_shorts.png',
     Icon: Smartphone,
   },
   {
     title: '会話形式の解説',
     body: '誰が何を話すかを先に決めて、字幕と読み上げを揃える。',
-    image: media.usecaseConversation,
+    image: '/usecase_conversation.png',
     Icon: Video,
   },
 ] as const
@@ -251,6 +254,8 @@ export function HomePage() {
         structuredData={homeStructuredData}
       />
       <div className="home-compact-shell" style={{ position: 'relative' }}>
+        <CustomCursorGlow />
+        <FloatingShapes />
         {/* Animated Parallax Background using generated asset */}
         <motion.div
           className="home-parallax-layer"
@@ -283,6 +288,8 @@ export function HomePage() {
             playsInline
             aria-hidden="true"
           />
+
+          <ParticlesBackground />
 
           {/* 120pt Ambient Background */}
           <div className="hero-ambient-vortex">
