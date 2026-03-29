@@ -6570,7 +6570,8 @@ html {
   margin-inline: auto;
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  flex: none;
+  min-height: auto;
 }
 
 .home-compact-usecase-grid {
