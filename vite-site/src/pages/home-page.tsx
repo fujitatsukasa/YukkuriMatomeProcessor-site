@@ -285,8 +285,8 @@ export function HomePage() {
 
           <div className="home-compact-hero__layout">
             <div className="home-compact-hero__copy">
-              <h1 className="brand-title">
-                <span className="text-rotator">
+              <div className="hero-eyecatch-label">
+                <span className="text-rotator" style={{ display: 'inline-block', verticalAlign: 'top', minWidth: '9.5em', textAlign: 'center', marginRight: '0.1em' }}>
                   <span className="text-rotator__inner">
                     <span className="text-glow-green">【 反応集 】</span>
                     <span className="text-glow-gold">【 ゆっくり解説 】</span>
@@ -294,10 +294,12 @@ export function HomePage() {
                     <span className="text-glow-green" aria-hidden="true">【 反応集 】</span>
                   </span>
                 </span>
+                <span>を一瞬で作成！</span>
+              </div>
+              <h1 className="brand-title">
+                面倒なネタ収集から
                 <br />
-                のネタ収集、台本作成、
-                <br />
-                <span className="text-gradient-animated">YMM4準備</span>を1つに。
+                <span className="text-gradient-animated">YMM4準備</span>まで1つに。
               </h1>
               <p className="brand-lead">
                 記事や話題を集めて、会話台本・立ち絵・素材整理までまとめて進められる、

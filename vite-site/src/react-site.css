@@ -3990,6 +3990,23 @@ html {
   text-transform: uppercase;
 }
 
+.hero-eyecatch-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: clamp(0.9rem, 1.8vw, 1.15rem);
+  font-weight: 700;
+  color: rgba(242, 239, 232, 0.9);
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  margin-bottom: -0.5rem; /* pull title closer */
+  justify-self: start;
+}
+
+
 .home-compact-hero__copy .brand-title {
   max-width: none;
   margin: 0;
