@@ -6542,6 +6542,11 @@ html {
   gap: clamp(0.4rem, 0.8vh, 0.8rem);
 }
 
+.home-compact-section {
+  position: relative;
+  overflow: hidden;
+}
+
 .home-compact-section > *:not(.page-bg-bleed) {
   width: min(1180px, calc(100% - 48px));
   margin-inline: auto;

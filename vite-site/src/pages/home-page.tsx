@@ -255,7 +255,6 @@ export function HomePage() {
       />
       <div className="home-compact-shell" style={{ position: 'relative' }}>
         <CustomCursorGlow />
-        <FloatingShapes />
         {/* Animated Parallax Background using generated asset */}
         <motion.div
           className="home-parallax-layer"
@@ -265,10 +264,10 @@ export function HomePage() {
             left: 0,
             width: '100%',
             height: '250vh',
-            backgroundImage: "url('/bg_hero_master.jpg')",
+            backgroundImage: "url('/bg_abstract_2.png')",
             backgroundSize: 'cover',
             backgroundPosition: 'center top',
-            opacity: 0.55,
+            opacity: 0.35,
             y: parallaxY,
             pointerEvents: 'none',
             zIndex: 0,
@@ -278,6 +277,25 @@ export function HomePage() {
           }}
         />
         <section className="home-compact-hero homepage-hero">
+          <video
+            className="home-compact-hero__video-bg"
+            src={media.heroSaasBg}
+            poster={media.heroPoster}
+            autoPlay
+            loop
+            muted
+            playsInline
+            aria-hidden="true"
+          />
+
+          <ParticlesBackground />
+
+          {/* 120pt Ambient Background */}
+          <div className="hero-ambient-vortex">
+            <div className="hero-ambient-orb orb-1" />
+            <div className="hero-ambient-orb orb-2" />
+            <div className="hero-ambient-grid" />
+          </div>
           
           <div className="hero-massive-title-container">
             <h1 className="hero-massive-title">
@@ -344,7 +362,9 @@ export function HomePage() {
               alt=""
               style={{
                 width: '100%', height: '100%', objectFit: 'cover',
-                opacity: 0.65, mixBlendMode: 'screen'
+                opacity: 0.65, mixBlendMode: 'screen',
+                maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
+                WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)'
               }}
               animate={{
                 scale: [1.02, 1.08, 1.02],
@@ -488,7 +508,9 @@ export function HomePage() {
               alt=""
               style={{
                 width: '100%', height: '100%', objectFit: 'cover',
-                opacity: 0.65, mixBlendMode: 'screen'
+                opacity: 0.65, mixBlendMode: 'screen',
+                maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
+                WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)'
               }}
               animate={{
                 scale: [1.05, 1.15, 1.05],
@@ -633,7 +655,9 @@ export function HomePage() {
               alt=""
               style={{
                 width: '100%', height: '100%', objectFit: 'cover',
-                opacity: 0.65, mixBlendMode: 'screen'
+                opacity: 0.65, mixBlendMode: 'screen',
+                maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
+                WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)'
               }}
               animate={{
                 scale: [1.0, 1.06, 1.0],
@@ -665,17 +689,6 @@ export function HomePage() {
           </div>
         </Section>
 
-        {/* Mid-page CTA */}
-        <motion.div 
-          className="home-mid-cta" 
-          initial={{ opacity: 0, scale: 0.95, y: 30 }}
-          whileInView={{ opacity: 1, scale: 1, y: 0, transition: { type: 'spring', stiffness: 100, damping: 20 } }}
-          viewport={{ once: true, margin: "-10%" }}
-        >
-          <p>ネタ収集からYMM4準備まで、<strong>すべてを今すぐ体験</strong>してみませんか？</p>
-          <Link className="brand-btn brand-btn--primary" to="/download/">無料で試してみる</Link>
-        </motion.div>
-
         <Section alt className="home-compact-section home-compact-usecase-section">
           {/* Parallax & Animated Section Background */}
           <div className="page-bg-bleed">
@@ -684,7 +697,9 @@ export function HomePage() {
               alt=""
               style={{
                 width: '100%', height: '100%', objectFit: 'cover',
-                opacity: 0.75, mixBlendMode: 'screen'
+                opacity: 0.75, mixBlendMode: 'screen',
+                maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
+                WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)'
               }}
               animate={{
                 rotateZ: [0, 2, -2, 0],
@@ -768,7 +783,9 @@ export function HomePage() {
               alt=""
               style={{
                 width: '100%', height: '100%', objectFit: 'cover',
-                opacity: 0.65, mixBlendMode: 'screen'
+                opacity: 0.65, mixBlendMode: 'screen',
+                maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
+                WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)'
               }}
               animate={{
                 scale: [1.02, 1.1, 1.02],
@@ -850,7 +867,9 @@ export function HomePage() {
               alt=""
               style={{
                 width: '100%', height: '100%', objectFit: 'cover',
-                opacity: 0.55, mixBlendMode: 'screen'
+                opacity: 0.55, mixBlendMode: 'screen',
+                maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
+                WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)'
               }}
               animate={{
                 scale: [1.0, 1.05, 1.0],
@@ -906,7 +925,9 @@ export function HomePage() {
               alt=""
               style={{
                 width: '100%', height: '100%', objectFit: 'cover',
-                opacity: 0.7, mixBlendMode: 'screen'
+                opacity: 0.7, mixBlendMode: 'screen',
+                maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 100%, transparent 100%)',
+                WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 100%, transparent 100%)'
               }}
               animate={{
                 scale: [1.02, 1.08, 1.02],
