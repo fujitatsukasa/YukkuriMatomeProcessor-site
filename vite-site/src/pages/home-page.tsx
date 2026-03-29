@@ -361,7 +361,7 @@ export function HomePage() {
             position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
             backgroundImage: "url('/section_bg_flow.png')",
             backgroundSize: 'cover', backgroundPosition: 'center',
-            opacity: 0.15, mixBlendMode: 'screen'
+            opacity: 0.45, mixBlendMode: 'screen'
           }} />
 
           <motion.div 
@@ -492,7 +492,7 @@ export function HomePage() {
             position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
             backgroundImage: "url('/section_bg_speed.png')",
             backgroundSize: 'cover', backgroundPosition: 'center',
-            opacity: 0.15, mixBlendMode: 'screen'
+            opacity: 0.45, mixBlendMode: 'screen'
           }} />
 
           <div className="bg-marquee-container" aria-hidden="true" style={{ zIndex: 0 }}>
@@ -624,7 +624,7 @@ export function HomePage() {
             position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
             backgroundImage: "url('/section_bg_demo.png')",
             backgroundSize: 'cover', backgroundPosition: 'center',
-            opacity: 0.15, mixBlendMode: 'screen'
+            opacity: 0.45, mixBlendMode: 'screen'
           }} />
 
           <motion.div 
@@ -662,7 +662,7 @@ export function HomePage() {
             position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
             backgroundImage: "url('/section_bg_usecases.png')",
             backgroundSize: 'cover', backgroundPosition: 'center',
-            opacity: 0.15, mixBlendMode: 'screen'
+            opacity: 0.45, mixBlendMode: 'screen'
           }} />
 
           <motion.div 

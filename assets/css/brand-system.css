@@ -1,14 +1,14 @@
 :root {
-  --bg: #0a090c;
-  --bg-soft: #121017;
-  --ink: #f9f6ef;
-  --muted: rgba(249, 246, 239, 0.76);
-  --accent: #e1c28a;
-  --accent-2: #d8b985;
+  --bg: #1a1c23;
+  --bg-soft: #232530;
+  --ink: #ffffff;
+  --muted: rgba(255, 255, 255, 0.85);
+  --accent: #eaca96;
+  --accent-2: #e0bb7d;
   --accent-ink: #140e08;
-  --card: rgba(17, 16, 22, 0.88);
-  --border: rgba(225, 194, 138, 0.42);
-  --shadow: 0 30px 70px rgba(0, 0, 0, 0.45);
+  --card: rgba(43, 47, 60, 0.85);
+  --border: rgba(255, 255, 255, 0.15);
+  --shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
   --display: "Noto Sans JP", "Zen Kaku Gothic New", "M PLUS 1p", sans-serif;
   --body: "Noto Sans JP", "Zen Kaku Gothic New", "M PLUS 1p", sans-serif;
   --ui: "Space Grotesk", "Noto Sans JP", "Zen Kaku Gothic New", sans-serif;
@@ -19,9 +19,9 @@
   --safe-left: env(safe-area-inset-left, 0px);
   --shell-padding-left: calc(var(--shell-padding) + var(--safe-left));
   --shell-padding-right: calc(var(--shell-padding) + var(--safe-right));
-  --prism-cyan: rgba(120, 207, 255, 0.24);
-  --prism-pink: rgba(250, 146, 228, 0.22);
-  --gold-line: rgba(255, 221, 167, 0.5);
+  --prism-cyan: rgba(120, 207, 255, 0.4);
+  --prism-pink: rgba(250, 146, 228, 0.4);
+  --gold-line: rgba(255, 221, 167, 0.8);
 }
 
 * {
