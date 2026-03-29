@@ -283,24 +283,28 @@ export function HomePage() {
             <div className="hero-ambient-grid" />
           </div>
 
+          <div className="hero-massive-title-container">
+            <h1 className="hero-massive-title">
+              <span className="text-rotator" style={{ display: 'inline-block', verticalAlign: 'top', minWidth: '8.5em', textAlign: 'center', marginRight: '0.1em' }}>
+                <span className="text-rotator__inner">
+                  <span className="text-glow-green">【 反応集 】</span>
+                  <span className="text-glow-gold">【 ゆっくり解説 】</span>
+                  <span className="text-glow-blue">【 ショート動画 】</span>
+                  <span className="text-glow-green" aria-hidden="true">【 反応集 】</span>
+                </span>
+              </span>
+              <br className="hero-massive-title__br" />
+              <span>を一瞬で生成！</span>
+            </h1>
+          </div>
+
           <div className="home-compact-hero__layout">
             <div className="home-compact-hero__copy">
-              <div className="hero-eyecatch-label">
-                <span className="text-rotator" style={{ display: 'inline-block', verticalAlign: 'top', minWidth: '9.5em', textAlign: 'center', marginRight: '0.1em' }}>
-                  <span className="text-rotator__inner">
-                    <span className="text-glow-green">【 反応集 】</span>
-                    <span className="text-glow-gold">【 ゆっくり解説 】</span>
-                    <span className="text-glow-blue">【 ショート動画 】</span>
-                    <span className="text-glow-green" aria-hidden="true">【 反応集 】</span>
-                  </span>
-                </span>
-                <span>を一瞬で作成！</span>
-              </div>
-              <h1 className="brand-title">
+              <h2 className="brand-title" style={{ fontSize: 'clamp(2rem, 4.5vw, 3.8rem)' }}>
                 面倒なネタ収集から
                 <br />
                 <span className="text-gradient-animated">YMM4準備</span>まで1つに。
-              </h1>
+              </h2>
               <p className="brand-lead">
                 記事や話題を集めて、会話台本・立ち絵・素材整理までまとめて進められる、
                 YMM4向けの動画制作支援ツールです。
