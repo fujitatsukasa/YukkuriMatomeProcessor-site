@@ -359,12 +359,11 @@ export function HomePage() {
           {/* Parallax & Animated Section Background */}
           <div className="page-bg-bleed">
             <motion.img 
-              src="/section_bg_flow.png"
+              src="/bg_flow_master.jpg"
               alt=""
               style={{
                 width: '100%', height: '100%', objectFit: 'cover',
-                opacity: 0.6, mixBlendMode: 'screen',
-                filter: 'brightness(1.5) saturate(1.5)'
+                opacity: 0.2
               }}
               animate={{
                 scale: [1.02, 1.08, 1.02],
@@ -504,12 +503,11 @@ export function HomePage() {
           {/* Parallax & Animated Section Background */}
           <div className="page-bg-bleed">
             <motion.img 
-              src="/section_bg_speed.png"
+              src="/bg_speed_master.jpg"
               alt=""
               style={{
                 width: '100%', height: '100%', objectFit: 'cover',
-                opacity: 0.7, mixBlendMode: 'screen',
-                filter: 'brightness(1.5) saturate(1.5)'
+                opacity: 0.2
               }}
               animate={{
                 scale: [1.05, 1.15, 1.05],
@@ -650,16 +648,15 @@ export function HomePage() {
           {/* Parallax & Animated Section Background */}
           <div className="page-bg-bleed">
             <motion.img 
-              src="/section_bg_demo.png"
+              src="/bg_demo_master.jpg"
               alt=""
               style={{
                 width: '100%', height: '100%', objectFit: 'cover',
-                opacity: 0.65, mixBlendMode: 'screen',
-                filter: 'brightness(1.5) saturate(1.5) hue-rotate(5deg)'
+                opacity: 0.2
               }}
               animate={{
                 scale: [1.0, 1.06, 1.0],
-                opacity: [0.55, 0.75, 0.55]
+                opacity: [0.15, 0.25, 0.15]
               }}
               transition={{
                 duration: 18,
@@ -702,12 +699,11 @@ export function HomePage() {
           {/* Parallax & Animated Section Background */}
           <div className="page-bg-bleed">
             <motion.img 
-              src="/section_bg_usecases.png"
+              src="/bg_usecases_master.jpg"
               alt=""
               style={{
                 width: '100%', height: '100%', objectFit: 'cover',
-                opacity: 0.6, mixBlendMode: 'screen',
-                filter: 'brightness(1.6) saturate(1.4) hue-rotate(-5deg)'
+                opacity: 0.25
               }}
               animate={{
                 rotateZ: [0, 2, -2, 0],
@@ -784,19 +780,41 @@ export function HomePage() {
 
 
         <Section className="home-compact-section home-compact-price-section">
+          {/* Parallax & Animated Section Background */}
+          <div className="page-bg-bleed">
+            <motion.img 
+              src="/bg_pricing_master.jpg"
+              alt=""
+              style={{
+                width: '100%', height: '100%', objectFit: 'cover',
+                opacity: 0.25
+              }}
+              animate={{
+                scale: [1.02, 1.1, 1.02],
+                objectPosition: ['50% 50%', '52% 48%', '50% 50%']
+              }}
+              transition={{
+                duration: 25,
+                ease: "easeInOut",
+                repeat: Infinity
+              }}
+            />
+          </div>
+
           <motion.div 
             className="home-compact-section-head" 
             variants={SECTION_HEAD_VARIANTS}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-10%" }}
+            style={{ position: 'relative', zIndex: 1 }}
           >
             <p className="brand-kicker">License</p>
             <h2>作業の無駄を削ぎ落とし、動画の<span className="text-glow-gold">純度を高める。</span></h2>
             <p>ゆっくりまとめプロセッサーは買い切り型。毎月のランニングコストを気にせず、動画制作のルーチンを即座に効率化できます。</p>
           </motion.div>
 
-          <div className="home-compact-price-layout">
+          <div className="home-compact-price-layout" style={{ position: 'relative', zIndex: 1 }}>
             <div className="home-compact-price-visual">
               <div className="home-compact-price-visual__img">
                 <img src={media.workspaceComputer} alt="" loading="lazy" />
@@ -844,7 +862,28 @@ export function HomePage() {
         </Section>
 
         <Section alt className="home-compact-section home-compact-closing-section">
-          <div className="home-compact-faq">
+          {/* Parallax & Animated Section Background */}
+          <div className="page-bg-bleed">
+            <motion.img 
+              src="/bg_faq_master.jpg"
+              alt=""
+              style={{
+                width: '100%', height: '100%', objectFit: 'cover',
+                opacity: 0.18
+              }}
+              animate={{
+                scale: [1.0, 1.05, 1.0],
+                opacity: [0.15, 0.22, 0.15]
+              }}
+              transition={{
+                duration: 20,
+                ease: "easeInOut",
+                repeat: Infinity
+              }}
+            />
+          </div>
+
+          <div className="home-compact-faq" style={{ position: 'relative', zIndex: 1 }}>
             <motion.div 
               className="home-compact-section-head" 
               variants={SECTION_HEAD_VARIANTS}
@@ -879,7 +918,28 @@ export function HomePage() {
         </Section>
 
         <Section className="home-compact-section home-compact-cta-section">
-          <InteractiveCard className="home-compact-cta-card">
+          {/* Parallax & Animated Section Background */}
+          <div className="page-bg-bleed">
+            <motion.img 
+              src="/bg_cta_master.jpg"
+              alt=""
+              style={{
+                width: '100%', height: '100%', objectFit: 'cover',
+                opacity: 0.35
+              }}
+              animate={{
+                scale: [1.02, 1.08, 1.02],
+                rotateZ: [0, 1, -1, 0]
+              }}
+              transition={{
+                duration: 15,
+                ease: "linear",
+                repeat: Infinity
+              }}
+            />
+          </div>
+
+          <InteractiveCard className="home-compact-cta-card" style={{ position: 'relative', zIndex: 1 }}>
             <h2><span className="text-glow-green">反応集・ゆっくり解説</span>の制作前工程を、<span className="text-glow-gold">ひとつに。</span></h2>
             <p>
               ネタ収集、台本作成、会話台本、素材整理、YMM4準備まで。
