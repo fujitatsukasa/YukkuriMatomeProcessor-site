@@ -29,7 +29,9 @@ function App() {
     const path = normalizePath(location.pathname)
     document.documentElement.lang = 'ja'
     document.body.classList.add('brand-body')
-    document.body.classList.toggle('brand-home', path === '/')
+    const isHome = path === '/'
+    document.body.classList.toggle('brand-home', isHome)
+    document.documentElement.classList.toggle('brand-home', isHome)
   }, [location.pathname])
 
   return (

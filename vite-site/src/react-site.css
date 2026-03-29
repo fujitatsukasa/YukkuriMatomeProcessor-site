@@ -3868,18 +3868,25 @@ code {
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 64px; /* Optional, fallback if header overlaps */
+  scroll-padding-top: 64px;
+}
+
+/* ═══[ Scroll-Snap: スライドショー型セクション送り ]═══
+   proximity = 画面端付近で吸い付くが、長いセクションでもスタックしない */
+html.brand-home {
+  scroll-snap-type: y proximity;
 }
 
 .home-compact-hero {
   position: relative;
-  min-height: calc(100svh - 64px); /* Subtract header height to perfectly align with viewport bottom */
+  min-height: calc(100svh - 64px);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: clamp(24px, 4vh, 40px); /* Responsive top padding */
-  padding-bottom: clamp(24px, 4vh, 40px); /* Symmetrical bottom padding */
+  padding-top: clamp(24px, 4vh, 40px);
+  padding-bottom: clamp(24px, 4vh, 40px);
   overflow: hidden;
+  scroll-snap-align: start;
 }
 
 .home-compact-section {
@@ -3887,7 +3894,11 @@ html {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: clamp(4px, 1vh, 12px) 0;
+  align-items: center;
+  min-height: 100svh;
+  padding: clamp(2rem, 4vh, 4rem) 0;
+  box-sizing: border-box;
+  scroll-snap-align: start;
 }
 
 .home-compact-section::before {
@@ -6524,7 +6535,7 @@ html {
 
 .home-compact-section {
   position: relative;
-  overflow: hidden;
+  overflow: clip;
 }
 
 .home-compact-section > *:not(.page-bg-bleed) {
@@ -8196,6 +8207,8 @@ html {
 /* ═══[ Closing CTA Enhancement ]═══ */
 .home-compact-cta-section {
   background: radial-gradient(ellipse at 50% 0%, rgba(255, 208, 107, 0.06) 0%, transparent 60%) !important;
+  min-height: auto !important;
+  padding: clamp(4rem, 10vh, 8rem) 0 !important;
 }
 
 .home-compact-cta-card {
