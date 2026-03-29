@@ -375,11 +375,7 @@ export function HomePage() {
             {/* Right: Real product screenshots */}
             <div className="home-interactive-flow__visual" data-reveal data-reveal-delay="2">
               <div className="home-interactive-flow__mockup">
-                <div className="home-interactive-flow__mockup-header">
-                  <div className="dot dot-r" />
-                  <div className="dot dot-y" />
-                  <div className="dot dot-g" />
-                </div>
+
                 <div className="home-interactive-flow__mockup-body" style={{ position: 'relative', flex: '1 1 0', minHeight: 0 }}>
                   <img 
                     key={`img-${activeFlowStep}`}
