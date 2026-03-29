@@ -261,43 +261,24 @@ export function HomePage() {
           className="home-parallax-layer"
           style={{
             position: 'absolute',
-            top: '80vh', /* Start below the hero */
+            top: '0vh', /* Start from the very top */
             left: 0,
             width: '100%',
             height: '250vh',
-            backgroundImage: "url('/bg_abstract_2.png')",
+            backgroundImage: "url('/bg_hero_master.jpg')",
             backgroundSize: 'cover',
             backgroundPosition: 'center top',
-            opacity: 0.25,
+            opacity: 0.55,
             y: parallaxY,
             pointerEvents: 'none',
             zIndex: 0,
-            maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 80%, transparent 100%)',
-            WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 80%, transparent 100%)',
+            maskImage: 'linear-gradient(to bottom, black 0%, black 15%, black 80%, transparent 100%)',
+            WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 15%, black 80%, transparent 100%)',
             mixBlendMode: 'screen'
           }}
         />
         <section className="home-compact-hero homepage-hero">
-          <video
-            className="home-compact-hero__video-bg"
-            src={media.heroSaasBg}
-            poster={media.heroPoster}
-            autoPlay
-            loop
-            muted
-            playsInline
-            aria-hidden="true"
-          />
-
-          <ParticlesBackground />
-
-          {/* 120pt Ambient Background */}
-          <div className="hero-ambient-vortex">
-            <div className="hero-ambient-orb orb-1" />
-            <div className="hero-ambient-orb orb-2" />
-            <div className="hero-ambient-grid" />
-          </div>
-
+          
           <div className="hero-massive-title-container">
             <h1 className="hero-massive-title">
               <span className="text-rotator">
@@ -363,7 +344,7 @@ export function HomePage() {
               alt=""
               style={{
                 width: '100%', height: '100%', objectFit: 'cover',
-                opacity: 0.2
+                opacity: 0.65, mixBlendMode: 'screen'
               }}
               animate={{
                 scale: [1.02, 1.08, 1.02],
@@ -507,7 +488,7 @@ export function HomePage() {
               alt=""
               style={{
                 width: '100%', height: '100%', objectFit: 'cover',
-                opacity: 0.2
+                opacity: 0.65, mixBlendMode: 'screen'
               }}
               animate={{
                 scale: [1.05, 1.15, 1.05],
@@ -652,11 +633,11 @@ export function HomePage() {
               alt=""
               style={{
                 width: '100%', height: '100%', objectFit: 'cover',
-                opacity: 0.2
+                opacity: 0.65, mixBlendMode: 'screen'
               }}
               animate={{
                 scale: [1.0, 1.06, 1.0],
-                opacity: [0.15, 0.25, 0.15]
+                opacity: [0.55, 0.75, 0.55]
               }}
               transition={{
                 duration: 18,
@@ -703,7 +684,7 @@ export function HomePage() {
               alt=""
               style={{
                 width: '100%', height: '100%', objectFit: 'cover',
-                opacity: 0.25
+                opacity: 0.75, mixBlendMode: 'screen'
               }}
               animate={{
                 rotateZ: [0, 2, -2, 0],
@@ -787,7 +768,7 @@ export function HomePage() {
               alt=""
               style={{
                 width: '100%', height: '100%', objectFit: 'cover',
-                opacity: 0.25
+                opacity: 0.65, mixBlendMode: 'screen'
               }}
               animate={{
                 scale: [1.02, 1.1, 1.02],
@@ -869,11 +850,11 @@ export function HomePage() {
               alt=""
               style={{
                 width: '100%', height: '100%', objectFit: 'cover',
-                opacity: 0.18
+                opacity: 0.55, mixBlendMode: 'screen'
               }}
               animate={{
                 scale: [1.0, 1.05, 1.0],
-                opacity: [0.15, 0.22, 0.15]
+                opacity: [0.45, 0.65, 0.45]
               }}
               transition={{
                 duration: 20,
@@ -925,7 +906,7 @@ export function HomePage() {
               alt=""
               style={{
                 width: '100%', height: '100%', objectFit: 'cover',
-                opacity: 0.35
+                opacity: 0.7, mixBlendMode: 'screen'
               }}
               animate={{
                 scale: [1.02, 1.08, 1.02],

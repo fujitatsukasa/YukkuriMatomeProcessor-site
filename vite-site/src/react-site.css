@@ -4354,19 +4354,24 @@ html {
 
 /* Top: Interactive Tabs (Sleek Pills) */
 .home-interactive-flow__tabs {
-  display: inline-flex;
+  display: flex;
   flex-wrap: nowrap;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   gap: clamp(0.5rem, 1vw, 15px);
-  padding: 8px clamp(16px, 2vw, 40px);
-  background: rgba(8, 7, 10, 0.6);
-  border-radius: 100px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  width: fit-content;
-  max-width: 90%;
+  padding: 8px 16px;
+  background: transparent;
+  border: none;
+  width: 100%;
+  max-width: 100%;
   margin: 0 auto clamp(0.5rem, 1vh, 1rem) auto;
-  align-self: center;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.home-interactive-flow__tabs::-webkit-scrollbar {
+  display: none;
 }
 
 .home-interactive-flow__tab {
@@ -4378,8 +4383,8 @@ html {
   gap: clamp(0.4rem, 1vh, 0.6rem);
   padding: 0 1.2rem;
   height: clamp(38px, 5vh, 44px);
-  background: transparent;
-  border: 1px solid transparent;
+  background: rgba(8, 7, 10, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 100px;
   cursor: pointer;
   text-align: left;
