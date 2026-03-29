@@ -3877,8 +3877,8 @@ html {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding-top: clamp(68px, 4vh, 76px); /* Completely packed to the top */
-  padding-bottom: clamp(40px, 4vh, 64px);
+  padding-top: clamp(8px, 1.5vh, 20px); /* Absolute minimum top padding */
+  padding-bottom: clamp(16px, 2vh, 32px); /* Absolute minimum bottom padding */
   overflow: hidden;
 }
 
@@ -3996,15 +3996,15 @@ html {
   width: min(1180px, calc(100% - 48px));
   margin-inline: auto;
   text-align: center;
-  margin-bottom: clamp(1rem, 2vh, 1.5rem);
+  margin-bottom: clamp(0.5rem, 1vh, 1.25rem);
   animation: compact-fade-up 680ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .hero-massive-title {
   margin: 0;
-  font-size: clamp(2.6rem, 7.5vw, 5.8rem);
+  font-size: clamp(2.2rem, 6vw, 4.8rem); /* Slightly smaller to ensure fit */
   font-weight: 900;
-  line-height: 1.05;
+  line-height: 1; /* Completely tight */
   letter-spacing: -0.04em;
   color: #fff;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
@@ -5025,9 +5025,8 @@ html {
   flex-direction: column;
   overflow: hidden;
   vertical-align: top;
-  height: 1.15em; /* Match typical H1 line height */
+  height: 1.05em; /* Extremely tight bounds */
   position: relative;
-  /* Min-width helps prevent jiggling layouts if words change length, but can be auto too */
 }
 .text-rotator__inner {
   display: flex;
@@ -5035,16 +5034,16 @@ html {
   animation: rotate-words 9s infinite cubic-bezier(0.25, 1, 0.3, 1);
 }
 .text-rotator__inner span {
-  height: 1.15em;
-  line-height: 1.15em;
+  height: 1.05em;
+  line-height: 1.05em;
   display: inline-flex;
   align-items: center;
 }
 @keyframes rotate-words {
   0%, 25% { transform: translateY(0); }
-  33.3%, 58.3% { transform: translateY(-1.15em); }
-  66.6%, 91.6% { transform: translateY(-2.3em); }
-  100% { transform: translateY(-3.45em); }
+  33.3%, 58.3% { transform: translateY(-1.05em); }
+  66.6%, 91.6% { transform: translateY(-2.1em); }
+  100% { transform: translateY(-3.15em); }
 }
 
 /* 3. Infinite Background Marquee */
