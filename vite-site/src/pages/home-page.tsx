@@ -2,14 +2,12 @@ import { Link } from 'react-router-dom'
 import { InteractiveCard, PageMeta, Section } from '@/components/ui'
 import { media } from '@/data/assets'
 import { downloadUrl, legal, siteOrigin, siteSubtitle, siteTitle } from '@/data/site-content'
-import { HomeHeroStage, ProductDemoTabs } from '@/pages/shared'
 import React, { useEffect, useRef, useState } from 'react'
 import { motion, useInView as useMotionInView, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import Tilt from 'react-parallax-tilt'
-import { MessageSquare, Video, Smartphone, Users, Download, Zap, Star } from 'lucide-react'
+import { MessageSquare, Smartphone, Users, Download, Zap, Star } from 'lucide-react'
 import { ParticlesBackground } from '@/components/ParticlesBackground'
 import { CustomCursorGlow } from '@/components/CustomCursorGlow'
-import { FloatingShapes } from '@/components/FloatingShapes'
 
 const SECTION_HEAD_VARIANTS = {
   hidden: { opacity: 0, y: -20 },
@@ -34,13 +32,12 @@ function AnimatedNumber({ value, active, suffix = '' }: { value: number; active:
   return <span className="animated-number">{display}{suffix}</span>
 }
 
-// ━━━[ Flow Steps (Dynamic Multimedia Interactive Version) ]━━━
+// ━━━[ Core AI Features (Benefit & SEO Optimized) ]━━━
 const flowSteps = [
-  { label: 'ネタ収集', stat: '速度 +400%', desc: '複数サイトから情報を収集・抽出。ワンクリックでストックへ。', icon: 'https://cdn-icons-png.flaticon.com/512/814/814867.png', mockupType: 'terminal' },
-  { label: '台本作成', stat: '精度 98.5%', desc: '集めたネタのノイズを除去し、一本の自然な文章へ強力に再構築。', icon: 'https://cdn-icons-png.flaticon.com/512/2921/2921136.png', mockupType: 'script-ai' },
-  { label: '会話台本', stat: '自動配役化', desc: '説明役と補足役の掛け合い形式へ自動変換。キャラ設定を即反映。', icon: 'https://cdn-icons-png.flaticon.com/512/9373/9373973.png', mockupType: 'casting' },
-  { label: '素材整理', stat: 'ミス率 0%', desc: '立ち絵の表情指定や音声トーン指示をセリフと紐付けて完全一元管理。', icon: 'https://cdn-icons-png.flaticon.com/512/3208/3208696.png', mockupType: 'assets' },
-  { label: 'YMM4準備', stat: '直結出力', desc: 'ゆっくりムービーメーカー4へそのまま読み込める形式で即出力。', icon: 'https://cdn-icons-png.flaticon.com/512/4798/4798781.png', mockupType: 'export' },
+  { label: '台本取得', stat: '複数サイト対応', desc: 'YouTubeや5ch等のURLから必要な情報を瞬時に抽出し、ワンクリックでストック・一元管理。', icon: 'https://cdn-icons-png.flaticon.com/512/814/814867.png', images: ['/product_get_script.png'] },
+  { label: 'AI台本生成', stat: 'ノイズ完全除去', desc: '集めたネタから不要なノイズを削ぎ落とし、あらかじめ設定したテンプレートに従って自然な掛け合い台本へと一気に再構築します。', icon: 'https://cdn-icons-png.flaticon.com/512/2921/2921136.png', images: ['/product_ai_script.png'] },
+  { label: '台本編集とボード', stat: 'YMM4直結出力', desc: 'サブウィンドウで感情ボードを出しながら直感的に表情や配役を指定。完成後は上部ボタンからYMM4形式へワンクリック出力。', icon: 'https://cdn-icons-png.flaticon.com/512/9373/9373973.png', images: ['/product_edit_script.png', '/product_board_emotion.png'] },
+  { label: '内蔵操作ガイド', stat: '迷わないUI', desc: '初心者でも安心して使いこなせるよう、詳細なマニュアルを搭載。インストールから動画化までの手順をいつでも確認できます。', icon: 'https://cdn-icons-png.flaticon.com/512/4798/4798781.png', images: ['/product_guide.png'] },
 ] as const
 
 const socialProofStats = [
@@ -65,28 +62,28 @@ const timeBreakdown = [
 
 const useCaseCards = [
   {
-    title: '反応集',
-    body: '記事や話題を拾って、そのまま会話台本へ。',
-    image: '/usecase_reaction.png',
+    title: '5ch/2ch 反応集動画',
+    body: '複数スレッドから面白いレスだけを自動抽出し、瞬時に掛け合い台本へ。',
+    image: '/product_get_script.png',
     Icon: Users,
   },
   {
-    title: 'ゆっくり解説',
-    body: '説明役と補足役を分けて、YMM4向けに整理。',
-    image: '/usecase_yukkuri.png',
+    title: 'YouTube ゆっくり解説',
+    body: '解説役と聞き役への自動配役と、YMM4での自然な間合い作りをAIで完全支援。',
+    image: '/product_board_emotion.png',
     Icon: MessageSquare,
   },
   {
-    title: 'ショート動画',
-    body: '短い尺でも、見せ場と順番を先に固める。',
-    image: '/usecase_shorts.png',
+    title: 'TikTok / YouTube Shorts',
+    body: '短尺特有のテンポの良い構成を見える化。縦型動画の台本作成にも完全対応。',
+    image: '/product_ai_script.png',
     Icon: Smartphone,
   },
   {
-    title: '会話形式の解説',
-    body: '誰が何を話すかを先に決めて、字幕と読み上げを揃える。',
-    image: '/usecase_conversation.png',
-    Icon: Video,
+    title: '自動化による収益化量産',
+    body: '属人性を排除したパイプラインで動画制作を仕組み化。外注からの内製化にも最適。',
+    image: '/product_youtube_info.png',
+    Icon: Zap,
   },
 ] as const
 
@@ -348,8 +345,54 @@ export function HomePage() {
 
             </div>
 
-            <div className="home-compact-hero__media">
-              <HomeHeroStage />
+            <div className="home-compact-hero__media" style={{ perspective: '1200px' }}>
+              <motion.div
+                initial={{ opacity: 0, rotateY: 15, rotateX: 5, y: 50 }}
+                animate={{ opacity: 1, rotateY: -15, rotateX: 10, y: [0, -15, 0] }}
+                transition={{
+                  opacity: { duration: 0.8, ease: "easeOut" },
+                  rotateY: { duration: 10, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" },
+                  rotateX: { duration: 8, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" },
+                  y: { duration: 6, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }
+                }}
+                style={{
+                  position: 'relative',
+                  width: '100%',
+                  aspectRatio: '16/9',
+                  borderRadius: '12px',
+                  boxShadow: '0 30px 60px -12px rgba(0,0,0,0.8), 0 18px 36px -18px rgba(0,0,0,1), inset 0 0 0 1px rgba(255,255,255,0.2)',
+                  overflow: 'hidden',
+                  background: '#111',
+                  transformStyle: 'preserve-3d',
+                }}
+              >
+                {/* 3D Glass overlay */}
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(125deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 40%, rgba(255,255,255,0.02) 100%)', zIndex: 2, pointerEvents: 'none' }} />
+                
+                {/* Real Product Screenshot */}
+                <img 
+                  src="/product_ai_script.png" 
+                  alt="AI台本生成ツールのメイン画面"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'left top', zIndex: 1, position: 'relative' }}
+                />
+
+                {/* Floating UI Elements for 3D depth */}
+                <motion.div 
+                   style={{
+                     position: 'absolute', bottom: '-20px', right: '-20px', background: 'rgba(20,20,25,0.9)', 
+                     backdropFilter: 'blur(10px)', border: '1px solid rgba(224, 193, 132, 0.4)', borderRadius: '12px',
+                     padding: '12px 16px', color: '#fff', fontSize: '0.85rem', fontWeight: 'bold', zIndex: 3,
+                     boxShadow: '0 10px 30px rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', gap: '8px',
+                     transform: 'translateZ(50px)'
+                   }}
+                   animate={{ y: [0, 10, 0] }}
+                   transition={{ duration: 4, repeat: Infinity, repeatType: "mirror", ease: "easeInOut", delay: 1 }}
+                >
+                  <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#4CAF50', boxShadow: '0 0 10px #4CAF50' }} />
+                  AI Automatic Conversion
+                </motion.div>
+
+              </motion.div>
             </div>
           </div>
         </section>
@@ -386,11 +429,11 @@ export function HomePage() {
             viewport={{ once: true, margin: "-10%" }}
             style={{ position: 'relative', zIndex: 1 }}
           >
-            <p className="brand-kicker">Features</p>
-            <h2 style={{ whiteSpace: 'nowrap' }}>
-              制作フローを統合する、<span className="text-glow-gold">5つのプロセス。</span>
-            </h2>
-            <p>複数ツールを行き来する無駄を排除し、情報収集から出力までを美しい一本のパイプラインに。</p>
+            <p className="brand-kicker">Core AI Engine</p>
+            <h2>動画制作を加速する、<span className="text-glow-gold">4つのAI統合プロセス</span>。</h2>
+            <p className="brand-section-desc">
+              YouTube収益化やショート動画量産に必須となる「リサーチ・台本・YMM4素材」の全工程を、AIの力で1つの美しいパイプラインに統合しました。
+            </p>
           </motion.div>
 
           <motion.div 
@@ -447,22 +490,29 @@ export function HomePage() {
 
                 <div className="home-interactive-flow__mockup-body" style={{ position: 'relative', flex: '1 1 0', minHeight: 0 }}>
                   <AnimatePresence mode="popLayout" initial={false}>
-                    <motion.img 
-                      key={`img-${activeFlowStep}`}
-                      src={
-                        activeFlowStep === 0 ? media.productImage2 :
-                        activeFlowStep === 1 ? media.productImage1 :
-                        activeFlowStep === 2 ? media.settingsShot :
-                        activeFlowStep === 3 ? media.settingsShot :
-                        media.productImage1
-                      }
-                      alt={`${flowSteps[activeFlowStep]?.label}のイメージ`} 
-                      initial={{ opacity: 0, scale: 0.96, filter: 'blur(4px)' }}
-                      animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-                      exit={{ opacity: 0, scale: 1.04, filter: 'blur(4px)' }}
-                      transition={{ duration: 0.4, type: 'spring', bounce: 0 }}
-                      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'left top' }}
-                    />
+                    {flowSteps[activeFlowStep]?.images.map((imgSrc, imgIndex) => (
+                      <motion.img 
+                        key={`img-${activeFlowStep}-${imgIndex}`}
+                        src={imgSrc}
+                        alt={`${flowSteps[activeFlowStep]?.label}の実画面 ${imgIndex + 1}`} 
+                        initial={{ opacity: 0, scale: 0.96, filter: 'blur(4px)', x: imgIndex * 60, y: imgIndex * 40 }}
+                        animate={{ opacity: 1 - (imgIndex * 0.05), scale: 1, filter: 'blur(0px)', x: imgIndex * 60, y: imgIndex * 40 }}
+                        exit={{ opacity: 0, scale: 1.04, filter: 'blur(4px)', x: imgIndex * 60, y: imgIndex * 40 }}
+                        transition={{ duration: 0.5, type: 'spring', bounce: 0, delay: imgIndex * 0.15 }}
+                        style={{ 
+                          position: 'absolute', 
+                          inset: 0, 
+                          width: flowSteps[activeFlowStep]?.images.length > 1 ? (imgIndex === 0 ? '85%' : '75%') : '100%', 
+                          height: flowSteps[activeFlowStep]?.images.length > 1 ? (imgIndex === 0 ? '85%' : '75%') : '100%', 
+                          objectFit: 'cover', 
+                          objectPosition: 'left top',
+                          borderRadius: '12px',
+                          boxShadow: imgIndex > 0 ? '-10px 20px 40px rgba(0,0,0,0.8)' : 'none',
+                          border: imgIndex > 0 ? '1px solid rgba(255,255,255,0.1)' : 'none',
+                          zIndex: imgIndex
+                        }}
+                      />
+                    ))}
                   </AnimatePresence>
 
                   <AnimatePresence mode="popLayout" initial={false}>
@@ -647,47 +697,6 @@ export function HomePage() {
           </motion.div>
         </Section>
 
-        <Section id="demo" className="home-compact-section home-compact-demo-section">
-          {/* Parallax & Animated Section Background */}
-          <div className="page-bg-bleed">
-            <motion.img 
-              src="/bg_demo_master.jpg"
-              alt=""
-              style={{
-                width: '100%', height: '100%', objectFit: 'cover',
-                opacity: 0.65, mixBlendMode: 'screen',
-                maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
-                WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)'
-              }}
-              animate={{
-                scale: [1.0, 1.06, 1.0],
-                opacity: [0.55, 0.75, 0.55]
-              }}
-              transition={{
-                duration: 18,
-                ease: "easeInOut",
-                repeat: Infinity
-              }}
-            />
-          </div>
-
-          <motion.div 
-            className="home-compact-section-head" 
-            variants={SECTION_HEAD_VARIANTS}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-10%" }}
-            style={{ position: 'relative', zIndex: 1 }}
-          >
-            <p className="brand-kicker">Demo</p>
-            <h2><span className="text-glow-gold">実画面</span>で分かる、ネタ収集から<span className="text-glow-green">YMM4準備</span>まで</h2>
-            <p>ネタ一覧、会話台本、YMM4準備の3枚で、どこまで進められるかを見せます。</p>
-          </motion.div>
-
-          <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', width: '100%', alignItems: 'center' }}>
-            <ProductDemoTabs className="home-compact-demo" />
-          </div>
-        </Section>
 
         <Section alt className="home-compact-section home-compact-usecase-section">
           {/* Parallax & Animated Section Background */}

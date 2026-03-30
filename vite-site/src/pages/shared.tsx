@@ -1,34 +1,41 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { InteractiveCard, PageMeta } from '@/components/ui'
-import { media } from '@/data/assets'
 import { legal, type NewsPost } from '@/data/site-content'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const productViews = [
   {
     key: 'topics',
-    label: 'ネタ一覧',
-    title: '記事や話題を一覧で見比べる',
-    body: '保存した候補を比較して、反応集や解説に使うネタを絞り込みます。',
-    image: media.productImage2,
-    alt: '保存した記事や話題を一覧で見比べるネタ一覧画面',
+    label: 'ネタ取得',
+    title: '記事やスレを一覧で自動ストック',
+    body: '複数サイトから保存した候補を比較して、動画に使うネタを効率的に絞り込みます。',
+    image: '/product_get_script.png',
+    alt: '台本取得・ネタ一覧画面',
   },
   {
-    key: 'script',
-    label: '会話台本',
-    title: '話者ごとの会話台本を整理する',
-    body: '台本作成と会話形式の整理を同じ流れで進め、字幕や読み上げの前提を揃えます。',
-    image: media.settingsShot,
-    alt: '会話台本と読み上げ設定を確認する画面',
+    key: 'ai_script',
+    label: 'AI台本生成',
+    title: 'ノイズを除去し、自動で掛け合い形式に',
+    body: '集めたネタから不要な部分を削り、AIが自然な会話台本へと一気に再構築します。',
+    image: '/product_ai_script.png',
+    alt: 'AI機能付き台本作成画面',
   },
   {
-    key: 'ymm4',
-    label: 'YMM4準備',
-    title: 'YMM4前の素材と話者を揃える',
-    body: '立ち絵・画像・音声の並びを整理して、編集前の再調整を減らします。',
-    image: media.productImage1,
-    alt: 'YMM4前の準備内容を確認できる画面',
+    key: 'script_edit',
+    label: '台本・感情編集',
+    title: 'ボード機能で会話の流れと表情を調整',
+    body: '配役の指定や感情（表情）の割り当てを、テキストと一緒に直感的に編集できます。',
+    image: '/product_board_emotion.png',
+    alt: '会話台本と感情設定を確認する画面',
+  },
+  {
+    key: 'materials',
+    label: '素材・出力',
+    title: 'YMM4へそのまま読み込める形式で',
+    body: 'キーワードや立ち絵の素材を整理し、YMM4へ直結するフォーマットで即出力します。',
+    image: '/product_keyword_material.png',
+    alt: '素材・出力設定画面',
   },
 ] as const
 

@@ -12,7 +12,7 @@ export const ParticlesBackground = () => {
     <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'auto' }}>
       <Particles
         id="tsparticles"
-        init={particlesInit}
+        {...{ init: particlesInit }}
         options={{
           fullScreen: { enable: false },
           background: {
