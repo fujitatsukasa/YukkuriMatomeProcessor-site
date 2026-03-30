@@ -87,7 +87,7 @@ const useCasesData = [
   {
     title: '自動化による収益化量産',
     body: 'テンプレート＋AI台本で属人性を排除。外注の内製化に最適。',
-    image: '/product_ai_script.png',
+    image: '/product_board_emotion.png',
     Icon: Zap,
   },
 ] as const
@@ -164,26 +164,14 @@ const faqCategories: FAQCategory[] = [
         question: '購入後のアップデートは無料ですか？',
         answer: 'はい、機能追加や不具合修正などのマイナーアップデートは無償でご提供いたします。ツール内から直接最新版をダウンロード可能です。',
       },
-      {
-        question: '返金は可能ですか？',
-        answer: '返金ポリシーについては、フッターの「返金・キャンセルポリシー」をご確認ください。まずは無料プランで十分にお試しの上、有料プランへのアップグレードをご検討ください。',
-      },
     ]
   },
   {
     categoryName: '用途・対応ジャンルについて',
     items: [
       {
-        question: '反応集やまとめ動画にも使えますか？',
-        answer: 'はい、使えます。2ch/5ch等の記事や話題を集めて、そのまま掛け合い形式の会話台本へ整理しやすい専用の構成になっています。',
-      },
-      {
-        question: 'ショート動画にも使えますか？',
-        answer: 'はい、使えます。短い尺でも「どこを見せ場にするか」の構成と順番を先に固めることができるため、短尺向けの台本作成に最適です。',
-      },
-      {
         question: 'YMM4専用ですか？他の編集ソフトでも使えますか？',
-        answer: '出力形式は基本的にYMM4（ゆっくりムービーメーカー4）向けのタイムライン・立ち絵情報込みのフォーマットですが、テキスト台本としてコピーすることも可能なため、Premiere ProやAviUtlでの制作の下準備としてもご利用いただけます。',
+        answer: '出力形式は基本的にYMM4（ゆっくりムービーメーカー4）向けですが、テキスト台本としてコピーすることも可能なため、Premiere ProやAviUtlでの制作の下準備としてもご利用いただけます。',
       },
     ]
   },
@@ -648,7 +636,7 @@ export function HomePage() {
                   
                   {/* Prev/Next Hotspots */}
                   <div style={{ position: 'absolute', bottom: '0', right: 0, display: 'flex', gap: '16px', zIndex: 10 }}>
-                     <button onClick={() => handleSlideChange((activeSlide - 1 + presentationSlides.length) % presentationSlides.length)} style={{ width: 44, height: 44, borderRadius: 22, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>&larr;</button>
+                     <button onClick={() => handleSlideChange((activeSlide - 1 + presentationSlides.length) % presentationSlides.length)} style={{ width: 44, height: 44, borderRadius: 22, background: 'rgba(20,18,15,0.8)', border: '1px solid rgba(224,193,132,0.3)', color: '#e0c184', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', backdropFilter: 'blur(4px)', transition: 'all 0.2s' }}>&larr;</button>
                      <button onClick={() => handleSlideChange((activeSlide + 1) % presentationSlides.length)} style={{ width: 44, height: 44, borderRadius: 22, background: 'linear-gradient(135deg, #e0c184, #b08d51)', border: 'none', color: '#000', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>&rarr;</button>
                   </div>
               </div>
@@ -856,7 +844,7 @@ export function HomePage() {
                 tiltMaxAngleX={4}
                 tiltMaxAngleY={4}
                 glareEnable={true}
-                glareMaxOpacity={0.1}
+                glareMaxOpacity={0.15}
                 glareColor="#ffffff"
                 glarePosition="all"
                 scale={1.02}
@@ -966,6 +954,7 @@ export function HomePage() {
               ))}
             </div>
             <p className="carousel-hint" style={{ textAlign: 'center', color: 'rgba(255,255,255,0.45)', fontSize: '0.85rem', marginTop: '1rem' }}>← スワイプまたは矢印ボタンで閲覧 →</p>
+            <p style={{ textAlign: 'center', color: 'rgba(255,255,255,0.35)', fontSize: '0.75rem', marginTop: '0.4rem' }}>※ 利用者の声を元に再構成した内容です</p>
           </div>
         </Section>
 

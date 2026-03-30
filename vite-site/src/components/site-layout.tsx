@@ -271,7 +271,7 @@ export function SiteLayout() {
         <div className="brand-footer__inner">
           <div className="brand-footer__lead">
             <h2>{siteTitle}</h2>
-            <p>編集運用の再現性を高めるため、導入判断から運用定着までを継続的に支援します。</p>
+            <p>ネタ収集から台本作成・YMM4出力まで。ゆっくり動画の制作前工程をひとつにまとめる支援ツール。</p>
           </div>
 
           <div className="brand-footer__grid">
