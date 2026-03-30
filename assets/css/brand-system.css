@@ -843,6 +843,10 @@ a {
 }
 
 @media (max-width: 900px) {
+  .brand-header__actions {
+    display: none;
+  }
+
   .brand-grid--2,
   .brand-grid--3,
   .brand-footer__grid,

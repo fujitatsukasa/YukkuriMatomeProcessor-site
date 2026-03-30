@@ -62,7 +62,7 @@ export function ProductDemoTabs({ className = '', compact = false }: ProductDemo
         style={{
           position: 'absolute',
           inset: 0,
-          backgroundImage: "url('/bg_abstract_2.png')",
+          backgroundImage: "url('/bg_abstract_2.webp')",
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           opacity: 0.35,

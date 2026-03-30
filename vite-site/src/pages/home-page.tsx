@@ -35,13 +35,13 @@ function AnimatedNumber({ value, active, suffix = '' }: { value: number; active:
 // ━━━[ Core AI Features (Benefit & SEO Optimized) ]━━━
 // ━━━[ Core AI Features (7 Step Pitch Deck) ]━━━
 const presentationSlides = [
-  { label: '台本取得', sub: 'WEBから即時ストック', desc: 'YouTubeや5ch等のURLから必要な情報を瞬時に抽出し、ワンクリックでストック・一元管理します。', images: ['/product_get_script.png'], charImage: '/nodoka/通常.png' },
-  { label: 'AI台本生成', sub: '高度な自動構築', desc: '集めたネタから不要なノイズを削ぎ落とし、設定したテンプレートに従って自然な掛け合い台本へと一気に再構築します。', images: ['/product_ai_script.png'], charImage: '/nodoka/自信.png' },
-  { label: 'Youtube分析', sub: 'トレンドを見逃さない', desc: '再生可能な動画データやトレンドを分析し、ヒットの確率を最大限まで高めるトピック選定を助けます。', images: ['/product_youtube_info.png'], charImage: '/nodoka/楽しさ.png' },
-  { label: '台本編集', sub: 'メインボードでサクッと調整', desc: '生成された台本は直感的なメインエディターですぐに微調整可能。ボードを出さずとも手軽にテキストを整えられます。', images: ['/product_edit_script.png'], charImage: '/nodoka/通常.png' },
-  { label: 'サブウインドウ一括管理', sub: '感情ボード・フォーマット', desc: '詳細な感情指定や配役、フォーマットなどは、独立した専用のサブウィンドウで柔軟かつ直感的に一括管理できます。', images: ['/product_edit_script.png', '/product_board_emotion.png'], charImage: '/nodoka/喜び.png' },
-  { label: 'YMM4直結出力', sub: '編集上部からワンクリック', desc: '編集が完了したら、台本編集画面の上部ボタンを一つ押すだけ。立ち絵や音声トーンを紐付け、そのままYMM4で読み込める形に完全出力します。', images: ['/product_edit_script.png'], charImage: '/nodoka/安心.png' },
-  { label: '内蔵操作ガイド', sub: '初心者も安心のフルサポート', desc: 'どの画面からでも即座に呼び出せる詳細なマニュアルを搭載。インストールから動画化までの手順をいつでも確認できます。', images: ['/product_guide.png'], charImage: '/nodoka/高揚.png' },
+  { label: '台本取得', sub: 'WEBから即時ストック', desc: 'YouTubeや5ch等のURLから必要な情報を瞬時に抽出し、ワンクリックでストック・一元管理します。', images: ['/product_get_script.png'], charImage: '/nodoka/ai_step1.png' },
+  { label: 'AI台本生成', sub: '高度な自動構築', desc: '集めたネタから不要なノイズを削ぎ落とし、設定したテンプレートに従って自然な掛け合い台本へと一気に再構築します。', images: ['/product_ai_script.png'], charImage: '/nodoka/ai_step2.png' },
+  { label: 'Youtube分析', sub: 'トレンドを見逃さない', desc: '再生可能な動画データやトレンドを分析し、ヒットの確率を最大限まで高めるトピック選定を助けます。', images: ['/product_youtube_info.png'], charImage: '/nodoka/ai_step3.png' },
+  { label: '台本編集', sub: 'メインボードでサクッと調整', desc: '生成された台本は直感的なメインエディターですぐに微調整可能。ボードを出さずとも手軽にテキストを整えられます。', images: ['/product_edit_script.png'], charImage: '/nodoka/ai_step4.png' },
+  { label: 'サブウインドウ一括管理', sub: '感情ボード・フォーマット', desc: '詳細な感情指定や配役、フォーマットなどは、独立した専用のサブウィンドウで柔軟かつ直感的に一括管理できます。', images: ['/product_edit_script.png', '/product_board_emotion.png'], charImage: '/nodoka/ai_step5.png' },
+  { label: 'YMM4直結出力', sub: '編集上部からワンクリック', desc: '編集が完了したら、台本編集画面の上部ボタンを一つ押すだけ。立ち絵や音声トーンを紐付け、そのままYMM4で読み込める形に完全出力します。', images: ['/product_edit_script.png'], charImage: '/nodoka/ai_step6.png' },
+  { label: '内蔵操作ガイド', sub: '初心者も安心のフルサポート', desc: 'どの画面からでも即座に呼び出せる詳細なマニュアルを搭載。インストールから動画化までの手順をいつでも確認できます。', images: ['/product_guide.png'], charImage: '/nodoka/ai_step7.png' },
 ] as const
 
 const socialProofStats = [
@@ -262,7 +262,7 @@ export function HomePage() {
             left: 0,
             width: '100%',
             height: '250vh',
-            backgroundImage: "url('/bg_abstract_2.png')",
+            backgroundImage: "url('/bg_abstract_2.webp')",
             backgroundSize: 'cover',
             backgroundPosition: 'center top',
             opacity: 0.35,
@@ -398,13 +398,13 @@ export function HomePage() {
           </div>
         </section>
 
-        <section className="home-presentation-deck" style={{ padding: 'clamp(3rem, 5vh, 6rem) clamp(1rem, 3vw, 2rem)', position: 'relative' }} ref={flowRef}>
-          <div className="home-presentation-container" style={{ maxWidth: 1400, margin: '0 auto', background: 'rgba(8,7,10,0.4)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: 24, padding: 'clamp(2rem, 4vw, 3rem)', boxShadow: '0 40px 100px rgba(0,0,0,0.5)', backdropFilter: 'blur(20px)', position: 'relative', overflow: 'hidden' }}>
+        <section className="home-presentation-deck" style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 'max(2rem, 3vh) 2rem', position: 'relative', scrollSnapAlign: 'start' }} ref={flowRef}>
+          <div className="home-presentation-container" style={{ width: '100%', height: '100%', maxHeight: '900px', maxWidth: 1400, margin: '0 auto', background: 'rgba(8,7,10,0.6)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: 24, padding: 'max(1.5rem, 3vh) max(1.5rem, 3vw)', boxShadow: '0 40px 100px rgba(0,0,0,0.5)', backdropFilter: 'blur(20px)', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
             
             {/* Header / Dots Navi */}
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '2rem', gap: '8px' }}>
-              <span className="home-section-kicker">FULL FEATURES SHOWCASE</span>
-              <h2 className="home-section-title" style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)' }}>収益化に向けた、<span className="gradient-text gradient-gold">全7プロセス完全網羅</span>。</h2>
+            <div style={{ flex: '0 0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '1rem', gap: '4px' }}>
+              <span className="home-section-kicker">全機能紹介</span>
+              <h2 className="home-section-title" style={{ fontSize: 'clamp(1.6rem, 2.5vw, 2.2rem)', margin: 0 }}>収益化に向けた、<span className="gradient-text gradient-gold">全7プロセス完全網羅</span>。</h2>
               <p style={{ color: 'rgba(255,255,255,0.5)', maxWidth: 600, textAlign: 'center' }}>
                 当プロセッサーが提供する全ての主要機能をガイドキャラクターの「のどか」がご案内します。
               </p>
@@ -426,10 +426,10 @@ export function HomePage() {
             </div>
 
             {/* Main Stage */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'clamp(2rem, 3vw, 4rem)', alignItems: 'center' }}>
+            <div style={{ display: 'flex', flex: '1 1 auto', minHeight: 0, flexWrap: 'nowrap', gap: 'clamp(1.5rem, 3vw, 3rem)', alignItems: 'stretch' }}>
               
               {/* Left: Guide Character & Text */}
-              <div style={{ flex: '1 1 340px', display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative' }}>
+              <div style={{ flex: '1 1 350px', display: 'flex', flexDirection: 'column', minHeight: 0, position: 'relative' }}>
                 <AnimatePresence mode="wait">
                   <motion.div 
                     key={`desc-${activeSlide}`}
@@ -438,20 +438,51 @@ export function HomePage() {
                     exit={{ opacity: 0, x: 20, filter: 'blur(5px)' }}
                     transition={{ duration: 0.4 }}
                     style={{ 
-                      background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(224, 193, 132, 0.2)', 
-                      padding: '2rem', borderRadius: 16, display: 'flex', flexDirection: 'column', gap: '1rem',
-                      width: '100%', position: 'relative', zIndex: 10
+                      flex: '0 0 auto',
+                      width: '100%', position: 'relative', zIndex: 10,
+                      padding: '1.5rem 1.7rem', 
+                      display: 'flex', flexDirection: 'column', gap: '0.8rem',
+                      filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.6))',
                     }}
                   >
-                    {/* Speech bubble pointy arrow */}
-                    <div style={{ position: 'absolute', bottom: -10, left: '50%', transform: 'translateX(-50%) rotate(45deg)', width: 20, height: 20, background: 'rgba(20,20,30,1)', borderBottom: '1px solid rgba(224, 193, 132, 0.2)', borderRight: '1px solid rgba(224, 193, 132, 0.2)' }} />
-                    <span style={{ fontSize: '0.9rem', color: '#e0c184', fontWeight: 700, letterSpacing: '2px' }}>STEP 0{activeSlide + 1}</span>
-                    <h3 style={{ fontSize: '1.6rem', color: '#fff', margin: 0 }}>{presentationSlides[activeSlide]?.label}</h3>
-                    <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.8)', lineHeight: 1.6, margin: 0 }}>{presentationSlides[activeSlide]?.desc}</p>
+                    {/* High Quality SVG Speech Bubble Background */}
+                    <svg preserveAspectRatio="none" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1 }}>
+                      <defs>
+                        <linearGradient id="bubbleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="rgba(20, 25, 35, 0.95)" />
+                          <stop offset="100%" stopColor="rgba(8, 10, 15, 0.95)" />
+                        </linearGradient>
+                        <filter id="glow-edge">
+                          <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                          <feMerge>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                          </feMerge>
+                        </filter>
+                      </defs>
+                      <path 
+                        d="M20,10 H380 A10,10 0 0,1 390,20 V150 A10,10 0 0,1 380,160 H220 L200,190 L180,160 H20 A10,10 0 0,1 10,150 V20 A10,10 0 0,1 20,10 Z" 
+                        fill="url(#bubbleGrad)" 
+                        stroke="#e0c184" 
+                        strokeWidth="1.5" 
+                        strokeOpacity="0.8"
+                        filter="url(#glow-edge)"
+                      />
+                    </svg>
+
+                    <div style={{ position: 'relative', zIndex: 1 }}>
+                      <span style={{ fontSize: '0.9rem', color: '#e0c184', fontWeight: 700, letterSpacing: '2px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#4CAF50', boxShadow: '0 0 10px #4CAF50' }} />
+                        STEP 0{activeSlide + 1}
+                      </span>
+                      <h3 style={{ fontSize: '1.4rem', color: '#fff', margin: '0.3rem 0', fontWeight: 800 }}>{presentationSlides[activeSlide]?.label}</h3>
+                      <p style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.85)', lineHeight: 1.5, margin: 0 }}>{presentationSlides[activeSlide]?.desc}</p>
+                    </div>
                   </motion.div>
                 </AnimatePresence>
 
-                <div style={{ position: 'relative', height: 420, width: '100%', marginTop: '1rem' }}>
+                {/* Character */}
+                <div style={{ flex: '1 1 auto', position: 'relative', minHeight: 0, width: '100%', marginTop: '0.5rem' }}>
                   <AnimatePresence mode="wait">
                     <motion.img 
                       key={`char-${activeSlide}`}
@@ -468,16 +499,17 @@ export function HomePage() {
               </div>
 
               {/* Right: Screenshot Carousel Showcase */}
-              <div style={{ flex: '2 1 600px', height: 'clamp(300px, 45vh, 550px)', position: 'relative', perspective: 1200 }}>
-                  <AnimatePresence mode="wait">
-                    <motion.div 
-                      key={`slide-${activeSlide}`}
-                      initial={{ opacity: 0, y: 100, rotateX: 10 }}
-                      animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                      exit={{ opacity: 0, y: -100, rotateX: -10 }}
-                      transition={{ duration: 0.6, type: 'spring', bounce: 0.2 }}
-                      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
-                    >
+              <div style={{ flex: '1.5 1 500px', position: 'relative', minHeight: 0, perspective: 1200, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <div style={{ position: 'absolute', inset: '1rem 0 3rem 0', width: '100%' }}>
+                    <AnimatePresence mode="wait">
+                      <motion.div 
+                        key={`slide-${activeSlide}`}
+                        initial={{ opacity: 0, y: 100, rotateX: 10 }}
+                        animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                        exit={{ opacity: 0, y: -100, rotateX: -10 }}
+                        transition={{ duration: 0.6, type: 'spring', bounce: 0.2 }}
+                        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
+                      >
                       {presentationSlides[activeSlide]?.images.map((imgSrc, imgIndex) => {
                         const isMain = imgIndex === 0;
                         const isYMM4Step = activeSlide === 5; // YMM4出力ステップ
@@ -504,13 +536,14 @@ export function HomePage() {
                           />
                         )
                       })}
-                    </motion.div>
-                  </AnimatePresence>
+                      </motion.div>
+                    </AnimatePresence>
+                  </div>
                   
                   {/* Prev/Next Hotspots */}
-                  <div style={{ position: 'absolute', bottom: '-40px', right: 0, display: 'flex', gap: '16px' }}>
-                     <button onClick={() => handleSlideChange((activeSlide - 1 + presentationSlides.length) % presentationSlides.length)} style={{ width: 48, height: 48, borderRadius: 24, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>&larr;</button>
-                     <button onClick={() => handleSlideChange((activeSlide + 1) % presentationSlides.length)} style={{ width: 48, height: 48, borderRadius: 24, background: 'linear-gradient(135deg, #e0c184, #b08d51)', border: 'none', color: '#000', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>&rarr;</button>
+                  <div style={{ position: 'absolute', bottom: '0', right: 0, display: 'flex', gap: '16px', zIndex: 10 }}>
+                     <button onClick={() => handleSlideChange((activeSlide - 1 + presentationSlides.length) % presentationSlides.length)} style={{ width: 44, height: 44, borderRadius: 22, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>&larr;</button>
+                     <button onClick={() => handleSlideChange((activeSlide + 1) % presentationSlides.length)} style={{ width: 44, height: 44, borderRadius: 22, background: 'linear-gradient(135deg, #e0c184, #b08d51)', border: 'none', color: '#000', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>&rarr;</button>
                   </div>
               </div>
 
@@ -522,7 +555,7 @@ export function HomePage() {
           {/* Parallax & Animated Section Background */}
           <div className="page-bg-bleed">
             <motion.img 
-              src="/bg_speed_master.jpg"
+              src="/bg_speed_master.webp"
               alt=""
               style={{
                 width: '100%', height: '100%', objectFit: 'cover',
@@ -556,7 +589,7 @@ export function HomePage() {
             viewport={{ once: true, margin: "-10%" }}
             style={{ position: 'relative', zIndex: 1 }}
           >
-            <p className="brand-kicker">Speed</p>
+            <p className="brand-kicker">圧倒的時短</p>
             <h2>準備時間を、<span className="text-glow-gold">120分から6分</span>へ<span className="text-glow-green">圧倒的短縮</span>。</h2>
             <p><strong className="text-glow-muted">95%削減</strong>の根拠を、<span className="text-glow-muted">ネタ探し・台本整理・YMM4前調整</span>の時間差で可視化します。</p>
           </motion.div>
@@ -670,7 +703,7 @@ export function HomePage() {
           {/* Parallax & Animated Section Background */}
           <div className="page-bg-bleed">
             <motion.img 
-              src="/bg_usecases_master.jpg"
+              src="/bg_usecases_master.webp"
               alt=""
               style={{
                 width: '100%', height: '100%', objectFit: 'cover',
@@ -698,7 +731,7 @@ export function HomePage() {
             viewport={{ once: true, margin: "-10%" }}
             style={{ position: 'relative', zIndex: 1 }}
           >
-            <p className="brand-kicker">Use Cases</p>
+            <p className="brand-kicker">対応ジャンル</p>
             <h2><span className="text-glow-green">反応集・ゆっくり解説</span>・ショート動画に対応</h2>
             <p>あらゆる形式の解説・まとめ動画に対応し、スタイルに合わせた最適なフォーマットで出力します。</p>
           </motion.div>
@@ -756,7 +789,7 @@ export function HomePage() {
           {/* Parallax & Animated Section Background */}
           <div className="page-bg-bleed">
             <motion.img 
-              src="/bg_pricing_master.jpg"
+              src="/bg_pricing_master.webp"
               alt=""
               style={{
                 width: '100%', height: '100%', objectFit: 'cover',
@@ -784,7 +817,7 @@ export function HomePage() {
             viewport={{ once: true, margin: "-10%" }}
             style={{ position: 'relative', zIndex: 1 }}
           >
-            <p className="brand-kicker">License</p>
+            <p className="brand-kicker">買い切りライセンス</p>
             <h2>作業の無駄を削ぎ落とし、動画の<span className="text-glow-gold">純度を高める。</span></h2>
             <p>ゆっくりまとめプロセッサーは買い切り型。毎月のランニングコストを気にせず、動画制作のルーチンを即座に効率化できます。</p>
           </motion.div>
@@ -840,7 +873,7 @@ export function HomePage() {
           {/* Parallax & Animated Section Background */}
           <div className="page-bg-bleed">
             <motion.img 
-              src="/bg_faq_master.jpg"
+              src="/bg_faq_master.webp"
               alt=""
               style={{
                 width: '100%', height: '100%', objectFit: 'cover',
@@ -898,7 +931,7 @@ export function HomePage() {
           {/* Parallax & Animated Section Background */}
           <div className="page-bg-bleed">
             <motion.img 
-              src="/bg_cta_master.jpg"
+              src="/bg_cta_master.webp"
               alt=""
               style={{
                 width: '100%', height: '100%', objectFit: 'cover',

@@ -6063,6 +6063,7 @@ html.brand-home {
   box-shadow: 0 0 24px rgba(223, 192, 131, 0.25);
   transition: all 0.3s ease;
   width: 100%;
+  color: #140e08 !important;
 }
 
 .home-compact-price-btn:hover {
