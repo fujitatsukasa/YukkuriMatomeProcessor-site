@@ -443,7 +443,7 @@ export function HomePage() {
             {/* Header / Dots Navi */}
             <div style={{ flex: '0 0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '0.5rem', gap: '4px' }}>
               <p className="brand-kicker">全機能紹介</p>
-              <h2 style={{ fontSize: 'clamp(1.6rem, 2.5vw, 2.2rem)', margin: 0 }}>収益化に向けた、<span className="text-glow-gold">全7プロセス</span><span className="text-glow-green">完全網羅</span>。</h2>
+              <h2 style={{ fontSize: 'clamp(1.6rem, 2.5vw, 2.2rem)', margin: 0 }}>収益化に向けた、<span style={{ display: 'inline-block' }}><span className="text-glow-gold">全7プロセス</span><span className="text-glow-green">完全網羅</span>。</span></h2>
               <p style={{ color: 'rgba(255,255,255,0.65)', maxWidth: 600, textAlign: 'center' }}>
                 当プロセッサーが提供する全ての主要機能をガイドキャラクターの「のどか」がご案内します。
               </p>
