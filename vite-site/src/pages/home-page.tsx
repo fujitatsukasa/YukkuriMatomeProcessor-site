@@ -423,14 +423,14 @@ export function HomePage() {
           <div style={{ width: '100%', maxWidth: 1400, margin: '0 auto', display: 'flex', flexDirection: 'column', padding: '0 max(1.5rem, 3vw)', position: 'relative', zIndex: 2 }}>
             
             {/* Header / Dots Navi */}
-            <div style={{ flex: '0 0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '1rem', gap: '4px' }}>
+            <div style={{ flex: '0 0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '0.5rem', gap: '4px' }}>
               <span className="home-section-kicker">全機能紹介</span>
               <h2 className="home-section-title" style={{ fontSize: 'clamp(1.6rem, 2.5vw, 2.2rem)', margin: 0 }}>収益化に向けた、<span className="gradient-text gradient-gold">全7プロセス完全網羅</span>。</h2>
               <p style={{ color: 'rgba(255,255,255,0.5)', maxWidth: 600, textAlign: 'center' }}>
                 当プロセッサーが提供する全ての主要機能をガイドキャラクターの「のどか」がご案内します。
               </p>
               
-              <div style={{ display: 'flex', gap: '8px', marginTop: '1.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+              <div style={{ display: 'flex', gap: '8px', marginTop: '0.8rem', flexWrap: 'wrap', justifyContent: 'center' }}>
                 {presentationSlides.map((slide, idx) => (
                   <button 
                     key={idx}
@@ -447,7 +447,7 @@ export function HomePage() {
             </div>
 
             {/* Main Stage */}
-            <div style={{ display: 'flex', flex: '1 1 auto', flexWrap: 'wrap', gap: 'clamp(1.5rem, 3vw, 3rem)', alignItems: 'stretch' }}>
+            <div style={{ display: 'flex', flex: '1 1 auto', flexWrap: 'wrap', gap: 'clamp(1rem, 2vw, 2rem)', alignItems: 'stretch' }}>
               
               {/* Left: Guide Character & Text */}
               <div style={{ flex: '1 1 350px', display: 'flex', flexDirection: 'column', minHeight: 0, position: 'relative' }}>
@@ -513,7 +513,7 @@ export function HomePage() {
                 </AnimatePresence>
 
                 {/* Character */}
-                <div style={{ flex: '1 1 auto', position: 'relative', minHeight: '350px', width: '100%', marginTop: '0.5rem' }}>
+                <div style={{ flex: '1 1 auto', position: 'relative', minHeight: 'clamp(250px, 35svh, 400px)', width: '100%', marginTop: '0.5rem' }}>
                   <AnimatePresence mode="wait">
                     <motion.img 
                       key={`char-${activeSlide}`}
@@ -530,7 +530,7 @@ export function HomePage() {
               </div>
 
               {/* Right: Screenshot Carousel Showcase */}
-              <div style={{ flex: '1.5 1 500px', position: 'relative', minHeight: '400px', perspective: 1200, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div style={{ flex: '1.5 1 500px', position: 'relative', minHeight: 'clamp(280px, 45svh, 500px)', perspective: 1200, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <div style={{ position: 'absolute', inset: '1rem 0 3rem 0', width: '100%' }}>
                     <AnimatePresence mode="wait">
                       <motion.div 

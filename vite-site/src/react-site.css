@@ -3897,7 +3897,7 @@ html.brand-home {
   justify-content: safe center;
   align-items: center;
   min-height: 100svh;
-  padding: clamp(90px, 12vh, 120px) 0 clamp(80px, 12vh, 100px);
+  padding: clamp(40px, 6svh, 120px) 0 clamp(40px, 6svh, 100px);
   box-sizing: border-box;
   scroll-snap-align: start;
 }
