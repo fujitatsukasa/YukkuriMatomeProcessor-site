@@ -97,25 +97,49 @@ const testimonials = [
     author: "ゆっくり解説系クリエイター",
     authorDetail: "登録者15万人 ｜ 導入歴6ヶ月",
     roi: "月間60時間の削減に成功",
-    avatar: "🎮",
-    avatarBg: "linear-gradient(135deg, #667eea, #764ba2)",
+    avatarImg: "/avatars_grid.png",
+    avatarPos: "0% 0%",
   },
   {
     quote: "「外注に頼っていた反応集まとめを内製化できました。コピペ作業の属人性が排除され、完全な自動パイプラインが完成しました。」",
     author: "2ch反応集チャンネル運営",
     authorDetail: "月間再生数300万回 ｜ 導入歴4ヶ月",
     roi: "外注費 約15万円/月の削減",
-    avatar: "📺",
-    avatarBg: "linear-gradient(135deg, #f093fb, #f5576c)",
+    avatarImg: "/avatars_grid.png",
+    avatarPos: "50% 0%",
   },
   {
     quote: "「YMM4への出力がワンクリックなのが最大の魅力。細かい立ち絵の表情指定も事前にまとめて設定できるためミスが激減しました。」",
     author: "複数チャンネル運営ディレクター",
     authorDetail: "3チャンネル同時運営 ｜ 導入歴8ヶ月",
     roi: "修正・確認時間の 80%削減",
-    avatar: "🎬",
-    avatarBg: "linear-gradient(135deg, #4facfe, #00f2fe)",
-  }
+    avatarImg: "/avatars_grid.png",
+    avatarPos: "100% 0%",
+  },
+  {
+    quote: "「ショート動画を量産するために導入。テンプレートを一度組めば、あとはURLを入れるだけで台本が出来上がるので楽すぎます。」",
+    author: "ショート動画特化クリエイター",
+    authorDetail: "TikTok フォロワー8万 ｜ 導入歴3ヶ月",
+    roi: "月間投稿本数が3倍に",
+    avatarImg: "/avatars_grid.png",
+    avatarPos: "0% 50%",
+  },
+  {
+    quote: "「副業で始めたゆっくり解説チャンネルが、このツールのおかげで本業の収入を超えました。準備の手間が消えたのが大きいです。」",
+    author: "副業系ゆっくりクリエイター",
+    authorDetail: "登録者3万人 ｜ 導入歴5ヶ月",
+    roi: "副業収入が月20万円を突破",
+    avatarImg: "/avatars_grid.png",
+    avatarPos: "50% 50%",
+  },
+  {
+    quote: "「法人として複数チャンネルの運用を効率化するために導入。属人化を排除でき、スタッフの教育コストも大幅に削減できました。」",
+    author: "動画制作会社 COO",
+    authorDetail: "法人5チャンネル運用 ｜ 導入歴10ヶ月",
+    roi: "スタッフ教育コスト 70%削減",
+    avatarImg: "/avatars_grid.png",
+    avatarPos: "100% 50%",
+  },
 ]
 
 type FAQItem = { question: string; answer: string }
@@ -133,7 +157,7 @@ const faqCategories: FAQCategory[] = [
     items: [
       {
         question: '価格・プランについて教えてください。',
-        answer: 'ご自身の利用用途に合わせた月額サブスクリプション制となります。スタンダードプラン（5,500円/月）と、さらに機能が充実したプロプラン（11,000円/月）をご用意しております。制作本数等の従量課金はありません。',
+        answer: '無料プラン、スタンダードプラン（月額5,000円/税込5,500円）、プロプラン（月額10,000円/税込11,000円）の3つのプランをご用意しています。まずは無料プランでお試しください。',
       },
       {
         question: '購入後のアップデートは無料ですか？',
@@ -141,7 +165,7 @@ const faqCategories: FAQCategory[] = [
       },
       {
         question: '返金は可能ですか？',
-        answer: '7日間の無料トライアル期間内であれば、一切の費用は発生しません。トライアル期間中に十分にご確認の上、継続をご判断ください。',
+        answer: '返金ポリシーについては、フッターの「返金・キャンセルポリシー」をご確認ください。まずは無料プランで十分にお試しの上、有料プランへのアップグレードをご検討ください。',
       },
     ]
   },
@@ -367,7 +391,7 @@ export function HomePage() {
                   使い方を見る
                 </Link>
               </div>
-              <p className="hero-microcopy">7日間の無料トライアル・クレジットカード不要・即ダウンロード</p>
+              <p className="hero-microcopy">無料プランあり・Windows対応・即ダウンロード</p>
 
               <div className="hero-proof-bar" style={{ position: 'relative', zIndex: 1 }}>
                 {socialProofStats.map((stat) => (
@@ -443,9 +467,9 @@ export function HomePage() {
             
             {/* Header / Dots Navi */}
             <div style={{ flex: '0 0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '0.5rem', gap: '4px' }}>
-              <span className="home-section-kicker">全機能紹介</span>
-              <h2 className="home-section-title" style={{ fontSize: 'clamp(1.6rem, 2.5vw, 2.2rem)', margin: 0 }}>収益化に向けた、<span className="gradient-text gradient-gold">全7プロセス完全網羅</span>。</h2>
-              <p style={{ color: 'rgba(255,255,255,0.5)', maxWidth: 600, textAlign: 'center' }}>
+              <p className="brand-kicker">全機能紹介</p>
+              <h2 style={{ fontSize: 'clamp(1.6rem, 2.5vw, 2.2rem)', margin: 0 }}>収益化に向けた、<span className="text-glow-gold">全7プロセス</span><span className="text-glow-green">完全網羅</span>。</h2>
+              <p style={{ color: 'rgba(255,255,255,0.65)', maxWidth: 600, textAlign: 'center' }}>
                 当プロセッサーが提供する全ての主要機能をガイドキャラクターの「のどか」がご案内します。
               </p>
               
@@ -649,18 +673,7 @@ export function HomePage() {
           </div>
         </section>
 
-        {/* ━━━[ Intermediate CTA Band #1: After Feature Overview ]━━━ */}
-        <div className="intermediate-cta-band" style={{ position: 'relative', zIndex: 1 }}>
-          <div className="intermediate-cta-band__inner">
-            <div className="intermediate-cta-band__copy">
-              <CheckCircle2 size={24} color="#4CAF50" />
-              <span>全7ステップを<strong className="text-glow-gold">30秒で無料ダウンロード</strong>して体験</span>
-            </div>
-            <Link className="brand-btn brand-btn--primary intermediate-cta-band__btn" to="/download/">
-              → 無料トライアルを開始
-            </Link>
-          </div>
-        </div>
+
 
         <Section alt className="home-compact-section home-compact-process-section bg-marquee-wrap">
           {/* Parallax & Animated Section Background */}
@@ -702,8 +715,11 @@ export function HomePage() {
           >
             <p className="brand-kicker">圧倒的時短</p>
             <h2>準備時間を、<span className="text-glow-gold">120分から6分</span>へ<span className="text-glow-green">圧倒的短縮</span>。</h2>
-            <p><strong className="text-glow-muted">95%削減</strong>の根拠を可視化。1本あたり約114分の短縮は、月30本の投稿で<span className="text-glow-gold">約57時間（約15万円分以上の労働価値）</span>に相当します。</p>
-            <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.35)', marginTop: '0.5rem' }}>※ 30分動画1本あたりの準備工程（ネタ探し・台本整理・YMM4前調整）を当社環境にて実測・比較した結果に基づく</p>
+            <p style={{ maxWidth: '700px', margin: '0 auto' }}>
+              1本あたり約114分の短縮は、月30本の投稿で<span className="text-glow-gold">約57時間</span>に相当。<br/>
+              <strong className="text-glow-muted">95%削減</strong>の根拠を、工程ごとの比較データで可視化します。
+            </p>
+            <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.35)', marginTop: '0.5rem' }}>※ 30分動画1本あたりの準備工程を当社環境にて実測・比較した結果に基づく</p>
           </motion.div>
 
           <motion.div 
@@ -911,58 +927,59 @@ export function HomePage() {
           >
             <p className="brand-kicker">お客様の声</p>
             <h2>導入クリエイターの<span className="text-glow-gold">圧倒的成果</span></h2>
-            <p>すでに多くの動画クリエイターが、当プロセッサーにより作業時間を削減し、収益化のスピードを上げています。</p>
+            <p style={{ maxWidth: '600px', margin: '0 auto' }}>
+              ジャンルも規模もさまざまなクリエイターが、<br/>
+              当プロセッサーで制作フローを<strong className="text-glow-gold">劇的に効率化</strong>しています。
+            </p>
           </motion.div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
-            {testimonials.map((t, idx) => (
-              <motion.div 
-                key={idx}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-10%" }}
-                transition={{ duration: 0.5, delay: idx * 0.15 }}
-                className="testimonial-card"
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1.2rem' }}>
-                  <Star size={16} fill="#e0c184" color="#e0c184" />
-                  <Star size={16} fill="#e0c184" color="#e0c184" />
-                  <Star size={16} fill="#e0c184" color="#e0c184" />
-                  <Star size={16} fill="#e0c184" color="#e0c184" />
-                  <Star size={16} fill="#e0c184" color="#e0c184" />
-                </div>
-                <p style={{ fontSize: '1rem', lineHeight: 1.7, color: '#f5f1e9', flex: 1, marginBottom: '1.5rem', fontWeight: 500 }}>{t.quote}</p>
-                <div style={{ marginTop: 'auto', paddingTop: '1.2rem', borderTop: '1px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                  {/* Avatar */}
-                  <div style={{ width: 48, height: 48, borderRadius: '50%', background: t.avatarBg, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.4rem', flexShrink: 0, boxShadow: '0 4px 12px rgba(0,0,0,0.3)' }}>
-                    {t.avatar}
+          {/* Horizontal Scroll Carousel */}
+          <div className="testimonials-carousel" style={{ position: 'relative', zIndex: 1, width: '100%', overflow: 'hidden', padding: '1rem 0 2rem' }}>
+            <motion.div 
+              className="testimonials-carousel__track"
+              style={{ display: 'flex', gap: '1.5rem', paddingLeft: 'max(1.5rem, calc((100vw - 1200px) / 2))', paddingRight: '2rem', cursor: 'grab' }}
+              drag="x"
+              dragConstraints={{ right: 0, left: -(testimonials.length * 380 - (typeof window !== 'undefined' ? window.innerWidth : 1200) + 100) }}
+              dragElastic={0.1}
+            >
+              {testimonials.map((t, idx) => (
+                <motion.div 
+                  key={idx}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-10%" }}
+                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                  className="testimonial-card"
+                  style={{ minWidth: '350px', maxWidth: '380px', flex: '0 0 auto' }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1.2rem' }}>
+                    <Star size={16} fill="#e0c184" color="#e0c184" />
+                    <Star size={16} fill="#e0c184" color="#e0c184" />
+                    <Star size={16} fill="#e0c184" color="#e0c184" />
+                    <Star size={16} fill="#e0c184" color="#e0c184" />
+                    <Star size={16} fill="#e0c184" color="#e0c184" />
                   </div>
-                  <div style={{ minWidth: 0 }}>
-                    <p style={{ fontSize: '0.95rem', color: '#f5f1e9', marginBottom: '0.15rem', fontWeight: 600 }}>{t.author}</p>
-                    <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.45)', marginBottom: '0.3rem' }}>{t.authorDetail}</p>
-                    <p style={{ fontSize: '0.9rem', color: '#e0c184', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '4px' }}>
-                      <TrendingUp size={14} />
-                      {t.roi}
-                    </p>
+                  <p style={{ fontSize: '1rem', lineHeight: 1.7, color: '#f5f1e9', flex: 1, marginBottom: '1.5rem', fontWeight: 500 }}>{t.quote}</p>
+                  <div style={{ marginTop: 'auto', paddingTop: '1.2rem', borderTop: '1px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                    {/* Avatar */}
+                    <div style={{ width: 52, height: 52, borderRadius: '50%', overflow: 'hidden', flexShrink: 0, boxShadow: '0 4px 16px rgba(0,0,0,0.4)', border: '2px solid rgba(224,193,132,0.3)' }}>
+                      <img src={t.avatarImg} alt={t.author} style={{ width: '156px', height: '104px', objectFit: 'cover', objectPosition: t.avatarPos, transform: 'scale(1)' }} />
+                    </div>
+                    <div style={{ minWidth: 0 }}>
+                      <p style={{ fontSize: '0.95rem', color: '#f5f1e9', marginBottom: '0.15rem', fontWeight: 600 }}>{t.author}</p>
+                      <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.45)', marginBottom: '0.3rem' }}>{t.authorDetail}</p>
+                      <p style={{ fontSize: '0.9rem', color: '#e0c184', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '4px' }}>
+                        <TrendingUp size={14} />
+                        {t.roi}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              ))}
+            </motion.div>
+            <p style={{ textAlign: 'center', color: 'rgba(255,255,255,0.3)', fontSize: '0.8rem', marginTop: '1rem' }}>← ドラッグしてスクロール →</p>
           </div>
         </Section>
-
-        {/* ━━━[ Intermediate CTA Band #2: After Testimonials ]━━━ */}
-        <div className="intermediate-cta-band" style={{ position: 'relative', zIndex: 1 }}>
-          <div className="intermediate-cta-band__inner">
-            <div className="intermediate-cta-band__copy">
-              <Clock size={24} color="#e0c184" />
-              <span>今なら<strong className="text-glow-gold">7日間完全無料</strong>ですべての機能をお試しいただけます</span>
-            </div>
-            <Link className="brand-btn brand-btn--primary intermediate-cta-band__btn" to="/download/">
-              → 30秒で無料ダウンロード
-            </Link>
-          </div>
-        </div>
 
         <Section className="home-compact-section home-compact-price-section">
           {/* Parallax & Animated Section Background */}
@@ -997,67 +1014,92 @@ export function HomePage() {
             style={{ position: 'relative', zIndex: 1 }}
           >
             <p className="brand-kicker">料金プラン</p>
-            <h2>自身の規模に合わせた<span className="text-glow-gold">最適なプランを。</span></h2>
-            <p>毎月の外注費用や、ご自身の労働時間と比較してください。<strong>導入初月で投資コストを容易に回収可能</strong>な圧倒的な時間対効果（ROI）を提供します。</p>
+            <h2>あなたの制作スタイルに合わせた<span className="text-glow-gold">3つのプラン</span></h2>
+            <p style={{ maxWidth: '600px', margin: '0 auto' }}>まずは無料で始めて、必要に応じてアップグレード。<br/>すべてのプランで<strong className="text-glow-muted">基本機能をフル活用</strong>できます。</p>
           </motion.div>
 
-          <div style={{ position: 'relative', zIndex: 1, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', width: '100%', maxWidth: '1000px', margin: '0 auto' }}>
-            {/* Standard Plan */}
+          <div style={{ position: 'relative', zIndex: 1, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', width: '100%', maxWidth: '1200px', margin: '0 auto' }}>
+            {/* Free Plan */}
             <InteractiveCard className="home-compact-price-card-rich">
               <div className="home-compact-price-card-rich__top">
-                <h3>Standard Plan</h3>
+                <h3 style={{ color: '#4CAF50' }}>Free</h3>
                 <div className="home-compact-price-card-rich__price">
-                  <strong>月額 5,500円</strong>
-                  <span>(税抜 5,000円)</span>
+                  <strong style={{ color: '#4CAF50' }}>¥0</strong>
+                  <span>ずっと無料</span>
                 </div>
-                <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.45)' }}>1日あたり約183円 — コーヒー1杯以下の投資</p>
-                <p>個人クリエイター向け。毎月の制作にかかる膨大な時間を劇的に下げる基本プラン。</p>
+                <p>まずは気軽に体験。基本的な台本取得と編集機能を無料でお使いいただけます。</p>
               </div>
-
               <ul className="home-compact-price-card-rich__features" aria-label="搭載機能">
-                <li><span className="check-icon">✓</span> AI台本自動コンバート</li>
-                <li><span className="check-icon">✓</span> YMM4用タイムライン出力</li>
-                <li><span className="check-icon">✓</span> 無償アップデート対応</li>
+                <li><span className="check-icon">✓</span> 台本取得・基本編集</li>
+                <li><span className="check-icon">✓</span> YMM4タイムライン出力</li>
+                <li><span className="check-icon">✓</span> 無償アップデート</li>
+                <li><span className="check-icon" style={{ opacity: 0.3 }}>—</span> <span style={{ opacity: 0.4 }}>AI台本自動生成</span></li>
+                <li><span className="check-icon" style={{ opacity: 0.3 }}>—</span> <span style={{ opacity: 0.4 }}>優先サポート</span></li>
               </ul>
-
               <div className="home-compact-price-card-rich__action" style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', marginTop: 'auto', paddingTop: '1.5rem' }}>
                 <Link to="/download/" className="brand-btn brand-btn--ghost home-compact-price-btn" style={{ justifyContent: 'center' }}>
-                  まずは7日間無料で試す
+                  無料で始める
+                </Link>
+              </div>
+            </InteractiveCard>
+
+            {/* Standard Plan */}
+            <InteractiveCard className="home-compact-price-card-rich" style={{ borderColor: 'rgba(224, 193, 132, 0.6)', boxShadow: '0 0 40px rgba(224, 193, 132, 0.15)', position: 'relative', transform: 'scale(1.04)', zIndex: 2 }}>
+              <div style={{ position: 'absolute', top: 0, left: '50%', transform: 'translate(-50%, -50%)', background: 'linear-gradient(135deg, #e0c184, #b08d51)', color: '#000', padding: '6px 20px', borderRadius: '12px', fontSize: '0.85rem', fontWeight: 'bold', whiteSpace: 'nowrap', zIndex: 10 }}>
+                🏆 おすすめ
+              </div>
+              <div className="home-compact-price-card-rich__top">
+                <h3 style={{ color: '#e0c184' }}>Standard</h3>
+                <div className="home-compact-price-card-rich__price">
+                  <strong>月額 5,000円</strong>
+                  <span>(税込 5,500円)</span>
+                </div>
+                <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.45)' }}>1日あたり約183円 — コーヒー1杯以下</p>
+                <p>個人クリエイター向け。AI台本生成でさらに制作を加速させる人気プラン。</p>
+              </div>
+              <ul className="home-compact-price-card-rich__features" aria-label="搭載機能">
+                <li><span className="check-icon">✓</span> Free版の全機能</li>
+                <li><span className="check-icon" style={{ color: '#e0c184' }}>✓</span> <strong>AI台本自動コンバート</strong></li>
+                <li><span className="check-icon">✓</span> 高度なYMM4出力設定</li>
+                <li><span className="check-icon">✓</span> 無償アップデート</li>
+                <li><span className="check-icon" style={{ opacity: 0.3 }}>—</span> <span style={{ opacity: 0.4 }}>優先サポート</span></li>
+              </ul>
+              <div className="home-compact-price-card-rich__action" style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', marginTop: 'auto', paddingTop: '1.5rem' }}>
+                <Link to="/purchase/" className="brand-btn brand-btn--primary home-compact-price-btn" style={{ justifyContent: 'center' }}>
+                  スタンダードで始める
                 </Link>
                 <p className="home-compact-price-card-rich__note" style={{ textAlign: 'center', fontSize: '0.8rem', color: 'rgba(255,255,255,0.4)' }}>
-                  トライアル中は一切費用が発生しません
+                  クレジットカード・銀行振込に対応
                 </p>
               </div>
             </InteractiveCard>
 
             {/* Pro Plan */}
-            <InteractiveCard className="home-compact-price-card-rich" style={{ borderColor: 'rgba(224, 193, 132, 0.6)', boxShadow: '0 0 40px rgba(224, 193, 132, 0.15)', transform: 'scale(1.02)' }}>
-              <div style={{ position: 'absolute', top: 0, left: '50%', transform: 'translate(-50%, -50%)', background: 'linear-gradient(135deg, #e0c184, #b08d51)', color: '#000', padding: '4px 16px', borderRadius: '12px', fontSize: '0.85rem', fontWeight: 'bold' }}>
-                おすすめ・法人向け
+            <InteractiveCard className="home-compact-price-card-rich">
+              <div style={{ position: 'absolute', top: 0, left: '50%', transform: 'translate(-50%, -50%)', background: 'rgba(255,255,255,0.1)', color: '#fff', padding: '6px 20px', borderRadius: '12px', fontSize: '0.85rem', fontWeight: 'bold', whiteSpace: 'nowrap', border: '1px solid rgba(255,255,255,0.15)', zIndex: 10 }}>
+                法人・プロ向け
               </div>
               <div className="home-compact-price-card-rich__top">
-                <h3 style={{ color: '#fff' }}>Pro Plan</h3>
+                <h3 style={{ color: '#fff' }}>Pro</h3>
                 <div className="home-compact-price-card-rich__price">
-                  <strong>月額 11,000円</strong>
-                  <span>(税抜 10,000円)</span>
+                  <strong>月額 10,000円</strong>
+                  <span>(税込 11,000円)</span>
                 </div>
-                <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.45)' }}>1日あたり約367円 — 外注費の1/10以下で完全内製化</p>
-                <p>複数チャンネル運営や、完全な自動パイプライン構築を目指すプロ事業者向け。</p>
+                <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.45)' }}>1日あたり約367円 — 外注費の1/10以下</p>
+                <p>複数チャンネル運営や完全自動化を目指すプロ・法人向け。</p>
               </div>
-
-              <ul className="home-compact-price-card-rich__features" aria-label="搭載機能" style={{ marginTop: '1rem' }}>
-                <li><span className="check-icon">✓</span> スタンダード版の全機能</li>
-                <li><span className="check-icon">✓</span> 複数サイトからのネタ自動収集機能</li>
-                <li><span className="check-icon">✓</span> API連携・高度な自動処理対応</li>
-                <li><span className="check-icon">✓</span> 優先専用サポート</li>
+              <ul className="home-compact-price-card-rich__features" aria-label="搭載機能">
+                <li><span className="check-icon">✓</span> Standard版の全機能</li>
+                <li><span className="check-icon" style={{ color: '#e0c184' }}>✓</span> <strong>複数サイトからのネタ自動収集</strong></li>
+                <li><span className="check-icon" style={{ color: '#e0c184' }}>✓</span> <strong>API連携・高度な自動処理</strong></li>
+                <li><span className="check-icon" style={{ color: '#e0c184' }}>✓</span> <strong>優先専用サポート</strong></li>
               </ul>
-
               <div className="home-compact-price-card-rich__action" style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', marginTop: 'auto', paddingTop: '1.5rem' }}>
-                <Link to="/download/" className="brand-btn brand-btn--primary home-compact-price-btn" style={{ justifyContent: 'center' }}>
-                  7日間無料でプロプランを体験
+                <Link to="/purchase/" className="brand-btn brand-btn--ghost home-compact-price-btn" style={{ justifyContent: 'center' }}>
+                  プロプランで始める
                 </Link>
-                <p className="home-compact-price-card-rich__note" style={{ textAlign: 'center' }}>
-                  ※クレジットカード・銀行振込に対応
+                <p className="home-compact-price-card-rich__note" style={{ textAlign: 'center', fontSize: '0.8rem', color: 'rgba(255,255,255,0.4)' }}>
+                  クレジットカード・銀行振込に対応
                 </p>
               </div>
             </InteractiveCard>
@@ -1078,7 +1120,7 @@ export function HomePage() {
             </div>
             <div className="trust-badge-bar__item">
               <CheckCircle2 size={20} color="#4CAF50" />
-              <span>7日間無料トライアル</span>
+              <span>無料プランあり</span>
             </div>
             <div className="trust-badge-bar__item">
               <Clock size={20} color="#e0c184" />
@@ -1185,34 +1227,45 @@ export function HomePage() {
             />
           </div>
 
-          <InteractiveCard className="home-compact-cta-card" style={{ position: 'relative', zIndex: 1 }}>
-            <h2><span className="text-glow-green">反応集・ゆっくり解説</span>の制作前工程を、<span className="text-glow-gold">ひとつに。</span></h2>
-            <p>
-              ネタ収集、台本作成、会話台本、素材整理、YMM4準備まで。
-              手作業で分断しがちな工程を、<strong className="text-glow-gold">1つの流れ</strong>にまとめます。
-            </p>
+          <div className="final-cta-hero" style={{ position: 'relative', zIndex: 1, textAlign: 'center', padding: '0 1.5rem' }}>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+            >
+              <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 3rem)', lineHeight: 1.3, marginBottom: '1.5rem' }}>
+                <span className="text-glow-green">反応集・ゆっくり解説</span>の制作前工程を、<br/>
+                <span className="text-glow-gold">ひとつに。</span>
+              </h2>
+              <p style={{ fontSize: 'clamp(1rem, 1.5vw, 1.2rem)', color: 'rgba(255,255,255,0.7)', maxWidth: '700px', margin: '0 auto 2.5rem', lineHeight: 1.7 }}>
+                ネタ収集、台本作成、会話台本、素材整理、YMM4準備まで。<br/>
+                手作業で分断しがちな工程を、<strong className="text-glow-gold">1つの流れ</strong>にまとめます。
+              </p>
 
-            <div className="brand-inline-actions home-compact-cta__actions">
-              <Link className="brand-btn brand-btn--primary" to="/download/">
-                <ArrowRight size={18} />
-                30秒で無料ダウンロード
-              </Link>
-              <Link className="brand-btn brand-btn--ghost" to="/instructions/">
-                使い方を見る
-              </Link>
-            </div>
-            <div className="hero-microcopy" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem 1.2rem', justifyContent: 'center', fontSize: '0.9rem' }}>
-              <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><CheckCircle2 size={14} color="#4CAF50" /> 7日間の無料トライアル</span>
-              <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><CheckCircle2 size={14} color="#4CAF50" /> クレジットカード不要</span>
-              <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><CheckCircle2 size={14} color="#4CAF50" /> 即ダウンロード</span>
-            </div>
+              <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
+                <Link className="brand-btn brand-btn--primary" to="/download/" style={{ fontSize: '1.1rem', padding: '1rem 2.5rem', gap: '10px' }}>
+                  <ArrowRight size={20} />
+                  無料ダウンロード
+                </Link>
+                <Link className="brand-btn brand-btn--ghost" to="/instructions/" style={{ fontSize: '1.1rem', padding: '1rem 2.5rem' }}>
+                  使い方を見る
+                </Link>
+              </div>
 
-            <ul className="home-compact-cta__badges" aria-label="補足情報">
-              {closingBadges.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </InteractiveCard>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem 1.5rem', justifyContent: 'center', fontSize: '0.95rem', color: 'rgba(255,255,255,0.55)' }}>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><CheckCircle2 size={14} color="#4CAF50" /> 無料プランあり</span>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><CheckCircle2 size={14} color="#4CAF50" /> Windows対応</span>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><CheckCircle2 size={14} color="#4CAF50" /> 即ダウンロード</span>
+              </div>
+
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem', justifyContent: 'center', marginTop: '1.5rem' }}>
+                {closingBadges.map((item) => (
+                  <span key={item} style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '20px', padding: '0.4rem 1rem', fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)' }}>{item}</span>
+                ))}
+              </div>
+            </motion.div>
+          </div>
         </Section>
       </div>
     </>

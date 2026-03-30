@@ -50,7 +50,7 @@ export function NewsPage() {
           <InteractiveCard className="brand-card premium-glass">
             <h2>次アクション</h2>
             <div className="brand-inline-actions">
-              <Link className="brand-btn brand-btn--primary" to="/download/">無料トライアルを開始</Link>
+              <Link className="brand-btn brand-btn--primary" to="/download/">無料で始める</Link>
               <Link className="brand-btn brand-btn--ghost" to="/contact/">お問い合わせ</Link>
             </div>
           </InteractiveCard>

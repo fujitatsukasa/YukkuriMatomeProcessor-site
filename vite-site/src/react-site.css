@@ -9185,8 +9185,9 @@ html {
     grid-template-columns: 1fr !important;
   }
 
-  /* Pricing */
-  .home-compact-price-section [style*="gridTemplateColumns"] {
+  /* Pricing - 3 column to 1 column */
+  .home-compact-price-section > div[style*="gridTemplateColumns"],
+  .home-compact-price-section div[style*="grid-template-columns"] {
     grid-template-columns: 1fr !important;
   }
 
@@ -9221,6 +9222,22 @@ html {
   .chart-dashboard__kpi-arrow {
     transform: rotate(90deg);
   }
+
+  /* Final CTA hero mobile */
+  .final-cta-hero h2 {
+    font-size: clamp(1.4rem, 5vw, 2.4rem) !important;
+  }
+
+  /* Testimonial card in carousel mobile */
+  .testimonials-carousel .testimonial-card {
+    min-width: 300px !important;
+  }
+
+  /* Price card badges fix mobile */
+  .home-compact-price-card-rich [style*="transform: translate(-50%, -50%)"] {
+    font-size: 0.75rem !important;
+    padding: 4px 12px !important;
+  }
 }
 
 /* ━━━[ FAQ Category Icon Styling ]━━━ */
@@ -9244,4 +9261,40 @@ html {
 .hero-microcopy {
   font-size: 0.9rem;
   color: rgba(255,255,255,0.5);
+}
+
+/* ━━━[ Final CTA Hero Section ]━━━ */
+.final-cta-hero {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* ━━━[ Testimonials Carousel ]━━━ */
+.testimonials-carousel__track {
+  will-change: transform;
+}
+
+.testimonials-carousel__track:active {
+  cursor: grabbing;
+}
+
+/* ━━━[ 3-Column Pricing Responsive ]━━━ */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .home-compact-price-section div[style*="repeat(3"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  
+  .home-compact-price-card-rich:first-child {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-compact-price-section div[style*="repeat(3"] {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .home-compact-price-card-rich {
+    transform: none !important;
+  }
 }
