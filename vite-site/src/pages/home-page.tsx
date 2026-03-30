@@ -515,16 +515,38 @@ export function HomePage() {
                 {/* Character */}
                 <div style={{ flex: '1 1 auto', position: 'relative', minHeight: 'clamp(250px, 35svh, 400px)', width: '100%', marginTop: '0.5rem' }}>
                   <AnimatePresence mode="wait">
-                    <motion.img 
+                    <motion.div
                       key={`char-${activeSlide}`}
-                      src={presentationSlides[activeSlide]?.charImage || '/nodoka/通常.png'} 
-                      alt="Guide Character Nodoka" 
-                      initial={{ opacity: 0, scale: 0.98, y: 10, filter: 'blur(3px)' }}
+                      initial={{ opacity: 0, scale: 0.95, y: 15, filter: 'blur(3px)' }}
                       animate={{ opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }}
-                      exit={{ opacity: 0, scale: 0.98, y: -10, filter: 'blur(3px)' }}
+                      exit={{ opacity: 0, scale: 0.95, y: -15, filter: 'blur(3px)' }}
                       transition={{ duration: 0.4 }}
-                      style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center bottom', opacity: 0.95, filter: 'drop-shadow(0 0 20px rgba(0,0,0,0.8))', position: 'absolute', inset: 0 }} 
-                    />
+                      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
+                    >
+                      <motion.img 
+                        src={presentationSlides[activeSlide]?.charImage || '/nodoka/通常.png'} 
+                        alt="Guide Character Nodoka" 
+                        animate={{ 
+                          scaleY: [1, 1.025, 1],
+                          scaleX: [1, 0.985, 1],
+                          y: [0, -8, 0]
+                        }}
+                        transition={{ 
+                          duration: 2.5, 
+                          repeat: Infinity, 
+                          ease: "easeInOut" 
+                        }}
+                        style={{ 
+                          width: '100%', 
+                          height: '100%', 
+                          objectFit: 'contain', 
+                          objectPosition: 'center bottom', 
+                          transformOrigin: 'bottom center',
+                          opacity: 0.95, 
+                          filter: 'drop-shadow(0 0 20px rgba(0,0,0,0.8))' 
+                        }} 
+                      />
+                    </motion.div>
                   </AnimatePresence>
                 </div>
               </div>
