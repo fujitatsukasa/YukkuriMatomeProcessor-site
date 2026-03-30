@@ -3872,9 +3872,9 @@ html {
 }
 
 /* ═══[ Scroll-Snap: スライドショー型セクション送り ]═══
-   mandatory = 1画面1項目を厳密に守る。スクロール途中で手を離しても必ずセクション冒頭に吸い付く */
+   proximity = 1画面に収まる場合は冒頭に吸い付くが、コンテンツが画面高（100svh）を超える「はみ出し状態」の場合は強制せず自然なスクロール・閲覧を許可する安全な方式 */
 html.brand-home {
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y proximity;
 }
 
 .home-compact-hero {
