@@ -60,8 +60,9 @@ const timeReduction = {
 
 const timeBreakdown = [
   { label: 'ネタ探し', manual: '30分', product: '2分', desc: '複数サイトからの手動コピペを自動収集へと置き換え' },
-  { label: '台本整理', manual: '35分', product: '2分', desc: '不要なノイズの除去と会話台本形式への一括テキスト変換' },
-  { label: 'YMM4前調整', manual: '55分', product: '2分', desc: '立ち絵の表情指定からタイムライン配置への読み込み定義' },
+  { label: '台本整理・生成', manual: '25分', product: '1分', desc: 'ノイズ除去と会話台本形式への一括テキスト変換をAIで自動化' },
+  { label: '感情・配役設定', manual: '10分', product: '1分', desc: '立ち絵の表情・声色マッピングをテンプレートで一括適用' },
+  { label: 'YMM4前調整', manual: '55分', product: '2分', desc: 'タイムライン配置・読み込み定義を自動出力' },
 ] as const
 
 const useCasesData = [
@@ -85,8 +86,8 @@ const useCasesData = [
   },
   {
     title: '自動化による収益化量産',
-    body: '属人性を排除したパイプラインで動画制作を仕組み化。外注からの内製化にも最適。',
-    image: '/product_youtube_info.png',
+    body: 'テンプレート＋AI台本で属人性を排除。外注の内製化に最適。',
+    image: '/product_ai_script.png',
     Icon: Zap,
   },
 ] as const
@@ -203,7 +204,7 @@ const faqCategories: FAQCategory[] = [
 
 const faqItems: FAQItem[] = faqCategories.flatMap(c => c.items)
 
-const closingBadges = ['月額制', 'Windows対応', 'YMM4向け', legal.support.firstResponseSla] as const
+
 
 const homeMetaDescription =
   '反応集・ゆっくり解説・ショート動画向けに、ネタ収集、台本作成、会話台本、立ち絵・画像・音声の素材整理、YMM4前の準備までまとめて進められる動画制作支援ツール。'
@@ -417,12 +418,10 @@ export function HomePage() {
 
             <div className="home-compact-hero__media" style={{ perspective: '1200px' }}>
               <motion.div
-                initial={{ opacity: 0, rotateY: 15, rotateX: 5, y: 50 }}
-                animate={{ opacity: 1, rotateY: -15, rotateX: 10, y: [0, -15, 0] }}
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: [0, -8, 0] }}
                 transition={{
                   opacity: { duration: 0.8, ease: "easeOut" },
-                  rotateY: { duration: 10, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" },
-                  rotateX: { duration: 8, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" },
                   y: { duration: 6, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }
                 }}
                 style={{
@@ -433,37 +432,17 @@ export function HomePage() {
                   boxShadow: '0 30px 60px -12px rgba(0,0,0,0.8), 0 18px 36px -18px rgba(0,0,0,1), inset 0 0 0 1px rgba(255,255,255,0.2)',
                   overflow: 'hidden',
                   background: '#111',
-                  transformStyle: 'preserve-3d',
                 }}
               >
-                {/* 3D Glass overlay */}
-                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(125deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 40%, rgba(255,255,255,0.02) 100%)', zIndex: 2, pointerEvents: 'none' }} />
+                {/* Glass overlay */}
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(125deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 40%, rgba(255,255,255,0.02) 100%)', zIndex: 2, pointerEvents: 'none' }} />
                 
-                {/* Real Product Video */}
-                <video 
-                  src={media.heroEditing} 
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
+                {/* Actual Product Screenshot */}
+                <img 
+                  src="/product_get_script.png"
+                  alt="ゆっくりまとめプロセッサーの実際の操作画面"
                   style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'left top', zIndex: 1, position: 'relative' }}
                 />
-
-                {/* Floating UI Elements for 3D depth */}
-                <motion.div 
-                   style={{
-                     position: 'absolute', bottom: '-20px', right: '-20px', background: 'rgba(20,20,25,0.9)', 
-                     backdropFilter: 'blur(10px)', border: '1px solid rgba(224, 193, 132, 0.4)', borderRadius: '12px',
-                     padding: '12px 16px', color: '#fff', fontSize: '0.85rem', fontWeight: 'bold', zIndex: 3,
-                     boxShadow: '0 10px 30px rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', gap: '8px',
-                     transform: 'translateZ(50px)'
-                   }}
-                   animate={{ y: [0, 10, 0] }}
-                   transition={{ duration: 4, repeat: Infinity, repeatType: "mirror", ease: "easeInOut", delay: 1 }}
-                >
-                  <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#4CAF50', boxShadow: '0 0 10px #4CAF50' }} />
-                  AI 自動変換処理中
-                </motion.div>
 
               </motion.div>
             </div>
@@ -505,9 +484,7 @@ export function HomePage() {
               transition={{ duration: 0.8, ease: "easeOut" }}
               style={{ flex: '1 1 auto' }}
             >
-              <motion.div 
-                animate={{ y: [0, -5, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              <div 
                 style={{ display: 'flex', flex: '1 1 auto', flexWrap: 'wrap', gap: 'clamp(1rem, 2vw, 2rem)', alignItems: 'stretch' }}
               >
               
@@ -676,7 +653,7 @@ export function HomePage() {
                   </div>
               </div>
 
-            </motion.div>
+            </div>
             </motion.div>
           </div>
         </section>
@@ -709,8 +686,8 @@ export function HomePage() {
 
           <div className="bg-marquee-container" aria-hidden="true" style={{ zIndex: 0 }}>
             <div className="bg-marquee__track">
-              <span>95% TIME REDUCTION FOR YMM4 - PREPARATION REVOLUTION - MASSIVE EFFICIENCY - </span>
-              <span>95% TIME REDUCTION FOR YMM4 - PREPARATION REVOLUTION - MASSIVE EFFICIENCY - </span>
+              <span>作業時間95%削減 - YMM4完全対応 - 動画制作を圧倒的に効率化 - ネタ収集から出力まで一本化 - </span>
+              <span>作業時間95%削減 - YMM4完全対応 - 動画制作を圧倒的に効率化 - ネタ収集から出力まで一本化 - </span>
             </div>
           </div>
           <motion.div 
@@ -727,7 +704,7 @@ export function HomePage() {
               1本あたり約114分の短縮は、月30本の投稿で<span className="text-glow-gold">約57時間</span>に相当。<br/>
               <strong className="text-glow-muted">95%削減</strong>の根拠を、工程ごとの比較データで可視化します。
             </p>
-            <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.35)', marginTop: '0.5rem' }}>※ 30分動画1本あたりの準備工程を当社環境にて実測・比較した結果に基づく</p>
+            <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.55)', marginTop: '0.5rem' }}>※ 30分動画1本あたりの準備工程を当社環境にて実測・比較した結果に基づく</p>
           </motion.div>
 
           <motion.div 
@@ -949,7 +926,7 @@ export function HomePage() {
             <div 
               ref={testimonialsRef}
               className="testimonials-carousel__track"
-              style={{ display: 'flex', gap: '1.5rem', paddingLeft: 'max(1.5rem, calc((100vw - 1200px) / 2))', paddingRight: '2rem', overflowX: 'auto', scrollSnapType: 'x mandatory', scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              style={{ display: 'flex', gap: '1.5rem', paddingLeft: 'max(3.5rem, calc((100vw - 1200px) / 2))', paddingRight: '3.5rem', overflowX: 'auto', scrollSnapType: 'x mandatory', scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
               {testimonials.map((t, idx) => (
                 <motion.div 
@@ -978,7 +955,7 @@ export function HomePage() {
                     }} />
                     <div style={{ minWidth: 0 }}>
                       <p style={{ fontSize: '0.95rem', color: '#f5f1e9', marginBottom: '0.15rem', fontWeight: 600 }}>{t.author}</p>
-                      <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.45)', marginBottom: '0.3rem' }}>{t.authorDetail}</p>
+                      <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.65)', marginBottom: '0.3rem' }}>{t.authorDetail}</p>
                       <p style={{ fontSize: '0.9rem', color: '#e0c184', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '4px' }}>
                         <TrendingUp size={14} />
                         {t.roi}
@@ -988,7 +965,7 @@ export function HomePage() {
                 </motion.div>
               ))}
             </div>
-            <p className="carousel-hint" style={{ textAlign: 'center', color: 'rgba(255,255,255,0.3)', fontSize: '0.8rem', marginTop: '1rem' }}>← ドラッグ・スワイプしてスクロール →</p>
+            <p className="carousel-hint" style={{ textAlign: 'center', color: 'rgba(255,255,255,0.45)', fontSize: '0.85rem', marginTop: '1rem' }}>← スワイプまたは矢印ボタンで閲覧 →</p>
           </div>
         </Section>
 
@@ -1038,14 +1015,15 @@ export function HomePage() {
                   <strong style={{ color: '#4CAF50' }}>¥0</strong>
                   <span>ずっと無料</span>
                 </div>
-                <p>まずは気軽に体験。自動動画編集などの基本機能を無料でお使いいただけます。</p>
+                <p>まずは気軽に体験。基本的な編集・出力機能を無料でお使いいただけます。</p>
               </div>
               <ul className="home-compact-price-card-rich__features" aria-label="搭載機能">
                 <li><span className="check-icon">✓</span> 自動動画編集</li>
                 <li><span className="check-icon">✓</span> YMM4タイムライン出力</li>
                 <li><span className="check-icon">✓</span> ローカル分析</li>
-                <li><span className="check-icon" style={{ opacity: 0.3 }}>—</span> <span style={{ opacity: 0.4 }}>高度な台本自動生成</span></li>
-                <li><span className="check-icon" style={{ opacity: 0.3 }}>—</span> <span style={{ opacity: 0.4 }}>優先サポート</span></li>
+                <li><span className="check-icon">✓</span> 内蔵操作ガイド</li>
+                <li><span className="check-icon">✓</span> 無償アップデート</li>
+                <li><span className="check-icon" style={{ opacity: 0.3 }}>—</span> <span style={{ opacity: 0.4 }}>高度な台本取得・AI生成</span></li>
               </ul>
               <div className="home-compact-price-card-rich__action" style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', marginTop: 'auto', paddingTop: '1.5rem' }}>
                 <Link to="/download/" className="brand-btn brand-btn--ghost home-compact-price-btn" style={{ justifyContent: 'center' }}>
@@ -1071,9 +1049,9 @@ export function HomePage() {
                 <p>個人クリエイター向け。AI台本生成でさらに制作を加速させる人気プラン。</p>
               </div>
               <ul className="home-compact-price-card-rich__features" aria-label="搭載機能">
-                <li><span className="check-icon">✓</span> Free版の全機能</li>
-                <li><span className="check-icon" style={{ color: '#e0c184' }}>✓</span> <strong>高度な台本取得・生成</strong></li>
-                <li><span className="check-icon">✓</span> 高度なYMM4出力設定</li>
+                <li><span className="check-icon">✓</span> 自動動画編集・YMM4出力・ローカル分析</li>
+                <li><span className="check-icon" style={{ color: '#e0c184' }}>✓</span> <strong>高度な台本取得・AI生成</strong></li>
+                <li><span className="check-icon" style={{ color: '#e0c184' }}>✓</span> <strong>高度なYMM4出力設定</strong></li>
                 <li><span className="check-icon">✓</span> 無償アップデート</li>
                 <li><span className="check-icon" style={{ opacity: 0.3 }}>—</span> <span style={{ opacity: 0.4 }}>優先専用サポート</span></li>
               </ul>
@@ -1081,7 +1059,7 @@ export function HomePage() {
                 <Link to="/purchase/" className="brand-btn brand-btn--primary home-compact-price-btn" style={{ justifyContent: 'center' }}>
                   スタンダードで始める
                 </Link>
-                <p className="home-compact-price-card-rich__note" style={{ textAlign: 'center', fontSize: '0.8rem', color: 'rgba(255,255,255,0.4)' }}>
+                <p className="home-compact-price-card-rich__note" style={{ textAlign: 'center', fontSize: '0.85rem', color: 'rgba(255,255,255,0.6)' }}>
                   クレジットカード・銀行振込に対応
                 </p>
               </div>
@@ -1096,11 +1074,11 @@ export function HomePage() {
               </div>
               <div className="home-compact-price-card-rich__top">
                 <h3 style={{ color: '#fff' }}>Pro</h3>
-                <div className="home-compact-price-card-rich__price">
-                  <strong>月額 10,000円</strong>
-                  <span>(税込 11,000円)</span>
+                <div className="home-compact-price-card-rich__price" style={{ whiteSpace: 'nowrap' }}>
+                  <strong style={{ fontSize: 'clamp(1.5rem, 3vw, 2.2rem)' }}>月額 10,000円</strong>
+                  <span style={{ fontSize: '0.85rem', fontWeight: 400, marginLeft: '0.5rem', color: 'rgba(255,255,255,0.7)' }}>(税込 11,000円)</span>
                 </div>
-                <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.45)' }}>1日あたり約367円 — 外注費の1/10以下</p>
+                <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.6)' }}>1日あたり約367円 — 外注費の1/10以下</p>
                 <p>複数チャンネル運営や完全自動化を目指すプロ・法人向け。</p>
               </div>
               <ul className="home-compact-price-card-rich__features" aria-label="搭載機能">
@@ -1113,7 +1091,7 @@ export function HomePage() {
                 <Link to="/purchase/" className="brand-btn brand-btn--ghost home-compact-price-btn" style={{ justifyContent: 'center' }}>
                   プロプランで始める
                 </Link>
-                <p className="home-compact-price-card-rich__note" style={{ textAlign: 'center', fontSize: '0.8rem', color: 'rgba(255,255,255,0.4)' }}>
+                <p className="home-compact-price-card-rich__note" style={{ textAlign: 'center', fontSize: '0.85rem', color: 'rgba(255,255,255,0.6)' }}>
                   クレジットカード・銀行振込に対応
                 </p>
               </div>
@@ -1250,34 +1228,25 @@ export function HomePage() {
               transition={{ duration: 0.7 }}
             >
               <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 3rem)', lineHeight: 1.3, marginBottom: '1.5rem' }}>
-                <span className="text-glow-green">反応集・ゆっくり解説</span>の制作前工程を、<br/>
-                <span className="text-glow-gold">ひとつに。</span>
+                今日から作業時間を<span className="text-glow-gold">95%削減</span>しませんか？
               </h2>
-              <p style={{ fontSize: 'clamp(1rem, 1.5vw, 1.2rem)', color: 'rgba(255,255,255,0.7)', maxWidth: '700px', margin: '0 auto 2.5rem', lineHeight: 1.7 }}>
-                ネタ収集、台本作成、会話台本、素材整理、YMM4準備まで。<br/>
-                手作業で分断しがちな工程を、<strong className="text-glow-gold">1つの流れ</strong>にまとめます。
+              <p style={{ fontSize: 'clamp(1rem, 1.5vw, 1.2rem)', color: 'rgba(255,255,255,0.75)', maxWidth: '700px', margin: '0 auto 2.5rem', lineHeight: 1.7 }}>
+                ネタ収集からYMM4出力まで、手作業で分断していた工程を<strong className="text-glow-gold">1つの流れ</strong>に。<br/>
+                まずは無料プランでお試しください。
               </p>
 
               <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
-                <Link className="brand-btn brand-btn--primary" to="/download/" style={{ fontSize: '1.1rem', padding: '1rem 2.5rem', gap: '10px' }}>
+                <Link className="brand-btn brand-btn--primary" to="/download/" style={{ fontSize: '1.15rem', padding: '1.1rem 2.8rem', gap: '10px' }}>
                   <ArrowRight size={20} />
-                  無料ダウンロード
-                </Link>
-                <Link className="brand-btn brand-btn--ghost" to="/instructions/" style={{ fontSize: '1.1rem', padding: '1rem 2.5rem' }}>
-                  使い方を見る
+                  無料で始める
                 </Link>
               </div>
 
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem 1.5rem', justifyContent: 'center', fontSize: '0.95rem', color: 'rgba(255,255,255,0.55)' }}>
-                <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><CheckCircle2 size={14} color="#4CAF50" /> 無料プランあり</span>
-                <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><CheckCircle2 size={14} color="#4CAF50" /> Windows対応</span>
-                <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><CheckCircle2 size={14} color="#4CAF50" /> 即ダウンロード</span>
-              </div>
-
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem', justifyContent: 'center', marginTop: '1.5rem' }}>
-                {closingBadges.map((item) => (
-                  <span key={item} style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '20px', padding: '0.4rem 1rem', fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)' }}>{item}</span>
-                ))}
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem 1.5rem', justifyContent: 'center', fontSize: '0.95rem', color: 'rgba(255,255,255,0.7)' }}>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><CheckCircle2 size={16} color="#4CAF50" /> 無料プランあり</span>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><CheckCircle2 size={16} color="#4CAF50" /> Windows専用</span>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><CheckCircle2 size={16} color="#4CAF50" /> 即ダウンロード</span>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><CheckCircle2 size={16} color="#e0c184" /> 2,400+本DL突破</span>
               </div>
             </motion.div>
           </div>
