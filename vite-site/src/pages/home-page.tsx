@@ -33,11 +33,15 @@ function AnimatedNumber({ value, active, suffix = '' }: { value: number; active:
 }
 
 // ━━━[ Core AI Features (Benefit & SEO Optimized) ]━━━
-const flowSteps = [
-  { label: '台本取得', stat: '複数サイト対応', desc: 'YouTubeや5ch等のURLから必要な情報を瞬時に抽出し、ワンクリックでストック・一元管理。', icon: 'https://cdn-icons-png.flaticon.com/512/814/814867.png', images: ['/product_get_script.png'] },
-  { label: 'AI台本生成', stat: 'ノイズ完全除去', desc: '集めたネタから不要なノイズを削ぎ落とし、あらかじめ設定したテンプレートに従って自然な掛け合い台本へと一気に再構築します。', icon: 'https://cdn-icons-png.flaticon.com/512/2921/2921136.png', images: ['/product_ai_script.png'] },
-  { label: '台本編集とボード', stat: 'YMM4直結出力', desc: 'サブウィンドウで感情ボードを出しながら直感的に表情や配役を指定。完成後は上部ボタンからYMM4形式へワンクリック出力。', icon: 'https://cdn-icons-png.flaticon.com/512/9373/9373973.png', images: ['/product_edit_script.png', '/product_board_emotion.png'] },
-  { label: '内蔵操作ガイド', stat: '迷わないUI', desc: '初心者でも安心して使いこなせるよう、詳細なマニュアルを搭載。インストールから動画化までの手順をいつでも確認できます。', icon: 'https://cdn-icons-png.flaticon.com/512/4798/4798781.png', images: ['/product_guide.png'] },
+// ━━━[ Core AI Features (7 Step Pitch Deck) ]━━━
+const presentationSlides = [
+  { label: '台本取得', sub: 'WEBから即時ストック', desc: 'YouTubeや5ch等のURLから必要な情報を瞬時に抽出し、ワンクリックでストック・一元管理します。', images: ['/product_get_script.png'], charImage: '/nodoka/通常.png' },
+  { label: 'AI台本生成', sub: '高度な自動構築', desc: '集めたネタから不要なノイズを削ぎ落とし、設定したテンプレートに従って自然な掛け合い台本へと一気に再構築します。', images: ['/product_ai_script.png'], charImage: '/nodoka/自信.png' },
+  { label: 'Youtube分析', sub: 'トレンドを見逃さない', desc: '再生可能な動画データやトレンドを分析し、ヒットの確率を最大限まで高めるトピック選定を助けます。', images: ['/product_youtube_info.png'], charImage: '/nodoka/楽しさ.png' },
+  { label: '台本編集', sub: 'メインボードでサクッと調整', desc: '生成された台本は直感的なメインエディターですぐに微調整可能。ボードを出さずとも手軽にテキストを整えられます。', images: ['/product_edit_script.png'], charImage: '/nodoka/通常.png' },
+  { label: 'サブウインドウ一括管理', sub: '感情ボード・フォーマット', desc: '詳細な感情指定や配役、フォーマットなどは、独立した専用のサブウィンドウで柔軟かつ直感的に一括管理できます。', images: ['/product_edit_script.png', '/product_board_emotion.png'], charImage: '/nodoka/喜び.png' },
+  { label: 'YMM4直結出力', sub: '編集上部からワンクリック', desc: '編集が完了したら、台本編集画面の上部ボタンを一つ押すだけ。立ち絵や音声トーンを紐付け、そのままYMM4で読み込める形に完全出力します。', images: ['/product_edit_script.png'], charImage: '/nodoka/安心.png' },
+  { label: '内蔵操作ガイド', sub: '初心者も安心のフルサポート', desc: 'どの画面からでも即座に呼び出せる詳細なマニュアルを搭載。インストールから動画化までの手順をいつでも確認できます。', images: ['/product_guide.png'], charImage: '/nodoka/高揚.png' },
 ] as const
 
 const socialProofStats = [
@@ -219,24 +223,21 @@ export function HomePage() {
   // Subtle parallax translation
   const parallaxY = useTransform(scrollY, [0, 8000], [0, 2000])
 
-  const [activeFlowStep, setActiveFlowStep] = useState(0)
-  const [progressKey, setProgressKey] = useState(0)
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true)
+  const [activeSlide, setActiveSlide] = useState(0)
+  const isAutoPlayingRef = useRef(true)
 
   // ━━━[ Auto Carousel Logic ]━━━
   useEffect(() => {
-    if (!isAutoPlaying || !isFlowInView) return
+    if (!isAutoPlayingRef.current || !isFlowInView) return
     const timer = setInterval(() => {
-      setActiveFlowStep((prev) => (prev + 1) % flowSteps.length)
-      setProgressKey((k) => k + 1) // Trigger progress bar reset
+      setActiveSlide((prev) => (prev + 1) % presentationSlides.length)
     }, 6000)
     return () => clearInterval(timer)
-  }, [activeFlowStep, isAutoPlaying, isFlowInView])
+  }, [activeSlide, isFlowInView])
 
-  const handleTabClick = (index: number) => {
-    setActiveFlowStep(index)
-    setProgressKey((k) => k + 1)
-    setIsAutoPlaying(false)
+  const handleSlideChange = (index: number) => {
+    isAutoPlayingRef.current = false
+    setActiveSlide(index)
   }
 
 
@@ -397,158 +398,125 @@ export function HomePage() {
           </div>
         </section>
 
-        <Section className="home-compact-section home-compact-flow-section">
-          {/* Parallax & Animated Section Background */}
-          <div className="page-bg-bleed">
-            <motion.img 
-              src="/bg_flow_master.jpg"
-              alt=""
-              style={{
-                width: '100%', height: '100%', objectFit: 'cover',
-                opacity: 0.65, mixBlendMode: 'screen',
-                maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
-                WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)'
-              }}
-              animate={{
-                scale: [1.02, 1.08, 1.02],
-                rotate: [0, 1, 0, -1, 0],
-              }}
-              transition={{
-                duration: 25,
-                ease: "linear",
-                repeat: Infinity
-              }}
-            />
-          </div>
-
-          <motion.div 
-            className="home-compact-section-head"
-            variants={SECTION_HEAD_VARIANTS}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-10%" }}
-            style={{ position: 'relative', zIndex: 1 }}
-          >
-            <p className="brand-kicker">Core AI Engine</p>
-            <h2>動画制作を加速する、<span className="text-glow-gold">4つのAI統合プロセス</span>。</h2>
-            <p className="brand-section-desc">
-              YouTube収益化やショート動画量産に必須となる「リサーチ・台本・YMM4素材」の全工程を、AIの力で1つの美しいパイプラインに統合しました。
-            </p>
-          </motion.div>
-
-          <motion.div 
-            className="home-interactive-flow-container" 
-            ref={flowRef}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0, transition: { type: 'spring', stiffness: 80, damping: 20 } }}
-            viewport={{ once: true, margin: "-10%" }}
-          >
-            {/* Left: Interactive Tabs */}
-            <div className="home-interactive-flow__tabs">
-              {flowSteps.map((item, index) => {
-                const isActive = activeFlowStep === index;
-                return (
-                  <button
-                    key={item.label}
-                    onClick={() => handleTabClick(index)}
-                    className={`home-interactive-flow__tab ${isActive ? 'is-active' : ''}`}
-                    aria-selected={isActive}
-                  >
-                    {/* Magic Move Indicator */}
-                    {isActive && (
-                      <motion.div
-                        layoutId="activeTabIndicator"
-                        className="home-interactive-flow__tab-active-indicator-bg"
-                        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                        style={{
-                          position: 'absolute',
-                          inset: 0,
-                          borderRadius: 'inherit',
-                          background: 'linear-gradient(90deg, rgba(224, 193, 132, 0.1), transparent)',
-                          borderLeft: '2px solid #e0c184',
-                          zIndex: 0
-                        }}
-                      />
-                    )}
-                    
-                    {/* Progress track, stops when clicked manually */}
-                    <div className="home-interactive-flow__tab-bg-progress" key={isActive && isAutoPlaying ? progressKey : `${item.label}-inactive`} style={{ zIndex: 1 }} />
-                    <div className="home-interactive-flow__tab-glow" style={{ zIndex: 1 }} />
-                    <span className="home-interactive-flow__tab-num" style={{ zIndex: 2, position: 'relative' }}>0{index + 1}</span>
-                    <div className="home-interactive-flow__tab-content" style={{ zIndex: 2, position: 'relative' }}>
-                      <h3>{item.label}</h3>
-                      <p>{item.desc}</p>
-                    </div>
-                  </button>
-                );
-              })}
+        <section className="home-presentation-deck" style={{ padding: 'clamp(3rem, 5vh, 6rem) clamp(1rem, 3vw, 2rem)', position: 'relative' }} ref={flowRef}>
+          <div className="home-presentation-container" style={{ maxWidth: 1400, margin: '0 auto', background: 'rgba(8,7,10,0.4)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: 24, padding: 'clamp(2rem, 4vw, 3rem)', boxShadow: '0 40px 100px rgba(0,0,0,0.5)', backdropFilter: 'blur(20px)', position: 'relative', overflow: 'hidden' }}>
+            
+            {/* Header / Dots Navi */}
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '2rem', gap: '8px' }}>
+              <span className="home-section-kicker">FULL FEATURES SHOWCASE</span>
+              <h2 className="home-section-title" style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)' }}>収益化に向けた、<span className="gradient-text gradient-gold">全7プロセス完全網羅</span>。</h2>
+              <p style={{ color: 'rgba(255,255,255,0.5)', maxWidth: 600, textAlign: 'center' }}>
+                当プロセッサーが提供する全ての主要機能をガイドキャラクターの「のどか」がご案内します。
+              </p>
+              
+              <div style={{ display: 'flex', gap: '8px', marginTop: '1.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+                {presentationSlides.map((slide, idx) => (
+                  <button 
+                    key={idx}
+                    onClick={() => handleSlideChange(idx)}
+                    style={{
+                      height: 5, width: activeSlide === idx ? 48 : 16,
+                      background: activeSlide === idx ? '#e0c184' : 'rgba(255,255,255,0.2)',
+                      borderRadius: 4, border: 'none', cursor: 'pointer', transition: 'all 0.3s ease'
+                    }}
+                    title={slide.label}
+                  />
+                ))}
+              </div>
             </div>
 
-            {/* Right: Real product screenshots */}
-            <div className="home-interactive-flow__visual">
-              <div className="home-interactive-flow__mockup">
+            {/* Main Stage */}
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'clamp(2rem, 3vw, 4rem)', alignItems: 'center' }}>
+              
+              {/* Left: Guide Character & Text */}
+              <div style={{ flex: '1 1 340px', display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative' }}>
+                <AnimatePresence mode="wait">
+                  <motion.div 
+                    key={`desc-${activeSlide}`}
+                    initial={{ opacity: 0, x: -20, filter: 'blur(5px)' }}
+                    animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+                    exit={{ opacity: 0, x: 20, filter: 'blur(5px)' }}
+                    transition={{ duration: 0.4 }}
+                    style={{ 
+                      background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(224, 193, 132, 0.2)', 
+                      padding: '2rem', borderRadius: 16, display: 'flex', flexDirection: 'column', gap: '1rem',
+                      width: '100%', position: 'relative', zIndex: 10
+                    }}
+                  >
+                    {/* Speech bubble pointy arrow */}
+                    <div style={{ position: 'absolute', bottom: -10, left: '50%', transform: 'translateX(-50%) rotate(45deg)', width: 20, height: 20, background: 'rgba(20,20,30,1)', borderBottom: '1px solid rgba(224, 193, 132, 0.2)', borderRight: '1px solid rgba(224, 193, 132, 0.2)' }} />
+                    <span style={{ fontSize: '0.9rem', color: '#e0c184', fontWeight: 700, letterSpacing: '2px' }}>STEP 0{activeSlide + 1}</span>
+                    <h3 style={{ fontSize: '1.6rem', color: '#fff', margin: 0 }}>{presentationSlides[activeSlide]?.label}</h3>
+                    <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.8)', lineHeight: 1.6, margin: 0 }}>{presentationSlides[activeSlide]?.desc}</p>
+                  </motion.div>
+                </AnimatePresence>
 
-                <div className="home-interactive-flow__mockup-body" style={{ position: 'relative', flex: '1 1 0', minHeight: 0 }}>
-                  <AnimatePresence mode="popLayout" initial={false}>
-                    {flowSteps[activeFlowStep]?.images.map((imgSrc, imgIndex) => (
-                      <motion.img 
-                        key={`img-${activeFlowStep}-${imgIndex}`}
-                        src={imgSrc}
-                        alt={`${flowSteps[activeFlowStep]?.label}の実画面 ${imgIndex + 1}`} 
-                        initial={{ opacity: 0, scale: 0.96, filter: 'blur(4px)', x: imgIndex * 60, y: imgIndex * 40 }}
-                        animate={{ opacity: 1 - (imgIndex * 0.05), scale: 1, filter: 'blur(0px)', x: imgIndex * 60, y: imgIndex * 40 }}
-                        exit={{ opacity: 0, scale: 1.04, filter: 'blur(4px)', x: imgIndex * 60, y: imgIndex * 40 }}
-                        transition={{ duration: 0.5, type: 'spring', bounce: 0, delay: imgIndex * 0.15 }}
-                        style={{ 
-                          position: 'absolute', 
-                          inset: 0, 
-                          width: flowSteps[activeFlowStep]?.images.length > 1 ? (imgIndex === 0 ? '85%' : '75%') : '100%', 
-                          height: flowSteps[activeFlowStep]?.images.length > 1 ? (imgIndex === 0 ? '85%' : '75%') : '100%', 
-                          objectFit: 'cover', 
-                          objectPosition: 'left top',
-                          borderRadius: '12px',
-                          boxShadow: imgIndex > 0 ? '-10px 20px 40px rgba(0,0,0,0.8)' : 'none',
-                          border: imgIndex > 0 ? '1px solid rgba(255,255,255,0.1)' : 'none',
-                          zIndex: imgIndex
-                        }}
-                      />
-                    ))}
-                  </AnimatePresence>
-
-                  <AnimatePresence mode="popLayout" initial={false}>
-                    <motion.div 
-                      key={`hud-${activeFlowStep}`} 
-                      initial={{ opacity: 0, y: 16, x: '-50%', scale: 0.95 }}
-                      animate={{ opacity: 1, y: 0, x: '-50%', scale: 1 }}
-                      exit={{ opacity: 0, y: -16, x: '-50%', scale: 0.95 }}
-                      transition={{ duration: 0.4, type: 'spring', bounce: 0, delay: 0.1 }}
-                      style={{
-                        position: 'absolute',
-                        bottom: 'clamp(12px, 2vh, 24px)',
-                        left: '50%',
-                        background: 'rgba(8, 7, 10, 0.85)',
-                        backdropFilter: 'blur(12px)',
-                        padding: 'clamp(10px, 1.5vh, 16px) clamp(20px, 2vw, 32px)',
-                        borderRadius: '100px',
-                        border: '1px solid rgba(255,255,255,0.1)',
-                        boxShadow: '0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)',
-                        color: '#fff',
-                        textAlign: 'center',
-                        maxWidth: '90%',
-                        width: 'max-content'
-                      }}
-                    >
-                      <p style={{ margin: 0, fontSize: 'clamp(0.85rem, 1.2vh, 0.95rem)', color: 'rgba(255,255,255,0.9)', fontWeight: 500, letterSpacing: '0.02em' }}>
-                        <span style={{ color: '#e0c184', marginRight: '8px', fontWeight: 700 }}>STEP 0{activeFlowStep + 1}</span>
-                        {flowSteps[activeFlowStep]?.desc}
-                      </p>
-                    </motion.div>
+                <div style={{ position: 'relative', height: 420, width: '100%', marginTop: '1rem' }}>
+                  <AnimatePresence mode="wait">
+                    <motion.img 
+                      key={`char-${activeSlide}`}
+                      src={presentationSlides[activeSlide]?.charImage || '/nodoka/通常.png'} 
+                      alt="Guide Character Nodoka" 
+                      initial={{ opacity: 0, scale: 0.98, y: 10, filter: 'blur(3px)' }}
+                      animate={{ opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }}
+                      exit={{ opacity: 0, scale: 0.98, y: -10, filter: 'blur(3px)' }}
+                      transition={{ duration: 0.4 }}
+                      style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center bottom', opacity: 0.95, filter: 'drop-shadow(0 0 20px rgba(0,0,0,0.8))', position: 'absolute', inset: 0 }} 
+                    />
                   </AnimatePresence>
                 </div>
               </div>
+
+              {/* Right: Screenshot Carousel Showcase */}
+              <div style={{ flex: '2 1 600px', height: 'clamp(300px, 45vh, 550px)', position: 'relative', perspective: 1200 }}>
+                  <AnimatePresence mode="wait">
+                    <motion.div 
+                      key={`slide-${activeSlide}`}
+                      initial={{ opacity: 0, y: 100, rotateX: 10 }}
+                      animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                      exit={{ opacity: 0, y: -100, rotateX: -10 }}
+                      transition={{ duration: 0.6, type: 'spring', bounce: 0.2 }}
+                      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
+                    >
+                      {presentationSlides[activeSlide]?.images.map((imgSrc, imgIndex) => {
+                        const isMain = imgIndex === 0;
+                        const isYMM4Step = activeSlide === 5; // YMM4出力ステップ
+                        return (
+                          <motion.img 
+                            key={`${activeSlide}-${imgIndex}`}
+                            src={imgSrc}
+                            alt={`${presentationSlides[activeSlide]?.label}の実画面 ${imgIndex + 1}`} 
+                            style={{ 
+                              position: 'absolute', 
+                              inset: 0, 
+                              width: presentationSlides[activeSlide]?.images.length > 1 ? (isMain ? '80%' : '70%') : (isYMM4Step ? '100%' : '100%'), 
+                              height: presentationSlides[activeSlide]?.images.length > 1 ? (isMain ? '100%' : '80%') : '100%', 
+                              objectFit: isYMM4Step ? 'cover' : 'contain', 
+                              objectPosition: isYMM4Step ? 'top left' : 'center',
+                              borderRadius: '16px',
+                              boxShadow: imgIndex > 0 ? '-15px 30px 60px rgba(0,0,0,0.8)' : '0 20px 50px rgba(0,0,0,0.4)',
+                              border: '1px solid rgba(255,255,255,0.1)',
+                              zIndex: imgIndex,
+                            }}
+                            initial={imgIndex > 0 ? { x: 80, y: 60, scale: 0.9 } : { x: 0, y: 0, scale: 1 }}
+                            animate={imgIndex > 0 ? { x: 120, y: 80, scale: 1.05 } : { x: 0, y: 0, scale: 1 }}
+                            transition={{ delay: 0.3, type: 'spring', bounce: 0.4 }}
+                          />
+                        )
+                      })}
+                    </motion.div>
+                  </AnimatePresence>
+                  
+                  {/* Prev/Next Hotspots */}
+                  <div style={{ position: 'absolute', bottom: '-40px', right: 0, display: 'flex', gap: '16px' }}>
+                     <button onClick={() => handleSlideChange((activeSlide - 1 + presentationSlides.length) % presentationSlides.length)} style={{ width: 48, height: 48, borderRadius: 24, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>&larr;</button>
+                     <button onClick={() => handleSlideChange((activeSlide + 1) % presentationSlides.length)} style={{ width: 48, height: 48, borderRadius: 24, background: 'linear-gradient(135deg, #e0c184, #b08d51)', border: 'none', color: '#000', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>&rarr;</button>
+                  </div>
+              </div>
+
             </div>
-          </motion.div>
-        </Section>
+          </div>
+        </section>
 
         <Section alt className="home-compact-section home-compact-process-section bg-marquee-wrap">
           {/* Parallax & Animated Section Background */}
