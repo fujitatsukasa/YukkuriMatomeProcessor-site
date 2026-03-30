@@ -419,8 +419,8 @@ export function HomePage() {
           </div>
         </section>
 
-        <section className="home-presentation-deck" style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 'max(2rem, 3vh) 2rem', position: 'relative', scrollSnapAlign: 'start' }} ref={flowRef}>
-          <div className="home-presentation-container" style={{ width: '100%', height: '100%', maxHeight: '900px', maxWidth: 1400, margin: '0 auto', background: 'rgba(8,7,10,0.6)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: 24, padding: 'max(1.5rem, 3vh) max(1.5rem, 3vw)', boxShadow: '0 40px 100px rgba(0,0,0,0.5)', backdropFilter: 'blur(20px)', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+        <section className="brand-section brand-section--alt home-compact-section home-presentation-deck" ref={flowRef} style={{ position: 'relative', zIndex: 1 }}>
+          <div style={{ width: '100%', maxWidth: 1400, margin: '0 auto', display: 'flex', flexDirection: 'column', padding: '0 max(1.5rem, 3vw)', position: 'relative', zIndex: 2 }}>
             
             {/* Header / Dots Navi */}
             <div style={{ flex: '0 0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '1rem', gap: '4px' }}>
@@ -447,7 +447,7 @@ export function HomePage() {
             </div>
 
             {/* Main Stage */}
-            <div style={{ display: 'flex', flex: '1 1 auto', minHeight: 0, flexWrap: 'nowrap', gap: 'clamp(1.5rem, 3vw, 3rem)', alignItems: 'stretch' }}>
+            <div style={{ display: 'flex', flex: '1 1 auto', flexWrap: 'wrap', gap: 'clamp(1.5rem, 3vw, 3rem)', alignItems: 'stretch' }}>
               
               {/* Left: Guide Character & Text */}
               <div style={{ flex: '1 1 350px', display: 'flex', flexDirection: 'column', minHeight: 0, position: 'relative' }}>
@@ -513,7 +513,7 @@ export function HomePage() {
                 </AnimatePresence>
 
                 {/* Character */}
-                <div style={{ flex: '1 1 auto', position: 'relative', minHeight: 0, width: '100%', marginTop: '0.5rem' }}>
+                <div style={{ flex: '1 1 auto', position: 'relative', minHeight: '350px', width: '100%', marginTop: '0.5rem' }}>
                   <AnimatePresence mode="wait">
                     <motion.img 
                       key={`char-${activeSlide}`}
@@ -530,7 +530,7 @@ export function HomePage() {
               </div>
 
               {/* Right: Screenshot Carousel Showcase */}
-              <div style={{ flex: '1.5 1 500px', position: 'relative', minHeight: 0, perspective: 1200, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div style={{ flex: '1.5 1 500px', position: 'relative', minHeight: '400px', perspective: 1200, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <div style={{ position: 'absolute', inset: '1rem 0 3rem 0', width: '100%' }}>
                     <AnimatePresence mode="wait">
                       <motion.div 
