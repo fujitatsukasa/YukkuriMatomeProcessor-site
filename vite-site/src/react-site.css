@@ -9270,12 +9270,63 @@ html {
 }
 
 /* ━━━[ Testimonials Carousel ]━━━ */
-.testimonials-carousel__track {
-  will-change: transform;
+.testimonials-carousel {
+  position: relative;
 }
 
-.testimonials-carousel__track:active {
-  cursor: grabbing;
+.testimonials-carousel__track {
+  will-change: transform, scroll-position;
+  -webkit-overflow-scrolling: touch;
+}
+
+.testimonials-carousel__track::-webkit-scrollbar {
+  display: none;
+}
+
+/* Carousel Navigation Buttons */
+.carousel-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(20, 20, 25, 0.8);
+  border: 1px solid rgba(224, 193, 132, 0.3);
+  color: #e0c184;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  transition: all 0.2s ease;
+  backdrop-filter: blur(4px);
+}
+
+.carousel-nav-btn:hover {
+  background: rgba(30, 30, 35, 0.9);
+  border-color: rgba(224, 193, 132, 0.6);
+  color: #fff;
+}
+
+.carousel-nav-btn:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.carousel-nav-btn--left {
+  left: max(0.5rem, calc((100vw - 1280px) / 2));
+}
+
+.carousel-nav-btn--right {
+  right: max(0.5rem, calc((100vw - 1280px) / 2));
+}
+
+@media (max-width: 768px) {
+  .carousel-nav-btn {
+    display: none; /* Mobile handles touch scrolling natively */
+  }
 }
 
 /* ━━━[ 3-Column Pricing Responsive ]━━━ */
@@ -9292,9 +9343,5 @@ html {
 @media (max-width: 768px) {
   .home-compact-price-section div[style*="repeat(3"] {
     grid-template-columns: 1fr !important;
-  }
-  
-  .home-compact-price-card-rich {
-    transform: none !important;
   }
 }

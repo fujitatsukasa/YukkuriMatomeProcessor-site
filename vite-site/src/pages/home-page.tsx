@@ -279,6 +279,14 @@ export function HomePage() {
   const isFlowInView = useMotionInView(flowRef, { amount: 0.2, once: true })
   const chartRef = useRef<HTMLDivElement>(null)
   const isChartInView = useMotionInView(chartRef, { amount: 0.2, once: true })
+  const testimonialsRef = useRef<HTMLDivElement>(null)
+
+  const scrollTestimonials = (direction: 'left' | 'right') => {
+    if (testimonialsRef.current) {
+      const amount = direction === 'left' ? -380 : 380;
+      testimonialsRef.current.scrollBy({ left: amount, behavior: 'smooth' });
+    }
+  }
 
   const { scrollY } = useScroll()
   // Subtle parallax translation
@@ -935,12 +943,13 @@ export function HomePage() {
 
           {/* Horizontal Scroll Carousel */}
           <div className="testimonials-carousel" style={{ position: 'relative', zIndex: 1, width: '100%', overflow: 'hidden', padding: '1rem 0 2rem' }}>
-            <motion.div 
+            <button onClick={() => scrollTestimonials('left')} className="carousel-nav-btn carousel-nav-btn--left" aria-label="左にスクロール">←</button>
+            <button onClick={() => scrollTestimonials('right')} className="carousel-nav-btn carousel-nav-btn--right" aria-label="右にスクロール">→</button>
+
+            <div 
+              ref={testimonialsRef}
               className="testimonials-carousel__track"
-              style={{ display: 'flex', gap: '1.5rem', paddingLeft: 'max(1.5rem, calc((100vw - 1200px) / 2))', paddingRight: '2rem', cursor: 'grab' }}
-              drag="x"
-              dragConstraints={{ right: 0, left: -(testimonials.length * 380 - (typeof window !== 'undefined' ? window.innerWidth : 1200) + 100) }}
-              dragElastic={0.1}
+              style={{ display: 'flex', gap: '1.5rem', paddingLeft: 'max(1.5rem, calc((100vw - 1200px) / 2))', paddingRight: '2rem', overflowX: 'auto', scrollSnapType: 'x mandatory', scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
               {testimonials.map((t, idx) => (
                 <motion.div 
@@ -950,7 +959,7 @@ export function HomePage() {
                   viewport={{ once: true, margin: "-10%" }}
                   transition={{ duration: 0.5, delay: idx * 0.1 }}
                   className="testimonial-card"
-                  style={{ minWidth: '350px', maxWidth: '380px', flex: '0 0 auto' }}
+                  style={{ minWidth: '350px', maxWidth: '380px', flex: '0 0 auto', scrollSnapAlign: 'start' }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1.2rem' }}>
                     <Star size={16} fill="#e0c184" color="#e0c184" />
@@ -962,9 +971,11 @@ export function HomePage() {
                   <p style={{ fontSize: '1rem', lineHeight: 1.7, color: '#f5f1e9', flex: 1, marginBottom: '1.5rem', fontWeight: 500 }}>{t.quote}</p>
                   <div style={{ marginTop: 'auto', paddingTop: '1.2rem', borderTop: '1px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', gap: '1rem' }}>
                     {/* Avatar */}
-                    <div style={{ width: 52, height: 52, borderRadius: '50%', overflow: 'hidden', flexShrink: 0, boxShadow: '0 4px 16px rgba(0,0,0,0.4)', border: '2px solid rgba(224,193,132,0.3)' }}>
-                      <img src={t.avatarImg} alt={t.author} style={{ width: '156px', height: '104px', objectFit: 'cover', objectPosition: t.avatarPos, transform: 'scale(1)' }} />
-                    </div>
+                    <div style={{ 
+                      width: 52, height: 52, borderRadius: '50%', flexShrink: 0, 
+                      boxShadow: '0 4px 16px rgba(0,0,0,0.4)', border: '2px solid rgba(224,193,132,0.3)',
+                      backgroundImage: `url(${t.avatarImg})`, backgroundSize: '300% 200%', backgroundPosition: t.avatarPos 
+                    }} />
                     <div style={{ minWidth: 0 }}>
                       <p style={{ fontSize: '0.95rem', color: '#f5f1e9', marginBottom: '0.15rem', fontWeight: 600 }}>{t.author}</p>
                       <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.45)', marginBottom: '0.3rem' }}>{t.authorDetail}</p>
@@ -976,8 +987,8 @@ export function HomePage() {
                   </div>
                 </motion.div>
               ))}
-            </motion.div>
-            <p style={{ textAlign: 'center', color: 'rgba(255,255,255,0.3)', fontSize: '0.8rem', marginTop: '1rem' }}>← ドラッグしてスクロール →</p>
+            </div>
+            <p className="carousel-hint" style={{ textAlign: 'center', color: 'rgba(255,255,255,0.3)', fontSize: '0.8rem', marginTop: '1rem' }}>← ドラッグ・スワイプしてスクロール →</p>
           </div>
         </Section>
 
@@ -1020,20 +1031,20 @@ export function HomePage() {
 
           <div style={{ position: 'relative', zIndex: 1, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', width: '100%', maxWidth: '1200px', margin: '0 auto' }}>
             {/* Free Plan */}
-            <InteractiveCard className="home-compact-price-card-rich">
+            <InteractiveCard className="home-compact-price-card-rich" style={{ paddingTop: '2rem' }}>
               <div className="home-compact-price-card-rich__top">
                 <h3 style={{ color: '#4CAF50' }}>Free</h3>
                 <div className="home-compact-price-card-rich__price">
                   <strong style={{ color: '#4CAF50' }}>¥0</strong>
                   <span>ずっと無料</span>
                 </div>
-                <p>まずは気軽に体験。基本的な台本取得と編集機能を無料でお使いいただけます。</p>
+                <p>まずは気軽に体験。自動動画編集などの基本機能を無料でお使いいただけます。</p>
               </div>
               <ul className="home-compact-price-card-rich__features" aria-label="搭載機能">
-                <li><span className="check-icon">✓</span> 台本取得・基本編集</li>
+                <li><span className="check-icon">✓</span> 自動動画編集</li>
                 <li><span className="check-icon">✓</span> YMM4タイムライン出力</li>
-                <li><span className="check-icon">✓</span> 無償アップデート</li>
-                <li><span className="check-icon" style={{ opacity: 0.3 }}>—</span> <span style={{ opacity: 0.4 }}>AI台本自動生成</span></li>
+                <li><span className="check-icon">✓</span> ローカル分析</li>
+                <li><span className="check-icon" style={{ opacity: 0.3 }}>—</span> <span style={{ opacity: 0.4 }}>高度な台本自動生成</span></li>
                 <li><span className="check-icon" style={{ opacity: 0.3 }}>—</span> <span style={{ opacity: 0.4 }}>優先サポート</span></li>
               </ul>
               <div className="home-compact-price-card-rich__action" style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', marginTop: 'auto', paddingTop: '1.5rem' }}>
@@ -1044,9 +1055,11 @@ export function HomePage() {
             </InteractiveCard>
 
             {/* Standard Plan */}
-            <InteractiveCard className="home-compact-price-card-rich" style={{ borderColor: 'rgba(224, 193, 132, 0.6)', boxShadow: '0 0 40px rgba(224, 193, 132, 0.15)', position: 'relative', transform: 'scale(1.04)', zIndex: 2 }}>
-              <div style={{ position: 'absolute', top: 0, left: '50%', transform: 'translate(-50%, -50%)', background: 'linear-gradient(135deg, #e0c184, #b08d51)', color: '#000', padding: '6px 20px', borderRadius: '12px', fontSize: '0.85rem', fontWeight: 'bold', whiteSpace: 'nowrap', zIndex: 10 }}>
-                🏆 おすすめ
+            <InteractiveCard className="home-compact-price-card-rich" style={{ borderColor: 'rgba(224, 193, 132, 0.6)', boxShadow: '0 0 40px rgba(224, 193, 132, 0.15)', position: 'relative', zIndex: 2, paddingTop: '2rem' }}>
+              <div style={{ position: 'absolute', top: 0, left: 0, right: 0, display: 'flex', justifyContent: 'center' }}>
+                <div style={{ background: 'linear-gradient(135deg, #e0c184, #b08d51)', color: '#000', padding: '6px 20px', borderRadius: '0 0 12px 12px', fontSize: '0.85rem', fontWeight: 'bold' }}>
+                  🏆 おすすめ
+                </div>
               </div>
               <div className="home-compact-price-card-rich__top">
                 <h3 style={{ color: '#e0c184' }}>Standard</h3>
@@ -1059,10 +1072,10 @@ export function HomePage() {
               </div>
               <ul className="home-compact-price-card-rich__features" aria-label="搭載機能">
                 <li><span className="check-icon">✓</span> Free版の全機能</li>
-                <li><span className="check-icon" style={{ color: '#e0c184' }}>✓</span> <strong>AI台本自動コンバート</strong></li>
+                <li><span className="check-icon" style={{ color: '#e0c184' }}>✓</span> <strong>高度な台本取得・生成</strong></li>
                 <li><span className="check-icon">✓</span> 高度なYMM4出力設定</li>
                 <li><span className="check-icon">✓</span> 無償アップデート</li>
-                <li><span className="check-icon" style={{ opacity: 0.3 }}>—</span> <span style={{ opacity: 0.4 }}>優先サポート</span></li>
+                <li><span className="check-icon" style={{ opacity: 0.3 }}>—</span> <span style={{ opacity: 0.4 }}>優先専用サポート</span></li>
               </ul>
               <div className="home-compact-price-card-rich__action" style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', marginTop: 'auto', paddingTop: '1.5rem' }}>
                 <Link to="/purchase/" className="brand-btn brand-btn--primary home-compact-price-btn" style={{ justifyContent: 'center' }}>
@@ -1075,9 +1088,11 @@ export function HomePage() {
             </InteractiveCard>
 
             {/* Pro Plan */}
-            <InteractiveCard className="home-compact-price-card-rich">
-              <div style={{ position: 'absolute', top: 0, left: '50%', transform: 'translate(-50%, -50%)', background: 'rgba(255,255,255,0.1)', color: '#fff', padding: '6px 20px', borderRadius: '12px', fontSize: '0.85rem', fontWeight: 'bold', whiteSpace: 'nowrap', border: '1px solid rgba(255,255,255,0.15)', zIndex: 10 }}>
-                法人・プロ向け
+            <InteractiveCard className="home-compact-price-card-rich" style={{ position: 'relative', paddingTop: '2rem' }}>
+              <div style={{ position: 'absolute', top: 0, left: 0, right: 0, display: 'flex', justifyContent: 'center' }}>
+                <div style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', padding: '6px 20px', borderRadius: '0 0 12px 12px', fontSize: '0.85rem', fontWeight: 'bold', border: '1px solid rgba(255,255,255,0.15)', borderTop: 'none' }}>
+                  法人・プロ向け
+                </div>
               </div>
               <div className="home-compact-price-card-rich__top">
                 <h3 style={{ color: '#fff' }}>Pro</h3>
