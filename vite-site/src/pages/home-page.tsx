@@ -481,14 +481,24 @@ export function HomePage() {
                           </feMerge>
                         </filter>
                       </defs>
-                      <path 
-                        d="M20,10 H380 A10,10 0 0,1 390,20 V150 A10,10 0 0,1 380,160 H220 L200,190 L180,160 H20 A10,10 0 0,1 10,150 V20 A10,10 0 0,1 20,10 Z" 
-                        fill="url(#bubbleGrad)" 
-                        stroke="#e0c184" 
-                        strokeWidth="1.5" 
-                        strokeOpacity="0.8"
-                        filter="url(#glow-edge)"
-                      />
+                      
+                      {(() => {
+                        // 各スライドごとに、のどかの頭の位置（画像のエフェクトによる重心のズレ）を補正するためのしっぽX座標
+                        const tailXMap = [180, 140, 170, 180, 170, 180, 200];
+                        const tx = tailXMap[activeSlide] || 200;
+                        const pathData = `M20,10 H380 A10,10 0 0,1 390,20 V150 A10,10 0 0,1 380,160 H${tx + 20} L${tx},190 L${tx - 20},160 H20 A10,10 0 0,1 10,150 V20 A10,10 0 0,1 20,10 Z`;
+                        
+                        return (
+                          <path 
+                            d={pathData}
+                            fill="url(#bubbleGrad)" 
+                            stroke="#e0c184" 
+                            strokeWidth="1.5" 
+                            strokeOpacity="0.8"
+                            filter="url(#glow-edge)"
+                          />
+                        );
+                      })()}
                     </svg>
 
                     <div style={{ position: 'relative', zIndex: 1 }}>
