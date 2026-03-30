@@ -3868,13 +3868,13 @@ code {
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 64px;
+  scroll-padding-top: 76px; /* Exactly clears the 72px min-height header + border */
 }
 
 /* ═══[ Scroll-Snap: スライドショー型セクション送り ]═══
-   proximity = 画面端付近で吸い付くが、長いセクションでもスタックしない */
+   mandatory = 1画面1項目を厳密に守る。スクロール途中で手を離しても必ずセクション冒頭に吸い付く */
 html.brand-home {
-  scroll-snap-type: y proximity;
+  scroll-snap-type: y mandatory;
 }
 
 .home-compact-hero {
