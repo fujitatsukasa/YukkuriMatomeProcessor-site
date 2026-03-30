@@ -545,26 +545,40 @@ export function HomePage() {
                         const isMain = imgIndex === 0;
                         const isYMM4Step = activeSlide === 5; // YMM4出力ステップ
                         return (
-                          <motion.img 
+                          <motion.div 
                             key={`${activeSlide}-${imgIndex}`}
-                            src={imgSrc}
-                            alt={`${presentationSlides[activeSlide]?.label}の実画面 ${imgIndex + 1}`} 
                             style={{ 
                               position: 'absolute', 
                               inset: 0, 
-                              width: presentationSlides[activeSlide]?.images.length > 1 ? (isMain ? '80%' : '70%') : (isYMM4Step ? '100%' : '100%'), 
+                              width: presentationSlides[activeSlide]?.images.length > 1 ? (isMain ? '80%' : '70%') : '100%', 
                               height: presentationSlides[activeSlide]?.images.length > 1 ? (isMain ? '100%' : '80%') : '100%', 
-                              objectFit: isYMM4Step ? 'cover' : 'contain', 
-                              objectPosition: isYMM4Step ? 'top left' : 'center',
-                              borderRadius: '16px',
-                              boxShadow: imgIndex > 0 ? '-15px 30px 60px rgba(0,0,0,0.8)' : '0 20px 50px rgba(0,0,0,0.4)',
-                              border: '1px solid rgba(255,255,255,0.1)',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
                               zIndex: imgIndex,
                             }}
                             initial={imgIndex > 0 ? { x: 80, y: 60, scale: 0.9 } : { x: 0, y: 0, scale: 1 }}
                             animate={imgIndex > 0 ? { x: 120, y: 80, scale: 1.05 } : { x: 0, y: 0, scale: 1 }}
                             transition={{ delay: 0.3, type: 'spring', bounce: 0.4 }}
-                          />
+                          >
+                            <img 
+                              src={imgSrc}
+                              alt={`${presentationSlides[activeSlide]?.label}の実画面 ${imgIndex + 1}`} 
+                              style={{ 
+                                width: isYMM4Step ? '100%' : 'auto',
+                                height: isYMM4Step ? '100%' : 'auto',
+                                maxWidth: '100%',
+                                maxHeight: '100%',
+                                objectFit: isYMM4Step ? 'cover' : 'contain', 
+                                objectPosition: isYMM4Step ? 'top left' : 'center',
+                                borderRadius: '12px',
+                                boxShadow: imgIndex > 0 
+                                  ? '-15px 30px 60px rgba(0,0,0,0.8), 0 0 20px rgba(224, 193, 132, 0.2)' 
+                                  : '0 20px 50px rgba(0,0,0,0.6), 0 0 30px rgba(224, 193, 132, 0.35)',
+                                border: '2px solid rgba(224, 193, 132, 0.5)',
+                              }}
+                            />
+                          </motion.div>
                         )
                       })}
                       </motion.div>
