@@ -147,8 +147,8 @@ const faqCategories: FAQCategory[] = [
     categoryName: 'ご購入・ライセンスについて',
     items: [
       {
-        question: '月額料金（サブスクリプション）はかかりますか？',
-        answer: 'いいえ、完全買い切り型のライセンスです。月額費用や制作本数に応じた従量課金は一切発生せず、永続的にご利用いただけます。',
+        question: '価格・プランについて教えてください。',
+        answer: 'ご自身の利用用途に合わせた月額サブスクリプション制となります。スタンダードプラン（5,500円/月）と、さらに機能が充実したプロプラン（11,000円/月）をご用意しております。制作本数等の従量課金はありません。',
       },
       {
         question: '購入後のアップデートは無料ですか？',
@@ -160,7 +160,7 @@ const faqCategories: FAQCategory[] = [
 
 const faqItems: FAQItem[] = faqCategories.flatMap(c => c.items)
 
-const closingBadges = ['買い切り', 'Windows対応', 'YMM4向け', legal.support.firstResponseSla] as const
+const closingBadges = ['月額制', 'Windows対応', 'YMM4向け', legal.support.firstResponseSla] as const
 
 const homeMetaDescription =
   '反応集・ゆっくり解説・ショート動画向けに、ネタ収集、台本作成、会話台本、立ち絵・画像・音声の素材整理、YMM4前の準備までまとめて進められる動画制作支援ツール。'
@@ -882,54 +882,65 @@ export function HomePage() {
             viewport={{ once: true, margin: "-10%" }}
             style={{ position: 'relative', zIndex: 1 }}
           >
-            <p className="brand-kicker">買い切りライセンス</p>
-            <h2>作業の無駄を削ぎ落とし、動画の<span className="text-glow-gold">純度を高める。</span></h2>
-            <p>毎月のランニングコストを気にせず、動画制作のルーチンを即座に効率化できます。<strong>導入初月で、外注費や労働時間コストを容易に回収可能</strong>な圧倒的な投資対効果（ROI）です。</p>
+            <p className="brand-kicker">料金プラン</p>
+            <h2>自身の規模に合わせた<span className="text-glow-gold">最適なプランを。</span></h2>
+            <p>毎月の外注費用や、ご自身の労働時間と比較してください。<strong>導入初月で投資コストを容易に回収可能</strong>な圧倒的な時間対効果（ROI）を提供します。</p>
           </motion.div>
 
-          <div className="home-compact-price-layout" style={{ position: 'relative', zIndex: 1 }}>
-            <div className="home-compact-price-visual">
-              <div className="home-compact-price-visual__img">
-                <img src={media.workspaceComputer} alt="" loading="lazy" />
-                <div className="home-compact-price-visual__overlay" />
-              </div>
-              <div className="home-compact-price-floating-badge">
-                <div className="pulse-ring"></div>
-                <span>買い切り<br/>ライセンス</span>
-              </div>
-            </div>
-
+          <div style={{ position: 'relative', zIndex: 1, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', width: '100%', maxWidth: '1000px', margin: '0 auto' }}>
+            {/* Standard Plan */}
             <InteractiveCard className="home-compact-price-card-rich">
               <div className="home-compact-price-card-rich__top">
-                <h3>Standard License</h3>
+                <h3>Standard Plan</h3>
                 <div className="home-compact-price-card-rich__price">
-                  <strong>{legal.pricing.amountIncludingTax}</strong>
-                  <span>(1ライセンス/PC1台)</span>
+                  <strong>月額 5,500円</strong>
+                  <span>(税抜 5,000円)</span>
                 </div>
-                <p>追加費用なしで永続利用可能なWindows向けデスクトップツールです。</p>
+                <p>個人クリエイター向け。毎月の制作にかかる膨大な時間を劇的に下げる基本プラン。</p>
               </div>
 
               <ul className="home-compact-price-card-rich__features" aria-label="搭載機能">
-                <li><span className="check-icon">✓</span> 複数サイトからのネタ自動収集</li>
-                <li><span className="check-icon">✓</span> 対話形式への台本自動コンバート</li>
-                <li><span className="check-icon">✓</span> YMM4用タイムライン・キャラ立ち絵出力</li>
-                <li><span className="check-icon">✓</span> 永続的なローカル動作と無償アップデート</li>
+                <li><span className="check-icon">✓</span> AI台本自動コンバート</li>
+                <li><span className="check-icon">✓</span> YMM4用タイムライン出力</li>
+                <li><span className="check-icon">✓</span> 無償アップデート対応</li>
               </ul>
 
-              <div className="home-compact-price-card-rich__action">
-                <Link to="/purchase/" className="brand-btn brand-btn--primary home-compact-price-btn">
-                  ご購入ページへ進む
+              <div className="home-compact-price-card-rich__action" style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', marginTop: 'auto', paddingTop: '1.5rem' }}>
+                <Link to="/purchase/" className="brand-btn brand-btn--ghost home-compact-price-btn" style={{ justifyContent: 'center' }}>
+                  スタンダードで開始する
                 </Link>
-                <p className="home-compact-price-card-rich__note">
-                  ※クレジットカード・銀行振込に対応しています。
-                </p>
+              </div>
+            </InteractiveCard>
+
+            {/* Pro Plan */}
+            <InteractiveCard className="home-compact-price-card-rich" style={{ borderColor: 'rgba(224, 193, 132, 0.6)', boxShadow: '0 0 40px rgba(224, 193, 132, 0.15)', transform: 'scale(1.02)' }}>
+              <div style={{ position: 'absolute', top: 0, left: '50%', transform: 'translate(-50%, -50%)', background: 'linear-gradient(135deg, #e0c184, #b08d51)', color: '#000', padding: '4px 16px', borderRadius: '12px', fontSize: '0.85rem', fontWeight: 'bold' }}>
+                おすすめ・法人向け
+              </div>
+              <div className="home-compact-price-card-rich__top">
+                <h3 style={{ color: '#fff' }}>Pro Plan</h3>
+                <div className="home-compact-price-card-rich__price">
+                  <strong>月額 11,000円</strong>
+                  <span>(税抜 10,000円)</span>
+                </div>
+                <p>複数チャンネル運営や、完全な自動パイプライン構築を目指すプロ事業者向け。</p>
               </div>
 
-              <ul className="home-compact-price-card__badges" aria-label="導入条件">
-                {closingBadges.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
+              <ul className="home-compact-price-card-rich__features" aria-label="搭載機能" style={{ marginTop: '1rem' }}>
+                <li><span className="check-icon">✓</span> スタンダード版の全機能</li>
+                <li><span className="check-icon">✓</span> 複数サイトからのネタ自動収集機能</li>
+                <li><span className="check-icon">✓</span> API連携・高度な自動処理対応</li>
+                <li><span className="check-icon">✓</span> 優先専用サポート</li>
               </ul>
+
+              <div className="home-compact-price-card-rich__action" style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', marginTop: 'auto', paddingTop: '1.5rem' }}>
+                <Link to="/purchase/" className="brand-btn brand-btn--primary home-compact-price-btn" style={{ justifyContent: 'center' }}>
+                  プロプランで開始する
+                </Link>
+                <p className="home-compact-price-card-rich__note" style={{ textAlign: 'center' }}>
+                  ※クレジットカード・銀行振込に対応
+                </p>
+              </div>
             </InteractiveCard>
           </div>
         </Section>

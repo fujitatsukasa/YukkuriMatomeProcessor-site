@@ -3893,10 +3893,11 @@ html.brand-home {
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* `justify-content: safe center;` を用いることで、内容が画面を超える場合は上部が切り取られず正常にスクロールでき、1画面に収まる場合は中央配置されます */
+  justify-content: safe center;
   align-items: center;
   min-height: 100svh;
-  padding: clamp(2rem, 4vh, 4rem) 0;
+  padding: clamp(90px, 12vh, 120px) 0 clamp(80px, 12vh, 100px);
   box-sizing: border-box;
   scroll-snap-align: start;
 }
