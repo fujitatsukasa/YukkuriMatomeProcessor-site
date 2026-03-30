@@ -447,7 +447,18 @@ export function HomePage() {
             </div>
 
             {/* Main Stage */}
-            <div style={{ display: 'flex', flex: '1 1 auto', flexWrap: 'wrap', gap: 'clamp(1rem, 2vw, 2rem)', alignItems: 'stretch' }}>
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              style={{ flex: '1 1 auto' }}
+            >
+              <motion.div 
+                animate={{ y: [0, -5, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                style={{ display: 'flex', flex: '1 1 auto', flexWrap: 'wrap', gap: 'clamp(1rem, 2vw, 2rem)', alignItems: 'stretch' }}
+              >
               
               {/* Left: Guide Character & Text */}
               <div style={{ flex: '1 1 350px', display: 'flex', flexDirection: 'column', minHeight: 0, position: 'relative' }}>
@@ -614,7 +625,8 @@ export function HomePage() {
                   </div>
               </div>
 
-            </div>
+            </motion.div>
+            </motion.div>
           </div>
         </section>
 
