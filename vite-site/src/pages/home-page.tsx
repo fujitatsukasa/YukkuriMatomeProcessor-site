@@ -461,7 +461,7 @@ export function HomePage() {
                     style={{ 
                       flex: '0 0 auto',
                       width: '100%', position: 'relative', zIndex: 10,
-                      padding: '1.5rem 1.7rem', 
+                      padding: '1.5rem 1.7rem 3.5rem 1.7rem', 
                       display: 'flex', flexDirection: 'column', gap: '0.8rem',
                       filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.6))',
                     }}
@@ -486,7 +486,7 @@ export function HomePage() {
                         // 各スライドごとに、のどかの頭の位置（画像のエフェクトによる重心のズレ）を補正するためのしっぽX座標
                         const tailXMap = [180, 140, 170, 180, 170, 180, 200];
                         const tx = tailXMap[activeSlide] || 200;
-                        const pathData = `M20,10 H380 A10,10 0 0,1 390,20 V150 A10,10 0 0,1 380,160 H${tx + 20} L${tx},190 L${tx - 20},160 H20 A10,10 0 0,1 10,150 V20 A10,10 0 0,1 20,10 Z`;
+                        const pathData = `M20,10 H380 A10,10 0 0,1 390,20 V165 A10,10 0 0,1 380,175 H${tx + 18} L${tx},195 L${tx - 18},175 H20 A10,10 0 0,1 10,165 V20 A10,10 0 0,1 20,10 Z`;
                         
                         return (
                           <path 
