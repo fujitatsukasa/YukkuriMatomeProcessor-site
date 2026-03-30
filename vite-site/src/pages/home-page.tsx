@@ -5,7 +5,7 @@ import { downloadUrl, legal, siteOrigin, siteSubtitle, siteTitle } from '@/data/
 import React, { useEffect, useRef, useState } from 'react'
 import { motion, useInView as useMotionInView, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import Tilt from 'react-parallax-tilt'
-import { MessageSquare, Smartphone, Users, Download, Zap, Star } from 'lucide-react'
+import { MessageSquare, Smartphone, Users, Download, Zap, Star, ShieldCheck, Clock, CheckCircle2, TrendingUp, HelpCircle, Monitor, CreditCard, ArrowRight } from 'lucide-react'
 import { ParticlesBackground } from '@/components/ParticlesBackground'
 import { CustomCursorGlow } from '@/components/CustomCursorGlow'
 
@@ -94,25 +94,57 @@ const useCasesData = [
 const testimonials = [
   {
     quote: "「毎日2時間かかっていた台本制作が、わずか5分で完了するように。浮いた時間で動画の投稿頻度を2倍に増やせました。」",
-    author: "登録者15万人 ｜ ゆっくり解説系クリエイター",
+    author: "ゆっくり解説系クリエイター",
+    authorDetail: "登録者15万人 ｜ 導入歴6ヶ月",
     roi: "月間60時間の削減に成功",
+    avatar: "🎮",
+    avatarBg: "linear-gradient(135deg, #667eea, #764ba2)",
   },
   {
     quote: "「外注に頼っていた反応集まとめを内製化できました。コピペ作業の属人性が排除され、完全な自動パイプラインが完成しました。」",
-    author: "月間再生数300万回 ｜ 2ch反応集チャンネル運営",
+    author: "2ch反応集チャンネル運営",
+    authorDetail: "月間再生数300万回 ｜ 導入歴4ヶ月",
     roi: "外注費 約15万円/月の削減",
+    avatar: "📺",
+    avatarBg: "linear-gradient(135deg, #f093fb, #f5576c)",
   },
   {
     quote: "「YMM4への出力がワンクリックなのが最大の魅力。細かい立ち絵の表情指定も事前にまとめて設定できるためミスが激減しました。」",
-    author: "複数チャンネル運営 ｜ ディレクター",
+    author: "複数チャンネル運営ディレクター",
+    authorDetail: "3チャンネル同時運営 ｜ 導入歴8ヶ月",
     roi: "修正・確認時間の 80%削減",
+    avatar: "🎬",
+    avatarBg: "linear-gradient(135deg, #4facfe, #00f2fe)",
   }
 ]
 
 type FAQItem = { question: string; answer: string }
 type FAQCategory = { categoryName: string; items: FAQItem[] }
 
+const faqCategoryIcons: Record<string, typeof HelpCircle> = {
+  'ご購入・ライセンスについて': CreditCard,
+  '用途・対応ジャンルについて': HelpCircle,
+  'システム・動作環境について': Monitor,
+}
+
 const faqCategories: FAQCategory[] = [
+  {
+    categoryName: 'ご購入・ライセンスについて',
+    items: [
+      {
+        question: '価格・プランについて教えてください。',
+        answer: 'ご自身の利用用途に合わせた月額サブスクリプション制となります。スタンダードプラン（5,500円/月）と、さらに機能が充実したプロプラン（11,000円/月）をご用意しております。制作本数等の従量課金はありません。',
+      },
+      {
+        question: '購入後のアップデートは無料ですか？',
+        answer: 'はい、機能追加や不具合修正などのマイナーアップデートは無償でご提供いたします。ツール内から直接最新版をダウンロード可能です。',
+      },
+      {
+        question: '返金は可能ですか？',
+        answer: '7日間の無料トライアル期間内であれば、一切の費用は発生しません。トライアル期間中に十分にご確認の上、継続をご判断ください。',
+      },
+    ]
+  },
   {
     categoryName: '用途・対応ジャンルについて',
     items: [
@@ -143,19 +175,6 @@ const faqCategories: FAQCategory[] = [
       },
     ]
   },
-  {
-    categoryName: 'ご購入・ライセンスについて',
-    items: [
-      {
-        question: '価格・プランについて教えてください。',
-        answer: 'ご自身の利用用途に合わせた月額サブスクリプション制となります。スタンダードプラン（5,500円/月）と、さらに機能が充実したプロプラン（11,000円/月）をご用意しております。制作本数等の従量課金はありません。',
-      },
-      {
-        question: '購入後のアップデートは無料ですか？',
-        answer: 'はい、機能追加や不具合修正などのマイナーアップデートは無償でご提供いたします。ツール内から直接最新版をダウンロード可能です。',
-      },
-    ]
-  }
 ]
 
 const faqItems: FAQItem[] = faqCategories.flatMap(c => c.items)
@@ -249,7 +268,7 @@ export function HomePage() {
     if (!isAutoPlayingRef.current || !isFlowInView) return
     const timer = setInterval(() => {
       setActiveSlide((prev) => (prev + 1) % presentationSlides.length)
-    }, 6000)
+    }, 8000)
     return () => clearInterval(timer)
   }, [activeSlide, isFlowInView])
 
@@ -411,7 +430,7 @@ export function HomePage() {
                    transition={{ duration: 4, repeat: Infinity, repeatType: "mirror", ease: "easeInOut", delay: 1 }}
                 >
                   <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#4CAF50', boxShadow: '0 0 10px #4CAF50' }} />
-                  AI Automatic Conversion
+                  AI 自動変換処理中
                 </motion.div>
 
               </motion.div>
@@ -536,7 +555,7 @@ export function HomePage() {
                     >
                       <motion.img 
                         src={presentationSlides[activeSlide]?.charImage || '/nodoka/通常.png'} 
-                        alt="Guide Character Nodoka" 
+                        alt={`STEP ${activeSlide + 1}: ${presentationSlides[activeSlide]?.label}を案内するガイドキャラクターのどか`} 
                         animate={{ 
                           scaleY: [1, 1.025, 1],
                           scaleX: [1, 0.985, 1],
@@ -630,6 +649,19 @@ export function HomePage() {
           </div>
         </section>
 
+        {/* ━━━[ Intermediate CTA Band #1: After Feature Overview ]━━━ */}
+        <div className="intermediate-cta-band" style={{ position: 'relative', zIndex: 1 }}>
+          <div className="intermediate-cta-band__inner">
+            <div className="intermediate-cta-band__copy">
+              <CheckCircle2 size={24} color="#4CAF50" />
+              <span>全7ステップを<strong className="text-glow-gold">30秒で無料ダウンロード</strong>して体験</span>
+            </div>
+            <Link className="brand-btn brand-btn--primary intermediate-cta-band__btn" to="/download/">
+              → 無料トライアルを開始
+            </Link>
+          </div>
+        </div>
+
         <Section alt className="home-compact-section home-compact-process-section bg-marquee-wrap">
           {/* Parallax & Animated Section Background */}
           <div className="page-bg-bleed">
@@ -671,6 +703,7 @@ export function HomePage() {
             <p className="brand-kicker">圧倒的時短</p>
             <h2>準備時間を、<span className="text-glow-gold">120分から6分</span>へ<span className="text-glow-green">圧倒的短縮</span>。</h2>
             <p><strong className="text-glow-muted">95%削減</strong>の根拠を可視化。1本あたり約114分の短縮は、月30本の投稿で<span className="text-glow-gold">約57時間（約15万円分以上の労働価値）</span>に相当します。</p>
+            <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.35)', marginTop: '0.5rem' }}>※ 30分動画1本あたりの準備工程（ネタ探し・台本整理・YMM4前調整）を当社環境にて実測・比較した結果に基づく</p>
           </motion.div>
 
           <motion.div 
@@ -898,15 +931,38 @@ export function HomePage() {
                   <Star size={16} fill="#e0c184" color="#e0c184" />
                   <Star size={16} fill="#e0c184" color="#e0c184" />
                 </div>
-                <p style={{ fontSize: '1rem', lineHeight: 1.6, color: '#f5f1e9', flex: 1, marginBottom: '1.5rem', fontWeight: 500 }}>{t.quote}</p>
-                <div style={{ marginTop: 'auto', paddingTop: '1.2rem', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-                  <p style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.6)', marginBottom: '0.4rem' }}>{t.author}</p>
-                  <p style={{ fontSize: '0.95rem', color: '#e0c184', fontWeight: 700 }}>成果: {t.roi}</p>
+                <p style={{ fontSize: '1rem', lineHeight: 1.7, color: '#f5f1e9', flex: 1, marginBottom: '1.5rem', fontWeight: 500 }}>{t.quote}</p>
+                <div style={{ marginTop: 'auto', paddingTop: '1.2rem', borderTop: '1px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                  {/* Avatar */}
+                  <div style={{ width: 48, height: 48, borderRadius: '50%', background: t.avatarBg, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.4rem', flexShrink: 0, boxShadow: '0 4px 12px rgba(0,0,0,0.3)' }}>
+                    {t.avatar}
+                  </div>
+                  <div style={{ minWidth: 0 }}>
+                    <p style={{ fontSize: '0.95rem', color: '#f5f1e9', marginBottom: '0.15rem', fontWeight: 600 }}>{t.author}</p>
+                    <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.45)', marginBottom: '0.3rem' }}>{t.authorDetail}</p>
+                    <p style={{ fontSize: '0.9rem', color: '#e0c184', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '4px' }}>
+                      <TrendingUp size={14} />
+                      {t.roi}
+                    </p>
+                  </div>
                 </div>
               </motion.div>
             ))}
           </div>
         </Section>
+
+        {/* ━━━[ Intermediate CTA Band #2: After Testimonials ]━━━ */}
+        <div className="intermediate-cta-band" style={{ position: 'relative', zIndex: 1 }}>
+          <div className="intermediate-cta-band__inner">
+            <div className="intermediate-cta-band__copy">
+              <Clock size={24} color="#e0c184" />
+              <span>今なら<strong className="text-glow-gold">7日間完全無料</strong>ですべての機能をお試しいただけます</span>
+            </div>
+            <Link className="brand-btn brand-btn--primary intermediate-cta-band__btn" to="/download/">
+              → 30秒で無料ダウンロード
+            </Link>
+          </div>
+        </div>
 
         <Section className="home-compact-section home-compact-price-section">
           {/* Parallax & Animated Section Background */}
@@ -954,6 +1010,7 @@ export function HomePage() {
                   <strong>月額 5,500円</strong>
                   <span>(税抜 5,000円)</span>
                 </div>
+                <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.45)' }}>1日あたり約183円 — コーヒー1杯以下の投資</p>
                 <p>個人クリエイター向け。毎月の制作にかかる膨大な時間を劇的に下げる基本プラン。</p>
               </div>
 
@@ -964,9 +1021,12 @@ export function HomePage() {
               </ul>
 
               <div className="home-compact-price-card-rich__action" style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', marginTop: 'auto', paddingTop: '1.5rem' }}>
-                <Link to="/purchase/" className="brand-btn brand-btn--ghost home-compact-price-btn" style={{ justifyContent: 'center' }}>
-                  スタンダードで開始する
+                <Link to="/download/" className="brand-btn brand-btn--ghost home-compact-price-btn" style={{ justifyContent: 'center' }}>
+                  まずは7日間無料で試す
                 </Link>
+                <p className="home-compact-price-card-rich__note" style={{ textAlign: 'center', fontSize: '0.8rem', color: 'rgba(255,255,255,0.4)' }}>
+                  トライアル中は一切費用が発生しません
+                </p>
               </div>
             </InteractiveCard>
 
@@ -981,6 +1041,7 @@ export function HomePage() {
                   <strong>月額 11,000円</strong>
                   <span>(税抜 10,000円)</span>
                 </div>
+                <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.45)' }}>1日あたり約367円 — 外注費の1/10以下で完全内製化</p>
                 <p>複数チャンネル運営や、完全な自動パイプライン構築を目指すプロ事業者向け。</p>
               </div>
 
@@ -992,8 +1053,8 @@ export function HomePage() {
               </ul>
 
               <div className="home-compact-price-card-rich__action" style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', marginTop: 'auto', paddingTop: '1.5rem' }}>
-                <Link to="/purchase/" className="brand-btn brand-btn--primary home-compact-price-btn" style={{ justifyContent: 'center' }}>
-                  プロプランで開始する
+                <Link to="/download/" className="brand-btn brand-btn--primary home-compact-price-btn" style={{ justifyContent: 'center' }}>
+                  7日間無料でプロプランを体験
                 </Link>
                 <p className="home-compact-price-card-rich__note" style={{ textAlign: 'center' }}>
                   ※クレジットカード・銀行振込に対応
@@ -1001,6 +1062,33 @@ export function HomePage() {
               </div>
             </InteractiveCard>
           </div>
+
+          {/* Trust Badges */}
+          <motion.div
+            className="trust-badge-bar"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            style={{ position: 'relative', zIndex: 1 }}
+          >
+            <div className="trust-badge-bar__item">
+              <ShieldCheck size={20} color="#4CAF50" />
+              <span>SSL暗号化通信</span>
+            </div>
+            <div className="trust-badge-bar__item">
+              <CheckCircle2 size={20} color="#4CAF50" />
+              <span>7日間無料トライアル</span>
+            </div>
+            <div className="trust-badge-bar__item">
+              <Clock size={20} color="#e0c184" />
+              <span>{legal.support.firstResponseSla}</span>
+            </div>
+            <div className="trust-badge-bar__item">
+              <CreditCard size={20} color="#e0c184" />
+              <span>安心の国内決済</span>
+            </div>
+          </motion.div>
         </Section>
 
         <Section alt className="home-compact-section home-compact-closing-section">
@@ -1044,19 +1132,31 @@ export function HomePage() {
             </motion.div>
 
             <div className="home-compact-faq__list">
-              {faqCategories.map((category) => (
-                <div key={category.categoryName} className="home-compact-faq__category">
-                  <h3 className="home-compact-faq__category-title">{category.categoryName}</h3>
-                  <div className="home-compact-faq__category-items">
-                    {category.items.map((item) => (
-                      <details key={item.question} className="home-compact-faq__item">
-                        <summary>{item.question}</summary>
-                        <p>{item.answer}</p>
-                      </details>
-                    ))}
+              {faqCategories.map((category) => {
+                const CategoryIcon = faqCategoryIcons[category.categoryName] || HelpCircle
+                return (
+                  <div key={category.categoryName} className="home-compact-faq__category">
+                    <h3 className="home-compact-faq__category-title">
+                      <CategoryIcon size={18} />
+                      {category.categoryName}
+                    </h3>
+                    <div className="home-compact-faq__category-items">
+                      {category.items.map((item) => (
+                        <details key={item.question} className="home-compact-faq__item">
+                          <summary>{item.question}</summary>
+                          <p>{item.answer}</p>
+                        </details>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              ))}
+                )
+              })}
+            </div>
+            <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+              <Link className="brand-btn brand-btn--ghost" to="/contact/" style={{ gap: '8px' }}>
+                <HelpCircle size={18} />
+                FAQで解決しない場合はお問い合わせ
+              </Link>
             </div>
           </div>
         </Section>
@@ -1094,13 +1194,18 @@ export function HomePage() {
 
             <div className="brand-inline-actions home-compact-cta__actions">
               <Link className="brand-btn brand-btn--primary" to="/download/">
-                無料で開始する！
+                <ArrowRight size={18} />
+                30秒で無料ダウンロード
               </Link>
               <Link className="brand-btn brand-btn--ghost" to="/instructions/">
                 使い方を見る
               </Link>
             </div>
-            <p className="hero-microcopy">7日間の無料トライアル・クレジットカード不要・即ダウンロード</p>
+            <div className="hero-microcopy" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem 1.2rem', justifyContent: 'center', fontSize: '0.9rem' }}>
+              <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><CheckCircle2 size={14} color="#4CAF50" /> 7日間の無料トライアル</span>
+              <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><CheckCircle2 size={14} color="#4CAF50" /> クレジットカード不要</span>
+              <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><CheckCircle2 size={14} color="#4CAF50" /> 即ダウンロード</span>
+            </div>
 
             <ul className="home-compact-cta__badges" aria-label="補足情報">
               {closingBadges.map((item) => (

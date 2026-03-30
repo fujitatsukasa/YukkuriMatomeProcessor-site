@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Particles from "@tsparticles/react";
 import { type Engine } from "@tsparticles/engine";
 import { loadSlim } from "@tsparticles/slim"; // slim to keep it lightweight!
@@ -7,6 +7,17 @@ export const ParticlesBackground = () => {
   const particlesInit = useCallback(async (engine: Engine) => {
     await loadSlim(engine);
   }, []);
+
+  const [isMobile, setIsMobile] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+    setPrefersReducedMotion(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  }, []);
+
+  // Fully disable particles when user prefers reduced motion
+  if (prefersReducedMotion) return null;
 
   return (
     <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'auto' }}>
@@ -24,8 +35,8 @@ export const ParticlesBackground = () => {
           interactivity: {
             events: {
               onHover: {
-                enable: true,
-                mode: "repulse", // repulse on mouse hover
+                enable: !isMobile, // Disable hover on mobile
+                mode: "repulse",
               },
             },
             modes: {
@@ -46,7 +57,7 @@ export const ParticlesBackground = () => {
               opacity: 0.1,
               width: 1,
               triangles: {
-                enable: true,
+                enable: !isMobile, // Disable triangles on mobile for perf
                 opacity: 0.05,
               }
             },
@@ -57,17 +68,17 @@ export const ParticlesBackground = () => {
                 default: "bounce",
               },
               random: false,
-              speed: 0.8,
+              speed: isMobile ? 0.5 : 0.8, // Slower on mobile
               straight: false,
             },
             number: {
               density: {
                 enable: true,
               },
-              value: 60,
+              value: isMobile ? 25 : 60, // Reduced particle count on mobile
             },
             opacity: {
-              value: 0.4,
+              value: isMobile ? 0.3 : 0.4,
             },
             shape: {
               type: "circle",
