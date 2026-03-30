@@ -9041,3 +9041,45 @@ html.brand-home {
 }
 .magnetic-card:hover .magnetic-spotlight,
 .magnetic-card:hover .magnetic-border { opacity: 1; }
+
+.testimonials-section-wrap {
+  background: #09080b;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ━━━[ Testimonial Card Styles ]━━━ */
+.testimonial-card {
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 2.2rem;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 20px 40px -20px rgba(0,0,0,0.5);
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.testimonial-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(224, 193, 132, 0.5), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-6px);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(224, 193, 132, 0.2);
+  box-shadow: 0 30px 50px -20px rgba(0,0,0,0.7);
+}
+
+.testimonial-card:hover::before {
+  opacity: 1;
+}

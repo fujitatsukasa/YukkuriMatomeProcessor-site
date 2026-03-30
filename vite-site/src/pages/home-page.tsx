@@ -64,7 +64,7 @@ const timeBreakdown = [
   { label: 'YMM4前調整', manual: '55分', product: '2分', desc: '立ち絵の表情指定からタイムライン配置への読み込み定義' },
 ] as const
 
-const useCaseCards = [
+const useCasesData = [
   {
     title: '5ch/2ch 反応集動画',
     body: '複数スレッドから面白いレスだけを自動抽出し、瞬時に掛け合い台本へ。',
@@ -90,6 +90,24 @@ const useCaseCards = [
     Icon: Zap,
   },
 ] as const
+
+const testimonials = [
+  {
+    quote: "「毎日2時間かかっていた台本制作が、わずか5分で完了するように。浮いた時間で動画の投稿頻度を2倍に増やせました。」",
+    author: "登録者15万人 ｜ ゆっくり解説系クリエイター",
+    roi: "月間60時間の削減に成功",
+  },
+  {
+    quote: "「外注に頼っていた反応集まとめを内製化できました。コピペ作業の属人性が排除され、完全な自動パイプラインが完成しました。」",
+    author: "月間再生数300万回 ｜ 2ch反応集チャンネル運営",
+    roi: "外注費 約15万円/月の削減",
+  },
+  {
+    quote: "「YMM4への出力がワンクリックなのが最大の魅力。細かい立ち絵の表情指定も事前にまとめて設定できるためミスが激減しました。」",
+    author: "複数チャンネル運営 ｜ ディレクター",
+    roi: "修正・確認時間の 80%削減",
+  }
+]
 
 type FAQItem = { question: string; answer: string }
 type FAQCategory = { categoryName: string; items: FAQItem[] }
@@ -370,10 +388,13 @@ export function HomePage() {
                 {/* 3D Glass overlay */}
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(125deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 40%, rgba(255,255,255,0.02) 100%)', zIndex: 2, pointerEvents: 'none' }} />
                 
-                {/* Real Product Screenshot */}
-                <img 
-                  src="/product_ai_script.png" 
-                  alt="AI台本生成ツールのメイン画面"
+                {/* Real Product Video */}
+                <video 
+                  src={media.heroEditing} 
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
                   style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'left top', zIndex: 1, position: 'relative' }}
                 />
 
@@ -591,7 +612,7 @@ export function HomePage() {
           >
             <p className="brand-kicker">圧倒的時短</p>
             <h2>準備時間を、<span className="text-glow-gold">120分から6分</span>へ<span className="text-glow-green">圧倒的短縮</span>。</h2>
-            <p><strong className="text-glow-muted">95%削減</strong>の根拠を、<span className="text-glow-muted">ネタ探し・台本整理・YMM4前調整</span>の時間差で可視化します。</p>
+            <p><strong className="text-glow-muted">95%削減</strong>の根拠を可視化。1本あたり約114分の短縮は、月30本の投稿で<span className="text-glow-gold">約57時間（約15万円分以上の労働価値）</span>に相当します。</p>
           </motion.div>
 
           <motion.div 
@@ -737,7 +758,7 @@ export function HomePage() {
           </motion.div>
 
           <div className="home-compact-usecase-grid" role="list" style={{ position: 'relative', zIndex: 1 }}>
-            {useCaseCards.map((item) => (
+            {useCasesData.map((item) => (
               <Tilt
                 key={item.title}
                 tiltMaxAngleX={4}
@@ -785,6 +806,50 @@ export function HomePage() {
 
 
 
+        <Section alt className="home-compact-section testimonials-section-wrap">
+          {/* subtle radial gradient for testimonials */}
+          <div style={{ position: 'absolute', top: '50%', left: '50%', width: '120vw', height: '120%', background: 'radial-gradient(ellipse at center, rgba(30,25,18,0.4) 0%, transparent 60%)', transform: 'translate(-50%, -50%)', zIndex: 0 }} />
+          
+          <motion.div 
+            className="home-compact-section-head" 
+            variants={SECTION_HEAD_VARIANTS}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-10%" }}
+            style={{ position: 'relative', zIndex: 1 }}
+          >
+            <p className="brand-kicker">お客様の声</p>
+            <h2>導入クリエイターの<span className="text-glow-gold">圧倒的成果</span></h2>
+            <p>すでに多くの動画クリエイターが、当プロセッサーにより作業時間を削減し、収益化のスピードを上げています。</p>
+          </motion.div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
+            {testimonials.map((t, idx) => (
+              <motion.div 
+                key={idx}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-10%" }}
+                transition={{ duration: 0.5, delay: idx * 0.15 }}
+                className="testimonial-card"
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1.2rem' }}>
+                  <Star size={16} fill="#e0c184" color="#e0c184" />
+                  <Star size={16} fill="#e0c184" color="#e0c184" />
+                  <Star size={16} fill="#e0c184" color="#e0c184" />
+                  <Star size={16} fill="#e0c184" color="#e0c184" />
+                  <Star size={16} fill="#e0c184" color="#e0c184" />
+                </div>
+                <p style={{ fontSize: '1rem', lineHeight: 1.6, color: '#f5f1e9', flex: 1, marginBottom: '1.5rem', fontWeight: 500 }}>{t.quote}</p>
+                <div style={{ marginTop: 'auto', paddingTop: '1.2rem', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+                  <p style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.6)', marginBottom: '0.4rem' }}>{t.author}</p>
+                  <p style={{ fontSize: '0.95rem', color: '#e0c184', fontWeight: 700 }}>成果: {t.roi}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </Section>
+
         <Section className="home-compact-section home-compact-price-section">
           {/* Parallax & Animated Section Background */}
           <div className="page-bg-bleed">
@@ -819,7 +884,7 @@ export function HomePage() {
           >
             <p className="brand-kicker">買い切りライセンス</p>
             <h2>作業の無駄を削ぎ落とし、動画の<span className="text-glow-gold">純度を高める。</span></h2>
-            <p>ゆっくりまとめプロセッサーは買い切り型。毎月のランニングコストを気にせず、動画制作のルーチンを即座に効率化できます。</p>
+            <p>毎月のランニングコストを気にせず、動画制作のルーチンを即座に効率化できます。<strong>導入初月で、外注費や労働時間コストを容易に回収可能</strong>な圧倒的な投資対効果（ROI）です。</p>
           </motion.div>
 
           <div className="home-compact-price-layout" style={{ position: 'relative', zIndex: 1 }}>
