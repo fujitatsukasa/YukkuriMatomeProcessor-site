@@ -395,125 +395,98 @@ export function HomePage() {
           </div>
           
           {/* Centered, minimal hero headline — Linear / Vercel style */}
-          <div className="hero-massive-title-container" style={{ marginBottom: 'clamp(1rem, 2.5vh, 1.5rem)' }}>
-            <motion.p 
-              className="brand-kicker hero-eyebrow-badge"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 16px', borderRadius: '999px', border: '1px solid rgba(224,193,132,0.3)', background: 'rgba(224,193,132,0.08)', marginBottom: 'clamp(0.8rem, 2vh, 1.5rem)', fontSize: '0.85rem' }}
-            >
-              <Sparkles size={14} color="#e0c184" />
-              ゆっくり動画制作を、圧倒的に加速
-            </motion.p>
-            <h1 className="hero-massive-title">
-              <span className="text-rotator">
-                <span className="text-rotator__inner">
-                  <span className="text-glow-green">【反応集】</span>
-                  <span className="text-glow-gold">【ゆっくり解説】</span>
-                  <span className="text-glow-blue">【ショート動画】</span>
-                  <span className="text-glow-green" aria-hidden="true">【反応集】</span>
+          <div className="hero-grid-split" style={{ position: 'relative', zIndex: 1 }}>
+            <div className="hero-grid-split__text">
+              <motion.p 
+                className="brand-kicker hero-eyebrow-badge"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 16px', borderRadius: '999px', border: '1px solid rgba(224,193,132,0.3)', background: 'rgba(224,193,132,0.08)', marginBottom: 'clamp(0.8rem, 2vh, 1.5rem)', fontSize: '0.85rem' }}
+              >
+                <Sparkles size={14} color="#e0c184" />
+                ゆっくり動画制作を、圧倒的に加速
+              </motion.p>
+              
+              <h1 className="hero-massive-title">
+                <span className="text-rotator" style={{ display: 'inline-block' }}>
+                  <span className="text-rotator__inner">
+                    <span className="text-glow-green">【反応集】</span>
+                    <span className="text-glow-gold">【ゆっくり解説】</span>
+                    <span className="text-glow-blue">【ショート動画】</span>
+                    <span className="text-glow-green" aria-hidden="true">【反応集】</span>
+                  </span>
                 </span>
-              </span>
-              <br />
-              <span>の面倒な作業をゼロに。</span>
-            </h1>
-            <motion.p 
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              style={{ color: 'rgba(236,233,226,0.7)', fontSize: 'clamp(1rem, 1.8vw, 1.25rem)', maxWidth: '680px', margin: 'clamp(0.5rem, 1.5vh, 1rem) auto 0', lineHeight: 1.7, textAlign: 'center' }}
-            >
-              ネタ収集からYMM4出力まで、手作業の<strong className="text-glow-gold" style={{ fontWeight: 700 }}>95%を自動化</strong>。
-              毎日の動画投稿を徹底アシストします。
-            </motion.p>
+                <br />
+                <span>の面倒な作業をゼロに。</span>
+              </h1>
+              
+              <motion.p 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                style={{ color: 'rgba(236,233,226,0.85)', fontSize: 'clamp(1rem, 1.2vw, 1.15rem)', maxWidth: '600px', margin: 'clamp(0.8rem, 1.5vh, 1.2rem) 0', lineHeight: 1.7 }}
+              >
+                ネタ収集からYMM4出力まで、手作業の<strong className="text-glow-gold" style={{ fontWeight: 700 }}>95%を自動化</strong>。毎日の動画投稿を徹底アシストします。
+              </motion.p>
+
+              <motion.div 
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                className="brand-inline-actions home-compact-hero__actions" 
+              >
+                <Link className="brand-btn brand-btn--primary" to="/download/" style={{ padding: '14px 28px', fontSize: '1.05rem' }}>
+                  無料で始める
+                </Link>
+                <Link className="brand-btn brand-btn--ghost" to="/instructions/" style={{ gap: '6px', padding: '14px 28px' }}>
+                  <Play size={16} />
+                  使い方を見る
+                </Link>
+              </motion.div>
+              
+              <motion.p 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.7 }}
+                className="hero-microcopy" style={{ marginTop: '0.8rem', opacity: 0.7 }}
+              >
+                無料プランあり・Windows専用・クレカ不要
+              </motion.p>
+
+              <motion.div 
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 1 }}
+                className="hero-proof-bar" 
+                style={{ marginTop: 'clamp(1.5rem, 3vh, 2.5rem)', justifyContent: 'flex-start' }}
+              >
+                {socialProofStats.map((stat) => (
+                  <div key={stat.label} className="hero-proof-bar__item">
+                    <span className="hero-proof-bar__icon" aria-hidden="true">
+                      <stat.Icon size={18} color="#e0c184" />
+                    </span>
+                    <span className="hero-proof-bar__value">{stat.value}</span>
+                    <span className="hero-proof-bar__label">{stat.label}</span>
+                  </div>
+                ))}
+              </motion.div>
+            </div>
 
             <motion.div 
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="brand-inline-actions home-compact-hero__actions" 
-              style={{ justifyContent: 'center', marginTop: 'clamp(0.8rem, 2vh, 1.5rem)' }}
+              className="hero-grid-split__media"
+              initial={{ opacity: 0, x: 40, filter: 'blur(10px)' }}
+              animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+              transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
             >
-              <Link className="brand-btn brand-btn--primary" to="/download/">
-                無料で始める
-              </Link>
-              <Link className="brand-btn brand-btn--ghost" to="/instructions/" style={{ gap: '6px' }}>
-                <Play size={16} />
-                使い方を見る
-              </Link>
+              <img 
+                src="/product_get_script.png"
+                alt="ゆっくりまとめプロセッサーの実際の操作画面"
+                fetchPriority="high"
+                className="hero-product-image-clean"
+              />
             </motion.div>
-            <motion.p 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.7 }}
-              className="hero-microcopy" style={{ textAlign: 'center', marginTop: '0.8rem' }}
-            >
-              無料プランあり・Windows専用・クレカ不要
-            </motion.p>
           </div>
-
-          {/* Full-width product screenshot with browser chrome — Vercel style, scroll-linked 3D */}
-          <motion.div
-            initial={{ opacity: 0, y: 80, rotateX: 8 }}
-            animate={{ opacity: 1, y: 0, rotateX: 0 }}
-            transition={{ duration: 1.2, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            style={{
-              position: 'relative',
-              zIndex: 1,
-              width: 'min(1280px, calc(100% - 32px))',
-              margin: '0 auto',
-              perspective: '1200px',
-              transformStyle: 'preserve-3d',
-              rotateX: browserRotateX,
-              scale: browserScale,
-            }}
-          >
-            <div className="hero-browser-frame">
-              {/* Browser chrome bar */}
-              <div className="hero-browser-frame__bar">
-                <div className="hero-browser-frame__dots">
-                  <span style={{ background: '#ff5f57' }} />
-                  <span style={{ background: '#febc2e' }} />
-                  <span style={{ background: '#28c840' }} />
-                </div>
-                <div className="hero-browser-frame__url">
-                  <span>ゆっくりまとめプロセッサー v1.4.1</span>
-                </div>
-              </div>
-              {/* Screenshot */}
-              <div className="hero-browser-frame__screen">
-                <img 
-                  src="/product_get_script.png"
-                  alt="ゆっくりまとめプロセッサーの実際の操作画面"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'left top', display: 'block' }}
-                />
-                {/* Glass overlay */}
-                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(255,255,255,0.06) 0%, transparent 15%, transparent 85%, rgba(0,0,0,0.2) 100%)', pointerEvents: 'none' }} />
-              </div>
-            </div>
-            {/* Glow underneath - wider and more dramatic */}
-            <div style={{ position: 'absolute', bottom: '-60px', left: '5%', right: '5%', height: '120px', background: 'radial-gradient(ellipse, rgba(224,193,132,0.25) 0%, rgba(224,193,132,0.08) 40%, transparent 70%)', filter: 'blur(40px)', pointerEvents: 'none' }} />
-          </motion.div>
-
-          {/* Social proof bar — separated, clean */}
-          <motion.div 
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1 }}
-            className="hero-proof-bar" 
-            style={{ position: 'relative', zIndex: 1, justifyContent: 'center', marginTop: 'clamp(1.5rem, 3vh, 2.5rem)' }}
-          >
-            {socialProofStats.map((stat) => (
-              <div key={stat.label} className="hero-proof-bar__item">
-                <span className="hero-proof-bar__icon" aria-hidden="true">
-                  <stat.Icon size={18} color="#e0c184" />
-                </span>
-                <span className="hero-proof-bar__value">{stat.value}</span>
-                <span className="hero-proof-bar__label">{stat.label}</span>
-              </div>
-            ))}
-          </motion.div>
 
           {/* Scroll indicator */}
           <motion.div
@@ -736,6 +709,8 @@ export function HomePage() {
                             <img 
                               src={imgSrc}
                               alt={`${presentationSlides[activeSlide]?.label}の実画面 ${imgIndex + 1}`} 
+                              loading="lazy"
+                              decoding="async"
                               style={{ 
                                 width: isYMM4Step ? '100%' : 'auto',
                                 height: isYMM4Step ? '100%' : 'auto',
@@ -888,29 +863,30 @@ export function HomePage() {
                         damping: 15,
                         delay: 0.3 + index * 0.15 
                       }}
+                      style={{ background: 'rgba(255,255,255,0.08)', padding: '1.4rem', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.15)' }}
                     >
                       <div className="chart-dashboard__row-info">
-                        <strong className="chart-dashboard__row-title">{item.label}</strong>
-                        <p>{item.desc}</p>
+                        <strong className="chart-dashboard__row-title" style={{ fontSize: '1.15rem', color: '#fff', marginBottom: '8px', display: 'block' }}>{item.label}</strong>
+                        <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '0.95rem' }}>{item.desc}</p>
                       </div>
 
                       <div className="chart-dashboard__row-stats">
-                        <div className="chart-dashboard__stat-box chart-dashboard__stat-box--manual">
-                          <small>手作業</small>
-                          <span>{item.manual}</span>
+                        <div className="chart-dashboard__stat-box chart-dashboard__stat-box--manual" style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.3)' }}>
+                          <small style={{ color: '#fff', opacity: 0.9 }}>手作業</small>
+                          <span style={{ fontSize: '1.25rem', color: '#fff' }}>{item.manual}</span>
                         </div>
-                        <div className="chart-dashboard__stat-arrow-sm" aria-hidden="true">
+                        <div className="chart-dashboard__stat-arrow-sm" aria-hidden="true" style={{ color: 'rgba(224,193,132,0.9)' }}>
                           <svg width="20" height="20" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/></svg>
                         </div>
-                        <div className="chart-dashboard__stat-box chart-dashboard__stat-box--product">
-                          <small>本ツール</small>
-                          <span>{item.product}</span>
+                        <div className="chart-dashboard__stat-box chart-dashboard__stat-box--product" style={{ background: 'rgba(224,193,132,0.2)', border: '1px solid rgba(224,193,132,0.6)' }}>
+                          <small style={{ color: '#e0c184', fontWeight: 'bold' }}>本ツール</small>
+                          <span style={{ fontSize: '1.25rem', color: '#fff' }}>{item.product}</span>
                         </div>
                       </div>
 
                       <div className="chart-dashboard__row-badge">
-                        <span className="chart-dashboard__row-saved">
-                          <svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 11V3M4 6l3-3 3 3" stroke="currentColor" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                        <span className="chart-dashboard__row-saved" style={{ background: '#4CAF50', color: '#fff', fontWeight: 800, padding: '8px 16px', fontSize: '1.15rem', border: '1px solid #66BB6A' }}>
+                          <svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 11V3M4 6l3-3 3 3" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/></svg>
                           {saved}分
                         </span>
                       </div>
@@ -988,36 +964,36 @@ export function HomePage() {
                   style={{ 
                     height: '100%', 
                     display: 'flex', flexDirection: 'column', alignItems: 'flex-start',
-                    padding: 'clamp(1.5rem, 3vh, 2.5rem)',
+                    padding: 'clamp(2rem, 4vh, 3rem)',
                     borderRadius: '24px',
-                    border: `1px solid ${item.borderColor}`,
-                    background: item.gradient,
+                    border: `1px solid ${item.iconColor}80`,
+                    background: 'rgba(32,30,36,0.95)',
                     position: 'relative', overflow: 'hidden',
                     transition: 'border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease',
                     cursor: 'default',
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.boxShadow = `0 20px 50px rgba(0,0,0,0.5), 0 0 40px ${item.borderColor}`
-                    e.currentTarget.style.borderColor = item.iconColor
+                    e.currentTarget.style.boxShadow = `0 20px 50px rgba(0,0,0,0.5), inset 0 0 0 2px ${item.iconColor}`
+                    e.currentTarget.style.background = 'rgba(40,38,45,1)'
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.boxShadow = ''
-                    e.currentTarget.style.borderColor = item.borderColor
+                    e.currentTarget.style.background = 'rgba(32,30,36,0.95)'
                   }}
                 >
                   {/* Large icon with glow */}
                   <div style={{ 
-                    width: 56, height: 56, borderRadius: '16px', 
+                    width: 64, height: 64, borderRadius: '18px', 
                     background: item.gradient, 
-                    border: `1.5px solid ${item.borderColor}`,
+                    border: `2px solid ${item.iconColor}`,
                     display: 'flex', alignItems: 'center', justifyContent: 'center', 
-                    marginBottom: '1.2rem',
-                    boxShadow: `0 8px 24px ${item.borderColor}`,
+                    marginBottom: '1.5rem',
+                    boxShadow: `0 8px 30px ${item.borderColor}`,
                   }}>
-                    <item.Icon size={26} color={item.iconColor} strokeWidth={1.8} />
+                    <item.Icon size={32} color={item.iconColor} strokeWidth={2} />
                   </div>
-                  <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#fff', marginBottom: '0.6rem' }}>{item.title}</h3>
-                  <p style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.65)', lineHeight: 1.65 }}>{item.body}</p>
+                  <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#fff', marginBottom: '1rem', letterSpacing: '0.02em', lineHeight: 1.3 }}>{item.title}</h3>
+                  <p style={{ fontSize: '1.05rem', color: 'rgba(255,255,255,0.9)', lineHeight: 1.7, flexGrow: 1 }}>{item.body}</p>
                   {/* Subtle gradient glow in corner */}
                   <div style={{ position: 'absolute', top: '-30%', right: '-20%', width: '60%', height: '60%', background: `radial-gradient(circle, ${item.borderColor}, transparent 70%)`, opacity: 0.15, pointerEvents: 'none' }} />
                 </article>
@@ -1418,21 +1394,20 @@ export function HomePage() {
       <AnimatePresence>
         {showFloatingCta && (
           <motion.div
-            className="floating-cta"
-            initial={{ y: 100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 100, opacity: 0 }}
-            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className="floating-cta floating-cta--waka"
+            initial={{ opacity: 0, scale: 0.9, x: 20 }}
+            animate={{ opacity: 1, scale: 1, x: 0 }}
+            exit={{ opacity: 0, scale: 0.9, x: 20 }}
+            transition={{ type: 'spring', stiffness: 200, damping: 20 }}
           >
-            <div className="floating-cta__inner">
-              <div className="floating-cta__text">
-                <strong>作業時間95%削減</strong>
-                <span>無料プランで今すぐ体験</span>
+            <div className="waka-popup">
+              <img src="/guide_nodoka.png" alt="案内役：和花" className="waka-avatar" />
+              <div className="waka-bubble">
+                <p>まだ手作業で動画作ってるの？<br/>自動化ツールなら<strong className="text-glow-gold">約95%時間を削減</strong>できるよ！</p>
+                <Link className="brand-btn brand-btn--primary" to="/download/" style={{ textAlign: 'center', justifyContent: 'center', padding: '12px', fontSize: '0.9rem' }}>
+                  無料プランで試してみる
+                </Link>
               </div>
-              <Link className="brand-btn brand-btn--primary floating-cta__btn" to="/download/">
-                <ArrowRight size={16} />
-                無料で始める
-              </Link>
             </div>
           </motion.div>
         )}

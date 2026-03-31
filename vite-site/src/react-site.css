@@ -9689,8 +9689,8 @@ html {
   gap: 1rem;
   padding: 0.8rem 1rem 0.8rem 1.5rem;
   border-radius: 16px;
-  background: rgba(12, 12, 16, 0.92);
-  backdrop-filter: blur(20px) saturate(1.5);
+  background: rgba(12, 12, 16, 0.75);
+  backdrop-filter: blur(24px) saturate(1.5);
   border: 1px solid rgba(224, 193, 132, 0.2);
   box-shadow:
     0 -8px 40px rgba(0, 0, 0, 0.5),
@@ -9882,7 +9882,7 @@ html {
 }
 
 .page-hero .page-intro__content h1 {
-  background: linear-gradient(135deg, #ffffff 0%, rgba(224, 193, 132, 0.9) 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #f0d89a 40%, #c9a862 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -10124,7 +10124,7 @@ html {
 }
 
 .brand-404 h1 {
-  background: linear-gradient(135deg, #ffffff, rgba(224, 193, 132, 0.8));
+  background: linear-gradient(135deg, #ffffff 0%, #f0d89a 40%, #c9a862 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -10166,7 +10166,7 @@ html {
 }
 
 .brand-article__header h1 {
-  background: linear-gradient(135deg, #ffffff, rgba(224, 193, 132, 0.8));
+  background: linear-gradient(135deg, #ffffff 0%, #f0d89a 40%, #c9a862 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -10196,8 +10196,126 @@ html {
 }
 
 .micro-status h1 {
-  background: linear-gradient(135deg, #ffffff, rgba(224, 193, 132, 0.8));
+  background: linear-gradient(135deg, #ffffff 0%, #f0d89a 40%, #c9a862 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
+/* ── Home Page Clean Footer Gap ── */
+.brand-home .brand-main {
+  padding-bottom: 0 !important;
+}
+.brand-home .brand-footer {
+  margin-top: 0 !important;
+}
+
+/* ── User Feedback Fixes (1 Screen Hero & Nodoka CTA & Readability) ── */
+.hero-grid-split {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  align-items: center;
+  gap: 3rem;
+  max-width: 1300px;
+  margin: 0 auto;
+  min-height: clamp(600px, calc(100vh - 80px), 900px);
+  padding: 2rem 0;
+}
+.hero-grid-split__text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+}
+.hero-grid-split__text .hero-massive-title {
+  text-align: left;
+  margin: 0;
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  line-height: 1.25;
+}
+.hero-grid-split__text p, .hero-grid-split__text .hero-microcopy {
+  text-align: left !important;
+}
+.hero-product-image-clean {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8), 0 0 0 1px rgba(225, 194, 138, 0.3);
+  background: #000;
+  display: block;
+}
+
+@media (max-width: 1024px) {
+  .hero-grid-split {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 3rem;
+    min-height: auto;
+    padding-top: 4rem;
+  }
+  .hero-grid-split__text {
+    align-items: center;
+    text-align: center;
+  }
+  .hero-grid-split__text .hero-massive-title {
+    text-align: center;
+  }
+  .hero-grid-split__text p, .hero-grid-split__text .hero-microcopy {
+    text-align: center !important;
+  }
+  .hero-grid-split__text .brand-inline-actions, .hero-grid-split__text .hero-proof-bar {
+    justify-content: center !important;
+  }
+}
+
+/* ── Waka Character Horizontal Compact CTA ── */
+.floating-cta--waka {
+  right: 16px !important;
+  bottom: 16px !important;
+  left: auto !important;
+  transform: none !important;
+  width: auto !important;
+  pointer-events: none; /* Let clicks pass through empty space */
+  z-index: 100 !important;
+}
+.waka-popup {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: rgba(22, 21, 26, 0.95);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(224, 193, 132, 0.4);
+  border-radius: 16px;
+  padding: 1.2rem;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.7), inset 0 0 0 1px rgba(255,255,255,0.06);
+  pointer-events: auto; /* Re-enable for the content */
+  gap: 1.2rem;
+}
+.waka-avatar {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 50%;
+  border: 2px solid rgba(224, 193, 132, 0.5);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  flex-shrink: 0;
+}
+.waka-bubble {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  max-width: 270px;
+}
+.waka-bubble p {
+  margin: 0;
+  font-weight: 700;
+  color: #fff;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.waka-bubble strong {
+  color: #f0d89a;
+}
+

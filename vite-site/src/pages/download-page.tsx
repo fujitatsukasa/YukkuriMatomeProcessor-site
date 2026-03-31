@@ -33,7 +33,7 @@ export function DownloadPage() {
         flowLinks={flowActions}
         media={
           <InteractiveCard className="page-visual-card premium-glass">
-            <img className="page-visual-card__image" src={media.productImage1} alt="製品画面イメージ" />
+            <img className="page-visual-card__image" src="/product_get_script.png" alt="製品画面イメージ" />
             <div className="page-visual-card__meta">
               <strong>試用の準備</strong>
               <span>導入前提と確認項目を一画面で把握</span>
