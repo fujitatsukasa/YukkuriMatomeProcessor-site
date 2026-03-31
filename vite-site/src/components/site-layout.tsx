@@ -239,9 +239,11 @@ export function SiteLayout() {
             ))}
           </nav>
 
-          <div className="header-actions brand-header__actions">
-            <ActionLink action={secondaryCta} className="btn header-cta brand-btn" />
-            <ActionLink action={primaryCta} className="btn header-cta brand-btn" />
+          <div className="header-actions brand-header__actions home-compact-cta__actions" style={{ margin: 0, padding: 0 }}>
+            <ActionLink action={secondaryCta} className="header-cta brand-btn" />
+            <div style={{ transform: 'scale(0.8)', transformOrigin: 'right center' }}>
+              <ActionLink action={{...primaryCta, label: '無料で開始する！'}} className="brand-btn" />
+            </div>
           </div>
         </div>
         <div className="brand-scroll-progress" aria-hidden="true">

@@ -61,7 +61,7 @@ export const navItems: NavItem[] = [
 ]
 
 export const primaryCta: ActionItem = {
-  label: '無料で開始する！',
+  label: '無料で開始する',
   href: '/download/',
   variant: 'primary',
 }
