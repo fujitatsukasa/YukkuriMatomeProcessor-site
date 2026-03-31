@@ -69,26 +69,32 @@ export function BlogPost() {
         )}
 
         {/* Content Body */}
-        <article className="markdown-body" style={{ maxWidth: 840, margin: '3rem auto 0', padding: '0 1.5rem' }}>
-          <ReactMarkdown 
-            remarkPlugins={[remarkGfm]} 
-            rehypePlugins={[rehypeRaw]}
-          >
-            {content}
-          </ReactMarkdown>
+        <div style={{ maxWidth: 900, margin: '-3rem auto 0', position: 'relative', zIndex: 10, padding: '0 1.5rem' }}>
+          <article className="markdown-body brand-article" style={{ background: 'rgba(14, 12, 18, 0.95)', backdropFilter: 'blur(30px)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '24px', padding: '3rem clamp(1.5rem, 5vw, 4rem)', boxShadow: '0 20px 40px rgba(0,0,0,0.5)', color: 'rgba(255,255,255,0.9)' }}>
+            <ReactMarkdown 
+              remarkPlugins={[remarkGfm]} 
+              rehypePlugins={[rehypeRaw]}
+            >
+              {content}
+            </ReactMarkdown>
+          </article>
 
-          {/* Special CTA Box placed effectively at the end of every post */}
-          <div style={{ margin: '4rem 0 2rem', padding: '2rem', background: 'rgba(224, 193, 132, 0.05)', borderRadius: '12px', border: '1px solid rgba(224, 193, 132, 0.2)', textAlign: 'center' }}>
-            <h3 style={{ margin: '0 0 1rem', fontSize: '1.5rem', color: '#e0c184' }}>面倒な準備作業から解放されませんか？</h3>
-            <p style={{ margin: '0 0 1.5rem', color: 'rgba(255,255,255,0.9)' }}>
-              本ツールの「AI自動化」なら、記事で解説した数時間かかるYMM4の準備を<strong>約95%短縮</strong>できます。
-              まずは永久無料プランで、驚きのスピードを体験してください。
+          {/* Premium CTA Box */}
+          <div className="blog-premium-cta" style={{ margin: '4rem 0 2rem', padding: '3rem', background: 'linear-gradient(135deg, rgba(20, 18, 24, 0.8) 0%, rgba(38, 30, 20, 0.9) 100%)', borderRadius: '24px', border: '1px solid rgba(225, 194, 138, 0.3)', textAlign: 'center', boxShadow: '0 30px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.1)', position: 'relative', overflow: 'hidden' }}>
+            <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at top, rgba(225,194,138,0.15), transparent 70%)', pointerEvents: 'none' }} />
+            <h3 style={{ margin: '0 0 1rem', fontSize: '1.8rem', color: '#fff', fontWeight: 800, textShadow: '0 0 20px rgba(225,194,138,0.5)' }}>面倒な準備作業から解放されませんか？</h3>
+            <p style={{ margin: '0 auto 2rem', color: 'rgba(255,255,255,0.8)', maxWidth: 600, lineHeight: 1.6, fontSize: '1.05rem' }}>
+              本ツールの「AI自動化」なら、記事で解説した数時間かかるYMM4の準備を<strong>約95%短縮</strong>できます。<br/>まずは永久無料プランで、驚きのスピードを体験してください。
             </p>
-            <Link to="/download/" className="brand-btn brand-btn--primary" style={{ display: 'inline-flex' }}>
-              <Download size={18} /> 無料でツールを試す
-            </Link>
+            <div className="home-compact-cta__actions" style={{ justifyContent: 'center' }}>
+              <div style={{ transform: 'scale(0.9)', transformOrigin: 'center' }}>
+                <Link to="/download/" className="brand-btn" style={{ display: 'inline-flex', padding: '0 2rem' }}>
+                  <Download size={20} style={{ marginRight: '8px' }} /> 無料で開始する！
+                </Link>
+              </div>
+            </div>
           </div>
-        </article>
+        </div>
 
       </main>
     </>
