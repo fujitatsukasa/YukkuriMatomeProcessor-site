@@ -5,7 +5,7 @@ import { downloadUrl, legal, siteOrigin, siteSubtitle, siteTitle } from '@/data/
 import React, { useEffect, useRef, useState } from 'react'
 import { motion, useInView as useMotionInView, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import Tilt from 'react-parallax-tilt'
-import { MessageSquare, Smartphone, Users, Download, Zap, Star, ShieldCheck, Clock, CheckCircle2, TrendingUp, HelpCircle, Monitor, CreditCard, ArrowRight, Sparkles, Play } from 'lucide-react'
+import { MessageSquare, Smartphone, Users, Download, Zap, Star, ShieldCheck, Clock, CheckCircle2, TrendingUp, HelpCircle, Monitor, CreditCard, ArrowRight, Sparkles, Play, ChevronDown } from 'lucide-react'
 import { CustomCursorGlow } from '@/components/CustomCursorGlow'
 
 const SECTION_HEAD_VARIANTS = {
@@ -283,7 +283,7 @@ export function HomePage() {
 
   const scrollTestimonials = (direction: 'left' | 'right') => {
     if (testimonialsRef.current) {
-      const amount = direction === 'left' ? -380 : 380;
+      const amount = direction === 'left' ? -400 : 400;
       testimonialsRef.current.scrollBy({ left: amount, behavior: 'smooth' });
     }
   }
@@ -291,9 +291,42 @@ export function HomePage() {
   const { scrollY } = useScroll()
   // Subtle parallax translation
   const parallaxY = useTransform(scrollY, [0, 8000], [0, 2000])
+  // Browser frame 3D tilt on scroll
+  const browserRotateX = useTransform(scrollY, [0, 600], [3, 0])
+  const browserScale = useTransform(scrollY, [0, 600], [0.97, 1])
 
   const [activeSlide, setActiveSlide] = useState(0)
   const isAutoPlayingRef = useRef(true)
+
+  // ━━━[ Floating CTA visibility ]━━━
+  const [showFloatingCta, setShowFloatingCta] = useState(false)
+  useEffect(() => {
+    const handleScroll = () => {
+      const heroEnd = document.querySelector('.home-compact-hero')?.getBoundingClientRect()
+      const ctaSection = document.querySelector('.home-compact-cta-section')?.getBoundingClientRect()
+      if (heroEnd && ctaSection) {
+        const pastHero = heroEnd.bottom < 0
+        const reachedCta = ctaSection.top < window.innerHeight
+        setShowFloatingCta(pastHero && !reachedCta)
+      }
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  // ━━━[ Testimonial Auto-Scroll ]━━━
+  useEffect(() => {
+    const el = testimonialsRef.current
+    if (!el) return
+    const timer = setInterval(() => {
+      if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 10) {
+        el.scrollTo({ left: 0, behavior: 'smooth' })
+      } else {
+        el.scrollBy({ left: 400, behavior: 'smooth' })
+      }
+    }, 5000)
+    return () => clearInterval(timer)
+  }, [])
 
   // ━━━[ Auto Carousel Logic ]━━━
   useEffect(() => {
@@ -420,7 +453,7 @@ export function HomePage() {
             </motion.p>
           </div>
 
-          {/* Full-width product screenshot with browser chrome — Vercel style */}
+          {/* Full-width product screenshot with browser chrome — Vercel style, scroll-linked 3D */}
           <motion.div
             initial={{ opacity: 0, y: 80, rotateX: 8 }}
             animate={{ opacity: 1, y: 0, rotateX: 0 }}
@@ -432,6 +465,8 @@ export function HomePage() {
               margin: '0 auto',
               perspective: '1200px',
               transformStyle: 'preserve-3d',
+              rotateX: browserRotateX,
+              scale: browserScale,
             }}
           >
             <div className="hero-browser-frame">
@@ -479,7 +514,51 @@ export function HomePage() {
               </div>
             ))}
           </motion.div>
+
+          {/* Scroll indicator */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.5, duration: 0.8 }}
+            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 'clamp(1rem, 2vh, 2rem)', gap: '4px' }}
+          >
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+            >
+              <ChevronDown size={20} color="rgba(255,255,255,0.3)" />
+            </motion.div>
+          </motion.div>
+
         </section>
+
+        {/* ━━━[ Compatibility / Ecosystem Bar ]━━━ */}
+        <div className="compatibility-bar">
+          <div className="compatibility-bar__inner">
+            <span className="compatibility-bar__label">対応環境</span>
+            <div className="compatibility-bar__items">
+              <div className="compatibility-bar__item">
+                <Monitor size={18} />
+                <span>Windows 10 / 11</span>
+              </div>
+              <div className="compatibility-bar__item">
+                <Sparkles size={18} color="#e0c184" />
+                <span>YMM4 完全対応</span>
+              </div>
+              <div className="compatibility-bar__item">
+                <Sparkles size={18} color="#e0c184" />
+                <span>AI台本生成</span>
+              </div>
+              <div className="compatibility-bar__item">
+                <Download size={18} />
+                <span>オフライン動作</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ━━━[ Section Glow Divider ]━━━ */}
+        <div className="section-glow-divider" />
 
         <section className="brand-section brand-section--alt home-compact-section home-presentation-deck" ref={flowRef} style={{ position: 'relative', zIndex: 1 }}>
           <div style={{ width: '100%', maxWidth: 1400, margin: '0 auto', display: 'flex', flexDirection: 'column', padding: '0 max(1.5rem, 3vw)', position: 'relative', zIndex: 2 }}>
@@ -844,6 +923,9 @@ export function HomePage() {
         </Section>
 
 
+        {/* ━━━[ Section Glow Divider ]━━━ */}
+        <div className="section-glow-divider" />
+
         <Section alt className="home-compact-section home-compact-usecase-section">
           {/* Parallax & Animated Section Background — rotation removed for premium feel */}
           <div className="page-bg-bleed">
@@ -947,6 +1029,9 @@ export function HomePage() {
 
 
 
+        {/* ━━━[ Section Glow Divider ]━━━ */}
+        <div className="section-glow-divider" />
+
         <Section alt className="home-compact-section testimonials-section-wrap">
           {/* subtle radial gradient for testimonials */}
           <div style={{ position: 'absolute', top: '50%', left: '50%', width: '120vw', height: '120%', background: 'radial-gradient(ellipse at center, rgba(30,25,18,0.4) 0%, transparent 60%)', transform: 'translate(-50%, -50%)', zIndex: 0 }} />
@@ -1020,6 +1105,9 @@ export function HomePage() {
             <p style={{ textAlign: 'center', color: 'rgba(255,255,255,0.35)', fontSize: '0.75rem', marginTop: '0.4rem' }}>※ 利用者の声を元に再構成した内容です</p>
           </div>
         </Section>
+
+        {/* ━━━[ Section Glow Divider ]━━━ */}
+        <div className="section-glow-divider" />
 
         <Section className="home-compact-section home-compact-price-section">
           {/* Parallax & Animated Section Background */}
@@ -1248,7 +1336,7 @@ export function HomePage() {
           </div>
         </Section>
 
-        <Section className="home-compact-section home-compact-cta-section" style={{ paddingBottom: '0 !important' }}>
+        <Section className="home-compact-section home-compact-cta-section home-cta-no-bottom-pad">
           {/* Parallax & Animated Section Background */}
           <div className="page-bg-bleed">
             <motion.img 
@@ -1325,6 +1413,30 @@ export function HomePage() {
           </div>
         </Section>
       </div>
+
+      {/* ━━━[ Floating CTA ]━━━ */}
+      <AnimatePresence>
+        {showFloatingCta && (
+          <motion.div
+            className="floating-cta"
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 100, opacity: 0 }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div className="floating-cta__inner">
+              <div className="floating-cta__text">
+                <strong>作業時間95%削減</strong>
+                <span>無料プランで今すぐ体験</span>
+              </div>
+              <Link className="brand-btn brand-btn--primary floating-cta__btn" to="/download/">
+                <ArrowRight size={16} />
+                無料で始める
+              </Link>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   )
 }
