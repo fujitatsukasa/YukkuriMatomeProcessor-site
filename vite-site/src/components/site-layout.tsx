@@ -246,9 +246,6 @@ export function SiteLayout() {
             </div>
           </div>
         </div>
-        <div className="brand-scroll-progress" aria-hidden="true">
-          <span data-scroll-progress />
-        </div>
       </header>
 
       <main id="main-content" className="brand-main" tabIndex={-1}>
