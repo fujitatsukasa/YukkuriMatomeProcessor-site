@@ -422,15 +422,16 @@ export function HomePage() {
 
           {/* Full-width product screenshot with browser chrome — Vercel style */}
           <motion.div
-            initial={{ opacity: 0, y: 60, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 1, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ opacity: 0, y: 80, rotateX: 8 }}
+            animate={{ opacity: 1, y: 0, rotateX: 0 }}
+            transition={{ duration: 1.2, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
             style={{
               position: 'relative',
               zIndex: 1,
               width: 'min(1280px, calc(100% - 32px))',
               margin: '0 auto',
               perspective: '1200px',
+              transformStyle: 'preserve-3d',
             }}
           >
             <div className="hero-browser-frame">
@@ -453,11 +454,11 @@ export function HomePage() {
                   style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'left top', display: 'block' }}
                 />
                 {/* Glass overlay */}
-                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(255,255,255,0.04) 0%, transparent 20%, transparent 80%, rgba(0,0,0,0.15) 100%)', pointerEvents: 'none' }} />
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(255,255,255,0.06) 0%, transparent 15%, transparent 85%, rgba(0,0,0,0.2) 100%)', pointerEvents: 'none' }} />
               </div>
             </div>
-            {/* Glow underneath */}
-            <div style={{ position: 'absolute', bottom: '-40px', left: '10%', right: '10%', height: '80px', background: 'radial-gradient(ellipse, rgba(224,193,132,0.2) 0%, transparent 70%)', filter: 'blur(30px)', pointerEvents: 'none' }} />
+            {/* Glow underneath - wider and more dramatic */}
+            <div style={{ position: 'absolute', bottom: '-60px', left: '5%', right: '5%', height: '120px', background: 'radial-gradient(ellipse, rgba(224,193,132,0.25) 0%, rgba(224,193,132,0.08) 40%, transparent 70%)', filter: 'blur(40px)', pointerEvents: 'none' }} />
           </motion.div>
 
           {/* Social proof bar — separated, clean */}
@@ -844,24 +845,23 @@ export function HomePage() {
 
 
         <Section alt className="home-compact-section home-compact-usecase-section">
-          {/* Parallax & Animated Section Background */}
+          {/* Parallax & Animated Section Background — rotation removed for premium feel */}
           <div className="page-bg-bleed">
             <motion.img 
               src="/bg_usecases_master.webp"
               alt=""
               style={{
                 width: '100%', height: '100%', objectFit: 'cover',
-                opacity: 0.75, mixBlendMode: 'screen',
+                opacity: 0.55, mixBlendMode: 'screen',
                 maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
                 WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)'
               }}
               animate={{
-                rotateZ: [0, 2, -2, 0],
-                scale: [1.08, 1.02, 1.08],
+                scale: [1.02, 1.06, 1.02],
               }}
               transition={{
-                duration: 30,
-                ease: "linear",
+                duration: 25,
+                ease: "easeInOut",
                 repeat: Infinity
               }}
             />
@@ -887,49 +887,57 @@ export function HomePage() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-10%" }}
-                transition={{ duration: 0.6, delay: idx * 0.1 }}
+                transition={{ duration: 0.6, delay: idx * 0.12 }}
                 style={{ height: '100%' }}
               >
               <Tilt
-                tiltMaxAngleX={4}
-                tiltMaxAngleY={4}
+                tiltMaxAngleX={5}
+                tiltMaxAngleY={5}
                 glareEnable={true}
-                glareMaxOpacity={0.12}
+                glareMaxOpacity={0.1}
                 glareColor="#ffffff"
                 glarePosition="all"
                 scale={1.02}
                 style={{ height: '100%' }}
               >
                 <article 
-                  className="home-compact-usecase-card magnetic-card" 
+                  className="home-compact-usecase-card--pure magnetic-card" 
                   role="listitem"
-                  style={{ height: '100%', background: item.gradient, borderColor: item.borderColor }}
-                  onMouseMove={(e) => {
-                    const rect = e.currentTarget.getBoundingClientRect()
-                    const x = e.clientX - rect.left
-                    const y = e.clientY - rect.top
-                    e.currentTarget.style.setProperty('--mouse-x', `${x}px`)
-                    e.currentTarget.style.setProperty('--mouse-y', `${y}px`)
+                  style={{ 
+                    height: '100%', 
+                    display: 'flex', flexDirection: 'column', alignItems: 'flex-start',
+                    padding: 'clamp(1.5rem, 3vh, 2.5rem)',
+                    borderRadius: '24px',
+                    border: `1px solid ${item.borderColor}`,
+                    background: item.gradient,
+                    position: 'relative', overflow: 'hidden',
+                    transition: 'border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease',
+                    cursor: 'default',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.boxShadow = `0 20px 50px rgba(0,0,0,0.5), 0 0 40px ${item.borderColor}`
+                    e.currentTarget.style.borderColor = item.iconColor
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.boxShadow = ''
+                    e.currentTarget.style.borderColor = item.borderColor
                   }}
                 >
-                  <div className="magnetic-spotlight" />
-                  <div className="magnetic-border" />
-                  <img 
-                    className="home-compact-usecase-card__bg-img" 
-                    src={item.image}
-                    alt={`${item.title}の活用イメージ`}
-                    loading="lazy"
-                  />
-                  <div className="home-compact-usecase-card__overlay" />
-                  <div className="home-compact-usecase-card__content">
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '6px' }}>
-                      <div style={{ width: 36, height: 36, borderRadius: '10px', background: `${item.gradient}`, border: `1px solid ${item.borderColor}`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                        <item.Icon size={18} color={item.iconColor} />
-                      </div>
-                      <h3>{item.title}</h3>
-                    </div>
-                    <p>{item.body}</p>
+                  {/* Large icon with glow */}
+                  <div style={{ 
+                    width: 56, height: 56, borderRadius: '16px', 
+                    background: item.gradient, 
+                    border: `1.5px solid ${item.borderColor}`,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', 
+                    marginBottom: '1.2rem',
+                    boxShadow: `0 8px 24px ${item.borderColor}`,
+                  }}>
+                    <item.Icon size={26} color={item.iconColor} strokeWidth={1.8} />
                   </div>
+                  <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#fff', marginBottom: '0.6rem' }}>{item.title}</h3>
+                  <p style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.65)', lineHeight: 1.65 }}>{item.body}</p>
+                  {/* Subtle gradient glow in corner */}
+                  <div style={{ position: 'absolute', top: '-30%', right: '-20%', width: '60%', height: '60%', background: `radial-gradient(circle, ${item.borderColor}, transparent 70%)`, opacity: 0.15, pointerEvents: 'none' }} />
                 </article>
               </Tilt>
               </motion.div>
@@ -975,29 +983,31 @@ export function HomePage() {
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-10%" }}
-                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                  transition={{ duration: 0.5, delay: idx * 0.08 }}
                   className="testimonial-card"
-                  style={{ minWidth: '350px', maxWidth: '380px', flex: '0 0 auto', scrollSnapAlign: 'start' }}
+                  style={{ minWidth: '360px', maxWidth: '400px', flex: '0 0 auto', scrollSnapAlign: 'start', padding: 'clamp(1.5rem, 3vh, 2.5rem)', gap: '0' }}
                 >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1.2rem' }}>
-                    <Star size={16} fill="#e0c184" color="#e0c184" />
-                    <Star size={16} fill="#e0c184" color="#e0c184" />
-                    <Star size={16} fill="#e0c184" color="#e0c184" />
-                    <Star size={16} fill="#e0c184" color="#e0c184" />
-                    <Star size={16} fill="#e0c184" color="#e0c184" />
+                  {/* Star rating */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '4px', marginBottom: '1.2rem' }}>
+                    {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#e0c184" color="#e0c184" />)}
                   </div>
-                  <p style={{ fontSize: '1rem', lineHeight: 1.7, color: '#f5f1e9', flex: 1, marginBottom: '1.5rem', fontWeight: 500 }}>{t.quote}</p>
+                  {/* Quote */}
+                  <p style={{ fontSize: '1.02rem', lineHeight: 1.75, color: 'rgba(245,241,233,0.92)', flex: 1, marginBottom: '1.5rem', fontWeight: 500, letterSpacing: '0.01em' }}>{t.quote}</p>
+                  {/* Author with improved layout */}
                   <div style={{ marginTop: 'auto', paddingTop: '1.2rem', borderTop: '1px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                    {/* Avatar */}
-                    <div style={{ 
-                      width: 52, height: 52, borderRadius: '50%', flexShrink: 0, 
-                      boxShadow: '0 4px 16px rgba(0,0,0,0.4)', border: '2px solid rgba(224,193,132,0.3)',
-                      backgroundImage: `url(${t.avatarImg})`, backgroundSize: '300% 200%', backgroundPosition: t.avatarPos 
-                    }} />
+                    {/* Avatar with glow ring */}
+                    <div style={{ position: 'relative', flexShrink: 0 }}>
+                      <div style={{ 
+                        width: 52, height: 52, borderRadius: '50%',
+                        boxShadow: '0 4px 16px rgba(0,0,0,0.4), 0 0 20px rgba(224,193,132,0.15)', 
+                        border: '2px solid rgba(224,193,132,0.4)',
+                        backgroundImage: `url(${t.avatarImg})`, backgroundSize: '300% 200%', backgroundPosition: t.avatarPos 
+                      }} />
+                    </div>
                     <div style={{ minWidth: 0 }}>
-                      <p style={{ fontSize: '0.95rem', color: '#f5f1e9', marginBottom: '0.15rem', fontWeight: 600 }}>{t.author}</p>
-                      <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.65)', marginBottom: '0.3rem' }}>{t.authorDetail}</p>
-                      <p style={{ fontSize: '0.9rem', color: '#e0c184', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '4px' }}>
+                      <p style={{ fontSize: '0.95rem', color: '#f5f1e9', marginBottom: '0.15rem', fontWeight: 700 }}>{t.author}</p>
+                      <p style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.55)', marginBottom: '0.3rem' }}>{t.authorDetail}</p>
+                      <p style={{ fontSize: '0.88rem', color: '#e0c184', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '4px' }}>
                         <TrendingUp size={14} />
                         {t.roi}
                       </p>
@@ -1238,7 +1248,7 @@ export function HomePage() {
           </div>
         </Section>
 
-        <Section className="home-compact-section home-compact-cta-section">
+        <Section className="home-compact-section home-compact-cta-section" style={{ paddingBottom: '0 !important' }}>
           {/* Parallax & Animated Section Background */}
           <div className="page-bg-bleed">
             <motion.img 
