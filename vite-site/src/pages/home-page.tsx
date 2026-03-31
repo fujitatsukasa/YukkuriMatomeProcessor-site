@@ -406,7 +406,7 @@ export function HomePage() {
               </div>
               <p className="hero-microcopy">無料プランあり・Windows対応・即ダウンロード</p>
 
-              <div className="hero-proof-bar" style={{ position: 'relative', zIndex: 1 }}>
+              <div className="hero-proof-bar" style={{ position: 'relative', zIndex: 1, display: 'flex', gap: '1.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
                 {socialProofStats.map((stat) => (
                   <div key={stat.label} className="hero-proof-bar__item">
                     <span className="hero-proof-bar__icon" aria-hidden="true">
@@ -855,12 +855,12 @@ export function HomePage() {
                 glareColor="#ffffff"
                 glarePosition="all"
                 scale={1.02}
-                style={{ height: '100%' }}
+                style={{ height: '100%', display: 'flex', flexDirection: 'column' }}
               >
                 <article 
                   className="home-compact-usecase-card magnetic-card" 
                   role="listitem"
-                  style={{ height: '100%' }}
+                  style={{ height: '100%', display: 'flex', flexDirection: 'column' }}
                   onMouseMove={(e) => {
                     const rect = e.currentTarget.getBoundingClientRect()
                     const x = e.clientX - rect.left
@@ -1004,7 +1004,7 @@ export function HomePage() {
 
           <div style={{ position: 'relative', zIndex: 1, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', width: '100%', maxWidth: '1200px', margin: '0 auto' }}>
             {/* Free Plan */}
-            <InteractiveCard className="home-compact-price-card-rich" style={{ paddingTop: '2rem' }}>
+            <InteractiveCard className="home-compact-price-card-rich" style={{ paddingTop: '2rem', display: 'flex', flexDirection: 'column', height: '100%' }}>
               <div className="home-compact-price-card-rich__top">
                 <h3 style={{ color: '#4CAF50' }}>Free</h3>
                 <div className="home-compact-price-card-rich__price">
@@ -1029,7 +1029,7 @@ export function HomePage() {
             </InteractiveCard>
 
             {/* Standard Plan */}
-            <InteractiveCard className="home-compact-price-card-rich" style={{ borderColor: 'rgba(224, 193, 132, 0.6)', boxShadow: '0 0 40px rgba(224, 193, 132, 0.15)', position: 'relative', zIndex: 2, paddingTop: '2rem' }}>
+            <InteractiveCard className="home-compact-price-card-rich" style={{ borderColor: 'rgba(224, 193, 132, 0.6)', boxShadow: '0 0 40px rgba(224, 193, 132, 0.15)', position: 'relative', zIndex: 2, paddingTop: '2rem', display: 'flex', flexDirection: 'column', height: '100%' }}>
               <div style={{ position: 'absolute', top: 0, left: 0, right: 0, display: 'flex', justifyContent: 'center' }}>
                 <div style={{ background: 'linear-gradient(135deg, #e0c184, #b08d51)', color: '#000', padding: '6px 20px', borderRadius: '0 0 12px 12px', fontSize: '0.85rem', fontWeight: 'bold' }}>
                   🏆 おすすめ
@@ -1062,7 +1062,7 @@ export function HomePage() {
             </InteractiveCard>
 
             {/* Pro Plan */}
-            <InteractiveCard className="home-compact-price-card-rich" style={{ position: 'relative', paddingTop: '2rem' }}>
+            <InteractiveCard className="home-compact-price-card-rich" style={{ position: 'relative', paddingTop: '2rem', display: 'flex', flexDirection: 'column', height: '100%' }}>
               <div style={{ position: 'absolute', top: 0, left: 0, right: 0, display: 'flex', justifyContent: 'center' }}>
                 <div style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', padding: '6px 20px', borderRadius: '0 0 12px 12px', fontSize: '0.85rem', fontWeight: 'bold', border: '1px solid rgba(255,255,255,0.15)', borderTop: 'none' }}>
                   法人・プロ向け
