@@ -461,7 +461,7 @@ export function HomePage() {
               <p className="brand-kicker">全機能紹介</p>
               <h2 style={{ fontSize: 'clamp(1.6rem, 2.5vw, 2.2rem)', margin: 0 }}>収益化に向けた、<span className="text-glow-gold">全7プロセス</span><span className="text-glow-green">完全網羅</span>。</h2>
               <p style={{ color: 'rgba(255,255,255,0.65)', maxWidth: 600, textAlign: 'center' }}>
-                当プロセッサーが提供する全ての主要機能をガイドキャラクターの「のどか」がご案内します。
+                本ツールが提供する全ての主要機能をガイドキャラクターの「のどか」がご案内します。
               </p>
               
               <div style={{ display: 'flex', gap: '8px', marginTop: '0.8rem', flexWrap: 'wrap', justifyContent: 'center' }}>
@@ -1021,10 +1021,8 @@ export function HomePage() {
                 <li><span className="check-icon">✓</span> 無償アップデート</li>
                 <li><span className="check-icon" style={{ opacity: 0.3 }}>—</span> <span style={{ opacity: 0.4 }}>高度な台本取得・AI生成</span></li>
               </ul>
-              <div className="home-compact-price-card-rich__action" style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', marginTop: 'auto', paddingTop: '1.5rem' }}>
-                <Link to="/download/" className="brand-btn brand-btn--ghost home-compact-price-btn" style={{ justifyContent: 'center' }}>
-                  無料で始める
-                </Link>
+              <div style={{ marginTop: 'auto', paddingTop: '1.5rem', textAlign: 'center' }}>
+                <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.45)', margin: 0 }}>※ ダウンロード後すぐにご利用可能</p>
               </div>
             </InteractiveCard>
 
@@ -1051,13 +1049,8 @@ export function HomePage() {
                 <li><span className="check-icon">✓</span> 無償アップデート</li>
                 <li><span className="check-icon" style={{ opacity: 0.3 }}>—</span> <span style={{ opacity: 0.4 }}>優先専用サポート</span></li>
               </ul>
-              <div className="home-compact-price-card-rich__action" style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', marginTop: 'auto', paddingTop: '1.5rem' }}>
-                <Link to="/purchase/" className="brand-btn brand-btn--primary home-compact-price-btn" style={{ justifyContent: 'center' }}>
-                  スタンダードで始める
-                </Link>
-                <p className="home-compact-price-card-rich__note" style={{ textAlign: 'center', fontSize: '0.85rem', color: 'rgba(255,255,255,0.6)' }}>
-                  クレジットカード・銀行振込に対応
-                </p>
+              <div style={{ marginTop: 'auto', paddingTop: '1.5rem', textAlign: 'center' }}>
+                <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.45)', margin: 0 }}>※ アプリ内でアップグレード可能</p>
               </div>
             </InteractiveCard>
 
@@ -1070,11 +1063,11 @@ export function HomePage() {
               </div>
               <div className="home-compact-price-card-rich__top">
                 <h3 style={{ color: '#fff' }}>Pro</h3>
-                <div className="home-compact-price-card-rich__price" style={{ whiteSpace: 'nowrap' }}>
-                  <strong style={{ fontSize: 'clamp(1.5rem, 3vw, 2.2rem)' }}>月額 10,000円</strong>
-                  <span style={{ fontSize: '0.85rem', fontWeight: 400, marginLeft: '0.5rem', color: 'rgba(255,255,255,0.7)' }}>(税込 11,000円)</span>
+                <div className="home-compact-price-card-rich__price">
+                  <strong>月額 10,000円</strong>
+                  <span>(税込 11,000円)</span>
                 </div>
-                <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.6)' }}>1日あたり約367円 — 外注費の1/10以下</p>
+                <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.45)' }}>1日あたり約367円 — 外注費の1/10以下</p>
                 <p>複数チャンネル運営や完全自動化を目指すプロ・法人向け。</p>
               </div>
               <ul className="home-compact-price-card-rich__features" aria-label="搭載機能">
@@ -1083,15 +1076,20 @@ export function HomePage() {
                 <li><span className="check-icon" style={{ color: '#e0c184' }}>✓</span> <strong>API連携・高度な自動処理</strong></li>
                 <li><span className="check-icon" style={{ color: '#e0c184' }}>✓</span> <strong>優先専用サポート</strong></li>
               </ul>
-              <div className="home-compact-price-card-rich__action" style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', marginTop: 'auto', paddingTop: '1.5rem' }}>
-                <Link to="/purchase/" className="brand-btn brand-btn--ghost home-compact-price-btn" style={{ justifyContent: 'center' }}>
-                  プロプランで始める
-                </Link>
-                <p className="home-compact-price-card-rich__note" style={{ textAlign: 'center', fontSize: '0.85rem', color: 'rgba(255,255,255,0.6)' }}>
-                  クレジットカード・銀行振込に対応
-                </p>
+              <div style={{ marginTop: 'auto', paddingTop: '1.5rem', textAlign: 'center' }}>
+                <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.45)', margin: 0 }}>※ アプリ内でアップグレード可能</p>
               </div>
             </InteractiveCard>
+          </div>
+
+          <div style={{ position: 'relative', zIndex: 1, textAlign: 'center', marginTop: '2.5rem' }}>
+            <p style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.55)', marginBottom: '1.2rem' }}>
+              ※ プランの選択・お支払いはすべてアプリ内で完結します
+            </p>
+            <Link className="brand-btn brand-btn--ghost" to="/download/" style={{ margin: '0 auto', gap: '8px' }}>
+              <Download size={18} />
+              無料ダウンロードはこちら
+            </Link>
           </div>
 
           {/* Trust Badges */}
@@ -1116,8 +1114,8 @@ export function HomePage() {
               <span>{legal.support.firstResponseSla}</span>
             </div>
             <div className="trust-badge-bar__item">
-              <CreditCard size={20} color="#e0c184" />
-              <span>安心の国内決済</span>
+              <Download size={20} color="#e0c184" />
+              <span>即ダウンロード可能</span>
             </div>
           </motion.div>
         </Section>
