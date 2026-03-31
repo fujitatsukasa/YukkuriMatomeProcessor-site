@@ -36,11 +36,11 @@ function AnimatedNumber({ value, active, suffix = '' }: { value: number; active:
 // ━━━[ Core AI Features (7 Step Pitch Deck) ]━━━
 const presentationSlides = [
   { label: '台本取得', sub: 'WEBから即時ストック', desc: 'YouTubeや5ch等のURLから必要な情報を瞬時に抽出し、ワンクリックでストック・一元管理します。', images: ['/product_get_script.png'], charImage: '/nodoka/step1.png' },
-  { label: '台本編集', sub: 'メインボードでサクッと調整', desc: '生成された台本は直感的なメインエディターですぐに微調整可能。ボードを出さずとも手軽にテキストを整えられます。', images: ['/product_edit_script.png'], charImage: '/nodoka/編集.png' },
   { label: 'AI台本生成', sub: '高度な自動構築', desc: '集めたネタから不要なノイズを削ぎ落とし、設定したテンプレートに従って自然な掛け合い台本へと一気に再構築します。', images: ['/product_ai_script.png'], charImage: '/nodoka/AI.png' },
-  { label: 'Youtube分析', sub: 'トレンドを見逃さない', desc: '再生可能な動画データやトレンドを分析し、ヒットの確率を最大限まで高めるトピック選定を助けます。', images: ['/product_youtube_info.png'], charImage: '/nodoka/step3.png' },
+  { label: '台本編集', sub: 'メインボードでサクッと調整', desc: '生成された台本は直感的なメインエディターですぐに微調整可能。ボードを出さずとも手軽にテキストを整えられます。', images: ['/product_edit_script.png'], charImage: '/nodoka/編集.png' },
   { label: 'サブウインドウ一括管理', sub: '感情ボード・フォーマット', desc: '詳細な感情指定や配役、フォーマットなどは、独立した専用のサブウィンドウで柔軟かつ直感的に一括管理できます。', images: ['/product_edit_script.png', '/product_board_emotion.png'], charImage: '/nodoka/サブウインドウ.png' },
   { label: 'YMM4直結出力', sub: '編集上部からワンクリック', desc: '編集が完了したら、台本編集画面の上部ボタンを一つ押すだけ。立ち絵や音声トーンを紐付け、そのままYMM4で読み込める形に完全出力します。', images: ['/product_edit_script.png'], charImage: '/nodoka/step6.png' },
+  { label: 'Youtube分析', sub: 'トレンドを見逃さない', desc: '再生可能な動画データやトレンドを分析し、ヒットの確率を最大限まで高めるトピック選定を助けます。', images: ['/product_youtube_info.png'], charImage: '/nodoka/step3.png' },
   { label: '内蔵操作ガイド', sub: '初心者も安心のフルサポート', desc: 'どの画面からでも即座に呼び出せる詳細なマニュアルを搭載。インストールから動画化までの手順をいつでも確認できます。', images: ['/product_guide.png'], charImage: '/nodoka/ガイド.png' },
 ] as const
 
@@ -60,9 +60,9 @@ const timeReduction = {
 
 const timeBreakdown = [
   { label: 'ネタ探し', manual: '30分', product: '2分', desc: '複数サイトからの手動コピペを自動収集へと置き換え' },
-  { label: '台本整理・生成', manual: '25分', product: '1分', desc: 'ノイズ除去と会話台本形式への一括テキスト変換をAIで自動化' },
+  { label: '台本整理・生成', manual: '25分', product: '1分', desc: 'ノイズ除去とゆっくり解説用の会話台本へのテキスト変換をAIで自動化' },
   { label: '感情・配役設定', manual: '10分', product: '1分', desc: '立ち絵の表情・声色マッピングをテンプレートで一括適用' },
-  { label: 'YMM4前調整', manual: '55分', product: '2分', desc: 'タイムライン配置・読み込み定義を自動出力' },
+  { label: '動画編集・YMM4', manual: '55分', product: '2分', desc: '動画編集ソフト(YMM4)用のタイムライン配置・読み込み定義を自動出力' },
 ] as const
 
 const useCasesData = [
@@ -195,7 +195,7 @@ const faqItems: FAQItem[] = faqCategories.flatMap(c => c.items)
 
 
 const homeMetaDescription =
-  '反応集・ゆっくり解説・ショート動画向けに、ネタ収集、台本作成、会話台本、立ち絵・画像・音声の素材整理、YMM4前の準備までまとめて進められる動画制作支援ツール。'
+  '基本的な動画編集やYMM4出力機能はずっと無料で使い放題。反応集・ゆっくり解説・ショート動画向けに、ネタ収集、台本作成、会話台本、立ち絵・画像・音声の素材整理、YMM4前の準備までまとめて進められる動画制作支援ツール。'
 
 const homeStructuredData = [
   {
@@ -319,8 +319,8 @@ export function HomePage() {
     <>
       <PageMeta
         title={`${siteTitle} | ${siteSubtitle}`}
-        description="ネタ収集からゆっくりムービーメーカー4(YMM4)の台本準備までを一本化し、作業時間を約95%短縮する2ch/5ch反応集・ゆっくり解説対応のWindows向け動画制作支援ツール。"
-        keywords="ゆっくり解説,反応集,YMM4,台本自動生成,ショート動画,2chまとめ"
+        description="台本取得やAI生成以外はすべて無料で動画編集が可能。ネタ収集からゆっくりムービーメーカー4(YMM4)の出力準備までを一本化し、作業時間を約95%短縮する2ch/5ch反応集・ゆっくり解説対応のWindows向け動画制作支援ツール。"
+        keywords="ゆっくり解説,反応集,YMM4,動画編集,無料,台本自動生成,ショート動画,2chまとめ"
         image={media.productImage2}
         path="/"
         structuredData={homeStructuredData}
@@ -387,12 +387,12 @@ export function HomePage() {
           <div className="home-compact-hero__layout">
             <div className="home-compact-hero__copy">
               <h2 className="brand-title" style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.8rem)' }}>
-                ネタ収集から出力まで、
+                ゆっくり解説の動画編集をAIで自動化。
                 <br />
-                <span className="text-gradient-animated">圧倒的時短</span>で動画量産。
+                <span className="text-gradient-animated">圧倒的時短</span>でYMM4へ。
               </h2>
               <p className="brand-lead">
-                使いたい記事などを集めるだけで、会話台本の編成からYMM4ファイルの書き出しまで全自動化。
+                基本的な動画編集やYMM4出力機能はずっと無料で使い放題。使いたい記事などを集めるだけで、会話台本の編成からYMM4ファイルの書き出しまで全自動化。
                 挫折しがちな「単純コピペ作業」から解放され、毎日の動画投稿を徹底アシストします。
               </p>
 
@@ -459,9 +459,9 @@ export function HomePage() {
             {/* Header / Dots Navi */}
             <div style={{ flex: '0 0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '0.5rem', gap: '4px' }}>
               <p className="brand-kicker">全機能紹介</p>
-              <h2 style={{ fontSize: 'clamp(1.6rem, 2.5vw, 2.2rem)', margin: 0 }}>収益化に向けた、<span className="text-glow-gold">全7プロセス</span><span className="text-glow-green">完全網羅</span>。</h2>
-              <p style={{ color: 'rgba(255,255,255,0.65)', maxWidth: 600, textAlign: 'center' }}>
-                本ツールが提供する全ての主要機能をガイドキャラクターの「のどか」がご案内します。
+              <h2 style={{ fontSize: 'clamp(1.6rem, 2.5vw, 2.2rem)', margin: 0 }}>台本作成からYMM4編集まで<span className="text-glow-gold">AIで自動化</span>する<span className="text-glow-green">全7機能</span>。</h2>
+              <p style={{ color: 'rgba(255,255,255,0.65)', maxWidth: 600, textAlign: 'center', marginTop: '0.8rem' }}>
+                無料で使える基本の動画編集機能と、作業を加速させるAI自動化プロセスをご案内します。
               </p>
               
               <div style={{ display: 'flex', gap: '8px', marginTop: '0.8rem', flexWrap: 'wrap', justifyContent: 'center' }}>
@@ -527,7 +527,7 @@ export function HomePage() {
                       
                       {(() => {
                         // 各スライドごとに、のどかの頭の位置（画像のエフェクトによる重心のズレ）を補正するためのしっぽX座標
-                        const tailXMap = [180, 140, 170, 180, 170, 180, 200];
+                        const tailXMap = [180, 170, 140, 170, 180, 180, 200];
                         const tx = tailXMap[activeSlide] || 200;
                         const pathData = `M20,10 H380 A10,10 0 0,1 390,20 V165 A10,10 0 0,1 380,175 H${tx + 18} L${tx},195 L${tx - 18},175 H20 A10,10 0 0,1 10,165 V20 A10,10 0 0,1 20,10 Z`;
                         
@@ -1221,12 +1221,12 @@ export function HomePage() {
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
             >
-              <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 3rem)', lineHeight: 1.3, marginBottom: '1.5rem' }}>
-                今日から作業時間を<span className="text-glow-gold">95%削減</span>しませんか？
+              <h2 style={{ fontSize: 'clamp(1.6rem, 3vw, 2.6rem)', lineHeight: 1.4, marginBottom: '1.5rem' }}>
+                ゆっくり解説の動画編集を<span className="text-glow-gold">AIで自動化</span>。<br/>作業時間を95%短縮しませんか？
               </h2>
-              <p style={{ fontSize: 'clamp(1rem, 1.5vw, 1.2rem)', color: 'rgba(255,255,255,0.75)', maxWidth: '700px', margin: '0 auto 2.5rem', lineHeight: 1.7 }}>
-                ネタ収集からYMM4出力まで、手作業で分断していた工程を<strong className="text-glow-gold">1つの流れ</strong>に。<br/>
-                まずは無料プランでお試しください。
+              <p style={{ fontSize: 'clamp(1rem, 1.5vw, 1.2rem)', color: 'rgba(255,255,255,0.75)', maxWidth: '750px', margin: '0 auto 2.5rem', lineHeight: 1.7 }}>
+                ネタ収集からYMM4（ゆっくりムービーメーカー4）の出力まで、手作業で分断していた工程を<strong className="text-glow-gold">1つの完全なツール</strong>に。<br/>
+                まずはすべての基本機能が使える無料プランからお試しください。
               </p>
 
               <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
