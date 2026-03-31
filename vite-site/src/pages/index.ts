@@ -6,6 +6,8 @@ export { ContactPage } from '@/pages/contact-page'
 export { NewsPage } from '@/pages/news-page'
 export { UpdatePage } from '@/pages/update-page'
 export { NewsPostPage } from '@/pages/news-post-page'
+export { BlogIndex } from '@/pages/blog-index'
+export { BlogPost } from '@/pages/blog-post'
 export { NotFoundPage, AccountReturnPage, BillingSuccessPage, BillingCancelPage } from '@/pages/system-pages'
 export {
   TermsPage,

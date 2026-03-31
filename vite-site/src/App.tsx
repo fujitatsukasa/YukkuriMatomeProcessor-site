@@ -20,6 +20,8 @@ import {
   RefundPolicyPage,
   TermsPage,
   UpdatePage,
+  BlogIndex,
+  BlogPost,
 } from '@/pages'
 
 function App() {
@@ -56,6 +58,10 @@ function App() {
         <Route path="instructions/" element={<InstructionsPage />} />
         <Route path="faq" element={<FaqPage />} />
         <Route path="faq/" element={<FaqPage />} />
+        <Route path="blog" element={<BlogIndex />} />
+        <Route path="blog/" element={<BlogIndex />} />
+        <Route path="blog/:slug" element={<BlogPost />} />
+        <Route path="blog/:slug/" element={<BlogPost />} />
         <Route path="purchase" element={<PurchasePage />} />
         <Route path="purchase/" element={<PurchasePage />} />
         <Route path="contact" element={<ContactPage />} />

@@ -35,13 +35,13 @@ function AnimatedNumber({ value, active, suffix = '' }: { value: number; active:
 // ━━━[ Core AI Features (Benefit & SEO Optimized) ]━━━
 // ━━━[ Core AI Features (7 Step Pitch Deck) ]━━━
 const presentationSlides = [
-  { label: '台本取得', sub: 'WEBから即時ストック', desc: 'YouTubeや5ch等のURLから必要な情報を瞬時に抽出し、ワンクリックでストック・一元管理します。', images: ['/product_get_script.png'], charImage: '/nodoka/step1.png' },
-  { label: 'AI台本生成', sub: '高度な自動構築', desc: '集めたネタから不要なノイズを削ぎ落とし、設定したテンプレートに従って自然な掛け合い台本へと一気に再構築します。', images: ['/product_ai_script.png'], charImage: '/nodoka/AI.png' },
-  { label: '台本編集', sub: 'メインボードでサクッと調整', desc: '生成された台本は直感的なメインエディターですぐに微調整可能。ボードを出さずとも手軽にテキストを整えられます。', images: ['/product_edit_script.png'], charImage: '/nodoka/編集.png' },
-  { label: 'サブウインドウ一括管理', sub: '感情ボード・フォーマット', desc: '詳細な感情指定や配役、フォーマットなどは、独立した専用のサブウィンドウで柔軟かつ直感的に一括管理できます。', images: ['/product_edit_script.png', '/product_board_emotion.png'], charImage: '/nodoka/サブウインドウ.png' },
-  { label: 'YMM4直結出力', sub: '編集上部からワンクリック', desc: '編集が完了したら、台本編集画面の上部ボタンを一つ押すだけ。立ち絵や音声トーンを紐付け、そのままYMM4で読み込める形に完全出力します。', images: ['/product_edit_script.png'], charImage: '/nodoka/step6.png' },
-  { label: 'Youtube分析', sub: 'トレンドを見逃さない', desc: '再生可能な動画データやトレンドを分析し、ヒットの確率を最大限まで高めるトピック選定を助けます。', images: ['/product_youtube_info.png'], charImage: '/nodoka/step3.png' },
-  { label: '内蔵操作ガイド', sub: '初心者も安心のフルサポート', desc: 'どの画面からでも即座に呼び出せる詳細なマニュアルを搭載。インストールから動画化までの手順をいつでも確認できます。', images: ['/product_guide.png'], charImage: '/nodoka/ガイド.png' },
+  { label: '台本取得', sub: 'WEBから即時ストック', desc: 'YouTubeや5ch等のURLから必要な情報を瞬時に抽出し、ワンクリックでストック・一元管理します。', images: ['/product_get_script.png'], charImage: '/nodoka/step1.png', tier: 'paid' as const },
+  { label: 'AI台本生成', sub: '高度な自動構築', desc: '集めたネタから不要なノイズを削ぎ落とし、設定したテンプレートに従って自然な掛け合い台本へと一気に再構築します。', images: ['/product_ai_script.png'], charImage: '/nodoka/AI.png', tier: 'paid' as const },
+  { label: '台本編集', sub: 'メインボードでサクッと調整', desc: '生成された台本は直感的なメインエディターですぐに微調整可能。ボードを出さずとも手軽にテキストを整えられます。', images: ['/product_edit_script.png'], charImage: '/nodoka/編集.png', tier: 'free' as const },
+  { label: 'サブウインドウ一括管理', sub: '感情ボード・フォーマット', desc: '詳細な感情指定や配役、フォーマットなどは、独立した専用のサブウィンドウで柔軟かつ直感的に一括管理できます。', images: ['/product_edit_script.png', '/product_board_emotion.png'], charImage: '/nodoka/サブウインドウ.png', tier: 'free' as const },
+  { label: 'YMM4直結出力', sub: '編集上部からワンクリック', desc: '編集が完了したら、台本編集画面の上部ボタンを一つ押すだけ。立ち絵や音声トーンを紐付け、そのままYMM4で読み込める形に完全出力します。', images: ['/product_edit_script.png'], charImage: '/nodoka/step6.png', tier: 'free' as const },
+  { label: 'Youtube分析', sub: 'トレンドを見逃さない', desc: '再生可能な動画データやトレンドを分析し、ヒットの確率を最大限まで高めるトピック選定を助けます。', images: ['/product_youtube_info.png'], charImage: '/nodoka/step3.png', tier: 'free' as const },
+  { label: '内蔵操作ガイド', sub: '初心者も安心のフルサポート', desc: 'どの画面からでも即座に呼び出せる詳細なマニュアルを搭載。インストールから動画化までの手順をいつでも確認できます。', images: ['/product_guide.png'], charImage: '/nodoka/ガイド.png', tier: 'free' as const },
 ] as const
 
 const socialProofStats = [
@@ -576,6 +576,10 @@ export function HomePage() {
                         <span style={{ fontSize: '0.9rem', color: '#e0c184', fontWeight: 700, letterSpacing: '2px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                           <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#4CAF50', boxShadow: '0 0 10px #4CAF50' }} />
                           STEP 0{activeSlide + 1}
+                          {presentationSlides[activeSlide]?.tier === 'free'
+                            ? <span style={{ fontSize: '0.65rem', padding: '2px 8px', borderRadius: '9999px', background: 'rgba(76,175,80,0.2)', color: '#4CAF50', border: '1px solid rgba(76,175,80,0.4)', fontWeight: 600, letterSpacing: '0.5px' }}>✓ 永久無料</span>
+                            : <span style={{ fontSize: '0.65rem', padding: '2px 8px', borderRadius: '9999px', background: 'rgba(224,193,132,0.15)', color: '#e0c184', border: '1px solid rgba(224,193,132,0.3)', fontWeight: 600, letterSpacing: '0.5px' }}>Standard以上</span>
+                          }
                         </span>
                         <h3 style={{ fontSize: '1.4rem', color: '#fff', margin: '0.3rem 0', fontWeight: 800 }}>{presentationSlides[activeSlide]?.label}</h3>
                         <p style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.85)', lineHeight: 1.5, margin: 0 }}>{presentationSlides[activeSlide]?.desc}</p>
@@ -906,10 +910,10 @@ export function HomePage() {
             style={{ position: 'relative', zIndex: 1 }}
           >
             <p className="brand-kicker">お客様の声</p>
-            <h2>導入クリエイターの<span className="text-glow-gold">圧倒的成果</span></h2>
+            <h2>導入クリエイターの<span className="text-glow-gold">活用事例</span></h2>
             <p style={{ maxWidth: '600px', margin: '0 auto' }}>
-              ジャンルも規模もさまざまなクリエイターが、<br/>
-              当プロセッサーで制作フローを<strong className="text-glow-gold">劇的に効率化</strong>しています。
+              さまざまなジャンルのクリエイターが、<br/>
+              本ツールで動画編集の制作フローを<strong className="text-glow-gold">効率化</strong>しています。
             </p>
           </motion.div>
 
@@ -961,7 +965,7 @@ export function HomePage() {
               ))}
             </div>
             <p className="carousel-hint" style={{ textAlign: 'center', color: 'rgba(255,255,255,0.45)', fontSize: '0.85rem', marginTop: '1rem' }}>← スワイプまたは矢印ボタンで閲覧 →</p>
-            <p style={{ textAlign: 'center', color: 'rgba(255,255,255,0.35)', fontSize: '0.75rem', marginTop: '0.4rem' }}>※ 利用者の声を元に再構成した内容です</p>
+            <p style={{ textAlign: 'center', color: 'rgba(255,255,255,0.45)', fontSize: '0.8rem', marginTop: '0.6rem', maxWidth: '500px', margin: '0.6rem auto 0', lineHeight: 1.6, background: 'rgba(255,255,255,0.03)', padding: '0.8rem 1.2rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.06)' }}>※ 利用シナリオに基づく想定事例です。実際の効果は利用状況により異なります。</p>
           </div>
         </Section>
 
@@ -1126,6 +1130,8 @@ export function HomePage() {
             <motion.img 
               src="/bg_faq_master.webp"
               alt=""
+              loading="lazy"
+              decoding="async"
               style={{
                 width: '100%', height: '100%', objectFit: 'cover',
                 opacity: 0.55, mixBlendMode: 'screen',
@@ -1196,6 +1202,8 @@ export function HomePage() {
             <motion.img 
               src="/bg_cta_master.webp"
               alt=""
+              loading="lazy"
+              decoding="async"
               style={{
                 width: '100%', height: '100%', objectFit: 'cover',
                 opacity: 0.7, mixBlendMode: 'screen',
@@ -1274,7 +1282,7 @@ export function HomePage() {
               </motion.div>
               
               {/* 黒枠から解放されたのどかちゃん */}
-              <img src="/nodoka/通常.png" alt="案内役：のどか" className="nodoka-freestanding-avatar" />
+              <img src="/nodoka/通常.png" alt="案内役：のどか" className="nodoka-freestanding-avatar" loading="lazy" decoding="async" />
             </div>
           </motion.div>
         )}

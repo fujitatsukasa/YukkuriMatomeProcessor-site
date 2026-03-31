@@ -10390,3 +10390,115 @@ html {
   pointer-events: auto; /* キャラクタクリックも可能に */
 }
 
+
+/* =========================================================================
+   Blog / Markdown Styles
+   ========================================================================= */
+
+.markdown-body {
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.8;
+  font-size: 1.05rem;
+}
+
+.markdown-body h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 3rem 0 1.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.markdown-body h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 2.5rem 0 1rem;
+  color: #f1f1f1;
+}
+
+.markdown-body p {
+  margin-bottom: 1.5rem;
+}
+
+.markdown-body a {
+  color: #e0c184;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.markdown-body a:hover {
+  text-decoration: none;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 1.5rem;
+  padding-left: 2rem;
+}
+
+.markdown-body li {
+  margin-bottom: 0.5rem;
+}
+
+.markdown-body strong {
+  color: #fff;
+  font-weight: 700;
+  background: linear-gradient(to right, transparent 50%, rgba(224, 193, 132, 0.2) 50%);
+  background-size: 200% 100%;
+  background-position: left bottom;
+}
+
+.markdown-body code {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-size: 0.9em;
+  font-family: monospace;
+}
+
+.markdown-body pre {
+  background: #1e1e1e;
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.markdown-body pre code {
+  background: none;
+  padding: 0;
+  color: #d4d4d4;
+}
+
+.markdown-body blockquote {
+  border-left: 4px solid #e0c184;
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(224, 193, 132, 0.05);
+  padding: 1rem;
+  border-radius: 0 8px 8px 0;
+}
+
+.blog-card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blog-card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(224, 193, 132, 0.3);
+}
+
+.blog-card-hover:hover img {
+  transform: scale(1.05);
+}
+
+.blog-title-link:hover {
+  color: #e0c184 !important;
+}
+
+.blog-read-more:hover {
+  text-decoration: underline !important;
+}
+

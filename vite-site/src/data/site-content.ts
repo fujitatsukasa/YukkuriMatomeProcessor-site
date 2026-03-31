@@ -1,7 +1,7 @@
 import { media } from '@/data/assets'
 
 export type NavItem = {
-  key: 'home' | 'download' | 'instructions' | 'update' | 'news' | 'faq' | 'purchase' | 'contact'
+  key: 'home' | 'download' | 'instructions' | 'update' | 'news' | 'faq' | 'purchase' | 'contact' | 'blog'
   label: string
   url: string
 }
@@ -55,6 +55,7 @@ export const navItems: NavItem[] = [
   { key: 'instructions', label: '機能と使い方', url: '/instructions/' },
   { key: 'purchase', label: '料金', url: '/purchase/' },
   { key: 'faq', label: 'FAQ', url: '/faq/' },
+  { key: 'blog', label: 'ブログ', url: '/blog/' },
   { key: 'update', label: 'アップデート', url: '/update/' },
   { key: 'news', label: 'お知らせ', url: '/news/' },
 ]
