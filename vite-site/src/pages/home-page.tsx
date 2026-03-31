@@ -1344,21 +1344,26 @@ export function HomePage() {
         {showFloatingCta && (
           <motion.div
             className="floating-cta floating-cta--nodoka"
-            initial={{ opacity: 0, scale: 0.9, x: 50, y: 50 }}
-            animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, x: 50, y: 50 }}
+            initial={{ opacity: 0, y: 50, x: 20 }}
+            animate={{ opacity: 1, y: 0, x: 0 }}
+            exit={{ opacity: 0, y: 50, x: 20 }}
             transition={{ type: 'spring', stiffness: 200, damping: 20 }}
           >
-            <div className="nodoka-popup">
-              <div className="nodoka-bubble">
-                <p>まだ手作業で動画作ってるの？<br/>自動化ツールなら<strong className="text-glow-neon">約95%時間を削減</strong>できるよ！</p>
-                <Link className="brand-btn brand-btn--neon-nodoka" style={{ textAlign: 'center', justifyContent: 'center', padding: '12px', fontSize: '0.9rem' }} to="/download/">
-                  無料プランで試してみる
+            <div className="nodoka-cta-container">
+              {/* フワフワ浮かぶフキダシ */}
+              <motion.div 
+                className="nodoka-speech-bubble"
+                animate={{ y: [0, -5, 0] }}
+                transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+              >
+                <p>まだ手作業で動画作ってるの？<br/>自動化ツールなら<strong style={{color: '#00ffcc', textShadow: '0 0 10px rgba(0,255,204,0.4)'}}>約95%時間を削減</strong>できるよ！</p>
+                <Link className="nodoka-animated-btn" to="/download/">
+                  <span className="nodoka-animated-btn__inner">無料で始める</span>
                 </Link>
-              </div>
-              <div className="nodoka-popup__img-container">
-                <img src="/nodoka/通常.png" alt="案内役：のどか" className="nodoka-avatar" />
-              </div>
+              </motion.div>
+              
+              {/* 黒枠から解放されたのどかちゃん */}
+              <img src="/nodoka/通常.png" alt="案内役：のどか" className="nodoka-freestanding-avatar" />
             </div>
           </motion.div>
         )}
