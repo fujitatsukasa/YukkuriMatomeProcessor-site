@@ -5,7 +5,7 @@ import { siteTitle } from '@/data/site-content'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
-import { Calendar, User, ArrowLeft, Download } from 'lucide-react'
+import { Calendar, User, ArrowLeft, Download, Link as LinkIcon, Share2 } from 'lucide-react'
 
 export function BlogPost() {
   const { slug } = useParams<{ slug: string }>()
@@ -16,6 +16,14 @@ export function BlogPost() {
   }
 
   const { meta, content } = post
+
+  const shareUrl = encodeURIComponent(`https://yukkurimatomeprocessor.com/blog/${meta.slug}/`)
+  const shareTitle = encodeURIComponent(`${meta.title} | ${siteTitle}`)
+  
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText(`https://yukkurimatomeprocessor.com/blog/${meta.slug}/`)
+    alert('記事のURLをコピーしました！SNSでのシェア大歓迎です！')
+  }
 
   return (
     <>
@@ -88,6 +96,47 @@ export function BlogPost() {
               <Download size={18} /> 無料でツールを試す
             </Link>
           </div>
+          {/* SNS Share Buttons */}
+          <div style={{ marginTop: '2rem', paddingTop: '2rem', borderTop: '1px solid rgba(255,255,255,0.06)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem', fontWeight: 600 }}>
+              <Share2 size={16} /> この記事をシェアして応援する
+            </span>
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+              <a 
+                href={`https://twitter.com/intent/tweet?url=${shareUrl}&text=${shareTitle}`} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '10px 20px', background: '#1DA1F2', color: '#fff', textDecoration: 'none', borderRadius: '30px', fontWeight: 600, fontSize: '0.9rem', transition: 'transform 0.2s' }}
+                onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.004 4.076H5.036z" />
+                </svg> X (Twitter)
+              </a>
+              <a 
+                href={`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '10px 20px', background: '#1877F2', color: '#fff', textDecoration: 'none', borderRadius: '30px', fontWeight: 600, fontSize: '0.9rem', transition: 'transform 0.2s' }}
+                onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M9.198 21.5h4v-8.01h3.604l.396-3.98h-4V7.5a1 1 0 0 1 1-1h3v-4h-3a5 5 0 0 0-5 5v2.01h-2l-.396 3.98h2.396v8.01Z" />
+                </svg> Facebook
+              </a>
+              <button 
+                onClick={handleCopyLink}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '10px 20px', background: 'rgba(255,255,255,0.1)', color: '#fff', border: 'none', cursor: 'pointer', borderRadius: '30px', fontWeight: 600, fontSize: '0.9rem', transition: 'all 0.2s' }}
+                onMouseOver={(e) => { e.currentTarget.style.transform = 'scale(1.05)'; e.currentTarget.style.background = 'rgba(255,255,255,0.15)' }}
+                onMouseOut={(e) => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.background = 'rgba(255,255,255,0.1)' }}
+              >
+                <LinkIcon size={18} /> リンクをコピー
+              </button>
+            </div>
+          </div>
+
         </article>
 
       </main>
