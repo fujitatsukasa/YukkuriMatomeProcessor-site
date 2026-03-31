@@ -9853,3 +9853,351 @@ html {
     font-size: 0.82rem;
   }
 }
+
+/* ════════════════════════════════════════════════════════
+   SUBPAGE PREMIUM DESIGN SYSTEM
+   ════════════════════════════════════════════════════════ */
+
+/* ── Page Hero (PageIntro upgrade) ── */
+.page-hero {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(5rem, 12vh, 8rem) 0 clamp(3rem, 6vh, 5rem);
+}
+
+.page-hero__backdrop {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(224, 193, 132, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 60% at 20% 80%, rgba(40, 80, 160, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 60% at 80% 80%, rgba(120, 50, 120, 0.04) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.page-hero .page-intro__shell {
+  position: relative;
+  z-index: 1;
+}
+
+.page-hero .page-intro__content h1 {
+  background: linear-gradient(135deg, #ffffff 0%, rgba(224, 193, 132, 0.9) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.page-hero .brand-kicker {
+  color: #e0c184;
+  font-weight: 700;
+}
+
+.page-hero .section-glow-divider {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+/* ── Enhanced Section Entrance Animations ── */
+.brand-section {
+  position: relative;
+}
+
+.brand-section .brand-shell {
+  animation: section-fade-in 0.6s ease-out both;
+}
+
+@keyframes section-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Premium Card Enhancements for Subpages ── */
+.interactive-surface.premium-glass,
+.interactive-surface.brand-card,
+.interactive-surface.release-panel,
+.interactive-surface.notice-box,
+.interactive-surface.channel {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.3s ease;
+}
+
+.interactive-surface.premium-glass:hover,
+.interactive-surface.brand-card:hover,
+.interactive-surface.release-panel:hover,
+.interactive-surface.notice-box:hover,
+.interactive-surface.channel:hover {
+  border-color: rgba(224, 193, 132, 0.2);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(224, 193, 132, 0.06);
+  transform: translateY(-2px);
+}
+
+/* ── FAQ Smooth Accordion Animation ── */
+.faq-item,
+.home-compact-faq__item {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 0.5rem;
+}
+
+.faq-item[open],
+.home-compact-faq__item[open] {
+  border-color: rgba(224, 193, 132, 0.15);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.faq-item summary,
+.home-compact-faq__item summary {
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.3s ease, color 0.3s ease;
+  border-radius: 12px;
+}
+
+.faq-item summary:hover,
+.home-compact-faq__item summary:hover {
+  background: rgba(255, 255, 255, 0.03);
+  color: #e0c184;
+}
+
+.faq-item summary::marker,
+.home-compact-faq__item summary::marker {
+  color: #e0c184;
+}
+
+.faq-item > p,
+.faq-item > .faq-answer,
+.home-compact-faq__item > p {
+  padding: 0 1.5rem 1.2rem;
+  animation: faq-expand 0.3s ease-out;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.7;
+}
+
+@keyframes faq-expand {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Timeline Premium (News/Update) ── */
+.timeline {
+  position: relative;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 20px;
+  width: 2px;
+  background: linear-gradient(180deg,
+    rgba(224, 193, 132, 0.4) 0%,
+    rgba(224, 193, 132, 0.1) 50%,
+    transparent 100%
+  );
+}
+
+.timeline > li {
+  position: relative;
+  padding-left: 48px;
+}
+
+.timeline > li::before {
+  content: '';
+  position: absolute;
+  left: 14px;
+  top: 24px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: rgba(224, 193, 132, 0.3);
+  border: 2px solid #e0c184;
+  box-shadow: 0 0 12px rgba(224, 193, 132, 0.2);
+}
+
+/* ── Contact Channel Cards ── */
+.contact-channels--cards .channel {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.contact-channels--cards .channel:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3), 0 0 24px rgba(224, 193, 132, 0.08);
+}
+
+.contact-channels--cards .channel h2 {
+  color: #e0c184;
+}
+
+/* ── Purchase Price Card Enhancement ── */
+.price-card--featured {
+  border: 1px solid rgba(224, 193, 132, 0.25) !important;
+  background: linear-gradient(135deg, rgba(224, 193, 132, 0.08) 0%, rgba(12, 12, 16, 0.95) 100%) !important;
+  box-shadow: 0 8px 40px rgba(224, 193, 132, 0.1) !important;
+}
+
+.price-card--featured .price {
+  color: #e0c184;
+}
+
+/* ── Legal Table Premium ── */
+.legal-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.legal-table th {
+  background: rgba(224, 193, 132, 0.06);
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.legal-table td {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.legal-table tr:last-child th,
+.legal-table tr:last-child td {
+  border-bottom: none;
+}
+
+.legal-table tr:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* ── 404 Premium ── */
+.brand-404 {
+  text-align: center;
+  padding: clamp(6rem, 15vh, 10rem) 1rem;
+  position: relative;
+}
+
+.brand-404::before {
+  content: '404';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(8rem, 20vw, 20rem);
+  font-weight: 900;
+  color: rgba(224, 193, 132, 0.04);
+  pointer-events: none;
+  z-index: 0;
+  line-height: 1;
+}
+
+.brand-404 > .brand-shell {
+  position: relative;
+  z-index: 1;
+}
+
+.brand-404 .brand-kicker {
+  font-size: 1.2rem;
+  color: #e0c184;
+}
+
+.brand-404 h1 {
+  background: linear-gradient(135deg, #ffffff, rgba(224, 193, 132, 0.8));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Purchase Summary DL Premium ── */
+.purchase-summary {
+  display: grid;
+  gap: 0;
+}
+
+.purchase-summary > div {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 0.5rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.purchase-summary > div:last-child {
+  border-bottom: none;
+}
+
+.purchase-summary dt {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.purchase-summary dd {
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ── Brand Article (News Post) Premium ── */
+.brand-article__header {
+  padding-top: clamp(4rem, 10vh, 6rem);
+}
+
+.brand-article__header h1 {
+  background: linear-gradient(135deg, #ffffff, rgba(224, 193, 132, 0.8));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.brand-panorama img {
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.brand-article__cta {
+  margin-top: 2rem;
+  padding: 2rem;
+  border-radius: 16px;
+  border: 1px solid rgba(224, 193, 132, 0.15);
+  background: rgba(224, 193, 132, 0.04);
+}
+
+/* ── Micro Status Pages ── */
+.micro-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+  padding: 2rem;
+}
+
+.micro-status h1 {
+  background: linear-gradient(135deg, #ffffff, rgba(224, 193, 132, 0.8));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}

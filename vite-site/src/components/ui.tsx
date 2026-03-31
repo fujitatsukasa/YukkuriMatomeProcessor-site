@@ -6,6 +6,7 @@ import {
 } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import {
   type ActionItem,
   normalizePath,
@@ -259,17 +260,37 @@ export function PageIntro({
   media,
 }: PageIntroProps) {
   return (
-    <Section>
+    <section className="page-hero">
+      {/* Ambient background glow */}
+      <div className="page-hero__backdrop" aria-hidden="true" />
+
       <div className={`brand-shell page-intro__shell${media ? ' page-intro__shell--media' : ''}`}>
-        <div className="page-intro__content">
+        <motion.div
+          className="page-intro__content"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        >
           <p className="brand-kicker">{kicker}</p>
           <h1>{title}</h1>
           <p className="brand-lead">{lead}</p>
           {actions.length ? <ActionGroup actions={actions} /> : null}
           {flowLinks.length ? <FlowLinks actions={flowLinks} /> : null}
-        </div>
-        {media ? <div className="page-intro__media">{media}</div> : null}
+        </motion.div>
+        {media ? (
+          <motion.div
+            className="page-intro__media"
+            initial={{ opacity: 0, y: 40, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          >
+            {media}
+          </motion.div>
+        ) : null}
       </div>
-    </Section>
+
+      {/* Glow divider at bottom */}
+      <div className="section-glow-divider" />
+    </section>
   )
 }
