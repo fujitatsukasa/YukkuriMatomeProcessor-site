@@ -1,7 +1,7 @@
 import { useEffect, useEffectEvent, useMemo, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { Link, Outlet, useLocation } from 'react-router-dom'
-import { ActionLink } from '@/components/ui'
+import { ActionLink, GlobalShareButtons } from '@/components/ui'
 import { media } from '@/data/assets'
 import {
   legal,
@@ -265,6 +265,9 @@ export function SiteLayout() {
           </nav>
         ) : null}
         <Outlet />
+        <div style={{ maxWidth: 1000, margin: '0 auto', width: '100%', padding: '0 1.5rem' }}>
+          <GlobalShareButtons />
+        </div>
       </main>
 
       <footer className="brand-footer">
