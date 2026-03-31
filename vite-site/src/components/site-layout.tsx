@@ -227,7 +227,7 @@ export function SiteLayout() {
             data-nav
             data-open={navOpen}
           >
-            {navItems.filter(item => ['instructions', 'purchase', 'faq', 'blog'].includes(item.key)).map((item) => (
+            {navItems.map((item) => (
               <Link
                 key={item.key}
                 className={item.key === activeKey ? 'is-active' : undefined}

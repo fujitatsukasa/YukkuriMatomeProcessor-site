@@ -398,8 +398,8 @@ export function HomePage() {
           </div>
         </section>
 
-        <section className="home-presentation-deck" style={{ padding: 'clamp(5rem, 8vh, 8rem) clamp(1rem, 3vw, 2rem)', position: 'relative' }} ref={flowRef}>
-          <div className="home-presentation-container" style={{ maxWidth: 1400, margin: '0 auto', background: 'rgba(8,7,10,0.4)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: 24, padding: 'clamp(2rem, 4vw, 3rem)', boxShadow: '0 40px 100px rgba(0,0,0,0.5)', backdropFilter: 'blur(20px)', position: 'relative', overflow: 'hidden' }}>
+        <section className="home-presentation-deck" style={{ padding: 'clamp(5rem, 8vh, 8rem) clamp(1rem, 3vw, 2rem)', position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center' }} ref={flowRef}>
+          <div className="home-presentation-container" style={{ width: '100%', maxWidth: 1400, margin: '0 auto', background: 'rgba(8,7,10,0.4)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: 24, padding: 'clamp(2rem, 4vw, 3rem) clamp(2rem, 4vw, 3rem) clamp(3rem, 5vw, 4rem)', boxShadow: '0 40px 100px rgba(0,0,0,0.5)', backdropFilter: 'blur(20px)', position: 'relative' }}>
             
             {/* Header / Dots Navi */}
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '2.5rem', gap: '8px' }}>
@@ -480,7 +480,7 @@ export function HomePage() {
                   </motion.div>
                 </AnimatePresence>
 
-                <div style={{ position: 'relative', height: 420, width: '100%', marginTop: '1rem' }}>
+                <div style={{ position: 'relative', height: 'clamp(350px, 45vh, 480px)', width: '100%', marginTop: '1rem' }}>
                   <AnimatePresence mode="wait">
                     <motion.img 
                       key={`char-${activeSlide}`}
@@ -490,7 +490,7 @@ export function HomePage() {
                       animate={{ opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }}
                       exit={{ opacity: 0, scale: 0.98, y: -10, filter: 'blur(3px)' }}
                       transition={{ duration: 0.4 }}
-                      style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center bottom', opacity: 0.95, filter: 'drop-shadow(0 0 20px rgba(0,0,0,0.8))', position: 'absolute', inset: 0 }} 
+                      style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center bottom', opacity: 0.95, filter: 'drop-shadow(0 0 20px rgba(0,0,0,0.8))', position: 'absolute', bottom: 0, left: 0 }} 
                     />
                   </AnimatePresence>
                 </div>
@@ -537,7 +537,7 @@ export function HomePage() {
                   </AnimatePresence>
                   
                   {/* Prev/Next Hotspots */}
-                  <div style={{ position: 'absolute', bottom: '-40px', right: 0, display: 'flex', gap: '16px' }}>
+                  <div style={{ position: 'absolute', bottom: '-45px', right: 0, display: 'flex', gap: '16px' }}>
                      <button onClick={() => handleSlideChange((activeSlide - 1 + presentationSlides.length) % presentationSlides.length)} style={{ width: 48, height: 48, borderRadius: 24, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>&larr;</button>
                      <button onClick={() => handleSlideChange((activeSlide + 1) % presentationSlides.length)} style={{ width: 48, height: 48, borderRadius: 24, background: 'linear-gradient(135deg, #e0c184, #b08d51)', border: 'none', color: '#000', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>&rarr;</button>
                   </div>

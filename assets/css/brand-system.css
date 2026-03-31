@@ -202,6 +202,7 @@ a {
   background: transparent;
   transition: color 0.25s ease, text-shadow 0.25s ease, letter-spacing 0.25s ease;
   overflow: hidden;
+  white-space: nowrap;
 }
 
 .nav a:hover,
