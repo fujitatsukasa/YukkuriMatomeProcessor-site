@@ -264,22 +264,6 @@ const homeStructuredData = [
 ]
 
 export function HomePage() {
-
-  // ━━━[ Floating CTA visibility ]━━━
-  const [showFloatingCta, setShowFloatingCta] = useState(false)
-  useEffect(() => {
-    const handleScroll = () => {
-      const heroEnd = document.querySelector('.home-compact-hero')?.getBoundingClientRect()
-      const ctaSection = document.querySelector('.home-compact-cta-section')?.getBoundingClientRect()
-      if (heroEnd && ctaSection) {
-        const pastHero = heroEnd.bottom < 0
-        const reachedCta = ctaSection.top < window.innerHeight
-        setShowFloatingCta(pastHero && !reachedCta)
-      }
-    }
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
   const flowRef = useRef<HTMLDivElement>(null)
   const isFlowInView = useMotionInView(flowRef, { amount: 0.2, once: true })
   const chartRef = useRef<HTMLDivElement>(null)
@@ -544,45 +528,54 @@ export function HomePage() {
                       })()}
                     </svg>
 
-                    <div style={{ position: 'relative', zIndex: 1, display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
-                      {/* コンパクトなキャラクター立ち絵（侵食防止） */}
-                      <AnimatePresence mode="wait">
-                        <motion.div
-                          key={`char-${activeSlide}`}
-                          initial={{ opacity: 0, scale: 0.9 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          exit={{ opacity: 0, scale: 0.9 }}
-                          transition={{ duration: 0.3 }}
-                          style={{ flexShrink: 0, width: '120px', display: 'flex', alignItems: 'flex-end', justifyContent: 'center' }}
-                        >
-                          <motion.img 
-                            src={presentationSlides[activeSlide]?.charImage || '/nodoka/通常.png'} 
-                            alt={`STEP ${activeSlide + 1}: ${presentationSlides[activeSlide]?.label}を案内するガイドキャラクターのどか`} 
-                            animate={{ y: [0, -5, 0] }}
-                            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                            style={{ 
-                              width: '100%', 
-                              height: 'auto',
-                              maxHeight: '160px',
-                              objectFit: 'contain', 
-                              objectPosition: 'bottom center',
-                              filter: 'drop-shadow(0 0 12px rgba(0,0,0,0.6))' 
-                            }} 
-                          />
-                        </motion.div>
-                      </AnimatePresence>
-                      {/* テキスト情報 */}
-                      <div>
-                        <span style={{ fontSize: '0.9rem', color: '#e0c184', fontWeight: 700, letterSpacing: '2px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                          <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#4CAF50', boxShadow: '0 0 10px #4CAF50' }} />
-                          STEP 0{activeSlide + 1}
-                        </span>
-                        <h3 style={{ fontSize: '1.4rem', color: '#fff', margin: '0.3rem 0', fontWeight: 800 }}>{presentationSlides[activeSlide]?.label}</h3>
-                        <p style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.85)', lineHeight: 1.5, margin: 0 }}>{presentationSlides[activeSlide]?.desc}</p>
-                      </div>
+                    <div style={{ position: 'relative', zIndex: 1 }}>
+                      <span style={{ fontSize: '0.9rem', color: '#e0c184', fontWeight: 700, letterSpacing: '2px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#4CAF50', boxShadow: '0 0 10px #4CAF50' }} />
+                        STEP 0{activeSlide + 1}
+                      </span>
+                      <h3 style={{ fontSize: '1.4rem', color: '#fff', margin: '0.3rem 0', fontWeight: 800 }}>{presentationSlides[activeSlide]?.label}</h3>
+                      <p style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.85)', lineHeight: 1.5, margin: 0 }}>{presentationSlides[activeSlide]?.desc}</p>
                     </div>
                   </motion.div>
                 </AnimatePresence>
+
+                {/* Character */}
+                <div style={{ flex: '1 1 auto', position: 'relative', minHeight: 'clamp(250px, 35svh, 400px)', width: '100%', marginTop: '0.5rem' }}>
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={`char-${activeSlide}`}
+                      initial={{ opacity: 0, scale: 0.95, y: 15, filter: 'blur(3px)' }}
+                      animate={{ opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }}
+                      exit={{ opacity: 0, scale: 0.95, y: -15, filter: 'blur(3px)' }}
+                      transition={{ duration: 0.4 }}
+                      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
+                    >
+                      <motion.img 
+                        src={presentationSlides[activeSlide]?.charImage || '/nodoka/通常.png'} 
+                        alt={`STEP ${activeSlide + 1}: ${presentationSlides[activeSlide]?.label}を案内するガイドキャラクターのどか`} 
+                        animate={{ 
+                          scaleY: [1, 1.025, 1],
+                          scaleX: [1, 0.985, 1],
+                          y: [0, -8, 0]
+                        }}
+                        transition={{ 
+                          duration: 2.5, 
+                          repeat: Infinity, 
+                          ease: "easeInOut" 
+                        }}
+                        style={{ 
+                          width: '100%', 
+                          height: '100%', 
+                          objectFit: 'contain', 
+                          objectPosition: 'center bottom', 
+                          transformOrigin: 'bottom center',
+                          opacity: 0.95, 
+                          filter: 'drop-shadow(0 0 20px rgba(0,0,0,0.8))' 
+                        }} 
+                      />
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
               </div>
 
               {/* Right: Screenshot Carousel Showcase */}
@@ -1248,39 +1241,6 @@ export function HomePage() {
           </div>
         </Section>
       </div>
-    
-        <AnimatePresence>
-        {showFloatingCta && (
-          <motion.div
-            className="floating-cta floating-cta--nodoka"
-            initial={{ opacity: 0, y: 50, x: 20 }}
-            animate={{ opacity: 1, y: 0, x: 0 }}
-            exit={{ opacity: 0, y: 50, x: 20 }}
-            transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-          >
-            <div className="nodoka-cta-container">
-              {/* フワフワ浮かぶフキダシ */}
-              <motion.div 
-                className="nodoka-speech-bubble"
-                animate={{ y: [0, -5, 0] }}
-                transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-              >
-                <p style={{ textAlign: 'center', lineHeight: '1.6', fontSize: '0.95rem' }}>
-                  毎日の動画編集、本当にお疲れ様です！☕<br/>
-                  面倒な作業をツールにお任せして、<br/>
-                  <strong style={{color: '#00ffcc', textShadow: '0 0 10px rgba(0,255,204,0.4)'}}>約95%も時短</strong>してみませんか？♪
-                </p>
-                <Link className="nodoka-animated-btn" style={{ margin: '0 auto' }} to="/download/">
-                  <span className="nodoka-animated-btn__inner">無料で始める</span>
-                </Link>
-              </motion.div>
-              
-              {/* 黒枠から解放されたのどかちゃん */}
-              <img src="/nodoka/通常.png" alt="案内役：のどか" className="nodoka-freestanding-avatar" />
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-</>
+    </>
   )
 }

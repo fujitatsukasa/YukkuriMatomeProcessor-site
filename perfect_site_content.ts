@@ -51,11 +51,8 @@ export const siteDescription =
 
 export const navItems: NavItem[] = [
   { key: 'home', label: 'ホーム', url: '/' },
-  { key: 'download', label: 'ダウンロード', url: '/download/' },
   { key: 'instructions', label: '機能と使い方', url: '/instructions/' },
   { key: 'purchase', label: '料金', url: '/purchase/' },
-  { key: 'faq', label: 'FAQ', url: '/faq/' },
-  { key: 'update', label: 'アップデート', url: '/update/' },
   { key: 'news', label: 'お知らせ', url: '/news/' },
 ]
 
