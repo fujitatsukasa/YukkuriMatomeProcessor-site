@@ -10269,53 +10269,63 @@ html {
   }
 }
 
-/* ── Waka Character Horizontal Compact CTA ── */
-.floating-cta--waka {
+/* ── Nodoka Character Horizontal Compact CTA ── */
+.floating-cta--nodoka {
   right: 16px !important;
   bottom: 16px !important;
   left: auto !important;
   transform: none !important;
   width: auto !important;
   pointer-events: none; /* Let clicks pass through empty space */
-  z-index: 100 !important;
+  z-index: 9999 !important;
 }
-.waka-popup {
+.nodoka-popup {
   position: relative;
   display: flex;
   align-items: center;
   background: rgba(22, 21, 26, 0.95);
   backdrop-filter: blur(16px);
   border: 1px solid rgba(224, 193, 132, 0.4);
-  border-radius: 16px;
-  padding: 1.2rem;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.7), inset 0 0 0 1px rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 0.8rem 1rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(255,255,255,0.06);
   pointer-events: auto; /* Re-enable for the content */
-  gap: 1.2rem;
+  gap: 0.8rem;
 }
-.waka-avatar {
-  width: 72px;
-  height: 72px;
-  object-fit: cover;
-  object-position: top;
-  border-radius: 50%;
-  border: 2px solid rgba(224, 193, 132, 0.5);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+/* 侵食禁止のための完全・絶対的な収納コンテナ */
+.nodoka-popup__img-container {
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  overflow: hidden; /* 絶対にはみ出させない */
+  background: rgba(0,0,0,0.3);
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(224, 193, 132, 0.3);
 }
-.waka-bubble {
+.nodoka-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%; /* 顔周辺にフォーカス */
+  transform: scale(1.6); /* ちょっと拡大してアイコン枠にフィットさせる */
+}
+.nodoka-bubble {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
-  max-width: 270px;
+  gap: 0.5rem;
+  max-width: 230px;
 }
-.waka-bubble p {
+.nodoka-bubble p {
   margin: 0;
   font-weight: 700;
   color: #fff;
-  font-size: 0.95rem;
-  line-height: 1.5;
+  font-size: 0.85rem;
+  line-height: 1.4;
 }
-.waka-bubble strong {
+.nodoka-bubble strong {
   color: #f0d89a;
 }
 

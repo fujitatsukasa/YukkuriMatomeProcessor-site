@@ -584,94 +584,43 @@ export function HomePage() {
                     style={{ 
                       flex: '0 0 auto',
                       width: '100%', position: 'relative', zIndex: 10,
-                      padding: '1.5rem 1.7rem 3.5rem 1.7rem', 
-                      display: 'flex', flexDirection: 'column', gap: '0.8rem',
-                      filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.6))',
+                      padding: '2rem', 
+                      display: 'flex', flexDirection: 'column', gap: '1.5rem',
+                      background: 'rgba(22, 21, 26, 0.95)',
+                      backdropFilter: 'blur(16px)',
+                      border: '1px solid rgba(224, 193, 132, 0.4)',
+                      borderRadius: '24px',
+                      boxShadow: '0 20px 50px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(255,255,255,0.06)',
                     }}
                   >
-                    {/* High Quality SVG Speech Bubble Background */}
-                    <svg preserveAspectRatio="none" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1 }}>
-                      <defs>
-                        <linearGradient id="bubbleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" stopColor="rgba(20, 25, 35, 0.95)" />
-                          <stop offset="100%" stopColor="rgba(8, 10, 15, 0.95)" />
-                        </linearGradient>
-                        <filter id="glow-edge">
-                          <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-                          <feMerge>
-                            <feMergeNode in="coloredBlur"/>
-                            <feMergeNode in="SourceGraphic"/>
-                          </feMerge>
-                        </filter>
-                      </defs>
-                      
-                      {(() => {
-                        // 各スライドごとに、のどかの頭の位置（画像のエフェクトによる重心のズレ）を補正するためのしっぽX座標
-                        const tailXMap = [180, 140, 170, 180, 170, 180, 200];
-                        const tx = tailXMap[activeSlide] || 200;
-                        const pathData = `M20,10 H380 A10,10 0 0,1 390,20 V165 A10,10 0 0,1 380,175 H${tx + 18} L${tx},195 L${tx - 18},175 H20 A10,10 0 0,1 10,165 V20 A10,10 0 0,1 20,10 Z`;
-                        
-                        return (
-                          <path 
-                            d={pathData}
-                            fill="url(#bubbleGrad)" 
-                            stroke="#e0c184" 
-                            strokeWidth="1.5" 
-                            strokeOpacity="0.8"
-                            filter="url(#glow-edge)"
-                          />
-                        );
-                      })()}
-                    </svg>
-
+                    {/* Character Avatar alongside Title inside the card */}
+                    <div style={{ position: 'relative', zIndex: 1, display: 'flex', gap: '1.2rem', alignItems: 'center' }}>
+                      <div style={{ flexShrink: 0, width: '100px', height: '100px', borderRadius: '50%', overflow: 'hidden', border: '2px solid rgba(224,193,132,0.5)', background: 'rgba(0,0,0,0.4)', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <img 
+                          src={presentationSlides[activeSlide]?.charImage || '/nodoka/通常.png'} 
+                          alt={`STEP ${activeSlide + 1}: ${presentationSlides[activeSlide]?.label}を案内するガイドキャラクターのどか`}
+                          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', transform: 'scale(1.3)' }}
+                        />
+                      </div>
+                      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                        <span style={{ fontSize: '0.9rem', color: '#e0c184', fontWeight: 700, letterSpacing: '2px', display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+                          <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#4CAF50', boxShadow: '0 0 10px #4CAF50' }} />
+                          STEP 0{activeSlide + 1}
+                        </span>
+                        <h3 style={{ fontSize: '1.7rem', color: '#fff', margin: 0, fontWeight: 800, lineHeight: 1.2 }}>{presentationSlides[activeSlide]?.label}</h3>
+                      </div>
+                    </div>
+                    
+                    {/* Description below */}
                     <div style={{ position: 'relative', zIndex: 1 }}>
-                      <span style={{ fontSize: '0.9rem', color: '#e0c184', fontWeight: 700, letterSpacing: '2px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#4CAF50', boxShadow: '0 0 10px #4CAF50' }} />
-                        STEP 0{activeSlide + 1}
-                      </span>
-                      <h3 style={{ fontSize: '1.4rem', color: '#fff', margin: '0.3rem 0', fontWeight: 800 }}>{presentationSlides[activeSlide]?.label}</h3>
-                      <p style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.85)', lineHeight: 1.5, margin: 0 }}>{presentationSlides[activeSlide]?.desc}</p>
+                      <p style={{ fontSize: '1.05rem', color: 'rgba(255,255,255,0.9)', lineHeight: 1.6, margin: 0 }}>{presentationSlides[activeSlide]?.desc}</p>
                     </div>
                   </motion.div>
                 </AnimatePresence>
-
-                {/* Character */}
-                <div style={{ flex: '1 1 auto', position: 'relative', minHeight: 'clamp(250px, 35svh, 400px)', width: '100%', marginTop: '0.5rem' }}>
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={`char-${activeSlide}`}
-                      initial={{ opacity: 0, scale: 0.95, y: 15, filter: 'blur(3px)' }}
-                      animate={{ opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }}
-                      exit={{ opacity: 0, scale: 0.95, y: -15, filter: 'blur(3px)' }}
-                      transition={{ duration: 0.4 }}
-                      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
-                    >
-                      <motion.img 
-                        src={presentationSlides[activeSlide]?.charImage || '/nodoka/通常.png'} 
-                        alt={`STEP ${activeSlide + 1}: ${presentationSlides[activeSlide]?.label}を案内するガイドキャラクターのどか`} 
-                        animate={{ 
-                          scaleY: [1, 1.025, 1],
-                          scaleX: [1, 0.985, 1],
-                          y: [0, -8, 0]
-                        }}
-                        transition={{ 
-                          duration: 2.5, 
-                          repeat: Infinity, 
-                          ease: "easeInOut" 
-                        }}
-                        style={{ 
-                          width: '100%', 
-                          height: '100%', 
-                          objectFit: 'contain', 
-                          objectPosition: 'center bottom', 
-                          transformOrigin: 'bottom center',
-                          opacity: 0.95, 
-                          filter: 'drop-shadow(0 0 20px rgba(0,0,0,0.8))' 
-                        }} 
-                      />
-                    </motion.div>
-                  </AnimatePresence>
-                </div>
+                {/* 
+                  邪魔だった下に伸びるキャラクラー巨大表示(侵食)枠は完全削除しました。
+                  これで画面高もスッキリし、他の要素の邪魔になりません。
+                */}
               </div>
 
               {/* Right: Screenshot Carousel Showcase */}
@@ -1394,17 +1343,19 @@ export function HomePage() {
       <AnimatePresence>
         {showFloatingCta && (
           <motion.div
-            className="floating-cta floating-cta--waka"
+            className="floating-cta floating-cta--nodoka"
             initial={{ opacity: 0, scale: 0.9, x: 20 }}
             animate={{ opacity: 1, scale: 1, x: 0 }}
             exit={{ opacity: 0, scale: 0.9, x: 20 }}
             transition={{ type: 'spring', stiffness: 200, damping: 20 }}
           >
-            <div className="waka-popup">
-              <img src="/guide_nodoka.png" alt="案内役：和花" className="waka-avatar" />
-              <div className="waka-bubble">
+            <div className="nodoka-popup">
+              <div className="nodoka-popup__img-container">
+                <img src="/nodoka/編集.png" alt="案内役：のどか" className="nodoka-avatar" />
+              </div>
+              <div className="nodoka-bubble">
                 <p>まだ手作業で動画作ってるの？<br/>自動化ツールなら<strong className="text-glow-gold">約95%時間を削減</strong>できるよ！</p>
-                <Link className="brand-btn brand-btn--primary" to="/download/" style={{ textAlign: 'center', justifyContent: 'center', padding: '12px', fontSize: '0.9rem' }}>
+                <Link className="brand-btn brand-btn--primary" style={{ textAlign: 'center', justifyContent: 'center', padding: '10px', fontSize: '0.85rem' }} to="/download/">
                   無料プランで試してみる
                 </Link>
               </div>
