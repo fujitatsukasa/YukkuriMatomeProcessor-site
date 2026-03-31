@@ -595,11 +595,11 @@ export function HomePage() {
                   >
                     {/* Character Avatar alongside Title inside the card */}
                     <div style={{ position: 'relative', zIndex: 1, display: 'flex', gap: '1.2rem', alignItems: 'center' }}>
-                      <div style={{ flexShrink: 0, width: '100px', height: '100px', borderRadius: '50%', overflow: 'hidden', border: '2px solid rgba(224,193,132,0.5)', background: 'rgba(0,0,0,0.4)', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                      <div style={{ flexShrink: 0, width: '130px', display: 'flex', justifyContent: 'center', alignItems: 'flex-end', alignSelf: 'stretch', paddingBottom: '0.2rem' }}>
                         <img 
                           src={presentationSlides[activeSlide]?.charImage || '/nodoka/通常.png'} 
                           alt={`STEP ${activeSlide + 1}: ${presentationSlides[activeSlide]?.label}を案内するガイドキャラクターのどか`}
-                          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', transform: 'scale(1.3)' }}
+                          style={{ width: '100%', height: 'auto', maxHeight: '140px', objectFit: 'contain', objectPosition: 'bottom center', filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.5))' }}
                         />
                       </div>
                       <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
@@ -1344,20 +1344,20 @@ export function HomePage() {
         {showFloatingCta && (
           <motion.div
             className="floating-cta floating-cta--nodoka"
-            initial={{ opacity: 0, scale: 0.9, x: 20 }}
-            animate={{ opacity: 1, scale: 1, x: 0 }}
-            exit={{ opacity: 0, scale: 0.9, x: 20 }}
+            initial={{ opacity: 0, scale: 0.9, x: 50, y: 50 }}
+            animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, x: 50, y: 50 }}
             transition={{ type: 'spring', stiffness: 200, damping: 20 }}
           >
             <div className="nodoka-popup">
-              <div className="nodoka-popup__img-container">
-                <img src="/nodoka/編集.png" alt="案内役：のどか" className="nodoka-avatar" />
-              </div>
               <div className="nodoka-bubble">
-                <p>まだ手作業で動画作ってるの？<br/>自動化ツールなら<strong className="text-glow-gold">約95%時間を削減</strong>できるよ！</p>
-                <Link className="brand-btn brand-btn--primary" style={{ textAlign: 'center', justifyContent: 'center', padding: '10px', fontSize: '0.85rem' }} to="/download/">
+                <p>まだ手作業で動画作ってるの？<br/>自動化ツールなら<strong className="text-glow-neon">約95%時間を削減</strong>できるよ！</p>
+                <Link className="brand-btn brand-btn--neon-nodoka" style={{ textAlign: 'center', justifyContent: 'center', padding: '12px', fontSize: '0.9rem' }} to="/download/">
                   無料プランで試してみる
                 </Link>
+              </div>
+              <div className="nodoka-popup__img-container">
+                <img src="/nodoka/通常.png" alt="案内役：のどか" className="nodoka-avatar" />
               </div>
             </div>
           </motion.div>
