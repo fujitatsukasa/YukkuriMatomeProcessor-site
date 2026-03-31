@@ -10271,7 +10271,7 @@ html {
 
 /* ── Nodoka Character V-Tuber Style Freestanding CTA ── */
 .floating-cta--nodoka {
-  right: 0 !important;
+  right: -10px !important; /* 画面右端限界まで押し込む */
   bottom: -5px !important;
   left: auto !important;
   transform: none !important;
@@ -10285,9 +10285,9 @@ html {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 5px; /* キャラクターとフキダシの隙間 */
+  gap: 15px; /* ここを15pxに広げて頭に矢印が刺さらないようにする */
   position: relative;
-  margin-right: 15px; /* 画面右端からわずかに余白 */
+  margin-right: 15px;
 }
 
 /* アニメーションするフキダシ部分 */
@@ -10298,11 +10298,11 @@ html {
   border-radius: 20px;
   box-shadow: 0 15px 40px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(255,255,255,0.06);
   pointer-events: auto;
-  padding: 1.2rem 1.4rem;
-  max-width: 280px;
+  padding: 1.4rem 1.6rem;
+  max-width: 320px; /* 中央揃えの3行改行が綺麗に収まるよう幅広化 */
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.2rem;
   position: relative;
   /* margin-bottomは削除しgapで管理 */
 }
@@ -10311,9 +10311,9 @@ html {
 .nodoka-speech-bubble::after {
   content: '';
   position: absolute;
-  right: 65px; /* のどかの頭の真上あたり */
-  bottom: -13px; /* 下向きに飛び出す */
-  border-width: 14px 12px 0 12px;
+  right: 75px; /* より正確に頭の中心を指すように右へズラす */
+  bottom: -10px; /* 長さを短くして圧迫感を減らす */
+  border-width: 10px 10px 0 10px;
   border-style: solid;
   border-color: rgba(18, 17, 22, 0.95) transparent transparent transparent;
   filter: drop-shadow(0 2px 0 rgba(224, 193, 132, 0.4));

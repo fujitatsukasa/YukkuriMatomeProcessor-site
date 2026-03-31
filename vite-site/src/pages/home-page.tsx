@@ -1356,8 +1356,12 @@ export function HomePage() {
                 animate={{ y: [0, -5, 0] }}
                 transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
               >
-                <p>毎日の動画編集、本当にお疲れ様です！☕<br/>面倒な作業をツールにお任せして、<strong style={{color: '#00ffcc', textShadow: '0 0 10px rgba(0,255,204,0.4)'}}>約95%も時短</strong>してみませんか？♪</p>
-                <Link className="nodoka-animated-btn" to="/download/">
+                <p style={{ textAlign: 'center', lineHeight: '1.6', fontSize: '0.95rem' }}>
+                  毎日の動画編集、本当にお疲れ様です！☕<br/>
+                  面倒な作業をツールにお任せして、<br/>
+                  <strong style={{color: '#00ffcc', textShadow: '0 0 10px rgba(0,255,204,0.4)'}}>約95%も時短</strong>してみませんか？♪
+                </p>
+                <Link className="nodoka-animated-btn" style={{ margin: '0 auto' }} to="/download/">
                   <span className="nodoka-animated-btn__inner">無料で始める</span>
                 </Link>
               </motion.div>
