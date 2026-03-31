@@ -9439,3 +9439,208 @@ html {
     grid-template-columns: 1fr !important;
   }
 }
+
+/* ════════════════════════════════════════════════════════
+   WORLD-CLASS LP UPGRADES — Browser Frame + Hero Polish
+   ════════════════════════════════════════════════════════ */
+
+/* ── macOS-Style Browser Frame (Vercel / Linear inspired) ── */
+.hero-browser-frame {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #0d0d10;
+  box-shadow:
+    0 50px 100px -20px rgba(0, 0, 0, 0.85),
+    0 30px 60px -30px rgba(0, 0, 0, 0.9),
+    0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 0 60px -10px rgba(224, 193, 132, 0.12);
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.6s ease;
+}
+
+.hero-browser-frame:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 60px 120px -20px rgba(0, 0, 0, 0.9),
+    0 40px 80px -30px rgba(0, 0, 0, 0.95),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    0 0 80px -10px rgba(224, 193, 132, 0.18);
+}
+
+.hero-browser-frame__bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: linear-gradient(180deg, rgba(30, 30, 35, 0.98), rgba(20, 20, 25, 0.98));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.hero-browser-frame__dots {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.hero-browser-frame__dots span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  opacity: 0.85;
+}
+
+.hero-browser-frame__url {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 16px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.hero-browser-frame__url span {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.02em;
+  font-weight: 500;
+}
+
+.hero-browser-frame__screen {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.hero-browser-frame__screen img {
+  transition: transform 12s ease;
+}
+
+.hero-browser-frame:hover .hero-browser-frame__screen img {
+  transform: scale(1.03);
+}
+
+/* ── Hero Section: Centered Layout (Linear style) ── */
+.home-compact-hero.homepage-hero {
+  min-height: calc(100svh - 64px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: clamp(32px, 6vh, 64px);
+  padding-bottom: clamp(32px, 6vh, 64px);
+  gap: 0;
+}
+
+/* ── Eyebrow Badge ── */
+.hero-eyebrow-badge {
+  animation: compact-fade-up 680ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── Hero Microcopy ── */
+.hero-microcopy {
+  font-size: 0.85rem !important;
+  color: rgba(255, 255, 255, 0.45) !important;
+  letter-spacing: 0.02em;
+}
+
+/* ── Social Proof Bar improvement ── */
+.hero-proof-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 2.5rem;
+  padding: 0.8rem 0;
+}
+
+.hero-proof-bar__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+
+.hero-proof-bar__value {
+  font-weight: 800;
+  color: #fff4d3;
+  font-size: 1.05rem;
+}
+
+.hero-proof-bar__label {
+  color: rgba(236, 233, 226, 0.6);
+  font-size: 0.85rem;
+}
+
+/* ── Section Breathing Room ── */
+.home-compact-section {
+  padding: clamp(64px, 10svh, 160px) 0 clamp(64px, 10svh, 140px) !important;
+}
+
+/* ── Testimonial Card Premium ── */
+.testimonial-card {
+  padding: 2rem;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, rgba(30, 28, 25, 0.95), rgba(16, 15, 12, 0.95));
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonial-card:hover {
+  border-color: rgba(224, 193, 132, 0.25);
+  transform: translateY(-4px);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba(224, 193, 132, 0.08);
+}
+
+/* ── Final CTA Enhancement ── */
+.final-cta-hero {
+  padding: clamp(2rem, 5vh, 4rem) 1.5rem;
+}
+
+/* ── Use Case Card Color ── */
+.home-compact-usecase-card.magnetic-card {
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.home-compact-usecase-card.magnetic-card:hover {
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(224, 193, 132, 0.08) !important;
+}
+
+/* ── Mobile responsive for browser frame ── */
+@media (max-width: 768px) {
+  .hero-browser-frame__bar {
+    padding: 8px 12px;
+    gap: 8px;
+  }
+  
+  .hero-browser-frame__dots span {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .hero-browser-frame__url {
+    display: none;
+  }
+
+  .hero-proof-bar {
+    justify-content: center;
+    gap: 1rem 1.5rem;
+  }
+
+  .final-cta-hero h2 {
+    font-size: clamp(1.6rem, 8vw, 2.5rem) !important;
+  }
+
+  .final-cta-hero .text-gradient-animated {
+    font-size: clamp(2rem, 10vw, 3rem) !important;
+  }
+
+  .final-cta-hero div[style*="repeat(4"] {
+    grid-template-columns: repeat(2, auto) !important;
+  }
+}
