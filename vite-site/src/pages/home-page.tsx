@@ -1356,7 +1356,7 @@ export function HomePage() {
                 animate={{ y: [0, -5, 0] }}
                 transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
               >
-                <p>まだ手作業で動画作ってるの？<br/>自動化ツールなら<strong style={{color: '#00ffcc', textShadow: '0 0 10px rgba(0,255,204,0.4)'}}>約95%時間を削減</strong>できるよ！</p>
+                <p>毎日の動画編集、本当にお疲れ様です！☕<br/>面倒な作業をツールにお任せして、<strong style={{color: '#00ffcc', textShadow: '0 0 10px rgba(0,255,204,0.4)'}}>約95%も時短</strong>してみませんか？♪</p>
                 <Link className="nodoka-animated-btn" to="/download/">
                   <span className="nodoka-animated-btn__inner">無料で始める</span>
                 </Link>

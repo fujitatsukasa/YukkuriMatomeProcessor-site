@@ -10280,12 +10280,14 @@ html {
   z-index: 9999 !important;
 }
 
-/* フキダシと立ち絵を並べるコンテナ */
+/* フキダシと立ち絵を縦に並べるコンテナ（横の侵食を防ぐため頭上配置） */
 .nodoka-cta-container {
   display: flex;
+  flex-direction: column;
   align-items: flex-end;
-  gap: 10px;
+  gap: 5px; /* キャラクターとフキダシの隙間 */
   position: relative;
+  margin-right: 15px; /* 画面右端からわずかに余白 */
 }
 
 /* アニメーションするフキダシ部分 */
@@ -10297,24 +10299,24 @@ html {
   box-shadow: 0 15px 40px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(255,255,255,0.06);
   pointer-events: auto;
   padding: 1.2rem 1.4rem;
-  max-width: 270px;
+  max-width: 280px;
   display: flex;
   flex-direction: column;
   gap: 1rem;
   position: relative;
-  margin-bottom: 25px; /* 足元から少し浮かせる */
+  /* margin-bottomは削除しgapで管理 */
 }
 
-/* キャラクター側のしっぽ */
+/* 縦並び・頭上配置に対応したキャラクター側のしっぽ（下向き） */
 .nodoka-speech-bubble::after {
   content: '';
   position: absolute;
-  right: -12px;
-  bottom: 30px;
-  border-width: 10px 0 10px 14px;
+  right: 65px; /* のどかの頭の真上あたり */
+  bottom: -13px; /* 下向きに飛び出す */
+  border-width: 14px 12px 0 12px;
   border-style: solid;
-  border-color: transparent transparent transparent rgba(18, 17, 22, 0.95);
-  filter: drop-shadow(2px 0 0 rgba(224, 193, 132, 0.4));
+  border-color: rgba(18, 17, 22, 0.95) transparent transparent transparent;
+  filter: drop-shadow(0 2px 0 rgba(224, 193, 132, 0.4));
 }
 
 .nodoka-speech-bubble p {
