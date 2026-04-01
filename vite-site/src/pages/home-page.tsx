@@ -563,7 +563,7 @@ export function HomePage() {
                   borderRadius: '28px',
                   boxShadow: '0 30px 60px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(255,255,255,0.08)',
                   overflow: 'hidden',
-                  minHeight: 'clamp(450px, 60svh, 600px)'
+                  height: 'clamp(550px, 65vh, 700px)' /* Absolute fixed height to prevent jumps */
                 }}
               >
               
