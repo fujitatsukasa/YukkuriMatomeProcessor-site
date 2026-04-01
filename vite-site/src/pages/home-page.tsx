@@ -536,28 +536,13 @@ export function HomePage() {
         <section className="brand-section brand-section--alt home-compact-section home-presentation-deck" ref={flowRef} style={{ position: 'relative', zIndex: 1, minHeight: '90vh', display: 'flex', alignItems: 'center' }}>
           <div style={{ width: '100%', maxWidth: 1500, margin: '0 auto', display: 'flex', flexDirection: 'column', padding: 'clamp(3rem, 6vh, 6rem) max(1.5rem, 3vw)', position: 'relative', zIndex: 2 }}>
             
-            {/* Header / Dots Navi */}
-            <div style={{ flex: '0 0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '0.5rem', gap: '4px' }}>
-              <p className="brand-kicker">全機能紹介</p>
-              <h2 style={{ fontSize: 'clamp(1.6rem, 2.5vw, 2.2rem)', margin: 0 }}>収益化に向けた、<span style={{ display: 'inline-block' }}><span className="text-glow-gold">全7プロセス</span><span className="text-glow-green">完全網羅</span>。</span></h2>
-              <p style={{ color: 'rgba(255,255,255,0.65)', maxWidth: 600, textAlign: 'center' }}>
+            {/* Header */}
+            <div style={{ flex: '0 0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '2.5rem', gap: '8px' }}>
+              <p className="brand-kicker" style={{ margin: 0 }}>全機能紹介</p>
+              <h2 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.5rem)', margin: 0 }}>収益化に向けた、<span style={{ display: 'inline-block' }}><span className="text-glow-gold">全7プロセス</span><span className="text-glow-green">完全網羅</span>。</span></h2>
+              <p style={{ color: 'rgba(255,255,255,0.7)', maxWidth: 700, textAlign: 'center', fontSize: '1.1rem', marginTop: '0.5rem' }}>
                 ネタ収集からYMM4タイムライン出力まで、動画制作におけるあらゆる手作業を自動化する、一貫した制作ワークフローをご紹介します。
               </p>
-              
-              <div style={{ display: 'flex', gap: '8px', marginTop: '0.8rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-                {presentationSlides.map((slide, idx) => (
-                  <button 
-                    key={idx}
-                    onClick={() => handleSlideChange(idx)}
-                    style={{
-                      height: 5, width: activeSlide === idx ? 48 : 16,
-                      background: activeSlide === idx ? '#e0c184' : 'rgba(255,255,255,0.2)',
-                      borderRadius: 4, border: 'none', cursor: 'pointer', transition: 'all 0.3s ease'
-                    }}
-                    title={slide.label}
-                  />
-                ))}
-              </div>
             </div>
 
             {/* Main Stage */}
@@ -566,126 +551,136 @@ export function HomePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              style={{ flex: '1 1 auto' }}
+              style={{ flex: '1 1 auto', width: '100%' }}
             >
+              {/* Combined Giant Card wrapper */}
               <div 
-                style={{ display: 'flex', flex: '1 1 auto', flexWrap: 'wrap', gap: 'clamp(1rem, 2vw, 2rem)', alignItems: 'stretch' }}
+                style={{ 
+                  display: 'flex', flexWrap: 'wrap', alignItems: 'stretch',
+                  background: 'linear-gradient(135deg, rgba(26, 25, 30, 0.95), rgba(16, 15, 20, 0.95))',
+                  backdropFilter: 'blur(20px)',
+                  border: '1px solid rgba(224, 193, 132, 0.4)',
+                  borderRadius: '28px',
+                  boxShadow: '0 30px 60px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(255,255,255,0.08)',
+                  overflow: 'hidden',
+                  minHeight: 'clamp(450px, 60svh, 600px)'
+                }}
               >
               
-              {/* Left: Guide Character & Text */}
-              <div style={{ flex: '1 1 400px', display: 'flex', flexDirection: 'column', position: 'relative', justifyContent: 'center' }}>
-                <AnimatePresence mode="wait">
-                  <motion.div 
-                    key={`desc-${activeSlide}`}
-                    initial={{ opacity: 0, x: -20, filter: 'blur(5px)' }}
-                    animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
-                    exit={{ opacity: 0, x: 20, filter: 'blur(5px)' }}
-                    transition={{ duration: 0.4 }}
-                    style={{ 
-                      flex: '0 0 auto',
-                      width: '100%', position: 'relative', zIndex: 10,
-                      padding: 'clamp(2rem, 3vw, 3rem)', 
-                      display: 'flex', flexDirection: 'column', gap: '1.8rem',
-                      background: 'linear-gradient(135deg, rgba(26, 25, 30, 0.95), rgba(16, 15, 20, 0.95))',
-                      backdropFilter: 'blur(20px)',
-                      border: '1px solid rgba(224, 193, 132, 0.4)',
-                      borderRadius: '28px',
-                      boxShadow: '0 30px 60px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(255,255,255,0.08)',
-                    }}
-                  >
-                    {/* Character Avatar alongside Title inside the card */}
-                    <div style={{ position: 'relative', zIndex: 1, display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
-                      <div style={{ flexShrink: 0, width: 'clamp(140px, 15vw, 180px)', display: 'flex', justifyContent: 'center', alignItems: 'flex-end', alignSelf: 'stretch', paddingBottom: '0.5rem' }}>
-                        <img 
-                          src={presentationSlides[activeSlide]?.charImage || '/nodoka/通常.png'} 
-                          alt={`STEP ${activeSlide + 1}: ${presentationSlides[activeSlide]?.label}を案内するガイドキャラクターのどか`}
-                          style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'bottom center', filter: 'drop-shadow(0 0 15px rgba(0,0,0,0.6))' }}
-                        />
+                {/* Left: Guide Character & Text */}
+                <div style={{ flex: '1 1 350px', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: 'clamp(2rem, 4vw, 4rem)', zIndex: 10, position: 'relative' }}>
+                  <AnimatePresence mode="wait">
+                    <motion.div 
+                      key={`desc-${activeSlide}`}
+                      initial={{ opacity: 0, x: -20, filter: 'blur(5px)' }}
+                      animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+                      exit={{ opacity: 0, x: 20, filter: 'blur(5px)' }}
+                      transition={{ duration: 0.4 }}
+                      style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}
+                    >
+                      {/* Character Avatar alongside Title inside the card */}
+                      <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
+                        <div style={{ flexShrink: 0, width: 'clamp(100px, 12vw, 150px)', display: 'flex', justifyContent: 'center', alignItems: 'flex-end', paddingBottom: '0.5rem' }}>
+                          <img 
+                            src={presentationSlides[activeSlide]?.charImage || '/nodoka/通常.png'} 
+                            alt={`STEP ${activeSlide + 1}: ${presentationSlides[activeSlide]?.label}を案内するガイドキャラクターのどか`}
+                            style={{ width: '100%', height: 'auto', objectFit: 'contain', filter: 'drop-shadow(0 0 15px rgba(0,0,0,0.6))' }}
+                          />
+                        </div>
+                        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                          <span style={{ fontSize: '1rem', color: '#e0c184', fontWeight: 800, letterSpacing: '2px', display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
+                            <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#4CAF50', boxShadow: '0 0 12px #4CAF50' }} />
+                            STEP 0{activeSlide + 1}
+                          </span>
+                          <h3 style={{ fontSize: 'clamp(1.8rem, 2.5vw, 2.4rem)', color: '#fff', margin: 0, fontWeight: 800, lineHeight: 1.25, letterSpacing: '-0.02em' }}>{presentationSlides[activeSlide]?.label}</h3>
+                        </div>
                       </div>
-                      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                        <span style={{ fontSize: '1rem', color: '#e0c184', fontWeight: 800, letterSpacing: '2px', display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
-                          <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#4CAF50', boxShadow: '0 0 12px #4CAF50' }} />
-                          STEP 0{activeSlide + 1}
-                        </span>
-                        <h3 style={{ fontSize: 'clamp(1.8rem, 2.5vw, 2.4rem)', color: '#fff', margin: 0, fontWeight: 800, lineHeight: 1.25, letterSpacing: '-0.02em' }}>{presentationSlides[activeSlide]?.label}</h3>
+                      
+                      {/* Description below */}
+                      <div>
+                        <p style={{ fontSize: 'clamp(1.1rem, 1.3vw, 1.2rem)', color: 'rgba(255,255,255,0.95)', lineHeight: 1.7, margin: 0, fontWeight: 500 }}>{presentationSlides[activeSlide]?.desc}</p>
                       </div>
-                    </div>
-                    
-                    {/* Description below */}
-                    <div style={{ position: 'relative', zIndex: 1, paddingLeft: '0.5rem' }}>
-                      <p style={{ fontSize: 'clamp(1.1rem, 1.5vw, 1.2rem)', color: 'rgba(255,255,255,0.95)', lineHeight: 1.7, margin: 0, fontWeight: 500 }}>{presentationSlides[activeSlide]?.desc}</p>
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
-                {/* 
-                  邪魔だった下に伸びるキャラクラー巨大表示(侵食)枠は完全削除しました。
-                  これで画面高もスッキリし、他の要素の邪魔になりません。
-                */}
-              </div>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
 
-              {/* Right: Screenshot Carousel Showcase */}
-              <div style={{ flex: '1.8 1 600px', position: 'relative', minHeight: 'clamp(400px, 65svh, 800px)', perspective: 1200, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <div style={{ position: 'absolute', inset: '1rem 0 4rem 0', width: '100%' }}>
-                    <AnimatePresence mode="wait">
-                      <motion.div 
-                        key={`slide-${activeSlide}`}
-                        initial={{ opacity: 0, y: 100, rotateX: 10 }}
-                        animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                        exit={{ opacity: 0, y: -100, rotateX: -10 }}
-                        transition={{ duration: 0.6, type: 'spring', bounce: 0.2 }}
-                        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
-                      >
-                      {presentationSlides[activeSlide]?.images.map((imgSrc, imgIndex) => {
-                        const isMain = imgIndex === 0;
-                        return (
-                          <motion.div 
-                            key={`${activeSlide}-${imgIndex}`}
+                {/* Right: Full bleeding Screenshot Area */}
+                <div style={{ flex: '1.5 1 500px', position: 'relative', background: 'rgba(0,0,0,0.4)', borderLeft: '1px solid rgba(255,255,255,0.05)', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <AnimatePresence mode="wait">
+                    <motion.div 
+                      key={`slide-${activeSlide}`}
+                      initial={{ opacity: 0, scale: 1.05 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.95 }}
+                      transition={{ duration: 0.6, type: 'spring', bounce: 0.2 }}
+                      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
+                    >
+                    {presentationSlides[activeSlide]?.images.map((imgSrc, imgIndex) => {
+                      return (
+                        <motion.div 
+                          key={`${activeSlide}-${imgIndex}`}
+                          style={{ 
+                            position: 'absolute', 
+                            inset: 0,
+                            width: '100%', 
+                            height: '100%',
+                            zIndex: imgIndex,
+                          }}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: 0.2 }}
+                        >
+                          <img 
+                            src={imgSrc}
+                            alt={`${presentationSlides[activeSlide]?.label}の実画面 ${imgIndex + 1}`} 
+                            loading="lazy"
+                            decoding="async"
                             style={{ 
-                              position: 'absolute', 
-                              top: '50%',
-                              left: '45%', // slightly shifted left so it doesn't overlap arrows
-                              width: presentationSlides[activeSlide]?.images.length > 1 ? (isMain ? '65%' : '55%') : '75%', 
-                              aspectRatio: '1 / 1', 
-                              // transform is handled by animate properties below
-                              zIndex: imgIndex,
+                              display: 'block',
+                              width: '100%',
+                              height: '100%',
+                              objectFit: 'cover', 
+                              objectPosition: 'left top',
+                              filter: imgIndex > 0 ? 'drop-shadow(-20px 20px 30px rgba(0,0,0,0.8))' : 'none',
+                              MaskImage: imgIndex > 0 ? 'linear-gradient(to right, rgba(0,0,0,1) 60%, rgba(0,0,0,0))' : 'none',
+                              WebkitMaskImage: imgIndex > 0 ? 'linear-gradient(to right, rgba(0,0,0,1) 60%, rgba(0,0,0,0))' : 'none',
+                              transform: imgIndex > 0 ? 'translate(10%, 10%) scale(0.95)' : 'none'
                             }}
-                            initial={imgIndex > 0 ? { x: 'calc(-50% + 40px)', y: 'calc(-50% + 30px)', scale: 0.9 } : { x: '-50%', y: '-50%', scale: 1 }}
-                            animate={imgIndex > 0 ? { x: 'calc(-50% + 80px)', y: 'calc(-50% + 60px)', scale: 1.05 } : { x: '-50%', y: '-50%', scale: 1 }}
-                            transition={{ delay: 0.3, type: 'spring', bounce: 0.4 }}
-                          >
-                            <img 
-                              src={imgSrc}
-                              alt={`${presentationSlides[activeSlide]?.label}の実画面 ${imgIndex + 1}`} 
-                              loading="lazy"
-                              decoding="async"
-                              style={{ 
-                                display: 'block',
-                                width: '100%',
-                                height: '100%',
-                                objectFit: 'cover', 
-                                objectPosition: 'left top',
-                                borderRadius: '16px',
-                                boxShadow: imgIndex > 0 
-                                  ? '-15px 30px 60px rgba(0,0,0,0.8), 0 0 20px rgba(224, 193, 132, 0.2)' 
-                                  : '0 30px 60px rgba(0,0,0,0.7), 0 0 40px rgba(224, 193, 132, 0.25)',
-                                border: '2px solid rgba(224, 193, 132, 0.5)',
-                              }}
-                            />
-                          </motion.div>
-                        )
-                      })}
-                      </motion.div>
-                    </AnimatePresence>
-                  </div>
-                  
+                          />
+                        </motion.div>
+                      )
+                    })}
+                    </motion.div>
+                  </AnimatePresence>
+
+                  {/* Inner Corner Gradient for blending */}
+                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(26, 25, 30, 0.95) 0%, rgba(26, 25, 30, 0) 15%)', zIndex: 5, pointerEvents: 'none' }} />
+
                   {/* Prev/Next Hotspots */}
-                  <div style={{ position: 'absolute', bottom: '0', right: 0, display: 'flex', gap: '20px', zIndex: 10 }}>
-                     <button onClick={() => handleSlideChange((activeSlide - 1 + presentationSlides.length) % presentationSlides.length)} style={{ width: 56, height: 56, borderRadius: 28, background: 'rgba(20,18,15,0.85)', border: '1px solid rgba(224,193,132,0.4)', color: '#e0c184', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', backdropFilter: 'blur(8px)', transition: 'all 0.2s', fontSize: '1.2rem' }}>&larr;</button>
-                     <button onClick={() => handleSlideChange((activeSlide + 1) % presentationSlides.length)} style={{ width: 56, height: 56, borderRadius: 28, background: 'linear-gradient(135deg, #e0c184, #b08d51)', border: 'none', color: '#000', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 8px 24px rgba(224,193,132,0.3)' }}>&rarr;</button>
+                  <div style={{ position: 'absolute', bottom: '1.5rem', right: '1.5rem', display: 'flex', gap: '16px', zIndex: 10 }}>
+                      <button onClick={() => handleSlideChange((activeSlide - 1 + presentationSlides.length) % presentationSlides.length)} style={{ width: 48, height: 48, borderRadius: 24, background: 'rgba(20,18,15,0.7)', border: '1px solid rgba(224,193,132,0.4)', color: '#e0c184', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', backdropFilter: 'blur(8px)', transition: 'all 0.2s', fontSize: '1.2rem' }}>&larr;</button>
+                      <button onClick={() => handleSlideChange((activeSlide + 1) % presentationSlides.length)} style={{ width: 48, height: 48, borderRadius: 24, background: 'linear-gradient(135deg, #e0c184, #b08d51)', border: 'none', color: '#000', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 8px 24px rgba(224,193,132,0.4)' }}>&rarr;</button>
                   </div>
+                </div>
+
+              </div>
+              
+              {/* Dots Navi relocated to bottom */}
+              <div style={{ display: 'flex', gap: '8px', marginTop: '2.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+                {presentationSlides.map((slide, idx) => (
+                  <button 
+                    key={idx}
+                    onClick={() => handleSlideChange(idx)}
+                    style={{
+                      height: 6, width: activeSlide === idx ? 48 : 16,
+                      background: activeSlide === idx ? '#e0c184' : 'rgba(255,255,255,0.2)',
+                      borderRadius: 3, border: 'none', cursor: 'pointer', transition: 'all 0.3s ease'
+                    }}
+                    title={slide.label}
+                  />
+                ))}
               </div>
 
-            </div>
             </motion.div>
           </div>
         </section>
