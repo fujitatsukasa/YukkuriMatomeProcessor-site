@@ -727,15 +727,15 @@ export function HomePage() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-10%" }}
-            style={{ position: 'relative', zIndex: 1 }}
+            style={{ position: 'relative', zIndex: 1, maxWidth: '820px', margin: '0 auto', textAlign: 'center', marginBottom: '1rem' }}
           >
-            <p className="brand-kicker">圧倒的時短</p>
-            <h2>準備時間を、<span className="text-glow-gold">120分から6分</span>へ<span className="text-glow-green">圧倒的短縮</span>。</h2>
-            <p style={{ maxWidth: '700px', margin: '0 auto' }}>
+            <p className="brand-kicker" style={{ justifyContent: 'center' }}>圧倒的時短</p>
+            <h2 style={{ textAlign: 'center' }}>準備時間を、<span className="text-glow-gold">120分から6分</span>へ<span className="text-glow-green">圧倒的短縮</span>。</h2>
+            <p style={{ margin: '0 auto 0.5rem' }}>
               1本あたり約114分の短縮は、月30本の投稿で<span className="text-glow-gold">約57時間</span>に相当。<br/>
               <strong className="text-glow-muted">95%削減</strong>の根拠を、工程ごとの比較データで可視化します。
             </p>
-            <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.55)', marginTop: '0.5rem' }}>※ 30分動画1本あたりの準備工程を当社環境にて実測・比較した結果に基づく</p>
+            <p style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.4)', marginTop: 0 }}>※ 30分動画1本あたりの準備工程を当社環境にて実測・比較した結果に基づく</p>
           </motion.div>
 
           <motion.div 
@@ -749,23 +749,8 @@ export function HomePage() {
             style={{ position: 'relative', zIndex: 1 }}
           >
             <div className="chart-dashboard__inner">
-              {/* ── Hero Stats Row ── */}
+              {/* ── Hero Stats Row (Symmetrical) ── */}
               <div className={`chart-dashboard__hero ${isChartInView ? 'is-visible' : ''}`}>
-                <div className="chart-dashboard__ring-wrap">
-                  <svg className="chart-dashboard__ring" viewBox="0 0 120 120">
-                    <circle className="chart-dashboard__ring-bg" cx="60" cy="60" r="52" />
-                    <circle
-                      className={`chart-dashboard__ring-fill ${isChartInView ? 'is-active' : ''}`}
-                      cx="60" cy="60" r="52"
-                      style={{ '--ring-pct': `${timeReduction.reductionRate}` } as React.CSSProperties}
-                    />
-                  </svg>
-                  <div className="chart-dashboard__ring-label">
-                    <AnimatedNumber value={timeReduction.reductionRate} active={isChartInView} suffix="%" />
-                    <span>削減</span>
-                  </div>
-                </div>
-
                 <div className="chart-dashboard__kpi-group">
                   <div className="chart-dashboard__kpi chart-dashboard__kpi--before">
                     <span className="chart-dashboard__kpi-tag">Before</span>
@@ -775,9 +760,23 @@ export function HomePage() {
                     </div>
                     <span className="chart-dashboard__kpi-desc">手作業による準備</span>
                   </div>
-                  <div className="chart-dashboard__kpi-arrow" aria-hidden="true">
-                    <svg width="40" height="40" viewBox="0 0 40 40"><path d="M8 20h20M22 13l8 7-8 7" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/></svg>
+
+                  {/* Ring acting as the central arrow */}
+                  <div className="chart-dashboard__ring-wrap" style={{ margin: '0 -0.5rem', zIndex: 2 }}>
+                    <svg className="chart-dashboard__ring" viewBox="0 0 120 120">
+                      <circle className="chart-dashboard__ring-bg" cx="60" cy="60" r="52" />
+                      <circle
+                        className={`chart-dashboard__ring-fill ${isChartInView ? 'is-active' : ''}`}
+                        cx="60" cy="60" r="52"
+                        style={{ '--ring-pct': `${timeReduction.reductionRate}` } as React.CSSProperties}
+                      />
+                    </svg>
+                    <div className="chart-dashboard__ring-label">
+                      <AnimatedNumber value={timeReduction.reductionRate} active={isChartInView} suffix="%" />
+                      <span>削減</span>
+                    </div>
                   </div>
+
                   <div className="chart-dashboard__kpi chart-dashboard__kpi--after">
                     <span className="chart-dashboard__kpi-tag">After</span>
                     <div className="kpi-giant-wrap">
