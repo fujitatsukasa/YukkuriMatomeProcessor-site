@@ -1118,12 +1118,15 @@ export function HomePage() {
                   <span>高度な台本取得・AI生成</span>
                 </div>
               </div>
+              <div className="premium-pricing-cta">
+                Freeで始める <span>&rarr;</span>
+              </div>
             </InteractiveCard>
 
             {/* Standard Plan */}
             <InteractiveCard className="home-compact-price-card-rich premium-pricing-card pricing-card--standard">
               <div className="pricing-badge pricing-badge--gold">
-                🏆 おすすめ
+                個人クリエイター向け
               </div>
               <div className="home-compact-price-card-rich__top premium-pricing-top">
                 <h3>Standard</h3>
@@ -1154,12 +1157,15 @@ export function HomePage() {
                   <span>優先専用サポート</span>
                 </div>
               </div>
+              <div className="premium-pricing-cta">
+                Standardプランを選択 <span>&rarr;</span>
+              </div>
             </InteractiveCard>
 
             {/* Pro Plan */}
             <InteractiveCard className="home-compact-price-card-rich premium-pricing-card pricing-card--pro">
               <div className="pricing-badge pricing-badge--platinum">
-                ✦ 法人・プロ向け
+                ✦ THE ULTIMATE / 圧倒的おすすめ
               </div>
               <div className="home-compact-price-card-rich__top premium-pricing-top">
                 <h3>Pro</h3>
@@ -1185,6 +1191,9 @@ export function HomePage() {
                   <span className="check-icon">✓</span>
                   <strong style={{ color: '#e0c184' }}>優先専用サポート</strong>
                 </div>
+              </div>
+              <div className="premium-pricing-cta pro-cta">
+                Proプランで最速自動化 <span>&rarr;</span>
               </div>
             </InteractiveCard>
           </div>

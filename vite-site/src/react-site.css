@@ -10674,224 +10674,171 @@ html {
   color: transparent;
 }
 
+
 /* ════════════════════════════════════════════════════════
-   ULTRA-PREMIUM SAAS PRICING CARDS
+   ABSOLUTE PREMIUM SAAS PRICING (PRO-FOCUSED + ANIMATIONS)
    ════════════════════════════════════════════════════════ */
+
+.home-compact-price-section {
+  position: relative;
+}
 
 .premium-pricing-card {
   position: relative;
-  padding: 3rem 2.5rem !important; /* 広めの余白で余裕を持たせる */
-  border-radius: 20px !important;
-  display: flex;
-  flex-direction: column;
-  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-  overflow: visible !important; /* バッジ見切れ防止 */
-}
-
-/* Base interactive card overrides if it had overflow hidden */
-.premium-pricing-card.interactive-card {
-  overflow: visible !important;
-}
-
-.premium-pricing-top {
-  text-align: center;
-  padding-bottom: 2.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  margin-bottom: 2.5rem;
-}
-
-.premium-pricing-top h3 {
-  font-size: 0.8rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  font-weight: 800;
-  margin-bottom: 1.5rem;
-  font-family: 'Inter', -apple-system, sans-serif;
-  opacity: 0.9;
-}
-
-.premium-pricing-price {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.premium-pricing-price strong {
-  font-family: 'Inter', -apple-system, sans-serif;
-  font-size: clamp(2.5rem, 5vw, 3.5rem) !important;
-  line-height: 1;
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  color: #fff;
-}
-
-.price-term {
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: rgba(255,255,255,0.4);
-  letter-spacing: 0.02em;
-}
-
-/* ━━━ [ FEATURES LIST ] ━━━ */
-.premium-pricing-features {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-.premium-pricing-feature-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  text-align: left;
-  line-height: 1.5;
-  font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.85);
-}
-
-.premium-pricing-feature-row .check-icon {
-  flex-shrink: 0;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.7rem;
-  margin-top: 2px;
-  font-weight: bold;
-}
-
-/* ━━━ [ BADGES ] ━━━ */
-.pricing-badge {
-  position: absolute;
-  top: -16px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 6px 18px;
-  border-radius: 30px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  white-space: nowrap;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-  z-index: 10;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.pricing-badge--gold {
-  background: linear-gradient(135deg, #FFDF91, #D29D38);
-  color: #1a150b;
-  box-shadow: 0 0 20px rgba(210, 157, 56, 0.3), 0 4px 15px rgba(0,0,0,0.5);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-}
-
-.pricing-badge--platinum {
-  background: linear-gradient(135deg, #F9FAFB, #D1D5DB);
-  color: #111827;
-  box-shadow: 0 0 25px rgba(255, 255, 255, 0.2), 0 4px 15px rgba(0,0,0,0.5);
-  border: 1px solid rgba(255, 255, 255, 0.8);
-}
-
-/* ━━━ [ INDIVIDUAL CARDS ] ━━━ */
-
-/* 1. FREE */
-.pricing-card--free {
-  border: 1px solid rgba(255,255,255,0.06) !important;
-  background: rgba(15, 15, 20, 0.6) !important;
-  box-shadow: none !important;
-}
-.pricing-card--free h3 { color: #818CF8; } /* グリーンからモダンなインディゴに変更 */
-.pricing-card--free .premium-pricing-feature-row.active .check-icon {
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff;
-}
-
-/* 2. STANDARD (High Glow) */
-.pricing-card--standard {
-  z-index: 2;
-  border: 1px solid rgba(210, 157, 56, 0.4) !important;
-  background: linear-gradient(180deg, rgba(210,157,56,0.08) 0%, rgba(15,15,20,0.9) 100%) !important;
-  box-shadow: 0 0 40px rgba(210, 157, 56, 0.12), 0 20px 40px rgba(0,0,0,0.5) !important;
-}
-.pricing-card--standard h3 { color: #FBBF24; }
-.pricing-card--standard .premium-pricing-price strong {
-  background: linear-gradient(135deg, #FFEFCA, #D29D38);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-.pricing-card--standard .premium-pricing-feature-row.active .check-icon {
-  background: rgba(210, 157, 56, 0.15);
-  color: #FBBF24;
-}
-
-/* 3. PRO (Ultra Glass/Platinum) */
-.pricing-card--pro {
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(15,15,20,0.7) 100%) !important;
-  backdrop-filter: blur(20px);
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.1) !important;
-}
-.pricing-card--pro h3 { 
-  color: #E5E7EB;
-  letter-spacing: 0.3em;
-}
-.pricing-card--pro .premium-pricing-price strong {
-  background: linear-gradient(135deg, #FFFFFF, #9CA3AF);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  text-shadow: 0 0 30px rgba(255,255,255,0.1);
-}
-.pricing-card--pro .premium-pricing-feature-row.active .check-icon {
-  background: rgba(255, 255, 255, 0.15);
-  color: #fff;
-}
-.pricing-card--pro .premium-pricing-feature-row.active strong {
-  color: #fff !important;
-}
-
-/* Inactive Row Shared */
-.premium-pricing-feature-row.inactive {
-  opacity: 0.3;
-}
-.premium-pricing-feature-row.inactive .check-icon {
-  background: transparent;
-  color: transparent;
-  border: 1px solid rgba(255,255,255,0.2);
-}
-
-@media (min-width: 1024px) {
-  .pricing-card--standard {
-    transform: scale(1.05);
-  }
-}
-
-
-/* ════════════════════════════════════════════════════════
-   ULTRA-PREMIUM SAAS PRICING CARDS
-   ════════════════════════════════════════════════════════ */
-
-.premium-pricing-card {
-  position: relative;
-  padding: 3rem 2.5rem !important; /* 広めの余白 */
+  padding: 3rem 2.5rem !important;
   border-radius: 20px !important;
   display: flex !important;
   flex-direction: column !important;
-  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
-  overflow: visible !important; /* バッジ見切れ防止 */
-  z-index: 1; /* relativeスタック */
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  overflow: visible !important;
+  z-index: 1;
+  background: rgba(15, 15, 20, 0.6) !important;
 }
 
+/* ホバー時の浮き上がり共通 */
+.premium-pricing-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  z-index: 10 !important;
+}
+
+/* ━━━ [ PRO PLAN - THE ULTIMATE FOCUS ] ━━━ */
+.pricing-card--pro {
+  z-index: 5 !important; /* Proをデフォルトで一番上に */
+  transform: scale(1.05); /* Proを一番デカくする */
+  background: linear-gradient(180deg, rgba(20, 20, 25, 0.95) 0%, rgba(10, 10, 15, 0.95) 100%) !important;
+  box-shadow: 0 0 50px rgba(162, 178, 255, 0.15) !important;
+}
+
+.pricing-card--pro:hover {
+  transform: translateY(-8px) scale(1.08) !important;
+  box-shadow: 0 0 80px rgba(162, 178, 255, 0.3) !important;
+}
+
+/* 回転するアニメーショングラデーション枠 (Pro専用) */
+.pricing-card--pro::before {
+  content: '';
+  position: absolute;
+  top: -2px; left: -2px; right: -2px; bottom: -2px;
+  background: linear-gradient(45deg, #FFDF91, #D29D38, #ffffff, #8A9CFF, #E78AFF, #FFDF91);
+  background-size: 400% 400%;
+  z-index: -1;
+  border-radius: 22px;
+  animation: megaGlowBorder 10s ease infinite;
+  opacity: 0.8;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  padding: 2px;
+}
+
+@keyframes megaGlowBorder {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Proの中身の装飾 */
+.pricing-card--pro .premium-pricing-top {
+  border-bottom: 1px solid rgba(162, 178, 255, 0.2);
+}
+.pricing-card--pro h3 { 
+  color: #fff !important;
+  letter-spacing: 0.3em !important;
+  text-shadow: 0 0 15px rgba(255,255,255,0.4);
+}
+.pricing-card--pro .premium-pricing-price strong {
+  background: linear-gradient(135deg, #FFFFFF 0%, #BCC6FF 50%, #E78AFF 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  text-shadow: 0 0 40px rgba(162, 178, 255, 0.3) !important;
+}
+.pricing-card--pro .premium-pricing-feature-row.active .check-icon {
+  background: rgba(162, 178, 255, 0.2) !important;
+  color: #BCC6FF !important;
+  border-color: rgba(162, 178, 255, 0.5) !important;
+  box-shadow: 0 0 10px rgba(162, 178, 255, 0.4);
+}
+
+
+/* ━━━ [ STANDARD PLAN - 控えめに ] ━━━ */
+.pricing-card--standard {
+  transform: scale(1);
+  border: 1px solid rgba(210, 157, 56, 0.3) !important;
+  border-top: 2px solid #D29D38 !important;
+}
+.pricing-card--standard h3 { color: #D29D38 !important; }
+.pricing-card--standard .premium-pricing-price strong {
+  color: #FFDF91 !important;
+}
+.pricing-card--standard .premium-pricing-feature-row.active .check-icon {
+  background: rgba(210, 157, 56, 0.1) !important;
+  color: #D29D38 !important;
+  border-color: rgba(210, 157, 56, 0.3) !important;
+}
+
+
+/* ━━━ [ FREE PLAN - さらに空気のように ] ━━━ */
+.pricing-card--free {
+  border: 1px dashed rgba(255, 255, 255, 0.1) !important;
+  opacity: 0.8;
+}
+.pricing-card--free:hover { opacity: 1; border-style: solid !important; }
+.pricing-card--free h3 { color: #9CA3AF !important; }
+.pricing-card--free .premium-pricing-price strong { color: #E5E7EB !important; }
+.pricing-card--free .premium-pricing-feature-row.active .check-icon {
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: #ccc !important;
+  border: none !important;
+}
+
+
+/* ━━━ [ BADGES ] ━━━ */
+.pricing-badge {
+  position: absolute !important;
+  top: -16px !important; 
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  padding: 8px 24px !important;
+  border-radius: 30px !important;
+  font-size: 0.85rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.05em !important;
+  white-space: nowrap !important;
+  z-index: 10 !important;
+  transition: all 0.3s ease;
+}
+
+/* Pro Badge - 圧倒的光沢 */
+.pricing-badge--platinum {
+  background: linear-gradient(135deg, #ffffff, #BCC6FF, #E78AFF) !important;
+  color: #111 !important;
+  box-shadow: 0 0 30px rgba(162, 178, 255, 0.6), 0 4px 15px rgba(0,0,0,0.8) !important;
+  border: none !important;
+  animation: badgePulse 2s infinite alternate;
+}
+@keyframes badgePulse {
+  0% { transform: translateX(-50%) scale(1); box-shadow: 0 0 20px rgba(162, 178, 255, 0.4); }
+  100% { transform: translateX(-50%) scale(1.05); box-shadow: 0 0 40px rgba(162, 178, 255, 0.8); }
+}
+
+/* Standard Badge - おとなしく */
+.pricing-badge--gold {
+  background: #2a2212 !important;
+  color: #FFDF91 !important;
+  border: 1px solid rgba(210, 157, 56, 0.4) !important;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5) !important;
+}
+
+/* Shared Top / Rows */
 .premium-pricing-top {
   text-align: center;
   padding-bottom: 2.5rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   margin-bottom: 2.5rem;
+  transition: all 0.3s ease;
 }
-
 .premium-pricing-top h3 {
   font-size: 0.9rem !important;
   letter-spacing: 0.25rem !important;
@@ -10899,25 +10846,20 @@ html {
   font-weight: 800 !important;
   margin-bottom: 1.5rem !important;
   font-family: 'Inter', -apple-system, sans-serif !important;
-  opacity: 0.9 !important;
 }
-
 .premium-pricing-price {
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
   gap: 0.5rem !important;
 }
-
 .premium-pricing-price strong {
   font-family: 'Inter', -apple-system, sans-serif !important;
   font-size: clamp(2.5rem, 5vw, 4rem) !important;
   line-height: 1 !important;
   font-weight: 800 !important;
   letter-spacing: -0.04em !important;
-  color: #fff !important;
 }
-
 .price-term {
   font-size: 0.85rem !important;
   font-weight: 500 !important;
@@ -10925,13 +10867,11 @@ html {
   letter-spacing: 0.02em !important;
 }
 
-/* FEATURES LIST */
 .premium-pricing-features {
   display: flex !important;
   flex-direction: column !important;
   gap: 1.25rem !important;
 }
-
 .premium-pricing-feature-row {
   display: flex !important;
   align-items: flex-start !important;
@@ -10940,8 +10880,11 @@ html {
   line-height: 1.5 !important;
   font-size: 0.95rem !important;
   color: rgba(255, 255, 255, 0.85) !important;
+  transition: transform 0.2s ease;
 }
-
+.premium-pricing-feature-row:hover {
+  transform: translateX(4px);
+}
 .premium-pricing-feature-row .check-icon {
   flex-shrink: 0 !important;
   width: 22px !important;
@@ -10954,108 +10897,61 @@ html {
   font-size: 0.75rem !important;
   margin-top: 2px !important;
   font-weight: bold !important;
-}
-
-/* BADGES (Top Pill style) */
-.pricing-badge {
-  position: absolute !important;
-  top: -16px !important; 
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  padding: 8px 24px !important;
-  border-radius: 30px !important;
-  font-size: 0.8rem !important;
-  font-weight: 800 !important;
-  letter-spacing: 0.05em !important;
-  white-space: nowrap !important;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.4) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  z-index: 10 !important;
-}
-
-.pricing-badge--gold {
-  background: linear-gradient(135deg, #FFDF91, #D29D38) !important;
-  color: #1a150b !important;
-  box-shadow: 0 0 20px rgba(210, 157, 56, 0.3), 0 4px 20px rgba(0,0,0,0.6) !important;
-  border: 1px solid rgba(255, 255, 255, 0.5) !important;
-}
-
-.pricing-badge--platinum {
-  background: linear-gradient(135deg, #FFF, #A0A5AF) !important;
-  color: #111827 !important;
-  box-shadow: 0 0 25px rgba(255, 255, 255, 0.2), 0 4px 20px rgba(0,0,0,0.6) !important;
-  border: 1px solid rgba(255, 255, 255, 0.9) !important;
-}
-
-/* INDIVIDUAL CARDS */
-
-/* FREE */
-.pricing-card--free {
-  border: 1px dashed rgba(255, 255, 255, 0.15) !important;
-  background: rgba(15, 15, 20, 0.4) !important;
-  box-shadow: none !important;
-}
-.pricing-card--free h3 { color: #818CF8 !important; }
-.pricing-card--free .premium-pricing-feature-row.active .check-icon {
-  background: rgba(255, 255, 255, 0.08) !important;
-  color: #fff !important;
-  border: none !important;
-}
-
-/* STANDARD (High Glow) */
-.pricing-card--standard {
-  z-index: 2 !important;
-  border: 1px solid rgba(210, 157, 56, 0.5) !important;
-  background: linear-gradient(180deg, rgba(210,157,56,0.12) 0%, rgba(15,15,20,0.95) 100%) !important;
-  box-shadow: 0 0 60px rgba(210, 157, 56, 0.15), 0 20px 40px rgba(0,0,0,0.6) !important;
-}
-.pricing-card--standard h3 { color: #FBBF24 !important; }
-.pricing-card--standard .premium-pricing-price strong {
-  background: linear-gradient(135deg, #FFEFCA, #D29D38) !important;
-  -webkit-background-clip: text !important;
-  background-clip: text !important;
-  color: transparent !important;
-}
-.pricing-card--standard .premium-pricing-feature-row.active .check-icon {
-  background: rgba(210, 157, 56, 0.15) !important;
-  color: #FBBF24 !important;
-  border-color: rgba(210, 157, 56, 0.4) !important;
-}
-
-/* PRO (Ultra Glass / Platinum) */
-.pricing-card--pro {
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(15,15,20,0.85) 100%) !important;
-  backdrop-filter: blur(20px) !important;
-  box-shadow: 0 0 40px rgba(255, 255, 255, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.1) !important;
-}
-.pricing-card--pro h3 { 
-  color: #E5E7EB !important;
-  letter-spacing: 0.3em !important;
-}
-.pricing-card--pro .premium-pricing-price strong {
-  background: linear-gradient(135deg, #FFFFFF, #9CA3AF) !important;
-  -webkit-background-clip: text !important;
-  background-clip: text !important;
-  color: transparent !important;
-  text-shadow: 0 0 30px rgba(255,255,255,0.1) !important;
-}
-.pricing-card--pro .premium-pricing-feature-row.active .check-icon {
-  background: rgba(255, 255, 255, 0.15) !important;
-  color: #fff !important;
-  border-color: rgba(255, 255, 255, 0.3) !important;
+  transition: all 0.3s ease;
 }
 
 /* Inactive */
 .premium-pricing-feature-row.inactive {
-  opacity: 0.3 !important;
+  opacity: 0.2 !important;
 }
 .premium-pricing-feature-row.inactive .check-icon {
-  border: 1px dashed rgba(255, 255, 255, 0.3) !important;
+  border: 1px dashed rgba(255, 255, 255, 0.2) !important;
 }
 
 @media (min-width: 1024px) {
-  .pricing-card--standard {
-    transform: scale(1.05) !important;
+  /* Only Pro scales up on desktop */
+  .pricing-card--pro {
+    transform: scale(1.08) !important;
   }
+  .pricing-card--pro:hover {
+    transform: translateY(-10px) scale(1.12) !important;
+  }
+}
+
+
+/* ━━━ [ MICRO CTAs ] ━━━ */
+.premium-pricing-cta {
+  margin-top: auto;
+  padding-top: 2rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.premium-pricing-cta span {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.premium-pricing-card:hover .premium-pricing-cta {
+  color: #fff;
+}
+.premium-pricing-card:hover .premium-pricing-cta span {
+  transform: translateX(8px);
+}
+
+.pricing-card--pro .pro-cta {
+  color: rgba(162, 178, 255, 0.8) !important;
+  border-top: 1px solid rgba(162, 178, 255, 0.2);
+}
+.pricing-card--pro:hover .pro-cta {
+  color: #E78AFF !important;
+  text-shadow: 0 0 10px rgba(231, 138, 255, 0.5);
 }
