@@ -3,7 +3,7 @@ title: "【限界】スマホだけで「ゆっくり茶番劇・解説動画」
 date: "2026-03-22"
 description: "「パソコンを持っていないけど、スマホ（iPhone/iPad/Android）だけでゆっくり実況や茶番劇を作れるの？」という初心者の疑問に完全回答。CapCutやキネマスター等の編集アプリを使ったスマホでの作り方と、YouTuberとして本気で稼ぐ（副業にする）ためにPC（YMM4等 Windows環境）＋AI自動化ツールへの移行が『絶対に必要』な理由を、作業時間・時給の観点から徹底解説します。"
 author: "動画制作サポートチーム"
-image: "/blog_thumb_smartphone_v6.png"
+image: "/blog_thumb_smartphone_v7.png"
 tags: ["スマホ編集", "iPhone", "CapCut", "ゆっくり動画", "YMM4", "PC推奨", "アプリ"]
 ---
 
