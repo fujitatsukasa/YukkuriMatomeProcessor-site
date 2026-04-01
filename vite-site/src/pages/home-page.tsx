@@ -637,22 +637,20 @@ export function HomePage() {
                       >
                       {presentationSlides[activeSlide]?.images.map((imgSrc, imgIndex) => {
                         const isMain = imgIndex === 0;
-                        const isYMM4Step = activeSlide === 5; // YMM4出力ステップ
                         return (
                           <motion.div 
                             key={`${activeSlide}-${imgIndex}`}
                             style={{ 
                               position: 'absolute', 
-                              inset: 0, 
-                              width: presentationSlides[activeSlide]?.images.length > 1 ? (isMain ? '80%' : '70%') : '100%', 
-                              height: presentationSlides[activeSlide]?.images.length > 1 ? (isMain ? '100%' : '80%') : '100%', 
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
+                              top: '50%',
+                              left: '45%', // slightly shifted left so it doesn't overlap arrows
+                              width: presentationSlides[activeSlide]?.images.length > 1 ? (isMain ? '65%' : '55%') : '75%', 
+                              aspectRatio: '1 / 1', 
+                              // transform is handled by animate properties below
                               zIndex: imgIndex,
                             }}
-                            initial={imgIndex > 0 ? { x: 80, y: 60, scale: 0.9 } : { x: 0, y: 0, scale: 1 }}
-                            animate={imgIndex > 0 ? { x: 120, y: 80, scale: 1.05 } : { x: 0, y: 0, scale: 1 }}
+                            initial={imgIndex > 0 ? { x: 'calc(-50% + 40px)', y: 'calc(-50% + 30px)', scale: 0.9 } : { x: '-50%', y: '-50%', scale: 1 }}
+                            animate={imgIndex > 0 ? { x: 'calc(-50% + 80px)', y: 'calc(-50% + 60px)', scale: 1.05 } : { x: '-50%', y: '-50%', scale: 1 }}
                             transition={{ delay: 0.3, type: 'spring', bounce: 0.4 }}
                           >
                             <img 
@@ -661,16 +659,15 @@ export function HomePage() {
                               loading="lazy"
                               decoding="async"
                               style={{ 
-                                width: isYMM4Step ? '100%' : 'auto',
-                                height: isYMM4Step ? '100%' : 'auto',
-                                maxWidth: '100%',
-                                maxHeight: '100%',
-                                objectFit: isYMM4Step ? 'cover' : 'contain', 
-                                objectPosition: isYMM4Step ? 'top left' : 'center',
-                                borderRadius: '12px',
+                                display: 'block',
+                                width: '100%',
+                                height: '100%',
+                                objectFit: 'cover', 
+                                objectPosition: 'left top',
+                                borderRadius: '16px',
                                 boxShadow: imgIndex > 0 
                                   ? '-15px 30px 60px rgba(0,0,0,0.8), 0 0 20px rgba(224, 193, 132, 0.2)' 
-                                  : '0 20px 50px rgba(0,0,0,0.6), 0 0 30px rgba(224, 193, 132, 0.35)',
+                                  : '0 30px 60px rgba(0,0,0,0.7), 0 0 40px rgba(224, 193, 132, 0.25)',
                                 border: '2px solid rgba(224, 193, 132, 0.5)',
                               }}
                             />
