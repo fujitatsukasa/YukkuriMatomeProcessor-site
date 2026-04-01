@@ -870,14 +870,58 @@ export function HomePage() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-10%" }}
-            style={{ position: 'relative', zIndex: 1 }}
+            style={{ position: 'relative', zIndex: 1, marginBottom: '2.5rem' }}
           >
             <p className="brand-kicker">対応ジャンル</p>
             <h2><span className="text-glow-green">反応集・ゆっくり解説</span>・ショート動画に対応</h2>
             <p>あらゆる形式の解説・まとめ動画に対応し、スタイルに合わせた最適なフォーマットで出力します。</p>
           </motion.div>
 
-          <div className="home-compact-usecase-grid" role="list" style={{ position: 'relative', zIndex: 1 }}>
+          {/* Premium Video Showcase Area */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            style={{
+              position: 'relative',
+              width: '100%',
+              maxWidth: '900px',
+              margin: '0 auto 4rem auto',
+              aspectRatio: '16/9',
+              borderRadius: '24px',
+              overflow: 'hidden',
+              background: '#000',
+              boxShadow: '0 30px 60px rgba(0,0,0,0.8), 0 0 40px rgba(68, 255, 128, 0.1)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              zIndex: 2
+            }}
+          >
+            {/* The actual video element (Dummy placeholder) */}
+            <video
+              src="https://www.w3schools.com/html/mov_bbb.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                opacity: 0.9
+              }}
+            />
+            {/* Subtle inner shadow overlay */}
+            <div style={{
+              position: 'absolute',
+              inset: 0,
+              boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.08)',
+              borderRadius: '24px',
+              pointerEvents: 'none'
+            }} />
+          </motion.div>
+
+          <div className="home-compact-usecase-grid" role="list" style={{ position: 'relative', zIndex: 1, width: '100%', maxWidth: '1000px', margin: '0 auto' }}>
             {useCasesData.map((item, idx) => (
               <motion.div
                 key={item.title}

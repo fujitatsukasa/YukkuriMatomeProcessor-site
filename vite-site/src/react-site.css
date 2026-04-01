@@ -6665,11 +6665,9 @@ html {
 
 .home-compact-usecase-grid {
   display: grid;
-  gap: 1.5rem;
+  gap: clamp(1rem, 2vw, 2rem);
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  flex: 1 1 0;
-  min-height: 0;
-  overflow: hidden;
+  width: 100%;
 }
 
 .home-compact-usecase-card {
