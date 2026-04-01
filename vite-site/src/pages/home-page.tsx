@@ -1084,14 +1084,13 @@ export function HomePage() {
 
           <div style={{ position: 'relative', zIndex: 1, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', width: '100%', maxWidth: '1200px', margin: '0 auto' }}>
             {/* Free Plan */}
-            <InteractiveCard className="home-compact-price-card-rich premium-pricing-card" style={{ paddingTop: '2rem' }}>
+            <InteractiveCard className="home-compact-price-card-rich premium-pricing-card pricing-card--free">
               <div className="home-compact-price-card-rich__top premium-pricing-top">
-                <h3 style={{ color: '#4CAF50' }}>Free</h3>
+                <h3>Free</h3>
                 <div className="home-compact-price-card-rich__price premium-pricing-price">
-                  <strong style={{ color: '#4CAF50' }}>¥0</strong>
-                  <span style={{ color: 'rgba(255,255,255,0.5)' }}>ずっと無料</span>
+                  <strong>¥0</strong>
+                  <span className="price-term">ずっと無料</span>
                 </div>
-                <p>まずは気軽に体験。基本的な編集・出力機能を無料でお使いいただけます。</p>
               </div>
               <div className="premium-pricing-features" aria-label="搭載機能">
                 <div className="premium-pricing-feature-row active free">
@@ -1122,20 +1121,16 @@ export function HomePage() {
             </InteractiveCard>
 
             {/* Standard Plan */}
-            <InteractiveCard className="home-compact-price-card-rich premium-pricing-card" style={{ borderColor: 'rgba(224, 193, 132, 0.6)', boxShadow: '0 0 40px rgba(224, 193, 132, 0.15)', position: 'relative', zIndex: 2, paddingTop: '2rem' }}>
-              <div style={{ position: 'absolute', top: 0, left: 0, right: 0, display: 'flex', justifyContent: 'center' }}>
-                <div style={{ background: 'linear-gradient(135deg, #e0c184, #b08d51)', color: '#000', padding: '6px 20px', borderRadius: '0 0 12px 12px', fontSize: '0.85rem', fontWeight: 'bold' }}>
-                  🏆 おすすめ
-                </div>
+            <InteractiveCard className="home-compact-price-card-rich premium-pricing-card pricing-card--standard">
+              <div className="pricing-badge pricing-badge--gold">
+                🏆 おすすめ
               </div>
               <div className="home-compact-price-card-rich__top premium-pricing-top">
-                <h3 style={{ color: '#e0c184' }}>Standard</h3>
+                <h3>Standard</h3>
                 <div className="home-compact-price-card-rich__price premium-pricing-price">
-                  <strong>月額 5,000円</strong>
-                  <span style={{ color: 'rgba(255,255,255,0.5)' }}>(税込 5,500円)</span>
+                  <strong>¥5,000</strong>
+                  <span className="price-term">月額 /税込 5,500円</span>
                 </div>
-                <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.45)' }}>1日あたり約183円 — コーヒー1杯以下</p>
-                <p>個人クリエイター向け。AI台本生成でさらに制作を加速させる人気プラン。</p>
               </div>
               <div className="premium-pricing-features" aria-label="搭載機能">
                 <div className="premium-pricing-feature-row active">
@@ -1162,20 +1157,16 @@ export function HomePage() {
             </InteractiveCard>
 
             {/* Pro Plan */}
-            <InteractiveCard className="home-compact-price-card-rich premium-pricing-card" style={{ position: 'relative', paddingTop: '2rem' }}>
-              <div style={{ position: 'absolute', top: 0, left: 0, right: 0, display: 'flex', justifyContent: 'center' }}>
-                <div style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', padding: '6px 20px', borderRadius: '0 0 12px 12px', fontSize: '0.85rem', fontWeight: 'bold', border: '1px solid rgba(255,255,255,0.15)', borderTop: 'none' }}>
-                  法人・プロ向け
-                </div>
+            <InteractiveCard className="home-compact-price-card-rich premium-pricing-card pricing-card--pro">
+              <div className="pricing-badge pricing-badge--platinum">
+                ✦ 法人・プロ向け
               </div>
               <div className="home-compact-price-card-rich__top premium-pricing-top">
-                <h3 style={{ color: '#fff' }}>Pro</h3>
-                <div className="home-compact-price-card-rich__price premium-pricing-price" style={{ whiteSpace: 'nowrap' }}>
-                  <strong style={{ fontSize: 'clamp(1.5rem, 3vw, 2.2rem)' }}>月額 10,000円</strong>
-                  <span style={{ fontSize: '0.85rem', fontWeight: 400, marginLeft: '0.5rem', color: 'rgba(255,255,255,0.5)' }}>(税込 11,000円)</span>
+                <h3>Pro</h3>
+                <div className="home-compact-price-card-rich__price premium-pricing-price">
+                  <strong>¥10,000</strong>
+                  <span className="price-term">月額 /税込 11,000円</span>
                 </div>
-                <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.6)' }}>1日あたり約367円 — 外注費の1/10以下</p>
-                <p>複数チャンネル運営や完全自動化を目指すプロ・法人向け。</p>
               </div>
               <div className="premium-pricing-features" aria-label="搭載機能">
                 <div className="premium-pricing-feature-row active">
