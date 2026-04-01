@@ -877,50 +877,6 @@ export function HomePage() {
             <p>あらゆる形式の解説・まとめ動画に対応し、スタイルに合わせた最適なフォーマットで出力します。</p>
           </motion.div>
 
-          {/* Premium Video Showcase Area */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-10%" }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            style={{
-              position: 'relative',
-              width: '100%',
-              maxWidth: '900px',
-              margin: '0 auto 4rem auto',
-              aspectRatio: '16/9',
-              borderRadius: '24px',
-              overflow: 'hidden',
-              background: '#000',
-              boxShadow: '0 30px 60px rgba(0,0,0,0.8), 0 0 40px rgba(68, 255, 128, 0.1)',
-              border: '1px solid rgba(255,255,255,0.1)',
-              zIndex: 2
-            }}
-          >
-            {/* The actual video element (Dummy placeholder) */}
-            <video
-              src="https://www.w3schools.com/html/mov_bbb.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                opacity: 0.9
-              }}
-            />
-            {/* Subtle inner shadow overlay */}
-            <div style={{
-              position: 'absolute',
-              inset: 0,
-              boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.08)',
-              borderRadius: '24px',
-              pointerEvents: 'none'
-            }} />
-          </motion.div>
-
           <div className="home-compact-usecase-grid" role="list" style={{ position: 'relative', zIndex: 1, width: '100%', maxWidth: '1000px', margin: '0 auto' }}>
             {useCasesData.map((item, idx) => (
               <motion.div
@@ -946,8 +902,7 @@ export function HomePage() {
                   role="listitem"
                   style={{ 
                     height: '100%', 
-                    display: 'flex', flexDirection: 'column', alignItems: 'flex-start',
-                    padding: 'clamp(2rem, 4vh, 3rem)',
+                    display: 'flex', flexDirection: 'column', alignItems: 'stretch',
                     borderRadius: '24px',
                     border: `1px solid ${item.iconColor}80`,
                     background: 'rgba(32,30,36,0.95)',
@@ -964,21 +919,49 @@ export function HomePage() {
                     e.currentTarget.style.background = 'rgba(32,30,36,0.95)'
                   }}
                 >
-                  {/* Large icon with glow */}
-                  <div style={{ 
-                    width: 64, height: 64, borderRadius: '18px', 
-                    background: item.gradient, 
-                    border: `2px solid ${item.iconColor}`,
-                    display: 'flex', alignItems: 'center', justifyContent: 'center', 
-                    marginBottom: '1.5rem',
-                    boxShadow: `0 8px 30px ${item.borderColor}`,
-                  }}>
-                    <item.Icon size={32} color={item.iconColor} strokeWidth={2} />
+                  {/* Top: Video Demo Placeholder */}
+                  <div style={{ width: '100%', height: 'clamp(140px, 20vh, 180px)', position: 'relative', background: '#000', overflow: 'hidden', flexShrink: 0 }}>
+                    <video
+                      src="https://www.w3schools.com/html/mov_bbb.mp4"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        opacity: 0.85,
+                        transition: 'opacity 0.3s ease'
+                      }}
+                      onMouseEnter={(e) => e.currentTarget.style.opacity = '1'}
+                      onMouseLeave={(e) => e.currentTarget.style.opacity = '0.85'}
+                    />
+                    {/* Subtle bottom fade */}
+                    <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '30%', background: 'linear-gradient(to top, rgba(32,30,36,1), transparent)', pointerEvents: 'none' }} />
                   </div>
-                  <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#fff', marginBottom: '1rem', letterSpacing: '0.02em', lineHeight: 1.3 }}>{item.title}</h3>
-                  <p style={{ fontSize: '1.05rem', color: 'rgba(255,255,255,0.9)', lineHeight: 1.7, flexGrow: 1 }}>{item.body}</p>
+
+                  {/* Bottom: Text & Icon */}
+                  <div style={{ display: 'flex', flexDirection: 'column', padding: 'clamp(1.5rem, 3vh, 2rem)', flexGrow: 1, position: 'relative', zIndex: 1 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.2rem' }}>
+                      {/* Integrated Icon */}
+                      <div style={{ 
+                        width: 48, height: 48, borderRadius: '14px', 
+                        background: item.gradient, 
+                        border: `1px solid ${item.iconColor}`,
+                        display: 'flex', alignItems: 'center', justifyContent: 'center', 
+                        boxShadow: `0 4px 15px ${item.borderColor}`,
+                        flexShrink: 0
+                      }}>
+                        <item.Icon size={24} color={item.iconColor} strokeWidth={2} />
+                      </div>
+                      <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: '#fff', margin: 0, letterSpacing: '0.02em', lineHeight: 1.3 }}>{item.title}</h3>
+                    </div>
+                    <p style={{ fontSize: '1.05rem', color: 'rgba(255,255,255,0.9)', lineHeight: 1.6, flexGrow: 1, margin: 0 }}>{item.body}</p>
+                  </div>
+
                   {/* Subtle gradient glow in corner */}
-                  <div style={{ position: 'absolute', top: '-30%', right: '-20%', width: '60%', height: '60%', background: `radial-gradient(circle, ${item.borderColor}, transparent 70%)`, opacity: 0.15, pointerEvents: 'none' }} />
+                  <div style={{ position: 'absolute', bottom: '-20%', right: '-20%', width: '60%', height: '60%', background: `radial-gradient(circle, ${item.borderColor}, transparent 70%)`, opacity: 0.15, pointerEvents: 'none' }} />
                 </article>
               </Tilt>
               </motion.div>
