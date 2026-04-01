@@ -10712,11 +10712,25 @@ html {
 }
 
 /* ━━━ [ PRO PLAN - THE ULTIMATE FOCUS ] ━━━ */
+/* PRO PLAN SUPER GLOW ANIMATION */
+@keyframes animatedGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 .pricing-card--pro {
-  z-index: 5 !important; /* Proをデフォルトで一番上に */
-  transform: scale(1.05); /* Proを一番デカくする */
-  background: linear-gradient(180deg, rgba(20, 20, 25, 0.95) 0%, rgba(10, 10, 15, 0.95) 100%) !important;
-  box-shadow: 0 0 50px rgba(162, 178, 255, 0.15) !important;
+  z-index: 5 !important;
+  transform: scale(1.05);
+  transform-origin: bottom center !important; /* Bottom-align fix */
+  border: 2px solid transparent !important;
+  border-radius: 20px !important;
+  background: 
+    linear-gradient(180deg, rgba(20, 20, 25, 0.95) 0%, rgba(10, 10, 15, 0.95) 100%) padding-box,
+    linear-gradient(45deg, #FFDF91, #D29D38, #ffffff, #8A9CFF, #E78AFF, #FFDF91) border-box !important;
+  background-size: 100% 100%, 300% 300% !important;
+  animation: animatedGradient 5s ease infinite alternate !important;
+  box-shadow: 0 0 40px rgba(162, 178, 255, 0.2), inset 0 0 20px rgba(255, 255, 255, 0.05) !important;
 }
 
 .pricing-card--pro:hover {
@@ -10724,27 +10738,7 @@ html {
   box-shadow: 0 0 80px rgba(162, 178, 255, 0.3) !important;
 }
 
-/* 回転するアニメーショングラデーション枠 (Pro専用) */
-.pricing-card--pro::before {
-  content: '';
-  position: absolute;
-  top: -2px; left: -2px; right: -2px; bottom: -2px;
-  background: linear-gradient(45deg, #FFDF91, #D29D38, #ffffff, #8A9CFF, #E78AFF, #FFDF91);
-  background-size: 400% 400%;
-  z-index: -1;
-  border-radius: 22px;
-  animation: megaGlowBorder 10s ease infinite;
-  opacity: 0.8;
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  padding: 2px;
-}
-
-@keyframes megaGlowBorder {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
@@ -10922,9 +10916,11 @@ html {
   /* Only Pro scales up on desktop */
   .pricing-card--pro {
     transform: scale(1.08) !important;
+    transform-origin: bottom center !important;
   }
   .pricing-card--pro:hover {
-    transform: translateY(-10px) scale(1.12) !important;
+    transform: translateY(0px) scale(1.12) !important;
+    transform-origin: bottom center !important;
   }
 }
 
@@ -10964,4 +10960,11 @@ html {
 .pricing-card--pro:hover .pro-cta {
   color: #E78AFF !important;
   text-shadow: 0 0 10px rgba(231, 138, 255, 0.5);
+}
+
+.pricing-card--free, .pricing-card--standard {
+  transform-origin: bottom center !important;
+}
+.premium-pricing-card:hover {
+  transform: translateY(0px) scale(1.02) !important;
 }
