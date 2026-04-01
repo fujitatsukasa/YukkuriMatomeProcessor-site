@@ -53,15 +53,15 @@ const socialProofStats = [
 
 const timeReduction = {
   manualMinutes: 120,
-  productMinutes: 6,
-  reductionRate: 95,
+  productMinutes: 1,
+  reductionRate: 99,
 } as const
 
 const timeBreakdown = [
-  { label: 'ネタ探し', manual: '30分', product: '2分', desc: '複数サイトからの手動コピペを自動収集へと置き換え' },
-  { label: '台本整理・生成', manual: '25分', product: '1分', desc: 'ノイズ除去と会話台本形式への一括テキスト変換をAIで自動化' },
-  { label: '感情・配役設定', manual: '10分', product: '1分', desc: '立ち絵の表情・声色マッピングをテンプレートで一括適用' },
-  { label: 'YMM4前調整', manual: '55分', product: '2分', desc: 'タイムライン配置・読み込み定義を自動出力' },
+  { label: 'ネタ探し', manual: '30分', product: '10秒', desc: '複数サイトからの手動コピペを自動収集へと置き換え' },
+  { label: '台本整理・生成', manual: '25分', product: '20秒', desc: 'ノイズ除去と会話台本形式への一括テキスト変換をAIで自動化' },
+  { label: '感情・配役設定', manual: '10分', product: '10秒', desc: '立ち絵の表情・声色マッピングをテンプレートで一括適用' },
+  { label: 'YMM4前調整', manual: '55分', product: '20秒', desc: 'タイムライン配置・読み込み定義を自動出力' },
 ] as const
 
 const useCasesData = [
@@ -727,13 +727,13 @@ export function HomePage() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-10%" }}
-            style={{ position: 'relative', zIndex: 1, maxWidth: '820px', margin: '0 auto', textAlign: 'center', marginBottom: '1rem' }}
+            style={{ position: 'relative', zIndex: 1, maxWidth: '1000px', margin: '0 auto', textAlign: 'center', marginBottom: '1.5rem' }}
           >
             <p className="brand-kicker" style={{ justifyContent: 'center' }}>圧倒的時短</p>
-            <h2 style={{ textAlign: 'center' }}>準備時間を、<span className="text-glow-gold">120分から6分</span>へ<span className="text-glow-green">圧倒的短縮</span>。</h2>
-            <p style={{ margin: '0 auto 0.5rem' }}>
-              1本あたり約114分の短縮は、月30本の投稿で<span className="text-glow-gold">約57時間</span>に相当。<br/>
-              <strong className="text-glow-muted">95%削減</strong>の根拠を、工程ごとの比較データで可視化します。
+            <h2 style={{ textAlign: 'center' }}>準備時間を、<span className="text-glow-gold">120分から1分</span>へ<span className="text-glow-green">圧倒的短縮</span>。</h2>
+            <p style={{ margin: '0 auto 0.5rem', fontSize: '1.05rem', lineHeight: 1.6 }}>
+              1本あたり約119分の短縮は、月30本の投稿で<span className="text-glow-gold">約60時間</span>に相当。<br/>
+              <strong className="text-glow-muted">99%削減</strong>の根拠を、工程ごとの比較データで可視化します。
             </p>
             <p style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.4)', marginTop: 0 }}>※ 30分動画1本あたりの準備工程を当社環境にて実測・比較した結果に基づく</p>
           </motion.div>
