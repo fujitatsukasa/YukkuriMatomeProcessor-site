@@ -594,12 +594,12 @@ export function HomePage() {
                         </div>
                       </div>
                       
-                      {/* Character Avatar Bottom Left */}
-                      <div style={{ flexShrink: 0, width: '100%', height: 'clamp(180px, 30vh, 260px)', display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-end', marginTop: 'auto' }}>
+                      {/* Character Avatar Bottom Center */}
+                      <div style={{ flexShrink: 0, width: '100%', height: 'clamp(180px, 30vh, 260px)', display: 'flex', justifyContent: 'center', alignItems: 'flex-end', marginTop: 'auto' }}>
                         <img 
                           src={presentationSlides[activeSlide]?.charImage || '/nodoka/通常.png'} 
                           alt={`STEP ${activeSlide + 1}: ${presentationSlides[activeSlide]?.label}を案内するガイドキャラクターのどか`}
-                          style={{ width: 'auto', maxWidth: '100%', height: '100%', objectFit: 'contain', objectPosition: 'left bottom', filter: 'drop-shadow(0 0 20px rgba(0,0,0,0.6))' }}
+                          style={{ width: 'auto', maxWidth: '100%', height: '100%', objectFit: 'contain', objectPosition: 'bottom', filter: 'drop-shadow(0 0 20px rgba(0,0,0,0.6))' }}
                         />
                       </div>
                     </motion.div>
