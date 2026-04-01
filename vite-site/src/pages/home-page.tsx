@@ -109,48 +109,42 @@ const testimonials = [
     author: "ゆっくり解説系クリエイター",
     authorDetail: "登録者15万人 ｜ 導入歴6ヶ月",
     roi: "月間60時間の削減に成功",
-    avatarImg: "/avatars_premium.png",
-    avatarPos: "0% 0%",
+    avatarImg: "/avatars_real/1.png",
   },
   {
     quote: "「外注に頼っていた反応集まとめを内製化できました。コピペ作業の属人性が排除され、完全な自動パイプラインが完成しました。」",
     author: "2ch反応集チャンネル運営",
     authorDetail: "月間再生数300万回 ｜ 導入歴4ヶ月",
     roi: "外注費 約15万円/月の削減",
-    avatarImg: "/avatars_premium.png",
-    avatarPos: "50% 0%",
+    avatarImg: "/avatars_real/2.png",
   },
   {
     quote: "「YMM4への出力がワンクリックなのが最大の魅力。細かい立ち絵の表情指定も事前にまとめて設定できるためミスが激減しました。」",
     author: "複数チャンネル運営ディレクター",
     authorDetail: "3チャンネル同時運営 ｜ 導入歴8ヶ月",
     roi: "修正・確認時間の 80%削減",
-    avatarImg: "/avatars_premium.png",
-    avatarPos: "100% 0%",
+    avatarImg: "/avatars_real/3.png",
   },
   {
     quote: "「ショート動画を量産するために導入。テンプレートを一度組めば、あとはURLを入れるだけで台本が出来上がるので楽すぎます。」",
     author: "ショート動画特化クリエイター",
     authorDetail: "TikTok フォロワー8万 ｜ 導入歴3ヶ月",
     roi: "月間投稿本数が3倍に",
-    avatarImg: "/avatars_premium.png",
-    avatarPos: "0% 50%",
+    avatarImg: "/avatars_real/4.png",
   },
   {
     quote: "「副業で始めたゆっくり解説チャンネルが、このツールのおかげで本業の収入を超えました。準備の手間が消えたのが大きいです。」",
     author: "副業系ゆっくりクリエイター",
     authorDetail: "登録者3万人 ｜ 導入歴5ヶ月",
     roi: "副業収入が月20万円を突破",
-    avatarImg: "/avatars_premium.png",
-    avatarPos: "50% 50%",
+    avatarImg: "/avatars_real/5.png",
   },
   {
     quote: "「法人として複数チャンネルの運用を効率化するために導入。属人化を排除でき、スタッフの教育コストも大幅に削減できました。」",
     author: "動画制作会社 COO",
     authorDetail: "法人5チャンネル運用 ｜ 導入歴10ヶ月",
     roi: "スタッフ教育コスト 70%削減",
-    avatarImg: "/avatars_premium.png",
-    avatarPos: "100% 50%",
+    avatarImg: "/avatars_real/6.png",
   },
 ]
 
@@ -1028,7 +1022,7 @@ export function HomePage() {
                         width: 52, height: 52, borderRadius: '50%',
                         boxShadow: '0 4px 16px rgba(0,0,0,0.4), 0 0 20px rgba(224,193,132,0.15)', 
                         border: '2px solid rgba(224,193,132,0.4)',
-                        backgroundImage: `url(${t.avatarImg})`, backgroundSize: '300% 200%', backgroundPosition: t.avatarPos 
+                        backgroundImage: `url(${t.avatarImg})`, backgroundSize: 'cover', backgroundPosition: 'center' 
                       }} />
                     </div>
                     <div style={{ minWidth: 0 }}>
@@ -1343,8 +1337,8 @@ export function HomePage() {
               {/* Subtle testimonial snippet for social proof */}
               <div style={{ marginTop: '0.5rem', padding: '1rem 1.5rem', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.08)', background: 'rgba(255,255,255,0.03)', maxWidth: '500px', display: 'flex', alignItems: 'center', gap: '1rem' }}>
                 <div style={{ display: 'flex', gap: '-4px', flexShrink: 0 }}>
-                  {[0, 1, 2].map(i => (
-                    <div key={i} style={{ width: 32, height: 32, borderRadius: '50%', border: '2px solid rgba(16,17,20,0.9)', backgroundImage: 'url(/avatars_premium.png)', backgroundSize: '300% 200%', backgroundPosition: `${i * 50}% 0%`, marginLeft: i > 0 ? '-8px' : 0 }} />
+                  {[1, 2, 3].map(i => (
+                    <div key={i} style={{ width: 32, height: 32, borderRadius: '50%', border: '2px solid rgba(16,17,20,0.9)', backgroundImage: `url(/avatars_real/${i}.png)`, backgroundSize: 'cover', backgroundPosition: 'center', marginLeft: i > 1 ? '-8px' : 0 }} />
                   ))}
                 </div>
                 <p style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.5 }}>
