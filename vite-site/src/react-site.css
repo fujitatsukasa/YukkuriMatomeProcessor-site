@@ -5230,29 +5230,27 @@ html {
   padding: clamp(20px, 4svh, 40px) 0 clamp(20px, 4svh, 40px) !important;
 }
 
-/* ── Superior smooth animated border ── */
+/* ── Superior smooth animated border mimicking 'Start For Free' Neon ── */
 .chart-dashboard::before {
   content: "";
   position: absolute;
-  inset: -50%;
-  aspect-ratio: 1/1;
-  background: conic-gradient(
-    from 0deg,
-    transparent 0%,
-    transparent 40%,
-    #ffd770 50%,
-    #ffaa00 55%,
-    transparent 60%,
-    transparent 100%
-  );
-  animation: chart-spin-border 4s linear infinite;
-  z-index: 0;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px; /* Neon border thickness */
+  background: linear-gradient(90deg, #00C0FF, #FF0055, #00C0FF, #FFd700, #00C0FF);
+  background-size: 300% auto;
+  animation: rainbow-border 4s linear infinite;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
   pointer-events: none;
+  z-index: 10;
 }
 
-@keyframes chart-spin-border {
-  0% { transform: translate(-25%, -25%) rotate(0deg); }
-  100% { transform: translate(-25%, -25%) rotate(360deg); }
+@keyframes neon-border {
+  0% { background-position: 0 0; }
+  100% { background-position: 400% 0; }
 }
 
 /* ── The actual content container to mask the inner area ── */
