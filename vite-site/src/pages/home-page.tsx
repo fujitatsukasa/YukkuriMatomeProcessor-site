@@ -58,10 +58,10 @@ const timeReduction = {
 } as const
 
 const timeBreakdown = [
-  { label: 'ネタ探し', manual: '30分', product: '10秒', desc: '複数サイトからの手動コピペを自動収集へと置き換え' },
-  { label: '台本整理・生成', manual: '25分', product: '20秒', desc: 'ノイズ除去と会話台本形式への一括テキスト変換をAIで自動化' },
-  { label: '感情・配役設定', manual: '10分', product: '10秒', desc: '立ち絵の表情・声色マッピングをテンプレートで一括適用' },
-  { label: 'YMM4前調整', manual: '55分', product: '20秒', desc: 'タイムライン配置・読み込み定義を自動出力' },
+  { label: 'ネタ探し', manual: '30分', product: '10秒', saved: '約30', desc: '複数サイトからの手動コピペを自動収集へと置き換え' },
+  { label: '台本整理・生成', manual: '25分', product: '20秒', saved: '約25', desc: 'ノイズ除去と会話台本形式への一括テキスト変換をAIで自動化' },
+  { label: '感情・配役設定', manual: '10分', product: '10秒', saved: '約10', desc: '立ち絵の表情・声色マッピングをテンプレートで一括適用' },
+  { label: 'YMM4前調整', manual: '55分', product: '20秒', saved: '約55', desc: 'タイムライン配置・読み込み定義を自動出力' },
 ] as const
 
 const useCasesData = [
@@ -791,10 +791,6 @@ export function HomePage() {
               {/* ── Breakdown Rows ── */}
               <div className="chart-dashboard__rows">
                 {timeBreakdown.map((item, index) => {
-                  const manual = Number.parseInt(item.manual, 10)
-                  const product = Number.parseInt(item.product, 10)
-                  const saved = manual - product
-
                   return (
                     <motion.div
                       key={item.label}
@@ -830,7 +826,7 @@ export function HomePage() {
                       <div className="chart-dashboard__row-badge">
                         <span className="chart-dashboard__row-saved">
                           <svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 11V3M4 6l3-3 3 3" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                          {saved}分
+                          {item.saved}分
                         </span>
                       </div>
                     </motion.div>
