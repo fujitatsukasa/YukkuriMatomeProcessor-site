@@ -10689,10 +10689,20 @@ html {
   border-radius: 20px !important;
   display: flex !important;
   flex-direction: column !important;
+  justify-content: space-between !important;
+  height: 100% !important; /* Ensure all cards are same height and stretched to grid row */
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
   overflow: visible !important;
   z-index: 1;
   background: rgba(15, 15, 20, 0.6) !important;
+}
+
+/* Ensure any inner wrappers created by InteractiveCard transparently pass flex state */
+.premium-pricing-card > * {
+  flex-shrink: 0;
+}
+.premium-pricing-features {
+  flex-grow: 1 !important; /* Allows features to fill space, pushing CTA down */
 }
 
 /* ホバー時の浮き上がり共通 */

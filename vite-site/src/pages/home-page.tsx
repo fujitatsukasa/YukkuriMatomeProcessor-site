@@ -1084,10 +1084,10 @@ export function HomePage() {
 
           <div style={{ position: 'relative', zIndex: 1, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', width: '100%', maxWidth: '1200px', margin: '0 auto' }}>
             {/* Free Plan */}
-            <InteractiveCard className="home-compact-price-card-rich premium-pricing-card pricing-card--free">
-              <div className="home-compact-price-card-rich__top premium-pricing-top">
+            <InteractiveCard className="premium-pricing-card pricing-card--free">
+              <div className="premium-pricing-top">
                 <h3>Free</h3>
-                <div className="home-compact-price-card-rich__price premium-pricing-price">
+                <div className="premium-pricing-price">
                   <strong>¥0</strong>
                   <span className="price-term">ずっと無料</span>
                 </div>
@@ -1124,13 +1124,13 @@ export function HomePage() {
             </InteractiveCard>
 
             {/* Standard Plan */}
-            <InteractiveCard className="home-compact-price-card-rich premium-pricing-card pricing-card--standard">
+            <InteractiveCard className="premium-pricing-card pricing-card--standard">
               <div className="pricing-badge pricing-badge--gold">
                 個人クリエイター向け
               </div>
-              <div className="home-compact-price-card-rich__top premium-pricing-top">
+              <div className="premium-pricing-top">
                 <h3>Standard</h3>
-                <div className="home-compact-price-card-rich__price premium-pricing-price">
+                <div className="premium-pricing-price">
                   <strong>¥5,000</strong>
                   <span className="price-term">月額 /税込 5,500円</span>
                 </div>
@@ -1163,13 +1163,13 @@ export function HomePage() {
             </InteractiveCard>
 
             {/* Pro Plan */}
-            <InteractiveCard className="home-compact-price-card-rich premium-pricing-card pricing-card--pro">
+            <InteractiveCard className="premium-pricing-card pricing-card--pro">
               <div className="pricing-badge pricing-badge--platinum">
                 ✦ THE ULTIMATE / 圧倒的おすすめ
               </div>
-              <div className="home-compact-price-card-rich__top premium-pricing-top">
+              <div className="premium-pricing-top">
                 <h3>Pro</h3>
-                <div className="home-compact-price-card-rich__price premium-pricing-price">
+                <div className="premium-pricing-price">
                   <strong>¥10,000</strong>
                   <span className="price-term">月額 /税込 11,000円</span>
                 </div>
