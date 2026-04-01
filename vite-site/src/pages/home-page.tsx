@@ -808,29 +808,28 @@ export function HomePage() {
                         damping: 15,
                         delay: 0.3 + index * 0.15 
                       }}
-                      style={{ background: 'rgba(255,255,255,0.08)', padding: '1.4rem', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.15)' }}
                     >
                       <div className="chart-dashboard__row-info">
-                        <strong className="chart-dashboard__row-title" style={{ fontSize: '1.15rem', color: '#fff', marginBottom: '8px', display: 'block' }}>{item.label}</strong>
-                        <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '0.95rem' }}>{item.desc}</p>
+                        <strong className="chart-dashboard__row-title">{item.label}</strong>
+                        <p>{item.desc}</p>
                       </div>
 
                       <div className="chart-dashboard__row-stats">
-                        <div className="chart-dashboard__stat-box chart-dashboard__stat-box--manual" style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.3)' }}>
-                          <small style={{ color: '#fff', opacity: 0.9 }}>手作業</small>
-                          <span style={{ fontSize: '1.25rem', color: '#fff' }}>{item.manual}</span>
+                        <div className="chart-dashboard__stat-box chart-dashboard__stat-box--manual">
+                          <small>手作業</small>
+                          <span>{item.manual}</span>
                         </div>
-                        <div className="chart-dashboard__stat-arrow-sm" aria-hidden="true" style={{ color: 'rgba(224,193,132,0.9)' }}>
+                        <div className="chart-dashboard__stat-arrow-sm" aria-hidden="true">
                           <svg width="20" height="20" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/></svg>
                         </div>
-                        <div className="chart-dashboard__stat-box chart-dashboard__stat-box--product" style={{ background: 'rgba(224,193,132,0.2)', border: '1px solid rgba(224,193,132,0.6)' }}>
-                          <small style={{ color: '#e0c184', fontWeight: 'bold' }}>本ツール</small>
-                          <span style={{ fontSize: '1.25rem', color: '#fff' }}>{item.product}</span>
+                        <div className="chart-dashboard__stat-box chart-dashboard__stat-box--product">
+                          <small>本ツール</small>
+                          <span>{item.product}</span>
                         </div>
                       </div>
 
                       <div className="chart-dashboard__row-badge">
-                        <span className="chart-dashboard__row-saved" style={{ background: '#4CAF50', color: '#fff', fontWeight: 800, padding: '8px 16px', fontSize: '1.15rem', border: '1px solid #66BB6A' }}>
+                        <span className="chart-dashboard__row-saved">
                           <svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 11V3M4 6l3-3 3 3" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/></svg>
                           {saved}分
                         </span>
