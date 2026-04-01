@@ -656,28 +656,26 @@ export function HomePage() {
                   {/* Inner Corner Gradient for blending */}
                   <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(26, 25, 30, 0.95) 0%, rgba(26, 25, 30, 0) 15%)', zIndex: 5, pointerEvents: 'none' }} />
 
-                  {/* Bottom Gradient for dots visibility */}
-                  <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '120px', background: 'linear-gradient(to top, rgba(16,15,20,0.9) 0%, rgba(0,0,0,0) 100%)', zIndex: 6, pointerEvents: 'none' }} />
-
-                  {/* Enhanced Dots Navigation instead of arrows */}
-                  <div style={{ position: 'absolute', bottom: '2rem', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '12px', zIndex: 10, background: 'rgba(20,18,15,0.6)', padding: '12px 24px', borderRadius: '40px', backdropFilter: 'blur(12px)', border: '1px solid rgba(224,193,132,0.2)', boxShadow: '0 10px 30px rgba(0,0,0,0.5)' }}>
+                  {/* Refined Minimal Dots Navigation */}
+                  <div style={{ position: 'absolute', bottom: '2rem', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '12px', zIndex: 10 }}>
                     {presentationSlides.map((slide, idx) => (
                       <button 
                         key={idx}
                         onClick={() => handleSlideChange(idx)}
                         style={{
-                          height: 8, width: activeSlide === idx ? 64 : 20,
-                          background: activeSlide === idx ? 'linear-gradient(135deg, #e0c184, #b08d51)' : 'rgba(255,255,255,0.3)',
-                          borderRadius: 4, border: 'none', cursor: 'pointer', transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                          boxShadow: activeSlide === idx ? '0 0 15px rgba(224,193,132,0.4)' : 'none',
+                          height: 4, 
+                          width: 40, // Constant width, no jumping size
+                          background: activeSlide === idx ? '#e0c184' : 'rgba(255,255,255,0.25)',
+                          borderRadius: 2, border: 'none', cursor: 'pointer', transition: 'all 0.3s ease',
+                          boxShadow: activeSlide === idx ? '0 0 10px rgba(224,193,132,0.6)' : 'none',
                           padding: 0
                         }}
                         title={slide.label}
                         onMouseOver={(e) => {
-                          if(activeSlide !== idx) e.currentTarget.style.background = 'rgba(255,255,255,0.6)';
+                          if(activeSlide !== idx) e.currentTarget.style.background = 'rgba(255,255,255,0.5)';
                         }}
                         onMouseOut={(e) => {
-                          if(activeSlide !== idx) e.currentTarget.style.background = 'rgba(255,255,255,0.3)';
+                          if(activeSlide !== idx) e.currentTarget.style.background = 'rgba(255,255,255,0.25)';
                         }}
                       />
                     ))}
