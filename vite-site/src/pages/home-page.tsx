@@ -534,7 +534,7 @@ export function HomePage() {
         <div className="section-glow-divider" />
 
         <section className="brand-section brand-section--alt home-compact-section home-presentation-deck" ref={flowRef} style={{ position: 'relative', zIndex: 1, minHeight: '90vh', display: 'flex', alignItems: 'center' }}>
-          <div style={{ width: '100%', maxWidth: 1500, margin: '0 auto', display: 'flex', flexDirection: 'column', padding: 'clamp(3rem, 6vh, 6rem) max(1.5rem, 3vw)', position: 'relative', zIndex: 2 }}>
+          <div style={{ width: '100%', maxWidth: 1250, margin: '0 auto', display: 'flex', flexDirection: 'column', padding: 'clamp(3rem, 6vh, 6rem) max(1.5rem, 3vw)', position: 'relative', zIndex: 2 }}>
             
             {/* Header */}
             <div style={{ flex: '0 0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '2.5rem', gap: '8px' }}>
@@ -568,7 +568,7 @@ export function HomePage() {
               >
               
                 {/* Left: Guide Character & Text */}
-                <div style={{ flex: '1 1 350px', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: 'clamp(2rem, 4vw, 4rem)', zIndex: 10, position: 'relative' }}>
+                <div style={{ flex: '1 1 350px', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: 'clamp(1.5rem, 3vw, 2.5rem) clamp(2rem, 4vw, 3rem)', zIndex: 10, position: 'relative' }}>
                   <AnimatePresence mode="wait">
                     <motion.div 
                       key={`desc-${activeSlide}`}
@@ -580,11 +580,11 @@ export function HomePage() {
                     >
                       {/* Character Avatar alongside Title inside the card */}
                       <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
-                        <div style={{ flexShrink: 0, width: 'clamp(100px, 12vw, 150px)', display: 'flex', justifyContent: 'center', alignItems: 'flex-end', paddingBottom: '0.5rem' }}>
+                        <div style={{ flexShrink: 0, width: '120px', height: '140px', display: 'flex', justifyContent: 'center', alignItems: 'flex-end', paddingBottom: '0.5rem' }}>
                           <img 
                             src={presentationSlides[activeSlide]?.charImage || '/nodoka/通常.png'} 
                             alt={`STEP ${activeSlide + 1}: ${presentationSlides[activeSlide]?.label}を案内するガイドキャラクターのどか`}
-                            style={{ width: '100%', height: 'auto', objectFit: 'contain', filter: 'drop-shadow(0 0 15px rgba(0,0,0,0.6))' }}
+                            style={{ width: 'auto', height: '100%', objectFit: 'contain', filter: 'drop-shadow(0 0 15px rgba(0,0,0,0.6))' }}
                           />
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
@@ -592,13 +592,13 @@ export function HomePage() {
                             <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#4CAF50', boxShadow: '0 0 12px #4CAF50' }} />
                             STEP 0{activeSlide + 1}
                           </span>
-                          <h3 style={{ fontSize: 'clamp(1.8rem, 2.5vw, 2.4rem)', color: '#fff', margin: 0, fontWeight: 800, lineHeight: 1.25, letterSpacing: '-0.02em' }}>{presentationSlides[activeSlide]?.label}</h3>
+                          <h3 style={{ fontSize: '2rem', color: '#fff', margin: 0, fontWeight: 800, lineHeight: 1.25, letterSpacing: '-0.02em', whiteSpace: 'nowrap' }}>{presentationSlides[activeSlide]?.label}</h3>
                         </div>
                       </div>
                       
                       {/* Description below */}
-                      <div>
-                        <p style={{ fontSize: 'clamp(1.1rem, 1.3vw, 1.2rem)', color: 'rgba(255,255,255,0.95)', lineHeight: 1.7, margin: 0, fontWeight: 500 }}>{presentationSlides[activeSlide]?.desc}</p>
+                      <div style={{ minHeight: '90px' }}>
+                        <p style={{ fontSize: '1.15rem', color: 'rgba(255,255,255,0.95)', lineHeight: 1.7, margin: 0, fontWeight: 500 }}>{presentationSlides[activeSlide]?.desc}</p>
                       </div>
                     </motion.div>
                   </AnimatePresence>
@@ -1348,10 +1348,10 @@ export function HomePage() {
                 animate={{ y: [0, -5, 0] }}
                 transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
               >
-                <p style={{ textAlign: 'center', lineHeight: '1.6', fontSize: '0.95rem' }}>
-                  毎日の動画編集、本当にお疲れ様です！☕<br/>
-                  面倒な作業をツールにお任せして、<br/>
-                  <strong style={{color: '#00ffcc', textShadow: '0 0 10px rgba(0,255,204,0.4)'}}>約95%も時短</strong>してみませんか？♪
+                <p style={{ textAlign: 'center', lineHeight: '1.5', fontSize: '0.85rem', whiteSpace: 'nowrap' }}>
+                  毎日の動画編集お疲れ様です！☕<br/>
+                  面倒な作業はツールにお任せして<br/>
+                  <strong style={{color: '#00ffcc', textShadow: '0 0 10px rgba(0,255,204,0.4)'}}>約95%も時短</strong>しませんか？♪
                 </p>
                 <Link className="nodoka-animated-btn" style={{ margin: '0 auto' }} to="/download/">
                   <span className="nodoka-animated-btn__inner">無料で始める</span>
