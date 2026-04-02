@@ -10884,3 +10884,36 @@ html {
 /* 確保する内部のレイアウト要素 */
 .premium-pricing-card > * { flex-shrink: 0; }
 .premium-pricing-features { flex-grow: 1 !important; }
+
+
+
+/* -------------------------------------------------------------
+   UX POLISH: TEXT ANIMATIONS & ADVANCED GLOWS
+   ------------------------------------------------------------- */
+@keyframes textGlowPulse {
+  0% { text-shadow: 0 0 10px rgba(162, 178, 255, 0.2); }
+  50% { text-shadow: 0 0 25px rgba(162, 178, 255, 0.6); }
+  100% { text-shadow: 0 0 10px rgba(162, 178, 255, 0.2); }
+}
+
+@keyframes featureHover {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(6px); color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.4); }
+}
+
+.pricing-card--pro .premium-pricing-price strong {
+  animation: textGlowPulse 3s ease-in-out infinite;
+}
+
+.premium-pricing-feature-row {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.premium-pricing-feature-row:hover {
+  animation: featureHover 0.3s forwards;
+}
+
+.premium-pricing-feature-row:hover .check-icon {
+  transform: scale(1.2) rotate(360deg);
+  box-shadow: 0 0 15px currentColor;
+}

@@ -1118,9 +1118,7 @@ export function HomePage() {
                   <span>高度な台本取得・AI生成</span>
                 </div>
               </div>
-              <div className="premium-pricing-cta">
-                Freeで始める <span>&rarr;</span>
-              </div>
+              
             </InteractiveCard>
 
             {/* Standard Plan */}
@@ -1157,9 +1155,7 @@ export function HomePage() {
                   <span>優先専用サポート</span>
                 </div>
               </div>
-              <div className="premium-pricing-cta">
-                Standardプランを選択 <span>&rarr;</span>
-              </div>
+              
             </InteractiveCard>
 
             {/* Pro Plan */}
