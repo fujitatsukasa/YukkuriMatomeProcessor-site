@@ -713,361 +713,7 @@ export function HomePage() {
               <span>作業時間95%削減 - YMM4完全対応 - 動画制作を圧倒的に効率化 - ネタ収集から出力まで一本化 - </span>
             </div>
           </div>
-          <motion.div 
-            className="home-compact-section-head"
-            variants={SECTION_HEAD_VARIANTS}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-10%" }}
-            style={{ position: 'relative', zIndex: 1, maxWidth: '1000px', margin: '0 auto', textAlign: 'center', marginBottom: '1.5rem' }}
-          >
-            <p className="brand-kicker" style={{ justifyContent: 'center' }}>圧倒的時短</p>
-            <h2 style={{ textAlign: 'center' }}>準備時間を、<span className="text-glow-gold">120分から1分</span>へ<span className="text-glow-green">圧倒的短縮</span>。</h2>
-            <p style={{ margin: '0 auto 0.5rem', fontSize: '1.05rem', lineHeight: 1.6 }}>
-              1本あたり約119分の短縮は、月30本の投稿で<span className="text-glow-gold">約60時間</span>に相当。<br/>
-              <strong className="text-glow-muted">99%削減</strong>の根拠を、工程ごとの比較データで可視化します。
-            </p>
-            <p style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.4)', marginTop: 0 }}>※ 30分動画1本あたりの準備工程を当社環境にて実測・比較した結果に基づく</p>
-          </motion.div>
-
-          <motion.div 
-            ref={chartRef}
-            className="chart-dashboard" 
-            role="img" 
-            aria-label="手作業120分と本ツール6分の時間内訳比較"
-            initial={{ opacity: 0, scale: 0.95, y: 30 }}
-            whileInView={{ opacity: 1, scale: 1, y: 0, transition: { type: 'spring', stiffness: 80, damping: 20 } }}
-            viewport={{ once: true, margin: "-10%" }}
-            style={{ position: 'relative', zIndex: 1 }}
-          >
-            <div className="chart-dashboard__inner">
-              {/* ── Hero Stats Row (Symmetrical) ── */}
-              <div className={`chart-dashboard__hero ${isChartInView ? 'is-visible' : ''}`}>
-                <div className="chart-dashboard__kpi-group">
-                  <div className="chart-dashboard__kpi chart-dashboard__kpi--before">
-                    <span className="chart-dashboard__kpi-tag">Before</span>
-                    <div className="kpi-giant-wrap">
-                      <AnimatedNumber value={timeReduction.manualMinutes} active={isChartInView} />
-                      <small>分</small>
-                    </div>
-                    <span className="chart-dashboard__kpi-desc">手作業による準備</span>
-                  </div>
-
-                  {/* Ring acting as the central arrow */}
-                  <div className="chart-dashboard__ring-wrap" style={{ margin: '0 -0.5rem', zIndex: 2 }}>
-                    <svg className="chart-dashboard__ring" viewBox="0 0 120 120">
-                      <circle className="chart-dashboard__ring-bg" cx="60" cy="60" r="52" />
-                      <circle
-                        className={`chart-dashboard__ring-fill ${isChartInView ? 'is-active' : ''}`}
-                        cx="60" cy="60" r="52"
-                        style={{ '--ring-pct': `${timeReduction.reductionRate}` } as React.CSSProperties}
-                      />
-                    </svg>
-                    <div className="chart-dashboard__ring-label">
-                      <AnimatedNumber value={timeReduction.reductionRate} active={isChartInView} suffix="%" />
-                      <span>削減</span>
-                    </div>
-                  </div>
-
-                  <div className="chart-dashboard__kpi chart-dashboard__kpi--after">
-                    <span className="chart-dashboard__kpi-tag">After</span>
-                    <div className="kpi-giant-wrap">
-                      <AnimatedNumber value={timeReduction.productMinutes} active={isChartInView} />
-                      <small>分</small>
-                    </div>
-                    <span className="chart-dashboard__kpi-desc">本ツールで完了</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* ── Breakdown Rows ── */}
-              <div className="chart-dashboard__rows">
-                {timeBreakdown.map((item, index) => {
-                  return (
-                    <motion.div
-                      key={item.label}
-                      className="chart-dashboard__row"
-                      initial={{ opacity: 0, x: -30 }}
-                      animate={isChartInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-                      transition={{ 
-                        type: 'spring', 
-                        stiffness: 100, 
-                        damping: 15,
-                        delay: 0.3 + index * 0.15 
-                      }}
-                    >
-                      <div className="chart-dashboard__row-info">
-                        <strong className="chart-dashboard__row-title">{item.label}</strong>
-                        <p>{item.desc}</p>
-                      </div>
-
-                      <div className="chart-dashboard__row-stats">
-                        <div className="chart-dashboard__stat-box chart-dashboard__stat-box--manual">
-                          <small>手作業</small>
-                          <span>{item.manual}</span>
-                        </div>
-                        <div className="chart-dashboard__stat-arrow-sm" aria-hidden="true">
-                          <svg width="20" height="20" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                        </div>
-                        <div className="chart-dashboard__stat-box chart-dashboard__stat-box--product">
-                          <small>本ツール</small>
-                          <span>{item.product}</span>
-                        </div>
-                      </div>
-
-                      <div className="chart-dashboard__row-badge">
-                        <span className="chart-dashboard__row-saved">
-                          <svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 11V3M4 6l3-3 3 3" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                          {item.saved}分
-                        </span>
-                      </div>
-                    </motion.div>
-                  )
-                })}
-              </div>
-            </div>
-          </motion.div>
-        </Section>
-
-
-        {/* ━━━[ Section Glow Divider ]━━━ */}
-        <div className="section-glow-divider" />
-
-        <Section alt className="home-compact-section home-compact-usecase-section">
-          {/* Parallax & Animated Section Background — rotation removed for premium feel */}
-          <div className="page-bg-bleed">
-            <motion.img 
-              src="/bg_usecases_master.webp"
-              alt=""
-              style={{
-                width: '100%', height: '100%', objectFit: 'cover',
-                opacity: 0.55, mixBlendMode: 'screen',
-                maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
-                WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)'
-              }}
-              animate={{
-                scale: [1.02, 1.06, 1.02],
-              }}
-              transition={{
-                duration: 25,
-                ease: "easeInOut",
-                repeat: Infinity
-              }}
-            />
-          </div>
-
-          <motion.div 
-            className="home-compact-section-head" 
-            variants={SECTION_HEAD_VARIANTS}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-10%" }}
-            style={{ position: 'relative', zIndex: 1, marginBottom: '2.5rem' }}
-          >
-            <p className="brand-kicker">対応ジャンル</p>
-            <h2><span className="text-glow-green">反応集・ゆっくり解説</span>・ショート動画に対応</h2>
-            <p>あらゆる形式の解説・まとめ動画に対応し、スタイルに合わせた最適なフォーマットで出力します。</p>
-          </motion.div>
-
-          <div className="home-compact-usecase-grid" role="list" style={{ position: 'relative', zIndex: 1, width: '100%', maxWidth: '1000px', margin: '0 auto' }}>
-            {useCasesData.map((item, idx) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-10%" }}
-                transition={{ duration: 0.6, delay: idx * 0.12 }}
-                style={{ height: '100%' }}
-              >
-              <Tilt
-                tiltMaxAngleX={5}
-                tiltMaxAngleY={5}
-                glareEnable={true}
-                glareMaxOpacity={0.1}
-                glareColor="#ffffff"
-                glarePosition="all"
-                scale={1.02}
-                style={{ height: '100%' }}
-              >
-                <article 
-                  className="home-compact-usecase-card--pure magnetic-card" 
-                  role="listitem"
-                  style={{ 
-                    height: '100%', 
-                    display: 'flex', flexDirection: 'column', alignItems: 'stretch',
-                    borderRadius: '24px',
-                    border: `1px solid ${item.iconColor}80`,
-                    background: 'rgba(32,30,36,0.95)',
-                    position: 'relative', overflow: 'visible',
-                    transition: 'border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease',
-                    cursor: 'default',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.boxShadow = `0 20px 50px rgba(0,0,0,0.5), inset 0 0 0 2px ${item.iconColor}`
-                    e.currentTarget.style.background = 'rgba(40,38,45,1)'
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.boxShadow = ''
-                    e.currentTarget.style.background = 'rgba(32,30,36,0.95)'
-                  }}
-                >
-                  {/* Top: Video Demo Placeholder */}
-                  <div style={{ width: '100%', height: 'clamp(140px, 20vh, 180px)', position: 'relative', background: '#000', overflow: 'visible', flexShrink: 0 }}>
-                    <video
-                      src="https://www.w3schools.com/html/mov_bbb.mp4"
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        opacity: 0.85,
-                        transition: 'opacity 0.3s ease'
-                      }}
-                      onMouseEnter={(e) => e.currentTarget.style.opacity = '1'}
-                      onMouseLeave={(e) => e.currentTarget.style.opacity = '0.85'}
-                    />
-                    {/* Subtle bottom fade */}
-                    <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '30%', background: 'linear-gradient(to top, rgba(32,30,36,1), transparent)', pointerEvents: 'none' }} />
-                  </div>
-
-                  {/* Bottom: Text & Icon */}
-                  <div style={{ display: 'flex', flexDirection: 'column', padding: 'clamp(1.5rem, 3vh, 2rem)', flexGrow: 1, position: 'relative', zIndex: 1 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.2rem' }}>
-                      {/* Integrated Icon */}
-                      <div style={{ 
-                        width: 48, height: 48, borderRadius: '14px', 
-                        background: item.gradient, 
-                        border: `1px solid ${item.iconColor}`,
-                        display: 'flex', alignItems: 'center', justifyContent: 'center', 
-                        boxShadow: `0 4px 15px ${item.borderColor}`,
-                        flexShrink: 0
-                      }}>
-                        <item.Icon size={24} color={item.iconColor} strokeWidth={2} />
-                      </div>
-                      <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: '#fff', margin: 0, letterSpacing: '0.02em', lineHeight: 1.3 }}>{item.title}</h3>
-                    </div>
-                    <p style={{ fontSize: '1.05rem', color: 'rgba(255,255,255,0.9)', lineHeight: 1.6, flexGrow: 1, margin: 0 }}>{item.body}</p>
-                  </div>
-
-                  {/* Subtle gradient glow in corner */}
-                  <div style={{ position: 'absolute', bottom: '-20%', right: '-20%', width: '60%', height: '60%', background: `radial-gradient(circle, ${item.borderColor}, transparent 70%)`, opacity: 0.15, pointerEvents: 'none' }} />
-                </article>
-              </Tilt>
-              </motion.div>
-            ))}
-          </div>
-        </Section>
-
-
-
-        {/* ━━━[ Section Glow Divider ]━━━ */}
-        <div className="section-glow-divider" />
-
-        <Section alt className="home-compact-section testimonials-section-wrap">
-          {/* subtle radial gradient for testimonials */}
-          <div style={{ position: 'absolute', top: '50%', left: '50%', width: '120vw', height: '120%', background: 'radial-gradient(ellipse at center, rgba(30,25,18,0.4) 0%, transparent 60%)', transform: 'translate(-50%, -50%)', zIndex: 0 }} />
-          
-          <motion.div 
-            className="home-compact-section-head" 
-            variants={SECTION_HEAD_VARIANTS}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-10%" }}
-            style={{ position: 'relative', zIndex: 1 }}
-          >
-            <p className="brand-kicker">お客様の声</p>
-            <h2>導入クリエイターの<span className="text-glow-gold">圧倒的成果</span></h2>
-            <p style={{ maxWidth: '600px', margin: '0 auto' }}>
-              ジャンルも規模もさまざまなクリエイターが、<br/>
-              当プロセッサーで制作フローを<strong className="text-glow-gold">劇的に効率化</strong>しています。
-            </p>
-          </motion.div>
-
-          {/* Horizontal Scroll Carousel */}
-          <div className="testimonials-carousel" style={{ position: 'relative', zIndex: 1, width: '100%', overflow: 'visible', padding: '1rem 0 2rem' }}>
-            <button onClick={() => scrollTestimonials('left')} className="carousel-nav-btn carousel-nav-btn--left" aria-label="左にスクロール">←</button>
-            <button onClick={() => scrollTestimonials('right')} className="carousel-nav-btn carousel-nav-btn--right" aria-label="右にスクロール">→</button>
-
-            <div 
-              ref={testimonialsRef}
-              className="testimonials-carousel__track"
-              style={{ display: 'flex', gap: '1.5rem', paddingLeft: 'max(3.5rem, calc((100vw - 1200px) / 2))', paddingRight: '3.5rem', overflowX: 'auto', scrollSnapType: 'x mandatory', scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-            >
-              {testimonials.map((t, idx) => (
-                <motion.div 
-                  key={idx}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-10%" }}
-                  transition={{ duration: 0.5, delay: idx * 0.08 }}
-                  className="testimonial-card"
-                  style={{ minWidth: '360px', maxWidth: '400px', flex: '0 0 auto', scrollSnapAlign: 'start', padding: 'clamp(1.5rem, 3vh, 2.5rem)', gap: '0' }}
-                >
-                  {/* Star rating */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '4px', marginBottom: '1.2rem' }}>
-                    {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#e0c184" color="#e0c184" />)}
-                  </div>
-                  {/* Quote */}
-                  <p style={{ fontSize: '1.02rem', lineHeight: 1.75, color: 'rgba(245,241,233,0.92)', flex: 1, marginBottom: '1.5rem', fontWeight: 500, letterSpacing: '0.01em' }}>{t.quote}</p>
-                  {/* Author with improved layout */}
-                  <div style={{ marginTop: 'auto', paddingTop: '1.2rem', borderTop: '1px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                    {/* Avatar with glow ring */}
-                    <div style={{ position: 'relative', flexShrink: 0 }}>
-                      <div style={{ 
-                        width: 52, height: 52, borderRadius: '50%',
-                        boxShadow: '0 4px 16px rgba(0,0,0,0.4), 0 0 20px rgba(224,193,132,0.15)', 
-                        border: '2px solid rgba(224,193,132,0.4)',
-                        backgroundImage: `url(${t.avatarImg})`, backgroundSize: 'cover', backgroundPosition: 'center' 
-                      }} />
-                    </div>
-                    <div style={{ minWidth: 0 }}>
-                      <p style={{ fontSize: '0.95rem', color: '#f5f1e9', marginBottom: '0.15rem', fontWeight: 700 }}>{t.author}</p>
-                      <p style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.55)', marginBottom: '0.3rem' }}>{t.authorDetail}</p>
-                      <p style={{ fontSize: '0.88rem', color: '#e0c184', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '4px' }}>
-                        <TrendingUp size={14} />
-                        {t.roi}
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-            <p className="carousel-hint" style={{ textAlign: 'center', color: 'rgba(255,255,255,0.45)', fontSize: '0.85rem', marginTop: '1rem' }}>← スワイプまたは矢印ボタンで閲覧 →</p>
-            <p style={{ textAlign: 'center', color: 'rgba(255,255,255,0.35)', fontSize: '0.75rem', marginTop: '0.4rem' }}>※ 利用者の声を元に再構成した内容です</p>
-          </div>
-        </Section>
-
-        {/* ━━━[ Section Glow Divider ]━━━ */}
-        <div className="section-glow-divider" />
-
-        <Section className="home-compact-section home-compact-price-section">
-          {/* Parallax & Animated Section Background */}
-          <div className="page-bg-bleed">
-            <motion.img 
-              src="/bg_pricing_master.webp"
-              alt=""
-              style={{
-                width: '100%', height: '100%', objectFit: 'cover',
-                opacity: 0.65, mixBlendMode: 'screen',
-                maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
-                WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)'
-              }}
-              animate={{
-                scale: [1.02, 1.1, 1.02],
-                objectPosition: ['50% 50%', '52% 48%', '50% 50%']
-              }}
-              transition={{
-                duration: 25,
-                ease: "easeInOut",
-                repeat: Infinity
-              }}
-            />
-          </div>
-
-          <motion.div 
+                    <motion.div 
             className="home-compact-section-head" 
             variants={SECTION_HEAD_VARIANTS}
             initial="hidden"
@@ -1077,124 +723,83 @@ export function HomePage() {
           >
             <p className="brand-kicker">料金プラン</p>
             <h2>あなたの制作スタイルに合わせた<span className="text-glow-gold">3つのプラン</span></h2>
-            <p style={{ maxWidth: '600px', margin: '0 auto' }}>まずは無料で始めて、必要に応じてアップグレード。<br/>すべてのプランで<strong className="text-glow-muted">基本機能をフル活用</strong>できます。</p>
+            <p style={{ maxWidth: '600px', margin: '0 auto', opacity: 0.7 }}>まずは無料で始めて、必要に応じてアップグレード。<br/>すべてのプランで基本機能をフル活用できます。</p>
           </motion.div>
 
-          <div style={{ position: 'relative', zIndex: 1, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', width: '100%', maxWidth: '1200px', margin: '0 auto' }}>
+          <div className="pricing-grid-container">
             {/* Free Plan */}
-            <InteractiveCard className="premium-pricing-card pricing-card--free">
-              <div className="premium-pricing-top">
-                <h3>Free</h3>
-                <div className="premium-pricing-price">
-                  <strong>¥0</strong>
-                  <span className="price-term">ずっと無料</span>
-                </div>
+            <div className="pc-card pc-card--free">
+              <div className="pc-plan-label">FREE</div>
+              <div className="pc-price-block">
+                <span className="pc-currency">¥</span>
+                <span className="pc-amount">0</span>
               </div>
-              <div className="premium-pricing-features" aria-label="搭載機能">
-                <div className="premium-pricing-feature-row active free">
-                  <span className="check-icon">✓</span>
-                  <span>自動動画編集</span>
-                </div>
-                <div className="premium-pricing-feature-row active free">
-                  <span className="check-icon">✓</span>
-                  <span>YMM4タイムライン出力</span>
-                </div>
-                <div className="premium-pricing-feature-row active free">
-                  <span className="check-icon">✓</span>
-                  <span>ローカル分析</span>
-                </div>
-                <div className="premium-pricing-feature-row active free">
-                  <span className="check-icon">✓</span>
-                  <span>内蔵操作ガイド</span>
-                </div>
-                <div className="premium-pricing-feature-row active free">
-                  <span className="check-icon">✓</span>
-                  <span>無償アップデート</span>
-                </div>
-                <div className="premium-pricing-feature-row inactive">
-                  <span className="check-icon"></span>
-                  <span>高度な台本取得・AI生成</span>
-                </div>
-              </div>
-              
-            </InteractiveCard>
+              <p className="pc-price-sub">ずっと無料</p>
+              <div className="pc-divider" />
+              <ul className="pc-features">
+                <li><span className="pc-check pc-check--on">✓</span>自動動画編集</li>
+                <li><span className="pc-check pc-check--on">✓</span>YMM4タイムライン出力</li>
+                <li><span className="pc-check pc-check--on">✓</span>ローカル分析</li>
+                <li><span className="pc-check pc-check--on">✓</span>内蔵操作ガイド</li>
+                <li><span className="pc-check pc-check--on">✓</span>無償アップデート</li>
+                <li className="pc-feature--off"><span className="pc-check pc-check--off">—</span>高度な台本取得・AI生成</li>
+                <li className="pc-feature--off"><span className="pc-check pc-check--off">—</span>高度なYMM4出力設定</li>
+                <li className="pc-feature--off"><span className="pc-check pc-check--off">—</span>複数サイト ネタ自動収集</li>
+                <li className="pc-feature--off"><span className="pc-check pc-check--off">—</span>API連携・高度な自動処理</li>
+                <li className="pc-feature--off"><span className="pc-check pc-check--off">—</span>優先専用サポート</li>
+              </ul>
+            </div>
 
             {/* Standard Plan */}
-            <InteractiveCard className="premium-pricing-card pricing-card--standard">
-              <div className="pricing-badge pricing-badge--gold">
-                個人クリエイター向け
+            <div className="pc-card pc-card--standard">
+              <div className="pc-badge pc-badge--gold">個人クリエイター向け</div>
+              <div className="pc-plan-label pc-plan-label--gold">STANDARD</div>
+              <div className="pc-price-block">
+                <span className="pc-currency pc-currency--gold">¥</span>
+                <span className="pc-amount pc-amount--gold">5,000</span>
               </div>
-              <div className="premium-pricing-top">
-                <h3>Standard</h3>
-                <div className="premium-pricing-price">
-                  <strong>¥5,000</strong>
-                  <span className="price-term">月額 /税込 5,500円</span>
-                </div>
-              </div>
-              <div className="premium-pricing-features" aria-label="搭載機能">
-                <div className="premium-pricing-feature-row active">
-                  <span className="check-icon" style={{ color: '#fff' }}>✓</span>
-                  <span>自動動画編集</span>
-                </div>
-                <div className="premium-pricing-feature-row active">
-                  <span className="check-icon" style={{ color: '#fff' }}>✓</span>
-                  <span>YMM4タイムライン出力</span>
-                </div>
-                <div className="premium-pricing-feature-row active">
-                  <span className="check-icon" style={{ color: '#fff' }}>✓</span>
-                  <span>ローカル分析</span>
-                </div>
-                <div className="premium-pricing-feature-row active">
-                  <span className="check-icon">✓</span>
-                  <strong style={{ color: '#e0c184' }}>高度な台本取得・AI生成</strong>
-                </div>
-                <div className="premium-pricing-feature-row active">
-                  <span className="check-icon">✓</span>
-                  <strong style={{ color: '#e0c184' }}>高度なYMM4出力設定</strong>
-                </div>
-                <div className="premium-pricing-feature-row active">
-                  <span className="check-icon" style={{ color: '#fff' }}>✓</span>
-                  <span>無償アップデート</span>
-                </div>
-                <div className="premium-pricing-feature-row inactive">
-                  <span className="check-icon"></span>
-                  <span>優先専用サポート</span>
-                </div>
-              </div>
-              
-            </InteractiveCard>
+              <p className="pc-price-sub">月額 / 税込 5,500円</p>
+              <div className="pc-divider pc-divider--gold" />
+              <ul className="pc-features">
+                <li><span className="pc-check pc-check--on">✓</span>自動動画編集</li>
+                <li><span className="pc-check pc-check--on">✓</span>YMM4タイムライン出力</li>
+                <li><span className="pc-check pc-check--on">✓</span>ローカル分析</li>
+                <li><span className="pc-check pc-check--on">✓</span>内蔵操作ガイド</li>
+                <li><span className="pc-check pc-check--on">✓</span>無償アップデート</li>
+                <li><span className="pc-check pc-check--gold">✦</span><strong className="pc-feat--gold">高度な台本取得・AI生成</strong></li>
+                <li><span className="pc-check pc-check--gold">✦</span><strong className="pc-feat--gold">高度なYMM4出力設定</strong></li>
+                <li className="pc-feature--off"><span className="pc-check pc-check--off">—</span>複数サイト ネタ自動収集</li>
+                <li className="pc-feature--off"><span className="pc-check pc-check--off">—</span>API連携・高度な自動処理</li>
+                <li className="pc-feature--off"><span className="pc-check pc-check--off">—</span>優先専用サポート</li>
+              </ul>
+            </div>
 
             {/* Pro Plan */}
-            <InteractiveCard className="premium-pricing-card pricing-card--pro">
-              <div className="pricing-badge pricing-badge--platinum">
-                ✦ THE ULTIMATE / 圧倒的おすすめ
+            <div className="pc-card pc-card--pro">
+              <div className="pc-badge pc-badge--pro">✦ 圧倒的おすすめ</div>
+              <div className="pc-plan-label pc-plan-label--pro">PRO</div>
+              <div className="pc-price-block">
+                <span className="pc-currency pc-currency--pro">¥</span>
+                <span className="pc-amount pc-amount--pro">10,000</span>
               </div>
-              <div className="premium-pricing-top">
-                <h3>Pro</h3>
-                <div className="premium-pricing-price">
-                  <strong>¥10,000</strong>
-                  <span className="price-term">月額 /税込 11,000円</span>
-                </div>
-              </div>
-              <div className="premium-pricing-features" aria-label="搭載機能">
-                <div className="premium-pricing-feature-row active">
-                  <span className="check-icon" style={{ color: '#fff' }}>✓</span>
-                  <span>Standard版の全機能</span>
-                </div>
-                <div className="premium-pricing-feature-row active">
-                  <span className="check-icon">✓</span>
-                  <strong style={{ color: '#e0c184' }}>複数サイトからのネタ自動収集</strong>
-                </div>
-                <div className="premium-pricing-feature-row active">
-                  <span className="check-icon">✓</span>
-                  <strong style={{ color: '#e0c184' }}>API連携・高度な自動処理</strong>
-                </div>
-                <div className="premium-pricing-feature-row active">
-                  <span className="check-icon">✓</span>
-                  <strong style={{ color: '#e0c184' }}>優先専用サポート</strong>
-                </div>
-              </div>
-            </InteractiveCard>
+              <p className="pc-price-sub">月額 / 税込 11,000円</p>
+              <div className="pc-divider pc-divider--pro" />
+              <ul className="pc-features">
+                <li><span className="pc-check pc-check--on">✓</span>自動動画編集</li>
+                <li><span className="pc-check pc-check--on">✓</span>YMM4タイムライン出力</li>
+                <li><span className="pc-check pc-check--on">✓</span>ローカル分析</li>
+                <li><span className="pc-check pc-check--on">✓</span>内蔵操作ガイド</li>
+                <li><span className="pc-check pc-check--on">✓</span>無償アップデート</li>
+                <li><span className="pc-check pc-check--gold">✦</span><strong className="pc-feat--gold">高度な台本取得・AI生成</strong></li>
+                <li><span className="pc-check pc-check--gold">✦</span><strong className="pc-feat--gold">高度なYMM4出力設定</strong></li>
+                <li><span className="pc-check pc-check--pro">◆</span><strong className="pc-feat--pro">複数サイト ネタ自動収集</strong></li>
+                <li><span className="pc-check pc-check--pro">◆</span><strong className="pc-feat--pro">API連携・高度な自動処理</strong></li>
+                <li><span className="pc-check pc-check--pro">◆</span><strong className="pc-feat--pro">優先専用サポート</strong></li>
+              </ul>
+              <div className="pc-pro-glow" />
+            </div>
+          </div>
+
           </div>
 
           {/* Trust Badges */}

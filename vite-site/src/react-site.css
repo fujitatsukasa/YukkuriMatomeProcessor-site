@@ -11034,3 +11034,217 @@ html {
   animation: textGlowPulseExtreme 2s ease-in-out infinite alternate !important;
   display: inline-block;
 }
+
+/* ================================================================
+   PRICING CARDS v3 窶・螳悟・譁ｰ隕・繧ｯ繝ｪ繝ｼ繝ｳ螳溯｣・   ================================================================ */
+
+.pricing-grid-container {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+/* === 繝吶・繧ｹ繧ｫ繝ｼ繝・=== */
+.pc-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 2.5rem 2rem 2rem;
+  border-radius: 20px;
+  background: rgba(12, 12, 18, 0.6);
+  border: 1px solid rgba(255,255,255,0.07);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  overflow: visible;
+  transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s ease;
+}
+.pc-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px rgba(0,0,0,0.4);
+}
+
+/* === Standard 繧ｫ繝ｼ繝・=== */
+.pc-card--standard {
+  background: rgba(18, 16, 10, 0.7);
+  border: 1px solid rgba(224,193,132,0.15);
+  box-shadow: 0 0 30px -10px rgba(224,193,132,0.15);
+}
+.pc-card--standard:hover {
+  border-color: rgba(224,193,132,0.3);
+  box-shadow: 0 24px 60px -10px rgba(224,193,132,0.25);
+}
+
+/* === Pro繧ｫ繝ｼ繝・=== */
+.pc-card--pro {
+  background: linear-gradient(160deg, rgba(15,12,28,0.95) 0%, rgba(10,8,20,0.98) 100%);
+  border: 1px solid rgba(162,178,255,0.2);
+  box-shadow: 0 0 60px -15px rgba(162,178,255,0.3), inset 0 0 20px rgba(162,178,255,0.04);
+}
+.pc-card--pro:hover {
+  border-color: rgba(162,178,255,0.4);
+  box-shadow: 0 30px 80px -15px rgba(162,178,255,0.4), inset 0 0 30px rgba(162,178,255,0.08);
+}
+
+/* === 繝舌ャ繧ｸ === */
+.pc-badge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 4px 14px;
+  border-radius: 100px;
+}
+.pc-badge--gold {
+  background: linear-gradient(90deg, #b8933a, #e0c184, #b8933a);
+  color: #1a1200;
+}
+.pc-badge--pro {
+  background: linear-gradient(90deg, #4a3fa0, #a2b2ff, #4a3fa0);
+  color: #fff;
+  box-shadow: 0 0 20px rgba(162,178,255,0.5);
+  animation: badgePulse 2.5s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+  0%, 100% { box-shadow: 0 0 12px rgba(162,178,255,0.4); }
+  50%       { box-shadow: 0 0 28px rgba(162,178,255,0.8); }
+}
+
+/* === 繝励Λ繝ｳ蜷・=== */
+.pc-plan-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+}
+.pc-plan-label--gold { color: rgba(224,193,132,0.7); }
+.pc-plan-label--pro  { color: rgba(162,178,255,0.7); }
+
+/* === 驥鷹｡阪ヶ繝ｭ繝・け === */
+.pc-price-block {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  line-height: 1;
+}
+.pc-currency {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.5);
+  margin-right: 2px;
+}
+.pc-currency--gold { color: rgba(224,193,132,0.7); }
+.pc-currency--pro  { color: rgba(162,178,255,0.7); }
+
+.pc-amount {
+  font-size: 3.5rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #fff;
+  font-feature-settings: "tnum";
+}
+.pc-amount--gold { color: #e0c184; }
+.pc-amount--pro {
+  background: linear-gradient(135deg, #c0ccff, #fff, #a2b2ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: priceGlow 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes priceGlow {
+  from { filter: drop-shadow(0 0 6px rgba(162,178,255,0.3)); }
+  to   { filter: drop-shadow(0 0 20px rgba(162,178,255,0.8)); }
+}
+
+.pc-price-sub {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.35);
+  margin: 0.4rem 0 0;
+}
+
+/* === 蛹ｺ蛻・ｊ邱・=== */
+.pc-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.06);
+  margin: 1.5rem 0;
+}
+.pc-divider--gold { background: rgba(224,193,132,0.15); }
+.pc-divider--pro  { background: rgba(162,178,255,0.15); }
+
+/* === 讖溯・繝ｪ繧ｹ繝・=== */
+.pc-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.pc-features li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.8);
+  padding: 5px 4px;
+  border-radius: 6px;
+  transition: background 0.2s, transform 0.25s cubic-bezier(0.16,1,0.3,1), color 0.2s;
+  cursor: default;
+}
+.pc-features li:hover {
+  background: rgba(255,255,255,0.05);
+  transform: translateX(8px);
+  color: #fff;
+}
+.pc-feature--off {
+  color: rgba(255,255,255,0.22) !important;
+}
+.pc-feature--off:hover {
+  transform: none !important;
+  background: transparent !important;
+  color: rgba(255,255,255,0.22) !important;
+}
+
+/* === 繝√ぉ繝・け繧｢繧､繧ｳ繝ｳ === */
+.pc-check {
+  flex-shrink: 0;
+  width: 18px;
+  text-align: center;
+  font-size: 0.8rem;
+  transition: transform 0.3s;
+}
+.pc-features li:hover .pc-check { transform: scale(1.25); }
+.pc-check--on   { color: rgba(255,255,255,0.45); }
+.pc-check--off  { color: rgba(255,255,255,0.12); font-size: 0.65rem; }
+.pc-check--gold { color: #e0c184; }
+.pc-check--pro  { color: #a2b2ff; }
+
+/* === 蠑ｷ隱ｿ繝・く繧ｹ繝・=== */
+.pc-feat--gold { color: #e0c184 !important; font-weight: 600; }
+.pc-feat--pro  { color: #a2b2ff !important; font-weight: 600; }
+
+/* === Pro 縺ｮ繧ｰ繝ｭ繝ｼ蠎募・ === */
+.pc-pro-glow {
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 80px;
+  background: radial-gradient(ellipse, rgba(162,178,255,0.2) 0%, transparent 70%);
+  pointer-events: none;
+  border-radius: 50%;
+}
