@@ -1188,9 +1188,6 @@ export function HomePage() {
                   <strong style={{ color: '#e0c184' }}>優先専用サポート</strong>
                 </div>
               </div>
-              <div className="premium-pricing-cta pro-cta">
-                Proプランで最速自動化 <span>&rarr;</span>
-              </div>
             </InteractiveCard>
           </div>
 
