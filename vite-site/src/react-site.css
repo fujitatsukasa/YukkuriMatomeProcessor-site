@@ -10690,29 +10690,22 @@ html {
   display: flex !important;
   flex-direction: column !important;
   justify-content: space-between !important;
-  height: 100% !important; /* Ensure all cards are same height and stretched to grid row */
+  height: 100% !important;
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
   overflow: visible !important;
   z-index: 1;
   background: rgba(15, 15, 20, 0.6) !important;
 }
 
-/* Ensure any inner wrappers created by InteractiveCard transparently pass flex state */
-.premium-pricing-card > * {
-  flex-shrink: 0;
-}
-.premium-pricing-features {
-  flex-grow: 1 !important; /* Allows features to fill space, pushing CTA down */
-}
+.premium-pricing-card > * { flex-shrink: 0; }
+.premium-pricing-features { flex-grow: 1 !important; }
 
-/* ホバー時の浮き上がり共通 */
 .premium-pricing-card:hover {
-  transform: translateY(-8px) scale(1.02);
+  transform: translateY(0px) scale(1.02) !important;
   z-index: 10 !important;
 }
 
-/* ━━━ [ PRO PLAN - THE ULTIMATE FOCUS ] ━━━ */
-/* PRO PLAN SUPER GLOW ANIMATION */
+/* ━━━ [ PRO PLAN SUPER GLOW ANIMATION ] ━━━ */
 @keyframes animatedGradient {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -10722,7 +10715,7 @@ html {
 .pricing-card--pro {
   z-index: 5 !important;
   transform: scale(1.05);
-  transform-origin: bottom center !important; /* Bottom-align fix */
+  transform-origin: bottom center !important;
   border: 2px solid transparent !important;
   border-radius: 20px !important;
   background: 
@@ -10734,15 +10727,11 @@ html {
 }
 
 .pricing-card--pro:hover {
-  transform: translateY(-8px) scale(1.08) !important;
+  transform: translateY(0px) scale(1.08) !important;
+  transform-origin: bottom center !important;
   box-shadow: 0 0 80px rgba(162, 178, 255, 0.3) !important;
 }
 
-50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Proの中身の装飾 */
 .pricing-card--pro .premium-pricing-top {
   border-bottom: 1px solid rgba(162, 178, 255, 0.2);
 }
@@ -10765,10 +10754,10 @@ html {
   box-shadow: 0 0 10px rgba(162, 178, 255, 0.4);
 }
 
-
-/* ━━━ [ STANDARD PLAN - 控えめに ] ━━━ */
+/* ━━━ [ STANDARD PLAN ] ━━━ */
 .pricing-card--standard {
   transform: scale(1);
+  transform-origin: bottom center !important;
   border: 1px solid rgba(210, 157, 56, 0.3) !important;
   border-top: 2px solid #D29D38 !important;
 }
@@ -10782,9 +10771,10 @@ html {
   border-color: rgba(210, 157, 56, 0.3) !important;
 }
 
-
-/* ━━━ [ FREE PLAN - さらに空気のように ] ━━━ */
+/* ━━━ [ FREE PLAN ] ━━━ */
 .pricing-card--free {
+  transform: scale(1);
+  transform-origin: bottom center !important;
   border: 1px dashed rgba(255, 255, 255, 0.1) !important;
   opacity: 0.8;
 }
@@ -10796,7 +10786,6 @@ html {
   color: #ccc !important;
   border: none !important;
 }
-
 
 /* ━━━ [ BADGES ] ━━━ */
 .pricing-badge {
@@ -10814,7 +10803,6 @@ html {
   transition: all 0.3s ease;
 }
 
-/* Pro Badge - 圧倒的光沢 */
 .pricing-badge--platinum {
   background: linear-gradient(135deg, #ffffff, #BCC6FF, #E78AFF) !important;
   color: #111 !important;
@@ -10827,7 +10815,6 @@ html {
   100% { transform: translateX(-50%) scale(1.05); box-shadow: 0 0 40px rgba(162, 178, 255, 0.8); }
 }
 
-/* Standard Badge - おとなしく */
 .pricing-badge--gold {
   background: #2a2212 !important;
   color: #FFDF91 !important;
@@ -10903,68 +10890,38 @@ html {
   font-weight: bold !important;
   transition: all 0.3s ease;
 }
-
-/* Inactive */
-.premium-pricing-feature-row.inactive {
-  opacity: 0.2 !important;
-}
-.premium-pricing-feature-row.inactive .check-icon {
-  border: 1px dashed rgba(255, 255, 255, 0.2) !important;
-}
-
-@media (min-width: 1024px) {
-  /* Only Pro scales up on desktop */
-  .pricing-card--pro {
-    transform: scale(1.08) !important;
-    transform-origin: bottom center !important;
-  }
-  .pricing-card--pro:hover {
-    transform: translateY(0px) scale(1.12) !important;
-    transform-origin: bottom center !important;
-  }
-}
-
+.premium-pricing-feature-row.inactive { opacity: 0.2 !important; }
+.premium-pricing-feature-row.inactive .check-icon { border: 1px dashed rgba(255, 255, 255, 0.2) !important; }
 
 /* ━━━ [ MICRO CTAs ] ━━━ */
 .premium-pricing-cta {
-  margin-top: auto;
-  padding-top: 2rem;
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  color: rgba(255, 255, 255, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  margin-top: auto !important;
+  padding-top: 2rem !important;
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em !important;
+  color: rgba(255, 255, 255, 0.4) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
 }
-
-.premium-pricing-cta span {
-  font-size: 1.2rem;
-  transition: transform 0.3s ease;
-}
-
-.premium-pricing-card:hover .premium-pricing-cta {
-  color: #fff;
-}
-.premium-pricing-card:hover .premium-pricing-cta span {
-  transform: translateX(8px);
-}
-
+.premium-pricing-cta span { font-size: 1.2rem !important; transition: transform 0.3s ease; }
+.premium-pricing-card:hover .premium-pricing-cta { color: #fff !important; }
+.premium-pricing-card:hover .premium-pricing-cta span { transform: translateX(8px); }
 .pricing-card--pro .pro-cta {
   color: rgba(162, 178, 255, 0.8) !important;
-  border-top: 1px solid rgba(162, 178, 255, 0.2);
+  border-top: 1px solid rgba(162, 178, 255, 0.2) !important;
 }
-.pricing-card--pro:hover .pro-cta {
-  color: #E78AFF !important;
-  text-shadow: 0 0 10px rgba(231, 138, 255, 0.5);
-}
+.pricing-card--pro:hover .pro-cta { color: #E78AFF !important; text-shadow: 0 0 10px rgba(231, 138, 255, 0.5) !important; }
 
-.pricing-card--free, .pricing-card--standard {
-  transform-origin: bottom center !important;
-}
-.premium-pricing-card:hover {
-  transform: translateY(0px) scale(1.02) !important;
+@media (min-width: 1024px) {
+  .pricing-card--pro {
+    transform: scale(1.08) !important;
+  }
+  .pricing-card--pro:hover {
+    transform: translateY(0px) scale(1.12) !important;
+  }
 }
