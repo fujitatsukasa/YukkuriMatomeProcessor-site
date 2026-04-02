@@ -556,7 +556,7 @@ export function HomePage() {
                   border: '1px solid rgba(224, 193, 132, 0.4)',
                   borderRadius: '28px',
                   boxShadow: '0 30px 60px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(255,255,255,0.08)',
-                  overflow: 'hidden',
+                  overflow: 'visible',
                   height: 'clamp(550px, 65vh, 700px)' /* Absolute fixed height to prevent jumps */
                 }}
               >
@@ -601,7 +601,7 @@ export function HomePage() {
                 </div>
 
                 {/* Right: Floating UI Window Showcase Area */}
-                <div style={{ flex: '1.5 1 500px', position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ flex: '1.5 1 500px', position: 'relative', overflow: 'visible', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <AnimatePresence mode="wait">
                     <motion.div 
                       key={`slide-${activeSlide}`}
@@ -611,7 +611,7 @@ export function HomePage() {
                       transition={{ duration: 0.6, type: 'spring', bounce: 0.2 }}
                       style={{ position: 'absolute', inset: '1.5rem 1.5rem 3.5rem 1.5rem', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
                     >
-                    <div style={{ position: 'relative', width: '100%', height: '100%', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 20px 50px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(255,255,255,0.08)' }}>
+                    <div style={{ position: 'relative', width: '100%', height: '100%', borderRadius: '16px', overflow: 'visible', boxShadow: '0 20px 50px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(255,255,255,0.08)' }}>
                       {presentationSlides[activeSlide]?.images?.map((imgSrc, imgIndex) => {
                         return (
                           <motion.div 
@@ -900,7 +900,7 @@ export function HomePage() {
                     borderRadius: '24px',
                     border: `1px solid ${item.iconColor}80`,
                     background: 'rgba(32,30,36,0.95)',
-                    position: 'relative', overflow: 'hidden',
+                    position: 'relative', overflow: 'visible',
                     transition: 'border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease',
                     cursor: 'default',
                   }}
@@ -914,7 +914,7 @@ export function HomePage() {
                   }}
                 >
                   {/* Top: Video Demo Placeholder */}
-                  <div style={{ width: '100%', height: 'clamp(140px, 20vh, 180px)', position: 'relative', background: '#000', overflow: 'hidden', flexShrink: 0 }}>
+                  <div style={{ width: '100%', height: 'clamp(140px, 20vh, 180px)', position: 'relative', background: '#000', overflow: 'visible', flexShrink: 0 }}>
                     <video
                       src="https://www.w3schools.com/html/mov_bbb.mp4"
                       autoPlay
@@ -989,7 +989,7 @@ export function HomePage() {
           </motion.div>
 
           {/* Horizontal Scroll Carousel */}
-          <div className="testimonials-carousel" style={{ position: 'relative', zIndex: 1, width: '100%', overflow: 'hidden', padding: '1rem 0 2rem' }}>
+          <div className="testimonials-carousel" style={{ position: 'relative', zIndex: 1, width: '100%', overflow: 'visible', padding: '1rem 0 2rem' }}>
             <button onClick={() => scrollTestimonials('left')} className="carousel-nav-btn carousel-nav-btn--left" aria-label="左にスクロール">←</button>
             <button onClick={() => scrollTestimonials('right')} className="carousel-nav-btn carousel-nav-btn--right" aria-label="右にスクロール">→</button>
 

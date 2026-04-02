@@ -10676,112 +10676,43 @@ html {
 
 
 /* ════════════════════════════════════════════════════════
-   ABSOLUTE PREMIUM SAAS PRICING (PRO-FOCUSED + ANIMATIONS)
+   THE ULTIMATE SAAS PREMIUM PRICING (FRAMER + CSS GLOWS)
    ════════════════════════════════════════════════════════ */
 
-.home-compact-price-section {
-  position: relative;
-}
-
-.premium-pricing-card {
-  position: relative;
-  padding: 3rem 2.5rem !important;
-  border-radius: 20px !important;
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: space-between !important;
-  height: 100% !important;
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  overflow: visible !important;
-  z-index: 1;
-  background: rgba(15, 15, 20, 0.6) !important;
-}
-
-.premium-pricing-card > * { flex-shrink: 0; }
-.premium-pricing-features { flex-grow: 1 !important; }
-
-.premium-pricing-card:hover {
-  transform: translateY(0px) scale(1.02) !important;
-  z-index: 10 !important;
-}
-
-/* ━━━ [ PRO PLAN SUPER GLOW ANIMATION ] ━━━ */
-@keyframes animatedGradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-.pricing-card--pro {
-  z-index: 5 !important;
-  transform: scale(1) !important;
-  margin-top: -20px !important; /* Physically taller */
-  padding-top: 4.5rem !important; /* Extra padding inside */
-  transform-origin: bottom center !important;
-  border: 2px solid transparent !important;
-  border-radius: 20px !important;
-  background: 
-    linear-gradient(180deg, rgba(20, 20, 25, 0.95) 0%, rgba(10, 10, 15, 0.95) 100%) padding-box,
-    linear-gradient(45deg, #FFDF91, #D29D38, #ffffff, #8A9CFF, #E78AFF, #FFDF91) border-box !important;
-  background-size: 100% 100%, 300% 300% !important;
-  animation: animatedGradient 5s ease infinite alternate !important;
-  box-shadow: 0 0 40px rgba(162, 178, 255, 0.2), inset 0 0 20px rgba(255, 255, 255, 0.05) !important;
-}
-
-.pricing-card--pro:hover {
-  transform: translateY(0px) scale(1.08) !important;
-  transform-origin: bottom center !important;
-  box-shadow: 0 0 80px rgba(162, 178, 255, 0.3) !important;
-}
-
 .pricing-card--pro .premium-pricing-top {
-  border-bottom: 1px solid rgba(162, 178, 255, 0.2);
+  border-bottom: 1px solid rgba(162, 178, 255, 0.15);
 }
 .pricing-card--pro h3 { 
   color: #fff !important;
-  letter-spacing: 0.3em !important;
-  text-shadow: 0 0 15px rgba(255,255,255,0.4);
+  letter-spacing: 0.35em !important;
+  text-shadow: 0 0 15px rgba(255,255,255,0.8);
 }
 .pricing-card--pro .premium-pricing-price strong {
-  background: linear-gradient(135deg, #FFFFFF 0%, #BCC6FF 50%, #E78AFF 100%) !important;
+  background: linear-gradient(135deg, #FFFFFF 0%, #E8EBFF 40%, #BCC6FF 60%, #E78AFF 100%) !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
   color: transparent !important;
-  text-shadow: 0 0 40px rgba(162, 178, 255, 0.3) !important;
+  text-shadow: 0 0 35px rgba(162, 178, 255, 0.4) !important;
 }
 .pricing-card--pro .premium-pricing-feature-row.active .check-icon {
-  background: rgba(162, 178, 255, 0.2) !important;
+  background: rgba(162, 178, 255, 0.15) !important;
   color: #BCC6FF !important;
-  border-color: rgba(162, 178, 255, 0.5) !important;
-  box-shadow: 0 0 10px rgba(162, 178, 255, 0.4);
+  border-color: rgba(162, 178, 255, 0.4) !important;
+  box-shadow: 0 0 15px rgba(162, 178, 255, 0.3);
 }
 
-/* ━━━ [ STANDARD PLAN ] ━━━ */
 .pricing-card--standard {
-  transform: scale(1);
-  transform-origin: bottom center !important;
-  border: 1px solid rgba(210, 157, 56, 0.3) !important;
   border-top: 2px solid #D29D38 !important;
 }
-.pricing-card--standard h3 { color: #D29D38 !important; }
-.pricing-card--standard .premium-pricing-price strong {
-  color: #FFDF91 !important;
-}
+.pricing-card--standard h3 { color: #D29D38 !important; letter-spacing: 0.25rem; font-weight: 800; font-size: 0.9rem;}
+.pricing-card--standard .premium-pricing-price strong { color: #FFDF91 !important; }
 .pricing-card--standard .premium-pricing-feature-row.active .check-icon {
   background: rgba(210, 157, 56, 0.1) !important;
   color: #D29D38 !important;
   border-color: rgba(210, 157, 56, 0.3) !important;
 }
 
-/* ━━━ [ FREE PLAN ] ━━━ */
-.pricing-card--free {
-  transform: scale(1);
-  transform-origin: bottom center !important;
-  border: 1px dashed rgba(255, 255, 255, 0.1) !important;
-  opacity: 0.8;
-}
-.pricing-card--free:hover { opacity: 1; border-style: solid !important; }
-.pricing-card--free h3 { color: #9CA3AF !important; }
+.pricing-card--free h3 { color: #9CA3AF !important; letter-spacing: 0.25rem; font-weight: 800; font-size: 0.9rem;}
 .pricing-card--free .premium-pricing-price strong { color: #E5E7EB !important; }
 .pricing-card--free .premium-pricing-feature-row.active .check-icon {
   background: rgba(255, 255, 255, 0.05) !important;
@@ -10789,7 +10720,7 @@ html {
   border: none !important;
 }
 
-/* ━━━ [ BADGES ] ━━━ */
+/* ━━━ [ BADGES: No compromise on typography and glow ] ━━━ */
 .pricing-badge {
   position: absolute !important;
   top: -16px !important; 
@@ -10802,21 +10733,14 @@ html {
   letter-spacing: 0.05em !important;
   white-space: nowrap !important;
   z-index: 10 !important;
-  transition: all 0.3s ease;
 }
 
 .pricing-badge--platinum {
-  background: linear-gradient(135deg, #ffffff, #BCC6FF, #E78AFF) !important;
+  background: linear-gradient(135deg, #ffffff, #E8EBFF, #E78AFF) !important;
   color: #111 !important;
-  box-shadow: 0 0 30px rgba(162, 178, 255, 0.6), 0 4px 15px rgba(0,0,0,0.8) !important;
+  box-shadow: 0 0 40px rgba(162, 178, 255, 0.8), 0 4px 15px rgba(0,0,0,0.8), inset 0 0 10px rgba(255,255,255,0.9) !important;
   border: none !important;
-  animation: badgePulse 2s infinite alternate;
 }
-@keyframes badgePulse {
-  0% { transform: translateX(-50%) scale(1); box-shadow: 0 0 20px rgba(162, 178, 255, 0.4); }
-  100% { transform: translateX(-50%) scale(1.05); box-shadow: 0 0 40px rgba(162, 178, 255, 0.8); }
-}
-
 .pricing-badge--gold {
   background: #2a2212 !important;
   color: #FFDF91 !important;
@@ -10824,19 +10748,15 @@ html {
   box-shadow: 0 4px 15px rgba(0,0,0,0.5) !important;
 }
 
-/* Shared Top / Rows */
+/* ━━━ [ Shared Typography ] ━━━ */
 .premium-pricing-top {
   text-align: center;
   padding-bottom: 2.5rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   margin-bottom: 2.5rem;
-  transition: all 0.3s ease;
 }
 .premium-pricing-top h3 {
-  font-size: 0.9rem !important;
-  letter-spacing: 0.25rem !important;
   text-transform: uppercase !important;
-  font-weight: 800 !important;
   margin-bottom: 1.5rem !important;
   font-family: 'Inter', -apple-system, sans-serif !important;
 }
@@ -10860,11 +10780,7 @@ html {
   letter-spacing: 0.02em !important;
 }
 
-.premium-pricing-features {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 1.25rem !important;
-}
+/* ━━━ [ Lists & Micro CTAs ] ━━━ */
 .premium-pricing-feature-row {
   display: flex !important;
   align-items: flex-start !important;
@@ -10874,28 +10790,27 @@ html {
   font-size: 0.95rem !important;
   color: rgba(255, 255, 255, 0.85) !important;
   transition: transform 0.2s ease;
+  padding-bottom: 1rem !important;
 }
-.premium-pricing-feature-row:hover {
+.group:hover .premium-pricing-feature-row {
   transform: translateX(4px);
 }
 .premium-pricing-feature-row .check-icon {
   flex-shrink: 0 !important;
-  width: 22px !important;
-  height: 22px !important;
+  width: 20px !important;
+  height: 20px !important;
   border-radius: 50% !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  font-size: 0.75rem !important;
-  margin-top: 2px !important;
+  font-size: 0.7rem !important;
+  margin-top: 3px !important;
   font-weight: bold !important;
-  transition: all 0.3s ease;
 }
 .premium-pricing-feature-row.inactive { opacity: 0.2 !important; }
 .premium-pricing-feature-row.inactive .check-icon { border: 1px dashed rgba(255, 255, 255, 0.2) !important; }
 
-/* ━━━ [ MICRO CTAs ] ━━━ */
 .premium-pricing-cta {
   margin-top: auto !important;
   padding-top: 2rem !important;
@@ -10906,24 +10821,22 @@ html {
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
-  cursor: pointer !important;
   transition: all 0.3s ease !important;
   border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
 }
 .premium-pricing-cta span { font-size: 1.2rem !important; transition: transform 0.3s ease; }
-.premium-pricing-card:hover .premium-pricing-cta { color: #fff !important; }
-.premium-pricing-card:hover .premium-pricing-cta span { transform: translateX(8px); }
+.group:hover .premium-pricing-cta { color: #fff !important; }
+.group:hover .premium-pricing-cta span { transform: translateX(8px); }
+
 .pricing-card--pro .pro-cta {
   color: rgba(162, 178, 255, 0.8) !important;
   border-top: 1px solid rgba(162, 178, 255, 0.2) !important;
 }
-.pricing-card--pro:hover .pro-cta { color: #E78AFF !important; text-shadow: 0 0 10px rgba(231, 138, 255, 0.5) !important; }
+.pricing-card--pro.group:hover .pro-cta { color: #E78AFF !important; text-shadow: 0 0 10px rgba(231, 138, 255, 0.5) !important; }
 
+/* Desktop hover fix for Framer Motion interference */
 @media (min-width: 1024px) {
   .pricing-card--pro {
-    transform: scale(1) !important;
-  }
-  .pricing-card--pro:hover {
-    transform: translateY(-8px) scale(1.02) !important; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    transform-origin: bottom center;
   }
 }
