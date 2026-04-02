@@ -10928,3 +10928,33 @@ html {
 .premium-pricing-card { overflow: visible !important; }
 .premium-pricing-card > * { overflow: visible !important; }
 .interactive-card, .interactive-card > div { overflow: visible !important; }
+
+
+
+/* -------------------------------------------------------------
+   UX POLISH: PERFECT LEFT ALIGNMENT FOR CHECKLIST
+   ------------------------------------------------------------- */
+.premium-pricing-features {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important; /* 絶対に左寄せ */
+  width: 100% !important;
+  padding-left: 10% !important; /* カード内で中央に見えつつ、左端のX座標はピタッと揃える */
+  box-sizing: border-box !important;
+}
+
+.premium-pricing-feature-row {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  width: 100% !important;
+  text-align: left !important;
+}
+
+/* アイコンとテキストの間隔も一定にする */
+.premium-pricing-feature-row .check-icon {
+  margin-right: 12px !important;
+  flex-shrink: 0 !important;
+  width: 20px !important;
+  text-align: center !important;
+}
