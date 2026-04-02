@@ -1134,7 +1134,15 @@ export function HomePage() {
               <div className="premium-pricing-features" aria-label="搭載機能">
                 <div className="premium-pricing-feature-row active">
                   <span className="check-icon" style={{ color: '#fff' }}>✓</span>
-                  <span>自動動画編集・YMM4出力・ローカル分析</span>
+                  <span>自動動画編集</span>
+                </div>
+                <div className="premium-pricing-feature-row active">
+                  <span className="check-icon" style={{ color: '#fff' }}>✓</span>
+                  <span>YMM4タイムライン出力</span>
+                </div>
+                <div className="premium-pricing-feature-row active">
+                  <span className="check-icon" style={{ color: '#fff' }}>✓</span>
+                  <span>ローカル分析</span>
                 </div>
                 <div className="premium-pricing-feature-row active">
                   <span className="check-icon">✓</span>
