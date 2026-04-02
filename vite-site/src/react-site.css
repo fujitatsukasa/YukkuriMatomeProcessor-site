@@ -9952,7 +9952,7 @@ html {
 .page-hero {
   position: relative;
   overflow: hidden;
-  padding: clamp(5rem, 12vh, 8rem) 0 clamp(3rem, 6vh, 5rem);
+  padding: clamp(2rem, 4vh, 3rem) 0 clamp(1.2rem, 2vh, 2rem);
 }
 
 .page-hero__backdrop {
@@ -9971,16 +9971,30 @@ html {
   z-index: 1;
 }
 
+.page-hero .page-intro__content {
+  gap: 0.3rem;
+}
+
 .page-hero .page-intro__content h1 {
   background: linear-gradient(135deg, #ffffff 0%, #f0d89a 40%, #c9a862 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  margin: 0;
+}
+
+.page-hero .brand-lead {
+  font-size: 0.95rem;
+  margin: 0;
+  opacity: 0.7;
 }
 
 .page-hero .brand-kicker {
   color: #e0c184;
   font-weight: 700;
+  font-size: 0.75rem;
+  margin-bottom: 0.2rem;
 }
 
 .page-hero .section-glow-divider {
