@@ -10958,3 +10958,38 @@ html {
   width: 20px !important;
   text-align: center !important;
 }
+
+
+
+/* -------------------------------------------------------------
+   UX POLISH: PERFECT Y-AXIS ALIGNMENT & TIGHT CLEARANCE
+   ------------------------------------------------------------- */
+/* 1. 価格ブロックの高さを強制的に統一し、チェックマークの開始位置(Y軸)を全プランで揃える */
+.premium-pricing-top {
+  min-height: 120px !important; /* 全プランの価格部分の高さをこれでロック */
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  margin-bottom: 2rem !important; /* 価格ブロックからチェックリストまでの固定距離 */
+}
+
+/* 2. カード内部は「上からの」順次レイアウトにし、下の余白で高さを吸収する */
+.premium-pricing-card {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important; /* space-between をやめて上揃えにする */
+}
+
+/* 3. チェックリストのコンテナは上揃えでパツパツに詰める */
+.premium-pricing-features {
+  margin-bottom: auto !important; /* 余った空間（高さ）をここで吸収し、ボタン等があれば下に押しやる。今回はボタンは無いのでこれでOK */
+  gap: 0.2rem !important; /* 隙間を極限まで縮小 */
+}
+
+/* 4. チェックリスト各行の上下のパディング・マージンも完全に排除（クリアランス最小化） */
+.premium-pricing-feature-row {
+  padding-top: 0.25rem !important;
+  padding-bottom: 0.25rem !important;
+  margin: 0 !important;
+  min-height: 32px !important; /* 行の高さを細く固定 */
+}
