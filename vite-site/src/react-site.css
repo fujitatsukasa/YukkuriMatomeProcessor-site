@@ -10840,3 +10840,47 @@ html {
     transform-origin: bottom center;
   }
 }
+
+
+
+/* -------------------------------------------------------------
+   THE ULTIMATE SAAS PRICING CARD - CORE STYLES (RE-ESTABLISHED)
+   ------------------------------------------------------------- */
+.premium-pricing-card {
+  position: relative;
+  padding: 3rem 2.5rem !important;
+  border-radius: 24px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  height: 100% !important;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  background: rgba(15, 15, 20, 0.4) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(40px) !important;
+  -webkit-backdrop-filter: blur(40px) !important;
+  cursor: pointer !important;
+}
+
+.premium-pricing-card:hover {
+  transform: translateY(-8px) scale(1.02) !important;
+  background: rgba(20, 20, 25, 0.6) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4) !important;
+}
+
+.pricing-card--pro {
+  background: linear-gradient(180deg, rgba(15, 12, 20, 0.8), rgba(10, 8, 15, 0.9)) !important;
+  border: 1px solid rgba(162, 178, 255, 0.15) !important;
+  box-shadow: 0 40px 80px -20px rgba(162, 178, 255, 0.25), inset 0 0 20px rgba(162, 178, 255, 0.05) !important;
+  z-index: 5 !important;
+}
+
+.pricing-card--pro:hover {
+  border-color: rgba(162, 178, 255, 0.3) !important;
+  box-shadow: 0 50px 100px -20px rgba(162, 178, 255, 0.4), inset 0 0 30px rgba(162, 178, 255, 0.1) !important;
+}
+
+/* 確保する内部のレイアウト要素 */
+.premium-pricing-card > * { flex-shrink: 0; }
+.premium-pricing-features { flex-grow: 1 !important; }
