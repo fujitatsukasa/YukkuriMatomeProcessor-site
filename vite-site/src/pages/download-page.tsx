@@ -1,16 +1,9 @@
 import { Link } from 'react-router-dom'
 import { InteractiveCard, PageIntro, PageMeta, Section } from '@/components/ui'
 import { media } from '@/data/assets'
-import { downloadUrl, type ActionItem } from '@/data/site-content'
+
 
 export function DownloadPage() {
-  const flowActions: ActionItem[] = [
-    { label: '次: 使い方を確認', href: '/instructions/' },
-    { label: '次: FAQを確認', href: '/faq/' },
-    { label: '次: アップデート履歴を確認', href: '/update/' },
-    { label: '次: 購入条件を確認', href: '/purchase/' },
-    { label: '不明点はお問い合わせ', href: '/contact/' },
-  ]
 
   return (
     <>
@@ -24,22 +17,7 @@ export function DownloadPage() {
       <PageIntro
         kicker="ダウンロード"
         title="最新版を安全に入手する"
-        lead="7日間の無料トライアルで、先に導入可否を確認してください。本ページでは導入前提、試用時の判断項目、問題発生時の対応先をまとめて確認できます。"
-        actions={[
-          { label: '最新版をダウンロード', href: downloadUrl, variant: 'primary', external: true },
-          { label: '使い方を見る', href: '/instructions/', variant: 'ghost' },
-          { label: 'FAQを見る', href: '/faq/', variant: 'ghost' },
-        ]}
-        flowLinks={flowActions}
-        media={
-          <InteractiveCard className="page-visual-card premium-glass">
-            <img className="page-visual-card__image" src="/product_get_script.png" alt="製品画面イメージ" />
-            <div className="page-visual-card__meta">
-              <strong>試用の準備</strong>
-              <span>導入前提と確認項目を一画面で把握</span>
-            </div>
-          </InteractiveCard>
-        }
+        lead="導入前提・試用チェック・トラブル時の対応先をまとめて確認できます"
       />
 
       <Section alt>
@@ -129,22 +107,7 @@ export function InstructionsPage() {
       <PageIntro
         kicker="使い方ガイド"
         title="初期設定から編集開始までを3ステップで進める"
-        lead="目的は、最短で安定運用に入ることです。「初期設定 → 台本取得 → 編集開始」の順で進め、最後に失敗例を確認してください。"
-        flowLinks={[
-          { label: '先にダウンロードする', href: '/download/' },
-          { label: '次: FAQを確認', href: '/faq/' },
-          { label: '次: 購入条件を確認', href: '/purchase/' },
-          { label: '解決しない場合はお問い合わせ', href: '/contact/' },
-        ]}
-        media={
-          <InteractiveCard className="page-visual-card premium-glass">
-            <img className="page-visual-card__image" src={media.settingsShot} alt="初期設定イメージ" />
-            <div className="page-visual-card__meta">
-              <strong>設定の流れ</strong>
-              <span>YMM4パス、保存先、試用環境を先に固定</span>
-            </div>
-          </InteractiveCard>
-        }
+        lead="初期設定・台本取得・編集開始の順に、最短で安定運用に入るためのガイドです"
       />
 
       <Section>

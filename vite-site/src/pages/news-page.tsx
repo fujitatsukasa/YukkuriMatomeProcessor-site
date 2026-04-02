@@ -17,13 +17,7 @@ export function NewsPage() {
       <PageIntro
         kicker="お知らせ"
         title="最新のお知らせ"
-        lead="公開日・要約・詳細リンクを時系列で確認できます。台本取得・整形・編集準備の改善点を中心に掲載します。"
-        flowLinks={[
-          { label: '次: 更新履歴を確認', href: '/update/' },
-          { label: '次: ダウンロードへ進む', href: '/download/' },
-          { label: '次: FAQを確認', href: '/faq/' },
-          { label: '不明点はお問い合わせ', href: '/contact/' },
-        ]}
+        lead="機能更新や運用に関する告知を時系列で掲載しています"
       />
 
       <Section alt>

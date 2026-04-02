@@ -16,14 +16,7 @@ export function ContactPage() {
       <PageIntro
         kicker="お問い合わせ"
         title="お問い合わせ窓口"
-        lead="連絡先はメールとXを中心に、Discord・Chatworkでも受け付けています。先に必要情報を添えると、回答までの時間を短縮できます。"
-        flowLinks={[
-          { label: '先にダウンロードする', href: '/download/' },
-          { label: '次: 使い方を確認', href: '/instructions/' },
-          { label: '次: FAQを確認', href: '/faq/' },
-          { label: '次: 購入条件を確認', href: '/purchase/' },
-          { label: '法務情報を確認', href: '/legal/commercial-transactions/' },
-        ]}
+        lead="メール・X・Discord・Chatworkで受け付けています"
       />
 
       <Section>

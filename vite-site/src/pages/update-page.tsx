@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { InteractiveCard, PageIntro, PageMeta, Section } from '@/components/ui'
 import { media } from '@/data/assets'
-import { changeLogUrl, downloadUrl, latestReleaseUrl, releasesUrl, tagsUrl } from '@/data/site-content'
+import { changeLogUrl, latestReleaseUrl, releasesUrl, tagsUrl } from '@/data/site-content'
 
 export function UpdatePage() {
   return (
@@ -16,11 +16,7 @@ export function UpdatePage() {
       <PageIntro
         kicker="Release Hub"
         title="アップデート情報"
-        lead="最新版の入手先と変更情報を、このページに集約しています。API取得に依存せず、常に同じ導線で確認できます。"
-        actions={[
-          { label: '最新版を1クリックで取得', href: downloadUrl, variant: 'primary', external: true },
-          { label: '最新リリース詳細', href: latestReleaseUrl, variant: 'ghost', external: true },
-        ]}
+        lead="最新版の入手先とリリースノート・変更履歴を集約しています"
       />
 
       <Section>

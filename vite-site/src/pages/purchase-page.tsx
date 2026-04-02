@@ -19,17 +19,7 @@ export function PurchasePage() {
       <PageIntro
         kicker="Purchase"
         title="購入前に契約条件を確認する"
-        lead={`プレミアムLicenseの販売価格は ${legal.pricing.amountIncludingTax}（買い切り）です。${legal.pricing.subscriptionNotice} 支払条件、提供時期、返金条件を確認し、不明点を解消したうえでお申し込みください。`}
-        actions={[
-          { label: '購入について問い合わせる', href: '/contact/', variant: 'primary' },
-          { label: '購入FAQを見る', href: '/faq/#faq-purchase', variant: 'ghost' },
-        ]}
-        flowLinks={[
-          { label: '先にダウンロードする', href: '/download/' },
-          { label: '次: 使い方を確認', href: '/instructions/' },
-          { label: '次: FAQを確認', href: '/faq/' },
-          { label: '契約条件の法務表記', href: '/legal/commercial-transactions/' },
-        ]}
+        lead="販売価格・支払条件・返金ポリシーなど、購入前に必要な情報をまとめています"
       />
 
       <Section alt>

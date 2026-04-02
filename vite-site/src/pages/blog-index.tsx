@@ -38,7 +38,7 @@ export function BlogIndex() {
         <PageIntro
           kicker="OFFICIAL BLOG"
           title="ゆっくり解説＆時短ノウハウ"
-          lead="動画編集の圧倒的な時短テクニックや、YMM4自動化の極意を、出し惜しみなく完全公開。最新のアップデート情報もこちらでお届けします。"
+          lead="動画編集の時短テクニックやYMM4自動化の実践ノウハウを公開しています"
         />
 
         <Section className="blog-index-section">

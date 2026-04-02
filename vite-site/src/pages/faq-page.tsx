@@ -16,16 +16,7 @@ export function FaqPage() {
       <PageIntro
         kicker="FAQ"
         title="導入前後によくある質問"
-        lead="目的に合うカテゴリから確認してください。解決しない場合はお問い合わせへ進んでください。"
-        media={
-          <InteractiveCard className="page-visual-card premium-glass">
-            <img className="page-visual-card__image" src={media.goldMetallic} alt="FAQイメージ" />
-            <div className="page-visual-card__meta">
-              <strong>6 categories</strong>
-              <span>導入前後の疑問をカテゴリ別に整理</span>
-            </div>
-          </InteractiveCard>
-        }
+        lead="全般・導入・台本取得・設定・トラブル・購入の6カテゴリで整理しています"
       />
 
       <Section>
