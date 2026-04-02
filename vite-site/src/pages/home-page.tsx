@@ -3,7 +3,7 @@ import { InteractiveCard, PageMeta, Section } from '@/components/ui'
 import { media } from '@/data/assets'
 import { downloadUrl, legal, siteOrigin, siteSubtitle, siteTitle } from '@/data/site-content'
 import React, { useEffect, useRef, useState } from 'react'
-import { motion, useInView as useMotionInView, AnimatePresence, useScroll, useTransform, useMotionValue, useMotionTemplate } from 'framer-motion'
+import { motion, useInView as useMotionInView, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import Tilt from 'react-parallax-tilt'
 import { MessageSquare, Smartphone, Users, Download, Zap, Star, ShieldCheck, Clock, CheckCircle2, TrendingUp, HelpCircle, Monitor, CreditCard, ArrowRight, Sparkles, Play, ChevronDown } from 'lucide-react'
 import { CustomCursorGlow } from '@/components/CustomCursorGlow'
@@ -286,9 +286,7 @@ export function HomePage() {
   // Subtle parallax translation
   const parallaxY = useTransform(scrollY, [0, 8000], [0, 2000])
   // Browser frame 3D tilt on scroll
-  const browserRotateX = useTransform(scrollY, [0, 600], [3, 0])
-  const browserScale = useTransform(scrollY, [0, 600], [0.97, 1])
-
+    
   const [activeSlide, setActiveSlide] = useState(0)
   const isAutoPlayingRef = useRef(true)
 
@@ -639,7 +637,7 @@ export function HomePage() {
                                 objectFit: 'cover', 
                                 objectPosition: 'left top',
                                 filter: imgIndex > 0 ? 'drop-shadow(-20px 20px 30px rgba(0,0,0,0.8))' : 'none',
-                                MaskImage: imgIndex > 0 ? 'linear-gradient(to right, rgba(0,0,0,1) 60%, rgba(0,0,0,0))' : 'none',
+                                maskImage: imgIndex > 0 ? 'linear-gradient(to right, rgba(0,0,0,1) 60%, rgba(0,0,0,0))' : 'none',
                                 WebkitMaskImage: imgIndex > 0 ? 'linear-gradient(to right, rgba(0,0,0,1) 60%, rgba(0,0,0,0))' : 'none',
                                 transform: imgIndex > 0 ? 'translate(10%, 10%) scale(0.95)' : 'none'
                               }}
