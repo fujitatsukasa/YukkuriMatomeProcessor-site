@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { InteractiveCard, PageIntro, PageMeta, Section } from '@/components/ui'
+import { PageIntro, PageMeta, Section } from '@/components/ui'
 import { media } from '@/data/assets'
 import { faqGroups } from '@/data/site-content'
 
@@ -16,64 +16,41 @@ export function FaqPage() {
       <PageIntro
         kicker="FAQ"
         title="導入前後によくある質問"
-        lead="全般・導入・台本取得・設定・トラブル・購入の6カテゴリで整理しています"
+        lead="全般・導入・使用方法・トラブル・購入の各カテゴリで整理しています"
       />
 
       <Section>
-        <div className="brand-shell">
-          <InteractiveCard className="brand-card premium-glass">
+        <div className="brand-shell content-page">
+          <div style={{ marginBottom: '4rem' }}>
             <h2>目次</h2>
-            <div className="brand-grid brand-grid--3">
-              <ul className="brand-list">
-                <li><Link to="/faq/#faq-general">全般</Link></li>
-                <li><Link to="/faq/#faq-onboarding">導入</Link></li>
-              </ul>
-              <ul className="brand-list">
-                <li><Link to="/faq/#faq-script">台本取得</Link></li>
-                <li><Link to="/faq/#faq-settings">設定</Link></li>
-              </ul>
-              <ul className="brand-list">
-                <li><Link to="/faq/#faq-trouble">トラブル</Link></li>
-                <li><Link to="/faq/#faq-purchase">購入・契約</Link></li>
-              </ul>
-            </div>
-          </InteractiveCard>
-        </div>
-      </Section>
-
-      {faqGroups.map((group, index) => (
-        <Section key={group.id} id={group.id} alt={index % 2 === 0}>
-          <div className="brand-shell">
-            <h2>{group.label}</h2>
-            <div className="faq-list" role="list">
-              {group.items.map((item, itemIndex) => (
-                <details key={item.question} className="faq-item" open={itemIndex === 0}>
-                  <summary>{item.question}</summary>
-                  <div className="faq-answer">{item.answer}</div>
-                </details>
-              ))}
-            </div>
-          </div>
-        </Section>
-      ))}
-
-      <Section alt>
-        <div className="brand-shell brand-grid brand-grid--2">
-          <InteractiveCard className="brand-card premium-glass">
-            <h2>関連ページ</h2>
-            <ul className="brand-list">
-              <li><Link to="/download/">ダウンロード</Link></li>
-              <li><Link to="/instructions/">使い方</Link></li>
-              <li><Link to="/purchase/">購入</Link></li>
-              <li><Link to="/update/">アップデート履歴</Link></li>
+            <ul className="brand-list" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: '1rem' }}>
+              <li><a href="#faq-general" style={{ color: '#8b9bb4' }}># 全般</a></li>
+              <li><a href="#faq-onboarding" style={{ color: '#8b9bb4' }}># 導入</a></li>
+              <li><a href="#faq-script" style={{ color: '#8b9bb4' }}># 台本取得</a></li>
+              <li><a href="#faq-settings" style={{ color: '#8b9bb4' }}># 設定</a></li>
+              <li><a href="#faq-trouble" style={{ color: '#8b9bb4' }}># トラブル</a></li>
+              <li><a href="#faq-purchase" style={{ color: '#8b9bb4' }}># 購入・契約</a></li>
             </ul>
-          </InteractiveCard>
-          <InteractiveCard className="brand-card premium-glass">
-            <h2>解決しない場合</h2>
-            <div className="brand-inline-actions">
-              <Link className="brand-btn brand-btn--primary" to="/contact/">お問い合わせ</Link>
+          </div>
+
+          {faqGroups.map((group) => (
+            <div key={group.id} id={group.id} style={{ marginBottom: '4rem', paddingTop: '2rem' }}>
+              <h2 style={{ borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '1rem', marginBottom: '2rem' }}>{group.label}</h2>
+              <div className="faq-list" role="list">
+                {group.items.map((item, itemIndex) => (
+                  <details key={item.question} className="faq-item" open={itemIndex === 0}>
+                    <summary>{item.question}</summary>
+                    <div className="faq-answer">{item.answer}</div>
+                  </details>
+                ))}
+              </div>
             </div>
-          </InteractiveCard>
+          ))}
+
+          <div style={{ marginTop: '5rem', paddingTop: '3rem', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+            <h2>解決しない場合</h2>
+            <p>ご不明な点が解決しない場合は、<Link to="/contact/">お問い合わせ</Link>よりご連絡ください。</p>
+          </div>
         </div>
       </Section>
     </>

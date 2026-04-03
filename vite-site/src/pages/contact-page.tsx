@@ -1,4 +1,4 @@
-import { InteractiveCard, PageIntro, PageMeta, Section } from '@/components/ui'
+import { PageIntro, PageMeta, Section } from '@/components/ui'
 import { media } from '@/data/assets'
 import { legal, supportChannels } from '@/data/site-content'
 import { LegalLinksBlock } from '@/pages/shared'
@@ -20,58 +20,44 @@ export function ContactPage() {
       />
 
       <Section>
-        <div className="brand-shell contact-channels contact-channels--cards">
-          {supportChannels.map((channel) => (
-            <InteractiveCard key={channel.name} className="channel premium-glass">
-              <h2>{channel.name}</h2>
-              <p>
+        <div className="brand-shell content-page">
+          <h2>サポートチャンネル</h2>
+          <ul className="brand-list">
+            {supportChannels.map((channel) => (
+              <li key={channel.name}>
+                <strong>{channel.name}:</strong>{' '}
                 <a href={channel.href} target={channel.href.startsWith('http') ? '_blank' : undefined} rel={channel.href.startsWith('http') ? 'noopener noreferrer' : undefined}>
                   {channel.href.replace(/^mailto:/, '')}
-                </a>
-              </p>
-              <p>{channel.description}</p>
-            </InteractiveCard>
-          ))}
-        </div>
-      </Section>
+                </a> - {channel.description}
+              </li>
+            ))}
+          </ul>
 
-      <Section alt>
-        <div className="brand-shell brand-grid brand-grid--2">
-          <InteractiveCard className="notice-box">
-            <h2>問い合わせ時に必要な情報</h2>
-            <ul className="brand-list">
-              <li>利用OSとバージョン</li>
-              <li>再現手順（時系列）</li>
-              <li>エラーメッセージ全文</li>
-              <li>発生頻度と回避可否</li>
-            </ul>
-          </InteractiveCard>
-          <InteractiveCard className="notice-box">
-            <h2>対応目安</h2>
-            <ul className="brand-list">
-              <li>受付時間: {legal.support.operationHours}</li>
-              <li>一次回答: {legal.support.firstResponseSla}</li>
-              <li>休業日の問い合わせは翌営業日以降に順次対応</li>
-            </ul>
-          </InteractiveCard>
-        </div>
-      </Section>
+          <div className="content-page__grid-2" style={{ marginTop: '4rem' }}>
+            <div>
+              <h2>不具合報告時に必要な情報</h2>
+              <ul className="brand-list">
+                <li>利用OSとバージョン</li>
+                <li>再現手順（時系列）</li>
+                <li>エラーメッセージ全文</li>
+                <li>発生頻度と回避可否</li>
+              </ul>
+            </div>
+            <div>
+              <h2>対応目安</h2>
+              <ul className="brand-list">
+                <li>受付時間: {legal.support.operationHours}</li>
+                <li>一次回答: {legal.support.firstResponseSla}</li>
+                <li>休業日の問い合わせは翌営業日以降に順次対応</li>
+              </ul>
+            </div>
+          </div>
 
-      <Section>
-        <div className="brand-shell brand-grid brand-grid--2">
-          <InteractiveCard className="notice-box">
-            <h2>法務情報の確認</h2>
-            <p>購入前に確認すべき契約条件、返金条件、個人情報の取り扱いをまとめています。</p>
+          <h2 style={{ marginTop: '4rem' }}>法務情報の確認</h2>
+          <p>購入前に確認すべき契約条件、返金条件は以下をご参照ください。</p>
+          <div style={{ marginTop: '1rem', background: 'rgba(255,255,255,0.03)', padding: '1.5rem', borderRadius: '12px' }}>
             <LegalLinksBlock />
-          </InteractiveCard>
-          <InteractiveCard className="notice-box">
-            <h2>法務問い合わせ</h2>
-            <ul className="brand-list">
-              <li>契約条件・請求に関する問い合わせ: メール推奨</li>
-              <li>銀行振込・PayPal購入希望: メールで個別案内</li>
-              <li>{legal.payment.bankAccountPolicy}</li>
-            </ul>
-          </InteractiveCard>
+          </div>
         </div>
       </Section>
     </>

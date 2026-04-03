@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { InteractiveCard, PageIntro, PageMeta, Section } from '@/components/ui'
+import { PageIntro, PageMeta, Section } from '@/components/ui'
 import { media } from '@/data/assets'
 import { newsPosts } from '@/data/site-content'
 import { NewsTimelineCard } from '@/pages/shared'
@@ -20,8 +20,8 @@ export function NewsPage() {
         lead="機能更新や運用に関する告知を時系列で掲載しています"
       />
 
-      <Section alt>
-        <div className="brand-shell">
+      <Section>
+        <div className="brand-shell content-page">
           <ol className="timeline">
             {newsPosts.map((post) => (
               <li key={post.path}>
@@ -29,25 +29,6 @@ export function NewsPage() {
               </li>
             ))}
           </ol>
-        </div>
-      </Section>
-
-      <Section>
-        <div className="brand-shell brand-grid brand-grid--2">
-          <InteractiveCard className="brand-card premium-glass">
-            <h2>機能確認ページ</h2>
-            <ul className="brand-list">
-              <li><Link to="/update/">アップデート履歴</Link>: 変更内容の時系列確認</li>
-              <li><Link to="/faq/">FAQ</Link>: 導入・運用時の疑問解消</li>
-            </ul>
-          </InteractiveCard>
-          <InteractiveCard className="brand-card premium-glass">
-            <h2>次アクション</h2>
-            <div className="brand-inline-actions">
-              <Link className="brand-btn brand-btn--primary" to="/download/">無料で始める</Link>
-              <Link className="brand-btn brand-btn--ghost" to="/contact/">お問い合わせ</Link>
-            </div>
-          </InteractiveCard>
         </div>
       </Section>
     </>

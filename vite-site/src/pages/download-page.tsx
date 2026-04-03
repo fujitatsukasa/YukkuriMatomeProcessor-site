@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
-import { InteractiveCard, PageIntro, PageMeta, Section } from '@/components/ui'
+import { PageIntro, PageMeta, Section } from '@/components/ui'
 import { media } from '@/data/assets'
-
 
 export function DownloadPage() {
 
@@ -16,78 +15,35 @@ export function DownloadPage() {
       />
       <PageIntro
         kicker="ダウンロード"
-        title="最新版を安全に入手する"
-        lead="導入前提・試用チェック・トラブル時の対応先をまとめて確認できます"
+        title="最新版を入手する"
+        lead="導入前に必要な前提条件をご確認ください"
       />
 
-      <Section alt>
-        <div className="brand-shell brand-grid brand-grid--2">
-          <InteractiveCard className="release-panel premium-glass">
-            <h2>導入前チェック</h2>
-            <ul className="brand-list">
-              <li>Windows環境で利用できること</li>
-              <li>YMM4実行ファイルパスを設定できること</li>
-              <li>解凍先フォルダに書き込み権限があること</li>
-              <li>試用用フォルダを固定し、再現手順を記録できること</li>
-            </ul>
-          </InteractiveCard>
-          <InteractiveCard className="release-panel premium-glass">
-            <h2>試用時に確認する判断項目</h2>
-            <ol className="brand-list">
-              <li>台本取得から編集開始までを3ステップで完了できるか</li>
-              <li>作業時間短縮が運用要件に合うか</li>
-              <li>失敗時の復旧手順をチーム内で共有できるか</li>
-              <li>契約前に必要な条件を把握できるか</li>
-            </ol>
-            <div className="brand-inline-actions">
-              <Link className="brand-btn brand-btn--ghost" to="/purchase/">
-                購入条件を見る
-              </Link>
-            </div>
-          </InteractiveCard>
-        </div>
-      </Section>
-
       <Section>
-        <div className="brand-shell brand-grid brand-grid--2">
-          <InteractiveCard className="release-panel premium-glass">
-            <h2>導入フロー</h2>
-            <ol className="brand-list">
-              <li>最新版をダウンロード</li>
-              <li>解凍して起動</li>
-              <li>使い方ページに沿って初期設定</li>
-              <li>FAQとアップデート履歴で運用情報を確認</li>
-            </ol>
-          </InteractiveCard>
-          <InteractiveCard className="release-panel premium-glass">
-            <h2>問題が発生した場合</h2>
-            <ul className="brand-list">
-              <li><Link to="/faq/">FAQ</Link>で既知の対処を確認</li>
-              <li>解決しない場合は <Link to="/contact/">お問い合わせ</Link> へ連絡</li>
-              <li>連絡時はOS、手順、エラーメッセージを共有</li>
-            </ul>
-          </InteractiveCard>
-        </div>
-      </Section>
-
-      <Section alt>
-        <div className="brand-shell brand-grid brand-grid--2">
-          <InteractiveCard className="brand-card premium-glass">
-            <h2>導入判断の補助情報</h2>
-            <ul className="brand-list">
-              <li><Link to="/update/">アップデート履歴</Link>で変更点を確認</li>
-              <li><Link to="/news/">お知らせ</Link>で運用関連情報を確認</li>
-              <li><Link to="/legal/commercial-transactions/">特商法ページ</Link>で契約条件を確認</li>
-            </ul>
-          </InteractiveCard>
-          <InteractiveCard className="brand-card premium-glass">
-            <h2>次アクション</h2>
-            <div className="brand-inline-actions">
-              <Link className="brand-btn brand-btn--primary" to="/instructions/">使い方へ進む</Link>
-              <Link className="brand-btn brand-btn--ghost" to="/faq/">FAQ</Link>
-              <Link className="brand-btn brand-btn--ghost" to="/contact/">お問い合わせ</Link>
+        <div className="brand-shell content-page">
+          <div className="content-page__grid-2">
+            <div>
+              <h2>導入前チェック</h2>
+              <ul className="brand-list">
+                <li>Windows環境（Windows 10/11推奨）であること</li>
+                <li>YMM4実行ファイルパスを指定できること</li>
+                <li>解凍先フォルダに書き込み権限があること</li>
+              </ul>
+              <div className="brand-inline-actions" style={{ marginTop: '2rem' }}>
+                <a className="brand-btn brand-btn--primary" href="https://github.com/fujitatsukasa/YukkuriMatomeProcessor/releases/latest" target="_blank" rel="noopener noreferrer">
+                  最新版をダウンロード（無料）
+                </a>
+              </div>
             </div>
-          </InteractiveCard>
+            <div>
+              <h2>導入の流れ</h2>
+              <ol className="brand-list">
+                <li>上記リンクから ZIP をダウンロード</li>
+                <li>任意のフォルダに解凍して `YukkuriMatomeProcessor.exe` を起動</li>
+                <li><Link to="/instructions/">使い方ガイド</Link> に沿って初回設定を行う</li>
+              </ol>
+            </div>
+          </div>
         </div>
       </Section>
     </>
@@ -106,107 +62,35 @@ export function InstructionsPage() {
       />
       <PageIntro
         kicker="使い方ガイド"
-        title="初期設定から編集開始までを3ステップで進める"
-        lead="初期設定・台本取得・編集開始の順に、最短で安定運用に入るためのガイドです"
+        title="初期設定から編集開始まで"
+        lead="最短で安定運用に入るための3ステップガイド"
       />
 
       <Section>
-        <div className="brand-shell brand-grid brand-grid--3">
-          {[
-            ['手順1 初期設定', 'YukkuriMovieMaker.exe の実行パスと台本保存先を固定します。'],
-            ['手順2 台本取得', '対象URLから記事を選択し、編集用に整形済み台本を作成します。'],
-            ['手順3 編集開始', '整形結果を確認し、YMM4への受け渡しと編集作業へ進みます。'],
-          ].map(([title, body]) => (
-            <InteractiveCard key={title} className="brand-card premium-glass">
-              <h2>{title}</h2>
-              <p>{body}</p>
-            </InteractiveCard>
-          ))}
-        </div>
-      </Section>
+        <div className="brand-shell content-page">
+          <h2>手順1：初期設定（必須）</h2>
+          <p>初回起動時はまず設定を完了させる必要があります。</p>
+          <ul className="brand-list">
+            <li><strong>YMM4実行ファイルの指定:</strong> 設定画面から `YukkuriMovieMaker4.exe` の絶対パスを登録します。</li>
+            <li><strong>台本保存先の固定:</strong> 出力されるCSVや素材の保存先フォルダを指定します。</li>
+          </ul>
 
-      <Section alt>
-        <div className="brand-shell brand-grid brand-grid--2">
-          <InteractiveCard className="brand-card premium-glass">
-            <h2>初期設定（必須）</h2>
-            <ul className="brand-list">
-              <li>YMM4実行ファイルの絶対パスを登録</li>
-              <li>台本保存先フォルダを運用単位で固定</li>
-              <li>試用中は設定変更内容を記録</li>
-              <li>権限エラーを防ぐため、書き込み可能フォルダを利用</li>
-            </ul>
-          </InteractiveCard>
-          <InteractiveCard className="brand-card premium-glass">
-            <h2>台本取得</h2>
-            <ol className="brand-list">
-              <li>対象サイトを選択</li>
-              <li>記事一覧を取得</li>
-              <li>使用する記事を選択</li>
-              <li>台本をダウンロードして整形</li>
-            </ol>
-          </InteractiveCard>
-          <InteractiveCard className="brand-card premium-glass">
-            <h2>編集開始前チェック</h2>
-            <ul className="brand-list">
-              <li>不要行・注釈の除去が完了しているか</li>
-              <li>見出しと本文の区切りが崩れていないか</li>
-              <li>読み上げ速度・尺の確認をしたか</li>
-            </ul>
-          </InteractiveCard>
-          <InteractiveCard className="brand-card premium-glass">
-            <h2>よくある失敗</h2>
-            <ul className="brand-list">
-              <li>YMM4パス未設定で連携に失敗</li>
-              <li>URL形式エラーで台本取得に失敗</li>
-              <li>保存先権限不足で出力に失敗</li>
-            </ul>
-            <div className="brand-inline-actions">
-              <Link className="brand-btn brand-btn--ghost" to="/faq/#faq-trouble">トラブルFAQへ</Link>
-            </div>
-          </InteractiveCard>
-        </div>
-      </Section>
+          <h2 style={{ marginTop: '3rem' }}>手順2：台本・スレッドの取得</h2>
+          <ol className="brand-list">
+            <li>対象のまとめサイトやURLを画面上部の入力欄に指定</li>
+            <li>「記事一覧取得」を実行して対象記事を選択</li>
+            <li>「台本取得と整形」を実行</li>
+          </ol>
 
-      <Section>
-        <div className="brand-shell brand-grid brand-grid--2">
-          <InteractiveCard className="notice-box">
-            <h2>開発者向けローカル実行（Vite 版）</h2>
-            <ul className="brand-list">
-              <li>初回のみ: <code>cd vite-site && npm install</code></li>
-              <li>開発起動: <code>cd vite-site && npm run dev</code></li>
-              <li>本番確認: <code>cd vite-site && npm run build && npm run preview</code></li>
-              <li>VSCode 既定起動は <code>Serve: GUI (Default)</code></li>
-            </ul>
-          </InteractiveCard>
-          <InteractiveCard className="notice-box">
-            <h2>関連する研究系ページ</h2>
-            <ul className="brand-list">
-              <li>TechTouch動作研究は <code>TechTouch Lab: GUI</code></li>
-              <li>CLI 起動は <code>serve_local.cmd --no-gui --open</code></li>
-              <li>本 Vite 版が現行の公開サイト本体です</li>
-            </ul>
-          </InteractiveCard>
-        </div>
-      </Section>
-
-      <Section alt>
-        <div className="brand-shell brand-grid brand-grid--2">
-          <InteractiveCard className="brand-card premium-glass">
-            <h2>次アクション</h2>
-            <ul className="brand-list">
-              <li><Link to="/download/">ダウンロード</Link>で試用開始</li>
-              <li><Link to="/faq/">FAQ</Link>で失敗例を確認</li>
-              <li><Link to="/purchase/">購入</Link>で契約条件を確認</li>
-              <li><Link to="/contact/">お問い合わせ</Link>で導入相談</li>
-            </ul>
-          </InteractiveCard>
-          <InteractiveCard className="brand-card premium-glass">
-            <h2>関連情報</h2>
-            <div className="brand-inline-actions">
-              <Link className="brand-btn brand-btn--ghost" to="/update/">アップデート履歴</Link>
-              <Link className="brand-btn brand-btn--ghost" to="/news/">お知らせ</Link>
-            </div>
-          </InteractiveCard>
+          <h2 style={{ marginTop: '3rem' }}>手順3：YMM4へ受け渡し</h2>
+          <p>整形結果を確認し、問題がなければ「YMM4を開く」ボタンでプロジェクトファイルを出力して編集作業へ進みます。</p>
+          
+          <h2 style={{ marginTop: '3rem' }}>よくあるトラブル</h2>
+          <ul className="brand-list">
+            <li><strong>YMM4連携に失敗する:</strong> 実行ファイルパスが間違っている可能性があります。</li>
+            <li><strong>保存エラー:</strong> 保存先フォルダがRead-Only（書き込み不可）になっている可能性があります。別のフォルダを選んでください。</li>
+          </ul>
+          <p><Link to="/faq/">その他のトラブルシューティングはこちら</Link></p>
         </div>
       </Section>
     </>
