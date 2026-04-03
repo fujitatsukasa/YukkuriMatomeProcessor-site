@@ -68,7 +68,7 @@ export function PricingCards() {
             </div>
             <div className="premium-pricing-feature-row active">
               <span className="check-icon">✓</span>
-              <strong style={{ color: '#e0c184' }}>動画テンプレート自由作成</strong>
+              <strong style={{ color: '#e0c184' }}>動画フォーマット自由作成</strong>
             </div>
             <div className="premium-pricing-feature-row active">
               <span className="check-icon">✓</span>
@@ -129,6 +129,10 @@ export function PricingCards() {
             <div className="premium-pricing-feature-row active">
               <span className="check-icon" style={{ color: '#a2b2ff' }}>✓</span>
               <strong style={{ color: '#a2b2ff' }}>取得サイト追加希望対応</strong>
+            </div>
+            <div className="premium-pricing-feature-row active">
+              <span className="check-icon" style={{ color: '#a2b2ff' }}>✓</span>
+              <strong style={{ color: '#a2b2ff' }}>動画フォーマット作成代行</strong>
             </div>
             <div className="premium-pricing-feature-row active">
               <span className="check-icon" style={{ color: '#a2b2ff' }}>✓</span>
