@@ -64,15 +64,7 @@ export function PricingCards() {
           <div className="premium-pricing-features" aria-label="搭載機能">
             <div className="premium-pricing-feature-row active">
               <span className="check-icon" style={{ color: '#fff' }}>✓</span>
-              <span>自動動画編集</span>
-            </div>
-            <div className="premium-pricing-feature-row active">
-              <span className="check-icon" style={{ color: '#fff' }}>✓</span>
-              <span>YMM4タイムライン出力</span>
-            </div>
-            <div className="premium-pricing-feature-row active">
-              <span className="check-icon" style={{ color: '#fff' }}>✓</span>
-              <span>ローカル分析</span>
+              <span>Freeプランの全機能</span>
             </div>
             <div className="premium-pricing-feature-row active">
               <span className="check-icon">✓</span>
@@ -83,12 +75,8 @@ export function PricingCards() {
               <strong style={{ color: '#e0c184' }}>高度なYMM4出力設定</strong>
             </div>
             <div className="premium-pricing-feature-row active">
-              <span className="check-icon" style={{ color: '#fff' }}>✓</span>
-              <span>無償アップデート</span>
-            </div>
-            <div className="premium-pricing-feature-row inactive">
-              <span className="check-icon"></span>
-              <span>優先専用サポート</span>
+              <span className="check-icon">✓</span>
+              <strong style={{ color: '#e0c184' }}>優先専用サポート</strong>
             </div>
           </div>
         </InteractiveCard>
@@ -108,43 +96,11 @@ export function PricingCards() {
           <div className="premium-pricing-features" aria-label="搭載機能">
             <div className="premium-pricing-feature-row active">
               <span className="check-icon" style={{ color: '#fff' }}>✓</span>
-              <span>自動動画編集</span>
-            </div>
-            <div className="premium-pricing-feature-row active">
-              <span className="check-icon" style={{ color: '#fff' }}>✓</span>
-              <span>YMM4タイムライン出力</span>
-            </div>
-            <div className="premium-pricing-feature-row active">
-              <span className="check-icon" style={{ color: '#fff' }}>✓</span>
-              <span>ローカル分析</span>
-            </div>
-            <div className="premium-pricing-feature-row active">
-              <span className="check-icon" style={{ color: '#fff' }}>✓</span>
-              <span>内蔵操作ガイド</span>
-            </div>
-            <div className="premium-pricing-feature-row active">
-              <span className="check-icon" style={{ color: '#fff' }}>✓</span>
-              <span>無償アップデート</span>
-            </div>
-            <div className="premium-pricing-feature-row active">
-              <span className="check-icon" style={{ color: '#e0c184' }}>✓</span>
-              <strong style={{ color: '#e0c184' }}>高度な台本取得・AI生成</strong>
-            </div>
-            <div className="premium-pricing-feature-row active">
-              <span className="check-icon" style={{ color: '#e0c184' }}>✓</span>
-              <strong style={{ color: '#e0c184' }}>高度なYMM4出力設定</strong>
+              <span>Standardの全機能</span>
             </div>
             <div className="premium-pricing-feature-row active">
               <span className="check-icon" style={{ color: '#a2b2ff' }}>✓</span>
               <strong style={{ color: '#a2b2ff' }}>複数サイト ネタ自動収集</strong>
-            </div>
-            <div className="premium-pricing-feature-row active">
-              <span className="check-icon" style={{ color: '#a2b2ff' }}>✓</span>
-              <strong style={{ color: '#a2b2ff' }}>API連携・高度な自動処理</strong>
-            </div>
-            <div className="premium-pricing-feature-row active">
-              <span className="check-icon" style={{ color: '#a2b2ff' }}>✓</span>
-              <strong style={{ color: '#a2b2ff' }}>優先専用サポート</strong>
             </div>
           </div>
         </InteractiveCard>
