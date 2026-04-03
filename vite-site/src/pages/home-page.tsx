@@ -449,23 +449,13 @@ export function HomePage() {
               </Link>
             </motion.div>
 
-            {/* マイクロコピー — 無料の安心感 */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.8 }}
-              className="hero-microcopy" style={{ marginTop: '0.6rem', opacity: 0.65, textAlign: 'center' }}
-            >
-              無料プランあり・Windows専用・クレカ不要
-            </motion.p>
-
             {/* 実績バー */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1 }}
               className="hero-proof-bar"
-              style={{ marginTop: 'clamp(1.2rem, 2.5vh, 2rem)', justifyContent: 'center' }}
+              style={{ marginTop: 'clamp(0.6rem, 1.5vh, 1.2rem)', justifyContent: 'center' }}
             >
               {socialProofStats.map((stat) => (
                 <div key={stat.label} className="hero-proof-bar__item">
@@ -478,21 +468,6 @@ export function HomePage() {
               ))}
             </motion.div>
 
-            {/* 製品スクリーンショット — 見出し下に中央配置 */}
-            <motion.div
-              initial={{ opacity: 0, y: 30, scale: 0.97 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.9, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              style={{ marginTop: 'clamp(2rem, 4vh, 3.5rem)', maxWidth: '1000px', width: '100%' }}
-            >
-              <img
-                src="/product_get_script.png"
-                alt="ゆっくりまとめプロセッサーの実際の操作画面"
-                fetchPriority="high"
-                className="hero-product-image-clean"
-              />
-            </motion.div>
-
           </div>
 
           {/* Scroll indicator */}
@@ -500,7 +475,7 @@ export function HomePage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.5, duration: 0.8 }}
-            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 'clamp(1rem, 2vh, 2rem)', gap: '4px' }}
+            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 'clamp(0.5rem, 1vh, 1rem)', gap: '4px' }}
           >
             <motion.div
               animate={{ y: [0, 8, 0] }}
@@ -511,6 +486,23 @@ export function HomePage() {
           </motion.div>
 
         </section>
+
+        {/* ━━━[ 製品スクリーンショット — ヒーロー直下、フルワイド ]━━━ */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          style={{ maxWidth: '1100px', margin: '-2rem auto 0', padding: '0 clamp(1rem, 3vw, 2rem)', position: 'relative', zIndex: 2 }}
+        >
+          <img
+            src="/product_get_script.png"
+            alt="ゆっくりまとめプロセッサーの実際の操作画面"
+            fetchPriority="high"
+            className="hero-product-image-clean"
+            style={{ borderRadius: '14px', boxShadow: '0 30px 60px -15px rgba(0,0,0,0.8), 0 0 0 1px rgba(225, 194, 138, 0.25), 0 0 80px -20px rgba(224, 193, 132, 0.15)' }}
+          />
+        </motion.div>
 
         {/* ━━━[ Compatibility / Ecosystem Bar ]━━━ */}
         <div className="compatibility-bar">
