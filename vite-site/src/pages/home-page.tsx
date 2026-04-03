@@ -348,25 +348,26 @@ export function HomePage() {
       />
       <div className="home-compact-shell" style={{ position: 'relative' }}>
         <CustomCursorGlow />
-        {/* Animated Parallax Background using generated asset */}
+        {/* Subtle ambient gradient — single layer, no video needed */}
         <motion.div
           className="home-parallax-layer"
           style={{
             position: 'absolute',
-            top: '0vh', /* Start from the very top */
+            top: '0vh',
             left: 0,
             width: '100%',
             height: '250vh',
             backgroundImage: "url('/bg_abstract_2.webp')",
             backgroundSize: 'cover',
             backgroundPosition: 'center top',
-            opacity: 0.35,
+            opacity: 0.12,
             y: parallaxY,
             pointerEvents: 'none',
             zIndex: 0,
             maskImage: 'linear-gradient(to bottom, black 0%, black 15%, black 80%, transparent 100%)',
             WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 15%, black 80%, transparent 100%)',
-            mixBlendMode: 'screen'
+            mixBlendMode: 'screen',
+            filter: 'blur(3px) saturate(0.5)'
           }}
         />
         <section className="home-compact-hero homepage-hero">
@@ -381,11 +382,8 @@ export function HomePage() {
             aria-hidden="true"
           />
 
-          {/* Refined ambient background — no particles for performance */}
-          <div className="hero-ambient-vortex">
-            <div className="hero-ambient-orb orb-1" />
-            <div className="hero-ambient-orb orb-2" />
-          </div>
+          {/* Minimal accent glow — single subtle element */}
+          <div style={{ position: 'absolute', top: '-20%', left: '50%', transform: 'translateX(-50%)', width: '800px', height: '400px', background: 'radial-gradient(ellipse, rgba(224,193,132,0.06) 0%, transparent 70%)', pointerEvents: 'none', zIndex: 0 }} />
           
           {/* Centered, minimal hero headline — Linear / Vercel style */}
           <div className="hero-grid-split" style={{ position: 'relative', zIndex: 1 }}>
@@ -404,23 +402,22 @@ export function HomePage() {
               <h1 className="hero-massive-title">
                 <span className="text-rotator" style={{ display: 'inline-block' }}>
                   <span className="text-rotator__inner">
-                    <span className="text-glow-green">【反応集】</span>
+                    <span className="text-glow-gold">【反応集】</span>
                     <span className="text-glow-gold">【ゆっくり解説】</span>
-                    <span className="text-glow-blue">【ショート動画】</span>
-                    <span className="text-glow-green" aria-hidden="true">【反応集】</span>
+                    <span className="text-glow-gold">【ショート動画】</span>
+                    <span className="text-glow-gold" aria-hidden="true">【反応集】</span>
                   </span>
                 </span>
-                <br />
-                <span>の面倒な作業をゼロに</span>
+                <span style={{ fontWeight: 500, color: 'rgba(255,255,255,0.9)' }}>の面倒な作業をゼロに</span>
               </h1>
               
               <motion.p 
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
-                style={{ color: 'rgba(236,233,226,0.85)', fontSize: 'clamp(1rem, 1.2vw, 1.15rem)', maxWidth: '600px', margin: 'clamp(0.8rem, 1.5vh, 1.2rem) 0', lineHeight: 1.7 }}
+                style={{ color: 'rgba(236,233,226,0.65)', fontSize: 'clamp(0.95rem, 1.1vw, 1.1rem)', maxWidth: '540px', margin: '0', lineHeight: 1.75, letterSpacing: '0.01em' }}
               >
-                ネタ収集からYMM4出力まで、手作業の<strong className="text-glow-gold" style={{ fontWeight: 700 }}>95%を自動化</strong>。毎日の動画投稿を徹底アシストします。
+                ネタ収集からYMM4出力まで、手作業の<strong style={{ fontWeight: 700, color: 'rgba(255,255,255,0.95)' }}>95%を自動化</strong>。毎日の動画投稿を徹底アシストします
               </motion.p>
 
               <motion.div 
@@ -429,11 +426,11 @@ export function HomePage() {
                 transition={{ duration: 0.6, delay: 0.5 }}
                 className="brand-inline-actions home-compact-hero__actions" 
               >
-                <Link className="brand-btn brand-btn--primary" to="/download/" style={{ padding: '14px 28px', fontSize: '1.05rem' }}>
+                <Link className="brand-btn brand-btn--primary" to="/download/" style={{ padding: '14px 32px', fontSize: '1rem' }}>
                   無料で始める
                 </Link>
                 <Link className="brand-btn brand-btn--ghost" to="/instructions/" style={{ gap: '6px', padding: '14px 28px' }}>
-                  <Play size={16} />
+                  <Play size={15} />
                   使い方を見る
                 </Link>
               </motion.div>
@@ -442,7 +439,7 @@ export function HomePage() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.7 }}
-                className="hero-microcopy" style={{ marginTop: '0.8rem', opacity: 0.7 }}
+                className="hero-microcopy" style={{ marginTop: '0.4rem', opacity: 0.45, fontSize: '0.82rem', letterSpacing: '0.02em' }}
               >
                 無料プランあり・Windows専用・クレカ不要
               </motion.p>
@@ -452,16 +449,19 @@ export function HomePage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 1 }}
                 className="hero-proof-bar" 
-                style={{ marginTop: 'clamp(1.5rem, 3vh, 2.5rem)', justifyContent: 'flex-start' }}
+                style={{ marginTop: 'clamp(1.5rem, 3vh, 2.5rem)', justifyContent: 'flex-start', gap: 'clamp(1.2rem, 2.5vw, 2.5rem)', flexWrap: 'nowrap', display: 'flex', alignItems: 'center' }}
               >
-                {socialProofStats.map((stat) => (
-                  <div key={stat.label} className="hero-proof-bar__item">
-                    <span className="hero-proof-bar__icon" aria-hidden="true">
-                      <stat.Icon size={18} color="#e0c184" />
-                    </span>
-                    <span className="hero-proof-bar__value">{stat.value}</span>
-                    <span className="hero-proof-bar__label">{stat.label}</span>
-                  </div>
+                {socialProofStats.map((stat, i) => (
+                  <React.Fragment key={stat.label}>
+                    <div className="hero-proof-bar__item" style={{ display: 'flex', alignItems: 'center', gap: '8px', whiteSpace: 'nowrap' }}>
+                      <span className="hero-proof-bar__icon" aria-hidden="true" style={{ opacity: 0.4 }}>
+                        <stat.Icon size={15} color="rgba(255,255,255,0.4)" />
+                      </span>
+                      <span className="hero-proof-bar__value" style={{ fontSize: '1.2rem', fontWeight: 800, letterSpacing: '-0.02em', color: '#fff' }}>{stat.value}</span>
+                      <span className="hero-proof-bar__label" style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.4)', fontWeight: 500 }}>{stat.label}</span>
+                    </div>
+                    {i < socialProofStats.length - 1 && <span style={{ width: '1px', height: '20px', background: 'rgba(255,255,255,0.1)' }} />}
+                  </React.Fragment>
                 ))}
               </motion.div>
             </div>
@@ -472,12 +472,19 @@ export function HomePage() {
               animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
               transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
             >
-              <img 
-                src="/product_get_script.png"
-                alt="ゆっくりまとめプロセッサーの実際の操作画面"
-                fetchPriority="high"
-                className="hero-product-image-clean"
-              />
+              <div className="hero-product-frame">
+                <div className="hero-product-frame__titlebar">
+                  <span className="hero-product-frame__dot" />
+                  <span className="hero-product-frame__dot" />
+                  <span className="hero-product-frame__dot" />
+                </div>
+                <img 
+                  src="/product_get_script.png"
+                  alt="ゆっくりまとめプロセッサーの実際の操作画面"
+                  fetchPriority="high"
+                  className="hero-product-image-clean"
+                />
+              </div>
             </motion.div>
           </div>
 
@@ -486,13 +493,13 @@ export function HomePage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.5, duration: 0.8 }}
-            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 'clamp(1rem, 2vh, 2rem)', gap: '4px' }}
+            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 'clamp(0.5rem, 1vh, 1rem)', gap: '4px' }}
           >
             <motion.div
-              animate={{ y: [0, 8, 0] }}
+              animate={{ y: [0, 6, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
             >
-              <ChevronDown size={20} color="rgba(255,255,255,0.3)" />
+              <ChevronDown size={18} color="rgba(255,255,255,0.15)" />
             </motion.div>
           </motion.div>
 
