@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom'
-import { InteractiveCard, PageMeta, Section } from '@/components/ui'
+import { PageMeta, Section } from '@/components/ui'
+import { PricingCards } from '@/components/PricingCards'
 import { media } from '@/data/assets'
 import { downloadUrl, legal, siteOrigin, siteSubtitle, siteTitle } from '@/data/site-content'
 import React, { useEffect, useRef, useState } from 'react'
 import { motion, useInView as useMotionInView, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import Tilt from 'react-parallax-tilt'
-import { MessageSquare, Smartphone, Users, Download, Zap, Star, ShieldCheck, Clock, CheckCircle2, TrendingUp, HelpCircle, Monitor, CreditCard, ArrowRight, Sparkles, Play, ChevronDown } from 'lucide-react'
+import { MessageSquare, Smartphone, Users, Download, Zap, Star, CheckCircle2, TrendingUp, HelpCircle, Monitor, CreditCard, ArrowRight, Sparkles, Play, ChevronDown } from 'lucide-react'
 import { CustomCursorGlow } from '@/components/CustomCursorGlow'
 
 const SECTION_HEAD_VARIANTS = {
@@ -410,7 +411,7 @@ export function HomePage() {
                   </span>
                 </span>
                 <br />
-                <span>の面倒な作業をゼロに。</span>
+                <span>の面倒な作業をゼロに</span>
               </h1>
               
               <motion.p 
@@ -531,7 +532,7 @@ export function HomePage() {
             {/* Header */}
             <div style={{ flex: '0 0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '2.5rem', gap: '8px' }}>
               <p className="brand-kicker" style={{ margin: 0 }}>全機能紹介</p>
-              <h2 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.5rem)', margin: 0 }}>収益化に向けた、<span style={{ display: 'inline-block' }}><span className="text-glow-gold">全7プロセス</span><span className="text-glow-green">完全網羅</span>。</span></h2>
+              <h2 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.5rem)', margin: 0 }}>収益化に向けた、<span style={{ display: 'inline-block' }}><span className="text-glow-gold">全7プロセス</span><span className="text-glow-green">完全網羅</span></span></h2>
               <p style={{ color: 'rgba(255,255,255,0.7)', maxWidth: 700, textAlign: 'center', fontSize: '1.1rem', marginTop: '0.5rem' }}>
                 ネタ収集からYMM4タイムライン出力まで、動画制作におけるあらゆる手作業を自動化する、一貫した制作ワークフローをご紹介します。
               </p>
@@ -722,7 +723,7 @@ export function HomePage() {
             style={{ position: 'relative', zIndex: 1, maxWidth: '1000px', margin: '0 auto', textAlign: 'center', marginBottom: '1.5rem' }}
           >
             <p className="brand-kicker" style={{ justifyContent: 'center' }}>圧倒的時短</p>
-            <h2 style={{ textAlign: 'center' }}>準備時間を、<span className="text-glow-gold">120分から1分</span>へ<span className="text-glow-green">圧倒的短縮</span>。</h2>
+            <h2 style={{ textAlign: 'center' }}>準備時間を、<span className="text-glow-gold">120分から1分</span>へ<span className="text-glow-green">圧倒的短縮</span></h2>
             <p style={{ margin: '0 auto 0.5rem', fontSize: '1.05rem', lineHeight: 1.6 }}>
               1本あたり約119分の短縮は、月30本の投稿で<span className="text-glow-gold">約60時間</span>に相当。<br/>
               <strong className="text-glow-muted">99%削減</strong>の根拠を、工程ごとの比較データで可視化します。
@@ -1080,173 +1081,7 @@ export function HomePage() {
             <p style={{ maxWidth: '600px', margin: '0 auto' }}>まずは無料で始めて、必要に応じてアップグレード。<br/>すべてのプランで<strong className="text-glow-muted">基本機能をフル活用</strong>できます。</p>
           </motion.div>
 
-          <div style={{ position: 'relative', zIndex: 1, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', width: '100%', maxWidth: '1200px', margin: '0 auto' }}>
-            {/* Free Plan */}
-            <InteractiveCard className="premium-pricing-card pricing-card--free">
-              <div className="premium-pricing-top">
-                <h3>Free</h3>
-                <div className="premium-pricing-price">
-                  <strong>¥0</strong>
-                  <span className="price-term">ずっと無料</span>
-                </div>
-              </div>
-              <div className="premium-pricing-features" aria-label="搭載機能">
-                <div className="premium-pricing-feature-row active free">
-                  <span className="check-icon">✓</span>
-                  <span>自動動画編集</span>
-                </div>
-                <div className="premium-pricing-feature-row active free">
-                  <span className="check-icon">✓</span>
-                  <span>YMM4タイムライン出力</span>
-                </div>
-                <div className="premium-pricing-feature-row active free">
-                  <span className="check-icon">✓</span>
-                  <span>ローカル分析</span>
-                </div>
-                <div className="premium-pricing-feature-row active free">
-                  <span className="check-icon">✓</span>
-                  <span>内蔵操作ガイド</span>
-                </div>
-                <div className="premium-pricing-feature-row active free">
-                  <span className="check-icon">✓</span>
-                  <span>無償アップデート</span>
-                </div>
-                <div className="premium-pricing-feature-row inactive">
-                  <span className="check-icon"></span>
-                  <span>高度な台本取得・AI生成</span>
-                </div>
-              </div>
-              
-            </InteractiveCard>
-
-            {/* Standard Plan */}
-            <InteractiveCard className="premium-pricing-card pricing-card--standard">
-              <div className="pricing-badge pricing-badge--gold">
-                個人クリエイター向け
-              </div>
-              <div className="premium-pricing-top">
-                <h3>Standard</h3>
-                <div className="premium-pricing-price">
-                  <strong>¥5,000</strong>
-                  <span className="price-term">月額 /税込 5,500円</span>
-                </div>
-              </div>
-              <div className="premium-pricing-features" aria-label="搭載機能">
-                <div className="premium-pricing-feature-row active">
-                  <span className="check-icon" style={{ color: '#fff' }}>✓</span>
-                  <span>自動動画編集</span>
-                </div>
-                <div className="premium-pricing-feature-row active">
-                  <span className="check-icon" style={{ color: '#fff' }}>✓</span>
-                  <span>YMM4タイムライン出力</span>
-                </div>
-                <div className="premium-pricing-feature-row active">
-                  <span className="check-icon" style={{ color: '#fff' }}>✓</span>
-                  <span>ローカル分析</span>
-                </div>
-                <div className="premium-pricing-feature-row active">
-                  <span className="check-icon">✓</span>
-                  <strong style={{ color: '#e0c184' }}>高度な台本取得・AI生成</strong>
-                </div>
-                <div className="premium-pricing-feature-row active">
-                  <span className="check-icon">✓</span>
-                  <strong style={{ color: '#e0c184' }}>高度なYMM4出力設定</strong>
-                </div>
-                <div className="premium-pricing-feature-row active">
-                  <span className="check-icon" style={{ color: '#fff' }}>✓</span>
-                  <span>無償アップデート</span>
-                </div>
-                <div className="premium-pricing-feature-row inactive">
-                  <span className="check-icon"></span>
-                  <span>優先専用サポート</span>
-                </div>
-              </div>
-              
-            </InteractiveCard>
-
-            {/* Pro Plan */}
-            <InteractiveCard className="premium-pricing-card pricing-card--pro">
-              <div className="pricing-badge pricing-badge--platinum">
-                ✦ 圧倒的おすすめ
-              </div>
-              <div className="premium-pricing-top">
-                <h3>Pro</h3>
-                <div className="premium-pricing-price">
-                  <strong>¥10,000</strong>
-                  <span className="price-term">月額 /税込 11,000円</span>
-                </div>
-              </div>
-              <div className="premium-pricing-features" aria-label="搭載機能">
-                <div className="premium-pricing-feature-row active">
-                  <span className="check-icon" style={{ color: '#fff' }}>✓</span>
-                  <span>自動動画編集</span>
-                </div>
-                <div className="premium-pricing-feature-row active">
-                  <span className="check-icon" style={{ color: '#fff' }}>✓</span>
-                  <span>YMM4タイムライン出力</span>
-                </div>
-                <div className="premium-pricing-feature-row active">
-                  <span className="check-icon" style={{ color: '#fff' }}>✓</span>
-                  <span>ローカル分析</span>
-                </div>
-                <div className="premium-pricing-feature-row active">
-                  <span className="check-icon" style={{ color: '#fff' }}>✓</span>
-                  <span>内蔵操作ガイド</span>
-                </div>
-                <div className="premium-pricing-feature-row active">
-                  <span className="check-icon" style={{ color: '#fff' }}>✓</span>
-                  <span>無償アップデート</span>
-                </div>
-                <div className="premium-pricing-feature-row active">
-                  <span className="check-icon" style={{ color: '#e0c184' }}>✓</span>
-                  <strong style={{ color: '#e0c184' }}>高度な台本取得・AI生成</strong>
-                </div>
-                <div className="premium-pricing-feature-row active">
-                  <span className="check-icon" style={{ color: '#e0c184' }}>✓</span>
-                  <strong style={{ color: '#e0c184' }}>高度なYMM4出力設定</strong>
-                </div>
-                <div className="premium-pricing-feature-row active">
-                  <span className="check-icon" style={{ color: '#a2b2ff' }}>✓</span>
-                  <strong style={{ color: '#a2b2ff' }}>複数サイト ネタ自動収集</strong>
-                </div>
-                <div className="premium-pricing-feature-row active">
-                  <span className="check-icon" style={{ color: '#a2b2ff' }}>✓</span>
-                  <strong style={{ color: '#a2b2ff' }}>API連携・高度な自動処理</strong>
-                </div>
-                <div className="premium-pricing-feature-row active">
-                  <span className="check-icon" style={{ color: '#a2b2ff' }}>✓</span>
-                  <strong style={{ color: '#a2b2ff' }}>優先専用サポート</strong>
-                </div>
-              </div>
-            </InteractiveCard>
-          </div>
-
-          {/* Trust Badges */}
-          <motion.div
-            className="trust-badge-bar"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            style={{ position: 'relative', zIndex: 1 }}
-          >
-            <div className="trust-badge-bar__item">
-              <ShieldCheck size={20} color="#4CAF50" />
-              <span>SSL暗号化通信</span>
-            </div>
-            <div className="trust-badge-bar__item">
-              <CheckCircle2 size={20} color="#4CAF50" />
-              <span>無料プランあり</span>
-            </div>
-            <div className="trust-badge-bar__item">
-              <Clock size={20} color="#e0c184" />
-              <span>{legal.support.firstResponseSla}</span>
-            </div>
-            <div className="trust-badge-bar__item">
-              <CreditCard size={20} color="#e0c184" />
-              <span>安心の国内決済</span>
-            </div>
-          </motion.div>
+          <PricingCards />
         </Section>
 
         <Section alt className="home-compact-section home-compact-closing-section">
