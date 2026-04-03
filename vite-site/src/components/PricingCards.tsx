@@ -68,11 +68,31 @@ export function PricingCards() {
             </div>
             <div className="premium-pricing-feature-row active">
               <span className="check-icon">✓</span>
-              <strong style={{ color: '#e0c184' }}>高度な台本取得・AI生成</strong>
+              <strong style={{ color: '#e0c184' }}>動画テンプレート自由作成</strong>
             </div>
             <div className="premium-pricing-feature-row active">
               <span className="check-icon">✓</span>
-              <strong style={{ color: '#e0c184' }}>高度なYMM4出力設定</strong>
+              <strong style={{ color: '#e0c184' }}>あにまん、5ch等のサイト台本取得(50回まで)</strong>
+            </div>
+            <div className="premium-pricing-feature-row active">
+              <span className="check-icon">✓</span>
+              <strong style={{ color: '#e0c184' }}>AI感情分析</strong>
+            </div>
+            <div className="premium-pricing-feature-row active">
+              <span className="check-icon">✓</span>
+              <strong style={{ color: '#e0c184' }}>AI文章校正</strong>
+            </div>
+            <div className="premium-pricing-feature-row active">
+              <span className="check-icon">✓</span>
+              <strong style={{ color: '#e0c184' }}>AI台本生成(20回まで)</strong>
+            </div>
+            <div className="premium-pricing-feature-row active">
+              <span className="check-icon">✓</span>
+              <strong style={{ color: '#e0c184' }}>youtube分析</strong>
+            </div>
+            <div className="premium-pricing-feature-row active">
+              <span className="check-icon">✓</span>
+              <strong style={{ color: '#e0c184' }}>ご要望サポート</strong>
             </div>
             <div className="premium-pricing-feature-row active">
               <span className="check-icon">✓</span>
@@ -100,7 +120,19 @@ export function PricingCards() {
             </div>
             <div className="premium-pricing-feature-row active">
               <span className="check-icon" style={{ color: '#a2b2ff' }}>✓</span>
-              <strong style={{ color: '#a2b2ff' }}>複数サイト ネタ自動収集</strong>
+              <strong style={{ color: '#a2b2ff' }}>サイト台本取得200回＋</strong>
+            </div>
+            <div className="premium-pricing-feature-row active">
+              <span className="check-icon" style={{ color: '#a2b2ff' }}>✓</span>
+              <strong style={{ color: '#a2b2ff' }}>AI台本生成(60回まで)</strong>
+            </div>
+            <div className="premium-pricing-feature-row active">
+              <span className="check-icon" style={{ color: '#a2b2ff' }}>✓</span>
+              <strong style={{ color: '#a2b2ff' }}>取得サイト追加希望対応</strong>
+            </div>
+            <div className="premium-pricing-feature-row active">
+              <span className="check-icon" style={{ color: '#a2b2ff' }}>✓</span>
+              <strong style={{ color: '#a2b2ff' }}>最優先サポート</strong>
             </div>
           </div>
         </InteractiveCard>
