@@ -91,45 +91,43 @@ export const legal = {
     { label: '返金・キャンセルポリシー', url: '/legal/refund-policy/' },
   ],
   pricing: {
-    productName: 'プレミアムLicense',
-    amountIncludingTax: '100,000円（税込）',
-    unitPrice: '100000',
-    currency: 'JPY',
-    modelLabel: '買い切り（継続課金プラン準備中）',
-    subscriptionPreparingLabel: '継続課金プラン（提供準備中）',
-    subscriptionNotice:
-      '継続課金プランは現在提供準備中です。提供開始時期・料金・条件は確定次第、本サイトのお知らせで告知します。',
+    plans: [
+      { name: 'Free', price: '¥0', priceTax: '無料', term: 'ずっと無料', description: '基本機能をフル活用' },
+      { name: 'Standard', price: '¥5,000', priceTax: '税込 5,500円', term: '月額', description: '個人クリエイター向け' },
+      { name: 'Pro', price: '¥10,000', priceTax: '税込 11,000円', term: '月額', description: '圧倒的おすすめ・全機能解放' },
+    ],
+    productName: 'ゆっくりまとめプロセッサー',
+    modelLabel: '月額サブスクリプション（無料プランあり）',
     additionalFees: '銀行振込手数料およびコンビニ支払い手数料は購入者負担',
+    unitPrice: '5000',
+    currency: 'JPY',
   },
   payment: {
-    methods: ['銀行振込', 'PayPal', 'クレジットカード', 'コンビニ支払い'],
-    timing: '注文確定時（前払い）',
+    methods: ['クレジットカード', 'コンビニ支払い', '銀行振込', 'PayPal'],
+    timing: '注文確定時（前払い・月額自動課金）',
     noteBankPaypal:
       '銀行振込・PayPalをご希望の場合はお問い合わせ窓口で案内します。',
     noteOnline: 'クレジットカード・コンビニ支払いはオンライン決済で対応します。',
     deadlineRules: [
-      { method: '銀行振込', limit: '注文日を含む3日以内' },
-      { method: 'PayPal', limit: '注文手続き時に即時決済' },
-      { method: 'クレジットカード', limit: '注文手続き時に即時決済' },
-      {
-        method: 'コンビニ支払い',
-        limit: '注文日を含む2日以内（決済画面に表示される期限に準拠）',
-      },
+      { method: 'クレジットカード', limit: '毎月自動決済' },
+      { method: 'コンビニ支払い', limit: '請求日を含む2日以内' },
+      { method: '銀行振込', limit: '請求日を含む3日以内' },
+      { method: 'PayPal', limit: '自動決済' },
     ],
     unpaidPolicy:
-      '支払期限を経過した注文は自動的にキャンセルとなり、契約は不成立とします。',
+      '支払期限を経過した場合、有料プランの機能は一時停止となります。',
     bankAccountPolicy:
       '銀行振込先情報は不正請求防止のため、問い合わせ受付後に個別案内します。',
   },
   delivery: {
-    timing: '入金確認後1営業日以内に利用案内を送付',
-    method: 'メールにてダウンロード情報またはライセンス情報を提供',
+    timing: '決済完了後、即時にプラン機能が有効化',
+    method: 'アプリ内でのプラン有効化（ライセンスキー方式またはアカウント連携）',
   },
   refund: {
-    summary: 'デジタル商品の性質上、購入後の返金・キャンセルは原則不可',
+    summary: 'サブスクリプションは次回更新日までに解約すれば追加課金なし。日割り返金は原則不可',
     defectiveResponse: '提供不備または重大な不具合がある場合は個別対応',
     procedure: '問い合わせ窓口へ申告後、事実確認のうえ対応方針を案内',
-    defectClaimDeadline: '提供日から7日以内に不備内容を申告してください。',
+    defectClaimDeadline: '課金日から7日以内に不備内容を申告してください。',
     remedyPolicy:
       '不備が確認された場合は、原則として修補または代替手段の提供で対応します。',
     refundMethod:
@@ -138,7 +136,7 @@ export const legal = {
   },
   cancellation: {
     subscription:
-      '継続課金プランは現在提供準備中です。提供開始時期・料金・条件は確定次第、本サイトのお知らせで告知します。現在は買い切りで提供しています。購入後のキャンセルは返金ポリシーに準じます。',
+      '有料プラン（Standard / Pro）はいつでも解約可能です。解約後も当月の残り期間は引き続き利用できます。解約後は自動的にFreeプランへ移行します。',
   },
   support: {
     operationHours: '平日 10:00-18:00（土日祝・年末年始を除く）',
@@ -152,10 +150,10 @@ export const legal = {
     analyticsTools: ['Google Analytics'],
   },
   meta: {
-    legalLastUpdated: '2026-02-11',
-    termsLastUpdated: '2026-02-11',
+    legalLastUpdated: '2026-04-03',
+    termsLastUpdated: '2026-04-03',
     privacyLastUpdated: '2026-02-11',
-    refundLastUpdated: '2026-02-11',
+    refundLastUpdated: '2026-04-03',
   },
 }
 
@@ -255,7 +253,7 @@ export const faqGroups: FaqGroup[] = [
     id: 'faq-purchase',
     label: '購入・契約',
     items: [
-      { question: 'プレミアムLicenseの価格はいくらですか？', answer: '現在の販売価格は100,000円（税込）で、販売モデルは買い切りです。継続課金プランは準備中です。' },
+      { question: 'プレミアムLicenseの価格はいくらですか？', answer: '無料プラン（¥0）、Standard（月額5,000円/税込5,500円）、Pro（月額10,000円/税込11,000円）の3つのプランをご用意しています。まずは無料プランでお試しください。' },
       { question: '購入申し込みはどのように進めますか？', answer: '購入ページで契約条件を確認後、お問い合わせから購入希望をご連絡ください。' },
       { question: '購入前に確認すべき情報は？', answer: '価格、販売モデル、提供時期、返金条件、支払期限を購入ページと法務ページで確認してください。' },
       { question: '契約・請求に関する相談先は？', answer: '記録の残るメール窓口を推奨します。詳細はお問い合わせページを参照してください。' },

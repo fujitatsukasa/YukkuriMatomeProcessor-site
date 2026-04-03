@@ -181,7 +181,7 @@ export function CommercialTransactionsPage() {
                 <tr><th scope="row">所在地</th><td>{legal.organization.postalCode} {legal.organization.addressLine}</td></tr>
                 <tr><th scope="row">電話番号</th><td>{legal.organization.phone}</td></tr>
                 <tr><th scope="row">メールアドレス</th><td><a href={`mailto:${legal.organization.email}`}>{legal.organization.email}</a></td></tr>
-                <tr><th scope="row">販売価格</th><td>{legal.pricing.productName}: {legal.pricing.amountIncludingTax}</td></tr>
+                <tr><th scope="row">販売価格</th><td>{legal.pricing.plans.map(p => `${p.name}: ${p.price}（${p.priceTax}）/ ${p.term}`).join(' ｜ ')}</td></tr>
                 <tr><th scope="row">商品代金以外の必要料金</th><td>{legal.pricing.additionalFees}</td></tr>
                 <tr><th scope="row">支払方法</th><td>{legal.payment.methods.join(', ')}<br />{legal.payment.noteOnline}<br />{legal.payment.noteBankPaypal}</td></tr>
                 <tr><th scope="row">支払時期</th><td>{legal.payment.timing}</td></tr>
