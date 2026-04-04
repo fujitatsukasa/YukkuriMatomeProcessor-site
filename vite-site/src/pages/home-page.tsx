@@ -381,110 +381,158 @@ export function HomePage() {
             aria-hidden="true"
           />
 
-          {/* Refined ambient background — no particles for performance */}
+          {/* Dark overlay to mask SAAS watermark in video */}
+          <div className="hero-video-overlay" aria-hidden="true" />
+
+          {/* Refined ambient background */}
           <div className="hero-ambient-vortex">
             <div className="hero-ambient-orb orb-1" />
             <div className="hero-ambient-orb orb-2" />
+            <div className="hero-ambient-orb orb-3" />
           </div>
           
-          {/* ── Hero: Grid split — text left, multi-screen product right ── */}
-          <div className="hero-grid-split" style={{ position: 'relative', zIndex: 1 }}>
-            <div className="hero-grid-split__text">
-              {/* 無料強調バッジ */}
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '7px 18px', borderRadius: '999px', border: '1px solid rgba(224,193,132,0.35)', background: 'linear-gradient(135deg, rgba(224,193,132,0.12), rgba(224,193,132,0.04))', fontSize: '0.85rem', color: '#e0c184', fontWeight: 600, letterSpacing: '0.02em', marginBottom: 'clamp(0.6rem, 1.5vh, 1rem)' }}
-              >
-                <Sparkles size={14} color="#e0c184" />
-                ずっと無料で使えるAI動画制作ツール
-              </motion.div>
-
-              <h1 className="hero-massive-title">
-                <span className="text-rotator" style={{ display: 'inline-block' }}>
-                  <span className="text-rotator__inner">
-                    <span className="text-glow-green">【反応集】</span>
-                    <span className="text-glow-gold">【ゆっくり解説】</span>
-                    <span className="text-glow-blue">【ショート動画】</span>
-                    <span className="text-glow-green" aria-hidden="true">【反応集】</span>
-                  </span>
-                </span>
-                <br />
-                <span>の面倒な作業をゼロに</span>
-              </h1>
-
-              <motion.p
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                style={{ color: 'rgba(236,233,226,0.8)', fontSize: 'clamp(0.95rem, 1.1vw, 1.1rem)', maxWidth: '520px', margin: 'clamp(0.6rem, 1.2vh, 1rem) 0', lineHeight: 1.7 }}
-              >
-                <strong className="text-glow-gold" style={{ fontWeight: 700 }}>AIが台本を自動生成</strong>。ネタ収集からYMM4出力まで手作業の95%を自動化
-              </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-                className="brand-inline-actions home-compact-hero__actions"
-              >
-                <Link className="brand-btn brand-btn--primary" to="/download/" style={{ padding: '14px 30px', fontSize: '1.05rem' }}>
-                  無料で始める
-                </Link>
-                <Link className="brand-btn brand-btn--ghost" to="/instructions/" style={{ gap: '6px', padding: '14px 24px' }}>
-                  <Play size={16} />
-                  使い方を見る
-                </Link>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.9 }}
-                className="hero-proof-bar"
-                style={{ marginTop: 'clamp(1rem, 2vh, 1.5rem)', justifyContent: 'flex-start' }}
-              >
-                {socialProofStats.map((stat) => (
-                  <div key={stat.label} className="hero-proof-bar__item">
-                    <span className="hero-proof-bar__icon" aria-hidden="true">
-                      <stat.Icon size={18} color="#e0c184" />
-                    </span>
-                    <span className="hero-proof-bar__value">{stat.value}</span>
-                    <span className="hero-proof-bar__label">{stat.label}</span>
-                  </div>
-                ))}
-              </motion.div>
-            </div>
-
-            {/* 右側: 複数画面を重ねた製品ショーケース */}
+          {/* ── Hero: Centered Stage — title DOMINATES ── */}
+          <div className="hero-center-stage" style={{ position: 'relative', zIndex: 1 }}>
+            {/* 無料強調バッジ */}
             <motion.div
-              className="hero-grid-split__media"
-              initial={{ opacity: 0, x: 40, filter: 'blur(10px)' }}
-              animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
-              transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              className="hero-badge-pill"
+              initial={{ opacity: 0, y: 20, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             >
-              <div className="hero-product-stack">
-                {/* メイン画面 — 台本取得 */}
-                <img
-                  src="/product_get_script.png"
-                  alt="台本取得画面"
-                  fetchPriority="high"
-                  className="hero-product-stack__main"
-                />
-                {/* サブ画面1 — AI台本作成（左下に少しずらす） */}
-                <img
-                  src="/product_ai_script.png"
-                  alt="AI台本自動生成画面"
-                  className="hero-product-stack__sub hero-product-stack__sub--1"
-                />
-                {/* サブ画面2 — 台本編集（右上に少しずらす） */}
-                <img
-                  src="/product_edit_script.png"
-                  alt="台本編集画面"
-                  className="hero-product-stack__sub hero-product-stack__sub--2"
-                />
+              <Sparkles size={14} color="#e0c184" />
+              ずっと無料で使えるAI動画制作ツール
+            </motion.div>
+
+            {/* 巨大タイトル — 画面の主役 */}
+            <motion.h1 
+              className="hero-massive-title hero-title-v2"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <span className="text-rotator" style={{ display: 'inline-block' }}>
+                <span className="text-rotator__inner">
+                  <span className="text-glow-green">【反応集】</span>
+                  <span className="text-glow-gold">【ゆっくり解説】</span>
+                  <span className="text-glow-blue">【ショート動画】</span>
+                  <span className="text-glow-green" aria-hidden="true">【反応集】</span>
+                </span>
+              </span>
+              <br />
+              <span className="hero-title-static">の面倒な作業をゼロに</span>
+            </motion.h1>
+
+            {/* サブコピー — ベネフィット訴求 */}
+            <motion.p
+              className="hero-subtitle-v2"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.45 }}
+            >
+              毎回2時間かかる台本作業を、<strong className="text-glow-gold" style={{ fontWeight: 700 }}>たった5分</strong>で完了。
+              <span className="hero-subtitle-v2__sub">ネタ収集からYMM4出力まで手作業の95%をAIで自動化</span>
+            </motion.p>
+
+            {/* 対応環境バー — ヒーロー内に統合 */}
+            <motion.div
+              className="hero-compat-inline"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.55 }}
+            >
+              <div className="hero-compat-inline__item">
+                <Monitor size={15} />
+                <span>Windows 10 / 11</span>
               </div>
+              <div className="hero-compat-inline__sep" />
+              <div className="hero-compat-inline__item">
+                <Sparkles size={15} color="#e0c184" />
+                <span>YMM4 完全対応</span>
+              </div>
+              <div className="hero-compat-inline__sep" />
+              <div className="hero-compat-inline__item">
+                <Sparkles size={15} color="#e0c184" />
+                <span>AI台本生成</span>
+              </div>
+              <div className="hero-compat-inline__sep" />
+              <div className="hero-compat-inline__item">
+                <Download size={15} />
+                <span>オフライン動作</span>
+              </div>
+            </motion.div>
+
+            {/* CTA ボタン */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.65 }}
+              className="brand-inline-actions home-compact-hero__actions hero-cta-row"
+            >
+              <Link className="brand-btn brand-btn--primary hero-cta-primary" to="/download/">
+                無料で始める
+              </Link>
+              <Link className="brand-btn brand-btn--ghost" to="/instructions/" style={{ gap: '6px' }}>
+                <Play size={16} />
+                使い方を見る
+              </Link>
+            </motion.div>
+
+            {/* Social Proof — 大きく目立つバー */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.85 }}
+              className="hero-proof-bar hero-proof-bar--v2"
+            >
+              {socialProofStats.map((stat) => (
+                <div key={stat.label} className="hero-proof-bar__item">
+                  <span className="hero-proof-bar__icon" aria-hidden="true">
+                    <stat.Icon size={20} color="#e0c184" />
+                  </span>
+                  <span className="hero-proof-bar__value">{stat.value}</span>
+                  <span className="hero-proof-bar__label">{stat.label}</span>
+                </div>
+              ))}
+            </motion.div>
+
+            {/* 製品ショーケース — 下部に配置 */}
+            <motion.div
+              className="hero-product-showcase"
+              initial={{ opacity: 0, y: 40, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 1, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <Tilt
+                tiltMaxAngleX={3}
+                tiltMaxAngleY={5}
+                glareEnable={true}
+                glareMaxOpacity={0.08}
+                glareColor="#e0c184"
+                glarePosition="all"
+                glareBorderRadius="16px"
+                perspective={1200}
+                className="hero-product-tilt-wrap"
+              >
+                <div className="hero-product-stack hero-product-stack--v2">
+                  <img
+                    src="/product_get_script.png"
+                    alt="台本取得画面"
+                    fetchPriority="high"
+                    className="hero-product-stack__main"
+                  />
+                  <img
+                    src="/product_ai_script.png"
+                    alt="AI台本自動生成画面"
+                    className="hero-product-stack__sub hero-product-stack__sub--1"
+                  />
+                  <img
+                    src="/product_edit_script.png"
+                    alt="台本編集画面"
+                    className="hero-product-stack__sub hero-product-stack__sub--2"
+                  />
+                </div>
+              </Tilt>
             </motion.div>
           </div>
 
@@ -492,46 +540,22 @@ export function HomePage() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1.5, duration: 0.8 }}
-            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 'clamp(0.5rem, 1vh, 1rem)', gap: '4px' }}
+            transition={{ delay: 1.8, duration: 0.8 }}
+            className="hero-scroll-hint"
           >
             <motion.div
               animate={{ y: [0, 8, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
             >
-              <ChevronDown size={20} color="rgba(255,255,255,0.3)" />
+              <ChevronDown size={22} color="rgba(255,255,255,0.35)" />
             </motion.div>
           </motion.div>
 
         </section>
 
-        {/* ━━━[ Compatibility / Ecosystem Bar ]━━━ */}
-        <div className="compatibility-bar">
-          <div className="compatibility-bar__inner">
-            <span className="compatibility-bar__label">対応環境</span>
-            <div className="compatibility-bar__items">
-              <div className="compatibility-bar__item">
-                <Monitor size={18} />
-                <span>Windows 10 / 11</span>
-              </div>
-              <div className="compatibility-bar__item">
-                <Sparkles size={18} color="#e0c184" />
-                <span>YMM4 完全対応</span>
-              </div>
-              <div className="compatibility-bar__item">
-                <Sparkles size={18} color="#e0c184" />
-                <span>AI台本生成</span>
-              </div>
-              <div className="compatibility-bar__item">
-                <Download size={18} />
-                <span>オフライン動作</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
         {/* ━━━[ Section Glow Divider ]━━━ */}
         <div className="section-glow-divider" />
+
 
         <section className="brand-section brand-section--alt home-compact-section home-presentation-deck" ref={flowRef} style={{ position: 'relative', zIndex: 1, minHeight: '90vh', display: 'flex', alignItems: 'center' }}>
           <div style={{ width: '100%', maxWidth: 1250, margin: '0 auto', display: 'flex', flexDirection: 'column', padding: 'clamp(3rem, 6vh, 6rem) max(1.5rem, 3vw)', position: 'relative', zIndex: 2 }}>

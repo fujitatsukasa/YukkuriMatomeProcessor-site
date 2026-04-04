@@ -11659,3 +11659,418 @@ html {
   border-color: rgba(255, 255, 255, 0.15);
   transform: translateX(4px);
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   HERO V2 — Centered Stage + Pro-Grade Animations
+   タイトルドーンの中央配置 / 全問題修正
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Video overlay to mask SAAS watermark ── */
+.hero-video-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(135deg, rgba(10,10,14,0.92) 0%, rgba(10,10,14,0.5) 35%, transparent 60%),
+    radial-gradient(ellipse at 70% 40%, transparent 30%, rgba(10,10,14,0.4) 100%);
+}
+
+/* ── 3rd ambient orb ── */
+.hero-ambient-orb.orb-3 {
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(90, 180, 255, 0.12), transparent 70%);
+  top: 30%;
+  right: 10%;
+  filter: blur(60px);
+  animation: hero-orb-drift-3 18s ease-in-out infinite alternate;
+}
+@keyframes hero-orb-drift-3 {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+  50% { transform: translate(-30px, 20px) scale(1.15); opacity: 0.6; }
+  100% { transform: translate(20px, -15px) scale(0.9); opacity: 0.35; }
+}
+
+/* ── Centered Stage Container ── */
+.hero-center-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(1.5rem, 4vh, 3rem) clamp(1rem, 3vw, 2rem) 0;
+  gap: clamp(0.6rem, 1.2vh, 1rem);
+}
+
+/* ── Badge Pill ── */
+.hero-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(224,193,132,0.3);
+  background: linear-gradient(135deg, rgba(224,193,132,0.1), rgba(224,193,132,0.03));
+  font-size: 0.85rem;
+  color: #e0c184;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  backdrop-filter: blur(8px);
+}
+
+/* ── Title V2 — MASSIVE, centered, with shimmer ── */
+.hero-title-v2 {
+  text-align: center !important;
+  margin: 0 !important;
+  font-size: clamp(2.8rem, 6vw, 4.8rem) !important;
+  font-weight: 800 !important;
+  line-height: 1.15 !important;
+  letter-spacing: 0.01em !important;
+  color: #fff;
+  position: relative;
+}
+
+/* Title static part shimmer effect */
+.hero-title-static {
+  display: inline-block;
+  background: linear-gradient(
+    105deg,
+    #ffffff 0%,
+    #ffffff 40%,
+    #f0d89a 50%,
+    #ffffff 60%,
+    #ffffff 100%
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: hero-title-shimmer 6s ease-in-out infinite;
+}
+@keyframes hero-title-shimmer {
+  0%, 100% { background-position: 125% center; }
+  50% { background-position: -25% center; }
+}
+
+/* ── Enhanced Text Rotator — smoother transition with glow flash ── */
+.hero-title-v2 .text-rotator {
+  height: 1.18em;
+}
+.hero-title-v2 .text-rotator__inner {
+  animation: rotate-words-v2 10s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+.hero-title-v2 .text-rotator__inner span {
+  height: 1.18em;
+  line-height: 1.18em;
+  position: relative;
+}
+
+@keyframes rotate-words-v2 {
+  0%, 26% { transform: translateY(0); filter: brightness(1); }
+  30% { filter: brightness(1.5); }
+  33%, 59% { transform: translateY(-1.18em); filter: brightness(1); }
+  63% { filter: brightness(1.5); }
+  66%, 92% { transform: translateY(-2.36em); filter: brightness(1); }
+  96% { filter: brightness(1.5); }
+  100% { transform: translateY(-3.54em); filter: brightness(1); }
+}
+
+/* ── Text Glow enhancements for V2 ── */
+.hero-title-v2 .text-glow-green {
+  text-shadow: 0 0 30px rgba(74, 222, 128, 0.3), 0 0 60px rgba(74, 222, 128, 0.1);
+}
+.hero-title-v2 .text-glow-gold {
+  text-shadow: 0 0 30px rgba(224, 193, 132, 0.3), 0 0 60px rgba(224, 193, 132, 0.1);
+}
+.hero-title-v2 .text-glow-blue {
+  text-shadow: 0 0 30px rgba(96, 165, 250, 0.3), 0 0 60px rgba(96, 165, 250, 0.1);
+}
+
+/* ── Subtitle V2 ── */
+.hero-subtitle-v2 {
+  color: rgba(236,233,226,0.85);
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
+  max-width: 600px;
+  margin: 0;
+  line-height: 1.7;
+  text-align: center;
+}
+.hero-subtitle-v2__sub {
+  display: block;
+  color: rgba(236,233,226,0.55);
+  font-size: 0.9em;
+  margin-top: 2px;
+}
+
+/* ── Compatibility Inline Bar ── */
+.hero-compat-inline {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 6px 0;
+}
+.hero-compat-inline__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.5);
+  padding: 0 12px;
+  white-space: nowrap;
+}
+.hero-compat-inline__item svg {
+  opacity: 0.6;
+}
+.hero-compat-inline__sep {
+  width: 1px;
+  height: 14px;
+  background: rgba(255,255,255,0.15);
+  flex-shrink: 0;
+}
+
+/* ── CTA Row ── */
+.hero-cta-row {
+  justify-content: center !important;
+  gap: 1rem !important;
+}
+
+/* ── CTA Primary V2 — Modern, not information-product style ── */
+.hero-cta-primary {
+  padding: 16px 36px !important;
+  font-size: 1.1rem !important;
+}
+
+/* ── Social Proof V2 — Larger, centered ── */
+.hero-proof-bar--v2 {
+  justify-content: center !important;
+  gap: clamp(1.5rem, 3vw, 2.5rem) !important;
+  margin-top: clamp(0.3rem, 0.8vh, 0.6rem) !important;
+}
+.hero-proof-bar--v2 .hero-proof-bar__value {
+  font-size: clamp(1.2rem, 2vw, 1.6rem) !important;
+  font-weight: 800 !important;
+  background: linear-gradient(135deg, #e0c184, #f5e6c8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero-proof-bar--v2 .hero-proof-bar__label {
+  font-size: 0.78rem !important;
+  color: rgba(255,255,255,0.5) !important;
+}
+.hero-proof-bar--v2 .hero-proof-bar__icon {
+  filter: drop-shadow(0 0 6px rgba(224, 193, 132, 0.4));
+}
+
+/* ── Product Showcase — Centered below hero ── */
+.hero-product-showcase {
+  width: 100%;
+  max-width: 900px;
+  margin: clamp(0.5rem, 1.5vh, 1.2rem) auto 0;
+}
+.hero-product-tilt-wrap {
+  width: 100%;
+}
+
+/* ── Product Stack V2 — Better contrast ── */
+.hero-product-stack--v2 {
+  position: relative;
+  width: 100%;
+  perspective: 1200px;
+  overflow: visible;
+  margin: auto;
+}
+.hero-product-stack--v2 .hero-product-stack__main {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  box-shadow:
+    0 25px 60px -12px rgba(0,0,0,0.9),
+    0 0 0 1px rgba(225, 194, 138, 0.25),
+    0 0 80px -20px rgba(224, 193, 132, 0.08);
+  background: #0a0a0f;
+  display: block;
+  /* Brighten the dark app screenshot */
+  filter: brightness(1.15) contrast(1.05);
+}
+.hero-product-stack--v2 .hero-product-stack__sub {
+  position: absolute;
+  width: 50%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 16px 40px -8px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.08);
+  background: #0a0a0f;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease;
+  /* Brighten sub screenshots too */
+  filter: brightness(1.1) contrast(1.05);
+}
+.hero-product-stack--v2 .hero-product-stack__sub--1 {
+  z-index: 4;
+  bottom: -12%;
+  left: -6%;
+  transform: rotateY(5deg) scale(0.82);
+  opacity: 0.85;
+}
+.hero-product-stack--v2 .hero-product-stack__sub--2 {
+  z-index: 4;
+  top: -6%;
+  right: -2%;
+  transform: rotateY(-4deg) scale(0.75);
+  opacity: 0.65;
+}
+.hero-product-stack--v2:hover .hero-product-stack__sub--1 {
+  transform: rotateY(3deg) scale(0.86) translateX(-5px);
+  opacity: 0.95;
+}
+.hero-product-stack--v2:hover .hero-product-stack__sub--2 {
+  transform: rotateY(-2deg) scale(0.8) translateX(5px);
+  opacity: 0.8;
+}
+
+/* ── Scroll Hint ── */
+.hero-scroll-hint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(0.3rem, 0.8vh, 0.8rem) 0 clamp(0.5rem, 1vh, 1rem);
+}
+
+/* ── Ambient Orb Enhancements ── */
+.hero-ambient-orb.orb-1 {
+  animation-duration: 22s !important;
+}
+.hero-ambient-orb.orb-2 {
+  animation-duration: 26s !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE: Hero V2
+   ═══════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .hero-center-stage {
+    padding: clamp(1rem, 3vh, 2rem) 1rem 0;
+    gap: clamp(0.5rem, 1vh, 0.8rem);
+  }
+  .hero-title-v2 {
+    font-size: clamp(1.8rem, 7vw, 2.8rem) !important;
+  }
+  .hero-subtitle-v2 {
+    font-size: 0.95rem;
+  }
+  .hero-compat-inline {
+    gap: 0;
+  }
+  .hero-compat-inline__item {
+    font-size: 0.72rem;
+    padding: 0 8px;
+  }
+  .hero-compat-inline__sep {
+    height: 12px;
+  }
+  .hero-product-showcase {
+    max-width: 100%;
+  }
+  .hero-product-stack--v2 .hero-product-stack__sub {
+    display: none;
+  }
+  .hero-proof-bar--v2 {
+    gap: 1.2rem !important;
+  }
+  .hero-proof-bar--v2 .hero-proof-bar__value {
+    font-size: 1.1rem !important;
+  }
+  .hero-cta-row {
+    flex-direction: column;
+    width: 100%;
+  }
+  .hero-cta-row .brand-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title-v2 {
+    font-size: clamp(1.5rem, 8vw, 2.2rem) !important;
+  }
+  .hero-compat-inline__item {
+    font-size: 0.68rem;
+    padding: 0 6px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CTA MODERNIZATION — Remove "information product" feel
+   クリーンなゴールドソリッド + 上品な呼吸グロー
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Override the rainbow conic-gradient border on hero CTA */
+.hero-cta-primary.brand-btn--primary::before {
+  background: linear-gradient(135deg, rgba(224, 193, 132, 0.6), rgba(224, 193, 132, 0.2)) !important;
+  filter: none !important;
+  animation: hero-cta-glow-breathe 3s ease-in-out infinite !important;
+}
+@keyframes hero-cta-glow-breathe {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.9; }
+}
+
+/* Simplify the surface layer — clean gold, no excessive sheen */
+.hero-cta-primary.brand-btn--primary::after {
+  background: none !important;
+  animation: none !important;
+  box-shadow: none !important;
+}
+
+/* Clean up the button itself — premium gold solid */
+.hero-cta-primary.brand-btn--primary {
+  background:
+    linear-gradient(180deg, #ffe8b8 0%, #d4a44a 100%) !important;
+  border: 2px solid rgba(224, 193, 132, 0.5) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 248, 230, 0.5),
+    0 8px 24px -8px rgba(194, 150, 60, 0.4),
+    0 0 0 0 rgba(224, 193, 132, 0) !important;
+  animation: hero-cta-subtle-glow 3s ease-in-out infinite !important;
+  color: #1a1408 !important;
+  text-shadow: 0 1px 0 rgba(255, 248, 225, 0.2) !important;
+  font-weight: 800 !important;
+}
+@keyframes hero-cta-subtle-glow {
+  0%, 100% {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 248, 230, 0.5),
+      0 8px 24px -8px rgba(194, 150, 60, 0.4),
+      0 0 20px rgba(224, 193, 132, 0.1);
+  }
+  50% {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 248, 230, 0.5),
+      0 8px 24px -8px rgba(194, 150, 60, 0.5),
+      0 0 30px rgba(224, 193, 132, 0.25);
+  }
+}
+
+/* Hover — subtle lift, brighter glow */
+.hero-cta-primary.brand-btn--primary:hover,
+.hero-cta-primary.brand-btn--primary:focus-visible {
+  transform: translateY(-3px) !important;
+  background: linear-gradient(180deg, #fff0cc 0%, #d9ad55 100%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 248, 230, 0.6),
+    0 12px 32px -8px rgba(194, 150, 60, 0.5),
+    0 0 40px rgba(224, 193, 132, 0.2) !important;
+}
+.hero-cta-primary.brand-btn--primary:hover::before,
+.hero-cta-primary.brand-btn--primary:focus-visible::before {
+  opacity: 1 !important;
+}

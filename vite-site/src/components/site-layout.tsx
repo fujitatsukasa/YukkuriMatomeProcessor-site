@@ -243,9 +243,7 @@ export function SiteLayout() {
 
           <div className="header-actions brand-header__actions home-compact-cta__actions" style={{ margin: 0, padding: 0 }}>
             <ActionLink action={secondaryCta} className="header-cta brand-btn" />
-            <div style={{ transform: 'scale(0.8)', transformOrigin: 'right center' }}>
-              <ActionLink action={customPrimaryCta} className="brand-btn" />
-            </div>
+            <ActionLink action={customPrimaryCta} className="brand-btn" />
           </div>
         </div>
       </header>
