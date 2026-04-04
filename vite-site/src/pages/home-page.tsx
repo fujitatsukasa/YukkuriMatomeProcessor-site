@@ -387,87 +387,105 @@ export function HomePage() {
             <div className="hero-ambient-orb orb-2" />
           </div>
           
-          {/* ── Hero content: centered single-column layout ── */}
-          <div className="hero-centered-stack" style={{ position: 'relative', zIndex: 1 }}>
+          {/* ── Hero: Grid split — text left, multi-screen product right ── */}
+          <div className="hero-grid-split" style={{ position: 'relative', zIndex: 1 }}>
+            <div className="hero-grid-split__text">
+              {/* 無料強調バッジ */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '7px 18px', borderRadius: '999px', border: '1px solid rgba(224,193,132,0.35)', background: 'linear-gradient(135deg, rgba(224,193,132,0.12), rgba(224,193,132,0.04))', fontSize: '0.85rem', color: '#e0c184', fontWeight: 600, letterSpacing: '0.02em', marginBottom: 'clamp(0.6rem, 1.5vh, 1rem)' }}
+              >
+                <Sparkles size={14} color="#e0c184" />
+                ずっと無料で使えるAI動画制作ツール
+              </motion.div>
 
-            {/* 無料強調バッジ — 最上部 */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '8px 20px', borderRadius: '999px', border: '1px solid rgba(224,193,132,0.35)', background: 'linear-gradient(135deg, rgba(224,193,132,0.12), rgba(224,193,132,0.04))', fontSize: '0.88rem', color: '#e0c184', fontWeight: 600, letterSpacing: '0.02em' }}
-            >
-              <Sparkles size={14} color="#e0c184" />
-              ずっと無料で使えるAI動画制作ツール
-            </motion.div>
-
-            {/* メイン見出し — 超大型・中央配置 */}
-            <motion.h1
-              className="hero-massive-title"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              style={{ textAlign: 'center', margin: '0' }}
-            >
-              <span className="text-rotator" style={{ display: 'inline-block' }}>
-                <span className="text-rotator__inner">
-                  <span className="text-glow-green">【反応集】</span>
-                  <span className="text-glow-gold">【ゆっくり解説】</span>
-                  <span className="text-glow-blue">【ショート動画】</span>
-                  <span className="text-glow-green" aria-hidden="true">【反応集】</span>
-                </span>
-              </span>
-              <br />
-              <span>の面倒な作業をゼロに</span>
-            </motion.h1>
-
-            {/* サブコピー — AI機能の補足 */}
-            <motion.p
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              style={{ color: 'rgba(236,233,226,0.8)', fontSize: 'clamp(1rem, 1.2vw, 1.15rem)', maxWidth: '640px', margin: '0 auto', lineHeight: 1.75, textAlign: 'center' }}
-            >
-              <strong className="text-glow-gold" style={{ fontWeight: 700 }}>AIが台本を自動生成</strong>、ネタ収集からYMM4出力まで手作業の95%を自動化。<br />
-              <span style={{ opacity: 0.7 }}>クレジットカード不要・インストールするだけですぐ使えます</span>
-            </motion.p>
-
-            {/* CTA ボタン群 — 既存グロー維持 */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="brand-inline-actions home-compact-hero__actions"
-              style={{ justifyContent: 'center' }}
-            >
-              <Link className="brand-btn brand-btn--primary" to="/download/" style={{ padding: '16px 36px', fontSize: '1.1rem' }}>
-                無料で始める
-              </Link>
-              <Link className="brand-btn brand-btn--ghost" to="/instructions/" style={{ gap: '6px', padding: '14px 28px' }}>
-                <Play size={16} />
-                使い方を見る
-              </Link>
-            </motion.div>
-
-            {/* 実績バー */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 1 }}
-              className="hero-proof-bar"
-              style={{ marginTop: 'clamp(0.6rem, 1.5vh, 1.2rem)', justifyContent: 'center' }}
-            >
-              {socialProofStats.map((stat) => (
-                <div key={stat.label} className="hero-proof-bar__item">
-                  <span className="hero-proof-bar__icon" aria-hidden="true">
-                    <stat.Icon size={18} color="#e0c184" />
+              <h1 className="hero-massive-title">
+                <span className="text-rotator" style={{ display: 'inline-block' }}>
+                  <span className="text-rotator__inner">
+                    <span className="text-glow-green">【反応集】</span>
+                    <span className="text-glow-gold">【ゆっくり解説】</span>
+                    <span className="text-glow-blue">【ショート動画】</span>
+                    <span className="text-glow-green" aria-hidden="true">【反応集】</span>
                   </span>
-                  <span className="hero-proof-bar__value">{stat.value}</span>
-                  <span className="hero-proof-bar__label">{stat.label}</span>
-                </div>
-              ))}
-            </motion.div>
+                </span>
+                <br />
+                <span>の面倒な作業をゼロに</span>
+              </h1>
 
+              <motion.p
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                style={{ color: 'rgba(236,233,226,0.8)', fontSize: 'clamp(0.95rem, 1.1vw, 1.1rem)', maxWidth: '520px', margin: 'clamp(0.6rem, 1.2vh, 1rem) 0', lineHeight: 1.7 }}
+              >
+                <strong className="text-glow-gold" style={{ fontWeight: 700 }}>AIが台本を自動生成</strong>。ネタ収集からYMM4出力まで手作業の95%を自動化
+              </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                className="brand-inline-actions home-compact-hero__actions"
+              >
+                <Link className="brand-btn brand-btn--primary" to="/download/" style={{ padding: '14px 30px', fontSize: '1.05rem' }}>
+                  無料で始める
+                </Link>
+                <Link className="brand-btn brand-btn--ghost" to="/instructions/" style={{ gap: '6px', padding: '14px 24px' }}>
+                  <Play size={16} />
+                  使い方を見る
+                </Link>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.9 }}
+                className="hero-proof-bar"
+                style={{ marginTop: 'clamp(1rem, 2vh, 1.5rem)', justifyContent: 'flex-start' }}
+              >
+                {socialProofStats.map((stat) => (
+                  <div key={stat.label} className="hero-proof-bar__item">
+                    <span className="hero-proof-bar__icon" aria-hidden="true">
+                      <stat.Icon size={18} color="#e0c184" />
+                    </span>
+                    <span className="hero-proof-bar__value">{stat.value}</span>
+                    <span className="hero-proof-bar__label">{stat.label}</span>
+                  </div>
+                ))}
+              </motion.div>
+            </div>
+
+            {/* 右側: 複数画面を重ねた製品ショーケース */}
+            <motion.div
+              className="hero-grid-split__media"
+              initial={{ opacity: 0, x: 40, filter: 'blur(10px)' }}
+              animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+              transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <div className="hero-product-stack">
+                {/* メイン画面 — 台本取得 */}
+                <img
+                  src="/product_get_script.png"
+                  alt="台本取得画面"
+                  fetchPriority="high"
+                  className="hero-product-stack__main"
+                />
+                {/* サブ画面1 — AI台本作成（左下に少しずらす） */}
+                <img
+                  src="/product_ai_script.png"
+                  alt="AI台本自動生成画面"
+                  className="hero-product-stack__sub hero-product-stack__sub--1"
+                />
+                {/* サブ画面2 — 台本編集（右上に少しずらす） */}
+                <img
+                  src="/product_edit_script.png"
+                  alt="台本編集画面"
+                  className="hero-product-stack__sub hero-product-stack__sub--2"
+                />
+              </div>
+            </motion.div>
           </div>
 
           {/* Scroll indicator */}
@@ -486,23 +504,6 @@ export function HomePage() {
           </motion.div>
 
         </section>
-
-        {/* ━━━[ 製品スクリーンショット — ヒーロー直下、フルワイド ]━━━ */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-50px' }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          style={{ maxWidth: '1100px', margin: '-2rem auto 0', padding: '0 clamp(1rem, 3vw, 2rem)', position: 'relative', zIndex: 2 }}
-        >
-          <img
-            src="/product_get_script.png"
-            alt="ゆっくりまとめプロセッサーの実際の操作画面"
-            fetchPriority="high"
-            className="hero-product-image-clean"
-            style={{ borderRadius: '14px', boxShadow: '0 30px 60px -15px rgba(0,0,0,0.8), 0 0 0 1px rgba(225, 194, 138, 0.25), 0 0 80px -20px rgba(224, 193, 132, 0.15)' }}
-          />
-        </motion.div>
 
         {/* ━━━[ Compatibility / Ecosystem Bar ]━━━ */}
         <div className="compatibility-bar">
