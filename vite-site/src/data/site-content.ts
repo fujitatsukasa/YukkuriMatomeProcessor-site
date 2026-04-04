@@ -50,6 +50,7 @@ export const siteDescription =
   '動画編集の前処理から台本整理、制作運用までを効率化する日本語向けワークフロー支援ツール。'
 
 export const navItems: NavItem[] = [
+  { key: 'home', label: 'ホーム', url: '/' },
   { key: 'download', label: 'ダウンロード', url: '/download/' },
   { key: 'instructions', label: '機能と使い方', url: '/instructions/' },
   { key: 'purchase', label: '料金', url: '/purchase/' },
