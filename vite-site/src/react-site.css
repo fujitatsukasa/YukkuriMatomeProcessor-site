@@ -11611,7 +11611,7 @@ html {
 
 /* ━━━ Content Pages (SaaS Clean Layout) ━━━ */
 .content-page {
-  max-width: 800px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 2rem 0;
   color: rgba(255, 255, 255, 0.85);
@@ -11658,6 +11658,11 @@ html {
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.15);
   transform: translateX(4px);
+}
+
+/* ━━━ Legal Page Narrow Layout ━━━ */
+.legal-page--narrow {
+  max-width: 900px;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
