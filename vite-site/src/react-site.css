@@ -12119,13 +12119,13 @@ html {
 .hero-title-static {
   background: linear-gradient(
     105deg,
-    rgba(255,255,255,0.9) 0%,
-    rgba(255,255,255,0.9) 30%,
-    #f0c050 46%,
-    #ffe0a0 50%,
-    #f0c050 54%,
-    rgba(255,255,255,0.9) 70%,
-    rgba(255,255,255,0.9) 100%
+    #e8d5a8 0%,
+    #e8d5a8 28%,
+    #ffffff 44%,
+    #fffbe6 50%,
+    #ffffff 56%,
+    #e8d5a8 72%,
+    #e8d5a8 100%
   ) !important;
   background-size: 300% 100% !important;
   -webkit-background-clip: text !important;
@@ -12142,23 +12142,25 @@ html {
 /* ── FIX 4: プロダクト画像を1画面に収める ── */
 .hero-product-showcase {
   max-width: 750px !important;
-  max-height: clamp(180px, 22vh, 280px) !important;
-  overflow: hidden !important;
+  max-height: clamp(200px, 25vh, 320px) !important;
+  overflow: visible !important;
   margin-top: clamp(0.3rem, 0.8vh, 0.6rem) !important;
   position: relative;
+  /* clip at the bottom while allowing sub-images to overflow sides */
+  clip-path: inset(0 -10% 0 -10%);
+  -webkit-clip-path: inset(0 -10% 0 -10%);
 }
 /* 下端をグラデーションフェードで自然に消す */
 .hero-product-showcase::after {
   content: "";
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 40%;
-  background: linear-gradient(to top, var(--bg-body, #0a0a0f) 0%, transparent 100%);
+  bottom: -20px;
+  left: -10%;
+  right: -10%;
+  height: 50%;
+  background: linear-gradient(to top, var(--bg-body, #0a0a0f) 5%, transparent 100%);
   pointer-events: none;
   z-index: 10;
-  border-radius: 0 0 14px 14px;
 }
 
 /* ── FIX 5: 要素間の垂直ギャップを圧縮 ── */
