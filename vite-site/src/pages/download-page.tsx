@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { PageIntro, PageMeta, Section } from '@/components/ui'
 import { media } from '@/data/assets'
-import { downloadUrl, latestReleaseUrl, changeLogUrl, releasesUrl, tagsUrl } from '@/data/site-content'
+import { downloadUrl } from '@/data/site-content'
 
 export function DownloadPage() {
 
@@ -45,40 +45,6 @@ export function DownloadPage() {
                 <li>任意のフォルダに解凍して `YukkuriMatomeProcessor.exe` を起動</li>
                 <li><Link to="/instructions/">使い方ガイド</Link> に沿って初回設定を行う</li>
               </ol>
-            </div>
-          </div>
-        </div>
-      </Section>
-
-      <Section alt>
-        <div className="content-page">
-          <h2>アップデート情報</h2>
-          <div className="content-page__grid-2">
-            <div>
-              <h3 style={{ color: '#fff', marginBottom: '1rem' }}>最新バージョン</h3>
-              <p>最新版は以下から直接ダウンロードできます。更新前に現在の設定をバックアップしてください。</p>
-              <div className="brand-inline-actions" style={{ marginTop: '1.5rem' }}>
-                <a className="brand-btn brand-btn--primary" href={downloadUrl}>最新版をダウンロード</a>
-                <a className="brand-btn brand-btn--ghost" href={latestReleaseUrl} target="_blank" rel="noopener noreferrer">リリースノートを確認</a>
-              </div>
-            </div>
-            <div>
-              <h3 style={{ color: '#fff', marginBottom: '1rem' }}>更新時の確認事項</h3>
-              <ul className="brand-list">
-                <li>更新前に現在の設定をバックアップ</li>
-                <li>作業手順に変更がある場合は<Link to="/instructions/">使い方ページ</Link>を再確認</li>
-                <li>問題発生時は<Link to="/faq/">FAQ</Link>と<Link to="/contact/">お問い合わせ窓口</Link>を利用</li>
-              </ul>
-            </div>
-          </div>
-
-          <div style={{ marginTop: '3rem' }}>
-            <h3 style={{ color: '#fff', marginBottom: '1rem' }}>変更履歴</h3>
-            <p>各バージョンの変更点はCHANGELOGおよびGitHub Releasesで確認できます。</p>
-            <div className="content-page__link-list">
-              <a href={changeLogUrl} target="_blank" rel="noopener noreferrer">CHANGELOG を確認 →</a>
-              <a href={releasesUrl} target="_blank" rel="noopener noreferrer">全リリース一覧 →</a>
-              <a href={tagsUrl} target="_blank" rel="noopener noreferrer">タグ一覧 →</a>
             </div>
           </div>
         </div>
