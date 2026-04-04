@@ -14,6 +14,8 @@ export function NewsPage() {
         image={media.goldBokeh}
         path="/news/"
       />
+
+      <main className="brand-shell">
       <PageIntro
         kicker="お知らせ"
         title="最新のお知らせ"
@@ -21,7 +23,7 @@ export function NewsPage() {
       />
 
       <Section>
-        <div className="brand-shell content-page">
+        <div className="content-page">
           <ol className="timeline">
             {newsPosts.map((post) => (
               <li key={post.path}>
@@ -31,6 +33,7 @@ export function NewsPage() {
           </ol>
         </div>
       </Section>
+      </main>
     </>
   )
 }

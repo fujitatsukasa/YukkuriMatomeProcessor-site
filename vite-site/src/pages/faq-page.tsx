@@ -13,6 +13,8 @@ export function FaqPage() {
         image={media.goldMetallic}
         path="/faq/"
       />
+
+      <main className="brand-shell">
       <PageIntro
         kicker="FAQ"
         title="導入前後によくある質問"
@@ -20,7 +22,7 @@ export function FaqPage() {
       />
 
       <Section>
-        <div className="brand-shell content-page">
+        <div className="content-page">
           <div style={{ marginBottom: '4rem' }}>
             <h2>目次</h2>
             <ul className="brand-list" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: '1rem' }}>
@@ -53,6 +55,7 @@ export function FaqPage() {
           </div>
         </div>
       </Section>
+      </main>
     </>
   )
 }

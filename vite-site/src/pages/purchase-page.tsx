@@ -16,6 +16,8 @@ export function PurchasePage() {
         image={media.officeLuxury}
         path="/purchase/"
       />
+
+      <main className="brand-shell">
       <PageIntro
         kicker="Pricing"
         title="あなたの制作スタイルに合わせた料金プラン"
@@ -29,7 +31,7 @@ export function PurchasePage() {
 
       {/* ━━━[ Contract Details ]━━━ */}
       <Section>
-        <div className="brand-shell brand-grid brand-grid--2">
+        <div className="brand-grid brand-grid--2">
           <InteractiveCard className="release-panel premium-glass">
             <h2>契約に関する重要事項</h2>
             <dl className="purchase-summary">
@@ -82,6 +84,7 @@ export function PurchasePage() {
           </InteractiveCard>
         </div>
       </Section>
+      </main>
     </>
   )
 }

@@ -13,6 +13,8 @@ export function UpdatePage() {
         image={media.abstractGold}
         path="/update/"
       />
+
+      <main className="brand-shell">
       <PageIntro
         kicker="Release Hub"
         title="アップデート情報"
@@ -20,7 +22,7 @@ export function UpdatePage() {
       />
 
       <Section>
-        <div className="brand-shell content-page">
+        <div className="content-page">
           <div className="content-page__grid-2">
             <div>
               <h2>最新バージョン</h2>
@@ -43,7 +45,7 @@ export function UpdatePage() {
       </Section>
 
       <Section alt>
-        <div className="brand-shell content-page">
+        <div className="content-page">
           <h2>変更履歴</h2>
           <p>各バージョンの変更点はCHANGELOGおよびGitHub Releasesで確認できます。</p>
           <div className="content-page__link-list">
@@ -53,6 +55,7 @@ export function UpdatePage() {
           </div>
         </div>
       </Section>
+      </main>
     </>
   )
 }

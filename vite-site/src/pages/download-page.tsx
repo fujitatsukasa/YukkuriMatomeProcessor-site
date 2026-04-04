@@ -13,6 +13,8 @@ export function DownloadPage() {
         image={media.modernWorkspace}
         path="/download/"
       />
+
+      <main className="brand-shell">
       <PageIntro
         kicker="ダウンロード"
         title="最新版を入手する"
@@ -20,7 +22,7 @@ export function DownloadPage() {
       />
 
       <Section>
-        <div className="brand-shell content-page">
+        <div className="content-page">
           <div className="content-page__grid-2">
             <div>
               <h2>導入前チェック</h2>
@@ -46,6 +48,7 @@ export function DownloadPage() {
           </div>
         </div>
       </Section>
+      </main>
     </>
   )
 }
@@ -60,6 +63,8 @@ export function InstructionsPage() {
         image={media.verticalMonitor}
         path="/instructions/"
       />
+
+      <main className="brand-shell">
       <PageIntro
         kicker="使い方ガイド"
         title="初期設定から編集開始まで"
@@ -67,7 +72,7 @@ export function InstructionsPage() {
       />
 
       <Section>
-        <div className="brand-shell content-page">
+        <div className="content-page">
           <h2>手順1：初期設定（必須）</h2>
           <p>初回起動時はまず設定を完了させる必要があります。</p>
           <ul className="brand-list">
@@ -93,6 +98,7 @@ export function InstructionsPage() {
           <p><Link to="/faq/">その他のトラブルシューティングはこちら</Link></p>
         </div>
       </Section>
+      </main>
     </>
   )
 }

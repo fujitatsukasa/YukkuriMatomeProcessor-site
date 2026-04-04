@@ -13,6 +13,8 @@ export function ContactPage() {
         image={media.workspaceComputer}
         path="/contact/"
       />
+
+      <main className="brand-shell">
       <PageIntro
         kicker="お問い合わせ"
         title="お問い合わせ窓口"
@@ -20,7 +22,7 @@ export function ContactPage() {
       />
 
       <Section>
-        <div className="brand-shell content-page">
+        <div className="content-page">
           <h2>サポートチャンネル</h2>
           <ul className="brand-list">
             {supportChannels.map((channel) => (
@@ -60,6 +62,7 @@ export function ContactPage() {
           </div>
         </div>
       </Section>
+      </main>
     </>
   )
 }

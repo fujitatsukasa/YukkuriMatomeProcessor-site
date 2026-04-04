@@ -1,32 +1,7 @@
-import { InteractiveCard, PageMeta, Section } from '@/components/ui'
+import { InteractiveCard, PageIntro, PageMeta, Section } from '@/components/ui'
 import { legal } from '@/data/site-content'
 import { media } from '@/data/assets'
 import { LegalLinksBlock } from '@/pages/shared'
-
-function LegalIntro({
-  kicker,
-  title,
-  lead,
-  updatedAt,
-  narrow = false,
-}: {
-  kicker: string
-  title: string
-  lead: string
-  updatedAt: string
-  narrow?: boolean
-}) {
-  return (
-    <Section>
-      <div className={`brand-shell legal-page${narrow ? ' legal-page--narrow' : ''}`}>
-        <p className="brand-kicker">{kicker}</p>
-        <h1>{title}</h1>
-        <p className="brand-lead">{lead}</p>
-        <p className="legal-updated">最終更新日: {updatedAt}</p>
-      </div>
-    </Section>
-  )
-}
 
 export function TermsPage() {
   return (
@@ -38,9 +13,16 @@ export function TermsPage() {
         image={media.hallway}
         path="/legal/terms/"
       />
-      <LegalIntro kicker="利用規約" title="利用規約" lead="本規約は、ゆっくりまとめプロセッサーの利用条件を定めるものです。" updatedAt={legal.meta.termsLastUpdated} narrow />
+
+      <main className="brand-shell">
+      <PageIntro
+        kicker="利用規約"
+        title="利用規約"
+        lead="本規約は、ゆっくりまとめプロセッサーの利用条件を定めるものです"
+      />
       <Section>
-        <div className="brand-shell legal-page legal-page--narrow">
+        <div className="content-page legal-page legal-page--narrow">
+          <p className="legal-updated">最終更新日: {legal.meta.termsLastUpdated}</p>
           <h2>第1条（適用）</h2>
           <p>本規約は、当社が提供する本サービスの利用に関する一切の関係に適用されます。</p>
           <h2>第2条（利用許諾）</h2>
@@ -63,6 +45,7 @@ export function TermsPage() {
           <LegalLinksBlock />
         </div>
       </Section>
+      </main>
     </>
   )
 }
@@ -77,9 +60,16 @@ export function PrivacyPolicyPage() {
         image={media.workstationDark}
         path="/legal/privacy/"
       />
-      <LegalIntro kicker="個人情報保護" title="プライバシーポリシー" lead="当社は、利用者の個人情報を関連法令と社内規程に基づいて適切に取り扱います。" updatedAt={legal.meta.privacyLastUpdated} narrow />
+
+      <main className="brand-shell">
+      <PageIntro
+        kicker="個人情報保護"
+        title="プライバシーポリシー"
+        lead="当社は、利用者の個人情報を関連法令と社内規程に基づいて適切に取り扱います"
+      />
       <Section>
-        <div className="brand-shell legal-page legal-page--narrow">
+        <div className="content-page legal-page legal-page--narrow">
+          <p className="legal-updated">最終更新日: {legal.meta.privacyLastUpdated}</p>
           <h2>1. 取得する情報</h2>
           <ul className="brand-list">
             <li>問い合わせ時に提供される氏名、メールアドレス、連絡内容</li>
@@ -113,6 +103,7 @@ export function PrivacyPolicyPage() {
           <LegalLinksBlock />
         </div>
       </Section>
+      </main>
     </>
   )
 }
@@ -127,9 +118,16 @@ export function RefundPolicyPage() {
         image={media.colorGrade}
         path="/legal/refund-policy/"
       />
-      <LegalIntro kicker="返金条件" title="返金・キャンセルポリシー" lead={`本ポリシーは、${legal.pricing.productName}の購入契約成立後に適用される返金・キャンセル条件を定めるものです。`} updatedAt={legal.meta.refundLastUpdated} narrow />
+
+      <main className="brand-shell">
+      <PageIntro
+        kicker="返金条件"
+        title="返金・キャンセルポリシー"
+        lead={`本ポリシーは、${legal.pricing.productName}の購入契約成立後に適用される返金・キャンセル条件を定めるものです`}
+      />
       <Section>
-        <div className="brand-shell legal-page legal-page--narrow">
+        <div className="content-page legal-page legal-page--narrow">
+          <p className="legal-updated">最終更新日: {legal.meta.refundLastUpdated}</p>
           <h2>1. 基本方針</h2>
           <p>{legal.refund.summary}</p>
           <h2>2. 例外的な返金対応</h2>
@@ -156,6 +154,7 @@ export function RefundPolicyPage() {
           <LegalLinksBlock />
         </div>
       </Section>
+      </main>
     </>
   )
 }
@@ -170,9 +169,16 @@ export function CommercialTransactionsPage() {
         image={media.lobby1}
         path="/legal/commercial-transactions/"
       />
-      <LegalIntro kicker="特商法" title="特定商取引法に基づく表記" lead="通信販売に必要な表示事項です。購入前に必ず確認してください。" updatedAt={legal.meta.legalLastUpdated} />
+
+      <main className="brand-shell">
+      <PageIntro
+        kicker="特商法"
+        title="特定商取引法に基づく表記"
+        lead="通信販売に必要な表示事項です。購入前に必ず確認してください"
+      />
       <Section alt>
-        <div className="brand-shell legal-page">
+        <div className="legal-page">
+          <p className="legal-updated">最終更新日: {legal.meta.legalLastUpdated}</p>
           <div className="legal-table-wrap" data-reveal>
             <table className="legal-table">
               <tbody>
@@ -199,6 +205,7 @@ export function CommercialTransactionsPage() {
           <LegalLinksBlock />
         </div>
       </Section>
+      </main>
     </>
   )
 }
