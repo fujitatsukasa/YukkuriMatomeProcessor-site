@@ -12074,3 +12074,117 @@ html {
 .hero-cta-primary.brand-btn--primary:focus-visible::before {
   opacity: 1 !important;
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   FINAL POLISH — 100点到達のための6修正
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── FIX 1: タイトル上部の空白削減 ── */
+.home-compact-hero .hero-center-stage {
+  padding-top: clamp(0.5rem, 1.5vh, 1.2rem) !important;
+}
+.home-compact-hero {
+  padding-top: clamp(8px, 1.5vh, 16px) !important;
+  padding-bottom: clamp(8px, 1.5vh, 16px) !important;
+}
+
+/* ── FIX 2: ヘッダーCTAのレインボーボーダー排除 ── */
+.home-compact-cta__actions .brand-btn--primary::before {
+  background: linear-gradient(135deg, rgba(224, 193, 132, 0.5), rgba(224, 193, 132, 0.15)) !important;
+  filter: none !important;
+  animation: hero-cta-glow-breathe 3s ease-in-out infinite !important;
+}
+.home-compact-cta__actions .brand-btn--primary::after {
+  background: none !important;
+  animation: none !important;
+}
+.home-compact-cta__actions .brand-btn--primary {
+  background: linear-gradient(180deg, #ffe8b8 0%, #d4a44a 100%) !important;
+  border: 2px solid rgba(224, 193, 132, 0.4) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 248, 230, 0.5),
+    0 6px 18px -6px rgba(194, 150, 60, 0.35) !important;
+  animation: hero-cta-subtle-glow 3s ease-in-out infinite !important;
+}
+.home-compact-cta__actions .brand-btn--primary:hover,
+.home-compact-cta__actions .brand-btn--primary:focus-visible {
+  transform: translateY(-2px) !important;
+  background: linear-gradient(180deg, #fff0cc 0%, #d9ad55 100%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 248, 230, 0.6),
+    0 10px 28px -6px rgba(194, 150, 60, 0.45) !important;
+}
+
+/* ── FIX 3: タイトルシマーを目立たせる ── */
+.hero-title-static {
+  background: linear-gradient(
+    105deg,
+    rgba(255,255,255,0.9) 0%,
+    rgba(255,255,255,0.9) 30%,
+    #f0c050 46%,
+    #ffe0a0 50%,
+    #f0c050 54%,
+    rgba(255,255,255,0.9) 70%,
+    rgba(255,255,255,0.9) 100%
+  ) !important;
+  background-size: 300% 100% !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  animation: hero-title-shimmer-v2 4s ease-in-out infinite !important;
+}
+@keyframes hero-title-shimmer-v2 {
+  0% { background-position: 150% center; }
+  100% { background-position: -50% center; }
+}
+
+/* ── FIX 4: プロダクト画像を1画面に収める ── */
+.hero-product-showcase {
+  max-width: 750px !important;
+  max-height: clamp(180px, 22vh, 280px) !important;
+  overflow: hidden !important;
+  margin-top: clamp(0.3rem, 0.8vh, 0.6rem) !important;
+  position: relative;
+}
+/* 下端をグラデーションフェードで自然に消す */
+.hero-product-showcase::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(to top, var(--bg-body, #0a0a0f) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 10;
+  border-radius: 0 0 14px 14px;
+}
+
+/* ── FIX 5: 要素間の垂直ギャップを圧縮 ── */
+.hero-center-stage {
+  gap: clamp(0.35rem, 0.7vh, 0.6rem) !important;
+}
+.hero-cta-row {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+.hero-proof-bar--v2 {
+  margin-top: clamp(0.1rem, 0.3vh, 0.3rem) !important;
+}
+
+/* ── FIX 6: 背景動画の存在感UP ── */
+.home-compact-hero .home-compact-hero__video-bg {
+  opacity: 0.28 !important;
+  filter: saturate(1.4) brightness(0.8) !important;
+}
+@keyframes hero-video-fade-in {
+  from { opacity: 0; }
+  to { opacity: 0.28; }
+}
+/* オーバーレイも少し透かす */
+.hero-video-overlay {
+  background:
+    linear-gradient(135deg, rgba(10,10,14,0.85) 0%, rgba(10,10,14,0.35) 35%, transparent 55%),
+    radial-gradient(ellipse at 70% 40%, transparent 30%, rgba(10,10,14,0.25) 100%) !important;
+}
