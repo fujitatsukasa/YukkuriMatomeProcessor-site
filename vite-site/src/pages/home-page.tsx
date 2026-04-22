@@ -829,7 +829,7 @@ export function HomePage() {
               transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             >
               <Sparkles size={14} color="#e0c184" />
-              無料プランあり / Windows向け動画制作支援
+              無料プランあり / ネタ探しから YMM4 前準備まで
             </motion.div>
 
             {/* ヒーローの一撃を狭くして、何のソフトかを即座に伝える */}
@@ -839,8 +839,8 @@ export function HomePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             >
-              <span className="hero-title-mobile-prefix">テンプレ運用を軸に、ネタ探しから YMM4 前準備まで</span>
-              <span className="hero-title-lead">動画の前工程を</span>
+              <span className="hero-title-mobile-prefix">対応サイト取得、台本整理、AI 補助、YMM4 前準備まで</span>
+              <span className="hero-title-lead">動画制作の前工程を</span>
               <br />
               <span className="text-glow-gold hero-title-focus">ひとつの運用線</span>
               <span className="hero-title-static">にまとめる</span>
@@ -853,8 +853,8 @@ export function HomePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.45 }}
             >
-              対応サイト取得、台本整理、AI補助、`.ymmp` / CSV 整理までを <strong className="text-glow-gold" style={{ fontWeight: 700 }}>同じフロー</strong> に集約。
-              <span className="hero-subtitle-v2__sub">単発の台本取得ツールではなく、継続投稿の前工程を崩れにくくするための制作基盤です。</span>
+              対応サイト取得、台本整理、AI 補助、`.ymmp` / CSV 整理までを <strong className="text-glow-gold" style={{ fontWeight: 700 }}>ひとつの運用線</strong> に集約。
+              <span className="hero-subtitle-v2__sub">単発の取得ツールではなく、継続投稿を崩れにくくする前工程の制作基盤です。</span>
             </motion.p>
 
             {/* CTA ボタン */}

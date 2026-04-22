@@ -79,6 +79,29 @@ export function BlogPost() {
     [headings],
   )
 
+  const articleDigestCards = useMemo(
+    () => [
+      {
+        label: '向いている読者',
+        title: meta?.tags?.slice(0, 2).join(' / ') || '制作フロー改善',
+        body: '単発ノウハウで終わらせず、テンプレ運用や YMM4 前準備へ戻したい人向けです。',
+      },
+      {
+        label: 'この記事で掴むこと',
+        title: `${Math.max(headings.length, 1)}つの論点`,
+        body: headings.length
+          ? `${headings[0]} から ${headings[Math.min(headings.length - 1, 2)]} まで順に整理します。`
+          : '導入から運用までの要点を順番に整理します。',
+      },
+      {
+        label: '読み終えた後',
+        title: '実作業へ戻しやすい',
+        body: '本文の後半に関連記事を置き、使い方ページとダウンロードへ戻しやすくしています。',
+      },
+    ],
+    [headings, meta?.tags],
+  )
+
   const relatedPosts = useMemo(() => {
     const currentTags = new Set(meta?.tags ?? [])
 
@@ -276,6 +299,16 @@ export function BlogPost() {
                   <strong>要点 → 本文 → 関連記事</strong>
                 </div>
               </div>
+            </InteractiveCard>
+
+            <InteractiveCard className="release-panel premium-glass blog-article-digest">
+              {articleDigestCards.map((card) => (
+                <div key={card.label} className="blog-article-digest__card">
+                  <span>{card.label}</span>
+                  <strong>{card.title}</strong>
+                  <p>{card.body}</p>
+                </div>
+              ))}
             </InteractiveCard>
 
             <article className="markdown-body brand-article blog-article-prose">
