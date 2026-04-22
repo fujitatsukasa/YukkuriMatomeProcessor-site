@@ -337,6 +337,33 @@ const publicProofRoutes = [
 
 const publicNewsEntries = [...newsPosts].reverse().slice(0, 3)
 
+const heroShowcaseScenes = [
+  {
+    eyebrow: 'STEP 01',
+    title: '対応サイト / スレッドから素材を集める',
+    body: '反応集や解説の前工程で、ネタ探しと台本の下地づくりを一箇所へ寄せます。',
+    caption: '対応サイト 20+ / スレッド処理',
+    image: '/product_get_script.png',
+    Icon: FileSearch,
+  },
+  {
+    eyebrow: 'STEP 02',
+    title: 'AI台本と役割テンプレで会話を整える',
+    body: '13キャラ対応のAI台本、役割テンプレ、性格プリセットで会話の型を作りやすくしています。',
+    caption: '13キャラAI / 役割テンプレ',
+    image: '/product_ai_script.png',
+    Icon: Bot,
+  },
+  {
+    eyebrow: 'STEP 03',
+    title: '編集前に文章整形と読みやすさを揃える',
+    body: '文章整形、感情分析、テロップ改行補助を前工程で済ませて、YMM4へ入る前の手戻りを減らします。',
+    caption: '文章整形 / 改行補助 / 感情分析',
+    image: '/product_edit_script.png',
+    Icon: PencilLine,
+  },
+] as const
+
 const operationBoundary = {
   automated: {
     eyebrow: 'SOFTWARE DOES',
@@ -559,6 +586,8 @@ export function HomePage() {
   // Browser frame 3D tilt on scroll
     
   const [activeSlide, setActiveSlide] = useState(0)
+  const [activeHeroScene, setActiveHeroScene] = useState(0)
+  const [activeOperationStage, setActiveOperationStage] = useState(0)
   const isAutoPlayingRef = useRef(true)
 
   // ━━━[ Floating CTA visibility ]━━━
@@ -611,11 +640,28 @@ export function HomePage() {
   // ━━━[ Auto Carousel Logic ]━━━
   useEffect(() => {
     if (!isAutoPlayingRef.current || !isFlowInView) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     const timer = setInterval(() => {
       setActiveSlide((prev) => (prev + 1) % presentationSlides.length)
     }, 8000)
     return () => clearInterval(timer)
   }, [activeSlide, isFlowInView])
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const timer = window.setInterval(() => {
+      setActiveHeroScene((prev) => (prev + 1) % heroShowcaseScenes.length)
+    }, 4200)
+    return () => window.clearInterval(timer)
+  }, [])
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const timer = window.setInterval(() => {
+      setActiveOperationStage((prev) => (prev + 1) % operationStageCards.length)
+    }, 4300)
+    return () => window.clearInterval(timer)
+  }, [])
 
   const handleSlideChange = (index: number) => {
     isAutoPlayingRef.current = false
@@ -624,6 +670,8 @@ export function HomePage() {
 
   const activePresentationSlide = presentationSlides[activeSlide]
   const ActiveSlideIcon = activePresentationSlide.Icon
+  const activeHeroShowcase = heroShowcaseScenes[activeHeroScene]
+  const heroPreviewScenes = heroShowcaseScenes.filter((_, index) => index !== activeHeroScene)
 
 
   return (
@@ -794,6 +842,51 @@ export function HomePage() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 1, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
             >
+              <div className="hero-live-command-shell">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeHeroShowcase.title}
+                    className="hero-live-command"
+                    initial={{ opacity: 0, y: 18, filter: 'blur(8px)' }}
+                    animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                    exit={{ opacity: 0, y: -18, filter: 'blur(8px)' }}
+                    transition={{ duration: 0.35 }}
+                  >
+                    <span>{activeHeroShowcase.eyebrow}</span>
+                    <strong>{activeHeroShowcase.title}</strong>
+                    <p>{activeHeroShowcase.body}</p>
+                  </motion.div>
+                </AnimatePresence>
+
+                <div className="hero-live-steps" role="tablist" aria-label="ヒーローのライブプレビュー">
+                  {heroShowcaseScenes.map((scene, index) => {
+                    const SceneIcon = scene.Icon
+                    const isActive = index === activeHeroScene
+                    return (
+                      <button
+                        type="button"
+                        key={scene.title}
+                        className={`hero-live-step${isActive ? ' is-active' : ''}`}
+                        onClick={() => setActiveHeroScene(index)}
+                        aria-pressed={isActive}
+                      >
+                        <span className="hero-live-step__eyebrow">{scene.eyebrow}</span>
+                        <span className="hero-live-step__body">
+                          <span className="hero-live-step__icon" aria-hidden="true">
+                            <SceneIcon size={16} />
+                          </span>
+                          <span>
+                            <strong>{scene.title}</strong>
+                            <small>{scene.caption}</small>
+                          </span>
+                        </span>
+                        <span className="hero-live-step__progress" aria-hidden="true" />
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
+
               <Tilt
                 tiltMaxAngleX={3}
                 tiltMaxAngleY={5}
@@ -806,22 +899,45 @@ export function HomePage() {
                 className="hero-product-tilt-wrap"
               >
                 <div className="hero-product-stack hero-product-stack--v2">
-                  <img
-                    src="/product_get_script.png"
-                    alt="台本取得画面"
-                    fetchPriority="high"
-                    className="hero-product-stack__main"
-                  />
-                  <img
-                    src="/product_ai_script.png"
-                    alt="AI台本自動生成画面"
-                    className="hero-product-stack__sub hero-product-stack__sub--1"
-                  />
-                  <img
-                    src="/product_edit_script.png"
-                    alt="台本編集画面"
-                    className="hero-product-stack__sub hero-product-stack__sub--2"
-                  />
+                  <AnimatePresence mode="wait">
+                    <motion.img
+                      key={activeHeroShowcase.image}
+                      src={activeHeroShowcase.image}
+                      alt={activeHeroShowcase.title}
+                      fetchPriority="high"
+                      className="hero-product-stack__main hero-product-stack__main--live"
+                      initial={{ opacity: 0, scale: 1.03, y: 24 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      exit={{ opacity: 0, scale: 0.97, y: -24 }}
+                      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                    />
+                  </AnimatePresence>
+
+                  {heroPreviewScenes.map((scene, index) => (
+                    <motion.img
+                      key={scene.title}
+                      src={scene.image}
+                      alt={scene.title}
+                      className={`hero-product-stack__sub hero-product-stack__sub--${index + 1}`}
+                      initial={{ opacity: 0 }}
+                      animate={{
+                        opacity: index === 0 ? 0.9 : 0.72,
+                        y: index === 0 ? [0, -8, 0] : [0, 8, 0],
+                        rotate: index === 0 ? [-4, -1.5, -4] : [4, 1.5, 4],
+                        scale: index === 0 ? [0.82, 0.86, 0.82] : [0.74, 0.78, 0.74],
+                      }}
+                      transition={{
+                        duration: 6.4 + index * 0.4,
+                        repeat: Infinity,
+                        ease: 'easeInOut',
+                      }}
+                    />
+                  ))}
+
+                  <div className="hero-product-stack__live-badge" aria-hidden="true">
+                    <span>{activeHeroShowcase.caption}</span>
+                    <strong>LIVE PREVIEW</strong>
+                  </div>
                 </div>
               </Tilt>
             </motion.div>
@@ -942,6 +1058,12 @@ export function HomePage() {
                       <strong>{activePresentationSlide.proof}</strong>
                     </div>
                     <div className="home-flow-visual-card__screen">
+                      <motion.div
+                        className="home-flow-visual-card__scan"
+                        aria-hidden="true"
+                        animate={{ x: ['-35%', '115%'] }}
+                        transition={{ duration: 4.2, repeat: Infinity, ease: 'linear' }}
+                      />
                       {activePresentationSlide.images.map((imgSrc, imgIndex) => (
                         <motion.div
                           key={`${activeSlide}-${imgIndex}`}
@@ -985,6 +1107,7 @@ export function HomePage() {
                             <small>{slide.sub}</small>
                           </span>
                         </span>
+                        <span className="home-flow-step__progress" aria-hidden="true" />
                       </button>
                     )
                   })}
@@ -1399,6 +1522,24 @@ export function HomePage() {
             </p>
           </motion.div>
 
+          <div className="home-internal-proof__stage-nav" role="tablist" aria-label="導入後の流れの段階">
+            {operationStageCards.map((card, index) => {
+              const isActive = index === activeOperationStage
+              return (
+                <button
+                  type="button"
+                  key={card.title}
+                  className={`home-internal-proof__stage-tab${isActive ? ' is-active' : ''}`}
+                  onClick={() => setActiveOperationStage(index)}
+                  aria-pressed={isActive}
+                >
+                  <span>{card.eyebrow}</span>
+                  <strong>{card.title}</strong>
+                </button>
+              )
+            })}
+          </div>
+
           <div className="home-v3-proof" style={{ position: 'relative', zIndex: 1, width: 'min(1180px, calc(100% - 48px))', margin: '0 auto' }}>
             <motion.div
               className="home-v3-before-after"
@@ -1441,8 +1582,13 @@ export function HomePage() {
               viewport={{ once: true, margin: '-10%' }}
               transition={{ duration: 0.6, delay: 0.05, ease: 'easeOut' }}
             >
-              {operationStageCards.map((card) => (
-                <article key={card.title} className="home-v3-proof-card home-internal-proof-card">
+              {operationStageCards.map((card, index) => (
+                <motion.article
+                  key={card.title}
+                  className={`home-v3-proof-card home-internal-proof-card${index === activeOperationStage ? ' is-active' : ''}`}
+                  animate={index === activeOperationStage ? { y: -8, scale: 1.01 } : { y: 0, scale: 1 }}
+                  transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                >
                   <div className="home-internal-proof-card__top">
                     <div>
                       <span>{card.eyebrow}</span>
@@ -1454,11 +1600,19 @@ export function HomePage() {
                   </div>
 
                   <div className="workflow-visual__screen home-internal-proof-card__screen">
-                    <img
+                    <motion.img
                       src={card.image}
                       alt={`${card.title}の実画面`}
                       loading="lazy"
                       decoding="async"
+                      animate={index === activeOperationStage ? { scale: 1.035, y: -10 } : { scale: 1, y: 0 }}
+                      transition={{ duration: 0.45, ease: 'easeOut' }}
+                    />
+                    <motion.div
+                      className="home-internal-proof-card__scan"
+                      aria-hidden="true"
+                      animate={index === activeOperationStage ? { x: ['-45%', '120%'] } : { x: '-45%' }}
+                      transition={index === activeOperationStage ? { duration: 4, repeat: Infinity, ease: 'linear' } : { duration: 0.2 }}
                     />
                   </div>
 
@@ -1472,7 +1626,7 @@ export function HomePage() {
                       </li>
                     ))}
                   </ul>
-                </article>
+                </motion.article>
               ))}
             </motion.div>
           </div>
