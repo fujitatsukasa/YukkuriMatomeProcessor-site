@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test'
 
 const pages = [
-  { path: '/', heading: 'を前工程にまとめる' },
+  { path: '/', heading: 'ひとつの運用線にまとめる' },
   { path: '/download/', heading: '最新版を入手する' },
   { path: '/instructions/', heading: '初期設定から編集開始まで' },
   { path: '/faq/', heading: '導入前後によくある質問' },

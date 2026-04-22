@@ -364,6 +364,87 @@ const heroShowcaseScenes = [
   },
 ] as const
 
+const storySections = [
+  { key: 'hero', label: '導入価値', selector: '.home-compact-hero' },
+  { key: 'process', label: '制作フロー', selector: '.home-compact-process-section' },
+  { key: 'results', label: '成果イメージ', selector: '.home-compact-usecase-section' },
+  { key: 'ops', label: '運用の芯', selector: '.home-internal-proof-section' },
+  { key: 'decision', label: '導入判断', selector: '.home-compact-price-section' },
+] as const
+
+const heroDeliverableChips = [
+  '台本ドラフト',
+  'AI補助',
+  '`.ymmp` 追加',
+  'CSV / YMM4前準備',
+] as const
+
+const outcomeStories = [
+  {
+    key: 'reaction',
+    tabLabel: '5ch / 反応集',
+    eyebrow: 'OUTPUT 01',
+    title: '最初の1本を、前工程ごと一本の導線で組み立てやすい',
+    body: '反応集や 5ch まとめで、ネタ収集からテンプレ整理、タイトルの叩き台、YMM4 前準備までを一本の制作線として見せます。',
+    source: useCasesData[0],
+    artifact: '/blog_thumb_2ch_v16.png',
+    artifactLabel: 'FINISH IMAGE',
+    artifactTitle: '反応集のサムネと見せ方の叩き台まで、一画面で判断',
+    artifactBody: '台本取得だけで終わらせず、タイトル案や見せ方の叩き台まで同じ判断線に乗せます。',
+    deliverables: ['記事 URL 一括入力', '台本ドラフト', '`.ymmp` 追加', 'タイトル整理'],
+    points: [
+      '記事取得 -> 台本化 -> 自動動画作成の一本導線で、前工程のどこで止まるかが見えやすい',
+      '複数スレッド比較と自動取得をまとめて見せるので、運用の入口が分かりやすい',
+      '最初の1本の流れを掴んだあと、そのまま量産導線へ寄せやすい',
+    ],
+    metricLabel: '見えるようになること',
+    metricValue: '1本目の流れが掴みやすい',
+    metricBody: '「結局どう回すソフトか」が一画面で伝わり、導入判断のズレを減らします。',
+  },
+  {
+    key: 'explain',
+    tabLabel: '解説 / ショート',
+    eyebrow: 'OUTPUT 02',
+    title: '掛け合いと場面転換まで、一本の画面で整理しやすい',
+    body: '感情、改行、話者、役割テンプレの軸を一箇所で整えることで、解説やショートでも使い回せる掛け合いの下地を作りやすくします。',
+    source: useCasesData[1],
+    artifact: '/blog_thumb_script_v16.png',
+    artifactLabel: 'STORY SAMPLE',
+    artifactTitle: '解説動画の画面密度と掛け合いの型を同時に揃える',
+    artifactBody: '誰が喋るか、どこで感情を切り替えるか、どの場面で字幕を折るかを前工程で揃えます。',
+    deliverables: ['役割テンプレ', '13キャラAI台本', '感情 / 改行補助', 'YMM4前準備'],
+    points: [
+      '解説と聞き役の役割を崩さず、掛け合いの型を前工程で揃えやすい',
+      'AI 補助だけに頼らず、役割テンプレと感情補助を混ぜて整えられる',
+      '編集前に台詞の流れを詰めるので、後から直す違和感を減らせる',
+    ],
+    metricLabel: '見えるようになること',
+    metricValue: '解説と掛け合いの型が揃う',
+    metricBody: '感情線と役割を揃えてから編集へ渡せるので、後工程の迷いを減らします。',
+  },
+  {
+    key: 'template',
+    tabLabel: 'テンプレ運用',
+    eyebrow: 'OUTPUT 03',
+    title: '`.ymmp` と CSV で、次のテンプレートへ増やしやすい',
+    body: 'このソフトで本当に強いのは、単発の一本より、テンプレと YMM4 前準備の型を増やしながら継続投稿へ繋げられることです。',
+    source: useCasesData[3],
+    artifact: '/blog_thumb_automation_v16.png',
+    artifactLabel: 'FORMAT EXPANSION',
+    artifactTitle: '運用の型を増やして、次の量産導線のみに集中できる',
+    artifactBody: '単発の一本で終わらせず、`.ymmp` や CSV を積み上げて次の型へ横展開しやすくします。',
+    deliverables: ['`.ymmp` 追加', 'CSV プロジェクト', 'YMM4 設定メモ', '台本蓄積'],
+    points: [
+      '運用の型を増やしながら、次に作る動画を同じ導線へ寄せられる',
+      '既存テンプレートと YMM4 設定の使い回しを前提に、量産時の判断を軽くできる',
+      '次の企画に迷わず入れるので、継続投稿の再現性を上げやすい',
+    ],
+    metricLabel: '見えるようになること',
+    metricValue: '1本から次の型へ増やしやすい',
+    metricBody: 'テンプレの型を積み上げて回せるので、継続投稿の再現性を作りやすくします。',
+  },
+] as const
+
 const operationBoundary = {
   automated: {
     eyebrow: 'SOFTWARE DOES',
@@ -579,6 +660,8 @@ export function HomePage() {
   const isFlowInView = useMotionInView(flowRef, { amount: 0.2, once: true })
   const chartRef = useRef<HTMLDivElement>(null)
   const isChartInView = useMotionInView(chartRef, { amount: 0.2, once: true })
+  const outcomesRef = useRef<HTMLDivElement>(null)
+  const isOutcomesInView = useMotionInView(outcomesRef, { amount: 0.25 })
 
   const { scrollY } = useScroll()
   // Subtle parallax translation
@@ -587,7 +670,9 @@ export function HomePage() {
     
   const [activeSlide, setActiveSlide] = useState(0)
   const [activeHeroScene, setActiveHeroScene] = useState(0)
+  const [activeOutcomeStory, setActiveOutcomeStory] = useState(0)
   const [activeOperationStage, setActiveOperationStage] = useState(0)
+  const [activeStorySection, setActiveStorySection] = useState<(typeof storySections)[number]['key']>('hero')
   const isAutoPlayingRef = useRef(true)
 
   // ━━━[ Floating CTA visibility ]━━━
@@ -595,6 +680,7 @@ export function HomePage() {
   useEffect(() => {
     const handleScroll = () => {
       const heroEnd = document.querySelector('.home-compact-hero')?.getBoundingClientRect()
+      const resultsSection = document.querySelector('.home-compact-usecase-section')?.getBoundingClientRect()
       const internalProofSection = document.querySelector('.home-internal-proof-section')?.getBoundingClientRect()
       const trustSection = document.querySelector('.testimonials-section-wrap')?.getBoundingClientRect()
       const pricingSection = document.querySelector('.home-compact-price-section')?.getBoundingClientRect()
@@ -609,6 +695,8 @@ export function HomePage() {
       const viewportHeight = window.innerHeight
       const pastHero = heroEnd.bottom < viewportHeight * 0.28
       const reachedCta = ctaSection.top < viewportHeight * 0.92
+      const overlappingResults =
+        !!resultsSection && resultsSection.top < viewportHeight * 0.85 && resultsSection.bottom > viewportHeight * 0.15
       const overlappingTrust =
         !!trustSection && trustSection.top < viewportHeight * 0.8 && trustSection.bottom > viewportHeight * 0.15
       const overlappingPricing =
@@ -621,6 +709,7 @@ export function HomePage() {
       setShowFloatingCta(
         pastHero &&
         !reachedCta &&
+        !overlappingResults &&
         !overlappingInternalProof &&
         !overlappingTrust &&
         !overlappingPricing &&
@@ -663,6 +752,57 @@ export function HomePage() {
     return () => window.clearInterval(timer)
   }, [])
 
+  useEffect(() => {
+    if (!isOutcomesInView) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const timer = window.setInterval(() => {
+      setActiveOutcomeStory((prev) => (prev + 1) % outcomeStories.length)
+    }, 5600)
+    return () => window.clearInterval(timer)
+  }, [isOutcomesInView])
+
+  useEffect(() => {
+    const updateActiveStorySection = () => {
+      const viewportHeight = window.innerHeight
+      const visibleSections = storySections
+        .map((section) => {
+          const rect = document.querySelector(section.selector)?.getBoundingClientRect()
+          if (!rect) return null
+          return { key: section.key, rect }
+        })
+        .filter((entry): entry is { key: (typeof storySections)[number]['key']; rect: DOMRect } => entry !== null)
+
+      const current = visibleSections.find(
+        ({ rect }) => rect.top <= viewportHeight * 0.34 && rect.bottom >= viewportHeight * 0.34,
+      )
+
+      if (current) {
+        setActiveStorySection(current.key)
+        return
+      }
+
+      const nearest = visibleSections.reduce<{ key: (typeof storySections)[number]['key']; distance: number } | null>(
+        (best, { key, rect }) => {
+          const distance = Math.abs(rect.top - viewportHeight * 0.34)
+          if (!best || distance < best.distance) return { key, distance }
+          return best
+        },
+        null,
+      )
+
+      if (nearest) setActiveStorySection(nearest.key)
+    }
+
+    updateActiveStorySection()
+    window.addEventListener('scroll', updateActiveStorySection, { passive: true })
+    window.addEventListener('resize', updateActiveStorySection)
+
+    return () => {
+      window.removeEventListener('scroll', updateActiveStorySection)
+      window.removeEventListener('resize', updateActiveStorySection)
+    }
+  }, [])
+
   const handleSlideChange = (index: number) => {
     isAutoPlayingRef.current = false
     setActiveSlide(index)
@@ -672,6 +812,14 @@ export function HomePage() {
   const ActiveSlideIcon = activePresentationSlide.Icon
   const activeHeroShowcase = heroShowcaseScenes[activeHeroScene]
   const heroPreviewScenes = heroShowcaseScenes.filter((_, index) => index !== activeHeroScene)
+  const activeOutcomePanel = outcomeStories[activeOutcomeStory]
+  const ActiveOutcomeIcon = activeOutcomePanel.source.Icon
+
+  const scrollToStorySection = (selector: string) => {
+    const target = document.querySelector(selector)
+    if (!target) return
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
 
 
   return (
@@ -742,63 +890,43 @@ export function HomePage() {
               無料プランあり / Windows向け動画制作支援
             </motion.div>
 
-            {/* 巨大タイトル — 画面の主役 */}
+            {/* ヒーローの一撃を狭くして、何のソフトかを即座に伝える */}
             <motion.h1 
               className="hero-massive-title hero-title-v2"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             >
-              <span className="hero-title-mobile-prefix">テンプレ運用・AI台本補助・YMM4前準備</span>
-              <span className="text-rotator" style={{ display: 'inline-block' }}>
-                <span className="text-rotator__inner">
-                  <span className="text-glow-green">【テンプレ運用】</span>
-                  <span className="text-glow-gold">【AI台本補助】</span>
-                  <span className="text-glow-blue">【YMM4前準備】</span>
-                  <span className="text-glow-green" aria-hidden="true">【テンプレ運用】</span>
-                </span>
-              </span>
+              <span className="hero-title-mobile-prefix">テンプレ運用を軸に、ネタ探しから YMM4 前準備まで</span>
+              <span className="hero-title-lead">動画の前工程を</span>
               <br />
-              <span className="hero-title-static">を前工程にまとめる</span>
+              <span className="text-glow-gold hero-title-focus">ひとつの運用線</span>
+              <span className="hero-title-static">にまとめる</span>
             </motion.h1>
 
-            {/* サブコピー — ベネフィット訴求 */}
+            {/* サブコピー — 説明ではなく導入後の価値に寄せる */}
             <motion.p
               className="hero-subtitle-v2"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.45 }}
             >
-              対応サイト取得、台本整理、AI補助、YMM4前準備を、<strong className="text-glow-gold" style={{ fontWeight: 700 }}>ひとつの導線</strong>に集約。
-              <span className="hero-subtitle-v2__sub">単発の台本取得で終わらず、`.ymmp` 追加や CSV 生成まで同じ流れで進められる制作支援ツールです。</span>
+              対応サイト取得、台本整理、AI補助、`.ymmp` / CSV 整理までを <strong className="text-glow-gold" style={{ fontWeight: 700 }}>同じフロー</strong> に集約。
+              <span className="hero-subtitle-v2__sub">単発の台本取得ツールではなく、継続投稿の前工程を崩れにくくするための制作基盤です。</span>
             </motion.p>
 
-            {/* 対応環境バー — ヒーロー内に統合 */}
+            {/* ヒーローで最終的に手元に残るものを先に見せる */}
             <motion.div
-              className="hero-compat-inline"
+              className="hero-deliverable-badges-wrap"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.55 }}
             >
-              <div className="hero-compat-inline__item">
-                <Monitor size={15} />
-                <span>Windows 10 / 11</span>
-              </div>
-              <div className="hero-compat-inline__sep" />
-              <div className="hero-compat-inline__item">
-                <Sparkles size={15} color="#e0c184" />
-                <span>YMM4前提</span>
-              </div>
-              <div className="hero-compat-inline__sep" />
-              <div className="hero-compat-inline__item">
-                <Sparkles size={15} color="#e0c184" />
-                <span>13キャラAI台本</span>
-              </div>
-              <div className="hero-compat-inline__sep" />
-              <div className="hero-compat-inline__item">
-                <BadgeCheck size={15} />
-                <span>2営業日以内に一次回答</span>
-              </div>
+              <ul className="home-v3-hero__badges hero-deliverable-badges" role="list" aria-label="このソフトで整えやすい成果物">
+                {heroDeliverableChips.map((chip) => (
+                  <li key={chip} role="listitem">{chip}</li>
+                ))}
+              </ul>
             </motion.div>
 
             {/* CTA ボタン */}
@@ -806,7 +934,7 @@ export function HomePage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.65 }}
-              className="brand-inline-actions home-compact-hero__actions hero-cta-row"
+              className="brand-inline-actions home-compact-hero__actions home-v3-hero__actions hero-cta-row"
             >
               <Link className="brand-btn brand-btn--primary hero-cta-primary" to="/download/">
                 無料プランを試す
@@ -962,6 +1090,34 @@ export function HomePage() {
 
         {/* ━━━[ Section Glow Divider ]━━━ */}
         <div className="section-glow-divider" />
+
+        <motion.section
+          className="home-story-rail-wrap"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-8%' }}
+          transition={{ duration: 0.55 }}
+          aria-label="ページ内ストーリーガイド"
+        >
+          <div className="home-story-rail">
+            <span className="home-story-rail__eyebrow">SCROLL STORY</span>
+            <div className="home-story-rail__track" role="tablist" aria-label="ホームの読みどころ">
+              {storySections.map((section, index) => (
+                <button
+                  key={section.key}
+                  type="button"
+                  role="tab"
+                  aria-selected={activeStorySection === section.key}
+                  className={`home-story-rail__item${activeStorySection === section.key ? ' is-active' : ''}`}
+                  onClick={() => scrollToStorySection(section.selector)}
+                >
+                  <span className="home-story-rail__index">{String(index + 1).padStart(2, '0')}</span>
+                  <span className="home-story-rail__label">{section.label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </motion.section>
 
 
         <section className="brand-section brand-section--alt home-compact-section home-presentation-deck" ref={flowRef}>
@@ -1305,64 +1461,106 @@ export function HomePage() {
             <p>どんな動画でもと言い切るより、テンプレート次第で多様な動画形式へ寄せやすいのが正確です。実際の運用イメージごとに、どこが効くかを整理しています。</p>
           </motion.div>
 
-          <div className="home-compact-usecase-grid" role="list" style={{ position: 'relative', zIndex: 1, width: '100%', maxWidth: '1000px', margin: '0 auto' }}>
-            {useCasesData.map((item, idx) => (
-              <motion.article
-                key={item.title}
-                className="home-usecase-card"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-10%" }}
-                transition={{ duration: 0.6, delay: idx * 0.12 }}
-                role="listitem"
-                style={{
-                  '--usecase-accent': item.iconColor,
-                  '--usecase-border': item.borderColor,
-                  '--usecase-gradient': item.gradient,
-                } as React.CSSProperties}
-              >
-                <div className="home-usecase-card__media">
-                  <img
-                    src={item.image}
-                    alt={`${item.title}の実画面イメージ`}
-                    className="home-usecase-card__image"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <div className="home-usecase-card__veil" aria-hidden="true" />
-                  <div className="home-usecase-card__badge">
-                    <item.Icon size={16} color={item.iconColor} strokeWidth={2} />
-                    <span>{item.eyebrow}</span>
-                  </div>
-                  <div className="home-usecase-card__metric">{item.metric}</div>
-                </div>
+          <div
+            ref={outcomesRef}
+            className="usecase-switcher"
+            style={{ position: 'relative', zIndex: 1, width: '100%', maxWidth: '1080px', margin: '0 auto' }}
+          >
+            <div className="usecase-switcher__tabs" role="tablist" aria-label="成果イメージの切り替え">
+              {outcomeStories.map((story, index) => (
+                <button
+                  key={story.key}
+                  type="button"
+                  role="tab"
+                  aria-selected={activeOutcomeStory === index}
+                  className={activeOutcomeStory === index ? 'is-active' : ''}
+                  onClick={() => setActiveOutcomeStory(index)}
+                >
+                  {story.tabLabel}
+                </button>
+              ))}
+            </div>
 
-                <div className="home-usecase-card__body">
-                  <div className="home-usecase-card__title-row">
-                    <div className="home-usecase-card__icon" aria-hidden="true">
-                      <item.Icon size={24} color={item.iconColor} strokeWidth={2} />
-                    </div>
-                    <div>
-                      <span>{item.eyebrow}</span>
-                      <h3>{item.title}</h3>
-                    </div>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeOutcomePanel.key}
+                className="usecase-switcher__panel usecase-switcher__panel--story"
+                initial={{ opacity: 0, y: 24, filter: 'blur(10px)' }}
+                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                exit={{ opacity: 0, y: -20, filter: 'blur(10px)' }}
+                transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <div className="usecase-switcher__content">
+                  <div className="usecase-switcher__intro">
+                    <span>{activeOutcomePanel.eyebrow}</span>
+                    <strong>{activeOutcomePanel.title}</strong>
+                    <p>{activeOutcomePanel.body}</p>
                   </div>
-                  <p>{item.body}</p>
-                  <ul className="home-usecase-card__highlights">
-                    {item.highlights.map((highlight) => (
-                      <li key={highlight}>
-                        <span className="home-usecase-card__highlights-dot" aria-hidden="true" />
-                        <span>{highlight}</span>
+
+                  <div className="usecase-switcher__metric">
+                    <span>{activeOutcomePanel.metricLabel}</span>
+                    <strong>{activeOutcomePanel.metricValue}</strong>
+                    <p>{activeOutcomePanel.metricBody}</p>
+                  </div>
+
+                  <div className="usecase-switcher__deliverables" role="list" aria-label="このケースで整えやすい成果物">
+                    {activeOutcomePanel.deliverables.map((deliverable) => (
+                      <div key={deliverable} role="listitem" className="usecase-switcher__deliverable">
+                        <BadgeCheck size={15} />
+                        <span>{deliverable}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <ul className="usecase-switcher__points">
+                    {activeOutcomePanel.points.map((point) => (
+                      <li key={point}>
+                        <span className="usecase-switcher__points-dot" aria-hidden="true" />
+                        <span>{point}</span>
                       </li>
                     ))}
                   </ul>
-                  <div className="home-usecase-card__result">
-                    <strong>向いている運用</strong>
-                    <span>{item.result}</span>
-                  </div>
                 </div>
-              </motion.article>
-            ))}
+
+                <div className="usecase-switcher__sample">
+                  <span>{activeOutcomePanel.source.eyebrow}</span>
+                  <div className="usecase-switcher__sample-head">
+                    <div className="usecase-switcher__sample-icon" aria-hidden="true">
+                      <ActiveOutcomeIcon size={18} />
+                    </div>
+                    <div>
+                      <strong>{activeOutcomePanel.source.title}</strong>
+                      <p>{activeOutcomePanel.source.metric}</p>
+                    </div>
+                  </div>
+
+                  <div className="usecase-switcher__screen">
+                    <img
+                      src={activeOutcomePanel.source.image}
+                      alt={`${activeOutcomePanel.source.title}の実画面`}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+
+                  <article className="usecase-switcher__artifact">
+                    <div className="usecase-switcher__artifact-copy">
+                      <span>{activeOutcomePanel.artifactLabel}</span>
+                      <strong>{activeOutcomePanel.artifactTitle}</strong>
+                      <p>{activeOutcomePanel.artifactBody}</p>
+                    </div>
+                    <div className="usecase-switcher__artifact-thumb">
+                      <img
+                        src={activeOutcomePanel.artifact}
+                        alt={`${activeOutcomePanel.tabLabel}の成果イメージ`}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </div>
+                  </article>
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </Section>
 
