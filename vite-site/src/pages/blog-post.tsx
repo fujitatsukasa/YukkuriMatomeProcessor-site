@@ -3,7 +3,7 @@ import { Navigate, Link, useParams } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
-import { ArrowLeft, ArrowRight, Calendar, Clock3, Download, FileText, User } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Calendar, Clock3, FileText, User } from 'lucide-react'
 import { InteractiveCard, PageMeta, Section } from '@/components/ui'
 import { getAllBlogPosts, getBlogPostBySlug, resolveBlogVisual } from '@/lib/blog'
 import { siteTitle } from '@/data/site-content'
@@ -201,23 +201,15 @@ export function BlogPost() {
               </div>
             ) : null}
 
-            <div className="brand-inline-actions blog-article-hero__actions">
-              <Link className="brand-btn brand-btn--primary" to="/download/">
-                <Download size={18} />
-                無料で始める
-              </Link>
-              <Link className="brand-btn brand-btn--ghost" to="/instructions/">
-                機能と使い方を見る
-              </Link>
-            </div>
           </div>
 
           <InteractiveCard className="release-panel premium-glass blog-article-hero__visual">
             <img src={articleVisual} alt={meta.title} className="blog-article-hero__image" />
 
             <div className="blog-article-hero__visual-copy">
-              <span className="subpage-card__eyebrow">THIS ARTICLE COVERS</span>
-              <h2>読む前に押さえたい論点</h2>
+              <span className="subpage-card__eyebrow">AT A GLANCE</span>
+              <h2>先に押さえる論点</h2>
+              <p>結論を先に確認してから、必要な章だけ本文で拾える構成です。</p>
               <ul className="blog-article-hero__points">
                 {articlePoints.map((point) => (
                   <li key={point}>{point}</li>
@@ -244,23 +236,19 @@ export function BlogPost() {
             ) : null}
 
             <InteractiveCard className="release-panel premium-glass blog-article-rail-card">
-              <span className="subpage-card__eyebrow">WORKFLOW FIT</span>
-              <h2>記事の内容を制作フローへ戻す</h2>
+              <span className="subpage-card__eyebrow">READING GUIDE</span>
+              <h2>必要な章だけ拾って読める構成です</h2>
               <p>
-                単発ノウハウで終わらせず、テンプレート運用、台本整理、YMM4前準備の順に戻すと実運用へ繋げやすくなります。
+                まず要点を確認し、気になる節だけ目次から開き、実作業に戻す段階で使い方ページと照らし合わせる流れを想定しています。
               </p>
               <ul className="brand-list blog-article-rail__list">
-                <li>テンプレートへ戻せる粒度で整える</li>
-                <li>AI補助は下書き整理と確認に限定して使う</li>
-                <li>YMM4へ渡す前の設定確認を固定する</li>
+                <li>最初に要点を見て、本文で掘る章を決める</li>
+                <li>手順確認が必要になったら目次から該当節へ飛ぶ</li>
+                <li>実際に試す段階で使い方ページへ戻す</li>
               </ul>
-              <div className="subpage-support-callout__actions">
-                <Link className="brand-btn brand-btn--ghost" to="/download/">
-                  無料で試す
-                </Link>
-                <Link className="brand-btn brand-btn--primary" to="/contact/">
-                  導入相談を送る
-                </Link>
+              <div className="utility-link-row blog-article-rail__links">
+                <Link to="/instructions/">使い方を見る</Link>
+                <Link to="/download/">ダウンロード</Link>
               </div>
             </InteractiveCard>
           </aside>
@@ -284,8 +272,8 @@ export function BlogPost() {
               <div className="blog-article-summary__item">
                 <ArrowRight size={18} />
                 <div>
-                  <span>次の行き先</span>
-                  <strong>使い方 / 料金 / ダウンロード</strong>
+                  <span>読む順番</span>
+                  <strong>要点 → 本文 → 関連記事</strong>
                 </div>
               </div>
             </InteractiveCard>

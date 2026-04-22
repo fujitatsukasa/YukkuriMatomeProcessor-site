@@ -6,7 +6,7 @@ import { changeLogUrl, downloadUrl, latestReleaseUrl, legal, newsPosts, siteOrig
 import React, { useEffect, useRef, useState } from 'react'
 import { motion, useInView as useMotionInView, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import Tilt from 'react-parallax-tilt'
-import { MessageSquare, Smartphone, Users, Download, CheckCircle2, TrendingUp, HelpCircle, Monitor, CreditCard, ArrowRight, Sparkles, Play, ChevronDown, FileSearch, PencilLine, Bot, Settings2, Send, BookOpen, BadgeCheck } from 'lucide-react'
+import { MessageSquare, Smartphone, Users, Download, CheckCircle2, TrendingUp, HelpCircle, Monitor, CreditCard, ArrowRight, Sparkles, Play, FileSearch, PencilLine, Bot, Settings2, Send, BookOpen, BadgeCheck } from 'lucide-react'
 import { CustomCursorGlow } from '@/components/CustomCursorGlow'
 
 const SECTION_HEAD_VARIANTS = {
@@ -364,14 +364,6 @@ const heroShowcaseScenes = [
   },
 ] as const
 
-const storySections = [
-  { key: 'hero', label: '導入価値', selector: '.home-compact-hero' },
-  { key: 'process', label: '制作フロー', selector: '.home-compact-process-section' },
-  { key: 'results', label: '成果イメージ', selector: '.home-compact-usecase-section' },
-  { key: 'ops', label: '運用の芯', selector: '.home-internal-proof-section' },
-  { key: 'decision', label: '導入判断', selector: '.home-compact-price-section' },
-] as const
-
 const heroDeliverableChips = [
   '台本ドラフト',
   'AI補助',
@@ -672,7 +664,6 @@ export function HomePage() {
   const [activeHeroScene, setActiveHeroScene] = useState(0)
   const [activeOutcomeStory, setActiveOutcomeStory] = useState(0)
   const [activeOperationStage, setActiveOperationStage] = useState(0)
-  const [activeStorySection, setActiveStorySection] = useState<(typeof storySections)[number]['key']>('hero')
   const isAutoPlayingRef = useRef(true)
 
   // ━━━[ Floating CTA visibility ]━━━
@@ -761,48 +752,6 @@ export function HomePage() {
     return () => window.clearInterval(timer)
   }, [isOutcomesInView])
 
-  useEffect(() => {
-    const updateActiveStorySection = () => {
-      const viewportHeight = window.innerHeight
-      const visibleSections = storySections
-        .map((section) => {
-          const rect = document.querySelector(section.selector)?.getBoundingClientRect()
-          if (!rect) return null
-          return { key: section.key, rect }
-        })
-        .filter((entry): entry is { key: (typeof storySections)[number]['key']; rect: DOMRect } => entry !== null)
-
-      const current = visibleSections.find(
-        ({ rect }) => rect.top <= viewportHeight * 0.34 && rect.bottom >= viewportHeight * 0.34,
-      )
-
-      if (current) {
-        setActiveStorySection(current.key)
-        return
-      }
-
-      const nearest = visibleSections.reduce<{ key: (typeof storySections)[number]['key']; distance: number } | null>(
-        (best, { key, rect }) => {
-          const distance = Math.abs(rect.top - viewportHeight * 0.34)
-          if (!best || distance < best.distance) return { key, distance }
-          return best
-        },
-        null,
-      )
-
-      if (nearest) setActiveStorySection(nearest.key)
-    }
-
-    updateActiveStorySection()
-    window.addEventListener('scroll', updateActiveStorySection, { passive: true })
-    window.addEventListener('resize', updateActiveStorySection)
-
-    return () => {
-      window.removeEventListener('scroll', updateActiveStorySection)
-      window.removeEventListener('resize', updateActiveStorySection)
-    }
-  }, [])
-
   const handleSlideChange = (index: number) => {
     isAutoPlayingRef.current = false
     setActiveSlide(index)
@@ -814,13 +763,6 @@ export function HomePage() {
   const heroPreviewScenes = heroShowcaseScenes.filter((_, index) => index !== activeHeroScene)
   const activeOutcomePanel = outcomeStories[activeOutcomeStory]
   const ActiveOutcomeIcon = activeOutcomePanel.source.Icon
-
-  const scrollToStorySection = (selector: string) => {
-    const target = document.querySelector(selector)
-    if (!target) return
-    target.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }
-
 
   return (
     <>
@@ -915,20 +857,6 @@ export function HomePage() {
               <span className="hero-subtitle-v2__sub">単発の台本取得ツールではなく、継続投稿の前工程を崩れにくくするための制作基盤です。</span>
             </motion.p>
 
-            {/* ヒーローで最終的に手元に残るものを先に見せる */}
-            <motion.div
-              className="hero-deliverable-badges-wrap"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.55 }}
-            >
-              <ul className="home-v3-hero__badges hero-deliverable-badges" role="list" aria-label="このソフトで整えやすい成果物">
-                {heroDeliverableChips.map((chip) => (
-                  <li key={chip} role="listitem">{chip}</li>
-                ))}
-              </ul>
-            </motion.div>
-
             {/* CTA ボタン */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -943,24 +871,6 @@ export function HomePage() {
                 <Play size={16} />
                 使い方を見る
               </Link>
-            </motion.div>
-
-            {/* Social Proof — 大きく目立つバー */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.85 }}
-              className="hero-proof-bar hero-proof-bar--v2"
-            >
-              {socialProofStats.map((stat) => (
-                <div key={stat.label} className="hero-proof-bar__item">
-                  <span className="hero-proof-bar__icon" aria-hidden="true">
-                    <stat.Icon size={20} color="#e0c184" />
-                  </span>
-                  <span className="hero-proof-bar__value">{stat.value}</span>
-                  <span className="hero-proof-bar__label">{stat.label}</span>
-                </div>
-              ))}
             </motion.div>
 
             {/* 製品ショーケース — 下部に配置 */}
@@ -983,6 +893,22 @@ export function HomePage() {
                     <span>{activeHeroShowcase.eyebrow}</span>
                     <strong>{activeHeroShowcase.title}</strong>
                     <p>{activeHeroShowcase.body}</p>
+                    <div className="hero-live-command__proof" role="list" aria-label="導入判断の材料">
+                      {socialProofStats.map((stat) => (
+                        <div key={stat.label} className="hero-live-command__proof-item" role="listitem">
+                          <span className="hero-live-command__proof-icon" aria-hidden="true">
+                            <stat.Icon size={15} />
+                          </span>
+                          <strong>{stat.value}</strong>
+                          <small>{stat.label}</small>
+                        </div>
+                      ))}
+                    </div>
+                    <ul className="hero-live-command__deliverables" role="list" aria-label="このソフトで残る主な成果物">
+                      {heroDeliverableChips.map((chip) => (
+                        <li key={chip} role="listitem">{chip}</li>
+                      ))}
+                    </ul>
                   </motion.div>
                 </AnimatePresence>
 
@@ -1071,54 +997,10 @@ export function HomePage() {
             </motion.div>
           </div>
 
-          {/* Scroll indicator */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.8, duration: 0.8 }}
-            className="hero-scroll-hint"
-          >
-            <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-            >
-              <ChevronDown size={22} color="rgba(255,255,255,0.35)" />
-            </motion.div>
-          </motion.div>
-
         </section>
 
         {/* ━━━[ Section Glow Divider ]━━━ */}
         <div className="section-glow-divider" />
-
-        <motion.section
-          className="home-story-rail-wrap"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-8%' }}
-          transition={{ duration: 0.55 }}
-          aria-label="ページ内ストーリーガイド"
-        >
-          <div className="home-story-rail">
-            <span className="home-story-rail__eyebrow">SCROLL STORY</span>
-            <div className="home-story-rail__track" role="tablist" aria-label="ホームの読みどころ">
-              {storySections.map((section, index) => (
-                <button
-                  key={section.key}
-                  type="button"
-                  role="tab"
-                  aria-selected={activeStorySection === section.key}
-                  className={`home-story-rail__item${activeStorySection === section.key ? ' is-active' : ''}`}
-                  onClick={() => scrollToStorySection(section.selector)}
-                >
-                  <span className="home-story-rail__index">{String(index + 1).padStart(2, '0')}</span>
-                  <span className="home-story-rail__label">{section.label}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-        </motion.section>
-
 
         <section className="brand-section brand-section--alt home-compact-section home-presentation-deck" ref={flowRef}>
           <div className="home-flow-shell">

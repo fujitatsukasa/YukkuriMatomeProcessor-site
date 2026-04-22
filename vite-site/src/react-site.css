@@ -14196,6 +14196,65 @@ html {
   line-height: 1.68;
 }
 
+.hero-live-command__proof {
+  display: grid;
+  gap: 0.55rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.hero-live-command__proof-item {
+  display: grid;
+  gap: 0.18rem;
+  padding: 0.72rem 0.78rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.hero-live-command__proof-icon {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  color: rgba(223, 192, 131, 0.86);
+  background: rgba(223, 192, 131, 0.1);
+}
+
+.hero-live-command__proof-item strong {
+  color: #fff2ca;
+  font-size: 0.96rem;
+  line-height: 1.2;
+}
+
+.hero-live-command__proof-item small {
+  color: rgba(236, 233, 226, 0.6);
+  font-size: 0.72rem;
+  line-height: 1.45;
+}
+
+.hero-live-command__deliverables {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hero-live-command__deliverables li {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.3rem;
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, rgba(223, 192, 131, 0.1), rgba(255, 255, 255, 0.03));
+  color: rgba(248, 241, 226, 0.86);
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
 .hero-live-steps {
   display: grid;
   gap: 0.75rem;
@@ -14517,6 +14576,20 @@ html {
   .hero-live-command {
     text-align: left;
   }
+  .hero-live-command__proof {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .hero-live-command__proof-item {
+    padding: 0.7rem 0.72rem;
+  }
+  .hero-live-command__deliverables {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .hero-live-command__deliverables li {
+    justify-content: center;
+    text-align: center;
+  }
   .hero-live-steps {
     display: flex;
     overflow-x: auto;
@@ -14597,6 +14670,12 @@ html {
   }
   .hero-product-stack__live-badge {
     padding: 0.72rem 0.8rem;
+  }
+  .hero-live-command__proof {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .hero-live-command__deliverables {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -15641,6 +15720,11 @@ html {
 .blog-article-rail-card p {
   margin: 0;
   color: var(--muted);
+}
+
+.blog-article-rail__links a {
+  flex: 1 1 0;
+  justify-content: center;
 }
 
 .blog-article-hero__points,
