@@ -4668,6 +4668,17 @@ html {
   word-break: keep-all;
 }
 
+.home-public-proof-head h2 {
+  max-width: min(14ch, 100%);
+  text-wrap: balance;
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
+.home-public-proof-head > p:not(.brand-kicker) {
+  max-width: min(760px, 30ch) !important;
+}
+
 .home-compact-compare,
 .home-compact-closing {
   display: grid;
@@ -12101,6 +12112,19 @@ html {
     min-height: 40px;
     padding: 0.58rem 0.95rem !important;
     font-size: 0.84rem !important;
+  }
+
+  .home-public-proof-head h2 {
+    max-width: 10ch;
+    font-size: clamp(2.1rem, 8.6vw, 2.9rem);
+    line-height: 1.14;
+    word-break: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .home-public-proof-head > p:not(.brand-kicker) {
+    max-width: 18ch !important;
+    font-size: 1rem !important;
   }
 
   .testimonials-proof-grid,

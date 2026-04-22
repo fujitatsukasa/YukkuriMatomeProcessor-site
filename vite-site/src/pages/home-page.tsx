@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { PageMeta, Section } from '@/components/ui'
 import { PricingCards } from '@/components/PricingCards'
 import { media } from '@/data/assets'
-import { downloadUrl, legal, siteOrigin, siteSubtitle, siteTitle } from '@/data/site-content'
+import { changeLogUrl, downloadUrl, latestReleaseUrl, legal, newsPosts, siteOrigin, siteSubtitle, siteTitle } from '@/data/site-content'
 import React, { useEffect, useRef, useState } from 'react'
 import { motion, useInView as useMotionInView, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import Tilt from 'react-parallax-tilt'
@@ -288,6 +288,55 @@ const trustDecisionCards = [
   },
 ] as const
 
+const publicProofRoutes = [
+  {
+    eyebrow: 'GUIDE',
+    title: '機能と使い方',
+    href: '/instructions/',
+    body: '導入手順、主要機能、テンプレート運用から YMM4 前準備までの流れを公開しています。',
+    meta: '導入前に制作フローを確認',
+  },
+  {
+    eyebrow: 'PRICING',
+    title: '料金とプラン差分',
+    href: '/purchase/',
+    body: 'Free / Standard / Pro の違いを、用途と向いている人まで含めて公開しています。',
+    meta: '月額と用途の違いを確認',
+  },
+  {
+    eyebrow: 'FAQ',
+    title: 'FAQ',
+    href: '/faq/',
+    body: '設定、購入、トラブル、導入前提をカテゴリ別に整理して確認できます。',
+    meta: '導入前の疑問を短時間で確認',
+  },
+  {
+    eyebrow: 'LEGAL',
+    title: '特商法と返金条件',
+    href: '/legal/commercial-transactions/',
+    body: '事業者情報、価格、支払時期、返金条件を公開しています。',
+    meta: `特商法更新 ${legal.meta.legalLastUpdated}`,
+  },
+  {
+    eyebrow: 'RELEASE',
+    title: '最新リリース',
+    href: latestReleaseUrl,
+    external: true,
+    body: '配布中の最新版を GitHub Releases で確認できます。',
+    meta: '配布物の公開先を確認',
+  },
+  {
+    eyebrow: 'CHANGELOG',
+    title: '更新履歴',
+    href: changeLogUrl,
+    external: true,
+    body: '変更内容を GitHub の changelog で追えます。',
+    meta: '更新の積み上げを確認',
+  },
+] as const
+
+const publicNewsEntries = [...newsPosts].reverse().slice(0, 3)
+
 const pricingDecisionPoints = [
   {
     title: 'Freeで初回導入を確認',
@@ -444,6 +493,7 @@ export function HomePage() {
       const heroEnd = document.querySelector('.home-compact-hero')?.getBoundingClientRect()
       const trustSection = document.querySelector('.testimonials-section-wrap')?.getBoundingClientRect()
       const pricingSection = document.querySelector('.home-compact-price-section')?.getBoundingClientRect()
+      const publicProofSection = document.querySelector('.home-public-proof-section')?.getBoundingClientRect()
       const ctaSection = document.querySelector('.home-compact-cta-section')?.getBoundingClientRect()
 
       if (!heroEnd || !ctaSection) {
@@ -458,8 +508,10 @@ export function HomePage() {
         !!trustSection && trustSection.top < viewportHeight * 0.8 && trustSection.bottom > viewportHeight * 0.15
       const overlappingPricing =
         !!pricingSection && pricingSection.top < viewportHeight * 0.85 && pricingSection.bottom > viewportHeight * 0.12
+      const overlappingPublicProof =
+        !!publicProofSection && publicProofSection.top < viewportHeight * 0.85 && publicProofSection.bottom > viewportHeight * 0.15
 
-      setShowFloatingCta(pastHero && !reachedCta && !overlappingTrust && !overlappingPricing)
+      setShowFloatingCta(pastHero && !reachedCta && !overlappingTrust && !overlappingPricing && !overlappingPublicProof)
     }
 
     handleScroll()
@@ -1552,6 +1604,66 @@ export function HomePage() {
                 FAQで解決しない場合はお問い合わせ
               </Link>
             </div>
+          </div>
+        </Section>
+
+        <Section className="home-compact-section home-public-proof-section">
+          <motion.div
+            className="home-compact-section-head home-public-proof-head"
+            variants={SECTION_HEAD_VARIANTS}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-10%' }}
+          >
+            <p className="brand-kicker">公開情報</p>
+            <h2>導入前に、<span className="text-glow-gold">ブラウザ上で確認できる証拠</span>を置いています</h2>
+            <p style={{ maxWidth: '700px', margin: '0 auto' }}>
+              外部レビューを盛る代わりに、使い方、FAQ、料金、特商法、返金条件、更新履歴、最新リリースを
+              事前に辿れる構成にしています。
+            </p>
+          </motion.div>
+
+          <div className="lp-proofstream" style={{ position: 'relative', zIndex: 1, width: 'min(1180px, calc(100% - 48px))', margin: '0 auto' }}>
+            <div className="lp-proofstream__copy">
+              <h2>確認可能性をそのまま信用に変える</h2>
+              <p>
+                「本当に今の仕様なのか」「契約条件はどこまで明記されているか」「更新が止まっていないか」を、
+                導入前に自分で確認できるようにしています。
+              </p>
+
+              <div className="lp-proofstream__routes">
+                {publicProofRoutes.map((route) => (
+                  <article key={route.title} className="lp-proofstream__route">
+                    <span>{route.eyebrow}</span>
+                    <h3>
+                      {'external' in route && route.external ? (
+                        <a href={route.href} target="_blank" rel="noreferrer">{route.title}</a>
+                      ) : (
+                        <Link to={route.href}>{route.title}</Link>
+                      )}
+                    </h3>
+                    <p>{route.body}</p>
+                    <p className="lp-proofstream__route-meta">{route.meta}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+
+            <aside className="lp-proofstream__aside">
+              <h3>最近の公開更新</h3>
+              <ul className="lp-proofstream__news">
+                {publicNewsEntries.map((entry) => (
+                  <li key={entry.path}>
+                    <time dateTime={entry.date}>{entry.dateLabel}</time>
+                    <Link to={entry.path}>{entry.title}</Link>
+                  </li>
+                ))}
+              </ul>
+              <p className="lp-proofstream__aside-copy">
+                特商法 / 利用規約 / 返金ポリシーの最終更新日は <strong>{legal.meta.legalLastUpdated}</strong>、
+                プライバシーポリシーは <strong>{legal.meta.privacyLastUpdated}</strong> です。
+              </p>
+            </aside>
           </div>
         </Section>
 
