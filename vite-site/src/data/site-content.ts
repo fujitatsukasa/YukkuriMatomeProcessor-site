@@ -45,9 +45,9 @@ export type PageEntry = {
 export const siteOrigin = 'https://yukkurimatomeprocessor.com'
 export const siteTitle = 'ゆっくりまとめプロセッサー'
 export const siteSubtitle = 'Yukkuri Matome Processor'
-export const siteTagline = '台本取得・整形・YMM4準備ツール'
+export const siteTagline = 'テンプレート運用・台本作成・YMM4準備ツール'
 export const siteDescription =
-  '動画編集の前処理から台本整理、制作運用までを効率化する日本語向けワークフロー支援ツール。'
+  'テンプレート運用を軸に、ネタ探しから台本作成、YMM4反映前の編集準備、AI補助、YouTube分析までを効率化する日本語向けワークフロー支援ツール。'
 
 export const navItems: NavItem[] = [
   { key: 'home', label: 'ホーム', url: '/' },
@@ -98,33 +98,30 @@ export const legal = {
     ],
     productName: 'ゆっくりまとめプロセッサー',
     modelLabel: '月額サブスクリプション（無料プランあり）',
-    additionalFees: '銀行振込手数料およびコンビニ支払い手数料は購入者負担',
+    additionalFees: '標準導線では追加手数料なし',
     unitPrice: '5000',
     currency: 'JPY',
   },
   payment: {
-    methods: ['クレジットカード', 'コンビニ支払い', '銀行振込', 'PayPal'],
-    timing: '注文確定時（前払い・月額自動課金）',
+    methods: ['クレジットカード（Stripe Checkout）'],
+    timing: 'アプリ内の購入画面で契約確定時に初回決済。以後は月額自動課金',
     noteBankPaypal:
-      '銀行振込・PayPalをご希望の場合はお問い合わせ窓口で案内します。',
-    noteOnline: 'クレジットカード・コンビニ支払いはオンライン決済で対応します。',
+      '現在の標準購入導線は Stripe Checkout です。',
+    noteOnline: '購入、アップグレード、支払い方法更新はアプリ内の導線から利用します。',
     deadlineRules: [
       { method: 'クレジットカード', limit: '毎月自動決済' },
-      { method: 'コンビニ支払い', limit: '請求日を含む2日以内' },
-      { method: '銀行振込', limit: '請求日を含む3日以内' },
-      { method: 'PayPal', limit: '自動決済' },
     ],
     unpaidPolicy:
-      '支払期限を経過した場合、有料プランの機能は一時停止となります。',
+      '支払い失敗時は短い猶予期間後に、有料プラン機能が一時停止となる場合があります。',
     bankAccountPolicy:
-      '銀行振込先情報は不正請求防止のため、問い合わせ受付後に個別案内します。',
+      '標準導線外の支払い方法は、別途案内がある場合を除き提供していません。',
   },
   delivery: {
-    timing: '決済完了後、即時にプラン機能が有効化',
-    method: 'アプリ内でのプラン有効化（ライセンスキー方式またはアカウント連携）',
+    timing: '決済完了後、アプリ内同期を経て即時または短時間でプラン機能が有効化',
+    method: 'アプリ内でのプラン有効化（Firebase同期結果を正として反映）',
   },
   refund: {
-    summary: 'サブスクリプションは次回更新日までに解約すれば追加課金なし。日割り返金は原則不可',
+    summary: '有料プランは期間終了時解約。次回更新日までに解約予約すれば追加課金はなく、日割り返金は原則ありません',
     defectiveResponse: '提供不備または重大な不具合がある場合は個別対応',
     procedure: '問い合わせ窓口へ申告後、事実確認のうえ対応方針を案内',
     defectClaimDeadline: '課金日から7日以内に不備内容を申告してください。',
@@ -136,7 +133,7 @@ export const legal = {
   },
   cancellation: {
     subscription:
-      '有料プラン（Standard / Pro）はいつでも解約可能です。解約後も当月の残り期間は引き続き利用できます。解約後は自動的にFreeプランへ移行します。',
+      '有料プラン（Standard / Pro）はアプリ内から Customer Portal を開いていつでも解約予約できます。期間終了までは引き続き利用でき、終了後に Free へ移行します。',
   },
   support: {
     operationHours: '平日 10:00-18:00（土日祝・年末年始を除く）',
@@ -198,10 +195,10 @@ export const faqGroups: FaqGroup[] = [
       {
         question: 'ゆっくりまとめプロセッサーは何を解決するツールですか？',
         answer:
-          '台本取得から編集開始までの前工程を半自動化し、準備時間の短縮と品質の再現性を高めます。',
+          'テンプレート運用を中心に、ネタ探し、台本作成、YMM4前準備、AI補助、YouTube分析までの前工程をまとめて効率化するツールです。',
       },
-      { question: '無料で試せますか？', answer: 'はい。7日間の無料トライアルで全機能を確認できます。' },
-      { question: '想定ユーザーは誰ですか？', answer: '個人配信者、副業クリエイター、チーム運用担当者を想定しています。' },
+      { question: '無料で試せますか？', answer: 'はい。Freeプランで基本導線と導入相性を確認できます。' },
+      { question: '想定ユーザーは誰ですか？', answer: '反応集、5chまとめ、ショート、ゆっくり解説、独自フォーマット動画を継続投稿したい個人・チームを想定しています。' },
       {
         question: '導入前に必ず確認すべきページは？',
         answer:
@@ -213,7 +210,7 @@ export const faqGroups: FaqGroup[] = [
     id: 'faq-onboarding',
     label: '導入',
     items: [
-      { question: '導入時に最初にやるべきことは？', answer: '最新版をダウンロードし、YMM4実行パスと保存先フォルダを設定してください。' },
+      { question: '導入時に最初にやるべきことは？', answer: '最新版をダウンロードし、YMM4実行パス、保存先フォルダ、必要に応じて YouTube API キーを設定してください。' },
       { question: '対応OSは何ですか？', answer: 'Windows環境での利用を前提に設計しています。' },
       { question: '初期設定を早く終えるコツは？', answer: '使い方ページのSTEP順で設定し、変更内容をメモすると再作業を減らせます。' },
       { question: 'チーム導入時に決めるべき項目は？', answer: '保存先命名ルール、連携パス、運用チェックリストの3点を先に揃えてください。' },
@@ -223,8 +220,8 @@ export const faqGroups: FaqGroup[] = [
     id: 'faq-script',
     label: '台本取得',
     items: [
-      { question: '台本取得はどのように行いますか？', answer: '対応サイトのURL入力後、記事を選択して取得し、編集用に整形します。' },
-      { question: '取得した台本は再編集できますか？', answer: 'はい。不要行削除、見出し整理、読み上げ向け調整が可能です。' },
+      { question: '台本取得はどのように行いますか？', answer: '対応サイトやスレッドの URL を入力し、候補を選択して取得したあと、編集用に整形します。' },
+      { question: '取得した台本は再編集できますか？', answer: 'はい。不要行削除、見出し整理、読み上げ向け調整、感情や役割の微修正が可能です。' },
       { question: 'URLエラーで取得できない場合は？', answer: 'URL形式、対象対応状況、ネットワークの順で確認してください。' },
       { question: '取得件数が多いときの運用は？', answer: 'まず試用用サンプルで手順を固定し、その後に本番件数へ拡張してください。' },
     ],
@@ -233,10 +230,10 @@ export const faqGroups: FaqGroup[] = [
     id: 'faq-settings',
     label: '設定',
     items: [
-      { question: '設定で優先すべき項目は？', answer: 'YMM4パス、台本保存先、運用フォルダルールを優先して固定してください。' },
+      { question: '設定で優先すべき項目は？', answer: 'YMM4パス、台本保存先、テンプレート / フォーマット方針、運用フォルダルールを優先して固定してください。' },
       { question: '複数人で設定を揃えるには？', answer: '初期値を定義した手順書を用意し、更新時は同じチェックリストで確認します。' },
       { question: '設定変更が反映されない場合は？', answer: '再起動、権限確認、保存先アクセス権の順に確認してください。' },
-      { question: '設定バックアップは必要ですか？', answer: 'チーム運用では必須です。変更履歴とあわせて保持してください。' },
+      { question: 'YouTube分析を使うのに追加設定は必要ですか？', answer: 'はい。YouTube分析では API キーの設定が必要です。検索条件、除外条件、コメント取得などの利用前に確認してください。' },
     ],
   },
   {
@@ -253,9 +250,9 @@ export const faqGroups: FaqGroup[] = [
     id: 'faq-purchase',
     label: '購入・契約',
     items: [
-      { question: 'プレミアムLicenseの価格はいくらですか？', answer: '無料プラン（¥0）、Standard（月額5,000円/税込5,500円）、Pro（月額10,000円/税込11,000円）の3つのプランをご用意しています。まずは無料プランでお試しください。' },
-      { question: '購入申し込みはどのように進めますか？', answer: '購入ページで契約条件を確認後、お問い合わせから購入希望をご連絡ください。' },
-      { question: '購入前に確認すべき情報は？', answer: '価格、販売モデル、提供時期、返金条件、支払期限を購入ページと法務ページで確認してください。' },
+      { question: '料金プランはどう分かれていますか？', answer: '無料プラン（¥0）、Standard（月額5,000円/税込5,500円）、Pro（月額10,000円/税込11,000円）の3つです。まずは無料プランで導入相性を確認できます。' },
+      { question: '購入申し込みはどのように進めますか？', answer: 'アプリ内の購入画面から Stripe Checkout を開いて契約します。解約や支払い方法更新は Customer Portal を利用します。' },
+      { question: 'プラン変更はどう反映されますか？', answer: 'アップグレードは即時反映 + 日割り差額請求、ダウングレードは次回更新日から反映の方針です。' },
       { question: '契約・請求に関する相談先は？', answer: '記録の残るメール窓口を推奨します。詳細はお問い合わせページを参照してください。' },
     ],
   },

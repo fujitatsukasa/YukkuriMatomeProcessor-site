@@ -11,8 +11,8 @@ export function PurchasePage() {
     <>
       <PageMeta
         title="料金プラン"
-        description="無料プラン、Standard（月額5,000円）、Pro（月額10,000円）の3つのプランをご用意。まずは無料で始めて、必要に応じてアップグレード。"
-        keywords="料金, プラン, サブスクリプション, 月額, 無料プラン, Standard, Pro"
+        description="Free、Standard（月額5,000円）、Pro（月額10,000円）の3つのプランを用意。初回導入の確認から継続投稿、複数運用まで運用規模に合わせて選べます。"
+        keywords="料金, プラン, サブスクリプション, 無料プラン, Standard, Pro, テンプレート運用"
         image={media.officeLuxury}
         path="/purchase/"
       />
@@ -21,8 +21,36 @@ export function PurchasePage() {
       <PageIntro
         kicker="Pricing"
         title="あなたの制作スタイルに合わせた料金プラン"
-        lead="まずは無料で始めて、必要に応じてアップグレード"
+        lead="初回導入の確認から、継続投稿、個別テンプレートや相談まで運用規模に合わせて選べます"
       />
+
+      <Section>
+        <div className="brand-grid brand-grid--2">
+          <InteractiveCard className="release-panel premium-glass">
+            <h2>初回導入で見るべきこと</h2>
+            <ul className="brand-list">
+              <li>対応サイト取得、基本編集、YMM4出力の流れが自分の運用に合うか</li>
+              <li>テンプレート運用を始める前提が整っているか</li>
+              <li>AI補助や YouTube 分析をどこまで日常運用へ入れたいか</li>
+            </ul>
+            <p style={{ color: 'rgba(255,255,255,0.58)', marginBottom: 0 }}>
+              まずは Free で入口を確認し、継続投稿が見えた段階で Standard / Pro に進む構成です。
+            </p>
+          </InteractiveCard>
+
+          <InteractiveCard className="release-panel premium-glass">
+            <h2>継続利用で差がつくところ</h2>
+            <ul className="brand-list">
+              <li>テンプレート運用と YMM4 前準備をどこまで標準化したいか</li>
+              <li>13キャラ対応 AI 台本や個別テンプレート作成が必要か</li>
+              <li>動画内容の相談や機能提案まで含めた伴走が必要か</li>
+            </ul>
+            <p style={{ color: 'rgba(255,255,255,0.58)', marginBottom: 0 }}>
+              個人の継続投稿なら Standard、複数運用や内製化まで見据えるなら Pro が自然です。
+            </p>
+          </InteractiveCard>
+        </div>
+      </Section>
 
       {/* ━━━[ Pricing Cards — ホームと完全同一の共通コンポーネント ]━━━ */}
       <Section alt>
@@ -66,6 +94,9 @@ export function PurchasePage() {
                 <dd>{legal.refund.summary}</dd>
               </div>
             </dl>
+            <p style={{ color: 'rgba(255,255,255,0.58)', marginTop: '1rem', marginBottom: '1rem' }}>
+              プラン変更は、アップグレードが即時反映 + 日割り差額請求、ダウングレードが次回更新日から反映の方針です。
+            </p>
             <LegalLinksBlock note={legalContactNote} />
           </InteractiveCard>
           <InteractiveCard className="release-panel premium-glass">
@@ -79,7 +110,7 @@ export function PurchasePage() {
               <li>一次回答: {legal.support.firstResponseSla}</li>
             </ul>
             <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.5)', marginTop: '1rem' }}>
-              ※ プランの購入・アップグレードはソフトウェア内から行えます
+              ※ プランの購入・アップグレードはアプリ内の購入画面から行えます
             </p>
           </InteractiveCard>
         </div>

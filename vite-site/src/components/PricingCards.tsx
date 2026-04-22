@@ -25,85 +25,88 @@ const pricingPlans: PricingPlan[] = [
   {
     key: 'free',
     name: 'Free',
-    eyebrow: 'まず試したい人へ',
+    eyebrow: '初回導入の入口',
     price: '¥0',
     term: 'ずっと無料',
-    bestFor: '導入前に制作フローとの相性を確かめたい',
-    summary: 'YMM4出力や基本編集を無料で確認し、今の運用にハマるかを検証する入口プランです。',
+    bestFor: 'まず動作確認をして、自分の制作フローにハマるかを見たい',
+    summary: '対応サイト取得、基本編集、YMM4出力の流れを見て、導入相性を確かめるための入口プランです。',
     note: '初回導入や動作確認、無料での試運転に最適',
     badge: null,
     features: [
-      { label: '自動動画編集', active: true },
-      { label: 'YMM4タイムライン出力', active: true },
-      { label: 'ローカル分析', active: true },
+      { label: '対応サイトからの台本取得を試用', active: true },
+      { label: '基本編集とYMM4出力の確認', active: true },
+      { label: 'デフォルトプリセットで編集開始', active: true },
       { label: '内蔵操作ガイド', active: true },
-      { label: '無償アップデート', active: true },
-      { label: '高度な台本取得・AI生成', active: false },
+      { label: '導入前の動作検証', active: true },
+      { label: '継続運用向けの高度なAI・個別テンプレ支援', active: false },
     ],
   },
   {
     key: 'standard',
     name: 'Standard',
-    eyebrow: '個人量産の主力',
+    eyebrow: '継続投稿の主力',
     price: '¥5,000',
     term: '月額 / 税込 5,500円',
-    bestFor: '個人クリエイターが投稿本数を増やしたい',
-    summary: 'サイト台本取得・AI生成・要望サポートまで揃えた、個人運用で最も使いどころの広い主力プランです。',
-    note: '台本作成を継続的に短縮し、個人量産の再現性を上げやすい',
-    badge: '個人クリエイター向け',
+    bestFor: '個人クリエイターとして継続投稿の再現性を上げたい',
+    summary: 'テンプレート運用、台本作成、AI補助、YouTube分析までまとめて回しやすい、個人運用の主力プランです。',
+    note: 'テンプレート運用と前工程の標準化で、継続投稿ラインを安定させやすい',
+    badge: '継続投稿の主力',
     features: [
       { label: 'Freeプランの全機能', active: true },
-      { label: '動画フォーマット自由作成', active: true, emphasis: true },
-      { label: 'あにまん、5ch等のサイト台本取得 (50回まで)', active: true, emphasis: true },
-      { label: 'AI感情分析', active: true, emphasis: true },
-      { label: 'AI文章校正', active: true, emphasis: true },
-      { label: 'AI台本生成 (20回まで)', active: true, emphasis: true },
-      { label: 'youtube分析', active: true, emphasis: true },
-      { label: 'ご要望サポート', active: true, emphasis: true },
-      { label: '優先専用サポート', active: true, emphasis: true },
+      { label: 'テンプレート / フォーマット運用', active: true, emphasis: true },
+      { label: 'サイト・スレッド起点の台本作成', active: true, emphasis: true },
+      { label: 'AI文章校正 / 感情分析 / 改行補助', active: true, emphasis: true },
+      { label: 'YouTube分析と候補比較', active: true, emphasis: true },
+      { label: 'YMM4前準備の効率化', active: true, emphasis: true },
+      { label: '継続投稿向けサポート', active: true, emphasis: true },
+      { label: '個別テンプレート作成 / 最優先対応', active: false },
     ],
   },
   {
     key: 'pro',
     name: 'Pro',
-    eyebrow: '複数運用と内製化向け',
+    eyebrow: '内製化と相談導線向け',
     price: '¥10,000',
     term: '月額 / 税込 11,000円',
     bestFor: '複数チャンネル運用や外注の巻き取りまで進めたい',
-    summary: '取得回数・AI生成回数・優先対応を強化し、チーム運用や量産ラインの標準化まで視野に入れた最上位プランです。',
-    note: '複数チャンネルや外注内製化で、サポート速度まで重視するなら最適',
+    summary: '13キャラAI台本、個別テンプレート作成、動画内容の相談まで含めて、チーム運用や内製化を進める最上位プランです。',
+    note: '複数運用や個別テンプレート、相談導線の厚みまで重視するなら最適',
     badge: '✦ 圧倒的おすすめ',
     features: [
       { label: 'Standardの全機能', active: true },
-      { label: 'サイト台本取得 200回＋', active: true, emphasis: true },
-      { label: 'AI台本生成 (60回まで)', active: true, emphasis: true },
-      { label: '取得サイト追加希望対応', active: true, emphasis: true },
-      { label: '動画フォーマット作成代行', active: true, emphasis: true },
-      { label: '最優先サポート', active: true, emphasis: true },
+      { label: '13キャラ対応のAI台本作成', active: true, emphasis: true },
+      { label: '動画内容の相談 / 機能提案', active: true, emphasis: true },
+      { label: '個別テンプレート作成', active: true, emphasis: true },
+      { label: '契約期間中の優先サポート', active: true, emphasis: true },
+      { label: '複数チャンネル運用の標準化', active: true, emphasis: true },
     ],
   },
 ] as const
 
 const comparisonRows = [
   {
-    label: '向いている使い方',
-    values: ['まず無料で試したい', '個人で量産したい', '複数運用を標準化したい'],
+    label: '導入フェーズ',
+    values: ['まず動作確認', '継続投稿を安定化', '内製化と相談導線まで'],
   },
   {
-    label: 'サイト台本取得',
-    values: ['基本機能のみ', '50回まで', '200回＋'],
+    label: '主な強み',
+    values: ['導入相性の確認', 'テンプレート運用とAI補助', '個別テンプレートと運用相談'],
   },
   {
-    label: 'AI台本生成',
-    values: ['対象外', '20回まで', '60回まで'],
+    label: 'テンプレート運用',
+    values: ['入口の確認', '継続投稿の主力', '個別運用へ最適化'],
   },
   {
-    label: 'サポートの厚み',
-    values: ['標準', '優先専用サポート', '最優先サポート'],
+    label: 'AI補助 / AI台本',
+    values: ['基本確認中心', 'AI補助を継続運用に活用', '13キャラ台本まで強化'],
   },
   {
-    label: 'おすすめの規模感',
+    label: '向いている規模感',
     values: ['導入検証', '個人の継続投稿', '複数チャンネル / 法人運用'],
+  },
+  {
+    label: 'サポート密度',
+    values: ['基本案内', '継続投稿向け支援', '優先サポートと個別相談'],
   },
 ] as const
 
@@ -161,8 +164,8 @@ export function PricingCards() {
         <div className="pricing-comparison-board__head">
           <h3>プラン差分を一目で把握</h3>
           <p>
-            強いSaaS LPがやっているように、価格だけでなく
-            「回数・サポート・運用規模」がどこで増えるかを短く整理しています。
+            価格だけでなく、導入確認から継続投稿、個別運用へどこで強くなるかを
+            短く整理して、比較の観点を揃えています。
           </p>
         </div>
 

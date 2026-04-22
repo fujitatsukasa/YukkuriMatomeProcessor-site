@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { PageIntro, PageMeta, Section } from '@/components/ui'
+import { InteractiveCard, PageIntro, PageMeta, Section } from '@/components/ui'
 import { media } from '@/data/assets'
 import { faqGroups } from '@/data/site-content'
 
@@ -8,8 +8,8 @@ export function FaqPage() {
     <>
       <PageMeta
         title="FAQ"
-        description="全般、導入、台本取得、設定、トラブル、購入・契約の6カテゴリで疑問を整理したFAQです。"
-        keywords="FAQ, 質問, トラブルシューティング, サポート, 購入条件"
+        description="テンプレート運用、導入、台本取得、設定、トラブル、購入・契約のカテゴリごとに疑問を整理したFAQです。"
+        keywords="FAQ, 質問, トラブルシューティング, サポート, 購入条件, テンプレート運用"
         image={media.goldMetallic}
         path="/faq/"
       />
@@ -18,11 +18,29 @@ export function FaqPage() {
       <PageIntro
         kicker="FAQ"
         title="導入前後によくある質問"
-        lead="全般・導入・使用方法・トラブル・購入の各カテゴリで整理しています"
+        lead="テンプレート運用、YMM4連携、課金、トラブルをカテゴリごとに整理しています"
       />
 
       <Section>
         <div className="content-page">
+          <div className="brand-grid brand-grid--2" style={{ marginBottom: '3rem' }}>
+            <InteractiveCard className="release-panel premium-glass">
+              <h2>FAQの前提</h2>
+              <p>
+                現在案内しているのは、テンプレート運用、対応サイト取得、AI補助、YMM4前準備、YouTube分析などの
+                <strong>現行機能</strong>です。追加予定の内容とは分けて整理しています。
+              </p>
+            </InteractiveCard>
+            <InteractiveCard className="release-panel premium-glass">
+              <h2>先に確認しておくと速いこと</h2>
+              <ul className="brand-list">
+                <li>Windows と YMM4 の前提</li>
+                <li>YouTube分析では API キーが必要</li>
+                <li>購入やアップグレードはアプリ内から行う</li>
+              </ul>
+            </InteractiveCard>
+          </div>
+
           <div style={{ marginBottom: '4rem' }}>
             <h2>目次</h2>
             <ul className="brand-list" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: '1rem' }}>

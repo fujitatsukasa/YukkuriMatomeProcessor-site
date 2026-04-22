@@ -36,71 +36,71 @@ function AnimatedNumber({ value, active, suffix = '' }: { value: number; active:
 // ━━━[ Core AI Features (7 Step Pitch Deck) ]━━━
 const presentationSlides = [
   {
-    label: '台本取得',
-    sub: 'URL投入から素材ストックまで最短10秒',
-    desc: 'YouTubeや5ch等のURLを貼るだけで、必要な情報を自動で抽出。ネタ収集のコピペ地獄を、最初の一手から止めます。',
-    proof: '複数ソースの収集を1画面で開始',
-    highlights: ['URL貼り付けだけで取得開始', '拾ったネタをそのままストック化', '後工程へそのまま引き継げる'],
+    label: '対応サイト取得',
+    sub: 'まとめサイトとスレッドを起点に素材を集約',
+    desc: 'あにまん、5ch、ふたばなどの対応元から、動画化したい話題を回収。記事取得から台本反映まで、前工程を途中で切らずに進められます。',
+    proof: '20以上の対応サイト・掲示板からネタ収集',
+    highlights: ['記事取得から台本反映まで続けやすい', 'スレッドベースで候補比較しやすい', 'ネタ探しのコピペ作業を圧縮'],
     images: ['/product_get_script.png'],
     charImage: '/nodoka/step1.png',
     Icon: FileSearch,
   },
   {
-    label: '台本編集',
-    sub: 'メインボードで流れを崩さず微調整',
-    desc: '生成した台本はメインエディターからそのまま整形。別画面を行き来せず、違和感のある箇所だけを高速に直せます。',
-    proof: '本文を見ながらその場で差分調整',
-    highlights: ['会話テンポをその場で微修正', '不要な文を即削除・差し替え', '編集後すぐ次工程へ進める'],
-    images: ['/product_edit_script.png'],
+    label: 'テンプレート運用',
+    sub: '`.ymmp` とフォーマットを動画の型として蓄積',
+    desc: 'このソフトの中心は、単発の台本取得ではなくテンプレート運用です。動画ごとの構成、字幕、立ち絵、演出の型を増やしながら、継続投稿向けの運用を作れます。',
+    proof: '動画の型を増やして継続投稿しやすい',
+    highlights: ['`.ymmp` からフォーマット追加', '既存テンプレートを流用して横展開', '反応集・ショート・解説・独自フォーマットへ寄せやすい'],
+    images: ['/product_format_list.png'],
     charImage: '/nodoka/編集.png',
+    Icon: Settings2,
+  },
+  {
+    label: '台本編集と役割整理',
+    sub: 'メインボードで会話テンポと役割を微調整',
+    desc: '生成後の台本は、本文を見ながらその場で整形。役割テンプレや感情指定も合わせて触れるので、別画面を往復せずに会話の流れを詰められます。',
+    proof: '本文・感情・配役を崩さず同時に詰める',
+    highlights: ['不要な文を即削除・差し替え', '役割テンプレで掛け合いを揃えやすい', '感情ボードを見ながらテンポ調整'],
+    images: ['/product_edit_script.png', '/product_board_emotion.png'],
+    charImage: '/nodoka/サブウインドウ.png',
     Icon: PencilLine,
   },
   {
-    label: 'AI台本生成',
-    sub: 'ノイズ除去から掛け合い化まで一気通貫',
-    desc: '集めたネタから不要部分を削ぎ落とし、設定テンプレートに沿って自然な掛け合い台本へ再構築。量産しながら品質を揃えます。',
-    proof: '下処理と会話化をまとめて自動化',
-    highlights: ['テンプレートに沿って台本生成', 'ノイズを自動で整理', '量産時でも語り口を揃えやすい'],
+    label: '13キャラAI台本',
+    sub: '役割テンプレと性格プリセットで掛け合い化',
+    desc: '集めたネタをそのまま流すのではなく、13キャラ対応のAI台本生成で会話形式へ再構築。役割テンプレ、性格プリセット、補助タグ調整で語り口を揃えられます。',
+    proof: '13キャラ対応のAI台本生成',
+    highlights: ['ゆっくり霊夢から紲星あかりまで対応', '役割テンプレと性格プリセット', '補助タグで掛け合いの温度感を調整'],
     images: ['/product_ai_script.png'],
     charImage: '/nodoka/AI.png',
     Icon: Bot,
   },
   {
-    label: 'Youtube分析',
-    sub: 'テーマ選定を勘に頼らない',
-    desc: '再生データやトレンドを踏まえて、反応が取りやすいテーマを見つけやすくします。動画化前の外しを減らすための分析導線です。',
-    proof: '再生を取りやすい題材選定を補助',
-    highlights: ['トレンドと動画データを参照', '企画の当たり外れを早めに判断', '次の一本を探す時間を圧縮'],
+    label: 'YMM4前準備',
+    sub: 'CSV・キャラ設定・立ち絵パスを前工程で整理',
+    desc: 'YMM4に入ってから詰まりやすい準備を前工程へ寄せています。CSVからのプロジェクト作成、キャラクター集保存、立ち絵パス一括変更、読み方監査までまとめて処理できます。',
+    proof: 'YMM4に入る前の面倒を前工程で片付ける',
+    highlights: ['CSVからプロジェクト作成', 'YMM4キャラクター集の保存', '立ち絵パス一括変更と読み方監査'],
+    images: ['/product_keyword_material.png', '/product_board_emotion.png'],
+    charImage: '/nodoka/サブウインドウ.png',
+    Icon: Send,
+  },
+  {
+    label: 'YouTube分析',
+    sub: '検索条件と差分比較で題材選定を補助',
+    desc: 'YouTube分析は、動画化するテーマを勘だけで決めないための導線です。検索条件や除外フィルタ、コメント取得、履歴比較、差分レポートまで一画面で追えます。',
+    proof: '検索条件・履歴比較・差分レポートまで整理',
+    highlights: ['URL一括入力と詳細取得に対応', 'コメント取得で反応の質を確認', 'CSV / TSV / JSON 出力とクォータ管理'],
     images: ['/product_youtube_info.png'],
     charImage: '/nodoka/step3.png',
     Icon: TrendingUp,
   },
   {
-    label: 'サブウインドウ一括管理',
-    sub: '感情・配役・フォーマットをまとめて制御',
-    desc: '感情指定や配役、フォーマット設定は専用のサブウィンドウで一括管理。動画ごとの細かい差分を、崩さず整えられます。',
-    proof: '表情・役割・テンプレートを横断管理',
-    highlights: ['感情ボードをまとめて編集', '配役ルールを崩さず適用', '量産時の設定漏れを減らす'],
-    images: ['/product_edit_script.png', '/product_board_emotion.png'],
-    charImage: '/nodoka/サブウインドウ.png',
-    Icon: Settings2,
-  },
-  {
-    label: 'YMM4直結出力',
-    sub: '完成したらワンクリックで持ち込み',
-    desc: '編集が終わったら上部ボタンを押すだけ。立ち絵や音声トーンを紐付けたまま、YMM4で読み込める形へそのまま出力できます。',
-    proof: '準備済みデータをYMM4向けに即出力',
-    highlights: ['上部ボタンからすぐ出力', '立ち絵・音声設定も保持', '最後の転記作業をなくせる'],
-    images: ['/product_edit_script.png'],
-    charImage: '/nodoka/step6.png',
-    Icon: Send,
-  },
-  {
     label: '内蔵操作ガイド',
-    sub: '初回でも迷わないオンボード',
-    desc: 'どの画面からでも呼び出せる詳細マニュアルを内蔵。インストールから動画化までの手順を、制作途中で止まらず確認できます。',
-    proof: '不明点を画面内で自己解決しやすい',
-    highlights: ['画面ごとに必要な説明へ飛べる', '初心者でも導入しやすい', '問い合わせ前に解決しやすい'],
+    sub: '初回導入から継続運用まで止まりにくい',
+    desc: 'どの画面からでも呼び出せる詳細ガイドを内蔵。インストールだけでなく、テンプレート運用やYMM4連携で迷いがちなポイントを制作途中で確認できます。',
+    proof: '初見導入でも流れを見失いにくい',
+    highlights: ['画面ごとに必要な説明へ飛べる', '問い合わせ前に自己解決しやすい', '継続運用時の手順も見返しやすい'],
     images: ['/product_guide.png'],
     charImage: '/nodoka/ガイド.png',
     Icon: BookOpen,
@@ -130,12 +130,12 @@ const timeBreakdown = [
 
 const useCasesData = [
   {
-    title: '5ch/2ch 反応集動画',
-    body: '複数スレッドから面白いレスだけを自動抽出し、瞬時に掛け合い台本へ。',
-    eyebrow: '量産しやすい定番導線',
-    metric: 'スレ収集から掛け合い台本化まで一直線',
-    highlights: ['複数スレッドをまとめて取得', '不要レスを除外して会話用に整形', '反応集の量産テンポを維持しやすい'],
-    result: '毎回の手作業収集を、量産向けの下書きフローへ置き換え',
+    title: '5ch / 反応集運用',
+    body: '複数スレッドやまとめ記事から面白いレスを拾い、掛け合い台本とYMM4前準備まで一直線で進めます。',
+    eyebrow: '定番の量産導線',
+    metric: '記事取得 → 台本化 → YMM4前準備まで一本化',
+    highlights: ['複数スレッドをまとめて比較', '不要レスを除外して会話用に整形', '反応集の定番工程をテンプレート化しやすい'],
+    result: '反応集の下書きから編集準備までを継続投稿向けに回しやすい',
     image: '/product_get_script.png',
     Icon: Users,
     gradient: 'linear-gradient(135deg, rgba(74, 222, 128, 0.15), rgba(34, 197, 94, 0.05))',
@@ -143,12 +143,12 @@ const useCasesData = [
     iconColor: '#4ade80',
   },
   {
-    title: 'YouTube ゆっくり解説',
-    body: '解説役と聞き役への自動配役と、YMM4での自然な間合い作りをAIで完全支援。',
+    title: 'ゆっくり解説・掛け合い解説',
+    body: '解説役と聞き役の役割を分け、テンプレートと感情指定で自然な掛け合いの下地をそろえます。',
     eyebrow: '説明系コンテンツ向け',
-    metric: '会話テンポと配役の詰めを前工程で完了',
-    highlights: ['聞き役と解説役の役割を分離', '自然な掛け合いテンプレートを適用', 'YMM4前の下準備を減らしやすい'],
-    result: '構成と掛け合いの下地を揃えて、編集前の迷いを削減',
+    metric: '役割テンプレと感情指定で話し方を揃える',
+    highlights: ['聞き役と解説役の役割を分離', '13キャラ対応のAI台本へ繋げやすい', 'YMM4前の調整を先に終えやすい'],
+    result: '構成と掛け合いの再現性を上げて、編集前の迷いを削減',
     image: '/product_board_emotion.png',
     Icon: MessageSquare,
     gradient: 'linear-gradient(135deg, rgba(96, 165, 250, 0.15), rgba(59, 130, 246, 0.05))',
@@ -156,12 +156,12 @@ const useCasesData = [
     iconColor: '#60a5fa',
   },
   {
-    title: 'TikTok / YouTube Shorts',
-    body: '短尺特有のテンポの良い構成を見える化。縦型動画の台本作成にも完全対応。',
+    title: 'ショート動画・縦型テンプレート',
+    body: '短尺向けの導入、展開、字幕の型を持たせて、縦型動画の試行回数を増やしやすくします。',
     eyebrow: '短尺量産にも対応',
-    metric: '縦型向けのテンポ設計を先に固めやすい',
-    highlights: ['短い導入と展開を作りやすい', '縦型向けのテンポで台本化', 'ショート向け素材の試行回数を増やせる'],
-    result: '短尺の投稿本数を増やしながら、構成のブレを抑制',
+    metric: '短い構成をテンプレートとして再利用',
+    highlights: ['短尺向けの導入と展開を整えやすい', '縦型向けテンポで台本化しやすい', 'ショート用テンプレートを量産導線へ組み込みやすい'],
+    result: '短尺の投稿本数を増やしつつ、構成のブレを抑えやすい',
     image: '/product_ai_script.png',
     Icon: Smartphone,
     gradient: 'linear-gradient(135deg, rgba(244, 114, 182, 0.15), rgba(236, 72, 153, 0.05))',
@@ -169,18 +169,60 @@ const useCasesData = [
     iconColor: '#f472b6',
   },
   {
-    title: '自動化による収益化量産',
-    body: 'テンプレート＋AI台本で属人性を排除。外注の内製化に最適。',
+    title: '独自フォーマット・複数運用',
+    body: '独自の動画構成や素材ルールをテンプレート化し、複数チャンネルやチーム運用へ横展開しやすくします。',
     eyebrow: '内製化・チーム運用向け',
-    metric: '属人作業をテンプレート化して再現性を確保',
-    highlights: ['担当者ごとの差を減らせる', 'テンプレートを横展開しやすい', '外注頼みの工程を内製へ寄せやすい'],
-    result: '量産導線を標準化して、収益化の再現性を高める',
-    image: '/product_board_emotion.png',
-    Icon: Zap,
+    metric: '動画の型を増やして複数ラインに展開',
+    highlights: ['`.ymmp` 由来の型を増やして運用', '担当者ごとの差を減らしやすい', '外注頼みの前工程を内製へ寄せやすい'],
+    result: 'テンプレート運用で継続投稿の再現性を高める',
+    image: '/product_format_list.png',
+    Icon: Monitor,
     gradient: 'linear-gradient(135deg, rgba(255, 215, 112, 0.15), rgba(224, 193, 132, 0.05))',
     borderColor: 'rgba(255, 215, 112, 0.3)',
     iconColor: '#ffd770',
   },
+] as const
+
+const workflowProofStats = [
+  { value: '20+', label: '対応サイト・掲示板', detail: 'あにまん、5ch、ふたばなどの既定対応を起点にネタ探しを短縮', Icon: FileSearch },
+  { value: '13', label: 'AI台本対応キャラ', detail: 'ゆっくり系から VOICEROID / CeVIO 系まで掛け合い化を補助', Icon: Users },
+  { value: 'YMM4', label: '前準備を一括整理', detail: '`.ymmp` 追加、CSV生成、キャラ設定保存、立ち絵パス変更を前工程へ集約', Icon: Send },
+] as const
+
+const workflowPillars = [
+  {
+    title: 'テンプレート運用が主役',
+    body: '単発の台本取得ではなく、動画の型を持って継続投稿を回す設計です。',
+    points: ['`.ymmp` からフォーマット追加', '既存テンプレートを複製して横展開'],
+  },
+  {
+    title: 'YMM4に入る前の面倒を前工程へ',
+    body: 'YMM4を開いてからの調整ではなく、編集前準備をまとめて済ませやすくしています。',
+    points: ['CSVからプロジェクト作成', 'YMM4キャラクター集保存と立ち絵パス一括変更'],
+  },
+  {
+    title: 'AI補助は掛け合い品質の再現に使う',
+    body: '文章整形、感情分析、改行補助、13キャラ台本で、語り口のばらつきを抑えます。',
+    points: ['役割テンプレと性格プリセット', 'タイトル案・サムネ文案の提案'],
+  },
+  {
+    title: '分析で次の一本を決めやすい',
+    body: '検索条件、除外フィルタ、コメント取得、履歴比較でテーマ選定を勘任せにしません。',
+    points: ['URL一括入力と差分レポート', 'CSV / TSV / JSON 出力とクォータ管理'],
+  },
+] as const
+
+const supportedSiteChips = [
+  'あにまん',
+  'あにまん掲示板',
+  '5ch',
+  'ふたば',
+  'あにこ便',
+  'サカサカ10',
+  'なんJスタジアム',
+  'GANDAM.LOG',
+  'わんこーる速報',
+  'キニ速',
 ] as const
 
 const testimonials = [
@@ -242,16 +284,16 @@ const testimonialProofStats = [
 
 const pricingDecisionPoints = [
   {
-    title: 'Freeから試す',
-    body: 'まずは基本機能とYMM4出力の流れを確認。制作フローにハマるかを無料で検証できます。',
+    title: 'Freeで初回導入を確認',
+    body: 'まずは対応サイト取得、基本編集、YMM4出力の流れを見て、自分の制作フローに合うかを入口で判断できます。',
   },
   {
-    title: 'Standardで個人量産',
-    body: 'サイト台本取得やAI生成を使い、個人クリエイターが投稿本数を伸ばすならここが主力です。',
+    title: 'Standardで継続投稿を回す',
+    body: 'テンプレート運用、台本作成、AI補助、YouTube分析までまとめて回し、個人の継続投稿ラインを安定させる主力です。',
   },
   {
-    title: 'Proで内製化を加速',
-    body: '複数チャンネル運用、外注の巻き取り、要望対応の速度まで欲しいなら最上位が向いています。',
+    title: 'Proで内製化と相談導線を強化',
+    body: '13キャラAI台本、個別テンプレート、動画内容の相談、契約期間中サポートまで欲しいなら最上位が向いています。',
   },
 ] as const
 
@@ -307,7 +349,7 @@ const faqItems: FAQItem[] = faqCategories.flatMap(c => c.items)
 
 
 const homeMetaDescription =
-  '反応集・ゆっくり解説・ショート動画向けに、ネタ収集、台本作成、会話台本、立ち絵・画像・音声の素材整理、YMM4前の準備までまとめて進められる動画制作支援ツール。'
+  'テンプレート運用を軸に、対応サイト取得、台本作成、AI補助、YMM4前準備、YouTube分析までまとめて進められる動画制作支援ツール。'
 
 const homeStructuredData = [
   {
@@ -676,15 +718,15 @@ export function HomePage() {
               viewport={{ once: true, margin: "-10%" }}
             >
               <p className="brand-kicker" style={{ margin: 0, justifyContent: 'center' }}>全機能紹介</p>
-              <h2 style={{ margin: 0 }}>収益化に向けた、<span className="text-glow-gold">全7プロセス</span>を<span className="text-glow-green">一画面で把握</span></h2>
+              <h2 style={{ margin: 0 }}>台本取得だけで終わらない、<span className="text-glow-gold">継続運用の7機能</span>を<span className="text-glow-green">一画面で把握</span></h2>
               <p>
-                ネタ収集からYMM4タイムライン出力まで、動画制作で詰まりやすい工程を分断せずに繋げています。
-                強いSaaS LPがやっているように、工程・画面・効能を同時に見せる構成へ整えました。
+                現仕様で強く出せるのは、対応サイト取得、テンプレート運用、AI補助、YMM4前準備、YouTube分析までの一続きの運用です。
+                工程・実画面・効能が同時に伝わるよう、台本取得ツールではなく継続投稿向けの運用基盤として見せています。
               </p>
               <div className="home-flow-head__chips" role="list" aria-label="制作フローの特徴">
-                <span role="listitem">URL投入からYMM4出力まで一直線</span>
-                <span role="listitem">工程ごとに何が終わるかが一目で分かる</span>
-                <span role="listitem">初心者でも迷いにくい内蔵ガイド付き</span>
+                <span role="listitem">テンプレート運用を主役にした構成</span>
+                <span role="listitem">YMM4に入る前の準備をまとめて整理</span>
+                <span role="listitem">初心者でも流れを追いやすい内蔵ガイド付き</span>
               </div>
             </motion.div>
 
@@ -996,8 +1038,8 @@ export function HomePage() {
             style={{ position: 'relative', zIndex: 1, marginBottom: '2.5rem' }}
           >
             <p className="brand-kicker">対応ジャンル</p>
-            <h2><span className="text-glow-green">反応集・ゆっくり解説</span>・ショート動画に対応</h2>
-            <p>あらゆる形式の解説・まとめ動画に対応し、スタイルに合わせた最適なフォーマットで出力します。</p>
+            <h2><span className="text-glow-green">反応集・ゆっくり解説</span>・ショート動画へ展開しやすい</h2>
+            <p>どんな動画でもと言い切るより、テンプレート次第で多様な動画形式へ寄せやすいのが正確です。実際の運用イメージごとに、どこが効くかを整理しています。</p>
           </motion.div>
 
           <div className="home-compact-usecase-grid" role="list" style={{ position: 'relative', zIndex: 1, width: '100%', maxWidth: '1000px', margin: '0 auto' }}>
@@ -1062,6 +1104,140 @@ export function HomePage() {
         </Section>
 
 
+
+        {/* ━━━[ Section Glow Divider ]━━━ */}
+        <div className="section-glow-divider" />
+
+        <Section className="home-compact-section home-compact-template-section">
+          <div className="page-bg-bleed">
+            <motion.img
+              src="/bg_demo_master.webp"
+              alt=""
+              style={{
+                width: '100%', height: '100%', objectFit: 'cover',
+                opacity: 0.55, mixBlendMode: 'screen',
+                maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
+                WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
+              }}
+              animate={{
+                scale: [1.03, 1.08, 1.03],
+                objectPosition: ['50% 50%', '52% 48%', '50% 50%'],
+              }}
+              transition={{
+                duration: 24,
+                ease: 'easeInOut',
+                repeat: Infinity,
+              }}
+            />
+          </div>
+
+          <motion.div
+            className="home-compact-section-head"
+            variants={SECTION_HEAD_VARIANTS}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-10%' }}
+            style={{ position: 'relative', zIndex: 1, marginBottom: '2.5rem' }}
+          >
+            <p className="brand-kicker">運用の中核</p>
+            <h2>台本取得より強いのは、<span className="text-glow-gold">テンプレート運用</span>と<span className="text-glow-green">YMM4前準備</span></h2>
+            <p>
+              実機能ベースで強く出せるのは、動画の型を持って継続運用しやすいことです。
+              現仕様の強みだけに絞り、どこが本当に工夫されているかを一段深く見せています。
+            </p>
+          </motion.div>
+
+          <div className="workflow-proof-grid" style={{ position: 'relative', zIndex: 1 }}>
+            <motion.div
+              className="workflow-proof-visual"
+              initial={{ opacity: 0, x: -24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-10%' }}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
+            >
+              <img
+                src="/generated/template-ops-studio-v1.png"
+                alt="テンプレート運用、AI補助、YMM4前準備、分析を一つのワークフローへまとめたプレミアムなスタジオビジュアル"
+                loading="lazy"
+                decoding="async"
+              />
+              <div className="workflow-proof-visual__overlay">
+                <span>TEMPLATE OPS</span>
+                <strong>動画の型を増やしながら、AI補助とYMM4前準備を一つの運用へまとめる</strong>
+              </div>
+            </motion.div>
+
+            <motion.div
+              className="workflow-proof-board"
+              initial={{ opacity: 0, x: 24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-10%' }}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
+            >
+              <div className="workflow-proof-board__intro">
+                <h3>現仕様で前面に出せる強みだけを整理</h3>
+                <p>
+                  反応集、5chまとめ、ショート、解説、独自フォーマットへ横展開しやすい理由は、
+                  テンプレート運用とYMM4編集準備を前工程に寄せているからです。
+                </p>
+              </div>
+
+              <div className="testimonials-proof-board__stats">
+                {workflowProofStats.map((stat) => (
+                  <article key={stat.label} className="testimonials-proof-stat">
+                    <div className="testimonials-proof-stat__icon" aria-hidden="true">
+                      <stat.Icon size={18} />
+                    </div>
+                    <strong>{stat.value}</strong>
+                    <span>{stat.label}</span>
+                    <p>{stat.detail}</p>
+                  </article>
+                ))}
+              </div>
+
+              <div className="workflow-proof-pillars">
+                {workflowPillars.map((pillar) => (
+                  <article key={pillar.title} className="workflow-proof-pillar">
+                    <strong>{pillar.title}</strong>
+                    <p>{pillar.body}</p>
+                    <ul className="workflow-proof-pillar__points">
+                      {pillar.points.map((point) => (
+                        <li key={point}>
+                          <BadgeCheck size={15} />
+                          <span>{point}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </article>
+                ))}
+              </div>
+
+              <div className="workflow-proof-board__mini">
+                <div className="workflow-proof-board__mini-screen">
+                  <img
+                    src="/product_format_list.png"
+                    alt=".ymmp からフォーマット追加を行う実画面"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div className="workflow-proof-board__mini-copy">
+                  <strong>`.ymmp`、CSV、YMM4キャラ設定をまとめて動画の型へ落とし込める</strong>
+                  <p>
+                    実画面でもフォーマット追加とカテゴリ管理を確認できます。
+                    ここがあるから、単発の取得ではなく継続運用の仕組みとして価値が立ちます。
+                  </p>
+                </div>
+              </div>
+
+              <div className="workflow-proof-board__chips" role="list" aria-label="代表的な対応サイト">
+                {supportedSiteChips.map((chip) => (
+                  <span key={chip} role="listitem">{chip}</span>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </Section>
 
         {/* ━━━[ Section Glow Divider ]━━━ */}
         <div className="section-glow-divider" />
@@ -1240,10 +1416,10 @@ export function HomePage() {
             whileInView="visible"
             viewport={{ once: true, margin: "-10%" }}
             style={{ position: 'relative', zIndex: 1 }}
-          >
-            <p className="brand-kicker">料金プラン</p>
-            <h2>あなたの制作スタイルに合わせた<span className="text-glow-gold">3つのプラン</span></h2>
-            <p style={{ maxWidth: '600px', margin: '0 auto' }}>まずは無料で始めて、必要に応じてアップグレード。<br/>すべてのプランで<strong className="text-glow-muted">基本機能をフル活用</strong>できます。</p>
+            >
+              <p className="brand-kicker">料金プラン</p>
+              <h2>あなたの制作スタイルに合わせた<span className="text-glow-gold">3つのプラン</span></h2>
+            <p style={{ maxWidth: '600px', margin: '0 auto' }}>まずは無料で始めて、必要に応じてアップグレード。<br/>基本導線を確認しながら、継続運用向け機能を段階的に広げられます。</p>
           </motion.div>
 
           <div className="pricing-decision-panel" style={{ position: 'relative', zIndex: 1 }}>
@@ -1276,8 +1452,8 @@ export function HomePage() {
               <div className="pricing-decision-panel__intro">
                 <h3>迷いにくい選び方を先に提示</h3>
                 <p>
-                  強いSaaS LPがやっているように、価格だけではなく
-                  「どの運用規模にどのプランが合うか」を先に見せて、比較の迷いを減らしています。
+                  価格だけではなく、初回導入、継続投稿、個別テンプレートや相談までの
+                  使い分けを先に見せて、比較の迷いを減らしています。
                 </p>
               </div>
 
@@ -1410,7 +1586,7 @@ export function HomePage() {
               </div>
 
               <p style={{ fontSize: 'clamp(1.05rem, 1.5vw, 1.25rem)', color: 'rgba(255,255,255,0.7)', maxWidth: '600px', lineHeight: 1.7 }}>
-                ネタ収集からYMM4出力まで、分断していた工程を<strong style={{ color: '#fff' }}>1つの流れ</strong>に統合。<br />
+                ネタ探し、テンプレート運用、AI補助、YMM4前準備まで、分断していた工程を<strong style={{ color: '#fff' }}>1つの流れ</strong>に統合。<br />
                 まずは無料プランでお試しください。
               </p>
 
@@ -1459,7 +1635,7 @@ export function HomePage() {
             <div className="floating-cta__mobile-dock">
               <div className="floating-cta__mobile-copy">
                 <span>無料プランあり</span>
-                <strong>台本作業を約95%短縮</strong>
+                <strong>テンプレ運用とYMM4準備を時短</strong>
               </div>
               <Link className="brand-btn brand-btn--primary floating-cta__mobile-btn" to="/download/">
                 無料で始める

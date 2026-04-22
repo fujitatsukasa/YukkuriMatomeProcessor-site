@@ -11331,7 +11331,8 @@ html {
   }
 }
 
-.testimonials-proof-grid {
+.testimonials-proof-grid,
+.workflow-proof-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
   gap: clamp(1rem, 2vw, 1.5rem);
@@ -11340,7 +11341,9 @@ html {
 }
 
 .testimonials-proof-visual,
+.workflow-proof-visual,
 .testimonials-proof-board,
+.workflow-proof-board,
 .pricing-decision-panel__visual,
 .pricing-decision-panel__content,
 .pricing-comparison-board {
@@ -11357,6 +11360,7 @@ html {
 }
 
 .testimonials-proof-visual img,
+.workflow-proof-visual img,
 .pricing-decision-panel__visual img {
   display: block;
   width: 100%;
@@ -11365,11 +11369,13 @@ html {
   object-fit: cover;
 }
 
-.testimonials-proof-visual {
+.testimonials-proof-visual,
+.workflow-proof-visual {
   min-height: 100%;
 }
 
 .testimonials-proof-visual::after,
+.workflow-proof-visual::after,
 .pricing-decision-panel__visual::after {
   content: "";
   position: absolute;
@@ -11381,6 +11387,7 @@ html {
 }
 
 .testimonials-proof-visual__overlay,
+.workflow-proof-visual__overlay,
 .pricing-decision-panel__visual-copy {
   position: absolute;
   left: 1.2rem;
@@ -11392,6 +11399,7 @@ html {
 }
 
 .testimonials-proof-visual__overlay span,
+.workflow-proof-visual__overlay span,
 .pricing-decision-panel__visual-copy span {
   color: rgba(223, 192, 131, 0.9);
   font-size: 0.78rem;
@@ -11401,16 +11409,138 @@ html {
 }
 
 .testimonials-proof-visual__overlay strong,
+.workflow-proof-visual__overlay strong,
 .pricing-decision-panel__visual-copy strong {
   color: #fff4d3;
   font-size: clamp(1.15rem, 2vw, 1.5rem);
   line-height: 1.35;
 }
 
-.testimonials-proof-board {
+.testimonials-proof-board,
+.workflow-proof-board {
   display: grid;
   gap: 1rem;
   padding: 1.25rem;
+}
+
+.workflow-proof-board__intro {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.workflow-proof-board__intro h3,
+.workflow-proof-board__mini-copy strong,
+.workflow-proof-pillar strong {
+  color: #fff4d3;
+}
+
+.workflow-proof-board__intro h3 {
+  margin: 0;
+  font-size: clamp(1.35rem, 2.3vw, 1.8rem);
+}
+
+.workflow-proof-board__intro p,
+.workflow-proof-board__mini-copy p,
+.workflow-proof-pillar p {
+  margin: 0;
+  color: rgba(236, 233, 226, 0.74);
+  line-height: 1.68;
+}
+
+.workflow-proof-pillars {
+  display: grid;
+  gap: 0.85rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.workflow-proof-pillar {
+  display: grid;
+  gap: 0.55rem;
+  padding: 1rem;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.workflow-proof-pillar strong {
+  font-size: 1rem;
+}
+
+.workflow-proof-pillar__points {
+  display: grid;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.workflow-proof-pillar__points li {
+  display: flex;
+  gap: 0.55rem;
+  align-items: flex-start;
+  color: rgba(245, 241, 233, 0.9);
+  line-height: 1.55;
+}
+
+.workflow-proof-pillar__points svg {
+  margin-top: 0.18rem;
+  flex-shrink: 0;
+  color: #f2ddb1;
+}
+
+.workflow-proof-board__mini {
+  display: grid;
+  grid-template-columns: minmax(0, 0.74fr) minmax(0, 1fr);
+  gap: 0.95rem;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 22px;
+  border: 1px solid rgba(223, 192, 131, 0.14);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+}
+
+.workflow-proof-board__mini-screen {
+  overflow: hidden;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(7, 8, 12, 0.88);
+}
+
+.workflow-proof-board__mini-screen img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.workflow-proof-board__mini-copy {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.workflow-proof-board__mini-copy strong {
+  display: block;
+  line-height: 1.45;
+}
+
+.workflow-proof-board__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.workflow-proof-board__chips span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(223, 192, 131, 0.2);
+  background: rgba(223, 192, 131, 0.08);
+  color: #f2ddb1;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
 }
 
 .testimonials-proof-board__stats {
@@ -11711,11 +11841,17 @@ html {
 
 @media (max-width: 980px) {
   .testimonials-proof-grid,
+  .workflow-proof-grid,
   .pricing-decision-panel {
     grid-template-columns: 1fr;
   }
 
   .testimonials-proof-board__stats {
+    grid-template-columns: 1fr;
+  }
+
+  .workflow-proof-pillars,
+  .workflow-proof-board__mini {
     grid-template-columns: 1fr;
   }
 
@@ -11765,13 +11901,16 @@ html {
   }
 
   .testimonials-proof-grid,
+  .workflow-proof-grid,
   .pricing-decision-panel,
   .pricing-comparison-board {
     width: min(100%, calc(100% - 24px));
   }
 
   .testimonials-proof-visual,
+  .workflow-proof-visual,
   .testimonials-proof-board,
+  .workflow-proof-board,
   .pricing-decision-panel__visual,
   .pricing-decision-panel__content,
   .pricing-comparison-board {
@@ -11783,6 +11922,7 @@ html {
   }
 
   .testimonials-proof-board,
+  .workflow-proof-board,
   .pricing-decision-panel__content,
   .pricing-comparison-board {
     padding: 1rem;
@@ -11794,8 +11934,15 @@ html {
     padding-bottom: 0.2rem;
   }
 
-  .testimonials-proof-board__chips span {
+  .testimonials-proof-board__chips span,
+  .workflow-proof-board__chips span {
     white-space: nowrap;
+  }
+
+  .workflow-proof-board__chips {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 0.2rem;
   }
 
   .testimonials-carousel {
