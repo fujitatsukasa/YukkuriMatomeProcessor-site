@@ -61,7 +61,7 @@ function useRouteEffects(pathname: string, hash: string) {
       window.removeEventListener('scroll', updateProgress)
       window.removeEventListener('resize', updateProgress)
     }
-  }, [updateProgress])
+  }, [])
 
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
@@ -154,6 +154,7 @@ export function SiteLayout() {
   const location = useLocation()
   const [navOpen, setNavOpen] = useState(false)
   const normalizedPath = normalizePath(location.pathname)
+  const isHome = normalizedPath === '/'
   const activeEntry = pageRegistry[normalizedPath]
   const activeKey = activeEntry?.navKey
   const breadcrumbs = useMemo(() => buildBreadcrumbs(location.pathname), [location.pathname])
@@ -176,9 +177,6 @@ export function SiteLayout() {
 
   useRouteEffects(location.pathname, location.hash)
 
-  useEffect(() => {
-    setNavOpen(false)
-  }, [location.pathname])
 
   const customPrimaryCta = useMemo(() => ({ ...primaryCta, label: '無料で開始する！' }), [])
 
@@ -196,8 +194,15 @@ export function SiteLayout() {
         本文へスキップ
       </a>
 
-      <header className="site-header brand-header" data-header>
-        <div className="brand-header__inner">
+      <header className={`site-header brand-header${isHome ? ' brand-header--home' : ''}`} data-header>
+        <div
+          className="brand-header__inner"
+          onClickCapture={(event) => {
+            if ((event.target as HTMLElement).closest('a')) {
+              setNavOpen(false)
+            }
+          }}
+        >
           <Link className="logo brand-logo" to="/" aria-label={`${siteTitle} ホーム`}>
             <span className="logo-badge brand-logo__mark" aria-hidden="true">
               <img className="logo-mark" src={media.logoMark} alt="" />
@@ -248,7 +253,7 @@ export function SiteLayout() {
         </div>
       </header>
 
-      <main id="main-content" className="brand-main" tabIndex={-1}>
+      <main id="main-content" className={`brand-main${isHome ? ' brand-main--home' : ''}`} tabIndex={-1}>
         {breadcrumbs.length ? (
           <nav className="brand-breadcrumbs" aria-label="パンくず">
             <ol>
@@ -269,7 +274,7 @@ export function SiteLayout() {
         </div>
       </main>
 
-      <footer className="brand-footer">
+      <footer className={`brand-footer${isHome ? ' brand-footer--home' : ''}`}>
         <div className="brand-footer__inner">
           <div className="brand-footer__lead">
             <h2>{siteTitle}</h2>

@@ -185,6 +185,7 @@ const useCasesData = [
 
 const testimonials = [
   {
+    badge: 'ゆっくり解説',
     quote: "「毎日2時間かかっていた台本制作が、わずか5分で完了するように。浮いた時間で動画の投稿頻度を2倍に増やせました。」",
     author: "ゆっくり解説系クリエイター",
     authorDetail: "登録者15万人 ｜ 導入歴6ヶ月",
@@ -192,6 +193,7 @@ const testimonials = [
     avatarImg: "/avatars_real/1.png",
   },
   {
+    badge: '反応集量産',
     quote: "「外注に頼っていた反応集まとめを内製化できました。コピペ作業の属人性が排除され、完全な自動パイプラインが完成しました。」",
     author: "2ch反応集チャンネル運営",
     authorDetail: "月間再生数300万回 ｜ 導入歴4ヶ月",
@@ -199,6 +201,7 @@ const testimonials = [
     avatarImg: "/avatars_real/2.png",
   },
   {
+    badge: '複数運用',
     quote: "「YMM4への出力がワンクリックなのが最大の魅力。細かい立ち絵の表情指定も事前にまとめて設定できるためミスが激減しました。」",
     author: "複数チャンネル運営ディレクター",
     authorDetail: "3チャンネル同時運営 ｜ 導入歴8ヶ月",
@@ -206,6 +209,7 @@ const testimonials = [
     avatarImg: "/avatars_real/3.png",
   },
   {
+    badge: 'ショート量産',
     quote: "「ショート動画を量産するために導入。テンプレートを一度組めば、あとはURLを入れるだけで台本が出来上がるので楽すぎます。」",
     author: "ショート動画特化クリエイター",
     authorDetail: "TikTok フォロワー8万 ｜ 導入歴3ヶ月",
@@ -213,6 +217,7 @@ const testimonials = [
     avatarImg: "/avatars_real/4.png",
   },
   {
+    badge: '副業拡大',
     quote: "「副業で始めたゆっくり解説チャンネルが、このツールのおかげで本業の収入を超えました。準備の手間が消えたのが大きいです。」",
     author: "副業系ゆっくりクリエイター",
     authorDetail: "登録者3万人 ｜ 導入歴5ヶ月",
@@ -220,6 +225,7 @@ const testimonials = [
     avatarImg: "/avatars_real/5.png",
   },
   {
+    badge: 'チーム運用',
     quote: "「法人として複数チャンネルの運用を効率化するために導入。属人化を排除でき、スタッフの教育コストも大幅に削減できました。」",
     author: "動画制作会社 COO",
     authorDetail: "法人5チャンネル運用 ｜ 導入歴10ヶ月",
@@ -227,6 +233,27 @@ const testimonials = [
     avatarImg: "/avatars_real/6.png",
   },
 ]
+
+const testimonialProofStats = [
+  { value: '2倍', label: '投稿頻度を伸ばしたケース', detail: '制作時間を短縮して配信本数へ再投資', Icon: TrendingUp },
+  { value: '15万円', label: '外注費削減の実例', detail: '反応集の内製化で月額コストを圧縮', Icon: CreditCard },
+  { value: '80%', label: '修正・確認時間の削減', detail: '複数チャンネル運用でも確認工数を軽量化', Icon: Zap },
+] as const
+
+const pricingDecisionPoints = [
+  {
+    title: 'Freeから試す',
+    body: 'まずは基本機能とYMM4出力の流れを確認。制作フローにハマるかを無料で検証できます。',
+  },
+  {
+    title: 'Standardで個人量産',
+    body: 'サイト台本取得やAI生成を使い、個人クリエイターが投稿本数を伸ばすならここが主力です。',
+  },
+  {
+    title: 'Proで内製化を加速',
+    body: '複数チャンネル運用、外注の巻き取り、要望対応の速度まで欲しいなら最上位が向いています。',
+  },
+] as const
 
 type FAQItem = { question: string; answer: string }
 type FAQCategory = { categoryName: string; items: FAQItem[] }
@@ -818,7 +845,7 @@ export function HomePage() {
             </div>
           </div>
           <motion.div 
-            className="home-compact-section-head"
+            className="home-compact-section-head" 
             variants={SECTION_HEAD_VARIANTS}
             initial="hidden"
             whileInView="visible"
@@ -1059,6 +1086,69 @@ export function HomePage() {
             </p>
           </motion.div>
 
+          <div className="testimonials-proof-grid" style={{ position: 'relative', zIndex: 1 }}>
+            <motion.div
+              className="testimonials-proof-visual"
+              initial={{ opacity: 0, x: -24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-10%' }}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
+            >
+              <img
+                src="/generated/testimonials-creator-studio-v1.png"
+                alt="夜のクリエイターワークスペース。複数モニターで編集画面と制作ダッシュボードを開いた様子"
+                loading="lazy"
+                decoding="async"
+              />
+              <div className="testimonials-proof-visual__overlay">
+                <span>CREATOR WORKFLOW</span>
+                <strong>制作ラインを止めずに、投稿本数と品質の両立を狙える運用へ</strong>
+              </div>
+            </motion.div>
+
+            <motion.div
+              className="testimonials-proof-board"
+              initial={{ opacity: 0, x: 24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-10%' }}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
+            >
+              <div className="testimonials-proof-board__stats">
+                {testimonialProofStats.map((stat) => (
+                  <article key={stat.label} className="testimonials-proof-stat">
+                    <div className="testimonials-proof-stat__icon" aria-hidden="true">
+                      <stat.Icon size={18} />
+                    </div>
+                    <strong>{stat.value}</strong>
+                    <span>{stat.label}</span>
+                    <p>{stat.detail}</p>
+                  </article>
+                ))}
+              </div>
+
+              <div className="testimonials-proof-board__quote">
+                <div className="testimonials-proof-board__stars" aria-hidden="true">
+                  {[...Array(5)].map((_, i) => <Star key={i} size={14} fill="#e0c184" color="#e0c184" />)}
+                </div>
+                <p>
+                  「外注に頼っていた反応集まとめを内製化できました。コピペ作業の属人性が排除され、
+                  完全な自動パイプラインが完成しました。」
+                </p>
+                <div>
+                  <strong>2ch反応集チャンネル運営</strong>
+                  <span>月間再生数300万回 ｜ 導入歴4ヶ月</span>
+                </div>
+              </div>
+
+              <div className="testimonials-proof-board__chips" role="list" aria-label="導入されている運用例">
+                <span role="listitem">反応集量産</span>
+                <span role="listitem">ゆっくり解説</span>
+                <span role="listitem">ショート量産</span>
+                <span role="listitem">複数チャンネル運用</span>
+              </div>
+            </motion.div>
+          </div>
+
           {/* Horizontal Scroll Carousel */}
           <div className="testimonials-carousel" style={{ position: 'relative', zIndex: 1, width: '100%', overflow: 'visible', padding: '1rem 0 2rem' }}>
             <button onClick={() => scrollTestimonials('left')} className="carousel-nav-btn carousel-nav-btn--left" aria-label="左にスクロール">←</button>
@@ -1080,8 +1170,11 @@ export function HomePage() {
                   style={{ minWidth: '360px', maxWidth: '400px', flex: '0 0 auto', scrollSnapAlign: 'start', padding: 'clamp(1.5rem, 3vh, 2.5rem)', gap: '0' }}
                 >
                   {/* Star rating */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '4px', marginBottom: '1.2rem' }}>
-                    {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#e0c184" color="#e0c184" />)}
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px', marginBottom: '1.2rem' }}>
+                    <span className="testimonial-card__badge">{t.badge}</span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                      {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#e0c184" color="#e0c184" />)}
+                    </div>
                   </div>
                   {/* Quote */}
                   <p style={{ fontSize: '1.02rem', lineHeight: 1.75, color: 'rgba(245,241,233,0.92)', flex: 1, marginBottom: '1.5rem', fontWeight: 500, letterSpacing: '0.01em' }}>{t.quote}</p>
@@ -1152,6 +1245,55 @@ export function HomePage() {
             <h2>あなたの制作スタイルに合わせた<span className="text-glow-gold">3つのプラン</span></h2>
             <p style={{ maxWidth: '600px', margin: '0 auto' }}>まずは無料で始めて、必要に応じてアップグレード。<br/>すべてのプランで<strong className="text-glow-muted">基本機能をフル活用</strong>できます。</p>
           </motion.div>
+
+          <div className="pricing-decision-panel" style={{ position: 'relative', zIndex: 1 }}>
+            <motion.div
+              className="pricing-decision-panel__visual"
+              initial={{ opacity: 0, x: -24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-10%' }}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
+            >
+              <img
+                src="/generated/pricing-plan-visual-v1.png"
+                alt="3つのプラン階層をイメージしたダークトーンのプレミアムな比較ビジュアル"
+                loading="lazy"
+                decoding="async"
+              />
+              <div className="pricing-decision-panel__visual-copy">
+                <span>PLAN DECISION</span>
+                <strong>無料検証から量産運用、内製化まで一段ずつ引き上げられる料金設計</strong>
+              </div>
+            </motion.div>
+
+            <motion.div
+              className="pricing-decision-panel__content"
+              initial={{ opacity: 0, x: 24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-10%' }}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
+            >
+              <div className="pricing-decision-panel__intro">
+                <h3>迷いにくい選び方を先に提示</h3>
+                <p>
+                  強いSaaS LPがやっているように、価格だけではなく
+                  「どの運用規模にどのプランが合うか」を先に見せて、比較の迷いを減らしています。
+                </p>
+              </div>
+
+              <div className="pricing-decision-panel__steps">
+                {pricingDecisionPoints.map((point, index) => (
+                  <article key={point.title} className="pricing-decision-step">
+                    <span className="pricing-decision-step__index">0{index + 1}</span>
+                    <div>
+                      <strong>{point.title}</strong>
+                      <p>{point.body}</p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </motion.div>
+          </div>
 
           <PricingCards />
         </Section>
