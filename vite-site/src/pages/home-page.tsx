@@ -6,7 +6,7 @@ import { downloadUrl, legal, siteOrigin, siteSubtitle, siteTitle } from '@/data/
 import React, { useEffect, useRef, useState } from 'react'
 import { motion, useInView as useMotionInView, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import Tilt from 'react-parallax-tilt'
-import { MessageSquare, Smartphone, Users, Download, Zap, Star, CheckCircle2, TrendingUp, HelpCircle, Monitor, CreditCard, ArrowRight, Sparkles, Play, ChevronDown } from 'lucide-react'
+import { MessageSquare, Smartphone, Users, Download, Zap, Star, CheckCircle2, TrendingUp, HelpCircle, Monitor, CreditCard, ArrowRight, Sparkles, Play, ChevronDown, FileSearch, PencilLine, Bot, Settings2, Send, BookOpen, BadgeCheck } from 'lucide-react'
 import { CustomCursorGlow } from '@/components/CustomCursorGlow'
 
 const SECTION_HEAD_VARIANTS = {
@@ -35,13 +35,76 @@ function AnimatedNumber({ value, active, suffix = '' }: { value: number; active:
 // ━━━[ Core AI Features (Benefit & SEO Optimized) ]━━━
 // ━━━[ Core AI Features (7 Step Pitch Deck) ]━━━
 const presentationSlides = [
-  { label: '台本取得', sub: 'WEBから即時ストック', desc: 'YouTubeや5ch等のURLから必要な情報を瞬時に抽出し、ワンクリックでストック・一元管理します。', images: ['/product_get_script.png'], charImage: '/nodoka/step1.png' },
-  { label: '台本編集', sub: 'メインボードでサクッと調整', desc: '生成された台本は直感的なメインエディターですぐに微調整可能。ボードを出さずとも手軽にテキストを整えられます。', images: ['/product_edit_script.png'], charImage: '/nodoka/編集.png' },
-  { label: 'AI台本生成', sub: '高度な自動構築', desc: '集めたネタから不要なノイズを削ぎ落とし、設定したテンプレートに従って自然な掛け合い台本へと一気に再構築します。', images: ['/product_ai_script.png'], charImage: '/nodoka/AI.png' },
-  { label: 'Youtube分析', sub: 'トレンドを見逃さない', desc: '再生可能な動画データやトレンドを分析し、ヒットの確率を最大限まで高めるトピック選定を助けます。', images: ['/product_youtube_info.png'], charImage: '/nodoka/step3.png' },
-  { label: 'サブウインドウ一括管理', sub: '感情ボード・フォーマット', desc: '詳細な感情指定や配役、フォーマットなどは、独立した専用のサブウィンドウで柔軟かつ直感的に一括管理できます。', images: ['/product_edit_script.png', '/product_board_emotion.png'], charImage: '/nodoka/サブウインドウ.png' },
-  { label: 'YMM4直結出力', sub: '編集上部からワンクリック', desc: '編集が完了したら、台本編集画面の上部ボタンを一つ押すだけ。立ち絵や音声トーンを紐付け、そのままYMM4で読み込める形に完全出力します。', images: ['/product_edit_script.png'], charImage: '/nodoka/step6.png' },
-  { label: '内蔵操作ガイド', sub: '初心者も安心のフルサポート', desc: 'どの画面からでも即座に呼び出せる詳細なマニュアルを搭載。インストールから動画化までの手順をいつでも確認できます。', images: ['/product_guide.png'], charImage: '/nodoka/ガイド.png' },
+  {
+    label: '台本取得',
+    sub: 'URL投入から素材ストックまで最短10秒',
+    desc: 'YouTubeや5ch等のURLを貼るだけで、必要な情報を自動で抽出。ネタ収集のコピペ地獄を、最初の一手から止めます。',
+    proof: '複数ソースの収集を1画面で開始',
+    highlights: ['URL貼り付けだけで取得開始', '拾ったネタをそのままストック化', '後工程へそのまま引き継げる'],
+    images: ['/product_get_script.png'],
+    charImage: '/nodoka/step1.png',
+    Icon: FileSearch,
+  },
+  {
+    label: '台本編集',
+    sub: 'メインボードで流れを崩さず微調整',
+    desc: '生成した台本はメインエディターからそのまま整形。別画面を行き来せず、違和感のある箇所だけを高速に直せます。',
+    proof: '本文を見ながらその場で差分調整',
+    highlights: ['会話テンポをその場で微修正', '不要な文を即削除・差し替え', '編集後すぐ次工程へ進める'],
+    images: ['/product_edit_script.png'],
+    charImage: '/nodoka/編集.png',
+    Icon: PencilLine,
+  },
+  {
+    label: 'AI台本生成',
+    sub: 'ノイズ除去から掛け合い化まで一気通貫',
+    desc: '集めたネタから不要部分を削ぎ落とし、設定テンプレートに沿って自然な掛け合い台本へ再構築。量産しながら品質を揃えます。',
+    proof: '下処理と会話化をまとめて自動化',
+    highlights: ['テンプレートに沿って台本生成', 'ノイズを自動で整理', '量産時でも語り口を揃えやすい'],
+    images: ['/product_ai_script.png'],
+    charImage: '/nodoka/AI.png',
+    Icon: Bot,
+  },
+  {
+    label: 'Youtube分析',
+    sub: 'テーマ選定を勘に頼らない',
+    desc: '再生データやトレンドを踏まえて、反応が取りやすいテーマを見つけやすくします。動画化前の外しを減らすための分析導線です。',
+    proof: '再生を取りやすい題材選定を補助',
+    highlights: ['トレンドと動画データを参照', '企画の当たり外れを早めに判断', '次の一本を探す時間を圧縮'],
+    images: ['/product_youtube_info.png'],
+    charImage: '/nodoka/step3.png',
+    Icon: TrendingUp,
+  },
+  {
+    label: 'サブウインドウ一括管理',
+    sub: '感情・配役・フォーマットをまとめて制御',
+    desc: '感情指定や配役、フォーマット設定は専用のサブウィンドウで一括管理。動画ごとの細かい差分を、崩さず整えられます。',
+    proof: '表情・役割・テンプレートを横断管理',
+    highlights: ['感情ボードをまとめて編集', '配役ルールを崩さず適用', '量産時の設定漏れを減らす'],
+    images: ['/product_edit_script.png', '/product_board_emotion.png'],
+    charImage: '/nodoka/サブウインドウ.png',
+    Icon: Settings2,
+  },
+  {
+    label: 'YMM4直結出力',
+    sub: '完成したらワンクリックで持ち込み',
+    desc: '編集が終わったら上部ボタンを押すだけ。立ち絵や音声トーンを紐付けたまま、YMM4で読み込める形へそのまま出力できます。',
+    proof: '準備済みデータをYMM4向けに即出力',
+    highlights: ['上部ボタンからすぐ出力', '立ち絵・音声設定も保持', '最後の転記作業をなくせる'],
+    images: ['/product_edit_script.png'],
+    charImage: '/nodoka/step6.png',
+    Icon: Send,
+  },
+  {
+    label: '内蔵操作ガイド',
+    sub: '初回でも迷わないオンボード',
+    desc: 'どの画面からでも呼び出せる詳細マニュアルを内蔵。インストールから動画化までの手順を、制作途中で止まらず確認できます。',
+    proof: '不明点を画面内で自己解決しやすい',
+    highlights: ['画面ごとに必要な説明へ飛べる', '初心者でも導入しやすい', '問い合わせ前に解決しやすい'],
+    images: ['/product_guide.png'],
+    charImage: '/nodoka/ガイド.png',
+    Icon: BookOpen,
+  },
 ] as const
 
 const socialProofStats = [
@@ -69,6 +132,10 @@ const useCasesData = [
   {
     title: '5ch/2ch 反応集動画',
     body: '複数スレッドから面白いレスだけを自動抽出し、瞬時に掛け合い台本へ。',
+    eyebrow: '量産しやすい定番導線',
+    metric: 'スレ収集から掛け合い台本化まで一直線',
+    highlights: ['複数スレッドをまとめて取得', '不要レスを除外して会話用に整形', '反応集の量産テンポを維持しやすい'],
+    result: '毎回の手作業収集を、量産向けの下書きフローへ置き換え',
     image: '/product_get_script.png',
     Icon: Users,
     gradient: 'linear-gradient(135deg, rgba(74, 222, 128, 0.15), rgba(34, 197, 94, 0.05))',
@@ -78,6 +145,10 @@ const useCasesData = [
   {
     title: 'YouTube ゆっくり解説',
     body: '解説役と聞き役への自動配役と、YMM4での自然な間合い作りをAIで完全支援。',
+    eyebrow: '説明系コンテンツ向け',
+    metric: '会話テンポと配役の詰めを前工程で完了',
+    highlights: ['聞き役と解説役の役割を分離', '自然な掛け合いテンプレートを適用', 'YMM4前の下準備を減らしやすい'],
+    result: '構成と掛け合いの下地を揃えて、編集前の迷いを削減',
     image: '/product_board_emotion.png',
     Icon: MessageSquare,
     gradient: 'linear-gradient(135deg, rgba(96, 165, 250, 0.15), rgba(59, 130, 246, 0.05))',
@@ -87,6 +158,10 @@ const useCasesData = [
   {
     title: 'TikTok / YouTube Shorts',
     body: '短尺特有のテンポの良い構成を見える化。縦型動画の台本作成にも完全対応。',
+    eyebrow: '短尺量産にも対応',
+    metric: '縦型向けのテンポ設計を先に固めやすい',
+    highlights: ['短い導入と展開を作りやすい', '縦型向けのテンポで台本化', 'ショート向け素材の試行回数を増やせる'],
+    result: '短尺の投稿本数を増やしながら、構成のブレを抑制',
     image: '/product_ai_script.png',
     Icon: Smartphone,
     gradient: 'linear-gradient(135deg, rgba(244, 114, 182, 0.15), rgba(236, 72, 153, 0.05))',
@@ -96,6 +171,10 @@ const useCasesData = [
   {
     title: '自動化による収益化量産',
     body: 'テンプレート＋AI台本で属人性を排除。外注の内製化に最適。',
+    eyebrow: '内製化・チーム運用向け',
+    metric: '属人作業をテンプレート化して再現性を確保',
+    highlights: ['担当者ごとの差を減らせる', 'テンプレートを横展開しやすい', '外注頼みの工程を内製へ寄せやすい'],
+    result: '量産導線を標準化して、収益化の再現性を高める',
     image: '/product_board_emotion.png',
     Icon: Zap,
     gradient: 'linear-gradient(135deg, rgba(255, 215, 112, 0.15), rgba(224, 193, 132, 0.05))',
@@ -335,6 +414,9 @@ export function HomePage() {
     setActiveSlide(index)
   }
 
+  const activePresentationSlide = presentationSlides[activeSlide]
+  const ActiveSlideIcon = activePresentationSlide.Icon
+
 
   return (
     <>
@@ -557,158 +639,148 @@ export function HomePage() {
         <div className="section-glow-divider" />
 
 
-        <section className="brand-section brand-section--alt home-compact-section home-presentation-deck" ref={flowRef} style={{ position: 'relative', zIndex: 1, minHeight: '90vh', display: 'flex', alignItems: 'center' }}>
-          <div style={{ width: '100%', maxWidth: 1250, margin: '0 auto', display: 'flex', flexDirection: 'column', padding: 'clamp(3rem, 6vh, 6rem) max(1.5rem, 3vw)', position: 'relative', zIndex: 2 }}>
-            
-            {/* Header */}
-            <div style={{ flex: '0 0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '2.5rem', gap: '8px' }}>
-              <p className="brand-kicker" style={{ margin: 0 }}>全機能紹介</p>
-              <h2 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.5rem)', margin: 0 }}>収益化に向けた、<span style={{ display: 'inline-block' }}><span className="text-glow-gold">全7プロセス</span><span className="text-glow-green">完全網羅</span></span></h2>
-              <p style={{ color: 'rgba(255,255,255,0.7)', maxWidth: 700, textAlign: 'center', fontSize: '1.1rem', marginTop: '0.5rem' }}>
-                ネタ収集からYMM4タイムライン出力まで、動画制作におけるあらゆる手作業を自動化する、一貫した制作ワークフローをご紹介します。
-              </p>
-            </div>
-
-            {/* Main Stage */}
+        <section className="brand-section brand-section--alt home-compact-section home-presentation-deck" ref={flowRef}>
+          <div className="home-flow-shell">
             <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              style={{ flex: '1 1 auto', width: '100%' }}
+              className="home-flow-head"
+              variants={SECTION_HEAD_VARIANTS}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-10%" }}
             >
-              {/* Combined Giant Card wrapper */}
-              <div 
-                style={{ 
-                  display: 'flex', flexWrap: 'wrap', alignItems: 'stretch',
-                  background: 'linear-gradient(135deg, rgba(26, 25, 30, 0.95), rgba(16, 15, 20, 0.95))',
-                  backdropFilter: 'blur(20px)',
-                  border: '1px solid rgba(224, 193, 132, 0.4)',
-                  borderRadius: '28px',
-                  boxShadow: '0 30px 60px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(255,255,255,0.08)',
-                  overflow: 'visible',
-                  height: 'clamp(550px, 65vh, 700px)' /* Absolute fixed height to prevent jumps */
-                }}
-              >
-              
-                {/* Left: Guide Character & Text */}
-                <div style={{ flex: '1 1 350px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', padding: 'clamp(1.5rem, 3vw, 2.5rem) clamp(2rem, 4vw, 3rem)', zIndex: 10, position: 'relative' }}>
-                  <AnimatePresence mode="wait">
-                    <motion.div 
-                      key={`desc-${activeSlide}`}
-                      initial={{ opacity: 0, x: -20, filter: 'blur(5px)' }}
-                      animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
-                      exit={{ opacity: 0, x: 20, filter: 'blur(5px)' }}
-                      transition={{ duration: 0.4 }}
-                      style={{ display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between', gap: '2rem' }}
-                    >
-                      {/* Text Section Top */}
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
-                        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' }}>
-                          <span style={{ fontSize: '1.05rem', color: '#e0c184', fontWeight: 800, letterSpacing: '3px', display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
-                            <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#4CAF50', boxShadow: '0 0 12px #4CAF50' }} />
-                            STEP 0{activeSlide + 1}
-                          </span>
-                          <h3 style={{ fontSize: 'clamp(1.8rem, 2.8vw, 2.4rem)', color: '#fff', margin: 0, fontWeight: 800, lineHeight: 1.25, letterSpacing: '-0.01em', wordBreak: 'keep-all', overflowWrap: 'anywhere' }}>{presentationSlides[activeSlide]?.label}</h3>
-                        </div>
-                        
-                        {/* Description */}
-                        <div>
-                          <p style={{ fontSize: '1.15rem', color: 'rgba(255,255,255,0.9)', lineHeight: 1.75, margin: 0, fontWeight: 500 }}>{presentationSlides[activeSlide]?.desc}</p>
-                        </div>
-                      </div>
-                      
-                      {/* Character Avatar Bottom Center */}
-                      <div style={{ flexShrink: 0, width: '100%', height: 'clamp(180px, 30vh, 260px)', display: 'flex', justifyContent: 'center', alignItems: 'flex-end', marginTop: 'auto' }}>
-                        <img 
-                          src={presentationSlides[activeSlide]?.charImage || '/nodoka/通常.png'} 
-                          alt={`STEP ${activeSlide + 1}: ${presentationSlides[activeSlide]?.label}を案内するガイドキャラクターのどか`}
-                          style={{ width: 'auto', maxWidth: '100%', height: '100%', objectFit: 'contain', objectPosition: 'bottom', filter: 'drop-shadow(0 0 20px rgba(0,0,0,0.6))' }}
-                        />
-                      </div>
-                    </motion.div>
-                  </AnimatePresence>
-                </div>
-
-                {/* Right: Floating UI Window Showcase Area */}
-                <div style={{ flex: '1.5 1 500px', position: 'relative', overflow: 'visible', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <AnimatePresence mode="wait">
-                    <motion.div 
-                      key={`slide-${activeSlide}`}
-                      initial={{ opacity: 0, scale: 1.05 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.95 }}
-                      transition={{ duration: 0.6, type: 'spring', bounce: 0.2 }}
-                      style={{ position: 'absolute', inset: '1.5rem 1.5rem 3.5rem 1.5rem', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-                    >
-                    <div style={{ position: 'relative', width: '100%', height: '100%', borderRadius: '16px', overflow: 'visible', boxShadow: '0 20px 50px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(255,255,255,0.08)' }}>
-                      {presentationSlides[activeSlide]?.images?.map((imgSrc, imgIndex) => {
-                        return (
-                          <motion.div 
-                            key={`${activeSlide}-${imgIndex}`}
-                            style={{ 
-                              position: 'absolute', 
-                              inset: 0,
-                              width: '100%', 
-                              height: '100%',
-                              zIndex: imgIndex,
-                            }}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.2 }}
-                          >
-                            <img 
-                              src={imgSrc}
-                              alt={`${presentationSlides[activeSlide]?.label}の実画面 ${imgIndex + 1}`} 
-                              loading="lazy"
-                              decoding="async"
-                              style={{ 
-                                display: 'block',
-                                width: '100%',
-                                height: '100%',
-                                objectFit: 'cover', 
-                                objectPosition: 'left top',
-                                filter: imgIndex > 0 ? 'drop-shadow(-20px 20px 30px rgba(0,0,0,0.8))' : 'none',
-                                maskImage: imgIndex > 0 ? 'linear-gradient(to right, rgba(0,0,0,1) 60%, rgba(0,0,0,0))' : 'none',
-                                WebkitMaskImage: imgIndex > 0 ? 'linear-gradient(to right, rgba(0,0,0,1) 60%, rgba(0,0,0,0))' : 'none',
-                                transform: imgIndex > 0 ? 'translate(10%, 10%) scale(0.95)' : 'none'
-                              }}
-                            />
-                          </motion.div>
-                        )
-                      })}
-                    </div>
-                    </motion.div>
-                  </AnimatePresence>
-
-                  {/* Refined Minimal Dots Navigation */}
-                  <div style={{ position: 'absolute', bottom: '2rem', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '12px', zIndex: 10 }}>
-                    {presentationSlides.map((slide, idx) => (
-                      <button 
-                        key={idx}
-                        onClick={() => handleSlideChange(idx)}
-                        style={{
-                          height: 4, 
-                          width: 40, // Constant width, no jumping size
-                          background: activeSlide === idx ? '#e0c184' : 'rgba(255,255,255,0.25)',
-                          borderRadius: 2, border: 'none', cursor: 'pointer', transition: 'all 0.3s ease',
-                          boxShadow: activeSlide === idx ? '0 0 10px rgba(224,193,132,0.6)' : 'none',
-                          padding: 0
-                        }}
-                        title={slide.label}
-                        onMouseOver={(e) => {
-                          if(activeSlide !== idx) e.currentTarget.style.background = 'rgba(255,255,255,0.5)';
-                        }}
-                        onMouseOut={(e) => {
-                          if(activeSlide !== idx) e.currentTarget.style.background = 'rgba(255,255,255,0.25)';
-                        }}
-                      />
-                    ))}
-                  </div>
-                </div>
-
+              <p className="brand-kicker" style={{ margin: 0, justifyContent: 'center' }}>全機能紹介</p>
+              <h2 style={{ margin: 0 }}>収益化に向けた、<span className="text-glow-gold">全7プロセス</span>を<span className="text-glow-green">一画面で把握</span></h2>
+              <p>
+                ネタ収集からYMM4タイムライン出力まで、動画制作で詰まりやすい工程を分断せずに繋げています。
+                強いSaaS LPがやっているように、工程・画面・効能を同時に見せる構成へ整えました。
+              </p>
+              <div className="home-flow-head__chips" role="list" aria-label="制作フローの特徴">
+                <span role="listitem">URL投入からYMM4出力まで一直線</span>
+                <span role="listitem">工程ごとに何が終わるかが一目で分かる</span>
+                <span role="listitem">初心者でも迷いにくい内蔵ガイド付き</span>
               </div>
+            </motion.div>
 
+            <motion.div
+              className="home-flow-stage"
+              initial={{ opacity: 0, y: 32 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-8%" }}
+              transition={{ duration: 0.7, ease: 'easeOut' }}
+            >
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={`copy-${activeSlide}`}
+                  className="home-flow-stage__copy"
+                  initial={{ opacity: 0, x: -20, filter: 'blur(5px)' }}
+                  animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+                  exit={{ opacity: 0, x: 20, filter: 'blur(5px)' }}
+                  transition={{ duration: 0.35 }}
+                >
+                  <div className="home-flow-stage__eyebrow">
+                    <span className="home-flow-stage__step">STEP 0{activeSlide + 1}</span>
+                    <span className="home-flow-stage__proof">{activePresentationSlide.proof}</span>
+                  </div>
+
+                  <div className="home-flow-stage__title">
+                    <div className="home-flow-stage__icon" aria-hidden="true">
+                      <ActiveSlideIcon size={22} />
+                    </div>
+                    <div>
+                      <p>{activePresentationSlide.sub}</p>
+                      <h3>{activePresentationSlide.label}</h3>
+                    </div>
+                  </div>
+
+                  <p className="home-flow-stage__desc">{activePresentationSlide.desc}</p>
+
+                  <ul className="home-flow-stage__highlights">
+                    {activePresentationSlide.highlights.map((highlight) => (
+                      <li key={highlight}>
+                        <BadgeCheck size={16} />
+                        <span>{highlight}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="home-flow-stage__guide">
+                    <div className="home-flow-stage__guide-avatar">
+                      <img
+                        src={activePresentationSlide.charImage || '/nodoka/通常.png'}
+                        alt={`STEP ${activeSlide + 1}: ${activePresentationSlide.label}を案内するガイドキャラクターのどか`}
+                      />
+                    </div>
+                    <div>
+                      <strong>操作が止まりにくい導線</strong>
+                      <p>今の工程で何が終わるのか、次にどこを触るのかを短く示し、初見でも流れを見失いにくくしています。</p>
+                    </div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+
+              <div className="home-flow-stage__visual">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={`visual-${activeSlide}`}
+                    className="home-flow-visual-card"
+                    initial={{ opacity: 0, scale: 1.02 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.98 }}
+                    transition={{ duration: 0.45, ease: 'easeOut' }}
+                  >
+                    <div className="home-flow-visual-card__topline">
+                      <span>PRODUCT SCREEN</span>
+                      <strong>{activePresentationSlide.proof}</strong>
+                    </div>
+                    <div className="home-flow-visual-card__screen">
+                      {activePresentationSlide.images.map((imgSrc, imgIndex) => (
+                        <motion.div
+                          key={`${activeSlide}-${imgIndex}`}
+                          className={`home-flow-visual-card__shot${imgIndex > 0 ? ' is-secondary' : ''}`}
+                          initial={{ opacity: 0, y: imgIndex > 0 ? 20 : 0 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.08 * imgIndex, duration: 0.35 }}
+                        >
+                          <img
+                            src={imgSrc}
+                            alt={`${activePresentationSlide.label}の実画面 ${imgIndex + 1}`}
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+
+                <div className="home-flow-stage__nav" role="tablist" aria-label="制作フローのステップ一覧">
+                  {presentationSlides.map((slide, idx) => {
+                    const SlideIcon = slide.Icon
+                    const isActive = idx === activeSlide
+                    return (
+                      <button
+                        type="button"
+                        key={slide.label}
+                        className={`home-flow-step${isActive ? ' is-active' : ''}`}
+                        onClick={() => handleSlideChange(idx)}
+                        aria-pressed={isActive}
+                        title={slide.label}
+                      >
+                        <span className="home-flow-step__count">0{idx + 1}</span>
+                        <span className="home-flow-step__body">
+                          <span className="home-flow-step__icon" aria-hidden="true">
+                            <SlideIcon size={16} />
+                          </span>
+                          <span>
+                            <strong>{slide.label}</strong>
+                            <small>{slide.sub}</small>
+                          </span>
+                        </span>
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
             </motion.div>
           </div>
         </section>
@@ -903,92 +975,61 @@ export function HomePage() {
 
           <div className="home-compact-usecase-grid" role="list" style={{ position: 'relative', zIndex: 1, width: '100%', maxWidth: '1000px', margin: '0 auto' }}>
             {useCasesData.map((item, idx) => (
-              <motion.div
+              <motion.article
                 key={item.title}
+                className="home-usecase-card"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-10%" }}
                 transition={{ duration: 0.6, delay: idx * 0.12 }}
-                style={{ height: '100%' }}
+                role="listitem"
+                style={{
+                  '--usecase-accent': item.iconColor,
+                  '--usecase-border': item.borderColor,
+                  '--usecase-gradient': item.gradient,
+                } as React.CSSProperties}
               >
-              <Tilt
-                tiltMaxAngleX={5}
-                tiltMaxAngleY={5}
-                glareEnable={true}
-                glareMaxOpacity={0.1}
-                glareColor="#ffffff"
-                glarePosition="all"
-                scale={1.02}
-                style={{ height: '100%' }}
-              >
-                <article 
-                  className="home-compact-usecase-card--pure magnetic-card" 
-                  role="listitem"
-                  style={{ 
-                    height: '100%', 
-                    display: 'flex', flexDirection: 'column', alignItems: 'stretch',
-                    borderRadius: '24px',
-                    border: `1px solid ${item.iconColor}80`,
-                    background: 'rgba(32,30,36,0.95)',
-                    position: 'relative', overflow: 'visible',
-                    transition: 'border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease',
-                    cursor: 'default',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.boxShadow = `0 20px 50px rgba(0,0,0,0.5), inset 0 0 0 2px ${item.iconColor}`
-                    e.currentTarget.style.background = 'rgba(40,38,45,1)'
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.boxShadow = ''
-                    e.currentTarget.style.background = 'rgba(32,30,36,0.95)'
-                  }}
-                >
-                  {/* Top: Video Demo Placeholder */}
-                  <div style={{ width: '100%', height: 'clamp(140px, 20vh, 180px)', position: 'relative', background: '#000', overflow: 'visible', flexShrink: 0 }}>
-                    <video
-                      src="https://www.w3schools.com/html/mov_bbb.mp4"
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        opacity: 0.85,
-                        transition: 'opacity 0.3s ease'
-                      }}
-                      onMouseEnter={(e) => e.currentTarget.style.opacity = '1'}
-                      onMouseLeave={(e) => e.currentTarget.style.opacity = '0.85'}
-                    />
-                    {/* Subtle bottom fade */}
-                    <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '30%', background: 'linear-gradient(to top, rgba(32,30,36,1), transparent)', pointerEvents: 'none' }} />
+                <div className="home-usecase-card__media">
+                  <img
+                    src={item.image}
+                    alt={`${item.title}の実画面イメージ`}
+                    className="home-usecase-card__image"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div className="home-usecase-card__veil" aria-hidden="true" />
+                  <div className="home-usecase-card__badge">
+                    <item.Icon size={16} color={item.iconColor} strokeWidth={2} />
+                    <span>{item.eyebrow}</span>
                   </div>
+                  <div className="home-usecase-card__metric">{item.metric}</div>
+                </div>
 
-                  {/* Bottom: Text & Icon */}
-                  <div style={{ display: 'flex', flexDirection: 'column', padding: 'clamp(1.5rem, 3vh, 2rem)', flexGrow: 1, position: 'relative', zIndex: 1 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.2rem' }}>
-                      {/* Integrated Icon */}
-                      <div style={{ 
-                        width: 48, height: 48, borderRadius: '14px', 
-                        background: item.gradient, 
-                        border: `1px solid ${item.iconColor}`,
-                        display: 'flex', alignItems: 'center', justifyContent: 'center', 
-                        boxShadow: `0 4px 15px ${item.borderColor}`,
-                        flexShrink: 0
-                      }}>
-                        <item.Icon size={24} color={item.iconColor} strokeWidth={2} />
-                      </div>
-                      <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: '#fff', margin: 0, letterSpacing: '0.02em', lineHeight: 1.3 }}>{item.title}</h3>
+                <div className="home-usecase-card__body">
+                  <div className="home-usecase-card__title-row">
+                    <div className="home-usecase-card__icon" aria-hidden="true">
+                      <item.Icon size={24} color={item.iconColor} strokeWidth={2} />
                     </div>
-                    <p style={{ fontSize: '1.05rem', color: 'rgba(255,255,255,0.9)', lineHeight: 1.6, flexGrow: 1, margin: 0 }}>{item.body}</p>
+                    <div>
+                      <span>{item.eyebrow}</span>
+                      <h3>{item.title}</h3>
+                    </div>
                   </div>
-
-                  {/* Subtle gradient glow in corner */}
-                  <div style={{ position: 'absolute', bottom: '-20%', right: '-20%', width: '60%', height: '60%', background: `radial-gradient(circle, ${item.borderColor}, transparent 70%)`, opacity: 0.15, pointerEvents: 'none' }} />
-                </article>
-              </Tilt>
-              </motion.div>
+                  <p>{item.body}</p>
+                  <ul className="home-usecase-card__highlights">
+                    {item.highlights.map((highlight) => (
+                      <li key={highlight}>
+                        <span className="home-usecase-card__highlights-dot" aria-hidden="true" />
+                        <span>{highlight}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="home-usecase-card__result">
+                    <strong>向いている運用</strong>
+                    <span>{item.result}</span>
+                  </div>
+                </div>
+              </motion.article>
             ))}
           </div>
         </Section>
@@ -1273,6 +1314,15 @@ export function HomePage() {
             exit={{ opacity: 0, y: 50, x: 20 }}
             transition={{ type: 'spring', stiffness: 200, damping: 20 }}
           >
+            <div className="floating-cta__mobile-dock">
+              <div className="floating-cta__mobile-copy">
+                <span>無料プランあり</span>
+                <strong>台本作業を約95%短縮</strong>
+              </div>
+              <Link className="brand-btn brand-btn--primary floating-cta__mobile-btn" to="/download/">
+                無料で始める
+              </Link>
+            </div>
             <div className="nodoka-cta-container">
               {/* フワフワ浮かぶフキダシ */}
               <motion.div 
