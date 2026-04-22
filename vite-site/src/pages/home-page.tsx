@@ -225,62 +225,67 @@ const supportedSiteChips = [
   'キニ速',
 ] as const
 
-const testimonials = [
+const trustEvidenceStats = [
   {
-    badge: '5ch / 反応集',
-    quote: '複数スレッド比較から不要レス整理、掛け合い台本化、YMM4前準備までを同じ導線で回したいケース。',
-    author: '主に使う機能',
-    authorDetail: '記事取得 / 台本整理 / テンプレ運用',
-    roi: '継続投稿の型を作りやすい',
+    value: '20+',
+    label: '対応サイト・掲示板',
+    detail: 'あにまん、5ch、ふたばなど、継続投稿で使いやすい定番導線を先に押さえています。',
+    Icon: FileSearch,
+  },
+  {
+    value: '13',
+    label: 'AI台本対応キャラ',
+    detail: 'ゆっくり系から VOICEROID / CeVIO 系まで、掛け合い台本の土台を揃えやすい構成です。',
     Icon: Users,
   },
   {
-    badge: 'ゆっくり解説',
-    quote: '聞き役と解説役を分けながら、役割テンプレートと感情指定で掛け合いの再現性を上げたいケース。',
-    author: '主に使う機能',
-    authorDetail: '役割テンプレ / 感情補助 / 13キャラAI台本',
-    roi: '話し方のブレを減らしやすい',
-    Icon: MessageSquare,
+    value: 'YMM4',
+    label: '前準備を一括整理',
+    detail: '`.ymmp` 追加、CSV生成、キャラ設定保存、立ち絵パス変更を前工程に集約しています。',
+    Icon: Send,
   },
-  {
-    badge: 'ショート動画',
-    quote: '短尺向けの導入、展開、字幕の型をテンプレート化して、試行回数を増やしたいケース。',
-    author: '主に使う機能',
-    authorDetail: '短尺テンプレ / AI補助 / タイトル案',
-    roi: '短い構成の量産に寄せやすい',
-    Icon: Smartphone,
-  },
-  {
-    badge: '複数チャンネル',
-    quote: '動画ごとに別テンプレートを持ちつつ、確認ポイントや前工程のルールを揃えて運用したいケース。',
-    author: '主に使う機能',
-    authorDetail: 'テンプレ複製 / YMM4前準備 / 読み方監査',
-    roi: '担当者ごとの差を減らしやすい',
-    Icon: TrendingUp,
-  },
-  {
-    badge: '分析ベース運用',
-    quote: 'URL一括入力、除外フィルタ、コメント取得、差分比較まで含めて次の題材を決めたいケース。',
-    author: '主に使う機能',
-    authorDetail: 'YouTube分析 / 履歴比較 / CSV出力',
-    roi: '勘頼みのテーマ選定を減らしやすい',
-    Icon: Settings2,
-  },
-]
-
-const testimonialProofStats = [
-  { value: 'Free', label: '入口確認から始められる', detail: '対応サイト取得、基本編集、YMM4出力の流れを先に確認', Icon: Download },
-  { value: '2営業日', label: '一次回答の目安を明記', detail: '契約、請求、不具合の窓口とサポート条件を掲載', Icon: BadgeCheck },
-  { value: 'Stripe', label: '決済と解約導線を整理', detail: 'Checkout と Customer Portal の前提を明示', Icon: CreditCard },
 ] as const
 
-const trustChecklist = [
-  '現仕様と追加予定を分けて掲載',
-  'Windows専用 / YMM4前提',
-  'YouTube分析は API キー設定が必要',
-  'Free → Standard → Pro の使い分けを明記',
-  'Stripe Checkout / Customer Portal 対応',
-  '2営業日以内を目安に一次回答',
+const trustSpecGroups = [
+  {
+    title: '現行仕様を基準に案内',
+    body: '追加予定と混ぜず、今すぐ使える範囲を主軸に見せています。',
+    items: ['テンプレート運用が中心', 'Windows専用 / YMM4前提', '追加予定は別枠で掲載'],
+  },
+  {
+    title: '事前に知っておく条件',
+    body: '導入後に詰まりやすいポイントを、購入前に先出ししています。',
+    items: ['YouTube分析は API キー設定が必要', 'CSV生成 / YMM4キャラクター集保存に対応', '立ち絵パス一括変更と読み方監査を搭載'],
+  },
+  {
+    title: '契約とサポートの導線',
+    body: '判断材料をUIと同じ粒度で整理し、契約後の不安を減らします。',
+    items: ['Free → Standard → Pro の使い分けを明記', 'Stripe Checkout / Customer Portal 対応', '2営業日以内を目安に一次回答'],
+  },
+] as const
+
+const trustDecisionCards = [
+  {
+    badge: '導入前',
+    title: 'Freeで入口確認',
+    body: '対応サイト取得、基本編集、YMM4出力まで、自分の制作フローに合うかを先に判断できます。',
+    points: ['対応サイト取得', '基本編集', 'YMM4出力の流れ'],
+    Icon: Download,
+  },
+  {
+    badge: '継続投稿',
+    title: 'Standardで運用を固める',
+    body: 'テンプレート運用、台本作成、AI補助、YouTube分析までをまとめて回す主力ラインです。',
+    points: ['テンプレート運用', 'AI台本補助', 'YouTube分析'],
+    Icon: Settings2,
+  },
+  {
+    badge: '内製化',
+    title: 'Proで個別運用まで詰める',
+    body: '13キャラAI台本、個別テンプレート、契約期間中サポートまで欲しい運用に向いています。',
+    points: ['13キャラAI台本', '個別テンプレート', '契約期間中サポート'],
+    Icon: BadgeCheck,
+  },
 ] as const
 
 const pricingDecisionPoints = [
@@ -423,14 +428,6 @@ export function HomePage() {
   const isFlowInView = useMotionInView(flowRef, { amount: 0.2, once: true })
   const chartRef = useRef<HTMLDivElement>(null)
   const isChartInView = useMotionInView(chartRef, { amount: 0.2, once: true })
-  const testimonialsRef = useRef<HTMLDivElement>(null)
-
-  const scrollTestimonials = (direction: 'left' | 'right') => {
-    if (testimonialsRef.current) {
-      const amount = direction === 'left' ? -400 : 400;
-      testimonialsRef.current.scrollBy({ left: amount, behavior: 'smooth' });
-    }
-  }
 
   const { scrollY } = useScroll()
   // Subtle parallax translation
@@ -445,29 +442,33 @@ export function HomePage() {
   useEffect(() => {
     const handleScroll = () => {
       const heroEnd = document.querySelector('.home-compact-hero')?.getBoundingClientRect()
+      const trustSection = document.querySelector('.testimonials-section-wrap')?.getBoundingClientRect()
+      const pricingSection = document.querySelector('.home-compact-price-section')?.getBoundingClientRect()
       const ctaSection = document.querySelector('.home-compact-cta-section')?.getBoundingClientRect()
-      if (heroEnd && ctaSection) {
-        const pastHero = heroEnd.bottom < 0
-        const reachedCta = ctaSection.top < window.innerHeight
-        setShowFloatingCta(pastHero && !reachedCta)
-      }
-    }
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
 
-  // ━━━[ Testimonial Auto-Scroll ]━━━
-  useEffect(() => {
-    const el = testimonialsRef.current
-    if (!el) return
-    const timer = setInterval(() => {
-      if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 10) {
-        el.scrollTo({ left: 0, behavior: 'smooth' })
-      } else {
-        el.scrollBy({ left: 400, behavior: 'smooth' })
+      if (!heroEnd || !ctaSection) {
+        setShowFloatingCta(false)
+        return
       }
-    }, 5000)
-    return () => clearInterval(timer)
+
+      const viewportHeight = window.innerHeight
+      const pastHero = heroEnd.bottom < viewportHeight * 0.28
+      const reachedCta = ctaSection.top < viewportHeight * 0.92
+      const overlappingTrust =
+        !!trustSection && trustSection.top < viewportHeight * 0.8 && trustSection.bottom > viewportHeight * 0.15
+      const overlappingPricing =
+        !!pricingSection && pricingSection.top < viewportHeight * 0.85 && pricingSection.bottom > viewportHeight * 0.12
+
+      setShowFloatingCta(pastHero && !reachedCta && !overlappingTrust && !overlappingPricing)
+    }
+
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('resize', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleScroll)
+    }
   }, [])
 
   // ━━━[ Auto Carousel Logic ]━━━
@@ -553,7 +554,7 @@ export function HomePage() {
               transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             >
               <Sparkles size={14} color="#e0c184" />
-              無料プランあり / テンプレ運用中心のWindows向け支援ツール
+              無料プランあり / Windows向け動画制作支援
             </motion.div>
 
             {/* 巨大タイトル — 画面の主役 */}
@@ -563,6 +564,7 @@ export function HomePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             >
+              <span className="hero-title-mobile-prefix">テンプレ運用・AI台本補助・YMM4前準備</span>
               <span className="text-rotator" style={{ display: 'inline-block' }}>
                 <span className="text-rotator__inner">
                   <span className="text-glow-green">【テンプレ運用】</span>
@@ -583,7 +585,7 @@ export function HomePage() {
               transition={{ duration: 0.6, delay: 0.45 }}
             >
               対応サイト取得、台本整理、AI補助、YMM4前準備を、<strong className="text-glow-gold" style={{ fontWeight: 700 }}>ひとつの導線</strong>に集約。
-              <span className="hero-subtitle-v2__sub">台本取得だけで終わらず、継続投稿の型を育てやすい制作支援ツールです。</span>
+              <span className="hero-subtitle-v2__sub">単発の台本取得で終わらず、`.ymmp` 追加や CSV 生成まで同じ流れで進められる制作支援ツールです。</span>
             </motion.p>
 
             {/* 対応環境バー — ヒーロー内に統合 */}
@@ -1263,112 +1265,131 @@ export function HomePage() {
             </p>
           </motion.div>
 
-          <div className="testimonials-proof-grid" style={{ position: 'relative', zIndex: 1 }}>
-            <motion.div
-              className="testimonials-proof-visual"
-              initial={{ opacity: 0, x: -24 }}
-              whileInView={{ opacity: 1, x: 0 }}
+          <div className="trust-layers" style={{ position: 'relative', zIndex: 1 }}>
+            <motion.article
+              className="trust-layer"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-10%' }}
               transition={{ duration: 0.6, ease: 'easeOut' }}
             >
-              <img
-                src="/product_format_list.png"
-                alt="テンプレート一覧とフォーマット管理の実画面"
-                loading="lazy"
-                decoding="async"
-              />
-              <div className="testimonials-proof-visual__overlay">
-                <span>REAL PRODUCT SCREEN</span>
-                <strong>テンプレートを増やしながら、YMM4前準備まで同じ導線で管理できる</strong>
-              </div>
-            </motion.div>
-
-            <motion.div
-              className="testimonials-proof-board"
-              initial={{ opacity: 0, x: 24 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: '-10%' }}
-              transition={{ duration: 0.6, ease: 'easeOut' }}
-            >
-              <div className="testimonials-proof-board__stats">
-                {testimonialProofStats.map((stat) => (
-                  <article key={stat.label} className="testimonials-proof-stat">
-                    <div className="testimonials-proof-stat__icon" aria-hidden="true">
-                      <stat.Icon size={18} />
-                    </div>
-                    <strong>{stat.value}</strong>
-                    <span>{stat.label}</span>
-                    <p>{stat.detail}</p>
-                  </article>
-                ))}
+              <div className="trust-layer__head">
+                <span className="trust-layer__eyebrow">実績</span>
+                <strong>現在公開している中核機能</strong>
+                <p>テンプレート運用、13キャラAI台本、YMM4前準備を、実画面と数値で確認できる構成にしています。</p>
               </div>
 
-              <div className="testimonials-proof-board__quote">
-                <p>
-                  現仕様と追加予定は分けて掲載し、Windows専用、YMM4前提、YouTube分析は API キー設定が必要という
-                  前提も先に見せています。購入前に「何ができて、どこからが継続運用向けか」を判断しやすくするための整理です。
-                </p>
-                <div>
-                  <strong>導入前に確認しておきたい前提</strong>
-                  <span>Freeで入口確認、Standardで継続投稿、Proで個別運用と相談導線を強化</span>
+              <div className="testimonials-proof-grid">
+                <div className="testimonials-proof-visual">
+                  <img
+                    src="/product_format_list.png"
+                    alt="テンプレート一覧とフォーマット管理の実画面"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div className="testimonials-proof-visual__overlay">
+                    <span>REAL PRODUCT SCREEN</span>
+                    <strong>テンプレートを増やしながら、YMM4前準備まで同じ導線で管理できる</strong>
+                  </div>
+                </div>
+
+                <div className="testimonials-proof-board">
+                  <div className="workflow-proof-board__intro">
+                    <h3>台本取得だけでなく、前工程の型を増やせる</h3>
+                    <p>`.ymmp` 追加、フォーマット管理、CSV生成、立ち絵パス変更までを、ひとつの運用フローに載せています。</p>
+                  </div>
+                  <div className="testimonials-proof-board__stats">
+                    {trustEvidenceStats.map((stat) => (
+                      <article key={stat.label} className="testimonials-proof-stat">
+                        <div className="testimonials-proof-stat__icon" aria-hidden="true">
+                          <stat.Icon size={18} />
+                        </div>
+                        <strong>{stat.value}</strong>
+                        <span>{stat.label}</span>
+                        <p>{stat.detail}</p>
+                      </article>
+                    ))}
+                  </div>
                 </div>
               </div>
 
-              <div className="testimonials-proof-board__chips" role="list" aria-label="導入前に確認したい前提">
-                {trustChecklist.map((item) => (
-                  <span key={item} role="listitem">{item}</span>
+              <div className="trust-supported-sites" role="list" aria-label="対応サイト例">
+                {supportedSiteChips.map((chip) => (
+                  <span key={chip} role="listitem">{chip}</span>
                 ))}
               </div>
-            </motion.div>
-          </div>
+            </motion.article>
 
-          <div className="testimonials-carousel__intro" style={{ position: 'relative', zIndex: 1 }}>
-            <strong>代表的な活用パターン</strong>
-            <p>実機能をもとに整理した代表例です。個別の成果を保証するものではありません。</p>
-          </div>
-
-          <div className="testimonials-carousel" style={{ position: 'relative', zIndex: 1, width: '100%', overflow: 'visible', padding: '1rem 0 2rem' }}>
-            <button onClick={() => scrollTestimonials('left')} className="carousel-nav-btn carousel-nav-btn--left" aria-label="左にスクロール">←</button>
-            <button onClick={() => scrollTestimonials('right')} className="carousel-nav-btn carousel-nav-btn--right" aria-label="右にスクロール">→</button>
-
-            <div 
-              ref={testimonialsRef}
-              className="testimonials-carousel__track"
-              style={{ display: 'flex', gap: '1.5rem', paddingLeft: 'max(3.5rem, calc((100vw - 1200px) / 2))', paddingRight: '3.5rem', overflowX: 'auto', scrollSnapType: 'x mandatory', scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            <motion.article
+              className="trust-layer"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-10%' }}
+              transition={{ duration: 0.6, delay: 0.04, ease: 'easeOut' }}
             >
-              {testimonials.map((t, idx) => (
-                <motion.div 
-                  key={idx}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-10%" }}
-                  transition={{ duration: 0.5, delay: idx * 0.08 }}
-                  className="testimonial-card"
-                  style={{ minWidth: '360px', maxWidth: '400px', flex: '0 0 auto', scrollSnapAlign: 'start', padding: 'clamp(1.5rem, 3vh, 2.5rem)', gap: '0' }}
-                >
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px', marginBottom: '1.2rem' }}>
-                    <span className="testimonial-card__badge">{t.badge}</span>
-                    <span className="testimonial-card__eyebrow">USE CASE</span>
-                  </div>
-                  <p style={{ fontSize: '1.02rem', lineHeight: 1.75, color: 'rgba(245,241,233,0.92)', flex: 1, marginBottom: '1.5rem', fontWeight: 500, letterSpacing: '0.01em' }}>{t.quote}</p>
-                  <div style={{ marginTop: 'auto', paddingTop: '1.2rem', borderTop: '1px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                    <div className="testimonial-card__icon-shell">
-                      <t.Icon size={20} />
+              <div className="trust-layer__head">
+                <span className="trust-layer__eyebrow">仕様</span>
+                <strong>導入前に知っておくべき前提</strong>
+                <p>制約や連携条件を後出しにせず、現在の公開仕様に寄せて整理しています。</p>
+              </div>
+
+              <div className="trust-spec-grid">
+                {trustSpecGroups.map((group, index) => (
+                  <article key={group.title} className="trust-spec-card">
+                    <div className="trust-spec-card__header">
+                      <span>{index === 0 ? 'CURRENT' : index === 1 ? 'CONDITION' : 'SUPPORT'}</span>
+                      <strong>{group.title}</strong>
                     </div>
-                    <div style={{ minWidth: 0 }}>
-                      <p style={{ fontSize: '0.95rem', color: '#f5f1e9', marginBottom: '0.15rem', fontWeight: 700 }}>{t.author}</p>
-                      <p style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.55)', marginBottom: '0.3rem' }}>{t.authorDetail}</p>
-                      <p style={{ fontSize: '0.88rem', color: '#e0c184', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '4px' }}>
-                        <TrendingUp size={14} />
-                        {t.roi}
-                      </p>
+                    <p>{group.body}</p>
+                    <ul className="trust-spec-card__list">
+                      {group.items.map((item) => (
+                        <li key={item}>
+                          <CheckCircle2 size={16} aria-hidden="true" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </article>
+                ))}
+              </div>
+            </motion.article>
+
+            <motion.article
+              className="trust-layer"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-10%' }}
+              transition={{ duration: 0.6, delay: 0.08, ease: 'easeOut' }}
+            >
+              <div className="trust-layer__head">
+                <span className="trust-layer__eyebrow">導入判断</span>
+                <strong>どのラインから始めると無理がないか</strong>
+                <p>まず無料で相性確認、次に継続投稿、最後に個別運用という順で判断できるようにしています。</p>
+              </div>
+
+              <div className="trust-decision-grid">
+                {trustDecisionCards.map((card) => (
+                  <article key={card.title} className="trust-decision-card">
+                    <div className="trust-decision-card__top">
+                      <span className="trust-decision-card__badge">{card.badge}</span>
+                      <div className="trust-decision-card__icon" aria-hidden="true">
+                        <card.Icon size={18} />
+                      </div>
                     </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-            <p className="carousel-hint" style={{ textAlign: 'center', color: 'rgba(255,255,255,0.45)', fontSize: '0.85rem', marginTop: '1rem' }}>← スワイプまたは矢印ボタンで活用パターンを確認 →</p>
-            <p style={{ textAlign: 'center', color: 'rgba(255,255,255,0.35)', fontSize: '0.75rem', marginTop: '0.4rem' }}>※ 実機能をもとに整理した代表例です。個別の成果を保証するものではありません。</p>
+                    <strong>{card.title}</strong>
+                    <p>{card.body}</p>
+                    <ul className="trust-decision-card__list">
+                      {card.points.map((point) => (
+                        <li key={point}>
+                          <ArrowRight size={16} aria-hidden="true" />
+                          <span>{point}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </article>
+                ))}
+              </div>
+            </motion.article>
           </div>
         </Section>
 
@@ -1614,40 +1635,22 @@ export function HomePage() {
       <AnimatePresence>
         {showFloatingCta && (
           <motion.div
-            className="floating-cta floating-cta--nodoka"
-            initial={{ opacity: 0, y: 50, x: 20 }}
-            animate={{ opacity: 1, y: 0, x: 0 }}
-            exit={{ opacity: 0, y: 50, x: 20 }}
-            transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+            className="floating-cta"
+            initial={{ opacity: 0, y: 24, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 24, scale: 0.98 }}
+            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="floating-cta__mobile-dock">
-              <div className="floating-cta__mobile-copy">
-                <span>無料プランあり</span>
-                <strong>導入相性を先に確認</strong>
+            <div className="floating-cta__panel">
+              <div className="floating-cta__copy">
+                <span className="floating-cta__eyebrow">FREE PLAN</span>
+                <strong>まずは導入相性を確認</strong>
+                <p>対応サイト取得から YMM4 前準備まで、無料で流れを試せます。</p>
               </div>
-              <Link className="brand-btn brand-btn--primary floating-cta__mobile-btn" to="/download/">
+              <Link className="brand-btn brand-btn--primary floating-cta__button" to="/download/" style={{ gap: '6px' }}>
                 無料プランを試す
+                <ArrowRight size={16} />
               </Link>
-            </div>
-            <div className="nodoka-cta-container">
-              {/* フワフワ浮かぶフキダシ */}
-              <motion.div 
-                className="nodoka-speech-bubble"
-                animate={{ y: [0, -5, 0] }}
-                transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-              >
-                <p style={{ textAlign: 'center', lineHeight: '1.5', fontSize: '0.85rem', whiteSpace: 'nowrap' }}>
-                  台本取得だけでなく<br/>
-                  テンプレ運用とYMM4前準備まで<br/>
-                  <strong style={{color: '#00ffcc', textShadow: '0 0 10px rgba(0,255,204,0.4)'}}>無料プランで相性確認</strong>
-                </p>
-                <Link className="nodoka-animated-btn" style={{ margin: '0 auto' }} to="/download/">
-                  <span className="nodoka-animated-btn__inner">無料プランを試す</span>
-                </Link>
-              </motion.div>
-              
-              {/* 黒枠から解放されたのどかちゃん */}
-              <img src="/nodoka/通常.png" alt="案内役：のどか" className="nodoka-freestanding-avatar" />
             </div>
           </motion.div>
         )}
