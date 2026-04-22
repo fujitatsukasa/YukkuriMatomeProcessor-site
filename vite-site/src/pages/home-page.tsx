@@ -6,7 +6,7 @@ import { downloadUrl, legal, siteOrigin, siteSubtitle, siteTitle } from '@/data/
 import React, { useEffect, useRef, useState } from 'react'
 import { motion, useInView as useMotionInView, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import Tilt from 'react-parallax-tilt'
-import { MessageSquare, Smartphone, Users, Download, Zap, Star, CheckCircle2, TrendingUp, HelpCircle, Monitor, CreditCard, ArrowRight, Sparkles, Play, ChevronDown, FileSearch, PencilLine, Bot, Settings2, Send, BookOpen, BadgeCheck } from 'lucide-react'
+import { MessageSquare, Smartphone, Users, Download, CheckCircle2, TrendingUp, HelpCircle, Monitor, CreditCard, ArrowRight, Sparkles, Play, ChevronDown, FileSearch, PencilLine, Bot, Settings2, Send, BookOpen, BadgeCheck } from 'lucide-react'
 import { CustomCursorGlow } from '@/components/CustomCursorGlow'
 
 const SECTION_HEAD_VARIANTS = {
@@ -108,24 +108,24 @@ const presentationSlides = [
 ] as const
 
 const socialProofStats = [
-  { value: '2,400+', label: 'ダウンロード数', Icon: Download },
-  { value: '95%', label: '作業時間の削減率', Icon: Zap },
-  { value: '4.8', label: 'ユーザー満足度 / 5.0', Icon: Star },
+  { value: '20+', label: '対応サイト・掲示板', Icon: FileSearch },
+  { value: '13', label: 'AI台本対応キャラ', Icon: Users },
+  { value: 'YMM4', label: '前準備を一括整理', Icon: Send },
 ] as const
 
 
 
 const timeReduction = {
-  manualMinutes: 120,
-  productMinutes: 1,
-  reductionRate: 99,
+  manualMinutes: 90,
+  productMinutes: 28,
+  reductionRate: 69,
 } as const
 
 const timeBreakdown = [
-  { label: 'ネタ探し', manual: '30分', product: '10秒', saved: '約30', desc: '複数サイトからの手動コピペを自動収集へと置き換え' },
-  { label: '台本整理・生成', manual: '25分', product: '20秒', saved: '約25', desc: 'ノイズ除去と会話台本形式への一括テキスト変換をAIで自動化' },
-  { label: '感情・配役設定', manual: '10分', product: '10秒', saved: '約10', desc: '立ち絵の表情・声色マッピングをテンプレートで一括適用' },
-  { label: 'YMM4前調整', manual: '55分', product: '20秒', saved: '約55', desc: 'タイムライン配置・読み込み定義を自動出力' },
+  { label: 'ネタ探し', manual: '25分', product: '8分', saved: '約17', desc: '対応サイト取得や履歴比較で候補を絞りやすくする' },
+  { label: '台本整理・生成', manual: '20分', product: '7分', saved: '約13', desc: '文章整形、改行補助、役割テンプレで下地を整える' },
+  { label: '感情・配役設定', manual: '15分', product: '5分', saved: '約10', desc: '感情分析やプリセットを起点に毎回の入力を減らす' },
+  { label: 'YMM4前調整', manual: '30分', product: '8分', saved: '約22', desc: 'CSV生成、キャラ設定保存、立ち絵パス変更を前工程に寄せる' },
 ] as const
 
 const useCasesData = [
@@ -227,59 +227,60 @@ const supportedSiteChips = [
 
 const testimonials = [
   {
+    badge: '5ch / 反応集',
+    quote: '複数スレッド比較から不要レス整理、掛け合い台本化、YMM4前準備までを同じ導線で回したいケース。',
+    author: '主に使う機能',
+    authorDetail: '記事取得 / 台本整理 / テンプレ運用',
+    roi: '継続投稿の型を作りやすい',
+    Icon: Users,
+  },
+  {
     badge: 'ゆっくり解説',
-    quote: "「毎日2時間かかっていた台本制作が、わずか5分で完了するように。浮いた時間で動画の投稿頻度を2倍に増やせました。」",
-    author: "ゆっくり解説系クリエイター",
-    authorDetail: "登録者15万人 ｜ 導入歴6ヶ月",
-    roi: "月間60時間の削減に成功",
-    avatarImg: "/avatars_real/1.png",
+    quote: '聞き役と解説役を分けながら、役割テンプレートと感情指定で掛け合いの再現性を上げたいケース。',
+    author: '主に使う機能',
+    authorDetail: '役割テンプレ / 感情補助 / 13キャラAI台本',
+    roi: '話し方のブレを減らしやすい',
+    Icon: MessageSquare,
   },
   {
-    badge: '反応集量産',
-    quote: "「外注に頼っていた反応集まとめを内製化できました。コピペ作業の属人性が排除され、完全な自動パイプラインが完成しました。」",
-    author: "2ch反応集チャンネル運営",
-    authorDetail: "月間再生数300万回 ｜ 導入歴4ヶ月",
-    roi: "外注費 約15万円/月の削減",
-    avatarImg: "/avatars_real/2.png",
+    badge: 'ショート動画',
+    quote: '短尺向けの導入、展開、字幕の型をテンプレート化して、試行回数を増やしたいケース。',
+    author: '主に使う機能',
+    authorDetail: '短尺テンプレ / AI補助 / タイトル案',
+    roi: '短い構成の量産に寄せやすい',
+    Icon: Smartphone,
   },
   {
-    badge: '複数運用',
-    quote: "「YMM4への出力がワンクリックなのが最大の魅力。細かい立ち絵の表情指定も事前にまとめて設定できるためミスが激減しました。」",
-    author: "複数チャンネル運営ディレクター",
-    authorDetail: "3チャンネル同時運営 ｜ 導入歴8ヶ月",
-    roi: "修正・確認時間の 80%削減",
-    avatarImg: "/avatars_real/3.png",
+    badge: '複数チャンネル',
+    quote: '動画ごとに別テンプレートを持ちつつ、確認ポイントや前工程のルールを揃えて運用したいケース。',
+    author: '主に使う機能',
+    authorDetail: 'テンプレ複製 / YMM4前準備 / 読み方監査',
+    roi: '担当者ごとの差を減らしやすい',
+    Icon: TrendingUp,
   },
   {
-    badge: 'ショート量産',
-    quote: "「ショート動画を量産するために導入。テンプレートを一度組めば、あとはURLを入れるだけで台本が出来上がるので楽すぎます。」",
-    author: "ショート動画特化クリエイター",
-    authorDetail: "TikTok フォロワー8万 ｜ 導入歴3ヶ月",
-    roi: "月間投稿本数が3倍に",
-    avatarImg: "/avatars_real/4.png",
-  },
-  {
-    badge: '副業拡大',
-    quote: "「副業で始めたゆっくり解説チャンネルが、このツールのおかげで本業の収入を超えました。準備の手間が消えたのが大きいです。」",
-    author: "副業系ゆっくりクリエイター",
-    authorDetail: "登録者3万人 ｜ 導入歴5ヶ月",
-    roi: "副業収入が月20万円を突破",
-    avatarImg: "/avatars_real/5.png",
-  },
-  {
-    badge: 'チーム運用',
-    quote: "「法人として複数チャンネルの運用を効率化するために導入。属人化を排除でき、スタッフの教育コストも大幅に削減できました。」",
-    author: "動画制作会社 COO",
-    authorDetail: "法人5チャンネル運用 ｜ 導入歴10ヶ月",
-    roi: "スタッフ教育コスト 70%削減",
-    avatarImg: "/avatars_real/6.png",
+    badge: '分析ベース運用',
+    quote: 'URL一括入力、除外フィルタ、コメント取得、差分比較まで含めて次の題材を決めたいケース。',
+    author: '主に使う機能',
+    authorDetail: 'YouTube分析 / 履歴比較 / CSV出力',
+    roi: '勘頼みのテーマ選定を減らしやすい',
+    Icon: Settings2,
   },
 ]
 
 const testimonialProofStats = [
-  { value: '2倍', label: '投稿頻度を伸ばしたケース', detail: '制作時間を短縮して配信本数へ再投資', Icon: TrendingUp },
-  { value: '15万円', label: '外注費削減の実例', detail: '反応集の内製化で月額コストを圧縮', Icon: CreditCard },
-  { value: '80%', label: '修正・確認時間の削減', detail: '複数チャンネル運用でも確認工数を軽量化', Icon: Zap },
+  { value: 'Free', label: '入口確認から始められる', detail: '対応サイト取得、基本編集、YMM4出力の流れを先に確認', Icon: Download },
+  { value: '2営業日', label: '一次回答の目安を明記', detail: '契約、請求、不具合の窓口とサポート条件を掲載', Icon: BadgeCheck },
+  { value: 'Stripe', label: '決済と解約導線を整理', detail: 'Checkout と Customer Portal の前提を明示', Icon: CreditCard },
+] as const
+
+const trustChecklist = [
+  '現仕様と追加予定を分けて掲載',
+  'Windows専用 / YMM4前提',
+  'YouTube分析は API キー設定が必要',
+  'Free → Standard → Pro の使い分けを明記',
+  'Stripe Checkout / Customer Portal 対応',
+  '2営業日以内を目安に一次回答',
 ] as const
 
 const pricingDecisionPoints = [
@@ -491,8 +492,8 @@ export function HomePage() {
     <>
       <PageMeta
         title={`${siteTitle} | ${siteSubtitle}`}
-        description="ネタ収集からゆっくりムービーメーカー4(YMM4)の台本準備までを一本化し、作業時間を約95%短縮する2ch/5ch反応集・ゆっくり解説対応のWindows向け動画制作支援ツール。"
-        keywords="ゆっくり解説,反応集,YMM4,台本自動生成,ショート動画,2chまとめ"
+        description="テンプレート運用を軸に、対応サイト取得、台本整理、AI補助、YMM4前準備、YouTube分析までを一続きで進められるWindows向け動画制作支援ツール。"
+        keywords="YMM4,テンプレート運用,ゆっくり解説,反応集,ショート動画,動画制作支援"
         image={media.productImage2}
         path="/"
         structuredData={homeStructuredData}
@@ -552,7 +553,7 @@ export function HomePage() {
               transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             >
               <Sparkles size={14} color="#e0c184" />
-              ずっと無料で使えるAI動画制作ツール
+              無料プランあり / テンプレ運用中心のWindows向け支援ツール
             </motion.div>
 
             {/* 巨大タイトル — 画面の主役 */}
@@ -564,14 +565,14 @@ export function HomePage() {
             >
               <span className="text-rotator" style={{ display: 'inline-block' }}>
                 <span className="text-rotator__inner">
-                  <span className="text-glow-green">【反応集】</span>
-                  <span className="text-glow-gold">【ゆっくり解説】</span>
-                  <span className="text-glow-blue">【ショート動画】</span>
-                  <span className="text-glow-green" aria-hidden="true">【反応集】</span>
+                  <span className="text-glow-green">【テンプレ運用】</span>
+                  <span className="text-glow-gold">【AI台本補助】</span>
+                  <span className="text-glow-blue">【YMM4前準備】</span>
+                  <span className="text-glow-green" aria-hidden="true">【テンプレ運用】</span>
                 </span>
               </span>
               <br />
-              <span className="hero-title-static">の面倒な作業をゼロに</span>
+              <span className="hero-title-static">を前工程にまとめる</span>
             </motion.h1>
 
             {/* サブコピー — ベネフィット訴求 */}
@@ -581,8 +582,8 @@ export function HomePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.45 }}
             >
-              毎回2時間かかる台本作業を、<strong className="text-glow-gold" style={{ fontWeight: 700 }}>たった5分</strong>で完了。
-              <span className="hero-subtitle-v2__sub">ネタ収集からYMM4出力まで手作業の95%をAIで自動化</span>
+              対応サイト取得、台本整理、AI補助、YMM4前準備を、<strong className="text-glow-gold" style={{ fontWeight: 700 }}>ひとつの導線</strong>に集約。
+              <span className="hero-subtitle-v2__sub">台本取得だけで終わらず、継続投稿の型を育てやすい制作支援ツールです。</span>
             </motion.p>
 
             {/* 対応環境バー — ヒーロー内に統合 */}
@@ -599,17 +600,17 @@ export function HomePage() {
               <div className="hero-compat-inline__sep" />
               <div className="hero-compat-inline__item">
                 <Sparkles size={15} color="#e0c184" />
-                <span>YMM4 完全対応</span>
+                <span>YMM4前提</span>
               </div>
               <div className="hero-compat-inline__sep" />
               <div className="hero-compat-inline__item">
                 <Sparkles size={15} color="#e0c184" />
-                <span>AI台本生成</span>
+                <span>13キャラAI台本</span>
               </div>
               <div className="hero-compat-inline__sep" />
               <div className="hero-compat-inline__item">
-                <Download size={15} />
-                <span>オフライン動作</span>
+                <BadgeCheck size={15} />
+                <span>2営業日以内に一次回答</span>
               </div>
             </motion.div>
 
@@ -621,7 +622,7 @@ export function HomePage() {
               className="brand-inline-actions home-compact-hero__actions hero-cta-row"
             >
               <Link className="brand-btn brand-btn--primary hero-cta-primary" to="/download/">
-                無料で始める
+                無料プランを試す
               </Link>
               <Link className="brand-btn brand-btn--ghost" to="/instructions/" style={{ gap: '6px' }}>
                 <Play size={16} />
@@ -882,8 +883,8 @@ export function HomePage() {
 
           <div className="bg-marquee-container" aria-hidden="true" style={{ zIndex: 0 }}>
             <div className="bg-marquee__track">
-              <span>作業時間95%削減 - YMM4完全対応 - 動画制作を圧倒的に効率化 - ネタ収集から出力まで一本化 - </span>
-              <span>作業時間95%削減 - YMM4完全対応 - 動画制作を圧倒的に効率化 - ネタ収集から出力まで一本化 - </span>
+              <span>テンプレ運用 - AI補助 - YMM4前準備 - YouTube分析 - 継続投稿の再現性を支援 - </span>
+              <span>テンプレ運用 - AI補助 - YMM4前準備 - YouTube分析 - 継続投稿の再現性を支援 - </span>
             </div>
           </div>
           <motion.div 
@@ -894,20 +895,20 @@ export function HomePage() {
             viewport={{ once: true, margin: "-10%" }}
             style={{ position: 'relative', zIndex: 1, maxWidth: '1000px', margin: '0 auto', textAlign: 'center', marginBottom: '1.5rem' }}
           >
-            <p className="brand-kicker" style={{ justifyContent: 'center' }}>圧倒的時短</p>
-            <h2 style={{ textAlign: 'center' }}>準備時間を、<span className="text-glow-gold">120分から1分</span>へ<span className="text-glow-green">圧倒的短縮</span></h2>
+            <p className="brand-kicker" style={{ justifyContent: 'center' }}>モデルケース</p>
+            <h2 style={{ textAlign: 'center' }}>前工程を、<span className="text-glow-gold">90分から28分</span>へ整理</h2>
             <p style={{ margin: '0 auto 0.5rem', fontSize: '1.05rem', lineHeight: 1.6 }}>
-              1本あたり約119分の短縮は、月30本の投稿で<span className="text-glow-gold">約60時間</span>に相当。<br/>
-              <strong className="text-glow-muted">99%削減</strong>の根拠を、工程ごとの比較データで可視化します。
+              テンプレートが整った継続運用を想定した目安です。<br/>
+              ネタ探しから YMM4 前準備まで、どこを前工程へ寄せられるかを工程別に見える化しています。
             </p>
-            <p style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.4)', marginTop: 0 }}>※ 30分動画1本あたりの準備工程を当社環境にて実測・比較した結果に基づく</p>
+            <p style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.4)', marginTop: 0 }}>※ 反応集 / 解説の前工程を例にしたモデルケースです。編集、書き出し、公開作業は含みません。</p>
           </motion.div>
 
           <motion.div 
             ref={chartRef}
             className="chart-dashboard" 
             role="img" 
-            aria-label="手作業120分と本ツール6分の時間内訳比較"
+            aria-label="手作業90分とツール活用28分の時間内訳比較"
             initial={{ opacity: 0, scale: 0.95, y: 30 }}
             whileInView={{ opacity: 1, scale: 1, y: 0, transition: { type: 'spring', stiffness: 80, damping: 20 } }}
             viewport={{ once: true, margin: "-10%" }}
@@ -917,13 +918,13 @@ export function HomePage() {
               {/* ── Hero Stats Row (Symmetrical) ── */}
               <div className={`chart-dashboard__hero ${isChartInView ? 'is-visible' : ''}`}>
                 <div className="chart-dashboard__kpi-group">
-                  <div className="chart-dashboard__kpi chart-dashboard__kpi--before">
-                    <span className="chart-dashboard__kpi-tag">Before</span>
+                    <div className="chart-dashboard__kpi chart-dashboard__kpi--before">
+                      <span className="chart-dashboard__kpi-tag">Before</span>
                     <div className="kpi-giant-wrap">
                       <AnimatedNumber value={timeReduction.manualMinutes} active={isChartInView} />
                       <small>分</small>
                     </div>
-                    <span className="chart-dashboard__kpi-desc">手作業による準備</span>
+                      <span className="chart-dashboard__kpi-desc">手作業ベースの目安</span>
                   </div>
 
                   {/* Ring acting as the central arrow */}
@@ -942,14 +943,14 @@ export function HomePage() {
                     </div>
                   </div>
 
-                  <div className="chart-dashboard__kpi chart-dashboard__kpi--after">
-                    <span className="chart-dashboard__kpi-tag">After</span>
+                    <div className="chart-dashboard__kpi chart-dashboard__kpi--after">
+                      <span className="chart-dashboard__kpi-tag">After</span>
                     <div className="kpi-giant-wrap">
                       <AnimatedNumber value={timeReduction.productMinutes} active={isChartInView} />
                       <small>分</small>
                     </div>
-                    <span className="chart-dashboard__kpi-desc">本ツールで完了</span>
-                  </div>
+                      <span className="chart-dashboard__kpi-desc">ツール活用時の目安</span>
+                    </div>
                 </div>
               </div>
 
@@ -1254,11 +1255,11 @@ export function HomePage() {
             viewport={{ once: true, margin: "-10%" }}
             style={{ position: 'relative', zIndex: 1 }}
           >
-            <p className="brand-kicker">お客様の声</p>
-            <h2>導入クリエイターの<span className="text-glow-gold">圧倒的成果</span></h2>
+            <p className="brand-kicker">導入判断</p>
+            <h2>誇張より先に、<span className="text-glow-gold">現仕様の証拠</span>を確認</h2>
             <p style={{ maxWidth: '600px', margin: '0 auto' }}>
-              ジャンルも規模もさまざまなクリエイターが、<br/>
-              当プロセッサーで制作フローを<strong className="text-glow-gold">劇的に効率化</strong>しています。
+              画面、契約導線、サポート条件、主な使いどころを先に見せています。<br/>
+              導入前に知りたい前提を<strong className="text-glow-gold">一箇所で確認</strong>できます。
             </p>
           </motion.div>
 
@@ -1271,14 +1272,14 @@ export function HomePage() {
               transition={{ duration: 0.6, ease: 'easeOut' }}
             >
               <img
-                src="/generated/testimonials-creator-studio-v1.png"
-                alt="夜のクリエイターワークスペース。複数モニターで編集画面と制作ダッシュボードを開いた様子"
+                src="/product_format_list.png"
+                alt="テンプレート一覧とフォーマット管理の実画面"
                 loading="lazy"
                 decoding="async"
               />
               <div className="testimonials-proof-visual__overlay">
-                <span>CREATOR WORKFLOW</span>
-                <strong>制作ラインを止めずに、投稿本数と品質の両立を狙える運用へ</strong>
+                <span>REAL PRODUCT SCREEN</span>
+                <strong>テンプレートを増やしながら、YMM4前準備まで同じ導線で管理できる</strong>
               </div>
             </motion.div>
 
@@ -1303,29 +1304,29 @@ export function HomePage() {
               </div>
 
               <div className="testimonials-proof-board__quote">
-                <div className="testimonials-proof-board__stars" aria-hidden="true">
-                  {[...Array(5)].map((_, i) => <Star key={i} size={14} fill="#e0c184" color="#e0c184" />)}
-                </div>
                 <p>
-                  「外注に頼っていた反応集まとめを内製化できました。コピペ作業の属人性が排除され、
-                  完全な自動パイプラインが完成しました。」
+                  現仕様と追加予定は分けて掲載し、Windows専用、YMM4前提、YouTube分析は API キー設定が必要という
+                  前提も先に見せています。購入前に「何ができて、どこからが継続運用向けか」を判断しやすくするための整理です。
                 </p>
                 <div>
-                  <strong>2ch反応集チャンネル運営</strong>
-                  <span>月間再生数300万回 ｜ 導入歴4ヶ月</span>
+                  <strong>導入前に確認しておきたい前提</strong>
+                  <span>Freeで入口確認、Standardで継続投稿、Proで個別運用と相談導線を強化</span>
                 </div>
               </div>
 
-              <div className="testimonials-proof-board__chips" role="list" aria-label="導入されている運用例">
-                <span role="listitem">反応集量産</span>
-                <span role="listitem">ゆっくり解説</span>
-                <span role="listitem">ショート量産</span>
-                <span role="listitem">複数チャンネル運用</span>
+              <div className="testimonials-proof-board__chips" role="list" aria-label="導入前に確認したい前提">
+                {trustChecklist.map((item) => (
+                  <span key={item} role="listitem">{item}</span>
+                ))}
               </div>
             </motion.div>
           </div>
 
-          {/* Horizontal Scroll Carousel */}
+          <div className="testimonials-carousel__intro" style={{ position: 'relative', zIndex: 1 }}>
+            <strong>代表的な活用パターン</strong>
+            <p>実機能をもとに整理した代表例です。個別の成果を保証するものではありません。</p>
+          </div>
+
           <div className="testimonials-carousel" style={{ position: 'relative', zIndex: 1, width: '100%', overflow: 'visible', padding: '1rem 0 2rem' }}>
             <button onClick={() => scrollTestimonials('left')} className="carousel-nav-btn carousel-nav-btn--left" aria-label="左にスクロール">←</button>
             <button onClick={() => scrollTestimonials('right')} className="carousel-nav-btn carousel-nav-btn--right" aria-label="右にスクロール">→</button>
@@ -1345,25 +1346,14 @@ export function HomePage() {
                   className="testimonial-card"
                   style={{ minWidth: '360px', maxWidth: '400px', flex: '0 0 auto', scrollSnapAlign: 'start', padding: 'clamp(1.5rem, 3vh, 2.5rem)', gap: '0' }}
                 >
-                  {/* Star rating */}
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px', marginBottom: '1.2rem' }}>
                     <span className="testimonial-card__badge">{t.badge}</span>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                      {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#e0c184" color="#e0c184" />)}
-                    </div>
+                    <span className="testimonial-card__eyebrow">USE CASE</span>
                   </div>
-                  {/* Quote */}
                   <p style={{ fontSize: '1.02rem', lineHeight: 1.75, color: 'rgba(245,241,233,0.92)', flex: 1, marginBottom: '1.5rem', fontWeight: 500, letterSpacing: '0.01em' }}>{t.quote}</p>
-                  {/* Author with improved layout */}
                   <div style={{ marginTop: 'auto', paddingTop: '1.2rem', borderTop: '1px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                    {/* Avatar with glow ring */}
-                    <div style={{ position: 'relative', flexShrink: 0 }}>
-                      <div style={{ 
-                        width: 52, height: 52, borderRadius: '50%',
-                        boxShadow: '0 4px 16px rgba(0,0,0,0.4), 0 0 20px rgba(224,193,132,0.15)', 
-                        border: '2px solid rgba(224,193,132,0.4)',
-                        backgroundImage: `url(${t.avatarImg})`, backgroundSize: 'cover', backgroundPosition: 'center' 
-                      }} />
+                    <div className="testimonial-card__icon-shell">
+                      <t.Icon size={20} />
                     </div>
                     <div style={{ minWidth: 0 }}>
                       <p style={{ fontSize: '0.95rem', color: '#f5f1e9', marginBottom: '0.15rem', fontWeight: 700 }}>{t.author}</p>
@@ -1377,8 +1367,8 @@ export function HomePage() {
                 </motion.div>
               ))}
             </div>
-            <p className="carousel-hint" style={{ textAlign: 'center', color: 'rgba(255,255,255,0.45)', fontSize: '0.85rem', marginTop: '1rem' }}>← スワイプまたは矢印ボタンで閲覧 →</p>
-            <p style={{ textAlign: 'center', color: 'rgba(255,255,255,0.35)', fontSize: '0.75rem', marginTop: '0.4rem' }}>※ 利用者の声を元に再構成した内容です</p>
+            <p className="carousel-hint" style={{ textAlign: 'center', color: 'rgba(255,255,255,0.45)', fontSize: '0.85rem', marginTop: '1rem' }}>← スワイプまたは矢印ボタンで活用パターンを確認 →</p>
+            <p style={{ textAlign: 'center', color: 'rgba(255,255,255,0.35)', fontSize: '0.75rem', marginTop: '0.4rem' }}>※ 実機能をもとに整理した代表例です。個別の成果を保証するものではありません。</p>
           </div>
         </Section>
 
@@ -1580,21 +1570,21 @@ export function HomePage() {
                 <p style={{ fontSize: '0.85rem', color: '#e0c184', letterSpacing: '0.12em', textTransform: 'uppercase', fontWeight: 700, marginBottom: '0.8rem' }}>Ready to start?</p>
                 <h2 style={{ fontSize: 'clamp(2.2rem, 5vw, 4rem)', lineHeight: 1.15, fontWeight: 800, letterSpacing: '-0.02em' }}>
                   今日から、<br />
-                  <span className="text-gradient-animated" style={{ fontSize: 'clamp(2.8rem, 6vw, 5rem)' }}>作業時間95%削減</span><br />
-                  を体感しませんか？
+                  <span className="text-gradient-animated" style={{ fontSize: 'clamp(2.8rem, 6vw, 5rem)' }}>無料プランで導入を確認</span><br />
+                  しませんか？
                 </h2>
               </div>
 
               <p style={{ fontSize: 'clamp(1.05rem, 1.5vw, 1.25rem)', color: 'rgba(255,255,255,0.7)', maxWidth: '600px', lineHeight: 1.7 }}>
-                ネタ探し、テンプレート運用、AI補助、YMM4前準備まで、分断していた工程を<strong style={{ color: '#fff' }}>1つの流れ</strong>に統合。<br />
-                まずは無料プランでお試しください。
+                対応サイト取得、テンプレート運用、AI補助、YMM4前準備が、あなたの制作フローに合うかを<strong style={{ color: '#fff' }}>無料プラン</strong>で先に確認できます。<br />
+                継続投稿向けに強い導線かどうかを、実画面ベースで判断してください。
               </p>
 
               {/* Giant CTA */}
               <div className="brand-inline-actions home-compact-cta__actions" style={{ justifyContent: 'center' }}>
                 <Link className="brand-btn brand-btn--primary" to="/download/" style={{ fontSize: '1.25rem', padding: '1.2rem 3.2rem', gap: '10px' }}>
                   <ArrowRight size={22} />
-                  無料で始める
+                  無料プランを試す
                 </Link>
               </div>
 
@@ -1602,19 +1592,17 @@ export function HomePage() {
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, auto)', gap: '0.8rem 2rem', justifyContent: 'center', fontSize: '0.95rem', color: 'rgba(255,255,255,0.65)' }}>
                 <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><CheckCircle2 size={16} color="#4CAF50" /> 無料プランあり</span>
                 <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><CheckCircle2 size={16} color="#4CAF50" /> Windows専用</span>
-                <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><CheckCircle2 size={16} color="#4CAF50" /> クレカ不要</span>
-                <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><CheckCircle2 size={16} color="#e0c184" /> 2,400+DL突破</span>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><CheckCircle2 size={16} color="#4CAF50" /> Stripe決済</span>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><CheckCircle2 size={16} color="#e0c184" /> 2営業日以内に一次回答</span>
               </div>
 
-              {/* Subtle testimonial snippet for social proof */}
               <div style={{ marginTop: '0.5rem', padding: '1rem 1.5rem', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.08)', background: 'rgba(255,255,255,0.03)', maxWidth: '500px', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <div style={{ display: 'flex', gap: '-4px', flexShrink: 0 }}>
-                  {[1, 2, 3].map(i => (
-                    <div key={i} style={{ width: 32, height: 32, borderRadius: '50%', border: '2px solid rgba(16,17,20,0.9)', backgroundImage: `url(/avatars_real/${i}.png)`, backgroundSize: 'cover', backgroundPosition: 'center', marginLeft: i > 1 ? '-8px' : 0 }} />
-                  ))}
+                <div className="testimonial-card__icon-shell" style={{ width: 42, height: 42, flexShrink: 0 }}>
+                  <FileSearch size={18} />
                 </div>
                 <p style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.5 }}>
-                  <strong style={{ color: '#e0c184' }}>2,400+人</strong>のクリエイターが導入済み
+                  <strong style={{ color: '#e0c184' }}>20+</strong>の対応サイト取得、<strong style={{ color: '#e0c184' }}>13キャラAI台本</strong>、
+                  <strong style={{ color: '#e0c184' }}>YMM4前準備</strong>まで無料で相性を確認できます。
                 </p>
               </div>
             </motion.div>
@@ -1635,10 +1623,10 @@ export function HomePage() {
             <div className="floating-cta__mobile-dock">
               <div className="floating-cta__mobile-copy">
                 <span>無料プランあり</span>
-                <strong>テンプレ運用とYMM4準備を時短</strong>
+                <strong>導入相性を先に確認</strong>
               </div>
               <Link className="brand-btn brand-btn--primary floating-cta__mobile-btn" to="/download/">
-                無料で始める
+                無料プランを試す
               </Link>
             </div>
             <div className="nodoka-cta-container">
@@ -1649,12 +1637,12 @@ export function HomePage() {
                 transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
               >
                 <p style={{ textAlign: 'center', lineHeight: '1.5', fontSize: '0.85rem', whiteSpace: 'nowrap' }}>
-                  毎日の動画編集お疲れ様です！☕<br/>
-                  面倒な作業はツールにお任せして<br/>
-                  <strong style={{color: '#00ffcc', textShadow: '0 0 10px rgba(0,255,204,0.4)'}}>約95%も時短</strong>しませんか？♪
+                  台本取得だけでなく<br/>
+                  テンプレ運用とYMM4前準備まで<br/>
+                  <strong style={{color: '#00ffcc', textShadow: '0 0 10px rgba(0,255,204,0.4)'}}>無料プランで相性確認</strong>
                 </p>
                 <Link className="nodoka-animated-btn" style={{ margin: '0 auto' }} to="/download/">
-                  <span className="nodoka-animated-btn__inner">無料で始める</span>
+                  <span className="nodoka-animated-btn__inner">無料プランを試す</span>
                 </Link>
               </motion.div>
               

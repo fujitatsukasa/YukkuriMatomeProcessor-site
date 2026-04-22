@@ -10149,6 +10149,26 @@ html {
   position: relative;
 }
 
+.testimonials-carousel__intro {
+  display: grid;
+  gap: 0.35rem;
+  width: min(1180px, calc(100% - 48px));
+  margin: 1.2rem auto 0;
+}
+
+.testimonials-carousel__intro strong {
+  color: #fff4d3;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+}
+
+.testimonials-carousel__intro p {
+  margin: 0;
+  color: rgba(236, 233, 226, 0.62);
+  line-height: 1.6;
+  font-size: 0.88rem;
+}
+
 .testimonials-carousel__track {
   will-change: transform, scroll-position;
   -webkit-overflow-scrolling: touch;
@@ -10451,6 +10471,26 @@ html {
 /* 笏笏 Testimonial Card Gap Fix 笏笏 */
 .testimonial-card {
   gap: 0 !important;
+}
+
+.testimonial-card__eyebrow {
+  color: rgba(236, 233, 226, 0.52);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.testimonial-card__icon-shell {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  color: #f2ddb1;
+  border-radius: 50%;
+  border: 2px solid rgba(224, 193, 132, 0.35);
+  background: radial-gradient(circle at 30% 30%, rgba(255, 233, 184, 0.16), rgba(21, 18, 12, 0.88));
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.34);
 }
 
 /* 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武
@@ -11803,9 +11843,22 @@ html {
   line-height: 1.65;
 }
 
+.pricing-comparison-board__hint {
+  color: rgba(236, 233, 226, 0.48);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+}
+
+.pricing-comparison-table-scroll {
+  overflow-x: auto;
+  padding-bottom: 0.2rem;
+  scrollbar-width: thin;
+}
+
 .pricing-comparison-table {
   display: grid;
   gap: 0.75rem;
+  min-width: 760px;
 }
 
 .pricing-comparison-table__row {
@@ -11852,10 +11905,6 @@ html {
 
   .workflow-proof-pillars,
   .workflow-proof-board__mini {
-    grid-template-columns: 1fr;
-  }
-
-  .pricing-comparison-table__row {
     grid-template-columns: 1fr;
   }
 }
@@ -11970,8 +12019,13 @@ html {
     font-size: 0.92rem;
   }
 
+  .pricing-comparison-board__hint {
+    font-size: 0.74rem;
+  }
+
   .pricing-comparison-table {
     gap: 0.6rem;
+    min-width: 700px;
   }
 
   .pricing-comparison-table__row {

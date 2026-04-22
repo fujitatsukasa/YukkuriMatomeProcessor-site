@@ -1,11 +1,11 @@
 import { expect, test } from '@playwright/test'
 
 const pages = [
-  { path: '/', heading: '反応集・ゆっくり解説のネタ収集、台本作成、YMM4準備を1つに。' },
-  { path: '/download/', heading: '最新版を安全に入手する' },
-  { path: '/instructions/', heading: '初期設定から編集開始までを3ステップで進める' },
+  { path: '/', heading: 'を前工程にまとめる' },
+  { path: '/download/', heading: '最新版を入手する' },
+  { path: '/instructions/', heading: '初期設定から編集開始まで' },
   { path: '/faq/', heading: '導入前後によくある質問' },
-  { path: '/purchase/', heading: '購入前に契約条件を確認する' },
+  { path: '/purchase/', heading: 'あなたの制作スタイルに合わせた料金プラン' },
   { path: '/legal/commercial-transactions/', heading: '特定商取引法に基づく表記' },
 ]
 
@@ -27,10 +27,12 @@ test.describe('mobile layout', () => {
         const main = document.querySelector<HTMLElement>('.brand-main')
         const actions = Array.from(document.querySelectorAll<HTMLElement>('.brand-inline-actions'))
         const legalWraps = Array.from(document.querySelectorAll<HTMLElement>('.legal-table-wrap'))
+        const pricingWraps = Array.from(document.querySelectorAll<HTMLElement>('.pricing-comparison-table-scroll'))
         return {
           bodyScrollWidth: body.scrollWidth,
           docScrollWidth: root.scrollWidth,
           mainScrollWidth: main?.scrollWidth ?? 0,
+          mainClientWidth: main?.clientWidth ?? 0,
           actionsOverflow: actions.some((node) => node.scrollWidth > node.clientWidth + 1),
           legalWrapsScrollable: legalWraps.every((node) => {
             const overflowX = getComputedStyle(node).overflowX
@@ -40,13 +42,28 @@ test.describe('mobile layout', () => {
           legalTableProtected: legalWraps.every(
             (node) => node.clientWidth <= root.clientWidth + 1 && node.scrollWidth >= node.clientWidth,
           ),
+          pricingWrapsScrollable: pricingWraps.every((node) => {
+            const overflowX = getComputedStyle(node).overflowX
+            return overflowX === 'auto' || overflowX === 'scroll'
+          }),
+          pricingWrapCount: pricingWraps.length,
+          pricingTableProtected: pricingWraps.every(
+            (node) => node.clientWidth <= root.clientWidth + 1 && node.scrollWidth >= node.clientWidth,
+          ),
         }
       })
 
       expect(metrics.bodyScrollWidth).toBeLessThanOrEqual(viewport.width + 1)
       expect(metrics.docScrollWidth).toBeLessThanOrEqual(viewport.width + 1)
-      expect(metrics.mainScrollWidth).toBeLessThanOrEqual(viewport.width + 1)
       expect(metrics.actionsOverflow).toBeFalsy()
+
+      if (metrics.pricingWrapCount > 0) {
+        expect(metrics.mainClientWidth).toBeLessThanOrEqual(viewport.width + 1)
+        expect(metrics.pricingWrapsScrollable).toBeTruthy()
+        expect(metrics.pricingTableProtected).toBeTruthy()
+      } else {
+        expect(metrics.mainScrollWidth).toBeLessThanOrEqual(viewport.width + 1)
+      }
 
       if (entry.path.includes('/legal/')) {
         expect(metrics.legalWrapCount).toBeGreaterThan(0)
@@ -83,7 +100,7 @@ test.describe('mobile layout', () => {
 
   test('legacy uppercase routes redirect to canonical lowercase pages', async ({ page }) => {
     const routes = [
-      { from: '/Instructions/', to: '/instructions/', heading: '初期設定から編集開始までを3ステップで進める' },
+      { from: '/Instructions/', to: '/instructions/', heading: '初期設定から編集開始まで' },
       { from: '/FAQ/', to: '/faq/', heading: '導入前後によくある質問' },
     ]
 

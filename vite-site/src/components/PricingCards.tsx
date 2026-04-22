@@ -167,24 +167,27 @@ export function PricingCards() {
             価格だけでなく、導入確認から継続投稿、個別運用へどこで強くなるかを
             短く整理して、比較の観点を揃えています。
           </p>
+          <span className="pricing-comparison-board__hint">モバイルでは横スクロールで比較できます。</span>
         </div>
 
-        <div className="pricing-comparison-table" role="table" aria-label="プラン比較表">
-          <div className="pricing-comparison-table__row pricing-comparison-table__row--head" role="row">
-            <span role="columnheader">比較項目</span>
-            {pricingPlans.map((plan) => (
-              <span key={plan.name} role="columnheader">{plan.name}</span>
-            ))}
-          </div>
-
-          {comparisonRows.map((row) => (
-            <div key={row.label} className="pricing-comparison-table__row" role="row">
-              <span role="rowheader">{row.label}</span>
-              {row.values.map((value, index) => (
-                <span key={`${row.label}-${pricingPlans[index].name}`} role="cell">{value}</span>
+        <div className="pricing-comparison-table-scroll">
+          <div className="pricing-comparison-table" role="table" aria-label="プラン比較表">
+            <div className="pricing-comparison-table__row pricing-comparison-table__row--head" role="row">
+              <span role="columnheader">比較項目</span>
+              {pricingPlans.map((plan) => (
+                <span key={plan.name} role="columnheader">{plan.name}</span>
               ))}
             </div>
-          ))}
+
+            {comparisonRows.map((row) => (
+              <div key={row.label} className="pricing-comparison-table__row" role="row">
+                <span role="rowheader">{row.label}</span>
+                {row.values.map((value, index) => (
+                  <span key={`${row.label}-${pricingPlans[index].name}`} role="cell">{value}</span>
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
