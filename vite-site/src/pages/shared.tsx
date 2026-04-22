@@ -41,6 +41,12 @@ const productViews = [
 
 const productFlow = ['ネタ収集', '台本作成', '会話台本', '素材整理', 'YMM4準備'] as const
 
+export type MetricItem = {
+  value: string
+  label: string
+  detail?: string
+}
+
 type ProductDemoTabsProps = {
   className?: string
   compact?: boolean
@@ -159,6 +165,28 @@ export function LegalLinksBlock({ note }: { note?: string }) {
         ))}
       </ul>
       {note ? <p className="legal-links__note">{note}</p> : null}
+    </div>
+  )
+}
+
+export function MetricStrip({
+  items,
+  className = '',
+  ariaLabel = 'ページ概要',
+}: {
+  items: MetricItem[]
+  className?: string
+  ariaLabel?: string
+}) {
+  return (
+    <div className={`subpage-metric-strip${className ? ` ${className}` : ''}`} role="list" aria-label={ariaLabel}>
+      {items.map((item) => (
+        <div key={`${item.value}-${item.label}`} className="subpage-metric" role="listitem">
+          <strong>{item.value}</strong>
+          <span>{item.label}</span>
+          {item.detail ? <p>{item.detail}</p> : null}
+        </div>
+      ))}
     </div>
   )
 }

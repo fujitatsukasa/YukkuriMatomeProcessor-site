@@ -313,11 +313,11 @@ export const newsPosts: NewsPost[] = [
 export const pageRegistry: Record<string, PageEntry> = {
   '/': { label: 'ホーム', navKey: 'home', hideBreadcrumbs: true },
   '/download/': { label: 'ダウンロード', navKey: 'download', parent: '/' },
-  '/instructions/': { label: '使い方', navKey: 'instructions', parent: '/' },
+  '/instructions/': { label: '機能と使い方', navKey: 'instructions', parent: '/' },
   '/update/': { label: 'アップデート', navKey: 'update', parent: '/' },
   '/news/': { label: 'お知らせ', navKey: 'news', parent: '/' },
   '/faq/': { label: 'FAQ', navKey: 'faq', parent: '/' },
-  '/purchase/': { label: '購入', navKey: 'purchase', parent: '/' },
+  '/purchase/': { label: '料金', navKey: 'purchase', parent: '/' },
   '/contact/': { label: 'お問い合わせ', navKey: 'contact', parent: '/' },
   '/legal/commercial-transactions/': { label: '特定商取引法に基づく表記', parent: '/' },
   '/legal/terms/': { label: '利用規約', parent: '/' },

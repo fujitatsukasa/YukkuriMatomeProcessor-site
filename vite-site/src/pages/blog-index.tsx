@@ -1,140 +1,258 @@
-import { useState, useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Section, PageMeta, PageIntro, InteractiveCard } from '@/components/ui'
-import { motion, AnimatePresence } from 'framer-motion'
-import { getAllBlogPosts } from '../lib/blog'
-import { Calendar, ArrowRight, Tag as TagIcon, Clock } from 'lucide-react'
-import { siteTitle } from '../data/site-content'
+import { AnimatePresence, motion } from 'framer-motion'
+import { ArrowRight, Calendar, Clock, Tag as TagIcon } from 'lucide-react'
+import { InteractiveCard, PageIntro, PageMeta, Section } from '@/components/ui'
+import { MetricStrip } from '@/pages/shared'
+import { siteTitle } from '@/data/site-content'
+import { getAllBlogPosts } from '@/lib/blog'
+
+function formatDate(date: string) {
+  return new Intl.DateTimeFormat('ja-JP', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).format(new Date(date))
+}
+
+function estimateReadMinutes(content: string) {
+  const textLength = content.replace(/\s+/g, '').length
+  return Math.max(3, Math.ceil(textLength / 900))
+}
 
 export function BlogIndex() {
-  const allPosts = getAllBlogPosts()
+  const allPosts = useMemo(
+    () =>
+      getAllBlogPosts().map((post) => ({
+        ...post,
+        readingMinutes: estimateReadMinutes(post.content),
+      })),
+    [],
+  )
   const [activeTag, setActiveTag] = useState<string | null>(null)
 
   const allTags = useMemo(() => {
     const tags = new Set<string>()
-    allPosts.forEach(post => {
-      if (post.meta.tags) {
-        post.meta.tags.forEach(t => tags.add(t))
-      }
+    allPosts.forEach((post) => {
+      post.meta.tags?.forEach((tag) => tags.add(tag))
     })
     return Array.from(tags)
   }, [allPosts])
 
-  const posts = useMemo(() => {
+  const filteredPosts = useMemo(() => {
     if (!activeTag) return allPosts
-    return allPosts.filter(p => p.meta.tags?.includes(activeTag))
-  }, [allPosts, activeTag])
+    return allPosts.filter((post) => post.meta.tags?.includes(activeTag))
+  }, [activeTag, allPosts])
+
+  const featuredPost = filteredPosts[0] ?? null
+  const sidePosts = filteredPosts.slice(1, 4)
+  const gridPosts = filteredPosts.slice(1)
+
+  const blogMetrics = [
+    {
+      value: `${allPosts.length}本`,
+      label: '公開記事',
+      detail: 'YMM4、運用、反応集、解説、時短ノウハウを継続更新',
+    },
+    {
+      value: `${allTags.length}タグ`,
+      label: 'テーマ別で絞り込み',
+      detail: '初心者向け記事から実運用寄りの話題まで横断',
+    },
+    {
+      value: '実践寄り',
+      label: '机上の話で終わらせない',
+      detail: '制作フロー改善や自動化に繋がる内容を優先',
+    },
+  ] as const
 
   return (
     <>
       <PageMeta
         title={`オフィシャルブログ | ${siteTitle}`}
-        description="ゆっくり解説や動画編集の自動化ノウハウについて、どこよりも詳しく解説する専門ブログです。最新のYMM4活用法や時短術をお届けします。"
-        keywords="ブログ,ゆっくり解説,動画編集,YMM4,ツール,時短"
+        description="ゆっくり解説、反応集、YMM4、制作自動化に関する実践ノウハウをまとめた公式ブログです。"
+        keywords="ブログ,ゆっくり解説,動画編集,YMM4,自動化,運用"
         path="/blog/"
       />
-      
+
       <main className="brand-shell">
         <PageIntro
           kicker="OFFICIAL BLOG"
-          title="ゆっくり解説＆時短ノウハウ"
-          lead="動画編集の時短テクニックやYMM4自動化の実践ノウハウを公開しています"
+          title="制作フローを伸ばす実践ノウハウ"
+          lead="ゆっくり解説、反応集、YMM4、時短化を中心に、運用へ繋がる記事を公開しています"
+          actions={[
+            { label: '無料で始める', href: '/download/', variant: 'primary' },
+            { label: '機能と使い方', href: '/instructions/', variant: 'ghost' },
+          ]}
+          flowLinks={[
+            { label: '料金を見る', href: '/purchase/' },
+            { label: 'お知らせ', href: '/news/' },
+          ]}
+          media={
+            featuredPost ? (
+              <InteractiveCard className="page-visual-card premium-glass">
+                {featuredPost.meta.image ? (
+                  <img className="page-visual-card__image" src={featuredPost.meta.image} alt={featuredPost.meta.title} />
+                ) : (
+                  <div className="blog-hero-fallback">
+                    <TagIcon size={54} />
+                  </div>
+                )}
+                <div className="page-visual-card__meta">
+                  <strong>{featuredPost.meta.title}</strong>
+                  <span>{featuredPost.meta.description}</span>
+                </div>
+              </InteractiveCard>
+            ) : undefined
+          }
         />
 
+        <Section>
+          <MetricStrip items={[...blogMetrics]} ariaLabel="ブログ一覧の要点" />
+        </Section>
+
+        {featuredPost ? (
+          <Section alt>
+            <div className="blog-hub">
+              <InteractiveCard className="release-panel premium-glass blog-featured">
+                <Link to={`/blog/${featuredPost.meta.slug}`} className="blog-featured__media">
+                  {featuredPost.meta.image ? (
+                    <img src={featuredPost.meta.image} alt={featuredPost.meta.title} />
+                  ) : (
+                    <div className="blog-hero-fallback">
+                      <TagIcon size={54} />
+                    </div>
+                  )}
+                </Link>
+
+                <div className="blog-featured__content">
+                  <span className="subpage-card__eyebrow">FEATURED ARTICLE</span>
+                  <div className="blog-card__meta">
+                    <span>
+                      <Calendar size={14} />
+                      {formatDate(featuredPost.meta.date)}
+                    </span>
+                    <span>
+                      <Clock size={14} />
+                      約{featuredPost.readingMinutes}分
+                    </span>
+                  </div>
+                  <h2>
+                    <Link to={`/blog/${featuredPost.meta.slug}`}>{featuredPost.meta.title}</Link>
+                  </h2>
+                  <p>{featuredPost.meta.description}</p>
+
+                  <div className="blog-card__tags">
+                    {featuredPost.meta.tags?.slice(0, 4).map((tag) => (
+                      <span key={tag}>#{tag}</span>
+                    ))}
+                  </div>
+
+                  <Link className="pricing-plan-card__link" to={`/blog/${featuredPost.meta.slug}`}>
+                    <span>この記事を読む</span>
+                  </Link>
+                </div>
+              </InteractiveCard>
+
+              <div className="blog-side-list">
+                <div className="subpage-section-head">
+                  <p>LATEST PICKS</p>
+                  <h2>関連する最新記事</h2>
+                </div>
+
+                {sidePosts.map((post) => (
+                  <InteractiveCard key={post.meta.slug} className="release-panel premium-glass blog-side-link">
+                    <Link to={`/blog/${post.meta.slug}`}>
+                      <span>{formatDate(post.meta.date)}</span>
+                      <strong>{post.meta.title}</strong>
+                      <small>{post.meta.description}</small>
+                    </Link>
+                  </InteractiveCard>
+                ))}
+              </div>
+            </div>
+          </Section>
+        ) : null}
+
         <Section className="blog-index-section">
-          {/* Tag Filter */}
-          {allTags.length > 0 && (
-            <div className="blog-tag-filter" style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', justifyContent: 'center', marginBottom: '3rem' }}>
-              <button 
-                onClick={() => setActiveTag(null)}
-                className={`brand-pill ${!activeTag ? 'is-active' : ''}`}
-                style={{ cursor: 'pointer', background: !activeTag ? 'rgba(225,194,138,0.2)' : 'rgba(255,255,255,0.06)', borderColor: !activeTag ? 'var(--accent)' : 'var(--border)', color: !activeTag ? '#fff' : 'var(--muted)', fontWeight: !activeTag ? 700 : 500 }}
-              >
+          {allTags.length > 0 ? (
+            <div className="blog-tag-filter" role="tablist" aria-label="ブログタグフィルター">
+              <button type="button" onClick={() => setActiveTag(null)} className={!activeTag ? 'is-active' : ''}>
                 すべて
               </button>
-              {allTags.map(tag => (
-                <button 
-                  key={tag}
-                  onClick={() => setActiveTag(tag)}
-                  className={`brand-pill ${activeTag === tag ? 'is-active' : ''}`}
-                  style={{ cursor: 'pointer', background: activeTag === tag ? 'rgba(225,194,138,0.2)' : 'rgba(255,255,255,0.06)', borderColor: activeTag === tag ? 'var(--accent)' : 'var(--border)', color: activeTag === tag ? '#fff' : 'var(--muted)', fontWeight: activeTag === tag ? 700 : 500 }}
-                >
+              {allTags.map((tag) => (
+                <button key={tag} type="button" onClick={() => setActiveTag(tag)} className={activeTag === tag ? 'is-active' : ''}>
                   #{tag}
                 </button>
               ))}
             </div>
-          )}
+          ) : null}
 
-          <div className="brand-grid brand-grid--3">
+          <div className="blog-grid">
             <AnimatePresence mode="popLayout">
-              {posts.length === 0 ? (
-                <motion.div 
-                  initial={{ opacity: 0 }} 
-                  animate={{ opacity: 1 }} 
+              {gridPosts.length === 0 ? (
+                <motion.div
+                  key="empty"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '4rem', color: 'var(--muted)' }}
+                  className="blog-empty-state"
                 >
-                  <p>該当する記事が見つかりませんでした。</p>
+                  <p>{featuredPost ? 'この条件では注目記事のみ表示しています。' : '該当する記事が見つかりませんでした。'}</p>
                 </motion.div>
               ) : (
-                posts.map((post, idx) => (
-                  <motion.div
+                gridPosts.map((post, index) => (
+                  <motion.article
                     key={post.meta.slug}
                     layout
-                    initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.9, y: -20 }}
-                    transition={{ duration: 0.4, delay: idx * 0.05 }}
+                    initial={{ opacity: 0, y: 24, scale: 0.97 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -20, scale: 0.97 }}
+                    transition={{ duration: 0.35, delay: index * 0.03 }}
                   >
-                    <InteractiveCard className="brand-card blog-card" style={{ padding: 0, height: '100%', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
-                      <Link to={`/blog/${post.meta.slug}`} style={{ display: 'block', overflow: 'hidden', borderBottom: '1px solid var(--border)', aspectRatio: '16/9' }}>
+                    <InteractiveCard className="brand-card blog-card">
+                      <Link to={`/blog/${post.meta.slug}`} className="blog-card__media">
                         {post.meta.image ? (
-                          <img 
-                            src={post.meta.image} 
-                            alt={post.meta.title} 
-                            style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
-                            onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-                            onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
-                          />
+                          <img src={post.meta.image} alt={post.meta.title} />
                         ) : (
-                          <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, rgba(20,18,24,1) 0%, rgba(30,28,36,1) 100%)', display: 'grid', placeItems: 'center', color: 'rgba(255,255,255,0.1)', transition: 'transform 0.5s ease' }}>
-                            <TagIcon size={48} />
+                          <div className="blog-hero-fallback blog-hero-fallback--compact">
+                            <TagIcon size={42} />
                           </div>
                         )}
                       </Link>
-                      <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', flexWrap: 'wrap', marginBottom: '1rem', fontSize: '0.8rem', color: 'var(--accent)' }}>
-                          <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                            <Calendar size={14} /> {post.meta.date}
+
+                      <div className="blog-card__content">
+                        <div className="blog-card__meta">
+                          <span>
+                            <Calendar size={14} />
+                            {formatDate(post.meta.date)}
                           </span>
-                          <span style={{ display: 'flex', alignItems: 'center', gap: '4px', color: 'var(--muted)' }}>
-                            <Clock size={14} /> 約3分で読める
+                          <span>
+                            <Clock size={14} />
+                            約{post.readingMinutes}分
                           </span>
                         </div>
-                        <h2 style={{ fontSize: '1.25rem', margin: '0 0 0.8rem', lineHeight: 1.4 }}>
-                          <Link to={`/blog/${post.meta.slug}`} style={{ textDecoration: 'none', color: 'var(--ink)' }}>
-                            {post.meta.title}
-                          </Link>
+
+                        <h2>
+                          <Link to={`/blog/${post.meta.slug}`}>{post.meta.title}</Link>
                         </h2>
-                        <p style={{ color: 'var(--muted)', fontSize: '0.9rem', lineHeight: 1.6, marginBottom: '1.5rem', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden', flexGrow: 1 }}>
-                          {post.meta.description}
-                        </p>
-                        
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto', paddingTop: '1rem', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-                          <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
-                            {post.meta.tags?.slice(0, 2).map(tag => (
-                              <span key={tag} style={{ fontSize: '0.7rem', padding: '2px 6px', borderRadius: '4px', background: 'rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.7)' }}>
-                                #{tag}
-                              </span>
+                        <p>{post.meta.description}</p>
+
+                        <div className="blog-card__footer">
+                          <div className="blog-card__tags">
+                            {post.meta.tags?.slice(0, 3).map((tag) => (
+                              <span key={tag}>#{tag}</span>
                             ))}
                           </div>
-                          <Link to={`/blog/${post.meta.slug}`} style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', color: 'var(--accent)', textDecoration: 'none', fontSize: '0.9rem', fontWeight: 600 }}>
-                            読む <ArrowRight size={14} />
+
+                          <Link to={`/blog/${post.meta.slug}`} className="blog-card__cta">
+                            読む
+                            <ArrowRight size={14} />
                           </Link>
                         </div>
                       </div>
                     </InteractiveCard>
-                  </motion.div>
+                  </motion.article>
                 ))
               )}
             </AnimatePresence>
