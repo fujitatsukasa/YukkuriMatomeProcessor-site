@@ -337,6 +337,81 @@ const publicProofRoutes = [
 
 const publicNewsEntries = [...newsPosts].reverse().slice(0, 3)
 
+const operationBoundary = {
+  automated: {
+    eyebrow: 'SOFTWARE DOES',
+    title: 'ソフトが前工程でまとめること',
+    body: '素材集め、台本の下地、AI補助、YMM4前準備、改善のための分析までを、ひとつの運用線に寄せています。',
+    items: [
+      '対応サイト / スレッドから素材と台本の下地を集める',
+      '文章整形、感情分析、テロップ改行補助を前工程で回す',
+      '`.ymmp`、CSV、キャラ設定、立ち絵パスをまとめて整える',
+      'タイトル案、サムネ文案、コメント取得、差分比較まで補助する',
+    ],
+  },
+  human: {
+    eyebrow: 'YOU DECIDE',
+    title: '最後に人が判断すること',
+    body: '最終的な見せ方や公開判断は残しつつ、繰り返し発生する前工程を圧縮する構成です。',
+    items: [
+      '動画ごとの見せ場、抑揚、例外ケースの扱いを決める',
+      'サムネの最終表現や公開文のニュアンスを仕上げる',
+      '投稿タイミングや優先順位をチャンネル方針に合わせて選ぶ',
+      '反応を見ながら、次のテンプレートにどこを反映するか判断する',
+    ],
+  },
+} as const
+
+const operationStageCards = [
+  {
+    eyebrow: 'DAY 1',
+    title: '最初の1本を通して流れを掴む',
+    body: '対応サイト取得、スレッド処理、台本反映、AI補助までを一度通して、自分の制作フローに合うかを短時間で判断できます。',
+    points: [
+      '記事取得 -> 台本反映 -> 自動動画作成の一括導線',
+      'Free で導入相性と初回の流れを確認しやすい',
+      '文章整形 / 感情分析 / 改行補助も前工程で触れる',
+    ],
+    image: '/product_get_script.png',
+    Icon: FileSearch,
+  },
+  {
+    eyebrow: 'TEMPLATE OPS',
+    title: '動画の型を増やして継続投稿へ寄せる',
+    body: '単発で終わらせず、`.ymmp` 追加、CSVからのプロジェクト作成、キャラ設定保存を積み上げて、チャンネルの型を増やしていけます。',
+    points: [
+      '`.ymmp` からフォーマット追加して横展開しやすい',
+      'YMM4 キャラ設定保存 / 立ち絵パス一括変更まで前工程に寄せる',
+      '反応集、5chまとめ、ショート、解説へテンプレートで広げやすい',
+    ],
+    image: '/product_format_list.png',
+    Icon: Settings2,
+  },
+  {
+    eyebrow: 'OPTIMIZE',
+    title: '分析を回して次の投稿へ改善を返す',
+    body: 'YouTube 分析、コメント取得、履歴比較、差分レポートまで繋げて、投稿後の改善を次のテンプレートへ戻しやすくしています。',
+    points: [
+      'URL 一括入力、コメント取得、履歴比較をまとめて扱える',
+      'CSV / TSV / JSON 出力で手元の分析や整理にも回しやすい',
+      'タイトル案 / サムネ文案と組み合わせて次の企画精度を上げる',
+    ],
+    image: '/product_youtube_info.png',
+    Icon: TrendingUp,
+  },
+] as const
+
+const operationOutputChips = [
+  '対応サイト 20+',
+  'AI台本 13キャラ',
+  '`.ymmp` 追加',
+  'CSVからプロジェクト作成',
+  'YMM4キャラ設定保存',
+  '立ち絵パス一括変更',
+  'コメント取得',
+  '差分比較 / レポート',
+] as const
+
 const pricingDecisionPoints = [
   {
     title: 'Freeで初回導入を確認',
@@ -491,6 +566,7 @@ export function HomePage() {
   useEffect(() => {
     const handleScroll = () => {
       const heroEnd = document.querySelector('.home-compact-hero')?.getBoundingClientRect()
+      const internalProofSection = document.querySelector('.home-internal-proof-section')?.getBoundingClientRect()
       const trustSection = document.querySelector('.testimonials-section-wrap')?.getBoundingClientRect()
       const pricingSection = document.querySelector('.home-compact-price-section')?.getBoundingClientRect()
       const publicProofSection = document.querySelector('.home-public-proof-section')?.getBoundingClientRect()
@@ -508,10 +584,19 @@ export function HomePage() {
         !!trustSection && trustSection.top < viewportHeight * 0.8 && trustSection.bottom > viewportHeight * 0.15
       const overlappingPricing =
         !!pricingSection && pricingSection.top < viewportHeight * 0.85 && pricingSection.bottom > viewportHeight * 0.12
+      const overlappingInternalProof =
+        !!internalProofSection && internalProofSection.top < viewportHeight * 0.85 && internalProofSection.bottom > viewportHeight * 0.15
       const overlappingPublicProof =
         !!publicProofSection && publicProofSection.top < viewportHeight * 0.85 && publicProofSection.bottom > viewportHeight * 0.15
 
-      setShowFloatingCta(pastHero && !reachedCta && !overlappingTrust && !overlappingPricing && !overlappingPublicProof)
+      setShowFloatingCta(
+        pastHero &&
+        !reachedCta &&
+        !overlappingInternalProof &&
+        !overlappingTrust &&
+        !overlappingPricing &&
+        !overlappingPublicProof,
+      )
     }
 
     handleScroll()
@@ -1291,6 +1376,113 @@ export function HomePage() {
                 ))}
               </div>
             </motion.div>
+          </div>
+        </Section>
+
+        {/* ━━━[ Section Glow Divider ]━━━ */}
+        <div className="section-glow-divider" />
+
+        <Section className="home-compact-section home-internal-proof-section">
+          <motion.div
+            className="home-compact-section-head"
+            variants={SECTION_HEAD_VARIANTS}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-10%' }}
+            style={{ position: 'relative', zIndex: 1 }}
+          >
+            <p className="brand-kicker">導入後の流れ</p>
+            <h2><span className="text-glow-gold">任せる工程</span>と<span className="text-glow-green">自分で仕上げる工程</span>を分けて見せる</h2>
+            <p style={{ maxWidth: '720px', margin: '0 auto' }}>
+              「全部自動」と見せるより、どこまで前工程をまとめ、どこから自分で握るのかが分かるほうが導入後のズレは減ります。
+              1本目、継続投稿、改善の3段で、何を触るソフトなのかを整理しています。
+            </p>
+          </motion.div>
+
+          <div className="home-v3-proof" style={{ position: 'relative', zIndex: 1, width: 'min(1180px, calc(100% - 48px))', margin: '0 auto' }}>
+            <motion.div
+              className="home-v3-before-after"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-10%' }}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
+            >
+              <div className="home-v3-before-after__column home-v3-before-after__column--accent home-internal-proof__column">
+                <span>{operationBoundary.automated.eyebrow}</span>
+                <strong className="home-internal-proof__column-title">{operationBoundary.automated.title}</strong>
+                <p className="home-internal-proof__column-caption">{operationBoundary.automated.body}</p>
+                <ul>
+                  {operationBoundary.automated.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="home-v3-before-after__divider" aria-hidden="true">
+                <span>→</span>
+              </div>
+
+              <div className="home-v3-before-after__column home-internal-proof__column">
+                <span>{operationBoundary.human.eyebrow}</span>
+                <strong className="home-internal-proof__column-title">{operationBoundary.human.title}</strong>
+                <p className="home-internal-proof__column-caption">{operationBoundary.human.body}</p>
+                <ul>
+                  {operationBoundary.human.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
+
+            <motion.div
+              className="home-v3-proof__notes"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-10%' }}
+              transition={{ duration: 0.6, delay: 0.05, ease: 'easeOut' }}
+            >
+              {operationStageCards.map((card) => (
+                <article key={card.title} className="home-v3-proof-card home-internal-proof-card">
+                  <div className="home-internal-proof-card__top">
+                    <div>
+                      <span>{card.eyebrow}</span>
+                      <h3>{card.title}</h3>
+                    </div>
+                    <div className="home-internal-proof-card__icon" aria-hidden="true">
+                      <card.Icon size={18} />
+                    </div>
+                  </div>
+
+                  <div className="workflow-visual__screen home-internal-proof-card__screen">
+                    <img
+                      src={card.image}
+                      alt={`${card.title}の実画面`}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+
+                  <p>{card.body}</p>
+
+                  <ul className="trust-spec-card__list">
+                    {card.points.map((point) => (
+                      <li key={point}>
+                        <CheckCircle2 size={16} aria-hidden="true" />
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              ))}
+            </motion.div>
+          </div>
+
+          <div style={{ position: 'relative', zIndex: 1, width: 'min(1180px, calc(100% - 48px))', margin: '1rem auto 0' }}>
+            <div className="trust-supported-sites" role="list" aria-label="前工程でまとめて扱える代表要素">
+              {operationOutputChips.map((chip) => (
+                <span key={chip} role="listitem">{chip}</span>
+              ))}
+            </div>
           </div>
         </Section>
 

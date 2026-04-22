@@ -4679,6 +4679,71 @@ html {
   max-width: min(760px, 30ch) !important;
 }
 
+.home-internal-proof__column {
+  align-content: start;
+}
+
+.home-internal-proof__column-title {
+  color: #fff4d3;
+  font-size: clamp(1.16rem, 2vw, 1.4rem);
+  line-height: 1.42;
+}
+
+.home-internal-proof__column-caption {
+  margin: 0;
+  color: rgba(236, 232, 224, 0.72);
+  line-height: 1.65;
+}
+
+.home-internal-proof-card {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.home-internal-proof-card__top {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.home-internal-proof-card__top span {
+  display: block;
+  color: rgba(240, 206, 136, 0.92);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.home-internal-proof-card__top h3 {
+  margin-top: 0.32rem;
+}
+
+.home-internal-proof-card__icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  border: 1px solid rgba(240, 206, 136, 0.16);
+  background: rgba(240, 206, 136, 0.08);
+  color: #f0ce88;
+}
+
+.home-internal-proof-card__screen {
+  aspect-ratio: 16 / 8.8;
+}
+
+.home-internal-proof-card__screen img {
+  object-position: left top;
+}
+
+.home-internal-proof-card .trust-spec-card__list {
+  gap: 0.45rem;
+}
+
 .home-compact-compare,
 .home-compact-closing {
   display: grid;
