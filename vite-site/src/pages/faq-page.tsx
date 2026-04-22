@@ -1,3 +1,4 @@
+import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { InteractiveCard, PageIntro, PageMeta, Section } from '@/components/ui'
 import { media } from '@/data/assets'
@@ -56,6 +57,26 @@ const faqMetrics = [
 ] as const
 
 export function FaqPage() {
+  const [query, setQuery] = useState('')
+
+  const filteredGroups = useMemo(() => {
+    const keyword = query.trim().toLowerCase()
+    if (!keyword) {
+      return faqGroups
+    }
+
+    return faqGroups
+      .map((group) => ({
+        ...group,
+        items: group.items.filter((item) =>
+          `${item.question} ${item.answer}`.toLowerCase().includes(keyword),
+        ),
+      }))
+      .filter((group) => group.items.length > 0)
+  }, [query])
+
+  const visibleQuestionCount = filteredGroups.reduce((sum, group) => sum + group.items.length, 0)
+
   return (
     <>
       <PageMeta
@@ -95,60 +116,101 @@ export function FaqPage() {
         </Section>
 
         <Section alt>
+          <InteractiveCard className="release-panel premium-glass faq-discovery-panel">
+            <div>
+              <span className="subpage-card__eyebrow">SEARCH FAQ</span>
+              <h2>質問文と回答文から、詰まりどころを先に絞り込む</h2>
+              <p>設定、YMM4連携、URL取得、契約まわりまで、気になる語句でそのまま検索できます。</p>
+            </div>
+
+            <label className="faq-search">
+              <span>検索キーワード</span>
+              <input
+                type="search"
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                placeholder="例: YMM4 / API キー / 保存先 / 解約"
+                aria-label="FAQ検索"
+              />
+            </label>
+
+            <div className="faq-discovery-panel__meta">
+              <strong>{visibleQuestionCount}件</strong>
+              <span>現在表示されている質問数</span>
+            </div>
+          </InteractiveCard>
+        </Section>
+
+        <Section>
           <div className="subpage-section-head">
             <p>QUICK ROUTES</p>
             <h2>まずは自分の疑問に近い入口から入る</h2>
           </div>
 
-          <div className="faq-category-grid">
-            {faqGroups.map((group) => {
-              const meta = faqCategoryMeta[group.id]
+          {filteredGroups.length ? (
+            <div className="faq-category-grid">
+              {filteredGroups.map((group) => {
+                const meta = faqCategoryMeta[group.id]
 
-              return (
-                <InteractiveCard key={group.id} className="release-panel premium-glass faq-category-card">
-                  <a href={`#${group.id}`} className="faq-category-card__link">
-                    <span className="subpage-card__eyebrow">{meta?.cue ?? 'FAQ'}</span>
-                    <h2>{group.label}</h2>
-                    <p>{meta?.lead}</p>
-                    <ul className="faq-category-card__questions">
-                      {group.items.slice(0, 2).map((item) => (
-                        <li key={item.question}>{item.question}</li>
-                      ))}
-                    </ul>
-                  </a>
-                </InteractiveCard>
-              )
-            })}
-          </div>
+                return (
+                  <InteractiveCard key={group.id} className="release-panel premium-glass faq-category-card">
+                    <a href={`#${group.id}`} className="faq-category-card__link">
+                      <span className="subpage-card__eyebrow">{meta?.cue ?? 'FAQ'}</span>
+                      <h2>{group.label}</h2>
+                      <p>{meta?.lead}</p>
+                      <strong className="faq-category-card__count">{group.items.length}件の質問</strong>
+                      <ul className="faq-category-card__questions">
+                        {group.items.slice(0, 2).map((item) => (
+                          <li key={item.question}>{item.question}</li>
+                        ))}
+                      </ul>
+                    </a>
+                  </InteractiveCard>
+                )
+              })}
+            </div>
+          ) : (
+            <InteractiveCard className="release-panel premium-glass faq-empty-state">
+              <strong>この検索条件ではカテゴリ候補が見つかりませんでした。</strong>
+              <p>語句を少し広げると、関連する質問が見つかりやすくなります。</p>
+            </InteractiveCard>
+          )}
         </Section>
 
         <Section>
-          <div className="faq-sections">
-            {faqGroups.map((group) => {
-              const meta = faqCategoryMeta[group.id]
+          {filteredGroups.length ? (
+            <div className="faq-sections">
+              {filteredGroups.map((group) => {
+                const meta = faqCategoryMeta[group.id]
 
-              return (
-                <section key={group.id} id={group.id} className="faq-section-block">
-                  <div className="faq-section-block__head">
-                    <div>
-                      <p>{meta?.cue ?? 'FAQ'}</p>
-                      <h2>{group.label}</h2>
+                return (
+                  <section key={group.id} id={group.id} className="faq-section-block">
+                    <div className="faq-section-block__head">
+                      <div>
+                        <p>{meta?.cue ?? 'FAQ'}</p>
+                        <h2>{group.label}</h2>
+                      </div>
+                      <span>{group.items.length}件の質問</span>
                     </div>
-                    <span>{group.items.length}件の質問</span>
-                  </div>
 
-                  <div className="faq-list" role="list">
-                    {group.items.map((item, index) => (
-                      <details key={item.question} className="faq-item" open={index === 0}>
-                        <summary>{item.question}</summary>
-                        <div className="faq-answer">{item.answer}</div>
-                      </details>
-                    ))}
-                  </div>
-                </section>
-              )
-            })}
-          </div>
+                    <div className="faq-list" role="list">
+                      {group.items.map((item, index) => (
+                        <details key={item.question} className="faq-item" open={index === 0}>
+                          <summary>{item.question}</summary>
+                          <div className="faq-answer">{item.answer}</div>
+                        </details>
+                      ))}
+                    </div>
+                  </section>
+                )
+              })}
+            </div>
+          ) : (
+            <InteractiveCard className="release-panel premium-glass faq-empty-state">
+              <strong>該当する質問は見つかりませんでした。</strong>
+              <p>別の語句で検索するか、解決しない場合はお問い合わせください。</p>
+            </InteractiveCard>
+          )}
         </Section>
 
         <Section alt>

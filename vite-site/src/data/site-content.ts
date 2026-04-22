@@ -1,5 +1,3 @@
-import { media } from '@/data/assets'
-
 export type NavItem = {
   key: 'home' | 'download' | 'instructions' | 'update' | 'news' | 'faq' | 'purchase' | 'contact' | 'blog'
   label: string
@@ -61,7 +59,7 @@ export const navItems: NavItem[] = [
 ]
 
 export const primaryCta: ActionItem = {
-  label: '無料で開始する',
+  label: '無料で始める',
   href: '/download/',
   variant: 'primary',
 }
@@ -94,7 +92,7 @@ export const legal = {
     plans: [
       { name: 'Free', price: '¥0', priceTax: '無料', term: 'ずっと無料', description: '基本機能をフル活用' },
       { name: 'Standard', price: '¥5,000', priceTax: '税込 5,500円', term: '月額', description: '個人クリエイター向け' },
-      { name: 'Pro', price: '¥10,000', priceTax: '税込 11,000円', term: '月額', description: '圧倒的おすすめ・全機能解放' },
+      { name: 'Pro', price: '¥10,000', priceTax: '税込 11,000円', term: '月額', description: '個別運用と相談込み' },
     ],
     productName: 'ゆっくりまとめプロセッサー',
     modelLabel: '月額サブスクリプション（無料プランあり）',
@@ -268,7 +266,7 @@ export const newsPosts: NewsPost[] = [
     summary:
       '最新版ダウンロード手順の更新内容をお知らせします。導入時の確認項目も合わせて見直し、迷わず開始できる構成に整えています。',
     seoDescription: '最新版ダウンロード手順の更新内容をお知らせします。',
-    seoImage: media.workstation1,
+    seoImage: '/product_guide.png',
     heroImageAlt: 'ダウンロード手順更新のお知らせイメージ',
     body: [
       '最新版のダウンロード手順を更新しました。',
@@ -283,7 +281,7 @@ export const newsPosts: NewsPost[] = [
     subtitle: '導入前後の疑問をカテゴリで整理し、サポート導線を強化しました。',
     summary: 'FAQページ追加に関するお知らせです。サポート情報への導線を強化しました。',
     seoDescription: 'FAQページ追加に関するお知らせです。サポート情報への導線を強化しました。',
-    seoImage: media.goldAbstractAurora,
+    seoImage: '/product_get_script.png',
     heroImageAlt: 'FAQ更新のお知らせイメージ',
     body: [
       '導入前後の疑問を整理し、FAQページを更新しました。',
@@ -300,7 +298,7 @@ export const newsPosts: NewsPost[] = [
       'デザインと情報導線の刷新に加え、台本取得・整形・YMM4連携準備など製品機能の説明を明確化しました。',
     seoDescription:
       'デザインと情報導線の刷新に加え、台本取得・整形・YMM4連携準備など製品機能の説明を明確化しました。',
-    seoImage: media.lobby1,
+    seoImage: '/generated/template-ops-studio-v1.png',
     heroImageAlt: 'サイトリニューアルのお知らせイメージ',
     body: [
       'サイトのデザインと情報導線を見直し、必要情報へ到達しやすい構成に改善しました。',

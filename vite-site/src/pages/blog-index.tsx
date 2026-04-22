@@ -5,7 +5,7 @@ import { ArrowRight, Calendar, Clock, Tag as TagIcon } from 'lucide-react'
 import { InteractiveCard, PageIntro, PageMeta, Section } from '@/components/ui'
 import { MetricStrip } from '@/pages/shared'
 import { siteTitle } from '@/data/site-content'
-import { getAllBlogPosts } from '@/lib/blog'
+import { getAllBlogPosts, resolveBlogVisual } from '@/lib/blog'
 
 function formatDate(date: string) {
   return new Intl.DateTimeFormat('ja-JP', {
@@ -30,19 +30,42 @@ export function BlogIndex() {
     [],
   )
   const [activeTag, setActiveTag] = useState<string | null>(null)
+  const [searchTerm, setSearchTerm] = useState('')
 
-  const allTags = useMemo(() => {
-    const tags = new Set<string>()
+  const tagCounts = useMemo(() => {
+    const tags = new Map<string, number>()
     allPosts.forEach((post) => {
-      post.meta.tags?.forEach((tag) => tags.add(tag))
+      post.meta.tags?.forEach((tag) => tags.set(tag, (tags.get(tag) ?? 0) + 1))
     })
-    return Array.from(tags)
+    return tags
   }, [allPosts])
 
+  const allTags = useMemo(() => {
+    return Array.from(tagCounts.entries())
+      .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'ja'))
+      .map(([tag]) => tag)
+  }, [tagCounts])
+
   const filteredPosts = useMemo(() => {
-    if (!activeTag) return allPosts
-    return allPosts.filter((post) => post.meta.tags?.includes(activeTag))
-  }, [activeTag, allPosts])
+    const keyword = searchTerm.trim().toLowerCase()
+
+    return allPosts.filter((post) => {
+      const matchesTag = !activeTag || post.meta.tags?.includes(activeTag)
+      if (!matchesTag) {
+        return false
+      }
+
+      if (!keyword) {
+        return true
+      }
+
+      const haystack = [post.meta.title, post.meta.description, ...(post.meta.tags ?? [])]
+        .join(' ')
+        .toLowerCase()
+
+      return haystack.includes(keyword)
+    })
+  }, [activeTag, allPosts, searchTerm])
 
   const featuredPost = filteredPosts[0] ?? null
   const sidePosts = filteredPosts.slice(1, 4)
@@ -55,9 +78,9 @@ export function BlogIndex() {
       detail: 'YMM4、運用、反応集、解説、時短ノウハウを継続更新',
     },
     {
-      value: `${allTags.length}タグ`,
-      label: 'テーマ別で絞り込み',
-      detail: '初心者向け記事から実運用寄りの話題まで横断',
+      value: `${allTags.length}テーマ`,
+      label: 'テーマで絞り込み',
+      detail: 'YMM4、台本作成、素材準備、著作権、運用設計を横断',
     },
     {
       value: '実践寄り',
@@ -92,7 +115,7 @@ export function BlogIndex() {
             featuredPost ? (
               <InteractiveCard className="page-visual-card premium-glass">
                 {featuredPost.meta.image ? (
-                  <img className="page-visual-card__image" src={featuredPost.meta.image} alt={featuredPost.meta.title} />
+                  <img className="page-visual-card__image" src={resolveBlogVisual(featuredPost.meta)} alt={featuredPost.meta.title} />
                 ) : (
                   <div className="blog-hero-fallback">
                     <TagIcon size={54} />
@@ -117,7 +140,7 @@ export function BlogIndex() {
               <InteractiveCard className="release-panel premium-glass blog-featured">
                 <Link to={`/blog/${featuredPost.meta.slug}`} className="blog-featured__media">
                   {featuredPost.meta.image ? (
-                    <img src={featuredPost.meta.image} alt={featuredPost.meta.title} />
+                    <img src={resolveBlogVisual(featuredPost.meta)} alt={featuredPost.meta.title} />
                   ) : (
                     <div className="blog-hero-fallback">
                       <TagIcon size={54} />
@@ -175,6 +198,24 @@ export function BlogIndex() {
         ) : null}
 
         <Section className="blog-index-section">
+          <div className="blog-index-toolbar">
+            <label className="blog-index-search">
+              <span>SEARCH ARTICLES</span>
+              <input
+                type="search"
+                value={searchTerm}
+                onChange={(event) => setSearchTerm(event.target.value)}
+                placeholder="YMM4、台本、素材、著作権などで検索"
+                aria-label="記事検索"
+              />
+            </label>
+            <p>
+              タイトル、説明、タグから絞り込みます。
+              <strong>{filteredPosts.length}本</strong>
+              が条件に一致しています。
+            </p>
+          </div>
+
           {allTags.length > 0 ? (
             <div className="blog-tag-filter" role="tablist" aria-label="ブログタグフィルター">
               <button type="button" onClick={() => setActiveTag(null)} className={!activeTag ? 'is-active' : ''}>
@@ -213,7 +254,7 @@ export function BlogIndex() {
                     <InteractiveCard className="brand-card blog-card">
                       <Link to={`/blog/${post.meta.slug}`} className="blog-card__media">
                         {post.meta.image ? (
-                          <img src={post.meta.image} alt={post.meta.title} />
+                          <img src={resolveBlogVisual(post.meta)} alt={post.meta.title} />
                         ) : (
                           <div className="blog-hero-fallback blog-hero-fallback--compact">
                             <TagIcon size={42} />

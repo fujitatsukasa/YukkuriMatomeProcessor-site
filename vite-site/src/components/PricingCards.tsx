@@ -71,7 +71,7 @@ const pricingPlans: PricingPlan[] = [
     bestFor: '複数チャンネル運用や外注の巻き取りまで進めたい',
     summary: '13キャラAI台本、個別テンプレート作成、動画内容の相談まで含めて、チーム運用や内製化を進める最上位プランです。',
     note: '複数運用や個別テンプレート、相談導線の厚みまで重視するなら最適',
-    badge: '✦ 圧倒的おすすめ',
+    badge: '個別運用向け',
     features: [
       { label: 'Standardの全機能', active: true },
       { label: '13キャラ対応のAI台本作成', active: true, emphasis: true },

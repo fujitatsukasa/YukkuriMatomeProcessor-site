@@ -157,6 +157,9 @@ export function SiteLayout() {
   const isHome = normalizedPath === '/'
   const activeEntry = pageRegistry[normalizedPath]
   const activeKey = activeEntry?.navKey
+  const isBlogArticle = normalizedPath.startsWith('/blog/') && normalizedPath !== '/blog/'
+  const isNewsArticle = activeEntry?.navKey === 'news' && normalizedPath !== '/news/'
+  const showShareButtons = isBlogArticle || isNewsArticle
   const breadcrumbs = useMemo(() => buildBreadcrumbs(location.pathname), [location.pathname])
   const breadcrumbStructuredData = useMemo(() => {
     if (breadcrumbs.length < 2) {
@@ -177,8 +180,7 @@ export function SiteLayout() {
 
   useRouteEffects(location.pathname, location.hash)
 
-
-  const customPrimaryCta = useMemo(() => ({ ...primaryCta, label: '無料で開始する！' }), [])
+  const customPrimaryCta = useMemo(() => ({ ...primaryCta, label: '無料で始める' }), [])
 
   return (
     <>
@@ -244,6 +246,10 @@ export function SiteLayout() {
                 {item.label}
               </Link>
             ))}
+            <div className="brand-nav__cta-stack" aria-label="モバイルCTA">
+              <ActionLink action={customPrimaryCta} className="brand-btn" />
+              <ActionLink action={secondaryCta} className="brand-btn brand-btn--ghost" />
+            </div>
           </nav>
 
           <div className="header-actions brand-header__actions home-compact-cta__actions" style={{ margin: 0, padding: 0 }}>
@@ -269,9 +275,11 @@ export function SiteLayout() {
           </nav>
         ) : null}
         <Outlet />
-        <div style={{ maxWidth: 1000, margin: '0 auto', width: '100%', padding: '0 1.5rem' }}>
-          <GlobalShareButtons />
-        </div>
+        {showShareButtons ? (
+          <div style={{ maxWidth: 1000, margin: '0 auto', width: '100%', padding: '0 1.5rem' }}>
+            <GlobalShareButtons />
+          </div>
+        ) : null}
       </main>
 
       <footer className={`brand-footer${isHome ? ' brand-footer--home' : ''}`}>
