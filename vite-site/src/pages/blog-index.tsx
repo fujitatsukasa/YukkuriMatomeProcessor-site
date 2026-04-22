@@ -2,8 +2,7 @@ import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowRight, Calendar, Clock, Tag as TagIcon } from 'lucide-react'
-import { InteractiveCard, PageIntro, PageMeta, Section } from '@/components/ui'
-import { MetricStrip } from '@/pages/shared'
+import { InteractiveCard, PageMeta, Section } from '@/components/ui'
 import { siteTitle } from '@/data/site-content'
 import { getAllBlogPosts, resolveBlogVisual } from '@/lib/blog'
 
@@ -67,27 +66,9 @@ export function BlogIndex() {
     })
   }, [activeTag, allPosts, searchTerm])
 
-  const featuredPost = filteredPosts[0] ?? null
-  const sidePosts = filteredPosts.slice(1, 4)
-  const gridPosts = filteredPosts.slice(1)
-
-  const blogMetrics = [
-    {
-      value: `${allPosts.length}本`,
-      label: '公開記事',
-      detail: 'YMM4、運用、反応集、解説、時短ノウハウを継続更新',
-    },
-    {
-      value: `${allTags.length}テーマ`,
-      label: 'テーマで絞り込み',
-      detail: 'YMM4、台本作成、素材準備、著作権、運用設計を横断',
-    },
-    {
-      value: '実践寄り',
-      label: '机上の話で終わらせない',
-      detail: '制作フロー改善や自動化に繋がる内容を優先',
-    },
-  ] as const
+  const heroFeaturedPost = filteredPosts[0] ?? allPosts[0] ?? null
+  const sidePosts = (filteredPosts.length > 0 ? filteredPosts.slice(1, 4) : allPosts.slice(1, 4))
+  const gridPosts = filteredPosts.length > 0 ? filteredPosts.slice(1) : []
 
   return (
     <>
@@ -99,135 +80,104 @@ export function BlogIndex() {
       />
 
       <main className="brand-shell">
-        <PageIntro
-          kicker="OFFICIAL BLOG"
-          title="制作フローを伸ばす実践ノウハウ"
-          lead="ゆっくり解説、反応集、YMM4、時短化を中心に、運用へ繋がる記事を公開しています"
-          actions={[
-            { label: '無料で始める', href: '/download/', variant: 'primary' },
-            { label: '機能と使い方', href: '/instructions/', variant: 'ghost' },
-          ]}
-          flowLinks={[
-            { label: '料金を見る', href: '/purchase/' },
-            { label: 'お知らせ', href: '/news/' },
-          ]}
-          media={
-            featuredPost ? (
-              <InteractiveCard className="page-visual-card premium-glass">
-                {featuredPost.meta.image ? (
-                  <img className="page-visual-card__image" src={resolveBlogVisual(featuredPost.meta)} alt={featuredPost.meta.title} />
-                ) : (
-                  <div className="blog-hero-fallback">
-                    <TagIcon size={54} />
-                  </div>
-                )}
-                <div className="page-visual-card__meta">
-                  <strong>{featuredPost.meta.title}</strong>
-                  <span>{featuredPost.meta.description}</span>
+        <section className="editorial-hero">
+          <div className="editorial-hero__shell">
+            <div className="editorial-hero__copy">
+              <p className="brand-kicker">OFFICIAL BLOG</p>
+              <h1>制作フローを伸ばす記事だけを並べる</h1>
+              <p className="brand-lead">
+                ここでは製品の宣伝よりも、運用へ戻せる知見を優先しています。YMM4、台本、素材、著作権、運用改善までを検索とタグで横断できます。
+              </p>
+
+              <label className="utility-search blog-index-search">
+                <span>探したいテーマから入る</span>
+                <input
+                  type="search"
+                  value={searchTerm}
+                  onChange={(event) => setSearchTerm(event.target.value)}
+                  placeholder="YMM4、台本、素材、著作権、反応集などで検索"
+                  aria-label="記事検索"
+                />
+              </label>
+
+              {allTags.length > 0 ? (
+                <div className="blog-tag-filter" role="tablist" aria-label="ブログタグフィルター">
+                  <button type="button" onClick={() => setActiveTag(null)} className={!activeTag ? 'is-active' : ''}>
+                    すべて
+                  </button>
+                  {allTags.map((tag) => (
+                    <button key={tag} type="button" onClick={() => setActiveTag(tag)} className={activeTag === tag ? 'is-active' : ''}>
+                      #{tag}
+                    </button>
+                  ))}
                 </div>
-              </InteractiveCard>
-            ) : undefined
-          }
-        />
+              ) : null}
 
-        <Section>
-          <MetricStrip items={[...blogMetrics]} ariaLabel="ブログ一覧の要点" />
-        </Section>
+              <p className="editorial-hero__meta">
+                {searchTerm || activeTag ? '絞り込み結果' : '公開中の記事'} <strong>{filteredPosts.length}</strong> 本
+                <span>運用に戻せる記事だけを残しています。</span>
+              </p>
+            </div>
 
-        {featuredPost ? (
-          <Section alt>
-            <div className="blog-hub">
-              <InteractiveCard className="release-panel premium-glass blog-featured">
-                <Link to={`/blog/${featuredPost.meta.slug}`} className="blog-featured__media">
-                  {featuredPost.meta.image ? (
-                    <img src={resolveBlogVisual(featuredPost.meta)} alt={featuredPost.meta.title} />
-                  ) : (
-                    <div className="blog-hero-fallback">
-                      <TagIcon size={54} />
-                    </div>
-                  )}
+            {heroFeaturedPost ? (
+              <InteractiveCard className="release-panel premium-glass editorial-hero__panel">
+                <span className="subpage-card__eyebrow">{filteredPosts.length > 0 ? 'EDITOR’S PICK' : 'LATEST ARTICLE'}</span>
+                <Link to={`/blog/${heroFeaturedPost.meta.slug}`} className="editorial-hero__panel-media">
+                  <img src={resolveBlogVisual(heroFeaturedPost.meta)} alt={heroFeaturedPost.meta.title} />
                 </Link>
-
-                <div className="blog-featured__content">
-                  <span className="subpage-card__eyebrow">FEATURED ARTICLE</span>
-                  <div className="blog-card__meta">
-                    <span>
-                      <Calendar size={14} />
-                      {formatDate(featuredPost.meta.date)}
-                    </span>
-                    <span>
-                      <Clock size={14} />
-                      約{featuredPost.readingMinutes}分
-                    </span>
-                  </div>
-                  <h2>
-                    <Link to={`/blog/${featuredPost.meta.slug}`}>{featuredPost.meta.title}</Link>
-                  </h2>
-                  <p>{featuredPost.meta.description}</p>
-
-                  <div className="blog-card__tags">
-                    {featuredPost.meta.tags?.slice(0, 4).map((tag) => (
-                      <span key={tag}>#{tag}</span>
-                    ))}
-                  </div>
-
-                  <Link className="pricing-plan-card__link" to={`/blog/${featuredPost.meta.slug}`}>
-                    <span>この記事を読む</span>
-                  </Link>
+                <div className="blog-card__meta">
+                  <span>
+                    <Calendar size={14} />
+                    {formatDate(heroFeaturedPost.meta.date)}
+                  </span>
+                  <span>
+                    <Clock size={14} />
+                    約{heroFeaturedPost.readingMinutes}分
+                  </span>
                 </div>
+                <h2>
+                  <Link to={`/blog/${heroFeaturedPost.meta.slug}`}>{heroFeaturedPost.meta.title}</Link>
+                </h2>
+                <p>{heroFeaturedPost.meta.description}</p>
+                <div className="blog-card__tags">
+                  {heroFeaturedPost.meta.tags?.slice(0, 4).map((tag) => (
+                    <span key={tag}>#{tag}</span>
+                  ))}
+                </div>
+                <Link className="pricing-plan-card__link" to={`/blog/${heroFeaturedPost.meta.slug}`}>
+                  <span>この記事を読む</span>
+                </Link>
               </InteractiveCard>
+            ) : null}
+          </div>
+        </section>
 
-              <div className="blog-side-list">
-                <div className="subpage-section-head">
-                  <p>LATEST PICKS</p>
-                  <h2>関連する最新記事</h2>
-                </div>
+        {sidePosts.length ? (
+          <Section alt>
+            <div className="subpage-section-head">
+              <p>LATEST PICKS</p>
+              <h2>今読むべき記事</h2>
+            </div>
 
-                {sidePosts.map((post) => (
-                  <InteractiveCard key={post.meta.slug} className="release-panel premium-glass blog-side-link">
-                    <Link to={`/blog/${post.meta.slug}`}>
-                      <span>{formatDate(post.meta.date)}</span>
-                      <strong>{post.meta.title}</strong>
-                      <small>{post.meta.description}</small>
-                    </Link>
-                  </InteractiveCard>
-                ))}
-              </div>
+            <div className="blog-side-list blog-side-list--compact">
+              {sidePosts.map((post) => (
+                <InteractiveCard key={post.meta.slug} className="release-panel premium-glass blog-side-link">
+                  <Link to={`/blog/${post.meta.slug}`}>
+                    <span>{formatDate(post.meta.date)}</span>
+                    <strong>{post.meta.title}</strong>
+                    <small>{post.meta.description}</small>
+                  </Link>
+                </InteractiveCard>
+              ))}
             </div>
           </Section>
         ) : null}
 
         <Section className="blog-index-section">
-          <div className="blog-index-toolbar">
-            <label className="blog-index-search">
-              <span>SEARCH ARTICLES</span>
-              <input
-                type="search"
-                value={searchTerm}
-                onChange={(event) => setSearchTerm(event.target.value)}
-                placeholder="YMM4、台本、素材、著作権などで検索"
-                aria-label="記事検索"
-              />
-            </label>
-            <p>
-              タイトル、説明、タグから絞り込みます。
-              <strong>{filteredPosts.length}本</strong>
-              が条件に一致しています。
-            </p>
+          <div className="subpage-section-head">
+            <p>ARTICLE LIBRARY</p>
+            <h2>テーマ別に記事を探す</h2>
           </div>
-
-          {allTags.length > 0 ? (
-            <div className="blog-tag-filter" role="tablist" aria-label="ブログタグフィルター">
-              <button type="button" onClick={() => setActiveTag(null)} className={!activeTag ? 'is-active' : ''}>
-                すべて
-              </button>
-              {allTags.map((tag) => (
-                <button key={tag} type="button" onClick={() => setActiveTag(tag)} className={activeTag === tag ? 'is-active' : ''}>
-                  #{tag}
-                </button>
-              ))}
-            </div>
-          ) : null}
 
           <div className="blog-grid">
             <AnimatePresence mode="popLayout">
@@ -239,7 +189,11 @@ export function BlogIndex() {
                   exit={{ opacity: 0 }}
                   className="blog-empty-state"
                 >
-                  <p>{featuredPost ? 'この条件では注目記事のみ表示しています。' : '該当する記事が見つかりませんでした。'}</p>
+                  <p>
+                    {filteredPosts.length > 0
+                      ? '表示中の記事はヒーローの1本のみです。'
+                      : 'この条件に一致する記事はまだ見つかりませんでした。'}
+                  </p>
                 </motion.div>
               ) : (
                 gridPosts.map((post, index) => (

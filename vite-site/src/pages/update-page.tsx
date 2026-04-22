@@ -1,9 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { InteractiveCard, PageIntro, PageMeta, Section } from '@/components/ui'
+import { InteractiveCard, PageMeta, Section } from '@/components/ui'
 import { media } from '@/data/assets'
 import { changeLogUrl, downloadUrl, latestReleaseUrl, releasesUrl, tagsUrl } from '@/data/site-content'
-import { MetricStrip } from '@/pages/shared'
 
 interface Release {
   id: number
@@ -30,19 +29,19 @@ function formatBody(body: string) {
 const updateGuideCards = [
   {
     eyebrow: 'BEFORE UPDATE',
-    title: '更新前にやっておくこと',
+    title: '更新前に確認しておくこと',
     body: '保存先、YMM4パス、テンプレートまわりの設定を確認し、必要ならバックアップします。',
     points: ['現在の設定を控える', '運用フォルダのバックアップを取る', '変更点がありそうなら使い方も併読する'],
   },
   {
     eyebrow: 'CHECK NOTES',
     title: '何を見てから更新するか',
-    body: '最新版のリリースノート、CHANGELOG、過去タグを併読すると差分が追いやすくなります。',
-    points: ['最新の変更内容', '過去バージョンとの違い', '導線変更があるか'],
+    body: '最新版のリリースノート、CHANGELOG、過去タグを先に確認すると、変更点の見落としを減らせます。',
+    points: ['最新の変更点を見る', '前バージョンとの差分を把握', '過去タグも遡れる'],
   },
   {
     eyebrow: 'WHEN STUCK',
-    title: '問題が出たときの逃げ先',
+    title: '困ったときの逃げ先',
     body: 'FAQ、使い方、問い合わせ窓口を先に固定しておくと、更新後の切り分けが速くなります。',
     points: ['FAQを先に確認', '手順変更は使い方で再確認', '解決しなければ問い合わせる'],
   },
@@ -71,23 +70,6 @@ export function UpdatePage() {
 
   const latestRelease = releases[0] ?? null
   const latestReleaseLines = useMemo(() => formatBody(latestRelease?.body ?? '').slice(0, 4), [latestRelease?.body])
-  const updateMetrics = [
-    {
-      value: loading ? '--' : `${releases.length || 20}件`,
-      label: 'GitHub Releasesを確認',
-      detail: '公開済みリリースを最大20件まで取得',
-    },
-    {
-      value: latestRelease ? formatDate(latestRelease.published_at) : '--',
-      label: '最新公開日',
-      detail: '最新版の公開タイミングを即確認',
-    },
-    {
-      value: '1CLICK',
-      label: '最新版へ到達',
-      detail: 'ダウンロード、リリースノート、CHANGELOGを集約',
-    },
-  ] as const
 
   return (
     <>
@@ -100,37 +82,103 @@ export function UpdatePage() {
       />
 
       <main className="brand-shell">
-        <PageIntro
-          kicker="Release Hub"
-          title="アップデート情報"
-          lead="最新版の入手先と、リリースノート・変更履歴・差分確認の導線をひとつにまとめています"
-          actions={[
-            { label: '最新版をダウンロード', href: downloadUrl, variant: 'primary', external: true },
-            { label: 'リリースノートを見る', href: latestReleaseUrl, variant: 'ghost', external: true },
-          ]}
-          flowLinks={[
-            { label: '機能と使い方', href: '/instructions/' },
-            { label: 'FAQ', href: '/faq/' },
-          ]}
-          media={
-            <InteractiveCard className="page-visual-card premium-glass">
-              <img className="page-visual-card__image" src="/generated/template-ops-studio-v1.png" alt="アップデート確認と導入導線を表すビジュアル" />
-              <div className="page-visual-card__meta">
-                <strong>更新導線を一本化して、迷わず最新版へ進める</strong>
-                <span>ダウンロード、リリースノート、CHANGELOG、過去タグをこのページから辿れます。</span>
-              </div>
-            </InteractiveCard>
-          }
-        />
+        <section className="utility-hero utility-hero--update">
+          <div className="utility-hero__shell">
+            <div className="utility-hero__copy">
+              <p className="brand-kicker">RELEASE HUB</p>
+              <h1>最新版へ、迷わず辿る</h1>
+              <p className="brand-lead">
+                このページでは、最新版の取得、変更点の把握、過去バージョンの確認を一つの導線にまとめています。更新判断に必要な情報を先に置いています。
+              </p>
 
-        <Section>
-          <MetricStrip items={[...updateMetrics]} ariaLabel="アップデートページの要点" />
-        </Section>
+              <div className="utility-stat-grid">
+                <div className="utility-stat">
+                  <strong>{loading ? '--' : `${releases.length || 20}件`}</strong>
+                  <span>GitHub Releases を確認</span>
+                </div>
+                <div className="utility-stat">
+                  <strong>{latestRelease ? formatDate(latestRelease.published_at) : '--'}</strong>
+                  <span>最新公開日</span>
+                </div>
+              </div>
+
+              <div className="utility-link-row">
+                <a href={downloadUrl}>最新版をダウンロード</a>
+                <a href={latestReleaseUrl} target="_blank" rel="noopener noreferrer">
+                  リリースノート
+                </a>
+                <a href={changeLogUrl} target="_blank" rel="noopener noreferrer">
+                  CHANGELOG
+                </a>
+                <a href={tagsUrl} target="_blank" rel="noopener noreferrer">
+                  タグ一覧
+                </a>
+              </div>
+            </div>
+
+            <div className="utility-hero__panel-stack">
+              <InteractiveCard className="release-panel premium-glass utility-hero__panel">
+                <span className="subpage-card__eyebrow">LATEST RELEASE</span>
+                <h2>{latestRelease?.name || latestRelease?.tag_name || '最新リリースを確認中'}</h2>
+                <p>{latestRelease ? `${formatDate(latestRelease.published_at)} に公開` : 'GitHub Releases から最新の公開情報を読み込んでいます。'}</p>
+
+                {loading ? <p className="release-monitor__fallback">リリース情報を取得中です...</p> : null}
+                {error ? (
+                  <p className="release-monitor__fallback">
+                    リリース情報の取得に失敗しました。下の公式リンクから GitHub 側の一覧を確認してください。
+                  </p>
+                ) : null}
+
+                {!loading && !error && latestReleaseLines.length > 0 ? (
+                  <ul className="release-monitor__list">
+                    {latestReleaseLines.map((line) => (
+                      <li key={line}>{line}</li>
+                    ))}
+                  </ul>
+                ) : null}
+
+                <div className="subpage-support-callout__actions">
+                  <a className="brand-btn brand-btn--ghost" href={latestReleaseUrl} target="_blank" rel="noopener noreferrer">
+                    リリースノートを見る
+                  </a>
+                  <a className="brand-btn brand-btn--primary" href={downloadUrl}>
+                    最新版を入手
+                  </a>
+                </div>
+              </InteractiveCard>
+
+              <InteractiveCard className="release-panel premium-glass release-link-panel">
+                <span className="subpage-card__eyebrow">OFFICIAL LINKS</span>
+                <h2>更新判断に必要なリンク</h2>
+                <div className="subpage-link-stack">
+                  <a href={changeLogUrl} target="_blank" rel="noopener noreferrer">
+                    <span>CHANGELOG を確認</span>
+                  </a>
+                  <a href={releasesUrl} target="_blank" rel="noopener noreferrer">
+                    <span>全リリース一覧</span>
+                  </a>
+                  <a href={tagsUrl} target="_blank" rel="noopener noreferrer">
+                    <span>タグ一覧</span>
+                  </a>
+                </div>
+                <p className="release-monitor__fallback">更新で手順が変わる場合は、使い方ページと FAQ も合わせて見直してください。</p>
+                <div className="subpage-support-callout__actions">
+                  <Link className="brand-btn brand-btn--ghost" to="/instructions/">
+                    使い方を見る
+                  </Link>
+                  <Link className="brand-btn brand-btn--primary" to="/faq/">
+                    FAQを見る
+                  </Link>
+                </div>
+              </InteractiveCard>
+            </div>
+          </div>
+        </section>
 
         <Section alt>
           <div className="subpage-section-head">
             <p>UPDATE FLOW</p>
-            <h2>更新前後で迷わないよう、見るべき順番と逃げ先を先に固定する</h2>
+            <h2>更新前後で迷わないよう、見る順番と逃げ先を固定する</h2>
           </div>
 
           <div className="subpage-card-grid subpage-card-grid--3">
@@ -150,62 +198,6 @@ export function UpdatePage() {
         </Section>
 
         <Section>
-          <div className="release-hub-grid">
-            <InteractiveCard className="release-panel premium-glass release-monitor">
-              <span className="subpage-card__eyebrow">LATEST RELEASE</span>
-              <h2>{latestRelease?.name || latestRelease?.tag_name || '最新リリースを取得中'}</h2>
-              <p>
-                {latestRelease ? `${formatDate(latestRelease.published_at)} に公開` : 'GitHub Releases から最新のリリース情報を取得しています。'}
-              </p>
-
-              {latestReleaseLines.length > 0 ? (
-                <ul className="release-monitor__list">
-                  {latestReleaseLines.map((line) => (
-                    <li key={line}>{line}</li>
-                  ))}
-                </ul>
-              ) : (
-                <p className="release-monitor__fallback">詳細な変更内容はリリースノートまたは CHANGELOG を確認してください。</p>
-              )}
-
-              <div className="subpage-support-callout__actions">
-                <a className="brand-btn brand-btn--ghost" href={latestReleaseUrl} target="_blank" rel="noopener noreferrer">
-                  リリースノート
-                </a>
-                <a className="brand-btn brand-btn--primary" href={downloadUrl}>
-                  最新版を入手
-                </a>
-              </div>
-            </InteractiveCard>
-
-            <InteractiveCard className="release-panel premium-glass release-link-panel">
-              <span className="subpage-card__eyebrow">OFFICIAL LINKS</span>
-              <h2>差分確認の公式リンク</h2>
-              <div className="subpage-link-stack">
-                <a href={changeLogUrl} target="_blank" rel="noopener noreferrer">
-                  <span>CHANGELOG を確認</span>
-                </a>
-                <a href={releasesUrl} target="_blank" rel="noopener noreferrer">
-                  <span>全リリース一覧</span>
-                </a>
-                <a href={tagsUrl} target="_blank" rel="noopener noreferrer">
-                  <span>タグ一覧</span>
-                </a>
-              </div>
-              <p className="release-monitor__fallback">更新で手順が変わる場合は、使い方ページとFAQも合わせて見直してください。</p>
-              <div className="subpage-support-callout__actions">
-                <Link className="brand-btn brand-btn--ghost" to="/instructions/">
-                  使い方を見る
-                </Link>
-                <Link className="brand-btn brand-btn--primary" to="/faq/">
-                  FAQを見る
-                </Link>
-              </div>
-            </InteractiveCard>
-          </div>
-        </Section>
-
-        <Section alt>
           <div className="content-page">
             <div className="subpage-section-head">
               <p>RELEASE TIMELINE</p>
@@ -216,13 +208,13 @@ export function UpdatePage() {
 
             {error ? (
               <div>
-                <p className="release-monitor__fallback">リリース情報の取得に失敗しました。GitHub上の公式情報を確認してください。</p>
+                <p className="release-monitor__fallback">リリース情報の取得に失敗しました。GitHub 上の公式一覧を確認してください。</p>
                 <div className="content-page__link-list" style={{ marginTop: '1rem' }}>
                   <a href={releasesUrl} target="_blank" rel="noopener noreferrer">
-                    GitHub Releases で確認 →
+                    GitHub Releases で確認
                   </a>
                   <a href={changeLogUrl} target="_blank" rel="noopener noreferrer">
-                    CHANGELOG で確認 →
+                    CHANGELOG で確認
                   </a>
                 </div>
               </div>
