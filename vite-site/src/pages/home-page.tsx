@@ -486,6 +486,69 @@ const proofJourneyUsecases = [
   },
 ] as const
 
+const homeStoryChapters = [
+  {
+    key: 'hero',
+    index: '00',
+    label: 'Promise',
+    title: '前工程をひとつの運用線にまとめる',
+    body: 'ヒーローで約束しているのは、ネタ探しからYMM4前準備までを分断させないことです。',
+    selector: '.home-compact-hero',
+    orbitPrimary: { x: -460, y: -180, scale: 1.05, opacity: 0.2 },
+    orbitSecondary: { x: 520, y: -40, scale: 1.12, opacity: 0.16 },
+  },
+  {
+    key: 'usecases',
+    index: '01',
+    label: 'Outputs',
+    title: '成果物の形をユースケース別に切り替える',
+    body: '反応集、解説、ショートで何が残るのかを見せ、テンプレ運用の出口を先に理解させます。',
+    selector: '.home-compact-usecase-section',
+    orbitPrimary: { x: -520, y: 140, scale: 1.1, opacity: 0.18 },
+    orbitSecondary: { x: 500, y: 90, scale: 1.02, opacity: 0.14 },
+  },
+  {
+    key: 'proof_journey',
+    index: '02',
+    label: 'Proof',
+    title: '取得前からYMM4前準備までを実画面で追う',
+    body: '新しく足した3段証拠で、どこまで整うのかを主張ではなく画面で確認できる状態にしています。',
+    selector: '.home-proof-journey-section',
+    orbitPrimary: { x: -400, y: 220, scale: 1.14, opacity: 0.22 },
+    orbitSecondary: { x: 540, y: 210, scale: 1.08, opacity: 0.15 },
+  },
+  {
+    key: 'template_ops',
+    index: '03',
+    label: 'System',
+    title: 'テンプレ運用を主役にして、工程を一画面で把握する',
+    body: '個別機能ではなく、継続投稿のための運用基盤として読むフェーズです。',
+    selector: '.home-compact-template-section',
+    orbitPrimary: { x: -540, y: 340, scale: 1.16, opacity: 0.18 },
+    orbitSecondary: { x: 460, y: 320, scale: 1.18, opacity: 0.16 },
+  },
+  {
+    key: 'pricing',
+    index: '04',
+    label: 'Decision',
+    title: 'Free / Standard / Pro の判断を短い視線で終える',
+    body: '価格ではなく導入判断として読ませる章です。ここで無料導線に戻る理由を固めます。',
+    selector: '.home-compact-price-section',
+    orbitPrimary: { x: -500, y: 420, scale: 1.08, opacity: 0.16 },
+    orbitSecondary: { x: 520, y: 420, scale: 1.1, opacity: 0.18 },
+  },
+  {
+    key: 'public_proof',
+    index: '05',
+    label: 'Public',
+    title: '公開情報と最終CTAで安心して着地させる',
+    body: '使い方、FAQ、料金、更新履歴まで見える状態で、最後の導線へ渡します。',
+    selector: '.home-public-proof-section',
+    orbitPrimary: { x: -440, y: 520, scale: 1.02, opacity: 0.14 },
+    orbitSecondary: { x: 500, y: 520, scale: 1.14, opacity: 0.16 },
+  },
+] as const
+
 const operationBoundary = {
   automated: {
     eyebrow: 'SOFTWARE DOES',
@@ -713,6 +776,7 @@ export function HomePage() {
   const [activeHeroScene, setActiveHeroScene] = useState(0)
   const [activeOutcomeStory, setActiveOutcomeStory] = useState(0)
   const [activeOperationStage, setActiveOperationStage] = useState(0)
+  const [activeStoryChapter, setActiveStoryChapter] = useState<(typeof homeStoryChapters)[number]['key']>('hero')
   const isAutoPlayingRef = useRef(true)
 
   // ━━━[ Floating CTA visibility ]━━━
@@ -852,6 +916,41 @@ export function HomePage() {
     return () => observer.disconnect()
   }, [])
 
+  useEffect(() => {
+    const updateActiveChapter = () => {
+      const anchor = window.innerHeight * 0.32 + 96
+      const ranked = homeStoryChapters
+        .map((chapter) => {
+          const node = document.querySelector(chapter.selector)
+          if (!node) {
+            return null
+          }
+
+          const rect = node.getBoundingClientRect()
+          const distance =
+            rect.top <= anchor && rect.bottom >= anchor
+              ? 0
+              : Math.min(Math.abs(rect.top - anchor), Math.abs(rect.bottom - anchor))
+
+          return { key: chapter.key, distance }
+        })
+        .filter((item): item is { key: (typeof homeStoryChapters)[number]['key']; distance: number } => item !== null)
+        .sort((a, b) => a.distance - b.distance)
+
+      if (ranked[0]) {
+        setActiveStoryChapter(ranked[0].key)
+      }
+    }
+
+    updateActiveChapter()
+    window.addEventListener('scroll', updateActiveChapter, { passive: true })
+    window.addEventListener('resize', updateActiveChapter)
+    return () => {
+      window.removeEventListener('scroll', updateActiveChapter)
+      window.removeEventListener('resize', updateActiveChapter)
+    }
+  }, [])
+
   const handleSlideChange = (index: number) => {
     isAutoPlayingRef.current = false
     setActiveSlide(index)
@@ -884,12 +983,36 @@ export function HomePage() {
     })
   }
 
+  const handleStoryChapterJump = (chapterKey: (typeof homeStoryChapters)[number]['key']) => {
+    const chapter = homeStoryChapters.find((item) => item.key === chapterKey)
+    if (!chapter) {
+      return
+    }
+
+    const target = document.querySelector(chapter.selector)
+    if (!target) {
+      return
+    }
+
+    const offsetTop = target.getBoundingClientRect().top + window.scrollY - 108
+    window.scrollTo({ top: offsetTop, behavior: 'smooth' })
+    setActiveStoryChapter(chapter.key)
+    trackEvent('story_chapter_jump', {
+      page: 'home',
+      chapter: chapter.key,
+      label: chapter.title,
+    })
+  }
+
   const activePresentationSlide = presentationSlides[activeSlide]
   const ActiveSlideIcon = activePresentationSlide.Icon
   const activeHeroShowcase = heroShowcaseScenes[activeHeroScene]
   const heroPreviewScenes = heroShowcaseScenes.filter((_, index) => index !== activeHeroScene)
   const activeOutcomePanel = outcomeStories[activeOutcomeStory]
   const ActiveOutcomeIcon = activeOutcomePanel.source.Icon
+  const activeStoryChapterMeta =
+    homeStoryChapters.find((chapter) => chapter.key === activeStoryChapter) ?? homeStoryChapters[0]
+  const activeStoryChapterIndex = homeStoryChapters.findIndex((chapter) => chapter.key === activeStoryChapter)
 
   return (
     <>
@@ -903,6 +1026,62 @@ export function HomePage() {
       />
       <div className="home-compact-shell" style={{ position: 'relative' }}>
         <CustomCursorGlow />
+        <div className="home-story-rail-wrap" aria-label="ホームの章立て">
+          <nav className="home-story-rail">
+            <div className="home-story-rail__track">
+              {homeStoryChapters.map((chapter) => (
+                <button
+                  key={chapter.key}
+                  type="button"
+                  className={`home-story-rail__item${chapter.key === activeStoryChapter ? ' is-active' : ''}`}
+                  onClick={() => handleStoryChapterJump(chapter.key)}
+                  aria-pressed={chapter.key === activeStoryChapter}
+                >
+                  <span className="home-story-rail__index">{chapter.index}</span>
+                  <span className="home-story-rail__label">{chapter.label}</span>
+                </button>
+              ))}
+            </div>
+          </nav>
+        </div>
+
+        <div className="home-story-system" aria-hidden="true">
+          <motion.div
+            className="home-story-orbit home-story-orbit--primary"
+            animate={activeStoryChapterMeta.orbitPrimary}
+            transition={{ type: 'spring', stiffness: 42, damping: 22, mass: 1.1 }}
+          />
+          <motion.div
+            className="home-story-orbit home-story-orbit--secondary"
+            animate={activeStoryChapterMeta.orbitSecondary}
+            transition={{ type: 'spring', stiffness: 38, damping: 24, mass: 1.15 }}
+          />
+        </div>
+
+        <AnimatePresence mode="wait">
+          <motion.aside
+            key={activeStoryChapterMeta.key}
+            className="home-story-banner"
+            initial={{ opacity: 0, x: 24, y: -8, filter: 'blur(8px)' }}
+            animate={{ opacity: 1, x: 0, y: 0, filter: 'blur(0px)' }}
+            exit={{ opacity: 0, x: 18, y: -6, filter: 'blur(8px)' }}
+            transition={{ duration: 0.34, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <span className="home-story-banner__eyebrow">
+              {activeStoryChapterMeta.index} / {activeStoryChapterMeta.label}
+            </span>
+            <strong>{activeStoryChapterMeta.title}</strong>
+            <p>{activeStoryChapterMeta.body}</p>
+            <div className="home-story-banner__meter">
+              <motion.span
+                className="home-story-banner__meter-fill"
+                animate={{ scaleX: (activeStoryChapterIndex + 1) / homeStoryChapters.length }}
+                transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+              />
+            </div>
+          </motion.aside>
+        </AnimatePresence>
+
         {/* Animated Parallax Background using generated asset */}
         <motion.div
           className="home-parallax-layer"
