@@ -4,7 +4,7 @@ import { PricingCards } from '@/components/PricingCards'
 import { media } from '@/data/assets'
 import { changeLogUrl, downloadUrl, latestReleaseUrl, legal, newsPosts, siteOrigin, siteSubtitle, siteTitle } from '@/data/site-content'
 import React, { useEffect, useRef, useState } from 'react'
-import { motion, useInView as useMotionInView, AnimatePresence, useScroll, useTransform } from 'framer-motion'
+import { motion, useInView as useMotionInView, AnimatePresence, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import Tilt from 'react-parallax-tilt'
 import { MessageSquare, Smartphone, Users, Download, CheckCircle2, TrendingUp, HelpCircle, Monitor, CreditCard, ArrowRight, Sparkles, Play, FileSearch, PencilLine, Bot, Settings2, Send, BookOpen, BadgeCheck } from 'lucide-react'
 import { CustomCursorGlow } from '@/components/CustomCursorGlow'
@@ -14,6 +14,9 @@ const SECTION_HEAD_VARIANTS = {
   hidden: { opacity: 0, y: -20 },
   visible: { opacity: 1, y: 0, transition: { type: 'spring' as const, stiffness: 80, damping: 20 } },
 }
+
+const shouldLimitAmbientMotion = () =>
+  window.matchMedia('(prefers-reduced-motion: reduce), (max-width: 767px)').matches
 
 function AnimatedNumber({ value, active, suffix = '' }: { value: number; active: boolean; suffix?: string }) {
   const [display, setDisplay] = useState(0)
@@ -760,6 +763,7 @@ const homeStructuredData = [
 ]
 
 export function HomePage() {
+  const prefersReducedMotion = useReducedMotion()
   const flowRef = useRef<HTMLDivElement>(null)
   const isFlowInView = useMotionInView(flowRef, { amount: 0.2, once: true })
   const chartRef = useRef<HTMLDivElement>(null)
@@ -769,7 +773,7 @@ export function HomePage() {
 
   const { scrollY } = useScroll()
   // Subtle parallax translation
-  const parallaxY = useTransform(scrollY, [0, 8000], [0, 2000])
+  const parallaxY = useTransform(scrollY, [0, 7000], [0, 360])
   // Browser frame 3D tilt on scroll
     
   const [activeSlide, setActiveSlide] = useState(0)
@@ -784,12 +788,14 @@ export function HomePage() {
   useEffect(() => {
     const handleScroll = () => {
       const heroEnd = document.querySelector('.home-compact-hero')?.getBoundingClientRect()
+      const processSection = document.querySelector('.home-compact-process-section')?.getBoundingClientRect()
       const resultsSection = document.querySelector('.home-compact-usecase-section')?.getBoundingClientRect()
       const proofJourneySection = document.querySelector('.home-proof-journey-section')?.getBoundingClientRect()
       const internalProofSection = document.querySelector('.home-internal-proof-section')?.getBoundingClientRect()
       const trustSection = document.querySelector('.testimonials-section-wrap')?.getBoundingClientRect()
       const pricingSection = document.querySelector('.home-compact-price-section')?.getBoundingClientRect()
       const publicProofSection = document.querySelector('.home-public-proof-section')?.getBoundingClientRect()
+      const closingSection = document.querySelector('.home-compact-closing-section')?.getBoundingClientRect()
       const ctaSection = document.querySelector('.home-compact-cta-section')?.getBoundingClientRect()
 
       if (!heroEnd || !ctaSection) {
@@ -802,6 +808,8 @@ export function HomePage() {
       const reachedCta = ctaSection.top < viewportHeight * 0.92
       const overlappingResults =
         !!resultsSection && resultsSection.top < viewportHeight * 0.85 && resultsSection.bottom > viewportHeight * 0.15
+      const overlappingProcess =
+        !!processSection && processSection.top < viewportHeight * 0.85 && processSection.bottom > viewportHeight * 0.15
       const overlappingProofJourney =
         !!proofJourneySection && proofJourneySection.top < viewportHeight * 0.85 && proofJourneySection.bottom > viewportHeight * 0.15
       const overlappingTrust =
@@ -812,16 +820,20 @@ export function HomePage() {
         !!internalProofSection && internalProofSection.top < viewportHeight * 0.85 && internalProofSection.bottom > viewportHeight * 0.15
       const overlappingPublicProof =
         !!publicProofSection && publicProofSection.top < viewportHeight * 0.85 && publicProofSection.bottom > viewportHeight * 0.15
+      const overlappingClosing =
+        !!closingSection && closingSection.top < viewportHeight * 0.85 && closingSection.bottom > viewportHeight * 0.15
 
       setShowFloatingCta(
         pastHero &&
         !reachedCta &&
+        !overlappingProcess &&
         !overlappingResults &&
         !overlappingProofJourney &&
         !overlappingInternalProof &&
         !overlappingTrust &&
         !overlappingPricing &&
-        !overlappingPublicProof,
+        !overlappingPublicProof &&
+        !overlappingClosing,
       )
     }
 
@@ -837,7 +849,7 @@ export function HomePage() {
   // ━━━[ Auto Carousel Logic ]━━━
   useEffect(() => {
     if (!isAutoPlayingRef.current || !isFlowInView) return
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    if (shouldLimitAmbientMotion()) return
     const timer = setInterval(() => {
       setActiveSlide((prev) => (prev + 1) % presentationSlides.length)
     }, 8000)
@@ -845,7 +857,7 @@ export function HomePage() {
   }, [activeSlide, isFlowInView])
 
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    if (shouldLimitAmbientMotion()) return
     const timer = window.setInterval(() => {
       setActiveHeroScene((prev) => (prev + 1) % heroShowcaseScenes.length)
     }, 4200)
@@ -853,7 +865,7 @@ export function HomePage() {
   }, [])
 
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    if (shouldLimitAmbientMotion()) return
     const timer = window.setInterval(() => {
       setActiveOperationStage((prev) => (prev + 1) % operationStageCards.length)
     }, 4300)
@@ -862,7 +874,7 @@ export function HomePage() {
 
   useEffect(() => {
     if (!isOutcomesInView) return
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    if (shouldLimitAmbientMotion()) return
     const timer = window.setInterval(() => {
       setActiveOutcomeStory((prev) => (prev + 1) % outcomeStories.length)
     }, 5600)
@@ -1059,27 +1071,29 @@ export function HomePage() {
         </div>
 
         <AnimatePresence mode="wait">
-          <motion.aside
-            key={activeStoryChapterMeta.key}
-            className="home-story-banner"
-            initial={{ opacity: 0, x: 24, y: -8, filter: 'blur(8px)' }}
-            animate={{ opacity: 1, x: 0, y: 0, filter: 'blur(0px)' }}
-            exit={{ opacity: 0, x: 18, y: -6, filter: 'blur(8px)' }}
-            transition={{ duration: 0.34, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <span className="home-story-banner__eyebrow">
-              {activeStoryChapterMeta.index} / {activeStoryChapterMeta.label}
-            </span>
-            <strong>{activeStoryChapterMeta.title}</strong>
-            <p>{activeStoryChapterMeta.body}</p>
-            <div className="home-story-banner__meter">
-              <motion.span
-                className="home-story-banner__meter-fill"
-                animate={{ scaleX: (activeStoryChapterIndex + 1) / homeStoryChapters.length }}
-                transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
-              />
-            </div>
-          </motion.aside>
+          {activeStoryChapter !== 'hero' ? (
+            <motion.aside
+              key={activeStoryChapterMeta.key}
+              className="home-story-banner"
+              initial={{ opacity: 0, x: 18, y: -6, filter: 'blur(6px)' }}
+              animate={{ opacity: 1, x: 0, y: 0, filter: 'blur(0px)' }}
+              exit={{ opacity: 0, x: 14, y: -4, filter: 'blur(6px)' }}
+              transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <span className="home-story-banner__eyebrow">
+                {activeStoryChapterMeta.index} / {activeStoryChapterMeta.label}
+              </span>
+              <strong>{activeStoryChapterMeta.title}</strong>
+              <p>{activeStoryChapterMeta.body}</p>
+              <div className="home-story-banner__meter">
+                <motion.span
+                  className="home-story-banner__meter-fill"
+                  animate={{ scaleX: (activeStoryChapterIndex + 1) / homeStoryChapters.length }}
+                  transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                />
+              </div>
+            </motion.aside>
+          ) : null}
         </AnimatePresence>
 
         {/* Animated Parallax Background using generated asset */}
@@ -1090,17 +1104,17 @@ export function HomePage() {
             top: '0vh', /* Start from the very top */
             left: 0,
             width: '100%',
-            height: '250vh',
+            height: '170vh',
             backgroundImage: "url('/bg_abstract_2.webp')",
             backgroundSize: 'cover',
             backgroundPosition: 'center top',
-            opacity: 0.35,
-            y: parallaxY,
+            opacity: 0.16,
+            y: prefersReducedMotion ? 0 : parallaxY,
             pointerEvents: 'none',
             zIndex: 0,
-            maskImage: 'linear-gradient(to bottom, black 0%, black 15%, black 80%, transparent 100%)',
-            WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 15%, black 80%, transparent 100%)',
-            mixBlendMode: 'screen'
+            maskImage: 'linear-gradient(to bottom, black 0%, black 22%, black 72%, transparent 100%)',
+            WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 22%, black 72%, transparent 100%)',
+            mixBlendMode: 'soft-light'
           }}
         />
         <section className="home-compact-hero homepage-hero">

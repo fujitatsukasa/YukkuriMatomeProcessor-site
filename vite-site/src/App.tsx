@@ -1,28 +1,41 @@
-import { useEffect } from 'react'
+import { Suspense, lazy, useEffect } from 'react'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { SiteLayout } from '@/components/site-layout'
 import { normalizePath, newsPosts } from '@/data/site-content'
-import {
-  AccountReturnPage,
-  BillingCancelPage,
-  BillingSuccessPage,
-  CommercialTransactionsPage,
-  ContactPage,
-  DownloadPage,
-  FaqPage,
-  HomePage,
-  InstructionsPage,
-  NewsPage,
-  NewsPostPage,
-  NotFoundPage,
-  PrivacyPolicyPage,
-  PurchasePage,
-  RefundPolicyPage,
-  TermsPage,
-  UpdatePage,
-  BlogIndex,
-  BlogPost,
-} from '@/pages'
+
+const HomePage = lazy(() => import('@/pages/home-page').then((module) => ({ default: module.HomePage })))
+const DownloadPage = lazy(() => import('@/pages/download-page').then((module) => ({ default: module.DownloadPage })))
+const InstructionsPage = lazy(() =>
+  import('@/pages/download-page').then((module) => ({ default: module.InstructionsPage })),
+)
+const FaqPage = lazy(() => import('@/pages/faq-page').then((module) => ({ default: module.FaqPage })))
+const PurchasePage = lazy(() => import('@/pages/purchase-page').then((module) => ({ default: module.PurchasePage })))
+const ContactPage = lazy(() => import('@/pages/contact-page').then((module) => ({ default: module.ContactPage })))
+const NewsPage = lazy(() => import('@/pages/news-page').then((module) => ({ default: module.NewsPage })))
+const UpdatePage = lazy(() => import('@/pages/update-page').then((module) => ({ default: module.UpdatePage })))
+const NewsPostPage = lazy(() => import('@/pages/news-post-page').then((module) => ({ default: module.NewsPostPage })))
+const BlogIndex = lazy(() => import('@/pages/blog-index').then((module) => ({ default: module.BlogIndex })))
+const BlogPost = lazy(() => import('@/pages/blog-post').then((module) => ({ default: module.BlogPost })))
+const NotFoundPage = lazy(() => import('@/pages/system-pages').then((module) => ({ default: module.NotFoundPage })))
+const AccountReturnPage = lazy(() =>
+  import('@/pages/system-pages').then((module) => ({ default: module.AccountReturnPage })),
+)
+const BillingSuccessPage = lazy(() =>
+  import('@/pages/system-pages').then((module) => ({ default: module.BillingSuccessPage })),
+)
+const BillingCancelPage = lazy(() =>
+  import('@/pages/system-pages').then((module) => ({ default: module.BillingCancelPage })),
+)
+const TermsPage = lazy(() => import('@/pages/legal-pages').then((module) => ({ default: module.TermsPage })))
+const PrivacyPolicyPage = lazy(() =>
+  import('@/pages/legal-pages').then((module) => ({ default: module.PrivacyPolicyPage })),
+)
+const RefundPolicyPage = lazy(() =>
+  import('@/pages/legal-pages').then((module) => ({ default: module.RefundPolicyPage })),
+)
+const CommercialTransactionsPage = lazy(() =>
+  import('@/pages/legal-pages').then((module) => ({ default: module.CommercialTransactionsPage })),
+)
 
 function App() {
   const location = useLocation()
@@ -37,6 +50,7 @@ function App() {
   }, [location.pathname])
 
   return (
+    <Suspense fallback={<div className="route-loading" aria-hidden="true" />}>
     <Routes>
       <Route caseSensitive path="/Instructions" element={<Navigate to="/instructions/" replace />} />
       <Route caseSensitive path="/Instructions/" element={<Navigate to="/instructions/" replace />} />
@@ -89,6 +103,7 @@ function App() {
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
+    </Suspense>
   )
 }
 
