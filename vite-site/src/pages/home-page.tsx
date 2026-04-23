@@ -8,6 +8,7 @@ import { motion, useInView as useMotionInView, AnimatePresence, useScroll, useTr
 import Tilt from 'react-parallax-tilt'
 import { MessageSquare, Smartphone, Users, Download, CheckCircle2, TrendingUp, HelpCircle, Monitor, CreditCard, ArrowRight, Sparkles, Play, FileSearch, PencilLine, Bot, Settings2, Send, BookOpen, BadgeCheck } from 'lucide-react'
 import { CustomCursorGlow } from '@/components/CustomCursorGlow'
+import { trackEvent } from '@/lib/analytics'
 
 const SECTION_HEAD_VARIANTS = {
   hidden: { opacity: 0, y: -20 },
@@ -437,6 +438,54 @@ const outcomeStories = [
   },
 ] as const
 
+const beforeAfterProofCards = [
+  {
+    eyebrow: 'BEFORE',
+    title: '取得前の材料を、候補のまま一気に集める',
+    body: '対応サイトやスレッドごとに散っているネタをまとめて拾い、どこから台本化を始めるかをひと目で決められる状態にします。',
+    result: 'URL・候補・ベース台本の土台がそろう',
+    image: '/product_get_script.png',
+    audience: '反応集 / 5ch / まとめ向け',
+    chips: ['対応サイト 20+', 'スレッド取得', '候補を一覧化'],
+    Icon: FileSearch,
+  },
+  {
+    eyebrow: 'STRUCTURED',
+    title: '整形後は、読みやすい台本ベースまで持っていく',
+    body: 'AI補助、テンプレート、感情や話者の整理を使って、読み上げ用に崩れにくい本文へ寄せます。ここで人が最終判断しやすくなります。',
+    result: 'そのまま調整できる台本ベースが残る',
+    image: '/product_edit_script.png',
+    audience: '解説 / ショート / 口調調整向け',
+    chips: ['AI台本補助', 'テンプレ適用', '感情・話者整理'],
+    Icon: PencilLine,
+  },
+  {
+    eyebrow: 'READY FOR YMM4',
+    title: 'YMM4に入れる直前までを前工程で整える',
+    body: '`.ymmp` 生成、CSV出力、キャラ設定や立ち絵パス変更までを前もって処理し、編集開始時点の散らかりを減らします。',
+    result: 'YMM4前準備がそろった状態で次工程へ渡せる',
+    image: '/product_format_list.png',
+    audience: '継続運用 / テンプレ量産向け',
+    chips: ['`.ymmp` 出力', 'CSV / YMM4前準備', '立ち絵パス変更'],
+    Icon: Send,
+  },
+] as const
+
+const proofJourneyUsecases = [
+  {
+    title: '反応集向け',
+    body: 'スレッド取得からベース台本作成、YMM4前準備までを一本化して、毎回の拾い直しを減らします。',
+  },
+  {
+    title: '解説向け',
+    body: '話者・感情・テンプレの整理を先に済ませて、読み上げや修正の判断を軽くします。',
+  },
+  {
+    title: 'ショート向け',
+    body: '速報ネタや素材候補を短尺テンプレへ寄せて、初速重視の制作フローに合わせやすくします。',
+  },
+] as const
+
 const operationBoundary = {
   automated: {
     eyebrow: 'SOFTWARE DOES',
@@ -672,6 +721,7 @@ export function HomePage() {
     const handleScroll = () => {
       const heroEnd = document.querySelector('.home-compact-hero')?.getBoundingClientRect()
       const resultsSection = document.querySelector('.home-compact-usecase-section')?.getBoundingClientRect()
+      const proofJourneySection = document.querySelector('.home-proof-journey-section')?.getBoundingClientRect()
       const internalProofSection = document.querySelector('.home-internal-proof-section')?.getBoundingClientRect()
       const trustSection = document.querySelector('.testimonials-section-wrap')?.getBoundingClientRect()
       const pricingSection = document.querySelector('.home-compact-price-section')?.getBoundingClientRect()
@@ -688,6 +738,8 @@ export function HomePage() {
       const reachedCta = ctaSection.top < viewportHeight * 0.92
       const overlappingResults =
         !!resultsSection && resultsSection.top < viewportHeight * 0.85 && resultsSection.bottom > viewportHeight * 0.15
+      const overlappingProofJourney =
+        !!proofJourneySection && proofJourneySection.top < viewportHeight * 0.85 && proofJourneySection.bottom > viewportHeight * 0.15
       const overlappingTrust =
         !!trustSection && trustSection.top < viewportHeight * 0.8 && trustSection.bottom > viewportHeight * 0.15
       const overlappingPricing =
@@ -701,6 +753,7 @@ export function HomePage() {
         pastHero &&
         !reachedCta &&
         !overlappingResults &&
+        !overlappingProofJourney &&
         !overlappingInternalProof &&
         !overlappingTrust &&
         !overlappingPricing &&
@@ -752,9 +805,83 @@ export function HomePage() {
     return () => window.clearInterval(timer)
   }, [isOutcomesInView])
 
+  useEffect(() => {
+    const seenSections = new Set<string>()
+    const trackedSections = [
+      { selector: '.home-compact-hero', name: 'hero' },
+      { selector: '.home-compact-usecase-section', name: 'usecases' },
+      { selector: '.home-proof-journey-section', name: 'proof_journey' },
+      { selector: '.home-compact-template-section', name: 'template_ops' },
+      { selector: '.home-compact-price-section', name: 'pricing' },
+      { selector: '.home-public-proof-section', name: 'public_proof' },
+      { selector: '.home-compact-cta-section', name: 'final_cta' },
+    ] as const
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return
+          }
+
+          const sectionName = entry.target.getAttribute('data-analytics-section')
+          if (!sectionName || seenSections.has(sectionName)) {
+            return
+          }
+
+          seenSections.add(sectionName)
+          trackEvent('section_view', {
+            page: 'home',
+            section: sectionName,
+          })
+        })
+      },
+      { threshold: 0.08 },
+    )
+
+    trackedSections.forEach(({ selector, name }) => {
+      const node = document.querySelector(selector)
+      if (!node) {
+        return
+      }
+
+      node.setAttribute('data-analytics-section', name)
+      observer.observe(node)
+    })
+
+    return () => observer.disconnect()
+  }, [])
+
   const handleSlideChange = (index: number) => {
     isAutoPlayingRef.current = false
     setActiveSlide(index)
+  }
+
+  const trackHomeCta = (placement: string, target: string, label: string) => {
+    trackEvent('cta_click', {
+      page: 'home',
+      placement,
+      target,
+      label,
+    })
+  }
+
+  const handleHeroSceneSelect = (index: number) => {
+    setActiveHeroScene(index)
+    trackEvent('hero_scene_select', {
+      page: 'home',
+      scene: heroShowcaseScenes[index]?.eyebrow,
+      title: heroShowcaseScenes[index]?.title,
+    })
+  }
+
+  const handleOutcomeStorySelect = (index: number) => {
+    setActiveOutcomeStory(index)
+    trackEvent('usecase_select', {
+      page: 'home',
+      usecase: outcomeStories[index]?.key,
+      label: outcomeStories[index]?.tabLabel,
+    })
   }
 
   const activePresentationSlide = presentationSlides[activeSlide]
@@ -864,10 +991,19 @@ export function HomePage() {
               transition={{ duration: 0.6, delay: 0.65 }}
               className="brand-inline-actions home-compact-hero__actions home-v3-hero__actions hero-cta-row"
             >
-              <Link className="brand-btn brand-btn--primary hero-cta-primary" to="/download/">
+              <Link
+                className="brand-btn brand-btn--primary hero-cta-primary"
+                to="/download/"
+                onClick={() => trackHomeCta('hero_primary', '/download/', '無料プランを試す')}
+              >
                 無料プランを試す
               </Link>
-              <Link className="brand-btn brand-btn--ghost" to="/instructions/" style={{ gap: '6px' }}>
+              <Link
+                className="brand-btn brand-btn--ghost"
+                to="/instructions/"
+                style={{ gap: '6px' }}
+                onClick={() => trackHomeCta('hero_secondary', '/instructions/', '使い方を見る')}
+              >
                 <Play size={16} />
                 使い方を見る
               </Link>
@@ -921,7 +1057,7 @@ export function HomePage() {
                         type="button"
                         key={scene.title}
                         className={`hero-live-step${isActive ? ' is-active' : ''}`}
-                        onClick={() => setActiveHeroScene(index)}
+                        onClick={() => handleHeroSceneSelect(index)}
                         aria-pressed={isActive}
                       >
                         <span className="hero-live-step__eyebrow">{scene.eyebrow}</span>
@@ -1356,7 +1492,7 @@ export function HomePage() {
                   role="tab"
                   aria-selected={activeOutcomeStory === index}
                   className={activeOutcomeStory === index ? 'is-active' : ''}
-                  onClick={() => setActiveOutcomeStory(index)}
+                  onClick={() => handleOutcomeStorySelect(index)}
                 >
                   {story.tabLabel}
                 </button>
@@ -1450,6 +1586,103 @@ export function HomePage() {
 
         {/* ━━━[ Section Glow Divider ]━━━ */}
         <div className="section-glow-divider" />
+
+        <Section className="home-compact-section home-proof-journey-section">
+          <motion.div
+            className="home-compact-section-head"
+            variants={SECTION_HEAD_VARIANTS}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-10%' }}
+            style={{ position: 'relative', zIndex: 1, marginBottom: '2.5rem' }}
+          >
+            <p className="brand-kicker">実画面で見る変化</p>
+            <h2>
+              取得前の散らばりから
+              <span className="text-glow-gold"> YMM4前準備 </span>
+              までを
+              <span className="text-glow-green">3画面で確認</span>
+            </h2>
+            <p>
+              何がどこまで整うのかを、実際の画面で区切って見せます。LP上で主張するだけでなく、
+              取得前→整形後→YMM4前準備後の流れをそのまま追える構成です。
+            </p>
+          </motion.div>
+
+          <div className="proof-journey-grid">
+            {beforeAfterProofCards.map((card, index) => {
+              const CardIcon = card.Icon
+              return (
+                <motion.article
+                  key={card.title}
+                  className="proof-journey-card"
+                  initial={{ opacity: 0, y: 28 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-10%' }}
+                  transition={{ duration: 0.45, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <div className="proof-journey-card__visual">
+                    <img src={card.image} alt={card.title} loading="lazy" decoding="async" />
+                    <span className="proof-journey-card__stage">{card.eyebrow}</span>
+                  </div>
+
+                  <div className="proof-journey-card__copy">
+                    <div className="proof-journey-card__head">
+                      <span className="proof-journey-card__icon" aria-hidden="true">
+                        <CardIcon size={16} />
+                      </span>
+                      <div>
+                        <strong>{card.title}</strong>
+                        <small>{card.audience}</small>
+                      </div>
+                    </div>
+
+                    <p>{card.body}</p>
+
+                    <div className="proof-journey-card__chips" role="list" aria-label={`${card.title}の要点`}>
+                      {card.chips.map((chip) => (
+                        <span key={chip} role="listitem">{chip}</span>
+                      ))}
+                    </div>
+
+                    <div className="proof-journey-card__result">
+                      <span>この段階で残るもの</span>
+                      <strong>{card.result}</strong>
+                    </div>
+                  </div>
+                </motion.article>
+              )
+            })}
+          </div>
+
+          <div className="proof-journey-focus" aria-label="ユースケース別の刺さりどころ">
+            {proofJourneyUsecases.map((item) => (
+              <article key={item.title} className="proof-journey-focus__item">
+                <span>{item.title}</span>
+                <p>{item.body}</p>
+              </article>
+            ))}
+          </div>
+
+          <div className="proof-journey-actions">
+            <Link
+              className="brand-btn brand-btn--primary"
+              to="/download/"
+              onClick={() => trackHomeCta('proof_journey', '/download/', '無料プランを試す')}
+            >
+              <ArrowRight size={16} />
+              無料プランで画面を確認する
+            </Link>
+            <Link
+              className="brand-btn brand-btn--ghost"
+              to="/instructions/"
+              onClick={() => trackHomeCta('proof_journey', '/instructions/', '使い方を見る')}
+            >
+              <Play size={16} />
+              手順を先に見る
+            </Link>
+          </div>
+        </Section>
 
         <Section className="home-compact-section home-compact-template-section">
           <div className="page-bg-bleed">
@@ -2063,9 +2296,21 @@ export function HomePage() {
                     <span>{route.eyebrow}</span>
                     <h3>
                       {'external' in route && route.external ? (
-                        <a href={route.href} target="_blank" rel="noreferrer">{route.title}</a>
+                        <a
+                          href={route.href}
+                          target="_blank"
+                          rel="noreferrer"
+                          onClick={() => trackHomeCta('public_proof', route.href, route.title)}
+                        >
+                          {route.title}
+                        </a>
                       ) : (
-                        <Link to={route.href}>{route.title}</Link>
+                        <Link
+                          to={route.href}
+                          onClick={() => trackHomeCta('public_proof', route.href, route.title)}
+                        >
+                          {route.title}
+                        </Link>
                       )}
                     </h3>
                     <p>{route.body}</p>
@@ -2141,7 +2386,12 @@ export function HomePage() {
 
               {/* Giant CTA */}
               <div className="brand-inline-actions home-compact-cta__actions" style={{ justifyContent: 'center' }}>
-                <Link className="brand-btn brand-btn--primary" to="/download/" style={{ fontSize: '1.25rem', padding: '1.2rem 3.2rem', gap: '10px' }}>
+                <Link
+                  className="brand-btn brand-btn--primary"
+                  to="/download/"
+                  style={{ fontSize: '1.25rem', padding: '1.2rem 3.2rem', gap: '10px' }}
+                  onClick={() => trackHomeCta('final_cta', '/download/', '無料プランを試す')}
+                >
                   <ArrowRight size={22} />
                   無料プランを試す
                 </Link>
@@ -2185,7 +2435,12 @@ export function HomePage() {
                 <strong>まずは導入相性を確認</strong>
                 <p>対応サイト取得から YMM4 前準備まで、無料で流れを試せます。</p>
               </div>
-              <Link className="brand-btn brand-btn--primary floating-cta__button" to="/download/" style={{ gap: '6px' }}>
+              <Link
+                className="brand-btn brand-btn--primary floating-cta__button"
+                to="/download/"
+                style={{ gap: '6px' }}
+                onClick={() => trackHomeCta('floating_cta', '/download/', '無料プランを試す')}
+              >
                 無料プランを試す
                 <ArrowRight size={16} />
               </Link>

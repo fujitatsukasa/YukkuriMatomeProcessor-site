@@ -3,7 +3,6 @@ import {
   type PropsWithChildren,
   type ReactNode,
   useRef,
-  useEffect,
   useState,
 } from 'react'
 import { Helmet } from 'react-helmet-async'
@@ -16,6 +15,7 @@ import {
   siteOrigin,
   siteTitle,
 } from '@/data/site-content'
+import { trackEvent } from '@/lib/analytics'
 
 type SectionProps = PropsWithChildren<{
   id?: string
@@ -126,6 +126,16 @@ export function ActionLink({
     action.href.startsWith('http') ||
     action.href.startsWith('mailto:') ||
     action.href.startsWith('tel:')
+  const handleClick = () => {
+    trackEvent('cta_click', {
+      page: 'shared',
+      label: action.label,
+      target: action.href,
+      variant: action.variant ?? 'ghost',
+      placement: className || 'action_link',
+      external: isExternal,
+    })
+  }
 
   if (isExternal) {
     return (
@@ -134,6 +144,7 @@ export function ActionLink({
         href={action.href}
         target={action.href.startsWith('http') ? '_blank' : undefined}
         rel={action.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+        onClick={handleClick}
       >
         {action.label}
       </a>
@@ -141,7 +152,7 @@ export function ActionLink({
   }
 
   return (
-    <Link className={classes} to={action.href}>
+    <Link className={classes} to={action.href} onClick={handleClick}>
       {action.label}
     </Link>
   )
@@ -306,10 +317,7 @@ export function GlobalShareButtons({
   title?: string
   message?: string 
 }) {
-  const [shareUrl, setShareUrl] = useState('')
-  useEffect(() => {
-    setShareUrl(window.location.href)
-  }, [])
+  const [shareUrl] = useState(() => (typeof window !== 'undefined' ? window.location.href : ''))
 
   if (!shareUrl) return null
 

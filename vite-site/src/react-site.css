@@ -16763,3 +16763,234 @@ html {
     display: none;
   }
 }
+
+.proof-journey-grid,
+.proof-journey-focus,
+.proof-journey-actions {
+  position: relative;
+  z-index: 1;
+  width: min(1180px, calc(100% - 48px));
+  margin-inline: auto;
+}
+
+.proof-journey-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.2rem;
+}
+
+.proof-journey-card {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(7, 10, 20, 0.96)),
+    rgba(9, 12, 24, 0.92);
+  box-shadow:
+    0 18px 60px rgba(3, 7, 18, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.proof-journey-card__visual {
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px;
+  aspect-ratio: 16 / 10;
+  background: rgba(8, 12, 24, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.proof-journey-card__visual::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 38%;
+  background: linear-gradient(180deg, transparent, rgba(4, 8, 18, 0.78));
+  pointer-events: none;
+}
+
+.proof-journey-card__visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.proof-journey-card__stage {
+  position: absolute;
+  top: 0.95rem;
+  left: 0.95rem;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.42rem 0.72rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(5, 8, 18, 0.78);
+  color: rgba(255, 235, 197, 0.92);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.proof-journey-card__copy {
+  display: grid;
+  gap: 0.95rem;
+}
+
+.proof-journey-card__head {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.85rem;
+  align-items: start;
+}
+
+.proof-journey-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 16px;
+  color: #f3d28e;
+  background: linear-gradient(135deg, rgba(243, 210, 142, 0.18), rgba(88, 171, 255, 0.12));
+  border: 1px solid rgba(243, 210, 142, 0.22);
+}
+
+.proof-journey-card__head strong,
+.proof-journey-card__result strong,
+.proof-journey-focus__item span {
+  display: block;
+}
+
+.proof-journey-card__head strong {
+  font-size: 1.04rem;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.96);
+}
+
+.proof-journey-card__head small {
+  display: block;
+  margin-top: 0.32rem;
+  color: rgba(255, 237, 202, 0.74);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+}
+
+.proof-journey-card__copy > p,
+.proof-journey-focus__item p {
+  margin: 0;
+  color: rgba(228, 233, 245, 0.72);
+  line-height: 1.8;
+  font-size: 0.96rem;
+}
+
+.proof-journey-card__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.proof-journey-card__chips span,
+.proof-journey-focus__item {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.proof-journey-card__chips span {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.42rem 0.72rem;
+  border-radius: 999px;
+  color: rgba(245, 247, 255, 0.86);
+  font-size: 0.82rem;
+}
+
+.proof-journey-card__result {
+  padding: 0.9rem 1rem;
+  border-radius: 20px;
+  border: 1px solid rgba(243, 210, 142, 0.16);
+  background: linear-gradient(180deg, rgba(243, 210, 142, 0.08), rgba(255, 255, 255, 0.03));
+}
+
+.proof-journey-card__result span {
+  display: block;
+  margin-bottom: 0.3rem;
+  color: rgba(255, 232, 190, 0.72);
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+}
+
+.proof-journey-card__result strong {
+  color: rgba(255, 255, 255, 0.94);
+  line-height: 1.55;
+  font-size: 0.98rem;
+}
+
+.proof-journey-focus {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.9rem;
+  margin-top: 1rem;
+}
+
+.proof-journey-focus__item {
+  padding: 1rem 1.05rem;
+  border-radius: 22px;
+}
+
+.proof-journey-focus__item span {
+  margin-bottom: 0.45rem;
+  color: rgba(255, 245, 218, 0.92);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.proof-journey-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.9rem;
+  margin-top: 1.4rem;
+}
+
+@media (max-width: 1180px) {
+  .proof-journey-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .proof-journey-focus {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 820px) {
+  .proof-journey-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .proof-journey-grid,
+  .proof-journey-focus,
+  .proof-journey-actions {
+    width: min(100%, calc(100% - 32px));
+  }
+
+  .proof-journey-card {
+    padding: 0.9rem;
+    border-radius: 24px;
+  }
+
+  .proof-journey-card__visual {
+    aspect-ratio: 4 / 3;
+  }
+
+  .proof-journey-actions .brand-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
