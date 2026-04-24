@@ -8,6 +8,7 @@
     "build": "tsc -b && vite build && node ./scripts/prerender.mjs",
     "audit:v1": "node ./scripts/audit-v1.mjs",
     "audit:perf": "node ./scripts/audit-performance.mjs",
+    "audit:ops": "node ./scripts/audit-operational-flow.mjs",
     "audit:site": "node ./scripts/audit-site-quality.mjs",
     "capture:home": "node ./scripts/capture-home.mjs",
     "capture:motion": "node ./scripts/record-home-motion.mjs",

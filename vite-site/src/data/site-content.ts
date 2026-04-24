@@ -183,7 +183,7 @@ export const releasesUrl =
   'https://github.com/fujitatsukasa/YukkuriMatomeProcessor/releases'
 export const tagsUrl = 'https://github.com/fujitatsukasa/YukkuriMatomeProcessor/tags'
 export const changeLogUrl =
-  'https://github.com/fujitatsukasa/YukkuriMatomeProcessor/blob/main/CHANGELOG.md'
+  'https://github.com/fujitatsukasa/YukkuriMatomeProcessor/releases'
 
 export const faqGroups: FaqGroup[] = [
   {

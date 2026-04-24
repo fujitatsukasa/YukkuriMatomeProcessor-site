@@ -86,6 +86,9 @@ export function PageMeta({
 }: PageMetaProps) {
   const canonical = `${siteOrigin}${normalizePath(path)}`
   const pageTitle = title.includes(siteTitle) ? title : `${title} | ${siteTitle}`
+  const baseDescription = description?.trim() || siteDescription
+  const metaDescription =
+    baseDescription.length >= 50 ? baseDescription : `${baseDescription} ${siteDescription}`
   const robots = noindex ? 'noindex,nofollow' : 'index,follow'
   const metaImage = resolveMetaImage(image)
   const structuredDataList = structuredData
@@ -97,7 +100,7 @@ export function PageMeta({
   return (
     <Helmet>
       <title>{pageTitle}</title>
-      <meta name="description" content={description || siteDescription} />
+      <meta name="description" content={metaDescription} />
       <meta name="application-name" content={siteTitle} />
       <meta name="robots" content={robots} />
       {keywords ? <meta name="keywords" content={keywords} /> : null}
@@ -105,13 +108,13 @@ export function PageMeta({
       <meta property="og:site_name" content={siteTitle} />
       <meta property="og:locale" content="ja_JP" />
       <meta property="og:title" content={pageTitle} />
-      <meta property="og:description" content={description || siteDescription} />
+      <meta property="og:description" content={metaDescription} />
       <meta property="og:type" content={type} />
       <meta property="og:url" content={canonical} />
       <meta property="og:image" content={metaImage} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={pageTitle} />
-      <meta name="twitter:description" content={description || siteDescription} />
+      <meta name="twitter:description" content={metaDescription} />
       <meta name="twitter:image" content={metaImage} />
       {publishedTime ? <meta property="article:published_time" content={publishedTime} /> : null}
       {structuredDataList.map((entry, index) => (

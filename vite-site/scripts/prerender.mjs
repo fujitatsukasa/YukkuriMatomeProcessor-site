@@ -29,15 +29,19 @@ async function prerender() {
   console.log(`[PRERENDER] Found ${routes.length} routes to prerender from sitemap.`);
 
   console.log('[PRERENDER] Starting dedicated SPA HTTP server...');
+  const spaShellHtml = readFileSync(join(distDir, 'index.html'), 'utf-8');
   
   // 確実なSPAフォールバックを実現する最低限のHTTPサーバー
   const server = http.createServer((req, res) => {
-    let filePath = join(distDir, req.url === '/' ? 'index.html' : req.url);
-    const ext = extname(filePath);
+    const requestUrl = new URL(req.url || '/', 'http://127.0.0.1');
+    let filePath = join(distDir, requestUrl.pathname);
+    const ext = extname(requestUrl.pathname);
     
     // パスに拡張子がない、またはファイルが存在しない場合は index.html を返す
-    if (!ext || !existsSync(filePath) || statSync(filePath).isDirectory()) {
-      filePath = join(distDir, 'index.html');
+    if (!ext) {
+      res.writeHead(200, { 'Content-Type': 'text/html' });
+      res.end(spaShellHtml, 'utf-8');
+      return;
     }
 
     const mimeTypes = {
@@ -49,6 +53,8 @@ async function prerender() {
       '.jpeg': 'image/jpeg',
       '.svg':  'image/svg+xml',
       '.json': 'application/json',
+      '.ico':  'image/x-icon',
+      '.webp': 'image/webp',
       '.mp4':  'video/mp4',
       '.webm': 'video/webm'
     };
@@ -56,6 +62,12 @@ async function prerender() {
     const contentType = mimeTypes[extname(filePath)] || 'application/octet-stream';
     
     try {
+      if (!existsSync(filePath) || statSync(filePath).isDirectory()) {
+        res.writeHead(404);
+        res.end('Not found: ' + req.url);
+        return;
+      }
+
       const content = readFileSync(filePath);
       res.writeHead(200, { 'Content-Type': contentType });
       res.end(content, 'utf-8');
@@ -75,12 +87,12 @@ async function prerender() {
   console.log(`[PRERENDER] Internal SPA server running at ${baseUrl}`);
 
   const browser = await chromium.launch({ headless: true });
-  const page = await browser.newPage();
 
   for (const route of routes) {
     if (route.match(/\.\w+$/)) continue; 
     
     console.log(`[PRERENDER] Prerendering route: ${route}`);
+    const page = await browser.newPage();
     try {
       // Lazy route and meta updates can settle after load; wait for network quiet.
       await page.goto(`${baseUrl}${route}`, { waitUntil: 'networkidle' });
@@ -105,6 +117,8 @@ async function prerender() {
       console.log(`[PRERENDER] Saved: ${outPath}`);
     } catch(err) {
       console.error(`[PRERENDER] Failed to prerender ${route}:`, err.message);
+    } finally {
+      await page.close();
     }
   }
 
