@@ -106,7 +106,7 @@ const downloadScenes: readonly GuideScene[] = [
     eyebrow: 'STEP 01',
     title: 'YMM4 パスと保存先を先に固定する',
     body: '最初に設定を終えることで、後の台本取得や出力で迷う回数を減らします。YouTube 分析を使うなら API キーもここで揃えます。',
-    image: '/product_guide.png',
+    image: '/product_guide.webp',
     alt: '内蔵ガイドと設定確認のイメージ',
     checkpoint: '起動直後に固定する設定が揃う',
     points: ['YMM4 実行ファイルの絶対パスを登録', 'CSV や素材の保存先フォルダを決める', '必要に応じて API キーを設定する'],
@@ -117,7 +117,7 @@ const downloadScenes: readonly GuideScene[] = [
     eyebrow: 'STEP 02',
     title: '対応サイトから記事とスレッドを取得する',
     body: 'まずは少ない件数で、記事取得 -> 候補選択 -> 台本化の流れを一度通して、導入相性を確認します。',
-    image: '/product_get_script.png',
+    image: '/product_get_script.webp',
     alt: '対応サイトから記事候補を取得する画面',
     checkpoint: 'URL から台本取得までの入口が通る',
     points: ['対象URLを入力して候補を一覧化', '少数件で最初の手順を固定', '取得候補を比較して動画化する題材を絞る'],
@@ -128,7 +128,7 @@ const downloadScenes: readonly GuideScene[] = [
     eyebrow: 'STEP 03',
     title: '台本整形と AI 補助の使いどころを掴む',
     body: '取得した台本をそのまま流さず、改行補助、感情分析、役割整理で「使える下書き」に寄せる流れを確認します。',
-    image: '/product_edit_script.png',
+    image: '/product_edit_script.webp',
     alt: '台本整形と編集の画面',
     checkpoint: 'AI 補助をどこで入れるか判断できる',
     points: ['不要行や見出しを整理する', '感情分析と改行補助を必要箇所だけ使う', 'テンプレート化しやすい粒度まで整える'],
@@ -139,7 +139,7 @@ const downloadScenes: readonly GuideScene[] = [
     eyebrow: 'STEP 04',
     title: 'YMM4 前準備まで一続きで確認する',
     body: 'CSV、キャラ設定、立ち絵パス変更など、編集前に揃えるべきものをここで整理しておくと、後工程の手戻りを減らせます。',
-    image: '/product_keyword_material.png',
+    image: '/product_keyword_material.webp',
     alt: 'YMM4 前準備と素材整理の画面',
     checkpoint: '編集に入る前の準備が揃う',
     points: ['CSV 出力と保存先を確認', 'キャラ設定や立ち絵パスの整合を確認', 'YMM4 に渡す前の最終チェックを固定する'],
@@ -153,7 +153,7 @@ const instructionScenes: readonly GuideScene[] = [
     eyebrow: 'STAGE 01',
     title: '初期設定を最初に終える',
     body: 'YMM4 パス、保存先、YouTube 分析の前提を先に揃えると、後の手順が一本化しやすくなります。',
-    image: '/product_guide.png',
+    image: '/product_guide.webp',
     alt: '初期設定とガイドの画面',
     checkpoint: '設定由来の詰まりを最小化する',
     points: ['YMM4 パスを登録', '保存先フォルダを固定', '分析を使うなら API キーも準備'],
@@ -164,7 +164,7 @@ const instructionScenes: readonly GuideScene[] = [
     eyebrow: 'STAGE 02',
     title: 'ネタ取得から台本化までを通す',
     body: '対象サイトやスレッド URL を入力し、候補を選んで台本化します。まずは少数件で流れを固定すると安定します。',
-    image: '/product_get_script.png',
+    image: '/product_get_script.webp',
     alt: '記事取得と候補選択の画面',
     checkpoint: 'ネタ取得の最短導線を掴む',
     points: ['候補一覧から動画化する題材を選ぶ', '台本取得と整形を一続きで回す', '必要に応じて AI 補助へ繋げる'],
@@ -175,7 +175,7 @@ const instructionScenes: readonly GuideScene[] = [
     eyebrow: 'STAGE 03',
     title: 'テンプレート運用へ戻せる形にする',
     body: '単発の一本で終わらせず、`.ymmp` や CSV と一緒に次の型へ戻すことで、継続投稿の再現性が上がります。',
-    image: '/product_format_list.png',
+    image: '/product_format_list.webp',
     alt: 'テンプレートとフォーマット管理の画面',
     checkpoint: '型を増やす前提で運用できる',
     points: ['`.ymmp` からフォーマット追加', '役割や感情の型を揃える', '次の動画にも使い回せる粒度に整える'],
@@ -186,7 +186,7 @@ const instructionScenes: readonly GuideScene[] = [
     eyebrow: 'STAGE 04',
     title: 'YMM4 へ受け渡す前に最終確認する',
     body: 'CSV、キャラ設定、立ち絵パス、読み方監査までを前工程で確認してから渡すと、編集工程が軽くなります。',
-    image: '/product_keyword_material.png',
+    image: '/product_keyword_material.webp',
     alt: '素材整理とYMM4前準備の画面',
     checkpoint: '後工程の修正コストを減らす',
     points: ['CSV と保存先の整合を確認', 'キャラ設定や素材パスを最終確認', '気になる読み方を先に監査する'],
@@ -313,7 +313,7 @@ export function DownloadPage() {
             <InteractiveCard className="page-visual-card premium-glass">
               <img
                 className="page-visual-card__image"
-                src="/generated/template-ops-studio-v1.png"
+                src="/generated/template-ops-studio-v1.webp"
                 alt="テンプレート運用、台本作成、YMM4前準備までをまとめたスタジオビジュアル"
               />
               <div className="page-visual-card__meta">
@@ -409,7 +409,7 @@ export function InstructionsPage() {
             <InteractiveCard className="page-visual-card premium-glass">
               <img
                 className="page-visual-card__image"
-                src="/product_guide.png"
+                src="/product_guide.webp"
                 alt="内蔵ガイドと初期設定の画面"
               />
               <div className="page-visual-card__meta">

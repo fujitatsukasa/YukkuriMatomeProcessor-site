@@ -3,7 +3,7 @@ title: "スマホでゆっくり動画を作る方法とPC移行の判断基準"
 date: "2026-03-22"
 description: "スマホだけでゆっくり動画を作る方法と、YMM4やPC環境へ移るべきタイミングを、作業量と運用面から整理します。"
 author: "動画制作サポートチーム"
-image: "/blog_thumb_smartphone_v16.png"
+image: "/blog_thumb_smartphone_v1.webp"
 tags: ["スマホ制作", "YMM4", "動画運用"]
 ---
 

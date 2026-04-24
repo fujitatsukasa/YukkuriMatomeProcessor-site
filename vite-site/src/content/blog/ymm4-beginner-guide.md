@@ -3,7 +3,7 @@ title: "YMM4の始め方 初期設定と最初に整える項目"
 date: "2026-03-27"
 description: "YMM4をこれから使う人向けに、インストールから初期設定、立ち絵・音声・前工程の整え方までをまとめた入門ガイドです。"
 author: "動画制作サポートチーム"
-image: "/blog_thumb_ymm4_v16.png"
+image: "/blog_thumb_ymm4_v1.webp"
 tags: ["YMM4", "初期設定", "ゆっくり解説"]
 ---
 

@@ -266,7 +266,7 @@ export const newsPosts: NewsPost[] = [
     summary:
       '最新版ダウンロード手順の更新内容をお知らせします。導入時の確認項目も合わせて見直し、迷わず開始できる構成に整えています。',
     seoDescription: '最新版ダウンロード手順の更新内容をお知らせします。',
-    seoImage: '/product_guide.png',
+    seoImage: '/product_guide.webp',
     heroImageAlt: 'ダウンロード手順更新のお知らせイメージ',
     body: [
       '最新版のダウンロード手順を更新しました。',
@@ -281,7 +281,7 @@ export const newsPosts: NewsPost[] = [
     subtitle: '導入前後の疑問をカテゴリで整理し、サポート導線を強化しました。',
     summary: 'FAQページ追加に関するお知らせです。サポート情報への導線を強化しました。',
     seoDescription: 'FAQページ追加に関するお知らせです。サポート情報への導線を強化しました。',
-    seoImage: '/product_get_script.png',
+    seoImage: '/product_get_script.webp',
     heroImageAlt: 'FAQ更新のお知らせイメージ',
     body: [
       '導入前後の疑問を整理し、FAQページを更新しました。',
@@ -298,7 +298,7 @@ export const newsPosts: NewsPost[] = [
       'デザインと情報導線の刷新に加え、台本取得・整形・YMM4連携準備など製品機能の説明を明確化しました。',
     seoDescription:
       'デザインと情報導線の刷新に加え、台本取得・整形・YMM4連携準備など製品機能の説明を明確化しました。',
-    seoImage: '/generated/template-ops-studio-v1.png',
+    seoImage: '/generated/template-ops-studio-v1.webp',
     heroImageAlt: 'サイトリニューアルのお知らせイメージ',
     body: [
       'サイトのデザインと情報導線を見直し、必要情報へ到達しやすい構成に改善しました。',

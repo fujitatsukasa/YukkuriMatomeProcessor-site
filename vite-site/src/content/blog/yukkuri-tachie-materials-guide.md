@@ -3,7 +3,7 @@ title: "ゆっくり解説の立ち絵素材の探し方とYMM4設定"
 date: "2026-03-26"
 description: "ゆっくり解説で使う立ち絵素材の探し方、利用規約の見方、YMM4での追加手順をまとめます。"
 author: "動画制作サポートチーム"
-image: "/blog_thumb_material_v16.png"
+image: "/blog_thumb_material_v1.webp"
 tags: ["素材準備", "YMM4", "ゆっくり解説"]
 ---
 

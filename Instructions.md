@@ -1,7 +1,6 @@
 # Development Instructions
 
-このリポジトリの公開サイト本体は `vite-site/` です。
-既定のローカルプレビューも Jekyll ではなく Vite を起動します。
+公開サイト本体は `vite-site/` です。現在のサイトバージョンは **V1** です。
 
 ## Local Preview
 
@@ -27,13 +26,9 @@ npm run build
 npm run preview
 ```
 
-## Troubleshooting
-
-- `npm was not found`: Node.js をインストールし、PATH を通して再起動
-- `node_modules was not found`: `cd vite-site && npm install` を実行
-- ポート競合: 既存の Vite プロセスを停止して再起動
-
 ## Notes
 
-- `serve_local.cmd` は互換用の名前を維持していますが、中身は Vite ランチャーです
-- TechTouch の研究ページは `serve_techtouch_lab.py` / `serve_techtouch_lab.cmd` で別起動です
+- V1の主要CSSは `vite-site/src/site-v1.css` です。
+- 旧デザインの `react-site.css` は使用しません。
+- `serve_local.cmd` は互換用の名前を維持していますが、中身は Vite ランチャーです。
+- GUI/F5 既定は変更しません。

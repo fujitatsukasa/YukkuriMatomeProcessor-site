@@ -3,7 +3,7 @@ title: "ゆっくり解説動画の作り方 YMM4と前工程の整え方"
 date: "2026-03-31"
 description: "ゆっくり解説や反応集をYMM4で作るときに必要な、台本作成、素材準備、テンプレート運用の流れを整理します。"
 author: "動画制作サポートチーム"
-image: "/blog_thumb_automation_v16.png"
+image: "/blog_thumb_automation_v1.webp"
 tags: ["ゆっくり解説", "YMM4", "テンプレート運用"]
 ---
 

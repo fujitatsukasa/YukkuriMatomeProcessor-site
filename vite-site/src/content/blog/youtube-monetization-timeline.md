@@ -3,7 +3,7 @@ title: "ゆっくり解説の収益化までの目安と投稿体制の整え方
 date: "2026-03-25"
 description: "ゆっくり解説チャンネルの収益化までの目安と、継続投稿のために必要な制作体制の考え方を整理します。"
 author: "動画制作サポートチーム"
-image: "/blog_thumb_monetization_v16.png"
+image: "/blog_thumb_monetization_v1.webp"
 tags: ["YouTube運用", "ゆっくり解説", "動画運用"]
 ---
 

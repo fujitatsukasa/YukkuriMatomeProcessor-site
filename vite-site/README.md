@@ -1,12 +1,10 @@
 # Vite React Site
 
-`vite-site/` は、このリポジトリの公開サイト本体です。
-ローカル既定プレビュー `Serve: GUI (Default)` / `Serve: No GUI` はこの Vite アプリを起動します。
+`vite-site/` は公開サイト本体です。現在のサイトバージョンは **V1** です。
 
 ## 使い方
 
 ```bash
-cd vite-site
 npm install
 npm run dev
 ```
@@ -18,22 +16,16 @@ npm run build
 npm run preview
 ```
 
-## 含めている導線
+## V1構成
 
-- `/`
-- `/download/`
-- `/instructions/`
-- `/faq/`
-- `/purchase/`
-- `/contact/`
-- `/news/`
-- `/update/`
-- `/legal/*`
-- `/account/`
-- `/billing/*`
+- Entry: `src/main.tsx`
+- Routes: `src/App.tsx`
+- Global CSS: `src/index.css`
+- V1 CSS: `src/site-v1.css`
+- Public assets: `public/`
 
-## 実装方針
+## 方針
 
-- GitHub Pages を前提に `404.html` リダイレクト、`CNAME`、`sitemap.xml`、`robots.txt` を同梱
-- お知らせ記事、法務情報、FAQ、CTA 導線を React 側へ移植
-- スクロール reveal、カード tilt、ヒーローのマウス追従で既存LPより動きを強化
+- 初期表示は軽量優先です。
+- ヒーロー背景は自動再生動画ではなく静止WebPを使います。
+- ブログサムネイル、製品スクリーンショット、キャラクター画像はV1用WebPへ整理しています。

@@ -67,7 +67,7 @@ export function BlogPost() {
   const post = useMemo(() => getBlogPostBySlug(slug || ''), [slug])
   const meta = post?.meta
   const content = post?.content ?? ''
-  const articleVisual = meta ? resolveBlogVisual(meta) : '/generated/template-ops-studio-v1.png'
+  const articleVisual = meta ? resolveBlogVisual(meta) : '/generated/template-ops-studio-v1.webp'
   const readingMinutes = useMemo(() => estimateReadMinutes(content), [content])
   const headings = useMemo(() => extractHeadings(content), [content])
   const articlePoints = useMemo(

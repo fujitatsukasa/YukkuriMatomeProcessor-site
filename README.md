@@ -1,7 +1,7 @@
 # Yukkuri Matome Processor Site
 
-このリポジトリの公開サイト本体は `vite-site/` の `Vite + React` 実装です。
-既定のローカルプレビューも Jekyll ではなく Vite 側を起動します。
+このリポジトリの公開サイト本体は `vite-site/` の Vite + React 実装です。
+現在のサイトバージョンは **V1** として定義しています。
 
 ## Local Preview
 
@@ -10,29 +10,30 @@
 - CLI: `serve_local.cmd --no-gui --open`
 - Dedicated research mirror: `TechTouch Lab: GUI`
 
-初回のみ `vite-site/` で依存関係を入れてください。
+初回のみ依存関係を入れます。
 
 ```bash
 cd vite-site
 npm install
 ```
 
-その後は VSCode の起動定義か、直接 Vite を使って確認できます。
+通常の確認は Vite を使います。
 
 ```bash
 cd vite-site
 npm run dev
 ```
 
-## Active Site
+## Active Site V1
 
 - Main app: `vite-site/`
-- Public routes: home, download, instructions, FAQ, purchase, contact, news, update
+- Main stylesheet: `vite-site/src/site-v1.css`
+- Public routes: home, download, instructions, FAQ, purchase, contact, news, update, blog
 - Support routes: legal pages, article pages, `404.html`, `/account/`, `/billing/*`
 - Deployment assets: `vite-site/public/`
 
-## Repository Status
+## Repository Policy
 
-- Jekyll 実行系と旧公開ページは削除済みです
-- ローカル preview と今後の実装対象は `vite-site/` に一本化しています
-- 実験用の別系統は `TechTouch Lab` を維持しています
+- 旧デザイン検証ファイル、旧生成スクリプト、未使用の大型動画素材は削除済みです。
+- 現行V1で使う画像はWebPを基本にし、ファーストビューでは動画を自動再生しません。
+- ローカルプレビューの既定は `Serve: GUI (Default)` のまま維持します。

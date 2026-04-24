@@ -3,7 +3,7 @@ title: "ゆっくり動画の著作権と音声ライセンスの基本"
 date: "2026-03-23"
 description: "ゆっくり動画で確認すべき著作権、音声ライセンス、引用ルールを初心者向けに整理します。"
 author: "動画制作サポートチーム"
-image: "/blog_thumb_copyright_v16.png"
+image: "/blog_thumb_copyright_v1.webp"
 tags: ["著作権", "ゆっくり解説", "動画運用"]
 ---
 

@@ -2,7 +2,7 @@
 @import url("../../assets/css/brand-system.css");
 @import url("../../assets/css/brand-pages.css");
 @import url("../../assets/css/rich-interactions.css");
-@import url("./react-site.css");
+@import url("./site-v1.css");
 
 :root {
   color-scheme: dark;
@@ -29,7 +29,7 @@ body {
 /* Global Premium Typography Overrides */
 h1, h2, h3, h4, h5, h6, .brand-text-display, .home-compact-section-head h2 {
   font-family: var(--font-base);
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 .animated-number, .chart-dashboard__stat-box span, .chart-dashboard__row-saved, .pricing-compact-tier-price, .pricing-compact-feature-val {

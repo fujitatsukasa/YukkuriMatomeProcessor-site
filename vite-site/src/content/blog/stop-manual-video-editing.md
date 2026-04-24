@@ -3,7 +3,7 @@ title: "動画編集副業がきつくなる理由と前工程を軽くする方
 date: "2026-03-28"
 description: "動画編集副業が続かなくなる原因を整理し、素材準備や台本整理の負荷を下げる考え方を解説します。"
 author: "動画制作サポートチーム"
-image: "/blog_thumb_stop_manual_v16.png"
+image: "/blog_thumb_stop_manual_v1.webp"
 tags: ["動画運用", "台本作成", "テンプレート運用"]
 ---
 

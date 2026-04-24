@@ -27,18 +27,18 @@ export function resolveBlogVisual(meta: Pick<BlogPostMeta, 'image' | 'tags'>) {
   const tags = new Set(meta.tags ?? [])
 
   if (tags.has('素材準備')) {
-    return '/product_keyword_material.png'
+    return '/product_keyword_material.webp'
   }
 
   if (tags.has('反応集') || tags.has('台本作成')) {
-    return '/product_get_script.png'
+    return '/product_get_script.webp'
   }
 
   if (tags.has('YMM4') || tags.has('初期設定')) {
-    return '/product_guide.png'
+    return '/product_guide.webp'
   }
 
-  return '/generated/template-ops-studio-v1.png'
+  return '/generated/template-ops-studio-v1.webp'
 }
 
 // Viteの機能を使って .md ファイルをすべて文字列(raw)として取得

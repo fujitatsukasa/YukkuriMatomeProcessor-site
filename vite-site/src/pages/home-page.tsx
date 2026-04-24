@@ -45,8 +45,8 @@ const presentationSlides = [
     desc: 'あにまん、5ch、ふたばなどの対応元から、動画化したい話題を回収。記事取得から台本反映まで、前工程を途中で切らずに進められます。',
     proof: '20以上の対応サイト・掲示板からネタ収集',
     highlights: ['記事取得から台本反映まで続けやすい', 'スレッドベースで候補比較しやすい', 'ネタ探しのコピペ作業を圧縮'],
-    images: ['/product_get_script.png'],
-    charImage: '/nodoka/step1.png',
+    images: ['/product_get_script.webp'],
+    charImage: '/nodoka/step1.webp',
     Icon: FileSearch,
   },
   {
@@ -55,8 +55,8 @@ const presentationSlides = [
     desc: 'このソフトの中心は、単発の台本取得ではなくテンプレート運用です。動画ごとの構成、字幕、立ち絵、演出の型を増やしながら、継続投稿向けの運用を作れます。',
     proof: '動画の型を増やして継続投稿しやすい',
     highlights: ['`.ymmp` からフォーマット追加', '既存テンプレートを流用して横展開', '反応集・ショート・解説・独自フォーマットへ寄せやすい'],
-    images: ['/product_format_list.png'],
-    charImage: '/nodoka/編集.png',
+    images: ['/product_format_list.webp'],
+    charImage: '/nodoka/編集.webp',
     Icon: Settings2,
   },
   {
@@ -65,8 +65,8 @@ const presentationSlides = [
     desc: '生成後の台本は、本文を見ながらその場で整形。役割テンプレや感情指定も合わせて触れるので、別画面を往復せずに会話の流れを詰められます。',
     proof: '本文・感情・配役を崩さず同時に詰める',
     highlights: ['不要な文を即削除・差し替え', '役割テンプレで掛け合いを揃えやすい', '感情ボードを見ながらテンポ調整'],
-    images: ['/product_edit_script.png', '/product_board_emotion.png'],
-    charImage: '/nodoka/サブウインドウ.png',
+    images: ['/product_edit_script.webp', '/product_board_emotion.webp'],
+    charImage: '/nodoka/サブウインドウ.webp',
     Icon: PencilLine,
   },
   {
@@ -75,8 +75,8 @@ const presentationSlides = [
     desc: '集めたネタをそのまま流すのではなく、13キャラ対応のAI台本生成で会話形式へ再構築。役割テンプレ、性格プリセット、補助タグ調整で語り口を揃えられます。',
     proof: '13キャラ対応のAI台本生成',
     highlights: ['ゆっくり霊夢から紲星あかりまで対応', '役割テンプレと性格プリセット', '補助タグで掛け合いの温度感を調整'],
-    images: ['/product_ai_script.png'],
-    charImage: '/nodoka/AI.png',
+    images: ['/product_ai_script.webp'],
+    charImage: '/nodoka/AI.webp',
     Icon: Bot,
   },
   {
@@ -85,8 +85,8 @@ const presentationSlides = [
     desc: 'YMM4に入ってから詰まりやすい準備を前工程へ寄せています。CSVからのプロジェクト作成、キャラクター集保存、立ち絵パス一括変更、読み方監査までまとめて処理できます。',
     proof: 'YMM4に入る前の面倒を前工程で片付ける',
     highlights: ['CSVからプロジェクト作成', 'YMM4キャラクター集の保存', '立ち絵パス一括変更と読み方監査'],
-    images: ['/product_keyword_material.png', '/product_board_emotion.png'],
-    charImage: '/nodoka/サブウインドウ.png',
+    images: ['/product_keyword_material.webp', '/product_board_emotion.webp'],
+    charImage: '/nodoka/サブウインドウ.webp',
     Icon: Send,
   },
   {
@@ -95,8 +95,8 @@ const presentationSlides = [
     desc: 'YouTube分析は、動画化するテーマを勘だけで決めないための導線です。検索条件や除外フィルタ、コメント取得、履歴比較、差分レポートまで一画面で追えます。',
     proof: '検索条件・履歴比較・差分レポートまで整理',
     highlights: ['URL一括入力と詳細取得に対応', 'コメント取得で反応の質を確認', 'CSV / TSV / JSON 出力とクォータ管理'],
-    images: ['/product_youtube_info.png'],
-    charImage: '/nodoka/step3.png',
+    images: ['/product_youtube_info.webp'],
+    charImage: '/nodoka/step3.webp',
     Icon: TrendingUp,
   },
   {
@@ -105,8 +105,8 @@ const presentationSlides = [
     desc: 'どの画面からでも呼び出せる詳細ガイドを内蔵。インストールだけでなく、テンプレート運用やYMM4連携で迷いがちなポイントを制作途中で確認できます。',
     proof: '初見導入でも流れを見失いにくい',
     highlights: ['画面ごとに必要な説明へ飛べる', '問い合わせ前に自己解決しやすい', '継続運用時の手順も見返しやすい'],
-    images: ['/product_guide.png'],
-    charImage: '/nodoka/ガイド.png',
+    images: ['/product_guide.webp'],
+    charImage: '/nodoka/ガイド.webp',
     Icon: BookOpen,
   },
 ] as const
@@ -140,7 +140,7 @@ const useCasesData = [
     metric: '記事取得 → 台本化 → YMM4前準備まで一本化',
     highlights: ['複数スレッドをまとめて比較', '不要レスを除外して会話用に整形', '反応集の定番工程をテンプレート化しやすい'],
     result: '反応集の下書きから編集準備までを継続投稿向けに回しやすい',
-    image: '/product_get_script.png',
+    image: '/product_get_script.webp',
     Icon: Users,
     gradient: 'linear-gradient(135deg, rgba(74, 222, 128, 0.15), rgba(34, 197, 94, 0.05))',
     borderColor: 'rgba(74, 222, 128, 0.3)',
@@ -153,7 +153,7 @@ const useCasesData = [
     metric: '役割テンプレと感情指定で話し方を揃える',
     highlights: ['聞き役と解説役の役割を分離', '13キャラ対応のAI台本へ繋げやすい', 'YMM4前の調整を先に終えやすい'],
     result: '構成と掛け合いの再現性を上げて、編集前の迷いを削減',
-    image: '/product_board_emotion.png',
+    image: '/product_board_emotion.webp',
     Icon: MessageSquare,
     gradient: 'linear-gradient(135deg, rgba(96, 165, 250, 0.15), rgba(59, 130, 246, 0.05))',
     borderColor: 'rgba(96, 165, 250, 0.3)',
@@ -166,7 +166,7 @@ const useCasesData = [
     metric: '短い構成をテンプレートとして再利用',
     highlights: ['短尺向けの導入と展開を整えやすい', '縦型向けテンポで台本化しやすい', 'ショート用テンプレートを量産導線へ組み込みやすい'],
     result: '短尺の投稿本数を増やしつつ、構成のブレを抑えやすい',
-    image: '/product_ai_script.png',
+    image: '/product_ai_script.webp',
     Icon: Smartphone,
     gradient: 'linear-gradient(135deg, rgba(244, 114, 182, 0.15), rgba(236, 72, 153, 0.05))',
     borderColor: 'rgba(244, 114, 182, 0.3)',
@@ -179,7 +179,7 @@ const useCasesData = [
     metric: '動画の型を増やして複数ラインに展開',
     highlights: ['`.ymmp` 由来の型を増やして運用', '担当者ごとの差を減らしやすい', '外注頼みの前工程を内製へ寄せやすい'],
     result: 'テンプレート運用で継続投稿の再現性を高める',
-    image: '/product_format_list.png',
+    image: '/product_format_list.webp',
     Icon: Monitor,
     gradient: 'linear-gradient(135deg, rgba(255, 215, 112, 0.15), rgba(224, 193, 132, 0.05))',
     borderColor: 'rgba(255, 215, 112, 0.3)',
@@ -347,7 +347,7 @@ const heroShowcaseScenes = [
     title: '対応サイト / スレッドから素材を集める',
     body: '反応集や解説の前工程で、ネタ探しと台本の下地づくりを一箇所へ寄せます。',
     caption: '対応サイト 20+ / スレッド処理',
-    image: '/product_get_script.png',
+    image: '/product_get_script.webp',
     Icon: FileSearch,
   },
   {
@@ -355,7 +355,7 @@ const heroShowcaseScenes = [
     title: 'AI台本と役割テンプレで会話を整える',
     body: '13キャラ対応のAI台本、役割テンプレ、性格プリセットで会話の型を作りやすくしています。',
     caption: '13キャラAI / 役割テンプレ',
-    image: '/product_ai_script.png',
+    image: '/product_ai_script.webp',
     Icon: Bot,
   },
   {
@@ -363,7 +363,7 @@ const heroShowcaseScenes = [
     title: '編集前に文章整形と読みやすさを揃える',
     body: '文章整形、感情分析、テロップ改行補助を前工程で済ませて、YMM4へ入る前の手戻りを減らします。',
     caption: '文章整形 / 改行補助 / 感情分析',
-    image: '/product_edit_script.png',
+    image: '/product_edit_script.webp',
     Icon: PencilLine,
   },
 ] as const
@@ -383,7 +383,7 @@ const outcomeStories = [
     title: '最初の1本を、前工程ごと一本の導線で組み立てやすい',
     body: '反応集や 5ch まとめで、ネタ収集からテンプレ整理、タイトルの叩き台、YMM4 前準備までを一本の制作線として見せます。',
     source: useCasesData[0],
-    artifact: '/blog_thumb_2ch_v16.png',
+    artifact: '/blog_thumb_2ch_v1.webp',
     artifactLabel: 'FINISH IMAGE',
     artifactTitle: '反応集のサムネと見せ方の叩き台まで、一画面で判断',
     artifactBody: '台本取得だけで終わらせず、タイトル案や見せ方の叩き台まで同じ判断線に乗せます。',
@@ -404,7 +404,7 @@ const outcomeStories = [
     title: '掛け合いと場面転換まで、一本の画面で整理しやすい',
     body: '感情、改行、話者、役割テンプレの軸を一箇所で整えることで、解説やショートでも使い回せる掛け合いの下地を作りやすくします。',
     source: useCasesData[1],
-    artifact: '/blog_thumb_script_v16.png',
+    artifact: '/blog_thumb_script_v1.webp',
     artifactLabel: 'STORY SAMPLE',
     artifactTitle: '解説動画の画面密度と掛け合いの型を同時に揃える',
     artifactBody: '誰が喋るか、どこで感情を切り替えるか、どの場面で字幕を折るかを前工程で揃えます。',
@@ -425,7 +425,7 @@ const outcomeStories = [
     title: '`.ymmp` と CSV で、次のテンプレートへ増やしやすい',
     body: 'このソフトで本当に強いのは、単発の一本より、テンプレと YMM4 前準備の型を増やしながら継続投稿へ繋げられることです。',
     source: useCasesData[3],
-    artifact: '/blog_thumb_automation_v16.png',
+    artifact: '/blog_thumb_automation_v1.webp',
     artifactLabel: 'FORMAT EXPANSION',
     artifactTitle: '運用の型を増やして、次の量産導線のみに集中できる',
     artifactBody: '単発の一本で終わらせず、`.ymmp` や CSV を積み上げて次の型へ横展開しやすくします。',
@@ -447,7 +447,7 @@ const beforeAfterProofCards = [
     title: '取得前の材料を、候補のまま一気に集める',
     body: '対応サイトやスレッドごとに散っているネタをまとめて拾い、どこから台本化を始めるかをひと目で決められる状態にします。',
     result: 'URL・候補・ベース台本の土台がそろう',
-    image: '/product_get_script.png',
+    image: '/product_get_script.webp',
     audience: '反応集 / 5ch / まとめ向け',
     chips: ['対応サイト 20+', 'スレッド取得', '候補を一覧化'],
     Icon: FileSearch,
@@ -457,7 +457,7 @@ const beforeAfterProofCards = [
     title: '整形後は、読みやすい台本ベースまで持っていく',
     body: 'AI補助、テンプレート、感情や話者の整理を使って、読み上げ用に崩れにくい本文へ寄せます。ここで人が最終判断しやすくなります。',
     result: 'そのまま調整できる台本ベースが残る',
-    image: '/product_edit_script.png',
+    image: '/product_edit_script.webp',
     audience: '解説 / ショート / 口調調整向け',
     chips: ['AI台本補助', 'テンプレ適用', '感情・話者整理'],
     Icon: PencilLine,
@@ -467,7 +467,7 @@ const beforeAfterProofCards = [
     title: 'YMM4に入れる直前までを前工程で整える',
     body: '`.ymmp` 生成、CSV出力、キャラ設定や立ち絵パス変更までを前もって処理し、編集開始時点の散らかりを減らします。',
     result: 'YMM4前準備がそろった状態で次工程へ渡せる',
-    image: '/product_format_list.png',
+    image: '/product_format_list.webp',
     audience: '継続運用 / テンプレ量産向け',
     chips: ['`.ymmp` 出力', 'CSV / YMM4前準備', '立ち絵パス変更'],
     Icon: Send,
@@ -587,7 +587,7 @@ const operationStageCards = [
       'Free で導入相性と初回の流れを確認しやすい',
       '文章整形 / 感情分析 / 改行補助も前工程で触れる',
     ],
-    image: '/product_get_script.png',
+    image: '/product_get_script.webp',
     Icon: FileSearch,
   },
   {
@@ -599,7 +599,7 @@ const operationStageCards = [
       'YMM4 キャラ設定保存 / 立ち絵パス一括変更まで前工程に寄せる',
       '反応集、5chまとめ、ショート、解説へテンプレートで広げやすい',
     ],
-    image: '/product_format_list.png',
+    image: '/product_format_list.webp',
     Icon: Settings2,
   },
   {
@@ -611,7 +611,7 @@ const operationStageCards = [
       'CSV / TSV / JSON 出力で手元の分析や整理にも回しやすい',
       'タイトル案 / サムネ文案と組み合わせて次の企画精度を上げる',
     ],
-    image: '/product_youtube_info.png',
+    image: '/product_youtube_info.webp',
     Icon: TrendingUp,
   },
 ] as const
@@ -696,6 +696,13 @@ const faqItems: FAQItem[] = faqCategories.flatMap(c => c.items)
 const homeMetaDescription =
   'テンプレート運用を軸に、対応サイト取得、台本作成、AI補助、YMM4前準備、YouTube分析までまとめて進められる動画制作支援ツール。'
 
+const homePreviewImage = `${siteOrigin}/product_get_script.webp`
+const homePreviewScreenshots = [
+  `${siteOrigin}/product_get_script.webp`,
+  `${siteOrigin}/product_format_list.webp`,
+  `${siteOrigin}/product_ai_script.webp`,
+]
+
 const homeStructuredData = [
   {
     '@context': 'https://schema.org',
@@ -733,8 +740,8 @@ const homeStructuredData = [
     description: homeMetaDescription,
     url: siteOrigin,
     downloadUrl,
-    image: media.productImage2,
-    screenshot: [media.productImage2, media.settingsShot, media.productImage1],
+    image: homePreviewImage,
+    screenshot: homePreviewScreenshots,
     offers: {
       '@type': 'Offer',
       price: legal.pricing.unitPrice,
@@ -1032,7 +1039,7 @@ export function HomePage() {
         title={`${siteTitle} | ${siteSubtitle}`}
         description="テンプレート運用を軸に、対応サイト取得、台本整理、AI補助、YMM4前準備、YouTube分析までを一続きで進められるWindows向け動画制作支援ツール。"
         keywords="YMM4,テンプレート運用,ゆっくり解説,反応集,ショート動画,動画制作支援"
-        image={media.productImage2}
+        image={homePreviewImage}
         path="/"
         structuredData={homeStructuredData}
       />
@@ -1118,19 +1125,17 @@ export function HomePage() {
           }}
         />
         <section className="home-compact-hero homepage-hero">
-          <video
-            className="home-compact-hero__video-bg"
-            src={media.heroSaasBg}
-            poster={media.heroPoster}
-            autoPlay
-            loop
-            muted
-            playsInline
+          <img
+            className="home-compact-hero__media-bg"
+            src={media.heroPoster}
+            alt=""
+            fetchPriority="high"
+            decoding="async"
             aria-hidden="true"
           />
 
-          {/* Dark overlay to mask SAAS watermark in video */}
-          <div className="hero-video-overlay" aria-hidden="true" />
+          {/* Dark overlay for the static hero media */}
+          <div className="hero-media-overlay" aria-hidden="true" />
 
           {/* Refined ambient background */}
           <div className="hero-ambient-vortex">
@@ -1182,7 +1187,7 @@ export function HomePage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.65 }}
-              className="brand-inline-actions home-compact-hero__actions home-v3-hero__actions hero-cta-row"
+              className="brand-inline-actions home-compact-hero__actions home-v1-hero__actions hero-cta-row"
             >
               <Link
                 className="brand-btn brand-btn--primary hero-cta-primary"
@@ -1398,7 +1403,7 @@ export function HomePage() {
                   <div className="home-flow-stage__guide">
                     <div className="home-flow-stage__guide-avatar">
                       <img
-                        src={activePresentationSlide.charImage || '/nodoka/通常.png'}
+                        src={activePresentationSlide.charImage || '/nodoka/通常.webp'}
                         alt={`STEP ${activeSlide + 1}: ${activePresentationSlide.label}を案内するガイドキャラクターのどか`}
                       />
                     </div>
@@ -1925,7 +1930,7 @@ export function HomePage() {
               transition={{ duration: 0.6, ease: 'easeOut' }}
             >
               <img
-                src="/generated/template-ops-studio-v1.png"
+                src="/generated/template-ops-studio-v1.webp"
                 alt="テンプレート運用、AI補助、YMM4前準備、分析を一つのワークフローへまとめたプレミアムなスタジオビジュアル"
                 loading="lazy"
                 decoding="async"
@@ -1984,7 +1989,7 @@ export function HomePage() {
               <div className="workflow-proof-board__mini">
                 <div className="workflow-proof-board__mini-screen">
                   <img
-                    src="/product_format_list.png"
+                    src="/product_format_list.webp"
                     alt=".ymmp からフォーマット追加を行う実画面"
                     loading="lazy"
                     decoding="async"
@@ -2046,15 +2051,15 @@ export function HomePage() {
             })}
           </div>
 
-          <div className="home-v3-proof" style={{ position: 'relative', zIndex: 1, width: 'min(1180px, calc(100% - 48px))', margin: '0 auto' }}>
+          <div className="home-v1-proof" style={{ position: 'relative', zIndex: 1, width: 'min(1180px, calc(100% - 48px))', margin: '0 auto' }}>
             <motion.div
-              className="home-v3-before-after"
+              className="home-v1-before-after"
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-10%' }}
               transition={{ duration: 0.6, ease: 'easeOut' }}
             >
-              <div className="home-v3-before-after__column home-v3-before-after__column--accent home-internal-proof__column">
+              <div className="home-v1-before-after__column home-v1-before-after__column--accent home-internal-proof__column">
                 <span>{operationBoundary.automated.eyebrow}</span>
                 <strong className="home-internal-proof__column-title">{operationBoundary.automated.title}</strong>
                 <p className="home-internal-proof__column-caption">{operationBoundary.automated.body}</p>
@@ -2065,11 +2070,11 @@ export function HomePage() {
                 </ul>
               </div>
 
-              <div className="home-v3-before-after__divider" aria-hidden="true">
+              <div className="home-v1-before-after__divider" aria-hidden="true">
                 <span>→</span>
               </div>
 
-              <div className="home-v3-before-after__column home-internal-proof__column">
+              <div className="home-v1-before-after__column home-internal-proof__column">
                 <span>{operationBoundary.human.eyebrow}</span>
                 <strong className="home-internal-proof__column-title">{operationBoundary.human.title}</strong>
                 <p className="home-internal-proof__column-caption">{operationBoundary.human.body}</p>
@@ -2082,7 +2087,7 @@ export function HomePage() {
             </motion.div>
 
             <motion.div
-              className="home-v3-proof__notes"
+              className="home-v1-proof__notes"
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-10%' }}
@@ -2091,7 +2096,7 @@ export function HomePage() {
               {operationStageCards.map((card, index) => (
                 <motion.article
                   key={card.title}
-                  className={`home-v3-proof-card home-internal-proof-card${index === activeOperationStage ? ' is-active' : ''}`}
+                  className={`home-v1-proof-card home-internal-proof-card${index === activeOperationStage ? ' is-active' : ''}`}
                   animate={index === activeOperationStage ? { y: -8, scale: 1.01 } : { y: 0, scale: 1 }}
                   transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                 >
@@ -2186,7 +2191,7 @@ export function HomePage() {
               <div className="testimonials-proof-grid">
                 <div className="testimonials-proof-visual">
                   <img
-                    src="/product_format_list.png"
+                    src="/product_format_list.webp"
                     alt="テンプレート一覧とフォーマット管理の実画面"
                     loading="lazy"
                     decoding="async"
@@ -2346,7 +2351,7 @@ export function HomePage() {
               transition={{ duration: 0.6, ease: 'easeOut' }}
             >
               <img
-                src="/generated/pricing-plan-visual-v1.png"
+                src="/generated/pricing-plan-visual-v1.webp"
                 alt="3つのプラン階層をイメージしたダークトーンのプレミアムな比較ビジュアル"
                 loading="lazy"
                 decoding="async"

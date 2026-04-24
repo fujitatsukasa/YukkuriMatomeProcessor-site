@@ -3,7 +3,7 @@ title: "2ch/5ch反応集動画の作り方 スレ選びと編集準備の流れ"
 date: "2026-03-30"
 description: "2ch / 5ch 反応集動画を作るときのスレ選定、権利確認、台本準備、YMM4前工程の整え方を順番に解説します。"
 author: "動画制作サポートチーム"
-image: "/blog_thumb_2ch_v16.png"
+image: "/blog_thumb_2ch_v1.webp"
 tags: ["反応集", "YMM4", "台本作成"]
 ---
 

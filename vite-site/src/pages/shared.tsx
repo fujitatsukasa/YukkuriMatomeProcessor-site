@@ -10,7 +10,7 @@ const productViews = [
     label: 'ネタ取得',
     title: '記事やスレを一覧で自動ストック',
     body: '複数サイトから保存した候補を比較して、動画に使うネタを効率的に絞り込みます。',
-    image: '/product_get_script.png',
+    image: '/product_get_script.webp',
     alt: '台本取得・ネタ一覧画面',
   },
   {
@@ -18,7 +18,7 @@ const productViews = [
     label: 'AI台本生成',
     title: 'ノイズを除去し、自動で掛け合い形式に',
     body: '集めたネタから不要な部分を削り、AIが自然な会話台本へと一気に再構築します。',
-    image: '/product_ai_script.png',
+    image: '/product_ai_script.webp',
     alt: 'AI機能付き台本作成画面',
   },
   {
@@ -26,7 +26,7 @@ const productViews = [
     label: '台本・感情編集',
     title: 'ボード機能で会話の流れと表情を調整',
     body: '配役の指定や感情（表情）の割り当てを、テキストと一緒に直感的に編集できます。',
-    image: '/product_board_emotion.png',
+    image: '/product_board_emotion.webp',
     alt: '会話台本と感情設定を確認する画面',
   },
   {
@@ -34,7 +34,7 @@ const productViews = [
     label: '素材・出力',
     title: 'YMM4へそのまま読み込める形式で',
     body: 'キーワードや立ち絵の素材を整理し、YMM4へ直結するフォーマットで即出力します。',
-    image: '/product_keyword_material.png',
+    image: '/product_keyword_material.webp',
     alt: '素材・出力設定画面',
   },
 ] as const
