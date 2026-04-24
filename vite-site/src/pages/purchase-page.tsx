@@ -76,6 +76,34 @@ const planDecisionGuide = [
   },
 ] as const
 
+const purchaseReassuranceItems = [
+  {
+    label: '支払い',
+    title: '国内決済とStripe Checkout',
+    body: '購入と支払い方法更新はアプリ内の導線から行えます。標準導線はクレジットカード決済です。',
+  },
+  {
+    label: '解約',
+    title: 'アプリ内から契約管理',
+    body: 'Standard / Pro は Customer Portal から解約予約できます。期間終了までは利用でき、終了後に Free へ戻ります。',
+  },
+  {
+    label: '商用利用',
+    title: '継続投稿の前工程に利用可能',
+    body: '利用規約と各素材・音声ライセンスの範囲を守ったうえで、制作フローの前工程に組み込めます。',
+  },
+  {
+    label: 'サポート',
+    title: legal.support.firstResponseSla,
+    body: `問い合わせ窓口は ${legal.organization.email} です。導入、契約、支払い、運用相談を用途別に確認できます。`,
+  },
+  {
+    label: '返金',
+    title: '返金条件を事前に確認',
+    body: '返金・キャンセルポリシー、特定商取引法表記、利用規約を購入前に確認できる構成にしています。',
+  },
+] as const
+
 export function PurchasePage() {
   const legalContactNote = `販売事業者: ${legal.organization.sellerName} / 連絡先: ${legal.organization.email}`
 
@@ -147,6 +175,30 @@ export function PurchasePage() {
 
         <Section id="pricing-cards">
           <PricingCards />
+        </Section>
+
+        <Section alt className="pricing-reassurance-section">
+          <div className="subpage-section-head pricing-reassurance__head">
+            <p>BEFORE PURCHASE</p>
+            <h2>購入前の不安を、価格表の直後で片付ける</h2>
+          </div>
+
+          <div className="pricing-reassurance-grid" aria-label="購入前の確認事項">
+            {purchaseReassuranceItems.map((item) => (
+              <article key={item.label} className="pricing-reassurance-card">
+                <span>{item.label}</span>
+                <strong>{item.title}</strong>
+                <p>{item.body}</p>
+              </article>
+            ))}
+          </div>
+
+          <div className="pricing-reassurance-links">
+            <Link to="/legal/terms/">利用規約</Link>
+            <Link to="/legal/refund-policy/">返金・キャンセル</Link>
+            <Link to="/legal/commercial-transactions/">特定商取引法表記</Link>
+            <Link to="/contact/">問い合わせ</Link>
+          </div>
         </Section>
 
         <Section alt>

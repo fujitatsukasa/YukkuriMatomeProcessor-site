@@ -1164,7 +1164,6 @@ export function HomePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             >
-              <span className="hero-title-mobile-prefix">対応サイト取得、台本整理、AI 補助、YMM4 前準備まで</span>
               <span className="hero-title-lead">動画制作の前工程を</span>
               <br />
               <span className="text-glow-gold hero-title-focus">ひとつの運用線</span>
@@ -1178,9 +1177,24 @@ export function HomePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.45 }}
             >
-              対応サイト取得、台本整理、AI 補助、`.ymmp` / CSV 整理までを <strong className="text-glow-gold" style={{ fontWeight: 700 }}>ひとつの運用線</strong> に集約。
-              <span className="hero-subtitle-v2__sub">単発の取得ツールではなく、継続投稿を崩れにくくする前工程の制作基盤です。</span>
+              対応サイト取得、台本整理、AI補助、`.ymmp` / CSV整理までを一本化。
+              <span className="hero-subtitle-v2__sub">無料で導入相性を確認し、必要になった工程だけ有料プランで広げられます。</span>
             </motion.p>
+
+            <div className="hero-value-strip" aria-label="ファーストビューの要点">
+              <article>
+                <span>できること</span>
+                <strong>素材取得からYMM4前準備まで</strong>
+              </article>
+              <article>
+                <span>無料で試す</span>
+                <strong>導入相性と基本動作を確認</strong>
+              </article>
+              <article>
+                <span>有料で増える</span>
+                <strong>AI補助、分析、個別運用</strong>
+              </article>
+            </div>
 
             {/* CTA ボタン */}
             <motion.div

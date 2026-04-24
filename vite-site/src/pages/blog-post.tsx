@@ -2,7 +2,7 @@ import { Children, isValidElement, type ComponentPropsWithoutRef, type ReactNode
 import { Navigate, Link, useParams } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import { ArrowLeft, ArrowRight, Calendar, Clock3, FileText, User } from 'lucide-react'
+import { ArrowLeft, ArrowRight, BookOpen, Calendar, Clock3, Download, FileText, HelpCircle, User } from 'lucide-react'
 import { InteractiveCard, PageMeta, Section } from '@/components/ui'
 import { getAllBlogPosts, getBlogPostBySlug, resolveBlogVisual } from '@/lib/blog'
 import { siteTitle } from '@/data/site-content'
@@ -315,6 +315,31 @@ export function BlogPost() {
                 {content}
               </ReactMarkdown>
             </article>
+
+            <InteractiveCard className="release-panel premium-glass blog-conversion-panel">
+              <div>
+                <span className="subpage-card__eyebrow">NEXT ACTION</span>
+                <h2>読んだ内容を、無料プランで実際の制作フローに戻す</h2>
+                <p>
+                  記事で確認した考え方を、対応サイト取得、台本整理、YMM4前準備の画面で試せます。
+                  まずは無料プランで導入相性を確認してください。
+                </p>
+              </div>
+              <div className="blog-conversion-panel__actions">
+                <Link className="brand-btn brand-btn--primary" to="/download/">
+                  <Download size={18} />
+                  無料プランを試す
+                </Link>
+                <Link className="brand-btn brand-btn--ghost" to="/instructions/">
+                  <BookOpen size={18} />
+                  使い方を見る
+                </Link>
+                <Link className="brand-btn brand-btn--ghost" to="/faq/">
+                  <HelpCircle size={18} />
+                  FAQを見る
+                </Link>
+              </div>
+            </InteractiveCard>
           </div>
         </section>
 
