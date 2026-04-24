@@ -1,5 +1,3 @@
-import frontMatter from 'front-matter';
-
 export interface BlogPostMeta {
   title: string;
   date: string;
@@ -17,6 +15,48 @@ export interface BlogPost {
 
 type FrontMatterAttributes = Partial<Omit<BlogPostMeta, 'slug'>> & {
   tags?: string[]
+}
+
+function parseFrontMatterValue(value: string) {
+  const trimmed = value.trim()
+
+  if (trimmed.startsWith('"') || trimmed.startsWith('[')) {
+    try {
+      return JSON.parse(trimmed) as unknown
+    } catch {
+      return trimmed.replace(/^["']|["']$/g, '')
+    }
+  }
+
+  return trimmed.replace(/^["']|["']$/g, '')
+}
+
+function parseFrontMatter(source: string) {
+  const match = source.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?/)
+
+  if (!match) {
+    return {
+      attributes: {} as FrontMatterAttributes,
+      body: source,
+    }
+  }
+
+  const attributes: Record<string, unknown> = {}
+  for (const line of match[1].split(/\r?\n/)) {
+    const separatorIndex = line.indexOf(':')
+    if (separatorIndex === -1) {
+      continue
+    }
+
+    const key = line.slice(0, separatorIndex).trim()
+    const value = line.slice(separatorIndex + 1)
+    attributes[key] = parseFrontMatterValue(value)
+  }
+
+  return {
+    attributes: attributes as FrontMatterAttributes,
+    body: source.slice(match[0].length),
+  }
 }
 
 export function resolveBlogVisual(meta: Pick<BlogPostMeta, 'image' | 'tags'>) {
@@ -52,8 +92,8 @@ export const getAllBlogPosts = (): BlogPost[] => {
     const slug = path.split('/').pop()?.replace('.md', '') || '';
     const fileContent = markdownFiles[path];
     
-    // front-matterでメタデータと本文を分離
-    const parsed = frontMatter<FrontMatterAttributes>(fileContent);
+    // Markdown冒頭のメタ情報と本文を分離
+    const parsed = parseFrontMatter(fileContent);
     
     posts.push({
       meta: {

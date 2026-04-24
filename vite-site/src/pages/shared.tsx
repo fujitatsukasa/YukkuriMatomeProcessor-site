@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { InteractiveCard, PageMeta } from '@/components/ui'
 import { legal, type NewsPost } from '@/data/site-content'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence } from '@/lib/light-motion'
 
 const productViews = [
   {
@@ -62,31 +62,16 @@ export function ProductDemoTabs({ className = '', compact = false }: ProductDemo
   }
 
   return (
-    <div className={`product-demo${compact ? ' product-demo--compact' : ''}${className ? ` ${className}` : ''}`} style={{ position: 'relative', zIndex: 1, overflow: 'hidden' }}>
+    <div className={`product-demo product-demo--layer${compact ? ' product-demo--compact' : ''}${className ? ` ${className}` : ''}`}>
       {/* Background Image inside Product Demo */}
-      <div 
-        style={{
-          position: 'absolute',
-          inset: 0,
-          backgroundImage: "url('/bg_abstract_2.webp')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          opacity: 0.35,
-          zIndex: 0,
-          pointerEvents: 'none',
-          mixBlendMode: 'screen',
-          maskImage: 'radial-gradient(ellipse at center, black 20%, transparent 80%)',
-          WebkitMaskImage: 'radial-gradient(ellipse at center, black 20%, transparent 80%)'
-        }}
-        aria-hidden="true"
-      />
+      <div className="product-demo__backdrop" aria-hidden="true" />
 
-      <div className="product-demo__topline" style={{ position: 'relative', zIndex: 1 }}>
+      <div className="product-demo__topline">
         <span>実画面で確認</span>
         <strong>ネタ収集からYMM4準備まで</strong>
       </div>
 
-      <div className="product-demo__tabs" role="tablist" aria-label="実画面タブ" style={{ position: 'relative', zIndex: 1 }}>
+      <div className="product-demo__tabs" role="tablist" aria-label="実画面タブ">
         {productViews.map((item) => (
           <button
             key={item.key}
@@ -95,28 +80,20 @@ export function ProductDemoTabs({ className = '', compact = false }: ProductDemo
             aria-selected={item.key === activeKey}
             className={`product-demo__tab${item.key === activeKey ? ' is-active' : ''}`}
             onClick={() => handleTabClick(item.key)}
-            style={{ position: 'relative' }}
           >
             {item.key === activeKey && (
               <motion.div
                 layoutId="demoTabIndicator"
                 transition={{ type: 'spring', stiffness: 350, damping: 30 }}
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  borderRadius: 'inherit',
-                  border: '1px solid rgba(255,255,255,0.2)',
-                  background: 'rgba(255,255,255,0.05)',
-                  zIndex: 0
-                }}
+                className="product-demo__tab-indicator"
               />
             )}
-            <span style={{ position: 'relative', zIndex: 1 }}>{item.label}</span>
+            <span className="product-demo__tab-label">{item.label}</span>
           </button>
         ))}
       </div>
 
-      <div className="product-demo__panel-container" style={{ position: 'relative', display: 'grid', zIndex: 1, width: '100%' }}>
+      <div className="product-demo__panel-container">
         <AnimatePresence mode="wait" initial={false}>
           <motion.div 
             key={activeView.key}
@@ -140,7 +117,7 @@ export function ProductDemoTabs({ className = '', compact = false }: ProductDemo
         </AnimatePresence>
       </div>
 
-      <ul className="product-demo__flow" aria-label="制作フロー" style={{ position: 'relative', zIndex: 1 }}>
+      <ul className="product-demo__flow" aria-label="制作フロー">
         {productFlow.map((item) => (
           <li key={item}>{item}</li>
         ))}

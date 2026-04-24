@@ -1,6 +1,5 @@
 import { InteractiveCard, PageIntro, PageMeta, Section } from '@/components/ui'
 import { legal } from '@/data/site-content'
-import { media } from '@/data/assets'
 import { LegalLinksBlock } from '@/pages/shared'
 
 export function TermsPage() {
@@ -10,7 +9,6 @@ export function TermsPage() {
         title="利用規約"
         description="ゆっくりまとめプロセッサーの利用条件、禁止事項、免責、準拠法・管轄を定める利用規約です。"
         keywords="利用規約, サービス利用条件, 免責, 準拠法"
-        image={media.hallway}
         path="/legal/terms/"
       />
 
@@ -57,7 +55,6 @@ export function PrivacyPolicyPage() {
         title="プライバシーポリシー"
         description="ゆっくりまとめプロセッサーにおける個人情報の取得、利用、第三者提供、管理方法を掲載しています。"
         keywords="プライバシーポリシー, 個人情報保護, Cookie, 解析ツール"
-        image={media.workstationDark}
         path="/legal/privacy/"
       />
 
@@ -115,7 +112,6 @@ export function RefundPolicyPage() {
         title="返金・キャンセルポリシー"
         description="デジタル商品の返金、キャンセル、解約に関する条件と申請手順を掲載しています。"
         keywords="返金ポリシー, キャンセル, 解約, デジタル商品"
-        image={media.colorGrade}
         path="/legal/refund-policy/"
       />
 
@@ -166,7 +162,6 @@ export function CommercialTransactionsPage() {
         title="特定商取引法に基づく表記"
         description="ゆっくりまとめプロセッサーの販売事業者情報、価格、支払時期、提供時期、返金条件を掲載しています。"
         keywords="特定商取引法, 通信販売, 事業者情報, 返金条件"
-        image={media.lobby1}
         path="/legal/commercial-transactions/"
       />
 

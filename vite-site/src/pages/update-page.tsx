@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { InteractiveCard, PageMeta, Section } from '@/components/ui'
-import { media } from '@/data/assets'
 import { changeLogUrl, downloadUrl, latestReleaseUrl, releasesUrl, tagsUrl } from '@/data/site-content'
 
 interface Release {
@@ -77,7 +76,6 @@ export function UpdatePage() {
         title="アップデート履歴"
         description="最新版の1クリックダウンロード、リリースノート、過去バージョン一覧の確認先をまとめたページです。"
         keywords="アップデート, リリースノート, 変更履歴, ダウンロード"
-        image={media.abstractGold}
         path="/update/"
       />
 

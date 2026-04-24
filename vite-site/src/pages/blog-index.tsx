@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion } from '@/lib/light-motion'
 import { ArrowRight, Calendar, Clock, Tag as TagIcon } from 'lucide-react'
 import { InteractiveCard, PageMeta, Section } from '@/components/ui'
 import { siteTitle } from '@/data/site-content'

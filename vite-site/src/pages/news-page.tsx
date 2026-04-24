@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import { InteractiveCard, PageMeta, Section } from '@/components/ui'
-import { media } from '@/data/assets'
 import { newsPosts } from '@/data/site-content'
 import { NewsTimelineCard } from '@/pages/shared'
 
@@ -15,7 +14,6 @@ export function NewsPage() {
         title="お知らせ"
         description="台本取得・整形・YMM4連携準備など、ゆっくりまとめプロセッサー本体の機能更新と運用告知を確認できます。"
         keywords="お知らせ, 更新情報, リリース, サポート"
-        image={media.goldBokeh}
         path="/news/"
       />
 

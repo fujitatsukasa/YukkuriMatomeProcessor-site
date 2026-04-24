@@ -1,7 +1,7 @@
 # Yukkuri Matome Processor Site
 
 このリポジトリの公開サイト本体は `vite-site/` の Vite + React 実装です。
-現在のサイトバージョンは **V1.1** として定義しています。
+現在のサイトバージョンは **V1.2** として定義しています。
 
 ## Local Preview
 
@@ -24,7 +24,7 @@ cd vite-site
 npm run dev
 ```
 
-## Active Site V1.1
+## Active Site V1.2
 
 - Main app: `vite-site/`
 - Main stylesheet: `vite-site/src/site-v1.css`
@@ -32,14 +32,15 @@ npm run dev
 - Support routes: legal pages, article pages, `404.html`, `/account/`, `/billing/*`
 - Deployment assets: `vite-site/public/`
 
-## V1.1 Quality Line
+## V1.2 Quality Line
 
 - 虹色発光はCTAや選択状態のシグナルとして維持します。
 - 常時動く装飾、追従カーソル、ファーストビュー動画は使いません。
 - `npm run audit:v1` で配信アセットのサイズと動画混入を確認します。
+- `npm run audit:perf` で実ブラウザの読み込み指標とスクロールFPSを確認します。
 
 ## Repository Policy
 
 - 旧デザイン検証ファイル、旧生成スクリプト、未使用の大型動画素材は削除済みです。
-- 現行V1.1で使う画像はWebPを基本にし、ファーストビューでは動画を自動再生しません。
+- 現行V1.2で使う画像はWebPを基本にし、ファーストビューでは動画を自動再生しません。
 - ローカルプレビューの既定は `Serve: GUI (Default)` のまま維持します。

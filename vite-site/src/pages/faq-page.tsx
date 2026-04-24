@@ -1,7 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { InteractiveCard, PageMeta, Section } from '@/components/ui'
-import { media } from '@/data/assets'
 import { faqGroups, supportChannels } from '@/data/site-content'
 
 const faqCategoryMeta: Record<
@@ -67,7 +66,6 @@ export function FaqPage() {
         title="FAQ"
         description="テンプレート運用、導入、台本取得、設定、トラブル、購入・契約のカテゴリごとに疑問を整理したFAQです。"
         keywords="FAQ, 質問, トラブルシューティング, サポート, 購入条件, テンプレート運用"
-        image={media.goldMetallic}
         path="/faq/"
       />
 

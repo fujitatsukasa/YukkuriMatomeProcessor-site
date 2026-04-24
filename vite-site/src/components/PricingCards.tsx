@@ -160,7 +160,7 @@ export function PricingCards() {
         ))}
       </div>
 
-      <div className="pricing-comparison-board" style={{ position: 'relative', zIndex: 1 }}>
+      <div className="pricing-comparison-board pricing-layer">
         <div className="pricing-comparison-board__head">
           <h3>プラン差分を一目で把握</h3>
           <p>
@@ -191,7 +191,7 @@ export function PricingCards() {
         </div>
       </div>
 
-      <div className="trust-badge-bar" style={{ position: 'relative', zIndex: 1 }}>
+      <div className="trust-badge-bar pricing-layer">
         <div className="trust-badge-bar__item">
           <ShieldCheck size={20} color="#4CAF50" />
           <span>SSL暗号化通信</span>

@@ -4,7 +4,7 @@ import { PricingCards } from '@/components/PricingCards'
 import { media } from '@/data/assets'
 import { changeLogUrl, downloadUrl, latestReleaseUrl, legal, newsPosts, siteOrigin, siteSubtitle, siteTitle } from '@/data/site-content'
 import React, { useEffect, useRef, useState } from 'react'
-import { motion, useInView as useMotionInView, AnimatePresence } from 'framer-motion'
+import { motion, useInView as useMotionInView, AnimatePresence } from '@/lib/light-motion'
 import { MessageSquare, Smartphone, Users, Download, CheckCircle2, TrendingUp, HelpCircle, Monitor, CreditCard, ArrowRight, Sparkles, Play, FileSearch, PencilLine, Bot, Settings2, Send, BookOpen, BadgeCheck } from 'lucide-react'
 import { trackEvent } from '@/lib/analytics'
 

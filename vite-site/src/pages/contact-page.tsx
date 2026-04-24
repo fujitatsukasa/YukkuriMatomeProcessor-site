@@ -1,5 +1,4 @@
 import { PageIntro, PageMeta, Section } from '@/components/ui'
-import { media } from '@/data/assets'
 import { legal, supportChannels } from '@/data/site-content'
 import { LegalLinksBlock } from '@/pages/shared'
 
@@ -10,7 +9,6 @@ export function ContactPage() {
         title="お問い合わせ"
         description="連絡手段、問い合わせ時に必要な情報、対応目安、法務情報をまとめたお問い合わせページです。"
         keywords="お問い合わせ, サポート, 導入相談, 不具合報告, 特商法"
-        image={media.workspaceComputer}
         path="/contact/"
       />
 

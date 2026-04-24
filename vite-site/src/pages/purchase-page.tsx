@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom'
 import { InteractiveCard, PageMeta, Section } from '@/components/ui'
 import { PricingCards } from '@/components/PricingCards'
 import { legal } from '@/data/site-content'
-import { media } from '@/data/assets'
 import { LegalLinksBlock } from '@/pages/shared'
 
 const planNarratives = [
@@ -62,7 +61,6 @@ export function PurchasePage() {
         title="料金プラン"
         description="Free、Standard、Pro の3つのプランを、初回導入、継続投稿、個別テンプレート運用の違いで比較できる料金ページです。"
         keywords="料金, プラン, サブスクリプション, 無料プラン, Standard, Pro, テンプレート運用"
-        image={media.officeLuxury}
         path="/purchase/"
       />
 

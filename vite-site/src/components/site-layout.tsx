@@ -252,7 +252,7 @@ export function SiteLayout() {
             </div>
           </nav>
 
-          <div className="header-actions brand-header__actions home-compact-cta__actions" style={{ margin: 0, padding: 0 }}>
+          <div className="header-actions brand-header__actions home-compact-cta__actions brand-header__actions--flush">
             <ActionLink action={secondaryCta} className="header-cta brand-btn" />
             <ActionLink action={customPrimaryCta} className="brand-btn" />
           </div>
@@ -276,7 +276,7 @@ export function SiteLayout() {
         ) : null}
         <Outlet />
         {showShareButtons ? (
-          <div style={{ maxWidth: 1000, margin: '0 auto', width: '100%', padding: '0 1.5rem' }}>
+          <div className="global-share-wrap">
             <GlobalShareButtons />
           </div>
         ) : null}

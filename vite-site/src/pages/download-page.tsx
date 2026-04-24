@@ -1,10 +1,9 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { InteractiveCard, PageIntro, PageMeta, Section } from '@/components/ui'
-import { media } from '@/data/assets'
 import { downloadUrl } from '@/data/site-content'
 import { MetricStrip } from '@/pages/shared'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion } from '@/lib/light-motion'
 import {
   ArrowRight,
   BadgeCheck,
@@ -292,7 +291,6 @@ export function DownloadPage() {
         title="ダウンロード"
         description="最新版ダウンロード、Windows / YMM4 の前提、初回導入で確認できる機能、サポートに渡すべき情報をまとめて確認できます。"
         keywords="ダウンロード, 初回導入, YMM4, テンプレート運用, 導入前チェック, ゆっくりまとめプロセッサー"
-        image={media.modernWorkspace}
         path="/download/"
       />
 
@@ -388,7 +386,6 @@ export function InstructionsPage() {
         title="使い方ガイド"
         description="初期設定、対応サイト取得、テンプレート運用、YMM4前準備、失敗時の対処をまとめた公式ガイドです。"
         keywords="使い方, 初期設定, テンプレート運用, YMM4, 台本取得, AI補助"
-        image={media.verticalMonitor}
         path="/instructions/"
       />
 

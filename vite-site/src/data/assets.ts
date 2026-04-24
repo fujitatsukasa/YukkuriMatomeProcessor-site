@@ -1,15 +1,8 @@
 export const media = {
   logoMark: new URL('../../../assets/showcase/aurora/logo-mark.svg', import.meta.url).href,
   heroPoster: new URL('../../../assets/showcase/aurora/hero-poster.webp', import.meta.url).href,
-  officeLuxury: new URL('../../../assets/showcase/premium/images/office-luxury-33342702.webp', import.meta.url).href,
-  modernWorkspace: new URL('../../../assets/showcase/premium/images/modern-workspace-10889348.webp', import.meta.url).href,
-  goldMetallic: new URL('../../../assets/showcase/premium/images/gold-metallic-35058966.webp', import.meta.url).href,
-  verticalMonitor: new URL('../../../assets/showcase/premium/images/vertical-monitor-15249470.webp', import.meta.url).href,
-  workspaceComputer: new URL('../../../assets/showcase/premium/images/workspace-computer-6044911.webp', import.meta.url).href,
-  goldBokeh: new URL('../../../assets/showcase/premium/images/gold-bokeh-29735307.webp', import.meta.url).href,
-  abstractGold: new URL('../../../assets/showcase/premium/images/abstract-gold-30715673.webp', import.meta.url).href,
-  lobby1: new URL('../../../assets/showcase/aurora/lobby-1.webp', import.meta.url).href,
-  workstationDark: new URL('../../../assets/showcase/aurora/workstation-dark.webp', import.meta.url).href,
-  hallway: new URL('../../../assets/showcase/aurora/hallway.webp', import.meta.url).href,
-  colorGrade: new URL('../../../assets/showcase/aurora/color-grade.webp', import.meta.url).href,
+}
+
+export const metaImages = {
+  default: '/og-image.png',
 }
