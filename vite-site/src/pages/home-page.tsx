@@ -1478,6 +1478,8 @@ export function HomePage() {
             <img
               src="/bg_speed_master.webp"
               alt=""
+              loading="lazy"
+              decoding="async"
               style={{
                 width: '100%', height: '100%', objectFit: 'cover',
                 opacity: 0.65, mixBlendMode: 'screen',
@@ -1619,6 +1621,8 @@ export function HomePage() {
             <img
               src="/bg_usecases_master.webp"
               alt=""
+              loading="lazy"
+              decoding="async"
               style={{
                 width: '100%', height: '100%', objectFit: 'cover',
                 opacity: 0.55, mixBlendMode: 'screen',
@@ -1851,6 +1855,8 @@ export function HomePage() {
             <img
               src="/bg_demo_master.webp"
               alt=""
+              loading="lazy"
+              decoding="async"
               style={{
                 width: '100%', height: '100%', objectFit: 'cover',
                 opacity: 0.55, mixBlendMode: 'screen',
@@ -2266,6 +2272,8 @@ export function HomePage() {
             <img
               src="/bg_pricing_master.webp"
               alt=""
+              loading="lazy"
+              decoding="async"
               style={{
                 width: '100%', height: '100%', objectFit: 'cover',
                 opacity: 0.65, mixBlendMode: 'screen',
@@ -2346,6 +2354,8 @@ export function HomePage() {
             <img
               src="/bg_faq_master.webp"
               alt=""
+              loading="lazy"
+              decoding="async"
               style={{
                 width: '100%', height: '100%', objectFit: 'cover',
                 opacity: 0.55, mixBlendMode: 'screen',
@@ -2479,6 +2489,8 @@ export function HomePage() {
             <img
               src="/bg_cta_master.webp"
               alt=""
+              loading="lazy"
+              decoding="async"
               style={{
                 width: '100%', height: '100%', objectFit: 'cover',
                 opacity: 0.7, mixBlendMode: 'screen',

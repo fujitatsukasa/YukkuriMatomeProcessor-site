@@ -265,7 +265,7 @@ const audit = async () => {
     }
 
     await writeFile(path.join(outputDir, 'perf-v1.json'), `${JSON.stringify(result, null, 2)}\n`)
-    console.log('[V1.3 performance audit]')
+    console.log('[V1.4 performance audit]')
     console.table(result.metrics)
     console.table(result.ratings)
 

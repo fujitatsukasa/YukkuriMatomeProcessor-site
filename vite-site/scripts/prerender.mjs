@@ -82,15 +82,19 @@ async function prerender() {
     
     console.log(`[PRERENDER] Prerendering route: ${route}`);
     try {
-      // 完全にロードされるまで待機（動画等へのnetworkidle待機を回避）
-      await page.goto(`${baseUrl}${route}`, { waitUntil: 'load' });
+      // Lazy route and meta updates can settle after load; wait for network quiet.
+      await page.goto(`${baseUrl}${route}`, { waitUntil: 'networkidle' });
       // アプリケーションがDOMにレンダリングされるまで待機(透明度0でもOK)
       await page.waitForSelector('#root > *', { state: 'attached', timeout: 5000 });
       // ヘルメットタグの注入と状態の安定化を待機
-      await page.waitForTimeout(1500); 
+      await page.waitForFunction(() => {
+        const html = document.documentElement.innerHTML;
+        return !html.includes('縺') && !html.includes('繧') && !html.includes('繝');
+      }, { timeout: 5000 }).catch(() => undefined);
+      await page.waitForTimeout(500);
 
-      let html = await page.content(); 
-      
+      let html = await page.content();
+
       let outPath = join(distDir, route, 'index.html');
       if (route === '/') {
           outPath = join(distDir, 'index.html');

@@ -83,6 +83,18 @@ const closeServer = () =>
     })
   })
 
+const warmPage = async (page) => {
+  await page.evaluate(async () => {
+    const step = Math.max(480, Math.floor(window.innerHeight * 0.8))
+    for (let y = 0; y <= document.documentElement.scrollHeight; y += step) {
+      window.scrollTo(0, y)
+      await new Promise((resolve) => window.requestAnimationFrame(resolve))
+    }
+    window.scrollTo(0, 0)
+  })
+  await page.waitForTimeout(350)
+}
+
 const capture = async () => {
   await listen()
 
@@ -90,9 +102,11 @@ const capture = async () => {
   const sectionShots = [
     ['.home-compact-hero', 'home-hero-desktop.png'],
     ['.home-compact-process-section', 'home-process-desktop.png'],
-    ['.home-compact-demo-section', 'home-demo-desktop.png'],
-    ['.home-compact-compare-section', 'home-compare-desktop.png'],
+    ['.home-compact-usecase-section', 'home-usecase-desktop.png'],
+    ['.home-compact-template-section', 'home-template-desktop.png'],
+    ['.home-compact-price-section', 'home-price-desktop.png'],
     ['.home-compact-closing-section', 'home-closing-desktop.png'],
+    ['.home-compact-cta-section', 'home-cta-desktop.png'],
   ]
 
   try {
@@ -101,6 +115,7 @@ const capture = async () => {
       deviceScaleFactor: 1,
     })
     await desktop.goto(`http://${host}:${port}/`, { waitUntil: 'networkidle' })
+    await warmPage(desktop)
     await desktop.screenshot({
       path: path.join(outputDir, 'home-desktop-chromium.png'),
       fullPage: false,
@@ -115,6 +130,7 @@ const capture = async () => {
         continue
       }
       await target.scrollIntoViewIfNeeded()
+      await desktop.evaluate(() => window.scrollBy(0, -140))
       await desktop.waitForTimeout(350)
       await target.screenshot({
         path: path.join(outputDir, filename),
@@ -130,6 +146,7 @@ const capture = async () => {
       deviceScaleFactor: 3,
     })
     await mobile.goto(`http://${host}:${port}/`, { waitUntil: 'networkidle' })
+    await warmPage(mobile)
     await mobile.screenshot({
       path: path.join(outputDir, 'home-mobile-chromium.png'),
       fullPage: false,

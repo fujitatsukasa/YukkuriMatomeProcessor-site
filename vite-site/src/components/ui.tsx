@@ -163,7 +163,7 @@ export function ActionLink({
   }
 
   return (
-    <Link className={classes} to={action.href} onClick={handleClick}>
+    <Link className={classes} to={action.href} discover="none" onClick={handleClick}>
       {action.label}
     </Link>
   )

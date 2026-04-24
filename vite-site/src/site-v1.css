@@ -5401,7 +5401,7 @@ html {
   line-height: 1.6;
 }
 .release-timeline__changes li::before {
-  content: '窶｢';
+  content: "\2022";
   position: absolute;
   left: 0;
   color: rgba(200, 170, 100, 0.5);
@@ -8908,7 +8908,7 @@ html {
   width: 100%;
 }
 
-/* V1.3: keep the premium direction while removing expensive paint paths during scroll. */
+/* V1.4: keep the premium direction while removing expensive paint paths during scroll. */
 .home-story-system,
 .home-story-banner,
 .hero-ambient-vortex,
@@ -8976,7 +8976,7 @@ html {
   contain-intrinsic-size: auto;
 }
 
-/* V1.3: reserve continuous motion for brand CTAs; keep scroll surfaces mostly static. */
+/* V1.4: reserve continuous motion for brand CTAs; keep scroll surfaces mostly static. */
 .brand-home .home-compact-section *,
 .brand-home .home-compact-section *::before,
 .brand-home .home-compact-section *::after {

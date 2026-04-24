@@ -73,7 +73,7 @@ if (videos.length > limits.videoCount) {
   failures.push('dist contains video assets')
 }
 
-console.log('[V1.3 audit]')
+console.log('[V1.4 audit]')
 console.table(result)
 
 if (failures.length) {

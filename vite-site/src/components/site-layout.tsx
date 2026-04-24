@@ -205,7 +205,7 @@ export function SiteLayout() {
             }
           }}
         >
-          <Link className="logo brand-logo" to="/" aria-label={`${siteTitle} ホーム`}>
+          <Link className="logo brand-logo" to="/" discover="none" aria-label={`${siteTitle} ホーム`}>
             <span className="logo-badge brand-logo__mark" aria-hidden="true">
               <img className="logo-mark" src={media.logoMark} alt="" />
             </span>
@@ -242,6 +242,7 @@ export function SiteLayout() {
                 className={item.key === activeKey ? 'is-active' : undefined}
                 aria-current={item.key === activeKey ? 'page' : undefined}
                 to={item.url}
+                discover="none"
               >
                 {item.label}
               </Link>
@@ -267,7 +268,7 @@ export function SiteLayout() {
                 const isLast = index === breadcrumbs.length - 1
                 return (
                   <li key={crumb.path}>
-                    {isLast ? <span>{crumb.label}</span> : <Link to={crumb.path}>{crumb.label}</Link>}
+                    {isLast ? <span>{crumb.label}</span> : <Link to={crumb.path} discover="none">{crumb.label}</Link>}
                   </li>
                 )
               })}
@@ -295,7 +296,7 @@ export function SiteLayout() {
               <ul>
                 {navItems.map((item) => (
                   <li key={item.key}>
-                    <Link to={item.url}>{item.label}</Link>
+                    <Link to={item.url} discover="none">{item.label}</Link>
                   </li>
                 ))}
               </ul>
@@ -325,7 +326,7 @@ export function SiteLayout() {
               <ul>
                 {legal.links.map((item) => (
                   <li key={item.url}>
-                    <Link to={item.url}>{item.label}</Link>
+                    <Link to={item.url} discover="none">{item.label}</Link>
                   </li>
                 ))}
               </ul>

@@ -1,6 +1,6 @@
 # Development Instructions
 
-公開サイト本体は `vite-site/` です。現在のサイトバージョンは **V1.3** です。
+公開サイト本体は `vite-site/` です。現在のサイトバージョンは **V1.4** です。
 
 ## Local Preview
 
@@ -25,12 +25,13 @@ npm run dev
 npm run build
 npm run audit:v1
 npm run audit:perf
+npm run audit:site
 npm run preview
 ```
 
 ## Notes
 
-- V1.3 の主要 CSS は `vite-site/src/site-v1.css` です。
+- V1.4 の主要 CSS は `vite-site/src/site-v1.css` です。
 - 旧デザインの `react-site.css` は使用しません。
 - 虹色発光は CTA と選択状態に残し、常時動く装飾は抑制します。
 - `serve_local.cmd` は互換用の名前を維持していますが、中身は Vite ランチャーです。

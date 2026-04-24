@@ -1,6 +1,6 @@
 # Vite React Site
 
-`vite-site/` は公開サイト本体です。現在のサイトバージョンは **V1.3** です。
+`vite-site/` は公開サイト本体です。現在のサイトバージョンは **V1.4** です。
 
 ## 使い方
 
@@ -15,10 +15,11 @@ npm run dev
 npm run build
 npm run audit:v1
 npm run audit:perf
+npm run audit:site
 npm run preview
 ```
 
-## V1.3 構成
+## V1.4 構成
 
 - Entry: `src/main.tsx`
 - Routes: `src/App.tsx`
