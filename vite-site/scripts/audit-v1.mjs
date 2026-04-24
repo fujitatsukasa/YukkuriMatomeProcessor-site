@@ -7,9 +7,11 @@ const distDir = path.join(rootDir, 'dist')
 const kib = 1024
 
 const limits = {
+  distAssetCount: 26,
   cssGzipHintKb: 40,
-  largestAssetKb: 550,
-  initialJsKb: 430,
+  largestAssetKb: 260,
+  initialJsKb: 90,
+  homeJsKb: 100,
   videoCount: 0,
 }
 
@@ -58,14 +60,20 @@ const failures = []
 if (largestAsset && kb(largestAsset.size) > limits.largestAssetKb) {
   failures.push(`largest asset exceeds ${limits.largestAssetKb}KB`)
 }
+if (assets.length > limits.distAssetCount) {
+  failures.push(`dist asset count exceeds ${limits.distAssetCount}`)
+}
 if (initialJs && kb(initialJs.size) > limits.initialJsKb) {
   failures.push(`initial JS exceeds ${limits.initialJsKb}KB`)
+}
+if (homeJs && kb(homeJs.size) > limits.homeJsKb) {
+  failures.push(`home JS exceeds ${limits.homeJsKb}KB`)
 }
 if (videos.length > limits.videoCount) {
   failures.push('dist contains video assets')
 }
 
-console.log('[V1.2 audit]')
+console.log('[V1.3 audit]')
 console.table(result)
 
 if (failures.length) {

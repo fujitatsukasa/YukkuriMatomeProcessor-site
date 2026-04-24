@@ -206,18 +206,19 @@ const createMotionComponent = (tag: ElementType) => {
       ...rest
     } = props
     const [node, setNode] = useState<HTMLElement | null>(null)
-    const [mounted, setMounted] = useState(initial === false)
+    const hasInitialTarget = initial !== undefined && initial !== false
+    const [mounted, setMounted] = useState(!hasInitialTarget)
     const shouldTrackInView = Boolean(whileInView)
     const inView = useLiteInView(node, viewport, shouldTrackInView)
 
     useEffect(() => {
-      if (initial === false) {
+      if (!hasInitialTarget) {
         return undefined
       }
 
       const frame = requestAnimationFrame(() => setMounted(true))
       return () => cancelAnimationFrame(frame)
-    }, [initial])
+    }, [hasInitialTarget])
 
     const resolvedTarget = useMemo(() => {
       if (shouldTrackInView) {
@@ -241,7 +242,7 @@ const createMotionComponent = (tag: ElementType) => {
       tag,
       {
         ...domProps,
-        ref: setNode,
+        ref: shouldTrackInView ? setNode : undefined,
         className,
         style: {
           ...style,

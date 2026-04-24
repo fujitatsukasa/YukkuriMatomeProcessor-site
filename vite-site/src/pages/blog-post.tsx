@@ -2,7 +2,6 @@ import { Children, isValidElement, type ComponentPropsWithoutRef, type ReactNode
 import { Navigate, Link, useParams } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import rehypeRaw from 'rehype-raw'
 import { ArrowLeft, ArrowRight, Calendar, Clock3, FileText, User } from 'lucide-react'
 import { InteractiveCard, PageMeta, Section } from '@/components/ui'
 import { getAllBlogPosts, getBlogPostBySlug, resolveBlogVisual } from '@/lib/blog'
@@ -312,7 +311,7 @@ export function BlogPost() {
             </InteractiveCard>
 
             <article className="markdown-body brand-article blog-article-prose">
-              <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={markdownComponents}>
+              <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
                 {content}
               </ReactMarkdown>
             </article>

@@ -8908,8 +8908,9 @@ html {
   width: 100%;
 }
 
-/* V1.2: keep the premium direction while removing expensive paint paths during scroll. */
+/* V1.3: keep the premium direction while removing expensive paint paths during scroll. */
 .home-story-system,
+.home-story-banner,
 .hero-ambient-vortex,
 .home-story-rail-wrap,
 .brand-home .floating-cta {
@@ -8973,4 +8974,30 @@ html {
 .brand-home .home-compact-hero {
   content-visibility: visible;
   contain-intrinsic-size: auto;
+}
+
+/* V1.3: reserve continuous motion for brand CTAs; keep scroll surfaces mostly static. */
+.brand-home .home-compact-section *,
+.brand-home .home-compact-section *::before,
+.brand-home .home-compact-section *::after {
+  animation: none !important;
+}
+
+.brand-home .home-compact-hero__actions .brand-btn--primary,
+.brand-home .home-compact-cta__actions .brand-btn--primary {
+  animation: v1-cta-gold-flow 8.8s cubic-bezier(0.4, 0, 0.2, 1) infinite !important;
+}
+
+.brand-home .home-compact-hero__actions .brand-btn--primary::before,
+.brand-home .home-compact-cta__actions .brand-btn--primary::before {
+  animation: v1-cta-rainbow-orbit 4.8s linear infinite !important;
+}
+
+.brand-home .home-compact-hero__actions .brand-btn--primary::after,
+.brand-home .home-compact-cta__actions .brand-btn--primary::after {
+  animation: v1-cta-gold-sheen 6.2s cubic-bezier(0.25, 0.1, 0.25, 1) infinite !important;
+}
+
+.brand-home .home-compact-section {
+  contain: layout paint style;
 }
