@@ -22,6 +22,7 @@ const contentTypes = new Map([
   ['.mp4', 'video/mp4'],
   ['.png', 'image/png'],
   ['.svg', 'image/svg+xml'],
+  ['.webp', 'image/webp'],
   ['.webm', 'video/webm'],
   ['.xml', 'application/xml; charset=utf-8'],
 ])

@@ -606,7 +606,7 @@ html {
     0 4px 12px rgba(149, 91, 27, 0.14),
     0 0 8px rgba(84, 219, 255, 0.4),
     0 0 16px rgba(145, 92, 255, 0.28);
-  animation: v1-cta-gold-flow 6.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation: v1-cta-gold-flow 8.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 .home-compact-hero__actions .brand-btn--primary::before,
@@ -654,7 +654,7 @@ html {
   mask-composite: exclude;
   filter: drop-shadow(0 0 6px rgba(84, 219, 255, 0.96))
     drop-shadow(0 0 16px rgba(145, 92, 255, 0.62));
-  animation: v1-cta-rainbow-orbit 2.2s linear infinite;
+  animation: v1-cta-rainbow-orbit 4.8s linear infinite;
 }
 
 .home-compact-hero__actions .brand-btn--primary::after,
@@ -681,7 +681,7 @@ html {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.34),
     inset 0 0 0 1px rgba(255, 237, 198, 0.08);
-  animation: v1-cta-gold-sheen 3.8s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
+  animation: v1-cta-gold-sheen 6.2s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
 }
 
 .home-compact-hero__actions .brand-btn--primary:hover,
@@ -979,7 +979,7 @@ html {
   color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
-  animation: glow-text-shimmer 4s linear infinite;
+  animation: glow-text-shimmer 8s linear infinite;
   display: inline-block;
   font-weight: 900;
   filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 1)) drop-shadow(0 10px 25px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 15px rgba(255, 215, 112, 0.6));
@@ -1078,7 +1078,7 @@ html {
   padding: 2px;
   background: linear-gradient(90deg, #00C0FF, #FF0055, #00C0FF, #FFd700, #00C0FF);
   background-size: 300% auto;
-  animation: rainbow-border 4s linear infinite;
+  animation: rainbow-border 8s linear infinite;
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -1460,7 +1460,7 @@ html {
 }
 
 .chart-dashboard__row-saved svg {
-  animation: chart-saved-bounce 1.5s ease-in-out infinite;
+  animation: none;
   z-index: 1;
 }
 
@@ -2613,7 +2613,7 @@ html {
     0 4px 12px rgba(149, 91, 27, 0.14),
     0 0 8px rgba(84, 219, 255, 0.4),
     0 0 16px rgba(145, 92, 255, 0.28);
-  animation: v1-cta-gold-flow 6.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation: v1-cta-gold-flow 8.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 .home-v1-hero__actions .brand-btn--primary::before,
@@ -2658,7 +2658,7 @@ html {
   mask-composite: exclude;
   filter: drop-shadow(0 0 6px rgba(84, 219, 255, 0.96))
     drop-shadow(0 0 16px rgba(145, 92, 255, 0.62));
-  animation: v1-cta-rainbow-orbit 2.2s linear infinite;
+  animation: v1-cta-rainbow-orbit 4.8s linear infinite;
 }
 
 .home-v1-hero__actions .brand-btn--primary::after {
@@ -2684,7 +2684,7 @@ html {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.34),
     inset 0 0 0 1px rgba(255, 237, 198, 0.08);
-  animation: v1-cta-gold-sheen 3.8s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
+  animation: v1-cta-gold-sheen 6.2s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
 }
 
 .home-v1-hero__actions .brand-btn--primary:hover,
@@ -5153,7 +5153,7 @@ html {
 }
 
 .pricing-card--pro .premium-pricing-price strong {
-  animation: textGlowPulse 3s ease-in-out infinite;
+  animation: none;
 }
 
 .premium-pricing-feature-row {
@@ -5172,7 +5172,7 @@ html {
 .premium-pricing-feature-row { transition: all 0.3s ease !important; }
 .premium-pricing-feature-row:hover { transform: translateX(8px) !important; text-shadow: 0 0 8px rgba(255,255,255,0.5) !important; color: white !important; }
 .premium-pricing-feature-row:hover .check-icon { transform: scale(1.3) rotate(360deg) !important; }
-.pricing-card--pro .premium-pricing-price strong { animation: textGlowPulse 2.5s infinite alternate !important; }
+.pricing-card--pro .premium-pricing-price strong { animation: none !important; }
 
 .premium-pricing-card { overflow: visible !important; }
 .premium-pricing-card > * { overflow: visible !important; }
@@ -5735,7 +5735,7 @@ html {
 }
 
 .hero-live-step.is-active .hero-live-step__progress::after {
-  animation: hero-step-progress 4.2s linear infinite;
+  animation: hero-step-progress 5.8s linear infinite;
 }
 .hero-product-stack--v2 {
   position: relative;
@@ -5768,11 +5768,10 @@ html {
   display: block;
   transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease;
   filter: brightness(1.1) contrast(1.05);
-  will-change: transform, opacity;
 }
 
 .hero-product-stack__main--live {
-  will-change: transform, opacity;
+  transform: translateZ(0);
 }
 .hero-product-stack--v2 .hero-product-stack__sub--1 {
   z-index: 4;
@@ -5815,7 +5814,7 @@ html {
   box-shadow:
     0 18px 36px -24px rgba(0, 0, 0, 0.82),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
-  animation: hero-live-badge-pulse 2.8s ease-in-out infinite;
+  animation: none;
 }
 
 .hero-product-stack__live-badge span {
@@ -8289,7 +8288,21 @@ html {
 }
 
 .home-parallax-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 150svh;
+  background-image: url('/bg_abstract_2.webp');
+  background-size: cover;
+  background-position: center top;
+  opacity: 0.11;
+  pointer-events: none;
+  z-index: 0;
   filter: saturate(0.7) brightness(0.58) contrast(1.08);
+  mix-blend-mode: soft-light;
+  mask-image: linear-gradient(to bottom, black 0%, black 24%, black 70%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 24%, black 70%, transparent 100%);
 }
 
 .hero-ambient-orb {
@@ -8733,4 +8746,38 @@ html {
   .hero-title-v2 {
     gap: 0.2rem;
   }
+}
+
+/* V1.1: keep branded CTA glow, but remove ambient motion that does not signal interaction. */
+.home-compact-shell::before,
+.home-compact-shell::after,
+.hero-ambient-orb,
+.bg-marquee__track,
+.chart-dashboard__badge,
+.hero-title-static,
+.pricing-card--pro .premium-pricing-price strong {
+  animation: none !important;
+}
+
+.pricing-card--pro .premium-pricing-price strong {
+  transform: none !important;
+}
+
+.premium-pricing-feature-row:hover {
+  transform: translateX(4px) !important;
+  text-shadow: none !important;
+}
+
+.premium-pricing-card {
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+  transition:
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 220ms ease,
+    background-color 220ms ease,
+    box-shadow 220ms ease !important;
+}
+
+.premium-pricing-card:hover {
+  transform: translateY(-4px) !important;
 }

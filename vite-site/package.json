@@ -1,11 +1,12 @@
 {
   "name": "yukkuri-matome-processor-vite-site",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "build": "tsc -b && vite build && node ./scripts/prerender.mjs",
+    "audit:v1": "node ./scripts/audit-v1.mjs",
     "capture:home": "node ./scripts/capture-home.mjs",
     "capture:motion": "node ./scripts/record-home-motion.mjs",
     "lint": "eslint .",
@@ -20,7 +21,6 @@
     "react-dom": "^19.2.4",
     "react-helmet-async": "^3.0.0",
     "react-markdown": "^10.1.0",
-    "react-parallax-tilt": "^1.7.320",
     "react-router-dom": "^7.13.1",
     "react-syntax-highlighter": "^16.1.1",
     "rehype-raw": "^7.0.0",

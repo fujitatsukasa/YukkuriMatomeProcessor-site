@@ -4,10 +4,8 @@ import { PricingCards } from '@/components/PricingCards'
 import { media } from '@/data/assets'
 import { changeLogUrl, downloadUrl, latestReleaseUrl, legal, newsPosts, siteOrigin, siteSubtitle, siteTitle } from '@/data/site-content'
 import React, { useEffect, useRef, useState } from 'react'
-import { motion, useInView as useMotionInView, AnimatePresence, useReducedMotion, useScroll, useTransform } from 'framer-motion'
-import Tilt from 'react-parallax-tilt'
+import { motion, useInView as useMotionInView, AnimatePresence } from 'framer-motion'
 import { MessageSquare, Smartphone, Users, Download, CheckCircle2, TrendingUp, HelpCircle, Monitor, CreditCard, ArrowRight, Sparkles, Play, FileSearch, PencilLine, Bot, Settings2, Send, BookOpen, BadgeCheck } from 'lucide-react'
-import { CustomCursorGlow } from '@/components/CustomCursorGlow'
 import { trackEvent } from '@/lib/analytics'
 
 const SECTION_HEAD_VARIANTS = {
@@ -770,18 +768,12 @@ const homeStructuredData = [
 ]
 
 export function HomePage() {
-  const prefersReducedMotion = useReducedMotion()
   const flowRef = useRef<HTMLDivElement>(null)
   const isFlowInView = useMotionInView(flowRef, { amount: 0.2, once: true })
   const chartRef = useRef<HTMLDivElement>(null)
   const isChartInView = useMotionInView(chartRef, { amount: 0.2, once: true })
   const outcomesRef = useRef<HTMLDivElement>(null)
   const isOutcomesInView = useMotionInView(outcomesRef, { amount: 0.25 })
-
-  const { scrollY } = useScroll()
-  // Subtle parallax translation
-  const parallaxY = useTransform(scrollY, [0, 7000], [0, 360])
-  // Browser frame 3D tilt on scroll
     
   const [activeSlide, setActiveSlide] = useState(0)
   const [activeHeroScene, setActiveHeroScene] = useState(0)
@@ -793,17 +785,32 @@ export function HomePage() {
   // ━━━[ Floating CTA visibility ]━━━
   const [showFloatingCta, setShowFloatingCta] = useState(false)
   useEffect(() => {
-    const handleScroll = () => {
-      const heroEnd = document.querySelector('.home-compact-hero')?.getBoundingClientRect()
-      const processSection = document.querySelector('.home-compact-process-section')?.getBoundingClientRect()
-      const resultsSection = document.querySelector('.home-compact-usecase-section')?.getBoundingClientRect()
-      const proofJourneySection = document.querySelector('.home-proof-journey-section')?.getBoundingClientRect()
-      const internalProofSection = document.querySelector('.home-internal-proof-section')?.getBoundingClientRect()
-      const trustSection = document.querySelector('.testimonials-section-wrap')?.getBoundingClientRect()
-      const pricingSection = document.querySelector('.home-compact-price-section')?.getBoundingClientRect()
-      const publicProofSection = document.querySelector('.home-public-proof-section')?.getBoundingClientRect()
-      const closingSection = document.querySelector('.home-compact-closing-section')?.getBoundingClientRect()
-      const ctaSection = document.querySelector('.home-compact-cta-section')?.getBoundingClientRect()
+    const mobileQuery = window.matchMedia('(max-width: 768px)')
+    const heroNode = document.querySelector('.home-compact-hero')
+    const ctaNode = document.querySelector('.home-compact-cta-section')
+    const sectionNodes = [
+      '.home-compact-process-section',
+      '.home-compact-usecase-section',
+      '.home-proof-journey-section',
+      '.home-internal-proof-section',
+      '.testimonials-section-wrap',
+      '.home-compact-price-section',
+      '.home-public-proof-section',
+      '.home-compact-closing-section',
+    ]
+      .map((selector) => document.querySelector(selector))
+      .filter((node): node is Element => node !== null)
+    let frame = 0
+
+    const updateVisibility = () => {
+      frame = 0
+      if (mobileQuery.matches) {
+        setShowFloatingCta(false)
+        return
+      }
+
+      const heroEnd = heroNode?.getBoundingClientRect()
+      const ctaSection = ctaNode?.getBoundingClientRect()
 
       if (!heroEnd || !ctaSection) {
         setShowFloatingCta(false)
@@ -813,43 +820,36 @@ export function HomePage() {
       const viewportHeight = window.innerHeight
       const pastHero = heroEnd.bottom < viewportHeight * 0.28
       const reachedCta = ctaSection.top < viewportHeight * 0.92
-      const overlappingResults =
-        !!resultsSection && resultsSection.top < viewportHeight * 0.85 && resultsSection.bottom > viewportHeight * 0.15
-      const overlappingProcess =
-        !!processSection && processSection.top < viewportHeight * 0.85 && processSection.bottom > viewportHeight * 0.15
-      const overlappingProofJourney =
-        !!proofJourneySection && proofJourneySection.top < viewportHeight * 0.85 && proofJourneySection.bottom > viewportHeight * 0.15
-      const overlappingTrust =
-        !!trustSection && trustSection.top < viewportHeight * 0.8 && trustSection.bottom > viewportHeight * 0.15
-      const overlappingPricing =
-        !!pricingSection && pricingSection.top < viewportHeight * 0.85 && pricingSection.bottom > viewportHeight * 0.12
-      const overlappingInternalProof =
-        !!internalProofSection && internalProofSection.top < viewportHeight * 0.85 && internalProofSection.bottom > viewportHeight * 0.15
-      const overlappingPublicProof =
-        !!publicProofSection && publicProofSection.top < viewportHeight * 0.85 && publicProofSection.bottom > viewportHeight * 0.15
-      const overlappingClosing =
-        !!closingSection && closingSection.top < viewportHeight * 0.85 && closingSection.bottom > viewportHeight * 0.15
+      const overlapsContent = sectionNodes.some((node) => {
+        const rect = node.getBoundingClientRect()
+        return rect.top < viewportHeight * 0.85 && rect.bottom > viewportHeight * 0.15
+      })
 
       setShowFloatingCta(
         pastHero &&
         !reachedCta &&
-        !overlappingProcess &&
-        !overlappingResults &&
-        !overlappingProofJourney &&
-        !overlappingInternalProof &&
-        !overlappingTrust &&
-        !overlappingPricing &&
-        !overlappingPublicProof &&
-        !overlappingClosing,
+        !overlapsContent,
       )
     }
 
-    handleScroll()
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    window.addEventListener('resize', handleScroll)
+    const requestUpdate = () => {
+      if (frame) {
+        return
+      }
+      frame = window.requestAnimationFrame(updateVisibility)
+    }
+
+    requestUpdate()
+    window.addEventListener('scroll', requestUpdate, { passive: true })
+    window.addEventListener('resize', requestUpdate)
+    mobileQuery.addEventListener('change', requestUpdate)
     return () => {
-      window.removeEventListener('scroll', handleScroll)
-      window.removeEventListener('resize', handleScroll)
+      if (frame) {
+        window.cancelAnimationFrame(frame)
+      }
+      window.removeEventListener('scroll', requestUpdate)
+      window.removeEventListener('resize', requestUpdate)
+      mobileQuery.removeEventListener('change', requestUpdate)
     }
   }, [])
 
@@ -936,15 +936,25 @@ export function HomePage() {
   }, [])
 
   useEffect(() => {
-    const updateActiveChapter = () => {
-      const anchor = window.innerHeight * 0.32 + 96
-      const ranked = homeStoryChapters
-        .map((chapter) => {
-          const node = document.querySelector(chapter.selector)
-          if (!node) {
-            return null
-          }
+    const mobileQuery = window.matchMedia('(max-width: 768px)')
+    const chapterNodes = homeStoryChapters
+      .map((chapter) => ({
+        chapter,
+        node: document.querySelector(chapter.selector),
+      }))
+      .filter((entry): entry is { chapter: (typeof homeStoryChapters)[number]; node: Element } => entry.node !== null)
+    let frame = 0
 
+    const updateActiveChapter = () => {
+      frame = 0
+      if (mobileQuery.matches) {
+        setActiveStoryChapter('hero')
+        return
+      }
+
+      const anchor = window.innerHeight * 0.32 + 96
+      const ranked = chapterNodes
+        .map(({ chapter, node }) => {
           const rect = node.getBoundingClientRect()
           const distance =
             rect.top <= anchor && rect.bottom >= anchor
@@ -953,7 +963,6 @@ export function HomePage() {
 
           return { key: chapter.key, distance }
         })
-        .filter((item): item is { key: (typeof homeStoryChapters)[number]['key']; distance: number } => item !== null)
         .sort((a, b) => a.distance - b.distance)
 
       if (ranked[0]) {
@@ -961,12 +970,24 @@ export function HomePage() {
       }
     }
 
-    updateActiveChapter()
-    window.addEventListener('scroll', updateActiveChapter, { passive: true })
-    window.addEventListener('resize', updateActiveChapter)
+    const requestUpdate = () => {
+      if (frame) {
+        return
+      }
+      frame = window.requestAnimationFrame(updateActiveChapter)
+    }
+
+    requestUpdate()
+    window.addEventListener('scroll', requestUpdate, { passive: true })
+    window.addEventListener('resize', requestUpdate)
+    mobileQuery.addEventListener('change', requestUpdate)
     return () => {
-      window.removeEventListener('scroll', updateActiveChapter)
-      window.removeEventListener('resize', updateActiveChapter)
+      if (frame) {
+        window.cancelAnimationFrame(frame)
+      }
+      window.removeEventListener('scroll', requestUpdate)
+      window.removeEventListener('resize', requestUpdate)
+      mobileQuery.removeEventListener('change', requestUpdate)
     }
   }, [])
 
@@ -1044,7 +1065,6 @@ export function HomePage() {
         structuredData={homeStructuredData}
       />
       <div className="home-compact-shell" style={{ position: 'relative' }}>
-        <CustomCursorGlow />
         <div className="home-story-rail-wrap" aria-label="ホームの章立て">
           <nav className="home-story-rail">
             <div className="home-story-rail__track">
@@ -1103,27 +1123,7 @@ export function HomePage() {
           ) : null}
         </AnimatePresence>
 
-        {/* Animated Parallax Background using generated asset */}
-        <motion.div
-          className="home-parallax-layer"
-          style={{
-            position: 'absolute',
-            top: '0vh', /* Start from the very top */
-            left: 0,
-            width: '100%',
-            height: '170vh',
-            backgroundImage: "url('/bg_abstract_2.webp')",
-            backgroundSize: 'cover',
-            backgroundPosition: 'center top',
-            opacity: 0.16,
-            y: prefersReducedMotion ? 0 : parallaxY,
-            pointerEvents: 'none',
-            zIndex: 0,
-            maskImage: 'linear-gradient(to bottom, black 0%, black 22%, black 72%, transparent 100%)',
-            WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 22%, black 72%, transparent 100%)',
-            mixBlendMode: 'soft-light'
-          }}
-        />
+        <div className="home-parallax-layer" aria-hidden="true" />
         <section className="home-compact-hero homepage-hero">
           <img
             className="home-compact-hero__media-bg"
@@ -1275,17 +1275,7 @@ export function HomePage() {
                 </div>
               </div>
 
-              <Tilt
-                tiltMaxAngleX={3}
-                tiltMaxAngleY={5}
-                glareEnable={true}
-                glareMaxOpacity={0.08}
-                glareColor="#e0c184"
-                glarePosition="all"
-                glareBorderRadius="16px"
-                perspective={1200}
-                className="hero-product-tilt-wrap"
-              >
+              <div className="hero-product-tilt-wrap">
                 <div className="hero-product-stack hero-product-stack--v2">
                   <AnimatePresence mode="wait">
                     <motion.img
@@ -1302,23 +1292,13 @@ export function HomePage() {
                   </AnimatePresence>
 
                   {heroPreviewScenes.map((scene, index) => (
-                    <motion.img
+                    <img
                       key={scene.title}
                       src={scene.image}
                       alt={scene.title}
                       className={`hero-product-stack__sub hero-product-stack__sub--${index + 1}`}
-                      initial={{ opacity: 0 }}
-                      animate={{
-                        opacity: index === 0 ? 0.9 : 0.72,
-                        y: index === 0 ? [0, -8, 0] : [0, 8, 0],
-                        rotate: index === 0 ? [-4, -1.5, -4] : [4, 1.5, 4],
-                        scale: index === 0 ? [0.82, 0.86, 0.82] : [0.74, 0.78, 0.74],
-                      }}
-                      transition={{
-                        duration: 6.4 + index * 0.4,
-                        repeat: Infinity,
-                        ease: 'easeInOut',
-                      }}
+                      loading="lazy"
+                      decoding="async"
                     />
                   ))}
 
@@ -1327,7 +1307,7 @@ export function HomePage() {
                     <strong>LIVE PREVIEW</strong>
                   </div>
                 </div>
-              </Tilt>
+              </div>
             </motion.div>
           </div>
 
@@ -1433,8 +1413,9 @@ export function HomePage() {
                       <motion.div
                         className="home-flow-visual-card__scan"
                         aria-hidden="true"
-                        animate={{ x: ['-35%', '115%'] }}
-                        transition={{ duration: 4.2, repeat: Infinity, ease: 'linear' }}
+                        initial={{ x: '-35%' }}
+                        animate={{ x: '115%' }}
+                        transition={{ duration: 1.8, ease: 'easeOut' }}
                       />
                       {activePresentationSlide.images.map((imgSrc, imgIndex) => (
                         <motion.div
@@ -1494,7 +1475,7 @@ export function HomePage() {
         <Section alt className="home-compact-section home-compact-process-section bg-marquee-wrap">
           {/* Parallax & Animated Section Background */}
           <div className="page-bg-bleed">
-            <motion.img 
+            <img
               src="/bg_speed_master.webp"
               alt=""
               style={{
@@ -1502,15 +1483,6 @@ export function HomePage() {
                 opacity: 0.65, mixBlendMode: 'screen',
                 maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
                 WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)'
-              }}
-              animate={{
-                scale: [1.05, 1.15, 1.05],
-                objectPosition: ['50% 50%', '55% 55%', '45% 45%', '50% 50%']
-              }}
-              transition={{
-                duration: 20,
-                ease: "easeInOut",
-                repeat: Infinity
               }}
             />
           </div>
@@ -1644,7 +1616,7 @@ export function HomePage() {
         <Section alt className="home-compact-section home-compact-usecase-section">
           {/* Parallax & Animated Section Background — rotation removed for premium feel */}
           <div className="page-bg-bleed">
-            <motion.img 
+            <img
               src="/bg_usecases_master.webp"
               alt=""
               style={{
@@ -1652,14 +1624,6 @@ export function HomePage() {
                 opacity: 0.55, mixBlendMode: 'screen',
                 maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
                 WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)'
-              }}
-              animate={{
-                scale: [1.02, 1.06, 1.02],
-              }}
-              transition={{
-                duration: 25,
-                ease: "easeInOut",
-                repeat: Infinity
               }}
             />
           </div>
@@ -1884,7 +1848,7 @@ export function HomePage() {
 
         <Section className="home-compact-section home-compact-template-section">
           <div className="page-bg-bleed">
-            <motion.img
+            <img
               src="/bg_demo_master.webp"
               alt=""
               style={{
@@ -1892,15 +1856,6 @@ export function HomePage() {
                 opacity: 0.55, mixBlendMode: 'screen',
                 maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
                 WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
-              }}
-              animate={{
-                scale: [1.03, 1.08, 1.03],
-                objectPosition: ['50% 50%', '52% 48%', '50% 50%'],
-              }}
-              transition={{
-                duration: 24,
-                ease: 'easeInOut',
-                repeat: Infinity,
               }}
             />
           </div>
@@ -2123,7 +2078,7 @@ export function HomePage() {
                       className="home-internal-proof-card__scan"
                       aria-hidden="true"
                       animate={index === activeOperationStage ? { x: ['-45%', '120%'] } : { x: '-45%' }}
-                      transition={index === activeOperationStage ? { duration: 4, repeat: Infinity, ease: 'linear' } : { duration: 0.2 }}
+                      transition={index === activeOperationStage ? { duration: 1.7, ease: 'easeOut' } : { duration: 0.2 }}
                     />
                   </div>
 
@@ -2308,7 +2263,7 @@ export function HomePage() {
         <Section className="home-compact-section home-compact-price-section">
           {/* Parallax & Animated Section Background */}
           <div className="page-bg-bleed">
-            <motion.img 
+            <img
               src="/bg_pricing_master.webp"
               alt=""
               style={{
@@ -2316,15 +2271,6 @@ export function HomePage() {
                 opacity: 0.65, mixBlendMode: 'screen',
                 maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
                 WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)'
-              }}
-              animate={{
-                scale: [1.02, 1.1, 1.02],
-                objectPosition: ['50% 50%', '52% 48%', '50% 50%']
-              }}
-              transition={{
-                duration: 25,
-                ease: "easeInOut",
-                repeat: Infinity
               }}
             />
           </div>
@@ -2397,7 +2343,7 @@ export function HomePage() {
         <Section alt className="home-compact-section home-compact-closing-section">
           {/* Parallax & Animated Section Background */}
           <div className="page-bg-bleed">
-            <motion.img 
+            <img
               src="/bg_faq_master.webp"
               alt=""
               style={{
@@ -2405,15 +2351,6 @@ export function HomePage() {
                 opacity: 0.55, mixBlendMode: 'screen',
                 maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
                 WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)'
-              }}
-              animate={{
-                scale: [1.0, 1.05, 1.0],
-                opacity: [0.45, 0.65, 0.45]
-              }}
-              transition={{
-                duration: 20,
-                ease: "easeInOut",
-                repeat: Infinity
               }}
             />
           </div>
@@ -2539,7 +2476,7 @@ export function HomePage() {
         <Section className="home-compact-section home-compact-cta-section home-cta-no-bottom-pad">
           {/* Parallax & Animated Section Background */}
           <div className="page-bg-bleed">
-            <motion.img 
+            <img
               src="/bg_cta_master.webp"
               alt=""
               style={{
@@ -2547,14 +2484,6 @@ export function HomePage() {
                 opacity: 0.7, mixBlendMode: 'screen',
                 maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 100%, transparent 100%)',
                 WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 100%, transparent 100%)'
-              }}
-              animate={{
-                scale: [1.02, 1.08, 1.02],
-              }}
-              transition={{
-                duration: 20,
-                ease: "easeInOut",
-                repeat: Infinity
               }}
             />
           </div>
