@@ -151,6 +151,9 @@ const transitionToStyle = (transition?: MotionTransition): CSSProperties => {
   }
 }
 
+const shouldDisableEntryMotion = () =>
+  typeof window !== 'undefined'
+
 function useLiteInView(
   node: Element | null,
   viewport?: MotionLikeProps['viewport'],
@@ -206,9 +209,10 @@ const createMotionComponent = (tag: ElementType) => {
       ...rest
     } = props
     const [node, setNode] = useState<HTMLElement | null>(null)
-    const hasInitialTarget = initial !== undefined && initial !== false
+    const disableEntryMotion = shouldDisableEntryMotion()
+    const hasInitialTarget = !disableEntryMotion && initial !== undefined && initial !== false
     const [mounted, setMounted] = useState(!hasInitialTarget)
-    const shouldTrackInView = Boolean(whileInView)
+    const shouldTrackInView = Boolean(whileInView) && !disableEntryMotion
     const inView = useLiteInView(node, viewport, shouldTrackInView)
 
     useEffect(() => {
@@ -221,6 +225,10 @@ const createMotionComponent = (tag: ElementType) => {
     }, [hasInitialTarget])
 
     const resolvedTarget = useMemo(() => {
+      if (disableEntryMotion) {
+        return resolveVariant(animate, variants) ?? resolveVariant(whileInView, variants)
+      }
+
       if (shouldTrackInView) {
         return inView
           ? resolveVariant(whileInView, variants)
@@ -232,7 +240,7 @@ const createMotionComponent = (tag: ElementType) => {
       }
 
       return resolveVariant(initial, variants)
-    }, [animate, initial, inView, mounted, shouldTrackInView, variants, whileInView])
+    }, [animate, disableEntryMotion, initial, inView, mounted, shouldTrackInView, variants, whileInView])
 
     const domProps = Object.fromEntries(
       Object.entries(rest).filter(([key]) => !MOTION_PROPS.has(key)),
@@ -246,7 +254,7 @@ const createMotionComponent = (tag: ElementType) => {
         className,
         style: {
           ...style,
-          ...transitionToStyle(transition),
+          ...(disableEntryMotion ? {} : transitionToStyle(transition)),
           ...targetToStyle(resolvedTarget),
         },
       },

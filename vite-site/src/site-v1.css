@@ -8967,8 +8967,8 @@ html {
 
 .brand-home .brand-section,
 .brand-home .home-compact-section {
-  content-visibility: auto;
-  contain-intrinsic-size: 860px;
+  content-visibility: visible;
+  contain-intrinsic-size: auto;
 }
 
 .brand-home .home-compact-hero {
@@ -8976,7 +8976,7 @@ html {
   contain-intrinsic-size: auto;
 }
 
-/* V1.4: reserve continuous motion for brand CTAs; keep scroll surfaces mostly static. */
+/* V1.5: keep the CTA visual treatment, but remove continuous paint work during scroll. */
 .brand-home .home-compact-section *,
 .brand-home .home-compact-section *::before,
 .brand-home .home-compact-section *::after {
@@ -8985,19 +8985,142 @@ html {
 
 .brand-home .home-compact-hero__actions .brand-btn--primary,
 .brand-home .home-compact-cta__actions .brand-btn--primary {
-  animation: v1-cta-gold-flow 8.8s cubic-bezier(0.4, 0, 0.2, 1) infinite !important;
+  animation: none !important;
 }
 
 .brand-home .home-compact-hero__actions .brand-btn--primary::before,
 .brand-home .home-compact-cta__actions .brand-btn--primary::before {
-  animation: v1-cta-rainbow-orbit 4.8s linear infinite !important;
+  animation: none !important;
 }
 
 .brand-home .home-compact-hero__actions .brand-btn--primary::after,
 .brand-home .home-compact-cta__actions .brand-btn--primary::after {
-  animation: v1-cta-gold-sheen 6.2s cubic-bezier(0.25, 0.1, 0.25, 1) infinite !important;
+  animation: none !important;
 }
 
 .brand-home .home-compact-section {
   contain: layout paint style;
+}
+
+.pricing-decision-guide__head span {
+  display: block;
+  max-width: 720px;
+  margin: 0 auto;
+  color: rgba(236, 233, 226, 0.72);
+  font-size: clamp(1rem, 1.35vw, 1.16rem);
+  line-height: 1.75;
+}
+
+.pricing-decision-guide {
+  width: min(1180px, calc(100% - 48px));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 24px);
+  scroll-margin-top: calc(var(--header-offset, 72px) + 20px);
+}
+
+.pricing-decision-guide__card {
+  display: grid;
+  gap: 0.85rem;
+  padding: clamp(1.25rem, 2vw, 1.7rem);
+  border: 1px solid rgba(224, 193, 132, 0.2);
+  border-radius: 22px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.065), rgba(255, 255, 255, 0.025)),
+    rgba(14, 15, 19, 0.84);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 18px 38px -32px rgba(0, 0, 0, 0.82);
+}
+
+.pricing-decision-guide__label,
+.pricing-decision-guide__plan {
+  width: fit-content;
+}
+
+.pricing-decision-guide__label {
+  color: rgba(236, 233, 226, 0.72);
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.pricing-decision-guide__plan {
+  padding: 0.36rem 0.72rem;
+  border: 1px solid rgba(224, 193, 132, 0.28);
+  border-radius: 999px;
+  color: #f5d98d;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+}
+
+.pricing-decision-guide__card h3,
+.pricing-decision-guide__card p {
+  margin: 0;
+}
+
+.pricing-decision-guide__card h3 {
+  color: #fff7e6;
+  font-size: clamp(1.25rem, 1.65vw, 1.55rem);
+  line-height: 1.35;
+}
+
+.pricing-decision-guide__card p {
+  color: rgba(236, 233, 226, 0.72);
+  line-height: 1.75;
+}
+
+.pricing-decision-guide__card ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pricing-decision-guide__card li {
+  padding: 0.42rem 0.64rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.78);
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .pricing-decision-guide {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 767px) {
+  .brand-home .home-compact-hero *,
+  .brand-home .home-compact-hero *::before,
+  .brand-home .home-compact-hero *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .brand-home .home-compact-hero .hero-center-stage,
+  .brand-home .home-compact-hero .hero-center-stage * {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  .brand-home .home-compact-hero__media-bg {
+    opacity: 0.08 !important;
+    filter: brightness(0.48) contrast(1.04) !important;
+  }
+
+  .brand-home .home-compact-hero__actions .brand-btn--primary::before,
+  .brand-home .home-compact-hero__actions .brand-btn--primary::after,
+  .brand-home .home-compact-cta__actions .brand-btn--primary::before,
+  .brand-home .home-compact-cta__actions .brand-btn--primary::after {
+    display: none !important;
+  }
+
+  .pricing-decision-guide {
+    width: min(100% - 28px, 560px);
+  }
 }

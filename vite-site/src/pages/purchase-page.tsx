@@ -52,6 +52,30 @@ const pricingFlow = [
   },
 ] as const
 
+const planDecisionGuide = [
+  {
+    label: 'まず触って判断したい',
+    plan: 'Free',
+    title: '導入相性を無料で確認',
+    body: '対応サイト取得、台本整理、YMM4前準備までの流れが今の制作手順に合うかを先に見ます。',
+    cues: ['初回導入', '個人の検証', 'YMM4前準備を試す'],
+  },
+  {
+    label: '週1本以上を安定させたい',
+    plan: 'Standard',
+    title: '継続投稿の主力ライン',
+    body: 'テンプレート運用、AI補助、分析まわりを日常運用に乗せ、毎週の制作本数を安定させます。',
+    cues: ['週1本以上', '反応集・解説の継続投稿', '個人運用の時短'],
+  },
+  {
+    label: '型を作って深く運用したい',
+    plan: 'Pro',
+    title: '個別テンプレートと相談込み',
+    body: '独自フォーマット、複数ライン、チーム運用など、制作体制に合わせた深い調整が必要な方向けです。',
+    cues: ['独自テンプレート', '複数フォーマット', '運用相談込み'],
+  },
+] as const
+
 export function PurchasePage() {
   const legalContactNote = `販売事業者: ${legal.organization.sellerName} / 連絡先: ${legal.organization.email}`
 
@@ -123,6 +147,32 @@ export function PurchasePage() {
 
         <Section id="pricing-cards">
           <PricingCards />
+        </Section>
+
+        <Section alt>
+          <div className="subpage-section-head pricing-decision-guide__head">
+            <p>PLAN DECISION</p>
+            <h2>迷うなら、制作本数と運用の深さで選ぶ</h2>
+            <span>
+              価格だけで比べるより、いま困っている工程と投稿頻度に合わせて選ぶ方が失敗しにくくなります。
+            </span>
+          </div>
+
+          <div className="pricing-decision-guide" aria-label="プラン選択の目安">
+            {planDecisionGuide.map((item) => (
+              <article key={item.plan} className="pricing-decision-guide__card">
+                <span className="pricing-decision-guide__label">{item.label}</span>
+                <strong className="pricing-decision-guide__plan">{item.plan}</strong>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+                <ul>
+                  {item.cues.map((cue) => (
+                    <li key={cue}>{cue}</li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
         </Section>
 
         <Section alt>
