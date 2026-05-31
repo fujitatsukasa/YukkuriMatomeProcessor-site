@@ -9,6 +9,7 @@ const __dirname = dirname(__filename);
 const distDir = resolve(__dirname, '../dist');
 const publicOrigin = 'https://yukkurimatomeprocessor.com';
 const internalOrigins = ['http://127.0.0.1:5174', 'http://localhost:5174'];
+const preferredInternalPort = Number(process.env.PRERENDER_PORT || 5174);
 
 function keepFirstTitle(html) {
   let seenTitle = false;
@@ -19,9 +20,9 @@ function keepFirstTitle(html) {
   });
 }
 
-function sanitizePrerenderedHtml(html, route) {
+function sanitizePrerenderedHtml(html, route, localOrigins = internalOrigins) {
   let sanitized = html;
-  for (const origin of internalOrigins) {
+  for (const origin of localOrigins) {
     sanitized = sanitized.replaceAll(origin, publicOrigin);
   }
   sanitized = keepFirstTitle(sanitized);
@@ -31,6 +32,43 @@ function sanitizePrerenderedHtml(html, route) {
   }
 
   return sanitized;
+}
+
+function listen(server, port) {
+  return new Promise((resolve, reject) => {
+    const handleError = (error) => {
+      server.off('listening', handleListening);
+      reject(error);
+    };
+    const handleListening = () => {
+      server.off('error', handleError);
+      resolve();
+    };
+
+    server.once('error', handleError);
+    server.once('listening', handleListening);
+    server.listen(port, '127.0.0.1');
+  });
+}
+
+async function listenOnAvailablePort(server) {
+  try {
+    await listen(server, preferredInternalPort);
+  } catch (error) {
+    if (error?.code !== 'EADDRINUSE') {
+      throw error;
+    }
+
+    console.warn(`[PRERENDER] Port ${preferredInternalPort} is busy. Falling back to an available port.`);
+    await listen(server, 0);
+  }
+
+  const address = server.address();
+  if (!address || typeof address === 'string') {
+    throw new Error('Failed to determine prerender server port.');
+  }
+
+  return address.port;
 }
 
 async function prerender() {
@@ -107,8 +145,13 @@ async function prerender() {
     }
   });
 
-  await new Promise(res => server.listen(5174, '127.0.0.1', res));
-  const baseUrl = `http://127.0.0.1:5174`;
+  const internalPort = await listenOnAvailablePort(server);
+  const baseUrl = `http://127.0.0.1:${internalPort}`;
+  const activeInternalOrigins = [
+    `http://127.0.0.1:${internalPort}`,
+    `http://localhost:${internalPort}`,
+    ...internalOrigins,
+  ];
   console.log(`[PRERENDER] Internal SPA server running at ${baseUrl}`);
 
   const browser = await chromium.launch({
@@ -135,7 +178,7 @@ async function prerender() {
       }, { timeout: 5000 }).catch(() => undefined);
       await page.waitForTimeout(500);
 
-      let html = sanitizePrerenderedHtml(await page.content(), route);
+      let html = sanitizePrerenderedHtml(await page.content(), route, activeInternalOrigins);
 
       let outPath = join(distDir, route, 'index.html');
       if (route === '/') {

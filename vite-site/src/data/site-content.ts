@@ -144,10 +144,10 @@ export const legal = {
     analyticsTools: ['Google Analytics'],
   },
   meta: {
-    legalLastUpdated: '2026-04-03',
-    termsLastUpdated: '2026-04-03',
+    legalLastUpdated: '2026-06-01',
+    termsLastUpdated: '2026-06-01',
     privacyLastUpdated: '2026-02-11',
-    refundLastUpdated: '2026-04-03',
+    refundLastUpdated: '2026-06-01',
   },
 }
 
