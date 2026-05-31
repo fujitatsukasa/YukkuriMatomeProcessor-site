@@ -9,7 +9,7 @@ type PlanFeature = {
 }
 
 type PricingPlan = {
-  key: 'free' | 'standard' | 'pro'
+  key: 'free' | 'premium'
   name: string
   eyebrow: string
   price: string
@@ -38,47 +38,28 @@ const pricingPlans: PricingPlan[] = [
       { label: 'デフォルトプリセットで編集開始', active: true },
       { label: '内蔵操作ガイド', active: true },
       { label: '導入前の動作検証', active: true },
-      { label: '継続運用向けの高度なAI・個別テンプレ支援', active: false },
+      { label: '台本取得・生成の制限解除', active: false },
     ],
   },
   {
-    key: 'standard',
-    name: 'Standard',
-    eyebrow: '継続投稿の主力',
-    price: '¥5,000',
-    term: '月額 / 税込 5,500円',
-    bestFor: '個人クリエイターとして継続投稿の再現性を上げたい',
-    summary: 'テンプレート運用、台本作成、AI補助、YouTube分析までまとめて回しやすい、個人運用の主力プランです。',
-    note: 'テンプレート運用と前工程の標準化で、継続投稿ラインを安定させやすい',
-    badge: '継続投稿の主力',
+    key: 'premium',
+    name: 'Premium',
+    eyebrow: '買い切りで制限解除',
+    price: '¥39,800',
+    term: '買い切り / 税込',
+    bestFor: '台本取得と台本生成の制限を外して、継続投稿の前工程を止めずに回したい',
+    summary: '一度払いで Premium 権限を付与し、scriptFetch と scriptGeneration の制限を外す買い切りライセンスです。',
+    note: 'Googleログインに紐づく権限同期で、購入後は月額なしで Premium 機能を利用',
+    badge: '買い切り',
     features: [
       { label: 'Freeプランの全機能', active: true },
       { label: 'テンプレート / フォーマット運用', active: true, emphasis: true },
-      { label: 'サイト・スレッド起点の台本作成', active: true, emphasis: true },
-      { label: 'AI文章校正 / 感情分析 / 改行補助', active: true, emphasis: true },
-      { label: 'YouTube分析と候補比較', active: true, emphasis: true },
-      { label: 'YMM4前準備の効率化', active: true, emphasis: true },
-      { label: '継続投稿向けサポート', active: true, emphasis: true },
-      { label: '個別テンプレート作成 / 最優先対応', active: false },
-    ],
-  },
-  {
-    key: 'pro',
-    name: 'Pro',
-    eyebrow: '内製化と相談導線向け',
-    price: '¥10,000',
-    term: '月額 / 税込 11,000円',
-    bestFor: '複数チャンネル運用や外注の巻き取りまで進めたい',
-    summary: '13キャラAI台本、個別テンプレート作成、動画内容の相談まで含めて、チーム運用や内製化を進める最上位プランです。',
-    note: '複数運用や個別テンプレート、相談導線の厚みまで重視するなら最適',
-    badge: '個別運用向け',
-    features: [
-      { label: 'Standardの全機能', active: true },
+      { label: 'scriptFetch の利用制限解除', active: true, emphasis: true },
+      { label: 'scriptGeneration の利用制限解除', active: true, emphasis: true },
       { label: '13キャラ対応のAI台本作成', active: true, emphasis: true },
-      { label: '動画内容の相談 / 機能提案', active: true, emphasis: true },
-      { label: '個別テンプレート作成', active: true, emphasis: true },
-      { label: '契約期間中の優先サポート', active: true, emphasis: true },
-      { label: '複数チャンネル運用の標準化', active: true, emphasis: true },
+      { label: 'YouTube分析と候補比較', active: true, emphasis: true },
+      { label: 'Googleアカウントへの権限保持', active: true, emphasis: true },
+      { label: '購入者向けサポート', active: true, emphasis: true },
     ],
   },
 ] as const
@@ -86,27 +67,27 @@ const pricingPlans: PricingPlan[] = [
 const comparisonRows = [
   {
     label: '導入フェーズ',
-    values: ['まず動作確認', '継続投稿を安定化', '内製化と相談導線まで'],
+    values: ['まず動作確認', '継続投稿の制限解除'],
   },
   {
     label: '主な強み',
-    values: ['導入相性の確認', 'テンプレート運用とAI補助', '個別テンプレートと運用相談'],
+    values: ['導入相性の確認', '買い切りで Premium 権限を保持'],
   },
   {
     label: 'テンプレート運用',
-    values: ['入口の確認', '継続投稿の主力', '個別運用へ最適化'],
+    values: ['入口の確認', '継続投稿で本格利用'],
   },
   {
     label: 'AI補助 / AI台本',
-    values: ['基本確認中心', 'AI補助を継続運用に活用', '13キャラ台本まで強化'],
+    values: ['基本確認中心', '13キャラ台本と生成枠を本格利用'],
   },
   {
     label: '向いている規模感',
-    values: ['導入検証', '個人の継続投稿', '複数チャンネル / 法人運用'],
+    values: ['導入検証', '個人・チームの継続投稿'],
   },
   {
     label: 'サポート密度',
-    values: ['基本案内', '継続投稿向け支援', '優先サポートと個別相談'],
+    values: ['基本案内', '購入者向けサポート'],
   },
 ] as const
 
@@ -118,7 +99,7 @@ export function PricingCards() {
           <InteractiveCard key={plan.name} className={`premium-pricing-card pricing-card--${plan.key}`}>
             {plan.badge ? (
               <div
-                className={`pricing-badge ${plan.key === 'pro' ? 'pricing-badge--platinum' : 'pricing-badge--gold'}`}
+                className="pricing-badge pricing-badge--gold"
               >
                 {plan.badge}
               </div>
@@ -164,7 +145,7 @@ export function PricingCards() {
         <div className="pricing-comparison-board__head">
           <h3>プラン差分を一目で把握</h3>
           <p>
-            価格だけでなく、導入確認から継続投稿、個別運用へどこで強くなるかを
+            価格だけでなく、導入確認から買い切りの制限解除へどこで強くなるかを
             短く整理して、比較の観点を揃えています。
           </p>
           <span className="pricing-comparison-board__hint">モバイルでは横スクロールで比較できます。</span>

@@ -262,7 +262,7 @@ const trustSpecGroups = [
   {
     title: '契約とサポートの導線',
     body: '判断材料をUIと同じ粒度で整理し、契約後の不安を減らします。',
-    items: ['Free → Standard → Pro の使い分けを明記', 'Stripe Checkout / Customer Portal 対応', '2営業日以内を目安に一次回答'],
+    items: ['Free と買い切り Premium の違いを明記', 'Stripe Checkout / Googleログイン権限同期', '2営業日以内を目安に一次回答'],
   },
 ] as const
 
@@ -276,16 +276,16 @@ const trustDecisionCards = [
   },
   {
     badge: '継続投稿',
-    title: 'Standardで運用を固める',
-    body: 'テンプレート運用、台本作成、AI補助、YouTube分析までをまとめて回す主力ラインです。',
-    points: ['テンプレート運用', 'AI台本補助', 'YouTube分析'],
+    title: 'Premiumで制限を外す',
+    body: '台本取得と台本生成の制限を外し、継続投稿の前工程を止めずに回す買い切りラインです。',
+    points: ['台本取得の制限解除', 'AI台本生成の制限解除', 'YouTube分析'],
     Icon: Settings2,
   },
   {
-    badge: '内製化',
-    title: 'Proで個別運用まで詰める',
-    body: '13キャラAI台本、個別テンプレート、契約期間中サポートまで欲しい運用に向いています。',
-    points: ['13キャラAI台本', '個別テンプレート', '契約期間中サポート'],
+    badge: '権限保持',
+    title: 'Googleアカウントで保持',
+    body: '購入後は Google ログインに紐づく Premium 権限を同期し、アプリ内で利用枠を反映します。',
+    points: ['Stripe Checkout', 'Webhook後に権限同期', '購入者向けサポート'],
     Icon: BadgeCheck,
   },
 ] as const
@@ -302,8 +302,8 @@ const publicProofRoutes = [
     eyebrow: 'PRICING',
     title: '料金とプラン差分',
     href: '/purchase/',
-    body: 'Free / Standard / Pro の違いを、用途と向いている人まで含めて公開しています。',
-    meta: '月額と用途の違いを確認',
+    body: 'Free と Premium 買い切りの違いを、用途と向いている人まで含めて公開しています。',
+    meta: '買い切り価格と制限解除範囲を確認',
   },
   {
     eyebrow: 'FAQ',
@@ -487,6 +487,36 @@ const proofJourneyUsecases = [
   },
 ] as const
 
+const actualSampleCards = [
+  {
+    eyebrow: 'SAMPLE 01',
+    title: 'ゆっくり掛け合い解説',
+    body: 'OutputBoard から YMM4 向けプレビューまで生成した、解説系フォーマットの実サンプルです。',
+    image: '/samples/sample-yukkuri-dialogue-thumbnail.png',
+    videoUrl:
+      'https://ymp-api.fujita-otm.workers.dev/assets/samples/script_timeline_v2/encoded_video_samples/01_yukkuri_dialogue_explainer_v1/01_topic_a/preview.mp4',
+    tags: ['掛け合い', '解説', 'YMM4プレビュー'],
+  },
+  {
+    eyebrow: 'SAMPLE 02',
+    title: '反応集ダイジェスト',
+    body: '反応集向けの構成・会話テンポ・字幕密度を確認できる、動画化前提の生成サンプルです。',
+    image: '/samples/sample-reaction-digest-thumbnail.png',
+    videoUrl:
+      'https://ymp-api.fujita-otm.workers.dev/assets/samples/script_timeline_v2/encoded_video_samples/02_reaction_digest_commentary_v1/01_topic_a/preview.mp4',
+    tags: ['反応集', '台本構成', '字幕密度'],
+  },
+  {
+    eyebrow: 'SAMPLE 03',
+    title: '縦型ショート構成',
+    body: '短尺向けの導入、場面転換、字幕の見え方を検証するための実サムネとプレビューです。',
+    image: '/samples/sample-short-drama-thumbnail.png',
+    videoUrl:
+      'https://ymp-api.fujita-otm.workers.dev/assets/samples/script_timeline_v2/encoded_video_samples/04_vertical_short_drama_v1/01_topic_a/preview.mp4',
+    tags: ['ショート', '縦型', 'テンプレ検証'],
+  },
+] as const
+
 const homeStoryChapters = [
   {
     key: 'hero',
@@ -532,8 +562,8 @@ const homeStoryChapters = [
     key: 'pricing',
     index: '04',
     label: 'Decision',
-    title: 'Free / Standard / Pro の判断を短い視線で終える',
-    body: '価格ではなく導入判断として読ませる章です。ここで無料導線に戻る理由を固めます。',
+    title: 'Free / Premium の判断を短い視線で終える',
+    body: '価格ではなく導入判断として読ませる章です。ここで無料検証か買い切り購入かを判断できます。',
     selector: '.home-compact-price-section',
     orbitPrimary: { x: -500, y: 420, scale: 1.08, opacity: 0.16 },
     orbitSecondary: { x: 520, y: 420, scale: 1.1, opacity: 0.18 },
@@ -631,12 +661,12 @@ const pricingDecisionPoints = [
     body: 'まずは対応サイト取得、基本編集、YMM4出力の流れを見て、自分の制作フローに合うかを入口で判断できます。',
   },
   {
-    title: 'Standardで継続投稿を回す',
-    body: 'テンプレート運用、台本作成、AI補助、YouTube分析までまとめて回し、個人の継続投稿ラインを安定させる主力です。',
+    title: 'Premiumで台本取得・生成の制限を外す',
+    body: '買い切りで Premium 権限を付与し、scriptFetch と scriptGeneration の制限を外して継続投稿の前工程を回します。',
   },
   {
-    title: 'Proで内製化と相談導線を強化',
-    body: '13キャラAI台本、個別テンプレート、動画内容の相談、契約期間中サポートまで欲しいなら最上位が向いています。',
+    title: '購入後は権限同期で反映',
+    body: 'Stripe Checkout の決済完了後、Googleログインに紐づく Premium 状態を同期してアプリ内の利用枠へ反映します。',
   },
 ] as const
 
@@ -655,7 +685,7 @@ const faqCategories: FAQCategory[] = [
     items: [
       {
         question: '価格・プランについて教えてください。',
-        answer: '無料プラン、スタンダードプラン（月額5,000円/税込5,500円）、プロプラン（月額10,000円/税込11,000円）の3つのプランをご用意しています。まずは無料プランでお試しください。',
+        answer: 'Free（¥0）と Premium（買い切り39,800円）の2つです。まずは無料プランで試し、台本取得・生成の制限解除が必要になったらPremiumを購入します。',
       },
       {
         question: '購入後のアップデートは無料ですか？',
@@ -699,6 +729,8 @@ const homePreviewScreenshots = [
   `${siteOrigin}/product_get_script.webp`,
   `${siteOrigin}/product_format_list.webp`,
   `${siteOrigin}/product_ai_script.webp`,
+  `${siteOrigin}/samples/sample-yukkuri-dialogue-thumbnail.png`,
+  `${siteOrigin}/samples/sample-reaction-digest-thumbnail.png`,
 ]
 
 const homeStructuredData = [
@@ -1178,7 +1210,7 @@ export function HomePage() {
               transition={{ duration: 0.6, delay: 0.45 }}
             >
               対応サイト取得、台本整理、AI補助、`.ymmp` / CSV整理までを一本化。
-              <span className="hero-subtitle-v2__sub">無料で導入相性を確認し、必要になった工程だけ有料プランで広げられます。</span>
+              <span className="hero-subtitle-v2__sub">無料で導入相性を確認し、必要になったら買い切り Premium で制限を外せます。</span>
             </motion.p>
 
             <div className="hero-value-strip" aria-label="ファーストビューの要点">
@@ -1191,8 +1223,8 @@ export function HomePage() {
                 <strong>導入相性と基本動作を確認</strong>
               </article>
               <article>
-                <span>有料で増える</span>
-                <strong>AI補助、分析、個別運用</strong>
+                <span>買い切りで増える</span>
+                <strong>台本取得・生成の制限解除</strong>
               </article>
             </div>
 
@@ -1864,6 +1896,74 @@ export function HomePage() {
           </div>
         </Section>
 
+        <Section alt className="home-compact-section home-actual-samples-section">
+          <motion.div
+            className="home-compact-section-head"
+            variants={SECTION_HEAD_VARIANTS}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-10%' }}
+            style={{ position: 'relative', zIndex: 1, marginBottom: '2.5rem' }}
+          >
+            <p className="brand-kicker">実サンプル</p>
+            <h2>
+              静止画だけでなく、
+              <span className="text-glow-gold">生成済みプレビュー</span>
+              まで確認できます
+            </h2>
+            <p>
+              実画像が少なく見える弱点を補うため、実際に生成したサムネイルと preview.mp4 への導線を置いています。
+              画面説明だけではなく、動画化された結果の雰囲気まで購入前に確認できます。
+            </p>
+          </motion.div>
+
+          <div className="actual-sample-grid">
+            {actualSampleCards.map((sample, index) => (
+              <motion.article
+                key={sample.title}
+                className="actual-sample-card"
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-10%' }}
+                transition={{ duration: 0.45, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <a
+                  className="actual-sample-card__media"
+                  href={sample.videoUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => trackHomeCta('actual_sample', sample.videoUrl, sample.title)}
+                >
+                  <img src={sample.image} alt={`${sample.title}の生成済みサムネイル`} loading="lazy" decoding="async" />
+                  <span className="actual-sample-card__play" aria-hidden="true">
+                    <Play size={18} />
+                  </span>
+                </a>
+                <div className="actual-sample-card__copy">
+                  <span>{sample.eyebrow}</span>
+                  <h3>{sample.title}</h3>
+                  <p>{sample.body}</p>
+                  <div className="actual-sample-card__tags" role="list" aria-label={`${sample.title}の特徴`}>
+                    {sample.tags.map((tag) => (
+                      <small key={tag} role="listitem">{tag}</small>
+                    ))}
+                  </div>
+                  <a
+                    className="actual-sample-card__link"
+                    href={sample.videoUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={() => trackHomeCta('actual_sample_link', sample.videoUrl, sample.title)}
+                  >
+                    <span>preview.mp4 を見る</span>
+                    <ArrowRight size={15} />
+                  </a>
+                </div>
+              </motion.article>
+            ))}
+          </div>
+        </Section>
+
         <Section className="home-compact-section home-compact-template-section">
           <div className="page-bg-bleed">
             <img
@@ -2306,8 +2406,8 @@ export function HomePage() {
             style={{ position: 'relative', zIndex: 1 }}
             >
               <p className="brand-kicker">料金プラン</p>
-              <h2>あなたの制作スタイルに合わせた<span className="text-glow-gold">3つのプラン</span></h2>
-            <p style={{ maxWidth: '600px', margin: '0 auto' }}>まずは無料で始めて、必要に応じてアップグレード。<br/>基本導線を確認しながら、継続運用向け機能を段階的に広げられます。</p>
+              <h2>無料検証から<span className="text-glow-gold">買い切りPremium</span>へ</h2>
+            <p style={{ maxWidth: '600px', margin: '0 auto' }}>まずは無料で始めて、台本取得・生成の制限解除が必要になったら買い切りへ。<br/>基本導線を確認しながら、継続運用へ進むタイミングを判断できます。</p>
           </motion.div>
 
           <div className="pricing-decision-panel" style={{ position: 'relative', zIndex: 1 }}>
@@ -2319,14 +2419,14 @@ export function HomePage() {
               transition={{ duration: 0.6, ease: 'easeOut' }}
             >
               <img
-                src="/generated/pricing-plan-visual-v1.webp"
-                alt="3つのプラン階層をイメージしたダークトーンのプレミアムな比較ビジュアル"
+                src="/product_ai_script.webp"
+                alt="Premiumで本格利用するAI台本生成画面"
                 loading="lazy"
                 decoding="async"
               />
               <div className="pricing-decision-panel__visual-copy">
                 <span>PLAN DECISION</span>
-                <strong>無料検証から量産運用、内製化まで一段ずつ引き上げられる料金設計</strong>
+                <strong>無料検証から買い切りの制限解除へ、判断軸を一段で理解できる料金設計</strong>
               </div>
             </motion.div>
 
@@ -2340,8 +2440,8 @@ export function HomePage() {
               <div className="pricing-decision-panel__intro">
                 <h3>迷いにくい選び方を先に提示</h3>
                 <p>
-                  価格だけではなく、初回導入、継続投稿、個別テンプレートや相談までの
-                  使い分けを先に見せて、比較の迷いを減らしています。
+                  価格だけではなく、初回導入、継続投稿で制限解除が必要になるタイミング、
+                  購入後の権限同期まで先に見せて、比較の迷いを減らしています。
                 </p>
               </div>
 

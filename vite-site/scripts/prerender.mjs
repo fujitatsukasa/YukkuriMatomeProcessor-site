@@ -7,6 +7,31 @@ import http from 'http';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const distDir = resolve(__dirname, '../dist');
+const publicOrigin = 'https://yukkurimatomeprocessor.com';
+const internalOrigins = ['http://127.0.0.1:5174', 'http://localhost:5174'];
+
+function keepFirstTitle(html) {
+  let seenTitle = false;
+  return html.replace(/<title>[\s\S]*?<\/title>/gi, (match) => {
+    if (seenTitle) return '';
+    seenTitle = true;
+    return match;
+  });
+}
+
+function sanitizePrerenderedHtml(html, route) {
+  let sanitized = html;
+  for (const origin of internalOrigins) {
+    sanitized = sanitized.replaceAll(origin, publicOrigin);
+  }
+  sanitized = keepFirstTitle(sanitized);
+
+  if (/https?:\/\/(?:127\.0\.0\.1|localhost)(?::\d+)?/i.test(sanitized)) {
+    throw new Error(`Local preview URL leaked into prerendered HTML for ${route}`);
+  }
+
+  return sanitized;
+}
 
 async function prerender() {
   const sitemapPath = join(distDir, 'sitemap.xml');
@@ -110,7 +135,7 @@ async function prerender() {
       }, { timeout: 5000 }).catch(() => undefined);
       await page.waitForTimeout(500);
 
-      let html = await page.content();
+      let html = sanitizePrerenderedHtml(await page.content(), route);
 
       let outPath = join(distDir, route, 'index.html');
       if (route === '/') {

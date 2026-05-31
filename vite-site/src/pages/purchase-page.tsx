@@ -15,22 +15,13 @@ const planNarratives = [
     cta: { label: '無料で始める', href: '/download/' },
   },
   {
-    name: 'Standard',
-    price: '¥5,000',
-    term: '月額 / 税込 5,500円',
-    title: '継続投稿の主力ライン',
-    body: 'テンプレート運用、AI補助、YouTube分析までを日常運用へ載せ、毎週の制作本数を安定させたい人向けです。',
-    points: ['テンプレート運用', 'AI補助と分析を日常化', '個人の継続投稿を安定化'],
+    name: 'Premium',
+    price: '¥39,800',
+    term: '買い切り / 税込',
+    title: '制限を外して継続投稿へ移る',
+    body: 'scriptFetch と scriptGeneration の制限を外し、台本取得・生成を止めずに回したい人向けの一度払いライセンスです。',
+    points: ['台本取得の制限解除', '台本生成の制限解除', 'Googleアカウントに権利保持'],
     cta: { label: 'プラン比較へ進む', href: '#pricing-cards' },
-  },
-  {
-    name: 'Pro',
-    price: '¥10,000',
-    term: '月額 / 税込 11,000円',
-    title: '個別テンプレートと相談込み',
-    body: '複数フォーマット運用、個別テンプレート作成、相談や機能提案まで含めて深く使い込む方向けです。',
-    points: ['個別テンプレート作成', '動画運用の相談', 'より深い内製化へ寄せる'],
-    cta: { label: '導入相談をする', href: '/contact/' },
   },
 ] as const
 
@@ -42,13 +33,13 @@ const pricingFlow = [
   },
   {
     eyebrow: 'STEP 02',
-    title: 'Standard で継続運用へ',
-    body: 'テンプレート運用やAI補助を日常運用に乗せ、投稿本数の安定化を狙います。',
+    title: 'Premium を買い切りで購入',
+    body: 'アプリ内の購入画面から Stripe Checkout を開き、一度払いでライセンスを購入します。',
   },
   {
     eyebrow: 'STEP 03',
-    title: 'Pro で個別最適化',
-    body: '独自テンプレートや相談込みで、チームや複数フォーマットの運用へ広げます。',
+    title: '権限同期後に制限解除',
+    body: '決済完了後、Googleログインに紐づく Premium 権限を同期し、台本取得・生成の制限を外します。',
   },
 ] as const
 
@@ -62,17 +53,10 @@ const planDecisionGuide = [
   },
   {
     label: '週1本以上を安定させたい',
-    plan: 'Standard',
-    title: '継続投稿の主力ライン',
-    body: 'テンプレート運用、AI補助、分析まわりを日常運用に乗せ、毎週の制作本数を安定させます。',
-    cues: ['週1本以上', '反応集・解説の継続投稿', '個人運用の時短'],
-  },
-  {
-    label: '型を作って深く運用したい',
-    plan: 'Pro',
-    title: '個別テンプレートと相談込み',
-    body: '独自フォーマット、複数ライン、チーム運用など、制作体制に合わせた深い調整が必要な方向けです。',
-    cues: ['独自テンプレート', '複数フォーマット', '運用相談込み'],
+    plan: 'Premium',
+    title: '買い切りで制限解除',
+    body: '台本取得・生成の制限を外し、継続投稿の前工程を止めずに回せるようにします。',
+    cues: ['週1本以上', '反応集・解説の継続投稿', 'scriptFetch / scriptGeneration の本格利用'],
   },
 ] as const
 
@@ -80,12 +64,12 @@ const purchaseReassuranceItems = [
   {
     label: '支払い',
     title: '国内決済とStripe Checkout',
-    body: '購入と支払い方法更新はアプリ内の導線から行えます。標準導線はクレジットカード決済です。',
+    body: '購入はアプリ内の導線から Stripe Checkout を開いて行います。標準導線はクレジットカードの一度払いです。',
   },
   {
-    label: '解約',
-    title: 'アプリ内から契約管理',
-    body: 'Standard / Pro は Customer Portal から解約予約できます。期間終了までは利用でき、終了後に Free へ戻ります。',
+    label: '更新',
+    title: '月額自動更新なし',
+    body: 'Premium は買い切りのため、解約予約や毎月の自動更新はありません。返金時は Premium 権限を停止します。',
   },
   {
     label: '商用利用',
@@ -111,8 +95,8 @@ export function PurchasePage() {
     <>
       <PageMeta
         title="料金プラン"
-        description="Free、Standard、Pro の3つのプランを、初回導入、継続投稿、個別テンプレート運用の違いで比較できる料金ページです。"
-        keywords="料金, プラン, サブスクリプション, 無料プラン, Standard, Pro, テンプレート運用"
+        description="Free と Premium 買い切りライセンスの違い、39,800円の一度払い、権限同期、返金条件を確認できる料金ページです。"
+        keywords="料金, 買い切り, Premium, 無料プラン, Stripe Checkout, テンプレート運用"
         path="/purchase/"
       />
 
@@ -123,13 +107,14 @@ export function PurchasePage() {
               <p className="brand-kicker">PRICING</p>
               <h1>最初の判断を、料金表の上で終わらせる</h1>
               <p className="brand-lead">
-                このページでは、価格だけでなく「どの制作規模にどのプランが合うか」を一画面目から判断しやすい形に整理しています。
+                このページでは、無料で試す範囲と、39,800円の買い切りで制限解除される範囲を一画面目から判断しやすい形に整理しています。
               </p>
 
               <div className="pricing-command-hero__chips" role="list" aria-label="料金ページの前提">
-                <span role="listitem">月額サブスク</span>
+                <span role="listitem">買い切り</span>
+                <span role="listitem">月額なし</span>
                 <span role="listitem">Free から導入相性を確認</span>
-                <span role="listitem">アプリ内で契約管理</span>
+                <span role="listitem">Googleアカウントに権利保持</span>
                 <span role="listitem">{legal.support.firstResponseSla}</span>
               </div>
 
@@ -204,9 +189,9 @@ export function PurchasePage() {
         <Section alt>
           <div className="subpage-section-head pricing-decision-guide__head">
             <p>PLAN DECISION</p>
-            <h2>迷うなら、制作本数と運用の深さで選ぶ</h2>
+            <h2>迷うなら、制限解除が必要かで選ぶ</h2>
             <span>
-              価格だけで比べるより、いま困っている工程と投稿頻度に合わせて選ぶ方が失敗しにくくなります。
+              まず Free で流れを確認し、台本取得・生成の利用量が増えてから Premium へ進む方が失敗しにくくなります。
             </span>
           </div>
 
@@ -230,7 +215,7 @@ export function PurchasePage() {
         <Section alt>
           <div className="subpage-section-head">
             <p>PLAN MAP</p>
-            <h2>使い方の段階ごとに、どこから上げるかを決める</h2>
+            <h2>Free で確認し、Premium で制限を外す</h2>
           </div>
 
           <div className="pricing-plan-map">
@@ -298,7 +283,7 @@ export function PurchasePage() {
                 </div>
               </dl>
               <p className="pricing-trust-card__note">
-                プラン変更は、アップグレードが即時反映 + 日割り差額請求、ダウングレードが次回更新日から反映の方針です。
+                Premium は買い切りのため、日割り差額請求やダウングレード予約はありません。
               </p>
               <LegalLinksBlock note={legalContactNote} />
             </InteractiveCard>
@@ -315,7 +300,7 @@ export function PurchasePage() {
                 <li>受付時間: {legal.support.operationHours}</li>
                 <li>一次返信: {legal.support.firstResponseSla}</li>
               </ul>
-              <p className="pricing-trust-card__note">購入、アップグレード、支払い方法更新はアプリ内の導線から利用できます。</p>
+              <p className="pricing-trust-card__note">購入とライセンス確認はアプリ内の導線から利用できます。</p>
             </InteractiveCard>
 
             <InteractiveCard className="release-panel premium-glass pricing-trust-card">

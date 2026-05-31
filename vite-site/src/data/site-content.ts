@@ -91,38 +91,37 @@ export const legal = {
   pricing: {
     plans: [
       { name: 'Free', price: '¥0', priceTax: '無料', term: 'ずっと無料', description: '基本機能をフル活用' },
-      { name: 'Standard', price: '¥5,000', priceTax: '税込 5,500円', term: '月額', description: '個人クリエイター向け' },
-      { name: 'Pro', price: '¥10,000', priceTax: '税込 11,000円', term: '月額', description: '個別運用と相談込み' },
+      { name: 'Premium', price: '¥39,800', priceTax: '税込 39,800円', term: '買い切り', description: '台本取得・生成の制限解除' },
     ],
     productName: 'ゆっくりまとめプロセッサー',
-    modelLabel: '月額サブスクリプション（無料プランあり）',
-    additionalFees: '標準導線では追加手数料なし',
-    unitPrice: '5000',
+    modelLabel: '無料プラン + 39,800円の買い切りライセンス',
+    additionalFees: '標準導線では送料・追加手数料なし',
+    unitPrice: '39800',
     currency: 'JPY',
   },
   payment: {
     methods: ['クレジットカード（Stripe Checkout）'],
-    timing: 'アプリ内の購入画面で契約確定時に初回決済。以後は月額自動課金',
+    timing: '買い切り版は Stripe Checkout で購入時に一度だけ決済します。月額自動課金はありません。',
     noteBankPaypal:
-      '現在の標準購入導線は Stripe Checkout です。',
-    noteOnline: '購入、アップグレード、支払い方法更新はアプリ内の導線から利用します。',
+      '現在の標準購入導線は Stripe Checkout の一度払いです。',
+    noteOnline: '購入とライセンス確認はアプリ内の導線から利用します。',
     deadlineRules: [
-      { method: 'クレジットカード', limit: '毎月自動決済' },
+      { method: 'クレジットカード', limit: 'Stripe Checkout で購入時に即時決済' },
     ],
     unpaidPolicy:
-      '支払い失敗時は短い猶予期間後に、有料プラン機能が一時停止となる場合があります。',
+      '決済が完了しない場合、Premium ライセンスは付与されません。月額継続課金の未払い扱いはありません。',
     bankAccountPolicy:
       '標準導線外の支払い方法は、別途案内がある場合を除き提供していません。',
   },
   delivery: {
-    timing: '決済完了後、アプリ内同期を経て即時または短時間でプラン機能が有効化',
-    method: 'アプリ内でのプラン有効化（Firebase同期結果を正として反映）',
+    timing: '決済完了後、Webhook とアプリ内同期を経て即時または短時間で Premium 機能が有効化',
+    method: 'Googleログインに紐づく課金状態と利用枠を同期してアプリ内へ反映',
   },
   refund: {
-    summary: '有料プランは期間終了時解約。次回更新日までに解約予約すれば追加課金はなく、日割り返金は原則ありません',
+    summary: '買い切りライセンスは購入後7日以内を原則受付。返金時は Premium 権限を停止します。',
     defectiveResponse: '提供不備または重大な不具合がある場合は個別対応',
     procedure: '問い合わせ窓口へ申告後、事実確認のうえ対応方針を案内',
-    defectClaimDeadline: '課金日から7日以内に不備内容を申告してください。',
+    defectClaimDeadline: '購入日から7日以内に不備内容を申告してください。',
     remedyPolicy:
       '不備が確認された場合は、原則として修補または代替手段の提供で対応します。',
     refundMethod:
@@ -131,7 +130,7 @@ export const legal = {
   },
   cancellation: {
     subscription:
-      '有料プラン（Standard / Pro）はアプリ内から Customer Portal を開いていつでも解約予約できます。期間終了までは引き続き利用でき、終了後に Free へ移行します。',
+      'Premium は買い切りのため解約予約や自動更新はありません。返金が成立した場合は Premium 権限を停止し、Free 状態へ戻ります。',
   },
   support: {
     operationHours: '平日 10:00-18:00（土日祝・年末年始を除く）',
@@ -248,9 +247,9 @@ export const faqGroups: FaqGroup[] = [
     id: 'faq-purchase',
     label: '購入・契約',
     items: [
-      { question: '料金プランはどう分かれていますか？', answer: '無料プラン（¥0）、Standard（月額5,000円/税込5,500円）、Pro（月額10,000円/税込11,000円）の3つです。まずは無料プランで導入相性を確認できます。' },
-      { question: '購入申し込みはどのように進めますか？', answer: 'アプリ内の購入画面から Stripe Checkout を開いて契約します。解約や支払い方法更新は Customer Portal を利用します。' },
-      { question: 'プラン変更はどう反映されますか？', answer: 'アップグレードは即時反映 + 日割り差額請求、ダウングレードは次回更新日から反映の方針です。' },
+      { question: '料金プランはどう分かれていますか？', answer: 'Free（¥0）と Premium（買い切り39,800円）の2つです。まずはFreeで導入相性を確認し、制限解除が必要になったらPremiumを購入します。' },
+      { question: '購入申し込みはどのように進めますか？', answer: 'アプリ内の購入画面から Stripe Checkout を開き、買い切りライセンスを一度払いで購入します。' },
+      { question: '購入後の権限はどう反映されますか？', answer: '決済完了後、Googleログインに紐づく課金状態と利用枠を同期し、アプリ内でPremium機能が有効化されます。' },
       { question: '契約・請求に関する相談先は？', answer: '記録の残るメール窓口を推奨します。詳細はお問い合わせページを参照してください。' },
     ],
   },

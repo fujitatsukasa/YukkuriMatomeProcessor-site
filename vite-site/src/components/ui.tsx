@@ -327,7 +327,9 @@ export function GlobalShareButtons({
   title?: string
   message?: string 
 }) {
-  const [shareUrl] = useState(() => (typeof window !== 'undefined' ? window.location.href : ''))
+  const [shareUrl] = useState(() =>
+    typeof window !== 'undefined' ? `${siteOrigin}${normalizePath(window.location.pathname)}` : '',
+  )
 
   if (!shareUrl) return null
 
