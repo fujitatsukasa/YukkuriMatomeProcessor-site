@@ -31,6 +31,12 @@ npm run dev
 - Support routes: legal pages, article pages, `404.html`, `/account/`, `/billing/*`
 - Deployment assets: `vite-site/public/`
 
+## Deployment
+
+公開サイトは `.github/workflows/deploy-pages.yml` で `vite-site/` をビルドし、`vite-site/dist` を GitHub Pages にデプロイします。
+
+GitHub Pages の Source は **GitHub Actions** に設定してください。Source が `main` branch / root のままだと、Vite のビルド成果物ではなくこの README が GitHub Pages で表示されます。
+
 ## V1.4 Quality Line
 
 - 虹色発光は CTA と選択状態のブランドシグナルとして維持します。
