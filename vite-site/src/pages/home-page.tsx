@@ -692,7 +692,7 @@ const faqItems: FAQItem[] = faqCategories.flatMap(c => c.items)
 
 
 const homeMetaDescription =
-  'テンプレート運用を軸に、対応サイト取得、台本作成、AI補助、YMM4前準備、YouTube分析までまとめて進められる動画制作支援ツール。'
+  'ゆっくりまとめプロセッサーは、対応サイト取得、台本作成、AI補助、YMM4前準備、YouTube分析までまとめて進められるWindows向け動画制作支援ツールです。'
 
 const homePreviewImage = `${siteOrigin}/product_get_script.webp`
 const homePreviewScreenshots = [
@@ -1057,8 +1057,8 @@ export function HomePage() {
   return (
     <>
       <PageMeta
-        title={`${siteTitle} | ${siteSubtitle}`}
-        description="テンプレート運用を軸に、対応サイト取得、台本整理、AI補助、YMM4前準備、YouTube分析までを一続きで進められるWindows向け動画制作支援ツール。"
+        title={`${siteTitle} | YMM4向け動画制作支援ツール`}
+        description={homeMetaDescription}
         keywords="YMM4,テンプレート運用,ゆっくり解説,反応集,ショート動画,動画制作支援"
         image={homePreviewImage}
         path="/"

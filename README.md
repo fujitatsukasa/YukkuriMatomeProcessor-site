@@ -1,4 +1,4 @@
-# Yukkuri Matome Processor Site
+# ゆっくりまとめプロセッサー サイト管理リポジトリ
 
 公開サイト本体は `vite-site/` の Vite + React 実装です。現在のサイトバージョンは **V1.4** として定義しています。
 
