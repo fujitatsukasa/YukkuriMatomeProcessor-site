@@ -86,7 +86,12 @@ async function prerender() {
   const baseUrl = `http://127.0.0.1:5174`;
   console.log(`[PRERENDER] Internal SPA server running at ${baseUrl}`);
 
-  const browser = await chromium.launch({ headless: true });
+  const browser = await chromium.launch({
+    headless: true,
+    ...(process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH
+      ? { executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH }
+      : {}),
+  });
 
   for (const route of routes) {
     if (route.match(/\.\w+$/)) continue; 
