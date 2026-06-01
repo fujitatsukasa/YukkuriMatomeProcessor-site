@@ -33,7 +33,7 @@ const supportBundle = [
 
 const downloadMetrics = [
   { value: 'Free', label: '無料で動作確認', detail: '記事URLから台本下地まで試せる' },
-  { value: '4手順', label: '最初に触る順番', detail: '解凍 -> 起動 -> 設定 -> URL入力' },
+  { value: '6手順', label: '最初に触る順番', detail: '解凍 -> 起動 -> 設定 -> URL入力 -> 出力確認' },
   { value: 'YMM4', label: '後工程の手戻りを削減', detail: '保存先、CSV、連携パスの整合を先に揃える' },
 ] as const
 
@@ -120,6 +120,41 @@ const distributionChecks = [
     title: '更新時',
     body: 'アップデート前に保存先と設定を確認し、必要なら作業フォルダをバックアップしてください。変更点は更新履歴で確認できます。',
   },
+] as const
+
+const distributionReadinessCards = [
+  {
+    title: '取得前に見る情報',
+    body: '最新版、公開日、ファイル名、サイズ、SHA256、GitHub Releases のURLを確認します。',
+    done: ['公式ZIPの名前を確認', 'サイズとSHA256を確認', '配布元URLを確認'],
+    Icon: FileSearch,
+  },
+  {
+    title: '解凍後に見ること',
+    body: 'ZIPを直接開いたまま使わず、書き込み可能なフォルダへ解凍してから起動します。',
+    done: ['ZIPを解凍済み', '作業フォルダに配置', 'Windows警告時は配布元を照合'],
+    Icon: Wrench,
+  },
+  {
+    title: '初回設定で固定すること',
+    body: 'YMM4.exeの絶対パス、CSV/.ymmp保存先、必要なAPIキーを先に保存します。',
+    done: ['YMM4.exeを指定', '保存先フォルダを指定', '必要ならAPIキーを設定'],
+    Icon: Settings2,
+  },
+  {
+    title: '導入完了の判定',
+    body: '少数URLで候補一覧、台本下地、出力先まで確認できたら導入完了です。',
+    done: ['候補一覧が表示される', '台本下地を確認できる', '出力先にファイルを作れる'],
+    Icon: ClipboardCheck,
+  },
+] as const
+
+const distributionCompletionChecks = [
+  '公式ZIPを取得した',
+  'ZIPを解凍してから起動した',
+  'Windows警告が出た場合に配布元とSHA256を確認した',
+  'YMM4.exeと保存先を保存した',
+  '少数URLで候補一覧と出力先まで確認した',
 ] as const
 
 type ReleaseAssetResponse = {
@@ -537,7 +572,7 @@ export function DownloadPage() {
     <>
       <PageMeta
         title="ダウンロード｜最新版を無料ダウンロード"
-        description="ゆっくりまとめプロセッサーの最新版を無料でダウンロード。Windows環境でYMM4向けの台本取得、CSV出力、.ymmp前準備、初期設定を確認できます。"
+        description="ゆっくりまとめプロセッサーの最新版を無料でダウンロード。ファイル名、サイズ、SHA256、初回起動、YMM4パス設定、導入完了判定まで確認できます。"
         keywords="ダウンロード, Windows, YMM4, 台本取得, CSV, .ymmp, ゆっくりまとめプロセッサー"
         path="/download/"
       />
@@ -577,6 +612,62 @@ export function DownloadPage() {
 
         <Section alt>
           <ReleaseIntegrityPanel />
+
+          <div className="subpage-section-head distribution-readiness-head">
+            <p>配布物の完成度</p>
+            <h2>取得してから導入完了まで、確認項目を一画面で見る</h2>
+            <p>
+              配布ファイルの取り違え、ZIPの開きっぱなし、YMM4パス未設定、保存先エラーで止まらないように、
+              ダウンロード前後で見る項目を分けています。
+            </p>
+          </div>
+
+          <div className="distribution-readiness-board">
+            <div className="distribution-readiness-grid">
+              {distributionReadinessCards.map((item) => {
+                const ItemIcon = item.Icon
+                return (
+                  <InteractiveCard key={item.title} className="release-panel premium-glass distribution-readiness-card">
+                    <span className="distribution-readiness-card__icon" aria-hidden="true">
+                      <ItemIcon size={20} />
+                    </span>
+                    <h3>{item.title}</h3>
+                    <p>{item.body}</p>
+                    <ul>
+                      {item.done.map((point) => (
+                        <li key={point}>
+                          <BadgeCheck size={15} />
+                          {point}
+                        </li>
+                      ))}
+                    </ul>
+                  </InteractiveCard>
+                )
+              })}
+            </div>
+
+            <InteractiveCard className="distribution-completion-panel premium-glass">
+              <div>
+                <span className="subpage-card__eyebrow">
+                  <ClipboardCheck size={16} />
+                  導入完了チェック
+                </span>
+                <h2>ここまで確認できたら、使い方ページの手順へ進めます</h2>
+                <p>
+                  ダウンロードページでは「安全確認」と「初回起動」までを扱います。URL取得、台本整理、
+                  CSV/.ymmp前準備の細かい操作は、次に使い方ページで確認してください。
+                </p>
+              </div>
+              <ul className="distribution-completion-list">
+                {distributionCompletionChecks.map((item) => (
+                  <li key={item}>
+                    <CheckCircle2 size={16} />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </InteractiveCard>
+          </div>
 
           <div className="subpage-section-head distribution-check-head">
             <p>配布物チェック</p>
