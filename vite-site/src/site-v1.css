@@ -6862,6 +6862,71 @@ html {
   line-height: 1.65;
 }
 
+.blog-principle-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.blog-principle-card {
+  padding: 0;
+  height: 100%;
+}
+
+.blog-principle-card a {
+  color: inherit;
+  display: grid;
+  gap: 0.72rem;
+  height: 100%;
+  padding: 1.1rem;
+  text-decoration: none;
+}
+
+.blog-principle-card__icon {
+  align-items: center;
+  background: rgba(225, 194, 138, 0.14);
+  border: 1px solid rgba(255, 232, 190, 0.18);
+  border-radius: 14px;
+  color: #ffe8be;
+  display: inline-flex;
+  height: 42px;
+  justify-content: center;
+  width: 42px;
+}
+
+.blog-principle-card strong {
+  font-family: var(--display);
+  font-size: 1.02rem;
+  line-height: 1.45;
+}
+
+.blog-principle-card small {
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+
+.blog-principle-card em {
+  align-items: center;
+  color: rgba(255, 232, 190, 0.86);
+  display: inline-flex;
+  font-size: 0.86rem;
+  font-style: normal;
+  gap: 0.35rem;
+  margin-top: auto;
+}
+
+.blog-editorial-note {
+  border: 1px solid rgba(255, 232, 190, 0.16);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.035);
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 0.92rem;
+  line-height: 1.8;
+  margin-top: 1rem;
+  padding: 0.95rem 1.05rem;
+}
+
 .blog-tag-filter {
   display: flex;
   gap: 0.65rem;
@@ -8136,6 +8201,7 @@ html {
 .contact-channel-grid,
 .contact-intake-grid,
 .contact-info-layout,
+.blog-principle-grid,
 .blog-grid,
 .faq-support-rail__channels,
 .blog-article-summary,

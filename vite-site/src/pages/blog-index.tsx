@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from '@/lib/light-motion'
-import { ArrowRight, Calendar, Clock, Tag as TagIcon } from 'lucide-react'
+import { ArrowRight, BookOpen, Calendar, Clock, FileCheck2, ShieldCheck, Tag as TagIcon } from 'lucide-react'
 import { InteractiveCard, PageMeta, Section } from '@/components/ui'
 import { siteTitle } from '@/data/site-content'
 import { getAllBlogPosts, resolveBlogVisual } from '@/lib/blog'
@@ -18,6 +18,27 @@ function estimateReadMinutes(content: string) {
   const textLength = content.replace(/\s+/g, '').length
   return Math.max(3, Math.ceil(textLength / 900))
 }
+
+const blogReadingPaths = [
+  {
+    title: 'まず作り方の全体像を掴む',
+    body: '記事URLやスレッドURLを、台本下地とYMM4前準備へつなげる流れを確認します。',
+    href: '/blog/how-to-make-yukkuri-video-automatically/',
+    Icon: BookOpen,
+  },
+  {
+    title: 'Windows + YMM4の前提を確認',
+    body: 'スマホ編集からPC環境へ移るべきタイミングと、YMM4で扱いやすい工程を整理します。',
+    href: '/blog/making-yukkuri-video-on-smartphone/',
+    Icon: FileCheck2,
+  },
+  {
+    title: '権利と素材ルールを先に確認',
+    body: '音声ライセンス、立ち絵、引用元、再利用コンテンツの考え方を先に押さえます。',
+    href: '/blog/yukkuri-copyright-and-voice-rules/',
+    Icon: ShieldCheck,
+  },
+]
 
 export function BlogIndex() {
   const allPosts = useMemo(
@@ -74,8 +95,8 @@ export function BlogIndex() {
     <>
       <PageMeta
         title={`オフィシャルブログ | ${siteTitle}`}
-        description="ゆっくり解説、反応集、YMM4、制作自動化に関する実践ノウハウをまとめた公式ブログです。"
-        keywords="ブログ,ゆっくり解説,動画編集,YMM4,自動化,制作手順"
+        description="ゆっくり解説、反応集、YMM4、台本下地、素材・著作権、YMM4前準備に関する実践ノウハウをまとめた公式ブログです。"
+        keywords="ブログ,ゆっくり解説,動画編集,YMM4,YMM4前準備,制作手順"
         path="/blog/"
       />
 
@@ -84,9 +105,9 @@ export function BlogIndex() {
           <div className="editorial-hero__shell">
             <div className="editorial-hero__copy">
               <p className="brand-kicker">OFFICIAL BLOG</p>
-              <h1>制作フローを伸ばす記事だけを並べる</h1>
+              <h1>ゆっくり動画制作の手順とYMM4前準備を読む</h1>
               <p className="brand-lead">
-                ここでは製品の宣伝よりも、制作手順へ戻せる知見を優先しています。YMM4、台本、素材、著作権、改善ポイントまでを検索とタグで横断できます。
+                記事URLから台本下地を作る流れ、素材・著作権、YMM4で確認する前工程までを検索とタグで横断できます。
               </p>
 
               <label className="utility-search blog-index-search">
@@ -115,7 +136,7 @@ export function BlogIndex() {
 
               <p className="editorial-hero__meta">
                 {searchTerm || activeTag ? '絞り込み結果' : '公開中の記事'} <strong>{filteredPosts.length}</strong> 本
-                <span>制作手順に戻せる記事だけを残しています。</span>
+                <span>YMM4前準備と制作手順に関係する記事を整理しています。</span>
               </p>
             </div>
 
@@ -151,6 +172,35 @@ export function BlogIndex() {
             ) : null}
           </div>
         </section>
+
+        <Section>
+          <div className="subpage-section-head">
+            <p>START HERE</p>
+            <h2>読む順番と前提</h2>
+          </div>
+
+          <div className="blog-principle-grid">
+            {blogReadingPaths.map(({ title, body, href, Icon }) => (
+              <InteractiveCard key={title} className="release-panel premium-glass blog-principle-card">
+                <Link to={href}>
+                  <span className="blog-principle-card__icon">
+                    <Icon size={22} aria-hidden="true" />
+                  </span>
+                  <strong>{title}</strong>
+                  <small>{body}</small>
+                  <em>
+                    記事を読む
+                    <ArrowRight size={14} aria-hidden="true" />
+                  </em>
+                </Link>
+              </InteractiveCard>
+            ))}
+          </div>
+
+          <div className="blog-editorial-note" role="note">
+            収益化や再生数を保証する記事ではありません。AI出力は下書きとして扱い、素材・引用・音声ライセンスを確認する前提で掲載しています。
+          </div>
+        </Section>
 
         {sidePosts.length ? (
           <Section alt>

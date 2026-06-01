@@ -122,6 +122,11 @@ try {
 
   for (const route of routes) {
     await desktopPage.goto(`http://${host}:${port}${route}`, { waitUntil: 'networkidle' })
+    await desktopPage
+      .waitForFunction(() => document.body.innerText.trim().length > 0 && document.querySelector('h1'), null, {
+        timeout: 10000,
+      })
+      .catch(() => undefined)
     const result = await desktopPage.evaluate(() => {
       const bodyText = document.body.innerText.replace(/\s+/g, ' ').trim()
       const title = document.title
@@ -140,6 +145,11 @@ try {
       }
     })
     await mobilePage.goto(`http://${host}:${port}${route}`, { waitUntil: 'networkidle' })
+    await mobilePage
+      .waitForFunction(() => document.body.innerText.trim().length > 0, null, {
+        timeout: 10000,
+      })
+      .catch(() => undefined)
     const mobileOverflow = await mobilePage.evaluate(() =>
       Math.max(0, document.documentElement.scrollWidth - window.innerWidth),
     )
