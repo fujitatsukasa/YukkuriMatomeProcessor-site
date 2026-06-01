@@ -1,11 +1,11 @@
 import { expect, test } from '@playwright/test'
 
 const pages = [
-  { path: '/', heading: 'ひとつの運用線にまとめる' },
-  { path: '/download/', heading: '最新版を入手する' },
-  { path: '/instructions/', heading: '初期設定から編集開始まで' },
-  { path: '/faq/', heading: 'まず疑問を片付ける' },
-  { path: '/purchase/', heading: '最初の判断を、料金表の上で終わらせる' },
+  { path: '/', heading: '記事URL・スレッドURLから' },
+  { path: '/download/', heading: '最新版を無料ダウンロード' },
+  { path: '/instructions/', heading: '記事URLから台本を取得' },
+  { path: '/faq/', heading: '導入前によくある質問' },
+  { path: '/purchase/', heading: 'Freeで試して' },
   { path: '/legal/commercial-transactions/', heading: '特定商取引法に基づく表記' },
 ]
 
@@ -100,8 +100,8 @@ test.describe('mobile layout', () => {
 
   test('legacy uppercase routes redirect to canonical lowercase pages', async ({ page }) => {
     const routes = [
-      { from: '/Instructions/', to: '/instructions/', heading: '初期設定から編集開始まで' },
-      { from: '/FAQ/', to: '/faq/', heading: 'まず疑問を片付ける' },
+      { from: '/Instructions/', to: '/instructions/', heading: '記事URLから台本を取得' },
+      { from: '/FAQ/', to: '/faq/', heading: '導入前によくある質問' },
     ]
 
     for (const route of routes) {

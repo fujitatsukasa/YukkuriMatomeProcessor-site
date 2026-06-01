@@ -184,6 +184,22 @@ export const tagsUrl = 'https://github.com/fujitatsukasa/YukkuriMatomeProcessor/
 export const changeLogUrl =
   'https://github.com/fujitatsukasa/YukkuriMatomeProcessor/releases'
 
+export const releaseIntegrity = {
+  repository: 'fujitatsukasa/YukkuriMatomeProcessor',
+  apiUrl: 'https://api.github.com/repos/fujitatsukasa/YukkuriMatomeProcessor/releases/latest',
+  fallback: {
+    tag: '1.2.12',
+    publishedAt: '2025-12-15T03:18:28Z',
+    releaseUrl: 'https://github.com/fujitatsukasa/YukkuriMatomeProcessor/releases/tag/1.2.12',
+    assetName: 'YukkuriMatomeProcessor.zip',
+    assetUrl:
+      'https://github.com/fujitatsukasa/YukkuriMatomeProcessor/releases/download/1.2.12/YukkuriMatomeProcessor.zip',
+    sizeBytes: 288372460,
+    sha256: 'e57399e9c42506dd0a8a8da4a254c2e395bd52b5341cce46dda0c9af3f3d3686',
+    verifiedAt: '2026-06-01',
+  },
+} as const
+
 export const faqGroups: FaqGroup[] = [
   {
     id: 'faq-general',

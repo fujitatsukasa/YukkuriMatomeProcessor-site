@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { InteractiveCard, PageIntro, PageMeta, Section } from '@/components/ui'
-import { downloadUrl } from '@/data/site-content'
+import { downloadUrl, latestReleaseUrl, releaseIntegrity } from '@/data/site-content'
 import { MetricStrip } from '@/pages/shared'
 import { AnimatePresence, motion } from '@/lib/light-motion'
 import {
@@ -68,12 +68,12 @@ const downloadSupportCards = [
 
 const distributionChecks = [
   {
-    title: '配布ファイル',
-    body: '標準配布は GitHub Releases の `YukkuriMatomeProcessor.zip` です。別名ファイルや再配布URLではなく、公式リンクから取得してください。',
+    title: '公式リンク',
+    body: '標準配布は GitHub Releases の YukkuriMatomeProcessor.zip です。別名ファイルや再配布URLではなく、このページの公式リンクから取得してください。',
   },
   {
     title: '初回起動前',
-    body: 'ZIPを解凍し、書き込み可能なフォルダへ置いてから起動します。Windowsの警告が出た場合は、配布元URLとファイル名を確認してください。',
+    body: 'ZIPを解凍し、書き込み可能なフォルダへ置いてから起動します。Windowsの警告が出た場合は、配布元URL、ファイル名、SHA256を確認してください。',
   },
   {
     title: '起動後に確認',
@@ -84,6 +84,173 @@ const distributionChecks = [
     body: 'アップデート前に保存先と設定を確認し、必要なら作業フォルダをバックアップしてください。変更点は更新履歴で確認できます。',
   },
 ] as const
+
+type ReleaseAssetResponse = {
+  name?: string
+  size?: number
+  digest?: string | null
+  browser_download_url?: string
+  download_count?: number
+}
+
+type LatestReleaseResponse = {
+  tag_name?: string
+  name?: string
+  published_at?: string
+  html_url?: string
+  assets?: ReleaseAssetResponse[]
+}
+
+type PublicReleaseInfo = {
+  tag: string
+  publishedAt: string
+  releaseUrl: string
+  assetName: string
+  assetUrl: string
+  sizeBytes: number
+  sha256: string
+  source: 'fallback' | 'live' | 'error'
+  downloadCount?: number
+}
+
+const fallbackReleaseInfo: PublicReleaseInfo = {
+  tag: releaseIntegrity.fallback.tag,
+  publishedAt: releaseIntegrity.fallback.publishedAt,
+  releaseUrl: releaseIntegrity.fallback.releaseUrl,
+  assetName: releaseIntegrity.fallback.assetName,
+  assetUrl: releaseIntegrity.fallback.assetUrl,
+  sizeBytes: releaseIntegrity.fallback.sizeBytes,
+  sha256: releaseIntegrity.fallback.sha256,
+  source: 'fallback',
+}
+
+function normalizeSha256(digest?: string | null) {
+  return digest?.replace(/^sha256:/i, '').trim() ?? ''
+}
+
+function formatReleaseDate(isoDate: string) {
+  const date = new Date(isoDate)
+  if (Number.isNaN(date.getTime())) return '確認中'
+
+  return new Intl.DateTimeFormat('ja-JP', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    timeZone: 'Asia/Tokyo',
+  }).format(date)
+}
+
+function formatFileSize(bytes: number) {
+  return `${(bytes / 1000 / 1000).toLocaleString('ja-JP', {
+    maximumFractionDigits: 1,
+  })} MB`
+}
+
+function ReleaseIntegrityPanel() {
+  const [release, setRelease] = useState<PublicReleaseInfo>(fallbackReleaseInfo)
+
+  useEffect(() => {
+    const controller = new AbortController()
+
+    async function fetchLatestRelease() {
+      try {
+        const response = await fetch(releaseIntegrity.apiUrl, {
+          headers: { Accept: 'application/vnd.github+json' },
+          signal: controller.signal,
+        })
+
+        if (!response.ok) throw new Error(`GitHub release fetch failed: ${response.status}`)
+
+        const data = (await response.json()) as LatestReleaseResponse
+        const asset =
+          data.assets?.find((candidate) => candidate.name === releaseIntegrity.fallback.assetName) ??
+          data.assets?.[0]
+
+        if (!data.tag_name || !data.published_at || !data.html_url || !asset?.name || !asset.browser_download_url) {
+          throw new Error('GitHub release response is missing required fields')
+        }
+
+        setRelease({
+          tag: data.tag_name,
+          publishedAt: data.published_at,
+          releaseUrl: data.html_url,
+          assetName: asset.name,
+          assetUrl: asset.browser_download_url,
+          sizeBytes: asset.size ?? releaseIntegrity.fallback.sizeBytes,
+          sha256: normalizeSha256(asset.digest) || releaseIntegrity.fallback.sha256,
+          source: 'live',
+          downloadCount: asset.download_count,
+        })
+      } catch {
+        if (controller.signal.aborted) return
+        setRelease({ ...fallbackReleaseInfo, source: 'error' })
+      }
+    }
+
+    void fetchLatestRelease()
+
+    return () => controller.abort()
+  }, [])
+
+  const statusLabel =
+    release.source === 'live'
+      ? 'GitHubから取得済み'
+      : release.source === 'error'
+        ? `既知情報を表示中 / ${releaseIntegrity.fallback.verifiedAt}確認`
+        : `既知情報を表示中 / ${releaseIntegrity.fallback.verifiedAt}確認`
+
+  return (
+    <InteractiveCard as="section" className="release-integrity-panel premium-glass">
+      <div className="release-integrity-panel__top">
+        <div>
+          <span className="subpage-card__eyebrow">公式配布情報</span>
+          <h2>最新版のファイル名・サイズ・SHA256を確認できます</h2>
+          <p>
+            ダウンロードボタンは GitHub Releases の最新版ZIPへ接続しています。取得前後にファイル名とハッシュを確認すると、
+            別URLや古い配布物との取り違えを避けやすくなります。
+          </p>
+        </div>
+        <span className={`release-integrity-status is-${release.source}`}>{statusLabel}</span>
+      </div>
+
+      <dl className="release-integrity-grid">
+        <div>
+          <dt>最新版</dt>
+          <dd>{release.tag}</dd>
+        </div>
+        <div>
+          <dt>公開日</dt>
+          <dd>{formatReleaseDate(release.publishedAt)}</dd>
+        </div>
+        <div>
+          <dt>ファイル</dt>
+          <dd>{release.assetName}</dd>
+        </div>
+        <div>
+          <dt>サイズ</dt>
+          <dd>{formatFileSize(release.sizeBytes)}</dd>
+        </div>
+      </dl>
+
+      <div className="release-integrity-hash">
+        <span>SHA256</span>
+        <code>{release.sha256}</code>
+      </div>
+
+      <div className="release-integrity-actions">
+        <a className="brand-btn brand-btn--primary" href={release.assetUrl} rel="noreferrer">
+          公式ZIPをダウンロード
+        </a>
+        <a className="brand-btn brand-btn--ghost" href={release.releaseUrl || latestReleaseUrl} rel="noreferrer">
+          リリースページで確認
+        </a>
+        {typeof release.downloadCount === 'number' ? (
+          <span className="release-integrity-downloads">GitHub上のDL数: {release.downloadCount.toLocaleString('ja-JP')}</span>
+        ) : null}
+      </div>
+    </InteractiveCard>
+  )
+}
 
 const instructionGuardrails = [
   {
@@ -347,6 +514,8 @@ export function DownloadPage() {
         </Section>
 
         <Section alt>
+          <ReleaseIntegrityPanel />
+
           <div className="subpage-section-head distribution-check-head">
             <p>配布物チェック</p>
             <h2>ダウンロード前後に確認すること</h2>
