@@ -631,6 +631,45 @@ const instructionQuickRoute = [
   },
 ] as const
 
+const instructionPracticePath = [
+  {
+    time: '5分',
+    title: '起動と初回設定を確認',
+    screen: 'ガイド画面 / 設定',
+    do: 'インストーラーまたは解凍済みZIPから起動し、YMM4.exeと保存先を固定します。',
+    done: '次回も同じ保存先へ出力できる',
+    href: '#instruction-step-02',
+    Icon: Settings2,
+  },
+  {
+    time: '10分',
+    title: '少数URLで候補一覧を出す',
+    screen: '台本取得',
+    do: '記事URLまたはスレッドURLを1から3件だけ入れ、右側の候補一覧にタイトルとURLが並ぶか見ます。',
+    done: '候補一覧にタイトル、サムネイル、URLが出る',
+    href: '#instruction-step-03',
+    Icon: FileSearch,
+  },
+  {
+    time: '10分',
+    title: '台本下地を人が確認する',
+    screen: '台本編集',
+    do: '不要行、長い文、AI補助の結果を確認し、そのまま読み上げても違和感が出そうな箇所を直します。',
+    done: '読み上げ前に確認できる下書きになる',
+    href: '#instruction-step-04',
+    Icon: Bot,
+  },
+  {
+    time: '5分',
+    title: 'CSV/.ymmp前準備を出す',
+    screen: 'フォーマット / 素材確認',
+    do: '出力形式、キャラ設定、保存先、素材パスを確認し、YMM4を開く前の準備ファイルを作ります。',
+    done: '保存先に編集前準備ファイルができる',
+    href: '#instruction-step-05',
+    Icon: FolderCog,
+  },
+] as const
+
 const instructionTroubleCards = [
   {
     title: '起動しない',
@@ -1114,6 +1153,51 @@ export function InstructionsPage() {
 
         <Section>
           <MetricStrip items={[...instructionMetrics]} ariaLabel="使い方ガイドの要点" />
+        </Section>
+
+        <Section>
+          <div className="instruction-practice-path">
+            <div className="subpage-section-head instruction-manual-head instruction-practice-path__head">
+              <p>初回30分の進め方</p>
+              <h2>まず少数URLで、YMM4へ渡す直前まで通す</h2>
+              <p>
+                最初から大量取得やPremium購入を判断せず、起動、設定、URL取得、台本確認、出力先確認までを短く通します。
+              </p>
+            </div>
+
+            <div className="instruction-practice-path__grid" aria-label="初回30分で確認する流れ">
+              {instructionPracticePath.map((item) => {
+                const PracticeIcon = item.Icon
+                return (
+                  <InteractiveCard key={item.title} className="instruction-practice-card premium-glass">
+                    <div className="instruction-practice-card__top">
+                      <span>{item.time}</span>
+                      <PracticeIcon size={18} aria-hidden="true" />
+                    </div>
+                    <h3>{item.title}</h3>
+                    <dl>
+                      <div>
+                        <dt>見る画面</dt>
+                        <dd>{item.screen}</dd>
+                      </div>
+                      <div>
+                        <dt>やること</dt>
+                        <dd>{item.do}</dd>
+                      </div>
+                      <div>
+                        <dt>次へ進む条件</dt>
+                        <dd>{item.done}</dd>
+                      </div>
+                    </dl>
+                    <a href={item.href}>
+                      該当手順へ
+                      <ArrowRight size={15} />
+                    </a>
+                  </InteractiveCard>
+                )
+              })}
+            </div>
+          </div>
         </Section>
 
         <Section className="instruction-route-section">

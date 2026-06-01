@@ -11968,6 +11968,108 @@ html {
   max-width: 860px;
 }
 
+.instruction-practice-path {
+  display: grid;
+  gap: 1rem;
+}
+
+.instruction-practice-path__head {
+  margin-bottom: 0.2rem;
+}
+
+.instruction-practice-path__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.instruction-practice-card {
+  min-width: 0;
+  display: grid;
+  gap: 0.78rem;
+  align-content: start;
+  padding: clamp(1rem, 1.8vw, 1.28rem);
+  border-radius: 18px;
+}
+
+.instruction-practice-card__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.instruction-practice-card__top span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 0 0.68rem;
+  border: 1px solid rgba(224, 193, 132, 0.22);
+  border-radius: 999px;
+  color: #ffe8be;
+  background: rgba(224, 193, 132, 0.1);
+  font-size: 0.8rem;
+  font-weight: 900;
+}
+
+.instruction-practice-card__top svg {
+  color: #e0c184;
+}
+
+.instruction-practice-card h3,
+.instruction-practice-card dl,
+.instruction-practice-card dd {
+  margin: 0;
+}
+
+.instruction-practice-card h3 {
+  color: #fff7e6;
+  font-size: 1.08rem;
+  line-height: 1.42;
+}
+
+.instruction-practice-card dl {
+  display: grid;
+  gap: 0.58rem;
+}
+
+.instruction-practice-card dl div {
+  display: grid;
+  gap: 0.22rem;
+  padding: 0.68rem 0.72rem;
+  border: 1px solid rgba(255, 232, 190, 0.1);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.instruction-practice-card dt {
+  color: rgba(255, 232, 190, 0.7);
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.instruction-practice-card dd {
+  color: rgba(236, 233, 226, 0.78);
+  font-size: 0.86rem;
+  line-height: 1.58;
+}
+
+.instruction-practice-card a {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 0.42rem;
+  margin-top: auto;
+  color: #fff1cd;
+  font-size: 0.88rem;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.instruction-practice-card a svg {
+  color: #e0c184;
+}
+
 .instruction-route-section {
   padding-top: clamp(1.35rem, 3vw, 2.2rem);
   scroll-margin-top: 104px;
@@ -12577,6 +12679,7 @@ html {
   }
 
   .download-choice-board,
+  .instruction-practice-path__grid,
   .distribution-check-grid,
   .distribution-readiness-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -12614,6 +12717,7 @@ html {
   .release-integrity-grid,
   .release-asset-grid,
   .download-choice-board,
+  .instruction-practice-path__grid,
   .distribution-check-grid,
   .distribution-readiness-grid,
   .sample-decision-strip,
