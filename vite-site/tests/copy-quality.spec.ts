@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test'
 const primaryPages = [
   {
     path: '/',
-    heading: 'ゆっくりまとめプロセッサー',
+    heading: '記事URLから',
     ctas: ['無料でダウンロード', '実画面を見る'],
   },
   {

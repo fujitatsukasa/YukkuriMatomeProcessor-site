@@ -1,4 +1,3 @@
-import type { CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
 import { PageMeta } from '@/components/ui'
 import { downloadUrl, legal, siteOrigin, siteTitle } from '@/data/site-content'
@@ -14,42 +13,58 @@ import {
 } from 'lucide-react'
 
 const heroProofItems = [
-  { label: 'Free', value: 'URL取得を試せる' },
-  { label: 'Premium', value: '買い切り ¥39,800' },
-  { label: 'Workflow', value: 'Windows / YMM4' },
+  { label: '作れるもの', value: '台本 / CSV / .ymmp前準備' },
+  { label: '手順', value: 'URL → 選択 → 出力' },
+  { label: '料金', value: 'Free / ¥39,800' },
 ] as const
 
-const heroMotionSteps = [
-  'URLを読み込む',
-  '候補を選ぶ',
-  '台本下地を整える',
-  'YMM4前準備へ進む',
-] as const
-
-const flowItems = [
-  { label: '入力', value: '記事URL / スレッドURL' },
-  { label: '出力', value: '台本下地 / CSV / .ymmp' },
-  { label: '仕上げ', value: 'YMM4で音声・字幕を調整' },
-] as const
-
-const inputOutputCards = [
+const deliverableCards = [
   {
-    label: '入力',
-    title: '記事URL・スレッドURLを入れる',
-    body: '対応URLから題材候補を取得し、動画化する本文や画像候補を確認します。',
-    points: ['記事URL', 'スレッドURL', 'まとめ記事'],
+    label: '作れるもの 01',
+    title: '読み上げ台本の下地',
+    body: '記事URLから本文候補を拾い、ゆっくり動画で使う掛け合い台本へ整理します。',
+    image: '/product_edit_script.webp',
+    alt: '読み上げ台本の下地を編集する実アプリ画面',
+    points: ['本文候補', '役割', '感情'],
   },
   {
-    label: '出力',
-    title: '台本下地とYMM4前準備を作る',
-    body: '読み上げ前の台本、CSV、.ymmp前準備、保存先や素材パスの確認へ進めます。',
-    points: ['台本下地', 'CSV', '.ymmp前準備'],
+    label: '作れるもの 02',
+    title: '素材候補とサムネ候補',
+    body: '動画に使う画像候補、キーワード素材、YouTube情報を同じ流れで確認します。',
+    image: '/product_keyword_material.webp',
+    alt: '素材候補とキーワード素材を確認する実アプリ画面',
+    points: ['画像候補', 'キーワード', 'YouTube情報'],
   },
   {
-    label: '前提',
-    title: '動画完成はYMM4で仕上げる',
-    body: '音声、字幕、立ち絵、間合いはYMM4側で確認します。まずFreeで流れを試せます。',
-    points: ['Windows専用', 'YMM4前提', 'Premiumは制限解除'],
+    label: '作れるもの 03',
+    title: 'CSV / .ymmp前準備',
+    body: 'YMM4で仕上げる前に、台本、形式、保存先、素材パスを確認できます。',
+    image: '/product_format_list.webp',
+    alt: 'CSVとymmp前準備の形式を確認する実アプリ画面',
+    points: ['CSV', '.ymmp前準備', '保存先'],
+  },
+] as const
+
+const valueCards = [
+  {
+    title: 'ネタ探しで止まらない',
+    body: 'URLを入れて候補を集め、使う題材だけを選べます。',
+    Icon: FileSearch,
+  },
+  {
+    title: '台本編集を前倒し',
+    body: 'YMM4を開く前に、役割、感情、不要行を整理できます。',
+    Icon: PencilLine,
+  },
+  {
+    title: 'YMM4前提で迷わない',
+    body: '完成はYMM4。だからCSV/.ymmp前準備までに集中します。',
+    Icon: Monitor,
+  },
+  {
+    title: '無料で確認してから購入',
+    body: 'Freeで流れを試し、必要ならPremiumで制限解除します。',
+    Icon: CreditCard,
   },
 ] as const
 
@@ -174,17 +189,18 @@ export function HomePage() {
       <div className="home-focus">
         <section className="home-focus-hero" aria-labelledby="home-focus-heading">
           <div className="home-focus-hero__copy">
-            <p className="home-focus-kicker">YMM4向け制作フロー自動化</p>
+            <p className="home-focus-kicker">ゆっくりまとめプロセッサー</p>
             <h1 id="home-focus-heading">
-              <span>ゆっくりまとめ</span>
-              <span>プロセッサー</span>
+              <span>記事URLから</span>
+              <span>台本と</span>
+              <span>YMM4前準備を作る</span>
             </h1>
             <p className="home-focus-hero__statement">
-              記事URLから、台本・素材・YMM4前準備まで一気に整える
+              反応集・まとめ動画の下準備を、YMM4前提で短縮
             </p>
             <p className="home-focus-lead">
-              ネタ探し、候補確認、台本下地、CSV/.ymmp前準備をひとつの流れにまとめます。
-              最終編集はYMM4で仕上げる前提の、ゆっくり動画制作支援ツールです。
+              台本下地、素材候補、CSV、.ymmp前準備を作成。
+              Freeで確認して、必要ならPremiumへ進めます。
             </p>
 
             <div className="home-focus-actions">
@@ -206,19 +222,12 @@ export function HomePage() {
               ))}
             </div>
 
-            <div className="home-focus-mini-flow" aria-label="制作フロー">
-              {heroMotionSteps.map((step, index) => (
-                <span key={step} style={{ '--step-index': index } as CSSProperties}>
-                  {step}
-                </span>
-              ))}
-            </div>
           </div>
 
           <figure className="home-focus-visual">
             <div className="home-focus-visual__bar" aria-hidden="true">
-              <span>Live workflow</span>
-              <strong>URL入力 → 台本下地 → YMM4前準備</strong>
+              <span>実アプリ画面</span>
+              <strong>URL入力 → 候補取得 → 台本整理</strong>
             </div>
             <img
               src="/product_get_script.webp"
@@ -230,34 +239,20 @@ export function HomePage() {
               <strong>取得候補を選ぶ画面</strong>
               <span>ここから台本整理とYMM4前準備へ進みます</span>
             </figcaption>
-            <div className="home-focus-visual__motion" aria-hidden="true">
-              {heroMotionSteps.map((step, index) => (
-                <span key={step} style={{ '--step-index': index } as CSSProperties}>
-                  {step}
-                </span>
-              ))}
-            </div>
           </figure>
 
-          <div className="home-focus-flow" aria-label="入力から出力まで">
-            {flowItems.map((item, index) => (
-              <div key={item.label} className="home-focus-flow__item">
-                <span>{item.label}</span>
-                <strong>{item.value}</strong>
-                {index < flowItems.length - 1 ? <ArrowRight size={17} aria-hidden="true" /> : null}
-              </div>
-            ))}
-          </div>
         </section>
 
-        <section className="home-focus-io" aria-labelledby="home-io-heading">
+        <section className="home-focus-io home-focus-io--deliverables" aria-labelledby="home-io-heading">
           <div className="home-focus-section__head home-focus-section__head--left">
-            <p className="home-focus-kicker">入力から出力まで</p>
-            <h2 id="home-io-heading">何を入れると、何ができるかを先に確認する</h2>
+            <p className="home-focus-kicker">何が作れるか</p>
+            <h2 id="home-io-heading">URLから、動画化に必要な下準備をまとめて作る</h2>
+            <p>文章だけで説明しません。実アプリ画面で、台本、素材、出力準備を先に見せます。</p>
           </div>
           <div className="home-focus-io__grid">
-            {inputOutputCards.map((item) => (
+            {deliverableCards.map((item) => (
               <article key={item.label} className="home-focus-io__card">
+                <img src={item.image} alt={item.alt} loading="lazy" decoding="async" />
                 <span>{item.label}</span>
                 <h3>{item.title}</h3>
                 <p>{item.body}</p>
@@ -271,6 +266,27 @@ export function HomePage() {
                 </ul>
               </article>
             ))}
+          </div>
+        </section>
+
+        <section className="home-focus-section home-focus-value" aria-labelledby="home-value-heading">
+          <div className="home-focus-section__head">
+            <p className="home-focus-kicker">どう凄いか</p>
+            <h2 id="home-value-heading">YMM4で仕上げる前の面倒な準備を、ひとつの流れに寄せる</h2>
+          </div>
+          <div className="home-focus-value__grid">
+            {valueCards.map((item) => {
+              const ValueIcon = item.Icon
+              return (
+                <article key={item.title} className="home-focus-value-card">
+                  <span aria-hidden="true">
+                    <ValueIcon size={18} />
+                  </span>
+                  <h3>{item.title}</h3>
+                  <p>{item.body}</p>
+                </article>
+              )
+            })}
           </div>
         </section>
 
