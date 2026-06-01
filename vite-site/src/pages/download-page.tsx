@@ -36,9 +36,9 @@ const downloadMetrics = [
 ] as const
 
 const instructionMetrics = [
-  { value: '10手順', label: '手を動かす順番', detail: 'ダウンロードからYMM4確認まで' },
-  { value: '実画面', label: '成功状態を確認', detail: '画面を見ながら次の操作へ進む' },
-  { value: 'YMM4前準備', label: '編集前に整える', detail: 'CSV、キャラ設定、立ち絵パスの整理を前倒し' },
+  { value: '6手順', label: '迷わない操作順', detail: '起動 -> 設定 -> URL -> 整理 -> 出力 -> 確認' },
+  { value: '成功状態', label: '各ステップで確認', detail: '押す場所と終わりの状態を分けて確認' },
+  { value: '詰まり対応', label: '原因を切り分ける', detail: '設定、URL、保存先、YMM4パスの順で見る' },
 ] as const
 
 const downloadSupportCards = [
@@ -252,24 +252,96 @@ function ReleaseIntegrityPanel() {
   )
 }
 
-const instructionGuardrails = [
+const instructionSteps = [
   {
-    eyebrow: '最初に固定',
-    title: '最初に固定する設定',
-    body: 'YMM4 パス、CSV/.ymmp保存先、素材フォルダを先に決めると、途中で手戻りしにくくなります。',
-    points: ['実行パスと保存先を固定', '出力フォルダ名を揃える', 'YouTube 分析を使うなら API キーも設定'],
+    number: '01',
+    title: 'ダウンロードして解凍する',
+    image: '/product_guide.webp',
+    alt: '初期設定とガイドの画面',
+    action: '公式ZIPを取得し、作業しやすいフォルダへ解凍します。',
+    input: '入力なし。まずは配布ファイル名と保存先だけ確認します。',
+    click: '解凍後、アプリ本体を起動します。',
+    success: 'アプリ画面が開き、初期設定へ進める状態です。',
+    trouble: ['Windows警告が出たら配布元URLを確認', 'ZIPを直接開かず、必ず解凍してから起動'],
+    Icon: Wrench,
   },
   {
-    eyebrow: '飛ばさない',
-    title: 'CSV/.ymmpまで確認する',
-    body: '取得した台本をそのまま終わらせず、CSV、.ymmp、キャラ設定と一緒に確認すると次の編集が楽になります。',
-    points: ['`.ymmp` からフォーマット追加', '台本の型を再利用しやすく整形', 'キャラ設定と立ち絵パスを前工程で整理'],
+    number: '02',
+    title: 'YMM4パスと保存先を設定する',
+    image: '/product_guide.webp',
+    alt: 'YMM4パスと保存先を設定する画面',
+    action: '最初にYMM4実行ファイルと出力先フォルダを固定します。',
+    input: 'YMM4.exeの絶対パス、CSV/.ymmpの保存先、必要に応じてYouTube APIキー。',
+    click: '設定保存またはガイド内の保存ボタンを押します。',
+    success: '次回以降も同じ保存先で出力できる状態です。',
+    trouble: ['YMM4パスはショートカットではなく実体を指定', '保存先は書き込み権限のあるフォルダにする'],
+    Icon: Settings2,
   },
   {
-    eyebrow: '困ったとき',
-    title: '詰まったら切り分ける順番',
-    body: '設定、URL、保存先、API キーの順に確認すると、無駄に深掘りしにくくなります。',
-    points: ['YMM4 パスの再確認', '対象URLと対応サイト状況', '保存先の権限と空き容量'],
+    number: '03',
+    title: '記事URL・スレッドURLを入力する',
+    image: '/product_get_script.webp',
+    alt: '記事URLから候補を取得する画面',
+    action: '動画化したい記事、スレッド、まとめ記事のURLを入力します。',
+    input: '対象URL、検索条件、必要なら取得件数や除外条件。',
+    click: '取得、検索、候補取得にあたるボタンを押します。',
+    success: '候補一覧にタイトル、サムネイル、URLが並びます。',
+    trouble: ['対応外URLは取得できない場合あり', 'まず少数URLで取得できるか確認'],
+    Icon: FileSearch,
+  },
+  {
+    number: '04',
+    title: '台本候補を整理する',
+    image: '/product_edit_script.webp',
+    alt: '台本を編集してYMM4向けに整える画面',
+    action: '取得した台本候補から不要行、見出し、読み上げに向かない文を整理します。',
+    input: '残したい本文、削りたい行、役割や感情の調整内容。',
+    click: '整形、AI補助、感情分析、改行補助など必要な処理だけ使います。',
+    success: '読み上げ前に確認できる台本下地になります。',
+    trouble: ['AI出力はそのまま確定せず内容確認', '長すぎる行は読み上げ前に分割'],
+    Icon: Bot,
+  },
+  {
+    number: '05',
+    title: 'CSV/.ymmp前準備を出力する',
+    image: '/product_format_list.webp',
+    alt: 'フォーマット管理とYMM4前準備の画面',
+    action: '台本をCSVや.ymmp前準備として残し、次の編集へ渡せる形にします。',
+    input: 'フォーマット、キャラ設定、出力ファイル名、保存先。',
+    click: 'CSV出力、.ymmp関連の出力、フォーマット保存を実行します。',
+    success: '保存先に編集前準備のファイルが作成されます。',
+    trouble: ['保存先の空き容量と権限を確認', 'ファイル名ルールを先に固定'],
+    Icon: FolderCog,
+  },
+  {
+    number: '06',
+    title: 'YMM4で開く前に最終確認する',
+    image: '/product_keyword_material.webp',
+    alt: '素材整理とYMM4前準備の画面',
+    action: 'CSV、キャラ設定、立ち絵パス、素材フォルダを確認してからYMM4側へ進みます。',
+    input: '素材フォルダ、キャラ設定、立ち絵パス、読み方が気になる語句。',
+    click: '必要に応じてパス変更、読み方監査、保存を行います。',
+    success: 'YMM4で開いた後の修正量を減らせる状態です。',
+    trouble: ['素材パスが変わった場合は再指定', 'YMM4で読めない場合は出力形式と保存先を確認'],
+    Icon: Send,
+  },
+] as const
+
+const instructionTroubleCards = [
+  {
+    title: '起動しない',
+    body: '解凍済みか、Windows警告で止まっていないか、保存先に書き込み権限があるかを確認します。',
+    points: ['ZIPを解凍してから起動', '配布元URLを確認', '管理者権限が必要か確認'],
+  },
+  {
+    title: 'URL取得できない',
+    body: 'URL形式、対応サイト、ネットワーク、対象ページの状態を順番に確認します。',
+    points: ['URLをブラウザで開けるか確認', '少数URLで再試行', '対応外URLは問い合わせへ'],
+  },
+  {
+    title: 'YMM4に渡せない',
+    body: 'YMM4パス、CSV/.ymmp保存先、素材パスがずれていないかを見直します。',
+    points: ['YMM4.exeの絶対パスを指定', '保存先を再確認', '素材フォルダの移動に注意'],
   },
 ] as const
 
@@ -329,53 +401,6 @@ const downloadScenes: readonly GuideScene[] = [
     checkpoint: '編集に入る前の準備が揃う',
     points: ['CSV 出力と保存先を確認', 'キャラ設定や立ち絵パスの整合を確認', 'YMM4 に渡す前の最終チェックを固定する'],
     Icon: Send,
-  },
-] as const
-
-const instructionScenes: readonly GuideScene[] = [
-  {
-    key: 'setup',
-    eyebrow: '手順1',
-    title: '初期設定を最初に終える',
-    body: 'YMM4 パス、保存先、YouTube 分析の前提を先に揃えると、後の手順が一本化しやすくなります。',
-    image: '/product_guide.webp',
-    alt: '初期設定とガイドの画面',
-    checkpoint: '設定由来の詰まりを最小化する',
-    points: ['YMM4 パスを登録', '保存先フォルダを固定', '分析を使うなら API キーも準備'],
-    Icon: Wrench,
-  },
-  {
-    key: 'script',
-    eyebrow: '手順2',
-    title: 'ネタ取得から台本化までを通す',
-    body: '対象サイトやスレッド URL を入力し、候補を選んで台本化します。まずは少数件で流れを固定すると安定します。',
-    image: '/product_get_script.webp',
-    alt: '記事取得と候補選択の画面',
-    checkpoint: 'ネタ取得の最短導線を掴む',
-    points: ['候補一覧から動画化する題材を選ぶ', '台本取得と整形を同じ流れで進める', '必要に応じて AI 補助へ繋げる'],
-    Icon: FileSearch,
-  },
-  {
-    key: 'template',
-    eyebrow: '手順3',
-    title: 'CSV/.ymmpへ渡せる形にする',
-    body: '単発の一本で終わらせず、`.ymmp` や CSV と一緒に残すことで、次の動画でも確認しやすくなります。',
-    image: '/product_format_list.webp',
-    alt: 'フォーマット管理とYMM4前準備の画面',
-    checkpoint: '次の編集でも流れを再利用できる',
-    points: ['`.ymmp` からフォーマット追加', '役割や感情の型を揃える', '次の動画にも使い回せる粒度に整える'],
-    Icon: Settings2,
-  },
-  {
-    key: 'handoff',
-    eyebrow: '手順4',
-    title: 'YMM4 へ受け渡す前に最終確認する',
-    body: 'CSV、キャラ設定、立ち絵パス、読み方監査までを前工程で確認してから渡すと、編集工程が軽くなります。',
-    image: '/product_keyword_material.webp',
-    alt: '素材整理とYMM4前準備の画面',
-    checkpoint: '後工程の修正コストを減らす',
-    points: ['CSV と保存先の整合を確認', 'キャラ設定や素材パスを最終確認', '気になる読み方を先に監査する'],
-    Icon: FolderCog,
   },
 ] as const
 
@@ -588,17 +613,17 @@ export function InstructionsPage() {
   return (
     <>
       <PageMeta
-        title="使い方｜URL入力からYMM4確認まで"
-        description="記事URL・スレッドURLの入力から、台本整理、AI補助、CSV/.ymmp出力、YMM4での確認までを実画面付きで解説します。"
-        keywords="使い方, 初期設定, YMM4, 台本取得, CSV, .ymmp, AI補助"
+        title="使い方｜記事URLからYMM4へ渡すまでの手順"
+        description="記事URL・スレッドURLの入力、YMM4パス設定、台本整理、CSV/.ymmp前準備、YMM4確認までを実画面付きの手順書として解説します。"
+        keywords="使い方, 初期設定, YMM4, 台本取得, CSV, .ymmp, AI補助, 手順"
         path="/instructions/"
       />
 
       <main className="brand-shell">
         <PageIntro
           kicker="使い方ガイド"
-          title="記事URLから台本を取得し、YMM4に渡すまでの手順"
-          lead="ダウンロード、起動、YMM4パス設定、URL入力、台本整理、CSV/.ymmp確認の順に進めます"
+          title="記事URLからYMM4へ渡すまでの手順"
+          lead="起動、YMM4パス設定、URL入力、台本整理、CSV/.ymmp前準備、YMM4確認の順に進めます"
           actions={[
             { label: '無料でダウンロード', href: downloadUrl, variant: 'primary', external: true },
             { label: 'FAQを見る', href: '/faq/', variant: 'ghost' },
@@ -611,12 +636,12 @@ export function InstructionsPage() {
             <InteractiveCard className="page-visual-card premium-glass">
               <img
                 className="page-visual-card__image"
-                src="/product_guide.webp"
-                alt="内蔵ガイドと初期設定の画面"
+                src="/product_get_script.webp"
+                alt="URL入力と記事候補取得の実アプリ画面"
               />
               <div className="page-visual-card__meta">
-                <strong>各ステップで、入力するものと成功状態を確認</strong>
-                <span>迷ったらYMM4パス、保存先、対象URL、APIキーの順で切り分けます。</span>
+                <strong>URL入力から候補取得まで、実画面で確認</strong>
+                <span>各ステップでは押す場所、入力するもの、成功状態を分けて確認します。</span>
               </div>
             </InteractiveCard>
           }
@@ -627,19 +652,68 @@ export function InstructionsPage() {
         </Section>
 
         <Section alt>
-          <GuideSceneSwitcher
-            title="段階別ガイド"
-            lead="設定から受け渡しまでを、実画面つきで順番に確認する"
-            scenes={instructionScenes}
-            ariaLabel="使い方の段階切り替え"
-          />
+          <div className="subpage-section-head instruction-manual-head">
+            <p>操作手順</p>
+            <h2>押す場所、入力するもの、成功状態を分けて確認する</h2>
+          </div>
+
+          <div className="instruction-manual-grid">
+            {instructionSteps.map((step) => {
+              const StepIcon = step.Icon
+              return (
+                <InteractiveCard key={step.number} as="article" className="instruction-step-card premium-glass">
+                  <figure className="instruction-step-card__media">
+                    <img src={step.image} alt={step.alt} loading="lazy" decoding="async" />
+                  </figure>
+                  <div className="instruction-step-card__body">
+                    <span className="instruction-step-card__number">
+                      <StepIcon size={16} />
+                      STEP {step.number}
+                    </span>
+                    <h3>{step.title}</h3>
+                    <dl className="instruction-step-card__details">
+                      <div>
+                        <dt>やること</dt>
+                        <dd>{step.action}</dd>
+                      </div>
+                      <div>
+                        <dt>入力するもの</dt>
+                        <dd>{step.input}</dd>
+                      </div>
+                      <div>
+                        <dt>押す場所</dt>
+                        <dd>{step.click}</dd>
+                      </div>
+                      <div>
+                        <dt>成功状態</dt>
+                        <dd>{step.success}</dd>
+                      </div>
+                    </dl>
+                    <div className="instruction-step-card__trouble">
+                      <strong>詰まったら</strong>
+                      <ul>
+                        {step.trouble.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </InteractiveCard>
+              )
+            })}
+          </div>
         </Section>
 
         <Section>
-          <div className="subpage-card-grid subpage-card-grid--3">
-            {instructionGuardrails.map((card) => (
-              <InteractiveCard key={card.title} className="release-panel premium-glass subpage-card">
-                <span className="subpage-card__eyebrow">{card.eyebrow}</span>
+          <div className="subpage-section-head instruction-manual-head">
+            <p>失敗時の確認</p>
+            <h2>原因は、設定・URL・保存先の順に切り分ける</h2>
+          </div>
+
+          <div className="instruction-trouble-grid">
+            {instructionTroubleCards.map((card) => (
+              <InteractiveCard key={card.title} className="release-panel premium-glass subpage-card instruction-trouble-card">
+                <span className="subpage-card__eyebrow">確認</span>
                 <h2>{card.title}</h2>
                 <p>{card.body}</p>
                 <ul className="brand-list subpage-card__list">
@@ -651,12 +725,12 @@ export function InstructionsPage() {
             ))}
           </div>
 
-          <InteractiveCard className="release-panel premium-glass subpage-support-callout">
+          <InteractiveCard className="release-panel premium-glass subpage-support-callout instruction-support-callout">
             <div>
               <span className="subpage-card__eyebrow">問い合わせ</span>
-              <h2>それでも詰まるときは、切り分け情報をまとめて送る</h2>
+              <h2>それでも詰まるときは、状況をまとめて送る</h2>
               <p>
-                実行パス、保存先、対象URL、発生時刻、エラー全文が揃っていると、原因の切り分けがかなり速くなります。
+                OS、対象URL、YMM4パス、保存先、発生時刻、エラー全文またはスクリーンショットがあると切り分けが速くなります。
               </p>
             </div>
             <div className="subpage-support-callout__actions">
