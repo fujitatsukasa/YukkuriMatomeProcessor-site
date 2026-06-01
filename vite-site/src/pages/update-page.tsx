@@ -143,6 +143,13 @@ const fallbackReleases: Release[] = [
   },
 ]
 
+const currentDistributionSummaryLines = [
+  publicDistribution.summary,
+  `インストーラー: ${publicDistribution.assets.setup.fileName}`,
+  `ポータブルZIP: ${publicDistribution.assets.portable.fileName}`,
+  '自己署名のためWindows警告が出る場合があります。公式URLとSHA256を確認してから起動してください。',
+] as const
+
 const updateSummaryCards = [
   {
     title: '更新前に設定を控える',
@@ -164,8 +171,8 @@ const updateSummaryCards = [
 const releaseReadinessCards = [
   {
     label: '確認済み',
-    title: `${publicDistribution.version}はインストールからメイン起動まで確認済み`,
-    body: 'Windows 11 VMで署名確認、インストール、起動ランチャー、内部API、メイン画面の起動まで確認されています。',
+    title: `${publicDistribution.version}の配布ファイルを公開中`,
+    body: 'インストーラーとポータブルZIPのファイル名、サイズ、SHA256を公開しています。更新前に配布元URLとファイル情報を確認してください。',
     tone: 'ok',
     Icon: CheckCircle2,
   },
@@ -178,8 +185,8 @@ const releaseReadinessCards = [
   },
   {
     label: '残タスク',
-    title: 'ログイン/課金の実ユーザー確認は別途必要です',
-    body: '配布物の起動確認とは別に、ログイン、課金、完全にクリーンな環境での最終確認は継続確認が必要です。',
+    title: '購入・ログインは実環境で再確認してください',
+    body: '更新後は本番件数に戻す前に、ログイン状態、Premium権限、少数URLでの取得と台本下地までを確認してください。',
     tone: 'caution',
     Icon: Clock3,
   },
@@ -205,21 +212,25 @@ export function UpdatePage() {
         return res.json()
       })
       .then((data: DistributionReleaseNotes) => {
-        const body = [
-          data.summary,
-          ...(data.sections ?? []).flatMap((section) => [
-            section.title,
-            ...(section.items ?? []),
-          ]),
-        ]
-          .filter((line): line is string => Boolean(line))
-          .join('\n')
+        const remoteVersion = data.version || publicDistribution.version
+        const isCurrentReleaseNote = remoteVersion === publicDistribution.version
+        const body = isCurrentReleaseNote
+          ? [
+              data.summary,
+              ...(data.sections ?? []).flatMap((section) => [
+                section.title,
+                ...(section.items ?? []),
+              ]),
+            ]
+              .filter((line): line is string => Boolean(line))
+              .join('\n')
+          : currentDistributionSummaryLines.join('\n')
 
         setReleases([
           {
             id: 1,
-            tag_name: data.version || publicDistribution.version,
-            name: data.title || `YMP ${publicDistribution.version}`,
+            tag_name: publicDistribution.version,
+            name: isCurrentReleaseNote ? data.title || `YMP ${publicDistribution.version}` : `YMP ${publicDistribution.version}`,
             published_at: publicDistribution.publishedAt,
             body: body || publicDistribution.summary,
             html_url: publicDistribution.releaseNotesUrl,
