@@ -83,14 +83,14 @@ export function BlogPost() {
       {
         label: '向いている読者',
         title: meta?.tags?.slice(0, 2).join(' / ') || '制作フロー改善',
-        body: '単発ノウハウで終わらせず、テンプレ運用や YMM4 前準備へ戻したい人向けです。',
+        body: '単発ノウハウで終わらせず、YMM4 前準備や次の制作手順へ戻したい人向けです。',
       },
       {
         label: 'この記事で掴むこと',
         title: `${Math.max(headings.length, 1)}つの論点`,
         body: headings.length
           ? `${headings[0]} から ${headings[Math.min(headings.length - 1, 2)]} まで順に整理します。`
-          : '導入から運用までの要点を順番に整理します。',
+          : '導入から制作手順までの要点を順番に整理します。',
       },
       {
         label: '読み終えた後',
@@ -328,7 +328,7 @@ export function BlogPost() {
               <div className="blog-conversion-panel__actions">
                 <Link className="brand-btn brand-btn--primary" to="/download/">
                   <Download size={18} />
-                  無料プランを試す
+                  無料でダウンロード
                 </Link>
                 <Link className="brand-btn brand-btn--ghost" to="/instructions/">
                   <BookOpen size={18} />

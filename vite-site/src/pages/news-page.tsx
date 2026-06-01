@@ -42,7 +42,7 @@ export function NewsPage() {
                 <Link to="/update/">アップデート履歴</Link>
                 <Link to="/instructions/">機能と使い方</Link>
                 <Link to="/faq/">FAQ</Link>
-                <Link to="/download/">無料で始める</Link>
+                <Link to="/download/">無料でダウンロード</Link>
               </div>
             </div>
 

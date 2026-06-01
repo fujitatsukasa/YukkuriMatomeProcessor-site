@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap");
 @import url("../../assets/css/brand-system.css");
 @import url("../../assets/css/brand-pages.css");
 @import url("../../assets/css/rich-interactions.css");
@@ -9,7 +10,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --font-base: "Yu Gothic", "Yu Gothic UI", "Hiragino Kaku Gothic ProN", "Meiryo", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-base: "Noto Sans JP", "Yu Gothic", "Yu Gothic UI", "Hiragino Kaku Gothic ProN", "Meiryo", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-numbers: "Segoe UI", var(--font-base);
 }
 

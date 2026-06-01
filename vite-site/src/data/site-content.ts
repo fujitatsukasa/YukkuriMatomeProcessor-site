@@ -43,9 +43,9 @@ export type PageEntry = {
 export const siteOrigin = 'https://yukkurimatomeprocessor.com'
 export const siteTitle = 'ゆっくりまとめプロセッサー'
 export const siteSubtitle = 'Yukkuri Matome Processor'
-export const siteTagline = 'テンプレート運用・台本作成・YMM4準備ツール'
+export const siteTagline = 'URL取得・台本作成・YMM4前準備ツール'
 export const siteDescription =
-  'テンプレート運用を軸に、ネタ探しから台本作成、YMM4反映前の編集準備、AI補助、YouTube分析までを効率化する日本語向けワークフロー支援ツール。'
+  '記事URL・スレッドURLから、ゆっくり動画の台本下地、CSV、.ymmp、YMM4前準備を整えるWindows向け制作支援ツール。'
 
 export const navItems: NavItem[] = [
   { key: 'home', label: 'ホーム', url: '/' },
@@ -59,7 +59,7 @@ export const navItems: NavItem[] = [
 ]
 
 export const primaryCta: ActionItem = {
-  label: '無料で始める',
+  label: '無料でダウンロード',
   href: '/download/',
   variant: 'primary',
 }
@@ -192,10 +192,10 @@ export const faqGroups: FaqGroup[] = [
       {
         question: 'ゆっくりまとめプロセッサーは何を解決するツールですか？',
         answer:
-          'テンプレート運用を中心に、ネタ探し、台本作成、YMM4前準備、AI補助、YouTube分析までの前工程をまとめて効率化するツールです。',
+          '記事URL・スレッドURLを起点に、台本下地、CSV、.ymmp、YMM4前準備を整えるWindows向け制作支援ツールです。',
       },
       { question: '無料で試せますか？', answer: 'はい。Freeプランで基本導線と導入相性を確認できます。' },
-      { question: '想定ユーザーは誰ですか？', answer: '反応集、5chまとめ、ショート、ゆっくり解説、独自フォーマット動画を継続投稿したい個人・チームを想定しています。' },
+      { question: '想定ユーザーは誰ですか？', answer: 'YMM4で反応集、5chまとめ、ショート、ゆっくり解説を作る個人・チームを想定しています。' },
       {
         question: '導入前に必ず確認すべきページは？',
         answer:
@@ -207,10 +207,11 @@ export const faqGroups: FaqGroup[] = [
     id: 'faq-onboarding',
     label: '導入',
     items: [
-      { question: '導入時に最初にやるべきことは？', answer: '最新版をダウンロードし、YMM4実行パス、保存先フォルダ、必要に応じて YouTube API キーを設定してください。' },
-      { question: '対応OSは何ですか？', answer: 'Windows環境での利用を前提に設計しています。' },
-      { question: '初期設定を早く終えるコツは？', answer: '使い方ページのSTEP順で設定し、変更内容をメモすると再作業を減らせます。' },
-      { question: 'チーム導入時に決めるべき項目は？', answer: '保存先命名ルール、連携パス、運用チェックリストの3点を先に揃えてください。' },
+      { question: '導入時に最初にやるべきことは？', answer: '最新版のZIPを取得し、YMM4実行パス、保存先フォルダ、必要に応じて YouTube API キーを設定してください。' },
+      { question: '対応OSは何ですか？', answer: 'Windows 10 / 11環境での利用を前提に設計しています。' },
+      { question: 'Macで使えますか？', answer: '現時点ではMac版はありません。YMM4を使うWindows環境を前提にしています。' },
+      { question: '初期設定を早く終えるコツは？', answer: '使い方ページの手順どおりに設定し、変更内容をメモすると再作業を減らせます。' },
+      { question: 'チーム導入時に決めるべき項目は？', answer: '保存先命名ルール、YMM4連携パス、確認チェックリストの3点を先に揃えてください。' },
     ],
   },
   {
@@ -219,18 +220,20 @@ export const faqGroups: FaqGroup[] = [
     items: [
       { question: '台本取得はどのように行いますか？', answer: '対応サイトやスレッドの URL を入力し、候補を選択して取得したあと、編集用に整形します。' },
       { question: '取得した台本は再編集できますか？', answer: 'はい。不要行削除、見出し整理、読み上げ向け調整、感情や役割の微修正が可能です。' },
-      { question: 'URLエラーで取得できない場合は？', answer: 'URL形式、対象対応状況、ネットワークの順で確認してください。' },
-      { question: '取得件数が多いときの運用は？', answer: 'まず試用用サンプルで手順を固定し、その後に本番件数へ拡張してください。' },
+      { question: 'URLエラーで取得できない場合は？', answer: 'URL形式、対象サイトの対応状況、ネットワークの順で確認してください。' },
+      { question: '対応していないURLは取得できますか？', answer: '対応外URLは取得できない場合があります。対象サイト、URL形式、ログの内容を確認してください。' },
+      { question: '取得件数が多いときはどう進めますか？', answer: 'まず少数のURLで取得、台本整理、CSV/.ymmp前準備まで通し、その後に本番件数へ増やしてください。' },
     ],
   },
   {
     id: 'faq-settings',
     label: '設定',
     items: [
-      { question: '設定で優先すべき項目は？', answer: 'YMM4パス、台本保存先、テンプレート / フォーマット方針、運用フォルダルールを優先して固定してください。' },
+      { question: '設定で優先すべき項目は？', answer: 'YMM4パス、台本保存先、CSV/.ymmpの保存先、フォルダルールを優先して固定してください。' },
       { question: '複数人で設定を揃えるには？', answer: '初期値を定義した手順書を用意し、更新時は同じチェックリストで確認します。' },
       { question: '設定変更が反映されない場合は？', answer: '再起動、権限確認、保存先アクセス権の順に確認してください。' },
       { question: 'YouTube分析を使うのに追加設定は必要ですか？', answer: 'はい。YouTube分析では API キーの設定が必要です。検索条件、除外条件、コメント取得などの利用前に確認してください。' },
+      { question: 'AIが全部自動で動画を完成させますか？', answer: 'いいえ。AIは台本下地や整形を補助しますが、最終的な編集、内容確認、投稿判断は利用者側で行います。' },
     ],
   },
   {
@@ -247,9 +250,12 @@ export const faqGroups: FaqGroup[] = [
     id: 'faq-purchase',
     label: '購入・契約',
     items: [
-      { question: '料金プランはどう分かれていますか？', answer: 'Free（¥0）と Premium（買い切り39,800円）の2つです。まずはFreeで導入相性を確認し、制限解除が必要になったらPremiumを購入します。' },
+      { question: '料金プランはどう分かれていますか？', answer: 'Free（¥0）と Premium（買い切り39,800円）の2つです。まずはFreeで導入相性を確認し、台本取得とAI台本生成の利用制限解除が必要になったらPremiumを購入します。' },
       { question: '購入申し込みはどのように進めますか？', answer: 'アプリ内の購入画面から Stripe Checkout を開き、買い切りライセンスを一度払いで購入します。' },
       { question: '購入後の権限はどう反映されますか？', answer: '決済完了後、Googleログインに紐づく課金状態と利用枠を同期し、アプリ内でPremium機能が有効化されます。' },
+      { question: 'Premiumで何が解除されますか？', answer: '台本取得とAI台本生成の利用制限を解除します。月額ではなく39,800円の買い切りです。' },
+      { question: '返金条件は何ですか？', answer: '購入後7日以内を原則受付とし、返金成立時はPremium権限を停止します。詳細は返金・キャンセルポリシーを確認してください。' },
+      { question: '収益化は保証されますか？', answer: 'いいえ。動画の品質、投稿頻度、チャンネル状況、各プラットフォームの審査に左右されるため、収益化は保証していません。' },
       { question: '契約・請求に関する相談先は？', answer: '記録の残るメール窓口を推奨します。詳細はお問い合わせページを参照してください。' },
     ],
   },

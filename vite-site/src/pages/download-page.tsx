@@ -30,34 +30,34 @@ const supportBundle = [
 ] as const
 
 const downloadMetrics = [
-  { value: '10分', label: '導入相性を判断', detail: 'Freeで基本導線とYMM4前準備まで確認' },
-  { value: '4STEP', label: '最初に触る順番', detail: '設定 -> 取得 -> 整形 -> 受け渡し' },
+  { value: 'Free', label: '無料で動作確認', detail: '記事URLから台本下地まで試せる' },
+  { value: '4手順', label: '最初に触る順番', detail: '解凍 -> 起動 -> 設定 -> URL入力' },
   { value: 'YMM4', label: '後工程の手戻りを削減', detail: '保存先、CSV、連携パスの整合を先に揃える' },
 ] as const
 
 const instructionMetrics = [
-  { value: '4STEP', label: '最短導線で把握', detail: '初期設定から受け渡しまで一本で確認' },
-  { value: 'テンプレ運用', label: '途中で迷わない軸', detail: '単発取得ではなく継続運用まで見据える' },
+  { value: '10手順', label: '手を動かす順番', detail: 'ダウンロードからYMM4確認まで' },
+  { value: '実画面', label: '成功状態を確認', detail: '画面を見ながら次の操作へ進む' },
   { value: 'YMM4前準備', label: '編集前に整える', detail: 'CSV、キャラ設定、立ち絵パスの整理を前倒し' },
 ] as const
 
 const downloadSupportCards = [
   {
-    eyebrow: 'PRE-FLIGHT',
+    eyebrow: '導入前',
     title: '導入前チェック',
     body: '最初に環境と前提を揃えるだけで、導入後の詰まり方がかなり減ります。',
     items: onboardingChecks,
   },
   {
-    eyebrow: 'FAST SUPPORT',
+    eyebrow: '問い合わせ',
     title: '問い合わせ時にあると速い情報',
     body: 'サポートへ渡す情報を先に決めておくと、切り分けが速くなります。',
     items: supportBundle,
   },
   {
-    eyebrow: 'NEXT',
+    eyebrow: '次に見るページ',
     title: '導入後に進むべきページ',
-    body: '使い方で手順、料金で運用規模、FAQで詰まりどころを確認すると導入判断が揃います。',
+    body: '使い方で操作手順、料金で制限解除、FAQで詰まりどころを確認できます。',
     links: [
       { label: '使い方を見る', href: '/instructions/' },
       { label: '料金を確認', href: '/purchase/' },
@@ -68,19 +68,19 @@ const downloadSupportCards = [
 
 const instructionGuardrails = [
   {
-    eyebrow: 'KEEP THIS',
+    eyebrow: '最初に固定',
     title: '最初に固定する設定',
-    body: 'YMM4 パス、保存先、テンプレート運用の方針を先に決めると、途中で導線が崩れにくくなります。',
-    points: ['実行パスと保存先を固定', '運用フォルダ命名を揃える', 'YouTube 分析を使うなら API キーも設定'],
+    body: 'YMM4 パス、CSV/.ymmp保存先、素材フォルダを先に決めると、途中で手戻りしにくくなります。',
+    points: ['実行パスと保存先を固定', '出力フォルダ名を揃える', 'YouTube 分析を使うなら API キーも設定'],
   },
   {
-    eyebrow: 'DO NOT SKIP',
-    title: 'テンプレ運用は入口だけで終えない',
-    body: '取得した台本を単発で終わらせず、`.ymmp` や CSV と一緒に型へ戻すと継続投稿が安定します。',
-    points: ['`.ymmp` からフォーマット追加', '台本の型を使い回す前提で整形', 'キャラ設定と立ち絵パスを前工程で整理'],
+    eyebrow: '飛ばさない',
+    title: 'CSV/.ymmpまで確認する',
+    body: '取得した台本をそのまま終わらせず、CSV、.ymmp、キャラ設定と一緒に確認すると次の編集が楽になります。',
+    points: ['`.ymmp` からフォーマット追加', '台本の型を再利用しやすく整形', 'キャラ設定と立ち絵パスを前工程で整理'],
   },
   {
-    eyebrow: 'WHEN STUCK',
+    eyebrow: '困ったとき',
     title: '詰まったら切り分ける順番',
     body: '設定、URL、保存先、API キーの順に確認すると、無駄に深掘りしにくくなります。',
     points: ['YMM4 パスの再確認', '対象URLと対応サイト状況', '保存先の権限と空き容量'],
@@ -102,7 +102,7 @@ type GuideScene = {
 const downloadScenes: readonly GuideScene[] = [
   {
     key: 'setup',
-    eyebrow: 'STEP 01',
+    eyebrow: '手順1',
     title: 'YMM4 パスと保存先を先に固定する',
     body: '最初に設定を終えることで、後の台本取得や出力で迷う回数を減らします。YouTube 分析を使うなら API キーもここで揃えます。',
     image: '/product_guide.webp',
@@ -113,7 +113,7 @@ const downloadScenes: readonly GuideScene[] = [
   },
   {
     key: 'collect',
-    eyebrow: 'STEP 02',
+    eyebrow: '手順2',
     title: '対応サイトから記事とスレッドを取得する',
     body: 'まずは少ない件数で、記事取得 -> 候補選択 -> 台本化の流れを一度通して、導入相性を確認します。',
     image: '/product_get_script.webp',
@@ -124,19 +124,19 @@ const downloadScenes: readonly GuideScene[] = [
   },
   {
     key: 'shape',
-    eyebrow: 'STEP 03',
+    eyebrow: '手順3',
     title: '台本整形と AI 補助の使いどころを掴む',
     body: '取得した台本をそのまま流さず、改行補助、感情分析、役割整理で「使える下書き」に寄せる流れを確認します。',
     image: '/product_edit_script.webp',
     alt: '台本整形と編集の画面',
     checkpoint: 'AI 補助をどこで入れるか判断できる',
-    points: ['不要行や見出しを整理する', '感情分析と改行補助を必要箇所だけ使う', 'テンプレート化しやすい粒度まで整える'],
+    points: ['不要行や見出しを整理する', '感情分析と改行補助を必要箇所だけ使う', '再利用しやすい粒度まで整える'],
     Icon: Bot,
   },
   {
     key: 'handoff',
-    eyebrow: 'STEP 04',
-    title: 'YMM4 前準備まで一続きで確認する',
+    eyebrow: '手順4',
+    title: 'YMM4 前準備まで確認する',
     body: 'CSV、キャラ設定、立ち絵パス変更など、編集前に揃えるべきものをここで整理しておくと、後工程の手戻りを減らせます。',
     image: '/product_keyword_material.webp',
     alt: 'YMM4 前準備と素材整理の画面',
@@ -149,7 +149,7 @@ const downloadScenes: readonly GuideScene[] = [
 const instructionScenes: readonly GuideScene[] = [
   {
     key: 'setup',
-    eyebrow: 'STAGE 01',
+    eyebrow: '手順1',
     title: '初期設定を最初に終える',
     body: 'YMM4 パス、保存先、YouTube 分析の前提を先に揃えると、後の手順が一本化しやすくなります。',
     image: '/product_guide.webp',
@@ -160,29 +160,29 @@ const instructionScenes: readonly GuideScene[] = [
   },
   {
     key: 'script',
-    eyebrow: 'STAGE 02',
+    eyebrow: '手順2',
     title: 'ネタ取得から台本化までを通す',
     body: '対象サイトやスレッド URL を入力し、候補を選んで台本化します。まずは少数件で流れを固定すると安定します。',
     image: '/product_get_script.webp',
     alt: '記事取得と候補選択の画面',
     checkpoint: 'ネタ取得の最短導線を掴む',
-    points: ['候補一覧から動画化する題材を選ぶ', '台本取得と整形を一続きで回す', '必要に応じて AI 補助へ繋げる'],
+    points: ['候補一覧から動画化する題材を選ぶ', '台本取得と整形を同じ流れで進める', '必要に応じて AI 補助へ繋げる'],
     Icon: FileSearch,
   },
   {
     key: 'template',
-    eyebrow: 'STAGE 03',
-    title: 'テンプレート運用へ戻せる形にする',
-    body: '単発の一本で終わらせず、`.ymmp` や CSV と一緒に次の型へ戻すことで、継続投稿の再現性が上がります。',
+    eyebrow: '手順3',
+    title: 'CSV/.ymmpへ渡せる形にする',
+    body: '単発の一本で終わらせず、`.ymmp` や CSV と一緒に残すことで、次の動画でも確認しやすくなります。',
     image: '/product_format_list.webp',
-    alt: 'テンプレートとフォーマット管理の画面',
-    checkpoint: '型を増やす前提で運用できる',
+    alt: 'フォーマット管理とYMM4前準備の画面',
+    checkpoint: '次の編集でも流れを再利用できる',
     points: ['`.ymmp` からフォーマット追加', '役割や感情の型を揃える', '次の動画にも使い回せる粒度に整える'],
     Icon: Settings2,
   },
   {
     key: 'handoff',
-    eyebrow: 'STAGE 04',
+    eyebrow: '手順4',
     title: 'YMM4 へ受け渡す前に最終確認する',
     body: 'CSV、キャラ設定、立ち絵パス、読み方監査までを前工程で確認してから渡すと、編集工程が軽くなります。',
     image: '/product_keyword_material.webp',
@@ -288,19 +288,19 @@ export function DownloadPage() {
   return (
     <>
       <PageMeta
-        title="ダウンロード"
-        description="最新版ダウンロード、Windows / YMM4 の前提、初回導入で確認できる機能、サポートに渡すべき情報をまとめて確認できます。"
-        keywords="ダウンロード, 初回導入, YMM4, テンプレート運用, 導入前チェック, ゆっくりまとめプロセッサー"
+        title="ダウンロード｜最新版を無料ダウンロード"
+        description="ゆっくりまとめプロセッサーの最新版を無料でダウンロード。Windows環境でYMM4向けの台本取得、CSV出力、.ymmp前準備、初期設定を確認できます。"
+        keywords="ダウンロード, Windows, YMM4, 台本取得, CSV, .ymmp, ゆっくりまとめプロセッサー"
         path="/download/"
       />
 
       <main className="brand-shell">
         <PageIntro
           kicker="ダウンロード"
-          title="最新版を入手する"
-          lead="Windows / YMM4 の前提を確認し、そのまま初回導入の動作確認に入れます"
+          title="最新版を無料ダウンロード"
+          lead="Windows環境で、記事URLから台本下地とYMM4前準備まで試せます"
           actions={[
-            { label: '最新版をダウンロード', href: downloadUrl, variant: 'primary', external: true },
+            { label: '無料でダウンロード', href: downloadUrl, variant: 'primary', external: true },
             { label: '使い方を見る', href: '/instructions/', variant: 'ghost' },
           ]}
           flowLinks={[
@@ -312,11 +312,11 @@ export function DownloadPage() {
               <img
                 className="page-visual-card__image"
                 src="/generated/template-ops-studio-v1.webp"
-                alt="テンプレート運用、台本作成、YMM4前準備までをまとめたスタジオビジュアル"
+                alt="URL取得、台本作成、YMM4前準備までをまとめたスタジオビジュアル"
               />
               <div className="page-visual-card__meta">
-                <strong>初回導入で確認すべきのは、単発取得ではなく運用全体</strong>
-                <span>対応サイト取得、テンプレート運用、YMM4前準備までの相性をここで確認します。</span>
+                <strong>まずは実際のURLで、取得からYMM4前準備まで確認</strong>
+                <span>ダウンロード後はYMM4パス、保存先、対象URLの順で設定します。</span>
               </div>
             </InteractiveCard>
           }
@@ -329,7 +329,7 @@ export function DownloadPage() {
         <Section alt>
           <GuideSceneSwitcher
             title="導入の流れ"
-            lead="最初の10分で確認する順番を、実画面つきで先に固定する"
+            lead="解凍して起動し、YMM4パスを設定してからURLを入力する"
             scenes={downloadScenes}
             ariaLabel="ダウンロード後の確認手順"
           />
@@ -383,19 +383,19 @@ export function InstructionsPage() {
   return (
     <>
       <PageMeta
-        title="使い方ガイド"
-        description="初期設定、対応サイト取得、テンプレート運用、YMM4前準備、失敗時の対処をまとめた公式ガイドです。"
-        keywords="使い方, 初期設定, テンプレート運用, YMM4, 台本取得, AI補助"
+        title="使い方｜URL入力からYMM4確認まで"
+        description="記事URL・スレッドURLの入力から、台本整理、AI補助、CSV/.ymmp出力、YMM4での確認までを実画面付きで解説します。"
+        keywords="使い方, 初期設定, YMM4, 台本取得, CSV, .ymmp, AI補助"
         path="/instructions/"
       />
 
       <main className="brand-shell">
         <PageIntro
           kicker="使い方ガイド"
-          title="初期設定から編集開始まで"
-          lead="テンプレート運用まで見据えて、最短で安定運用に入るためのガイド"
+          title="記事URLから台本を取得し、YMM4に渡すまでの手順"
+          lead="ダウンロード、起動、YMM4パス設定、URL入力、台本整理、CSV/.ymmp確認の順に進めます"
           actions={[
-            { label: '最新版をダウンロード', href: downloadUrl, variant: 'primary', external: true },
+            { label: '無料でダウンロード', href: downloadUrl, variant: 'primary', external: true },
             { label: 'FAQを見る', href: '/faq/', variant: 'ghost' },
           ]}
           flowLinks={[
@@ -410,8 +410,8 @@ export function InstructionsPage() {
                 alt="内蔵ガイドと初期設定の画面"
               />
               <div className="page-visual-card__meta">
-                <strong>読むだけでなく、実画面と一緒に手順を固定する</strong>
-                <span>初回設定、台本取得、テンプレ運用、YMM4受け渡しまでを、途中で迷わない順番に並べています。</span>
+                <strong>各ステップで、入力するものと成功状態を確認</strong>
+                <span>迷ったらYMM4パス、保存先、対象URL、APIキーの順で切り分けます。</span>
               </div>
             </InteractiveCard>
           }
@@ -424,7 +424,7 @@ export function InstructionsPage() {
         <Section alt>
           <GuideSceneSwitcher
             title="段階別ガイド"
-            lead="設定から受け渡しまでを、実画面つきで一本の導線にまとめる"
+            lead="設定から受け渡しまでを、実画面つきで順番に確認する"
             scenes={instructionScenes}
             ariaLabel="使い方の段階切り替え"
           />
@@ -448,7 +448,7 @@ export function InstructionsPage() {
 
           <InteractiveCard className="release-panel premium-glass subpage-support-callout">
             <div>
-              <span className="subpage-card__eyebrow">SUPPORT ROUTE</span>
+              <span className="subpage-card__eyebrow">問い合わせ</span>
               <h2>それでも詰まるときは、切り分け情報をまとめて送る</h2>
               <p>
                 実行パス、保存先、対象URL、発生時刻、エラー全文が揃っていると、原因の切り分けがかなり速くなります。

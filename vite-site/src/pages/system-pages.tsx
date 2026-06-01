@@ -37,7 +37,7 @@ export function NotFoundPage() {
           </div>
           <div className="brand-inline-actions" style={{ justifyContent: 'center', marginTop: '1.1rem' }}>
             <Link className="brand-btn brand-btn--primary" to="/">ホームへ戻る</Link>
-            <Link className="brand-btn brand-btn--ghost" to="/download/">無料で始める</Link>
+            <Link className="brand-btn brand-btn--ghost" to="/download/">無料でダウンロード</Link>
           </div>
         </div>
       </Section>

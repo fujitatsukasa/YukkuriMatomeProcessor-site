@@ -48,14 +48,14 @@ const pricingPlans: PricingPlan[] = [
     price: '¥39,800',
     term: '買い切り / 税込',
     bestFor: '台本取得と台本生成の制限を外して、継続投稿の前工程を止めずに回したい',
-    summary: '一度払いで Premium 権限を付与し、scriptFetch と scriptGeneration の制限を外す買い切りライセンスです。',
+    summary: '一度払いで Premium 権限を付与し、台本取得とAI台本生成の利用制限を解除する買い切りライセンスです。',
     note: 'Googleログインに紐づく権限同期で、購入後は月額なしで Premium 機能を利用',
     badge: '買い切り',
     features: [
       { label: 'Freeプランの全機能', active: true },
-      { label: 'テンプレート / フォーマット運用', active: true, emphasis: true },
-      { label: 'scriptFetch の利用制限解除', active: true, emphasis: true },
-      { label: 'scriptGeneration の利用制限解除', active: true, emphasis: true },
+      { label: 'CSV/.ymmpとフォーマット管理', active: true, emphasis: true },
+      { label: '台本取得の利用制限解除', active: true, emphasis: true },
+      { label: 'AI台本生成の利用制限解除', active: true, emphasis: true },
       { label: '13キャラ対応のAI台本作成', active: true, emphasis: true },
       { label: 'YouTube分析と候補比較', active: true, emphasis: true },
       { label: 'Googleアカウントへの権限保持', active: true, emphasis: true },
@@ -74,7 +74,7 @@ const comparisonRows = [
     values: ['導入相性の確認', '買い切りで Premium 権限を保持'],
   },
   {
-    label: 'テンプレート運用',
+    label: 'CSV/.ymmp管理',
     values: ['入口の確認', '継続投稿で本格利用'],
   },
   {
@@ -134,7 +134,7 @@ export function PricingCards() {
             </div>
 
             <div className="pricing-card__note">
-              <span>おすすめ運用</span>
+              <span>おすすめの使い方</span>
               <p>{plan.note}</p>
             </div>
           </InteractiveCard>
@@ -145,8 +145,7 @@ export function PricingCards() {
         <div className="pricing-comparison-board__head">
           <h3>プラン差分を一目で把握</h3>
           <p>
-            価格だけでなく、導入確認から買い切りの制限解除へどこで強くなるかを
-            短く整理して、比較の観点を揃えています。
+            Freeで確認できる範囲と、Premiumで解除される範囲を短く整理しています。
           </p>
           <span className="pricing-comparison-board__hint">モバイルでは横スクロールで比較できます。</span>
         </div>

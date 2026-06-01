@@ -27,19 +27,19 @@ function formatBody(body: string) {
 
 const updateGuideCards = [
   {
-    eyebrow: 'BEFORE UPDATE',
+    eyebrow: '更新前',
     title: '更新前に確認しておくこと',
-    body: '保存先、YMM4パス、テンプレートまわりの設定を確認し、必要ならバックアップします。',
-    points: ['現在の設定を控える', '運用フォルダのバックアップを取る', '変更点がありそうなら使い方も併読する'],
+    body: '保存先、YMM4パス、CSV/.ymmpの出力先を確認し、必要ならバックアップします。',
+    points: ['現在の設定を控える', '保存先フォルダをバックアップする', '手順変更がありそうなら使い方も確認する'],
   },
   {
-    eyebrow: 'CHECK NOTES',
+    eyebrow: '変更点',
     title: '何を見てから更新するか',
     body: '最新版のリリースノート、CHANGELOG、過去タグを先に確認すると、変更点の見落としを減らせます。',
     points: ['最新の変更点を見る', '前バージョンとの差分を把握', '過去タグも遡れる'],
   },
   {
-    eyebrow: 'WHEN STUCK',
+    eyebrow: '困ったとき',
     title: '困ったときの逃げ先',
     body: 'FAQ、使い方、問い合わせ窓口を先に固定しておくと、更新後の切り分けが速くなります。',
     points: ['FAQを先に確認', '手順変更は使い方で再確認', '解決しなければ問い合わせる'],
@@ -73,9 +73,9 @@ export function UpdatePage() {
   return (
     <>
       <PageMeta
-        title="アップデート履歴"
-        description="最新版の1クリックダウンロード、リリースノート、過去バージョン一覧の確認先をまとめたページです。"
-        keywords="アップデート, リリースノート, 変更履歴, ダウンロード"
+        title="アップデート｜最新版と変更履歴"
+        description="ゆっくりまとめプロセッサーの最新版、公開日、リリースノート、過去バージョンを確認できます。更新前の設定確認もまとめています。"
+        keywords="アップデート, 最新版, リリースノート, 変更履歴, ダウンロード"
         path="/update/"
       />
 
@@ -83,10 +83,10 @@ export function UpdatePage() {
         <section className="utility-hero utility-hero--update">
           <div className="utility-hero__shell">
             <div className="utility-hero__copy">
-              <p className="brand-kicker">RELEASE HUB</p>
-              <h1>最新版へ、迷わず辿る</h1>
+              <p className="brand-kicker">アップデート</p>
+              <h1>最新版と更新履歴</h1>
               <p className="brand-lead">
-                このページでは、最新版の取得、変更点の把握、過去バージョンの確認を一つの導線にまとめています。更新判断に必要な情報を先に置いています。
+                最新版の取得、公開日、変更点、過去バージョンを確認できます。更新前にYMM4パスと保存先も見直してください。
               </p>
 
               <div className="utility-stat-grid">
@@ -101,7 +101,7 @@ export function UpdatePage() {
               </div>
 
               <div className="utility-link-row">
-                <a href={downloadUrl}>最新版をダウンロード</a>
+                <a href={downloadUrl}>無料でダウンロード</a>
                 <a href={latestReleaseUrl} target="_blank" rel="noopener noreferrer">
                   リリースノート
                 </a>
@@ -116,7 +116,7 @@ export function UpdatePage() {
 
             <div className="utility-hero__panel-stack">
               <InteractiveCard className="release-panel premium-glass utility-hero__panel">
-                <span className="subpage-card__eyebrow">LATEST RELEASE</span>
+                <span className="subpage-card__eyebrow">最新リリース</span>
                 <h2>{latestRelease?.name || latestRelease?.tag_name || '最新リリースを確認中'}</h2>
                 <p>{latestRelease ? `${formatDate(latestRelease.published_at)} に公開` : 'GitHub Releases から最新の公開情報を読み込んでいます。'}</p>
 
@@ -140,13 +140,13 @@ export function UpdatePage() {
                     リリースノートを見る
                   </a>
                   <a className="brand-btn brand-btn--primary" href={downloadUrl}>
-                    最新版を入手
+                    無料でダウンロード
                   </a>
                 </div>
               </InteractiveCard>
 
               <InteractiveCard className="release-panel premium-glass release-link-panel">
-                <span className="subpage-card__eyebrow">OFFICIAL LINKS</span>
+                <span className="subpage-card__eyebrow">公式リンク</span>
                 <h2>更新判断に必要なリンク</h2>
                 <div className="subpage-link-stack">
                   <a href={changeLogUrl} target="_blank" rel="noopener noreferrer">
@@ -175,8 +175,8 @@ export function UpdatePage() {
 
         <Section alt>
           <div className="subpage-section-head">
-            <p>UPDATE FLOW</p>
-            <h2>更新前後で迷わないよう、見る順番と逃げ先を固定する</h2>
+            <p>更新前の確認</p>
+            <h2>更新前後で見る順番を固定する</h2>
           </div>
 
           <div className="subpage-card-grid subpage-card-grid--3">
@@ -198,7 +198,7 @@ export function UpdatePage() {
         <Section>
           <div className="content-page">
             <div className="subpage-section-head">
-              <p>RELEASE TIMELINE</p>
+              <p>更新履歴</p>
               <h2>直近の更新を時系列で追う</h2>
             </div>
 

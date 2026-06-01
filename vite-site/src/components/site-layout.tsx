@@ -180,7 +180,7 @@ export function SiteLayout() {
 
   useRouteEffects(location.pathname, location.hash)
 
-  const customPrimaryCta = useMemo(() => ({ ...primaryCta, label: '無料で始める' }), [])
+  const customPrimaryCta = useMemo(() => ({ ...primaryCta, label: '無料でダウンロード' }), [])
 
   return (
     <>
@@ -315,7 +315,7 @@ export function SiteLayout() {
             <section>
               <h3>クイックリンク</h3>
               <ul>
-                <li><Link to="/download/">無料で始める</Link></li>
+                <li><Link to="/download/">無料でダウンロード</Link></li>
                 <li><Link to="/purchase/">料金を確認</Link></li>
                 <li><Link to="/news/">最新のお知らせ</Link></li>
               </ul>

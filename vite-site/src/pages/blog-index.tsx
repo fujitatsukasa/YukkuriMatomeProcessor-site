@@ -75,7 +75,7 @@ export function BlogIndex() {
       <PageMeta
         title={`オフィシャルブログ | ${siteTitle}`}
         description="ゆっくり解説、反応集、YMM4、制作自動化に関する実践ノウハウをまとめた公式ブログです。"
-        keywords="ブログ,ゆっくり解説,動画編集,YMM4,自動化,運用"
+        keywords="ブログ,ゆっくり解説,動画編集,YMM4,自動化,制作手順"
         path="/blog/"
       />
 
@@ -86,7 +86,7 @@ export function BlogIndex() {
               <p className="brand-kicker">OFFICIAL BLOG</p>
               <h1>制作フローを伸ばす記事だけを並べる</h1>
               <p className="brand-lead">
-                ここでは製品の宣伝よりも、運用へ戻せる知見を優先しています。YMM4、台本、素材、著作権、運用改善までを検索とタグで横断できます。
+                ここでは製品の宣伝よりも、制作手順へ戻せる知見を優先しています。YMM4、台本、素材、著作権、改善ポイントまでを検索とタグで横断できます。
               </p>
 
               <label className="utility-search blog-index-search">
@@ -115,7 +115,7 @@ export function BlogIndex() {
 
               <p className="editorial-hero__meta">
                 {searchTerm || activeTag ? '絞り込み結果' : '公開中の記事'} <strong>{filteredPosts.length}</strong> 本
-                <span>運用に戻せる記事だけを残しています。</span>
+                <span>制作手順に戻せる記事だけを残しています。</span>
               </p>
             </div>
 

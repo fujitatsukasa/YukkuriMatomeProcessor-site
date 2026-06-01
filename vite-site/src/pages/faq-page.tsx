@@ -11,32 +11,32 @@ const faqCategoryMeta: Record<
   }
 > = {
   'faq-general': {
-    lead: 'まず仕様の全体像を掴みたいときの入口です。対応範囲、前提、見ておくべきページをまとめています。',
-    cue: '全体像を先に把握する',
+    lead: 'このツールで何ができ、何ができないかを最初に確認できます。',
+    cue: 'できることを見る',
   },
   'faq-onboarding': {
-    lead: '初回導入でつまずきやすい設定、対応OS、導入チェックの順番をまとめています。',
-    cue: '導入の最初を整える',
+    lead: 'Windows、YMM4、保存先、初回起動でつまずきやすい点をまとめています。',
+    cue: '導入前提を見る',
   },
   'faq-script': {
-    lead: '対応URLの取得、台本整形、AI補助の使いどころを整理しています。',
-    cue: '台本取得まわりを見る',
+    lead: '対応URLの取得、取得できないときの確認、台本整形の使いどころを整理しています。',
+    cue: 'URL取得を見る',
   },
   'faq-settings': {
-    lead: 'YMM4パス、保存先、テンプレート方針、YouTube分析の前提をまとめています。',
-    cue: '設定を先に固める',
+    lead: 'YMM4パス、CSV/.ymmp保存先、YouTube APIキーの前提をまとめています。',
+    cue: '設定を見る',
   },
   'faq-trouble': {
     lead: '起動失敗、YMM4連携、保存エラー、問い合わせ時の必要情報を整理しています。',
     cue: '困りごとを切り分ける',
   },
   'faq-purchase': {
-    lead: '料金、課金導線、プラン変更、契約相談に関する前提をまとめています。',
-    cue: '購入まわりを確認する',
+    lead: 'FreeとPremiumの違い、Stripe Checkout、返金条件をまとめています。',
+    cue: '料金と返金を見る',
   },
 }
 
-const faqQuickQueries = ['YMM4', '保存先', 'API キー', '解約', 'テンプレート', 'URL取得'] as const
+const faqQuickQueries = ['Mac', 'Windows', 'YMM4', 'Premium', '返金', 'URL取得', 'API キー'] as const
 
 export function FaqPage() {
   const [query, setQuery] = useState('')
@@ -63,9 +63,9 @@ export function FaqPage() {
   return (
     <>
       <PageMeta
-        title="FAQ"
-        description="テンプレート運用、導入、台本取得、設定、トラブル、購入・契約のカテゴリごとに疑問を整理したFAQです。"
-        keywords="FAQ, 質問, トラブルシューティング, サポート, 購入条件, テンプレート運用"
+        title="FAQ｜導入前によくある質問"
+        description="Windows対応、YMM4前提、Mac対応、FreeとPremiumの違い、URL取得、APIキー、返金条件を導入前に確認できます。"
+        keywords="FAQ, Windows, Mac, YMM4, Premium, 返金, URL取得, APIキー"
         path="/faq/"
       />
 
@@ -74,9 +74,9 @@ export function FaqPage() {
           <div className="utility-hero__shell">
             <div className="utility-hero__copy">
               <p className="brand-kicker">FAQ</p>
-              <h1>まず疑問を片付ける</h1>
+              <h1>導入前によくある質問</h1>
               <p className="brand-lead">
-                導入、YMM4連携、課金、トラブルをカテゴリで探すのではなく、気になる語句でそのまま辿れる入口に変えています。
+                Windows専用か、YMM4は必要か、無料で何ができるか、Premiumで何が解除されるかを購入前に確認できます。
               </p>
 
               <label className="utility-search">
@@ -85,7 +85,7 @@ export function FaqPage() {
                   type="search"
                   value={query}
                   onChange={(event) => setQuery(event.target.value)}
-                  placeholder="例: YMM4 / API キー / 保存先 / 解約"
+                  placeholder="例: Mac / YMM4 / Premium / 返金"
                   aria-label="FAQ検索"
                 />
               </label>
@@ -110,8 +110,8 @@ export function FaqPage() {
             </div>
 
             <InteractiveCard className="release-panel premium-glass utility-hero__panel">
-              <span className="subpage-card__eyebrow">TOP ROUTES</span>
-              <h2>今すぐ確認しやすい入口</h2>
+              <span className="subpage-card__eyebrow">主要な確認先</span>
+              <h2>よく見られる質問から確認する</h2>
 
               <div className="utility-stat-grid">
                 <div className="utility-stat">
@@ -120,7 +120,7 @@ export function FaqPage() {
                 </div>
                 <div className="utility-stat">
                   <strong>{faqGroups.length}カテゴリ</strong>
-                  <span>導入から契約までを整理</span>
+                  <span>導入から返金までを整理</span>
                 </div>
               </div>
 
@@ -148,8 +148,8 @@ export function FaqPage() {
 
         <Section>
           <div className="subpage-section-head">
-            <p>QUICK ROUTES</p>
-            <h2>まずは自分の疑問に近い入口から入る</h2>
+            <p>質問カテゴリ</p>
+            <h2>知りたい内容から選ぶ</h2>
           </div>
 
           {filteredGroups.length ? (
@@ -221,9 +221,9 @@ export function FaqPage() {
         <Section alt>
           <InteractiveCard className="release-panel premium-glass faq-support-rail">
             <div>
-              <span className="subpage-card__eyebrow">SUPPORT ROUTE</span>
-              <h2>解決しない場合は、使う窓口を先に固定する</h2>
-              <p>設定確認を先に済ませたい導線、購入相談、継続利用の相談先を分けて、迷わず次へ進めるようにしています。</p>
+              <span className="subpage-card__eyebrow">問い合わせ</span>
+              <h2>解決しない場合は状況を添えて問い合わせる</h2>
+              <p>OS、対象URL、エラー全文、YMM4パス、保存先設定があると切り分けが速くなります。</p>
             </div>
 
             <div className="faq-support-rail__channels">
