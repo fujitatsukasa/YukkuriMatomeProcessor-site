@@ -44,6 +44,30 @@ const pricingFlow = [
   },
 ] as const
 
+const purchaseGoalCards = [
+  {
+    label: '購入前',
+    plan: 'Freeで確認',
+    title: '少数URLで一連の流れを通す',
+    body: 'まず無料で起動、URL取得、台本整理、CSV/.ymmp前準備まで触り、自分の制作手順に合うか確認します。',
+    checks: ['アプリが起動する', '候補一覧が出る', 'YMM4前準備まで試す'],
+  },
+  {
+    label: '購入時',
+    plan: 'Stripe Checkout',
+    title: 'アプリ内の購入導線から一度払いする',
+    body: 'Premiumはサイト単体ではなく、アプリ内の購入画面からStripe Checkoutを開いて購入します。',
+    checks: ['39,800円税込', '月額なし', '購入後7日以内の返金条件を確認'],
+  },
+  {
+    label: '購入後',
+    plan: 'Premium同期',
+    title: 'Googleアカウントで権限を確認する',
+    body: '決済後はGoogleログインに紐づくPremium権限を同期し、制限解除後の動作を少数URLで確認します。',
+    checks: ['権限同期を確認', '台本取得の制限解除', 'AI台本生成の制限解除'],
+  },
+] as const
+
 const premiumUnlocks = [
   {
     label: '台本取得',
@@ -62,6 +86,21 @@ const premiumUnlocks = [
     title: 'GoogleアカウントにPremium権限を保持',
     body: '購入後はGoogleログインに紐づく権限同期で、アプリ内のPremium機能を有効化します。',
     Icon: ShieldCheck,
+  },
+] as const
+
+const premiumCompletionGoals = [
+  {
+    title: '台本取得を本番件数へ増やす',
+    body: 'Freeで確認した対応URLの取得を、継続投稿で使う量へ増やせる状態にします。',
+  },
+  {
+    title: 'AI台本生成を継続利用する',
+    body: '掛け合い台本、役割、感情、読み上げ向けの整理を、制作ごとに使える状態にします。',
+  },
+  {
+    title: '制限解除後も少数URLで確認する',
+    body: '購入直後にいきなり本番件数へ増やさず、少数URLで取得、生成、出力まで再確認します。',
   },
 ] as const
 
@@ -166,6 +205,33 @@ export function PurchasePage() {
           <PricingCards />
         </Section>
 
+        <Section className="pricing-reassurance-section">
+          <div className="subpage-section-head pricing-decision-guide__head">
+            <p>購入前後の到達目標</p>
+            <h2>Freeで試し、Premiumで制限解除し、少数URLで再確認する</h2>
+            <span>
+              料金だけで判断せず、購入前、購入時、購入後の確認を分けます。
+              ここまで揃ってから本番件数へ増やしてください。
+            </span>
+          </div>
+
+          <div className="pricing-decision-guide" aria-label="購入前後の到達目標">
+            {purchaseGoalCards.map((card) => (
+              <InteractiveCard key={card.label} className="pricing-decision-guide__card">
+                <span className="pricing-decision-guide__label">{card.label}</span>
+                <strong className="pricing-decision-guide__plan">{card.plan}</strong>
+                <h3>{card.title}</h3>
+                <p>{card.body}</p>
+                <ul>
+                  {card.checks.map((check) => (
+                    <li key={check}>{check}</li>
+                  ))}
+                </ul>
+              </InteractiveCard>
+            ))}
+          </div>
+        </Section>
+
         <Section alt className="pricing-clarity-section">
           <div className="pricing-clarity-board">
             <div className="pricing-clarity-board__head">
@@ -188,6 +254,24 @@ export function PurchasePage() {
                   </article>
                 )
               })}
+            </div>
+
+            <div className="pricing-clarity-board__head pricing-clarity-board__head--compact">
+              <p>制限解除後の完了判定</p>
+              <h2>Premium後に「できた」と言える状態</h2>
+              <span>購入後も、まず少数URLで台本取得、AI台本生成、出力確認までを通します。</span>
+            </div>
+
+            <div className="pricing-unlock-goal-grid" aria-label="Premium後の完了判定">
+              {premiumCompletionGoals.map((item) => (
+                <article key={item.title} className="pricing-unlock-goal-card">
+                  <CheckCircle2 size={17} />
+                  <div>
+                    <strong>{item.title}</strong>
+                    <p>{item.body}</p>
+                  </div>
+                </article>
+              ))}
             </div>
 
             <div className="pricing-fact-row" aria-label="支払いと返金の要点">

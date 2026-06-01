@@ -9495,8 +9495,14 @@ html {
   line-height: 1.75;
 }
 
+.pricing-clarity-board__head--compact {
+  max-width: 720px;
+  padding-top: 0.2rem;
+}
+
 .pricing-unlock-grid,
-.pricing-fact-row {
+.pricing-fact-row,
+.pricing-unlock-goal-grid {
   display: grid;
   gap: 0.85rem;
 }
@@ -9509,14 +9515,24 @@ html {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.pricing-unlock-goal-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .pricing-unlock-card,
-.pricing-fact-card {
+.pricing-fact-card,
+.pricing-unlock-goal-card {
   display: grid;
   gap: 0.65rem;
   padding: 1rem;
   border: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.045);
+}
+
+.pricing-unlock-goal-card {
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: flex-start;
 }
 
 .pricing-unlock-card span,
@@ -9531,19 +9547,22 @@ html {
 }
 
 .pricing-unlock-card svg,
-.pricing-fact-card svg {
+.pricing-fact-card svg,
+.pricing-unlock-goal-card > svg {
   color: #e0c184;
 }
 
 .pricing-unlock-card h3,
 .pricing-unlock-card p,
 .pricing-fact-card p,
+.pricing-unlock-goal-card p,
 .pricing-caution-panel h3 {
   margin: 0;
 }
 
 .pricing-unlock-card h3,
 .pricing-fact-card strong,
+.pricing-unlock-goal-card strong,
 .pricing-caution-panel h3 {
   color: #fff7e6;
   line-height: 1.38;
@@ -9558,10 +9577,16 @@ html {
 }
 
 .pricing-unlock-card p,
-.pricing-fact-card p {
+.pricing-fact-card p,
+.pricing-unlock-goal-card p {
   color: rgba(236, 233, 226, 0.72);
   font-size: 0.92rem;
   line-height: 1.72;
+}
+
+.pricing-unlock-goal-card div {
+  display: grid;
+  gap: 0.38rem;
 }
 
 .pricing-caution-panel {
@@ -9730,6 +9755,7 @@ html {
 
   .pricing-unlock-grid,
   .pricing-fact-row,
+  .pricing-unlock-goal-grid,
   .pricing-caution-panel {
     grid-template-columns: 1fr;
   }
