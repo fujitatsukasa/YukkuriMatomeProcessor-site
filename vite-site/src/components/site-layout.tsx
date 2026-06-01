@@ -153,6 +153,10 @@ function useRouteEffects(pathname: string, hash: string) {
 export function SiteLayout() {
   const location = useLocation()
   const [navOpen, setNavOpen] = useState(false)
+  const headerNavItems = useMemo(
+    () => navItems.filter((item) => item.key !== 'news' && item.key !== 'blog'),
+    [],
+  )
   const normalizedPath = normalizePath(location.pathname)
   const isHome = normalizedPath === '/'
   const activeEntry = pageRegistry[normalizedPath]
@@ -236,7 +240,7 @@ export function SiteLayout() {
             data-nav
             data-open={navOpen}
           >
-            {navItems.map((item) => (
+            {headerNavItems.map((item) => (
               <Link
                 key={item.key}
                 className={item.key === activeKey ? 'is-active' : undefined}
