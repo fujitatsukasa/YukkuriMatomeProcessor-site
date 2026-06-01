@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
 import { PageMeta } from '@/components/ui'
 import { downloadUrl, legal, siteOrigin, siteTitle } from '@/data/site-content'
@@ -13,9 +14,16 @@ import {
 } from 'lucide-react'
 
 const heroProofItems = [
-  { label: '対応環境', value: 'Windows専用 / YMM4前提' },
-  { label: '無料確認', value: 'URL取得と台本編集を試せる' },
-  { label: '制限解除', value: 'Premiumは買い切り ¥39,800' },
+  { label: 'Free', value: 'URL取得を試せる' },
+  { label: 'Premium', value: '買い切り ¥39,800' },
+  { label: 'Workflow', value: 'Windows / YMM4' },
+] as const
+
+const heroMotionSteps = [
+  'URLを読み込む',
+  '候補を選ぶ',
+  '台本下地を整える',
+  'YMM4前準備へ進む',
 ] as const
 
 const flowItems = [
@@ -166,14 +174,17 @@ export function HomePage() {
       <div className="home-focus">
         <section className="home-focus-hero" aria-labelledby="home-focus-heading">
           <div className="home-focus-hero__copy">
-            <p className="home-focus-kicker">YMM4向け Windows制作支援ツール</p>
-            <h1 id="home-focus-heading">ゆっくりまとめプロセッサー</h1>
+            <p className="home-focus-kicker">YMM4向け制作フロー自動化</p>
+            <h1 id="home-focus-heading">
+              <span>ゆっくりまとめ</span>
+              <span>プロセッサー</span>
+            </h1>
             <p className="home-focus-hero__statement">
-              記事URL・スレッドURLから、台本下地とYMM4前準備を作る
+              記事URLから、台本・素材・YMM4前準備まで一気に整える
             </p>
             <p className="home-focus-lead">
-              候補取得、台本整理、CSV/.ymmp前準備までをWindows上で確認できます。
-              最終編集はYMM4で音声、字幕、立ち絵、間合いを仕上げます。
+              ネタ探し、候補確認、台本下地、CSV/.ymmp前準備をひとつの流れにまとめます。
+              最終編集はYMM4で仕上げる前提の、ゆっくり動画制作支援ツールです。
             </p>
 
             <div className="home-focus-actions">
@@ -194,12 +205,20 @@ export function HomePage() {
                 </div>
               ))}
             </div>
+
+            <div className="home-focus-mini-flow" aria-label="制作フロー">
+              {heroMotionSteps.map((step, index) => (
+                <span key={step} style={{ '--step-index': index } as CSSProperties}>
+                  {step}
+                </span>
+              ))}
+            </div>
           </div>
 
           <figure className="home-focus-visual">
             <div className="home-focus-visual__bar" aria-hidden="true">
-              <span>実アプリ画面</span>
-              <strong>URL入力 → 候補取得</strong>
+              <span>Live workflow</span>
+              <strong>URL入力 → 台本下地 → YMM4前準備</strong>
             </div>
             <img
               src="/product_get_script.webp"
@@ -211,6 +230,13 @@ export function HomePage() {
               <strong>取得候補を選ぶ画面</strong>
               <span>ここから台本整理とYMM4前準備へ進みます</span>
             </figcaption>
+            <div className="home-focus-visual__motion" aria-hidden="true">
+              {heroMotionSteps.map((step, index) => (
+                <span key={step} style={{ '--step-index': index } as CSSProperties}>
+                  {step}
+                </span>
+              ))}
+            </div>
           </figure>
 
           <div className="home-focus-flow" aria-label="入力から出力まで">
