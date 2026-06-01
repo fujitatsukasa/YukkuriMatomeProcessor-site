@@ -1,12 +1,14 @@
 import { Link } from 'react-router-dom'
 import { InteractiveCard, PageIntro, PageMeta, Section } from '@/components/ui'
 import { downloadUrl } from '@/data/site-content'
-import { ArrowRight, BadgeCheck, Download, FileText, MonitorPlay, Sparkles } from 'lucide-react'
+import { ArrowRight, BadgeCheck, ClipboardCheck, Download, FileText, MonitorPlay, Sparkles } from 'lucide-react'
 
 const screenGallery = [
   {
     title: 'URL入力から記事候補を取得',
     body: '対応サイトやスレッドURLを入れ、動画化する候補を一覧で確認します。',
+    goal: '候補一覧にタイトル、URL、サムネイルが並ぶ',
+    next: '使う候補を選び、台本下地へ進む',
     image: '/product_get_script.webp',
     alt: 'URL入力から記事候補を取得する実アプリ画面',
     tags: ['URL取得', '候補比較', '対応サイト'],
@@ -14,6 +16,8 @@ const screenGallery = [
   {
     title: '台本下地を編集する',
     body: '不要行を削り、役割、感情、読み上げ向けの文量を見ながら整えます。',
+    goal: '読み上げ前に確認できる台本下地になる',
+    next: 'CSV/.ymmp前準備へ渡す内容を確定する',
     image: '/product_edit_script.webp',
     alt: '取得した台本下地を編集する実アプリ画面',
     tags: ['台本編集', '感情補助', '読み上げ調整'],
@@ -21,6 +25,8 @@ const screenGallery = [
   {
     title: 'YMM4前準備を確認する',
     body: 'CSV、キャラ設定、立ち絵パス、保存先を確認してからYMM4側の編集へ移れます。',
+    goal: '素材パスと保存先を確認し、編集前の不整合を減らす',
+    next: 'YMM4側で音声、字幕、立ち絵を確認する',
     image: '/product_keyword_material.webp',
     alt: 'YMM4前準備と素材整理を確認する実アプリ画面',
     tags: ['CSV', '.ymmp', '素材パス'],
@@ -28,6 +34,8 @@ const screenGallery = [
   {
     title: 'AI台本生成を使う',
     body: '13キャラの掛け合い補助を使い、取得素材を会話形式へ寄せます。',
+    goal: 'AI出力を下書きとして作り、人が内容確認できる状態にする',
+    next: '事実確認、引用、言い回しを修正する',
     image: '/product_ai_script.webp',
     alt: 'AI台本生成とキャラ指定の実アプリ画面',
     tags: ['AI補助', '13キャラ', '掛け合い'],
@@ -35,6 +43,8 @@ const screenGallery = [
   {
     title: 'YouTube分析で題材を見る',
     body: '候補動画、コメント、比較情報を確認し、次に作る題材の判断材料にします。',
+    goal: '題材候補の比較材料を集める',
+    next: '使う題材を選び、URL取得か台本作成へ戻る',
     image: '/product_youtube_info.webp',
     alt: 'YouTube分析と候補比較の実アプリ画面',
     tags: ['YouTube分析', 'コメント', '題材選定'],
@@ -42,9 +52,29 @@ const screenGallery = [
   {
     title: 'フォーマットを追加する',
     body: 'CSV/.ymmpに渡しやすい形を残し、次の動画でも手順を再利用しやすくします。',
+    goal: '出力形式と命名ルールを再利用できる状態にする',
+    next: '次回の動画でも同じ前工程を使う',
     image: '/product_format_list.webp',
     alt: 'フォーマット管理とYMM4前準備の実アプリ画面',
     tags: ['フォーマット', '再利用', '制作手順'],
+  },
+] as const
+
+const sampleGoalCards = [
+  {
+    title: 'URL取得の成功',
+    body: '対応URLを入れて、候補一覧に使える素材が並ぶかを確認します。',
+    checks: ['少数URLで取得確認', '対応外URLを切り分け', '候補から題材を選ぶ'],
+  },
+  {
+    title: '台本下地の成功',
+    body: 'AI補助を使う場合も、公開前に人が確認できる台本へ整えます。',
+    checks: ['不要行を削除', '役割と感情を確認', '長い行を分割'],
+  },
+  {
+    title: 'YMM4前準備の成功',
+    body: 'CSV/.ymmp、保存先、素材パスを確認して、YMM4側の編集に入れる状態にします。',
+    checks: ['保存先を固定', '素材パスを確認', 'YMM4側で最終編集'],
   },
 ] as const
 
@@ -140,6 +170,33 @@ export function SamplesPage() {
 
         <Section>
           <div className="subpage-section-head sample-gallery-head">
+            <p>機能別ゴール</p>
+            <h2>実画面を見る前に、何ができれば成功かを決める</h2>
+          </div>
+
+          <div className="sample-goal-grid">
+            {sampleGoalCards.map((goal) => (
+              <InteractiveCard key={goal.title} className="sample-goal-card premium-glass">
+                <span className="sample-goal-card__icon" aria-hidden="true">
+                  <ClipboardCheck size={21} />
+                </span>
+                <h3>{goal.title}</h3>
+                <p>{goal.body}</p>
+                <ul>
+                  {goal.checks.map((check) => (
+                    <li key={check}>
+                      <BadgeCheck size={15} />
+                      {check}
+                    </li>
+                  ))}
+                </ul>
+              </InteractiveCard>
+            ))}
+          </div>
+        </Section>
+
+        <Section alt>
+          <div className="subpage-section-head sample-gallery-head">
             <p>実アプリ画面</p>
             <h2>URL取得からYMM4前準備までを画面で見る</h2>
           </div>
@@ -157,6 +214,16 @@ export function SamplesPage() {
                   </span>
                   <h3>{item.title}</h3>
                   <p>{item.body}</p>
+                  <dl className="sample-screen-card__goal">
+                    <div>
+                      <dt>成功状態</dt>
+                      <dd>{item.goal}</dd>
+                    </div>
+                    <div>
+                      <dt>次にやること</dt>
+                      <dd>{item.next}</dd>
+                    </div>
+                  </dl>
                   <div className="sample-chip-row">
                     {item.tags.map((tag) => (
                       <small key={tag}>{tag}</small>
@@ -168,7 +235,7 @@ export function SamplesPage() {
           </div>
         </Section>
 
-        <Section alt>
+        <Section>
           <div className="subpage-section-head sample-gallery-head">
             <p>Before / After</p>
             <h2>手作業で散らばりやすい部分を、確認しやすい順番へ戻す</h2>
@@ -204,7 +271,7 @@ export function SamplesPage() {
           </div>
         </Section>
 
-        <Section>
+        <Section alt>
           <div className="subpage-section-head sample-gallery-head">
             <p>動画化サンプル構成</p>
             <h2>作れる動画の方向性を、構成見本で確認する</h2>

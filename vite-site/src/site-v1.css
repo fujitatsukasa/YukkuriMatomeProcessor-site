@@ -10623,6 +10623,69 @@ html {
   line-height: 1.72;
 }
 
+.sample-goal-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.sample-goal-card {
+  display: grid;
+  gap: 0.78rem;
+  align-content: start;
+  padding: clamp(1rem, 1.8vw, 1.32rem);
+  border-radius: 18px;
+}
+
+.sample-goal-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255, 232, 190, 0.18);
+  border-radius: 14px;
+  background: rgba(224, 193, 132, 0.12);
+  color: #ffe8be;
+}
+
+.sample-goal-card h3 {
+  margin: 0;
+  color: #fff7e6;
+  font-size: 1.08rem;
+  line-height: 1.42;
+}
+
+.sample-goal-card p {
+  margin: 0;
+  color: rgba(236, 233, 226, 0.74);
+  font-size: 0.92rem;
+  line-height: 1.72;
+}
+
+.sample-goal-card ul {
+  display: grid;
+  gap: 0.52rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sample-goal-card li {
+  display: flex;
+  gap: 0.45rem;
+  align-items: flex-start;
+  color: rgba(245, 247, 255, 0.82);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.sample-goal-card li svg {
+  flex: 0 0 auto;
+  color: #e0c184;
+  margin-top: 0.18rem;
+}
+
 .sample-screen-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -10684,6 +10747,34 @@ html {
   margin: 0;
   color: rgba(236, 233, 226, 0.73);
   line-height: 1.75;
+}
+
+.sample-screen-card__goal {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0;
+}
+
+.sample-screen-card__goal div {
+  display: grid;
+  gap: 0.24rem;
+  padding: 0.68rem;
+  border: 1px solid rgba(255, 232, 190, 0.12);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.sample-screen-card__goal dt {
+  color: rgba(255, 232, 190, 0.74);
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.sample-screen-card__goal dd {
+  margin: 0;
+  color: rgba(245, 247, 255, 0.82);
+  font-size: 0.86rem;
+  line-height: 1.58;
 }
 
 .sample-chip-row {
@@ -11036,6 +11127,7 @@ html {
   }
 
   .sample-screen-grid,
+  .sample-goal-grid,
   .instruction-goal-grid,
   .instruction-manual-grid,
   .instruction-trouble-grid,
