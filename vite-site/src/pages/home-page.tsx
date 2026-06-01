@@ -32,7 +32,7 @@ const goalMapItems = [
   {
     step: '01',
     title: '最新版を入手する',
-    goal: '公式ZIPを取得し、Windowsでアプリを起動できる状態にします。',
+    goal: '公式インストーラーまたはポータブルZIPを取得し、Windowsでアプリを起動できる状態にします。',
     output: '初期設定へ進める',
     link: { label: 'ダウンロードへ', href: '/download/', external: false },
     Icon: Download,
@@ -151,7 +151,7 @@ const finalRouteCards = [
   },
   {
     title: '配布物を確認',
-    body: '最新版ZIP、ファイル情報、初回起動、導入完了チェックを確認します。',
+    body: '最新版インストーラー、ポータブルZIP、ファイル情報、初回起動、導入完了チェックを確認します。',
     href: '/download/',
     Icon: Download,
   },

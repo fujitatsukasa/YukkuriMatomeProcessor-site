@@ -185,28 +185,64 @@ export const supportChannels = [
   },
 ]
 
-export const downloadUrl =
-  'https://github.com/fujitatsukasa/YukkuriMatomeProcessor/releases/latest/download/YukkuriMatomeProcessor.zip'
-export const latestReleaseUrl =
-  'https://github.com/fujitatsukasa/YukkuriMatomeProcessor/releases/latest'
-export const releasesUrl =
-  'https://github.com/fujitatsukasa/YukkuriMatomeProcessor/releases'
-export const tagsUrl = 'https://github.com/fujitatsukasa/YukkuriMatomeProcessor/tags'
-export const changeLogUrl =
-  'https://github.com/fujitatsukasa/YukkuriMatomeProcessor/releases'
+export const distributionBaseUrl = 'https://ymp-api.fujita-otm.workers.dev/updates/ymp/win-x64-stable/'
+export const setupDownloadUrl = `${distributionBaseUrl}YukkuriMatomeProcessor-win-x64-stable-Setup.exe`
+export const portableDownloadUrl = `${distributionBaseUrl}YukkuriMatomeProcessor-win-x64-stable-Portable.zip`
+export const releaseNotesUrl = `${distributionBaseUrl}release-notes.json`
+export const sha256SumsUrl = `${distributionBaseUrl}sha256sums.txt`
+export const updateFeedUrl = `${distributionBaseUrl}RELEASES-win-x64-stable`
+export const releaseManifestUrl = `${distributionBaseUrl}releases.win-x64-stable.json`
+
+export const downloadUrl = setupDownloadUrl
+export const latestReleaseUrl = releaseNotesUrl
+export const releasesUrl = releaseManifestUrl
+export const tagsUrl = updateFeedUrl
+export const changeLogUrl = releaseNotesUrl
+
+export const publicDistribution = {
+  version: '0.0.17',
+  channel: 'win-x64-stable',
+  publishedAt: '2026-06-01T05:06:24Z',
+  baseUrl: distributionBaseUrl,
+  releaseNotesUrl,
+  sha256SumsUrl,
+  updateFeedUrl,
+  releaseManifestUrl,
+  summary:
+    'Windows配布版の初回インストール、Launcher起動、Main起動までの packaged runtime blocker を修正した配布候補です。',
+  trustNote:
+    '現在の配布物は自己署名のため、WindowsやSmartScreenの警告が表示される場合があります。配布元URLとSHA256を確認してから起動してください。',
+  assets: {
+    setup: {
+      label: 'インストーラー',
+      fileName: 'YukkuriMatomeProcessor-win-x64-stable-Setup.exe',
+      url: setupDownloadUrl,
+      sizeBytes: 296291728,
+      sha256: '388b2d88ddbb3c80580659aa52cc771036ba2c952690faff95081e31725311b0',
+      description: '通常はこちら。インストールして起動し、自動更新フィードへ接続できます。',
+    },
+    portable: {
+      label: 'ポータブルZIP',
+      fileName: 'YukkuriMatomeProcessor-win-x64-stable-Portable.zip',
+      url: portableDownloadUrl,
+      sizeBytes: 293700746,
+      sha256: '8633b37601b5cc5b06cd8437f99c77409ea4849a06acae71708e34575dd2fc53',
+      description: 'インストールせずに試したい場合向け。解凍してから起動します。',
+    },
+  },
+} as const
 
 export const releaseIntegrity = {
   repository: 'fujitatsukasa/YukkuriMatomeProcessor',
-  apiUrl: 'https://api.github.com/repos/fujitatsukasa/YukkuriMatomeProcessor/releases/latest',
+  apiUrl: releaseNotesUrl,
   fallback: {
-    tag: '1.2.12',
-    publishedAt: '2025-12-15T03:18:28Z',
-    releaseUrl: 'https://github.com/fujitatsukasa/YukkuriMatomeProcessor/releases/tag/1.2.12',
-    assetName: 'YukkuriMatomeProcessor.zip',
-    assetUrl:
-      'https://github.com/fujitatsukasa/YukkuriMatomeProcessor/releases/download/1.2.12/YukkuriMatomeProcessor.zip',
-    sizeBytes: 288372460,
-    sha256: 'e57399e9c42506dd0a8a8da4a254c2e395bd52b5341cce46dda0c9af3f3d3686',
+    tag: publicDistribution.version,
+    publishedAt: publicDistribution.publishedAt,
+    releaseUrl: publicDistribution.releaseNotesUrl,
+    assetName: publicDistribution.assets.setup.fileName,
+    assetUrl: publicDistribution.assets.setup.url,
+    sizeBytes: publicDistribution.assets.setup.sizeBytes,
+    sha256: publicDistribution.assets.setup.sha256,
     verifiedAt: '2026-06-01',
   },
 } as const
@@ -238,7 +274,7 @@ export const faqGroups: FaqGroup[] = [
     id: 'faq-onboarding',
     label: '導入',
     items: [
-      { question: '導入時に最初にやるべきことは？', answer: '最新版のZIPを取得し、YMM4実行パス、保存先フォルダ、必要に応じて YouTube API キーを設定してください。' },
+      { question: '導入時に最初にやるべきことは？', answer: '最新版のインストーラーまたはポータブルZIPを取得し、YMM4実行パス、保存先フォルダ、必要に応じて YouTube API キーを設定してください。' },
       { question: '対応OSは何ですか？', answer: 'Windows 10 / 11環境での利用を前提に設計しています。' },
       { question: 'Macで使えますか？', answer: '現時点ではMac版はありません。YMM4を使うWindows環境を前提にしています。' },
       {

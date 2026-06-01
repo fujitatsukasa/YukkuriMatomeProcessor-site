@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { InteractiveCard, PageMeta, Section } from '@/components/ui'
-import { downloadUrl, latestReleaseUrl, releaseIntegrity, releasesUrl, tagsUrl } from '@/data/site-content'
+import { downloadUrl, publicDistribution } from '@/data/site-content'
 import { BadgeCheck, Clock3, Download, ExternalLink, ShieldCheck, Wrench } from 'lucide-react'
 
 interface Release {
@@ -11,6 +11,16 @@ interface Release {
   published_at: string
   body: string
   html_url: string
+}
+
+interface DistributionReleaseNotes {
+  version?: string
+  title?: string
+  summary?: string
+  sections?: Array<{
+    title?: string
+    items?: string[]
+  }>
 }
 
 function formatDate(dateStr: string) {
@@ -90,14 +100,11 @@ const updateGuideCards = [
 const fallbackReleases: Release[] = [
   {
     id: -1,
-    tag_name: releaseIntegrity.fallback.tag,
-    name: releaseIntegrity.fallback.tag,
-    published_at: releaseIntegrity.fallback.publishedAt,
-    html_url: releaseIntegrity.fallback.releaseUrl,
-    body: [
-      'あにまん／あにまん掲示板の画像取得不具合を修正',
-      'あにまんおよびあにまん掲示板の個別記事が取得できない状況を修正しました。',
-    ].join('\n'),
+    tag_name: publicDistribution.version,
+    name: `YMP ${publicDistribution.version}`,
+    published_at: publicDistribution.publishedAt,
+    html_url: publicDistribution.releaseNotesUrl,
+    body: publicDistribution.summary,
   },
 ]
 
@@ -108,8 +115,8 @@ const updateSummaryCards = [
     Icon: ShieldCheck,
   },
   {
-    title: '最新版ZIPを公式リンクから取得',
-    body: '配布元は公式リリース一覧です。別URLや古いZIPとの取り違えを避けます。',
+    title: '最新版インストーラーを公式リンクから取得',
+    body: '配布元は Cloudflare Workers/R2 の公式URLです。別URLや古いファイルとの取り違えを避けます。',
     Icon: Download,
   },
   {
@@ -125,13 +132,32 @@ export function UpdatePage() {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    fetch('https://api.github.com/repos/fujitatsukasa/YukkuriMatomeProcessor/releases?per_page=20')
+    fetch(publicDistribution.releaseNotesUrl)
       .then((res) => {
-        if (!res.ok) throw new Error(`GitHub API error: ${res.status}`)
+        if (!res.ok) throw new Error(`Release notes fetch failed: ${res.status}`)
         return res.json()
       })
-      .then((data: Release[]) => {
-        setReleases(data)
+      .then((data: DistributionReleaseNotes) => {
+        const body = [
+          data.summary,
+          ...(data.sections ?? []).flatMap((section) => [
+            section.title,
+            ...(section.items ?? []),
+          ]),
+        ]
+          .filter((line): line is string => Boolean(line))
+          .join('\n')
+
+        setReleases([
+          {
+            id: 1,
+            tag_name: data.version || publicDistribution.version,
+            name: data.title || `YMP ${publicDistribution.version}`,
+            published_at: publicDistribution.publishedAt,
+            body: body || publicDistribution.summary,
+            html_url: publicDistribution.releaseNotesUrl,
+          },
+        ])
         setLoading(false)
       })
       .catch((err: Error) => {
@@ -161,7 +187,7 @@ export function UpdatePage() {
               <p className="brand-kicker">アップデート</p>
               <h1>最新版の確認と更新前チェック</h1>
               <p className="brand-lead">
-                公開中の最新版、直近変更の要約、更新前に見るべき設定を確認できます。原文の長いログより先に、必要な判断材料だけを見える位置にまとめています。
+                公開中の最新版、直近変更の要約、更新前に見るべき設定を確認できます。Cloudflare配布のファイル名と変更点を、必要な判断材料だけに絞ってまとめています。
               </p>
 
               <div className="utility-stat-grid">
@@ -177,14 +203,14 @@ export function UpdatePage() {
 
               <div className="utility-link-row">
                 <a href={downloadUrl}>無料でダウンロード</a>
-                <a href={latestReleaseUrl} target="_blank" rel="noopener noreferrer">
-                  リリースノート
+                <a href={publicDistribution.releaseNotesUrl} target="_blank" rel="noopener noreferrer">
+                  リリースデータ
                 </a>
-                <a href={releasesUrl} target="_blank" rel="noopener noreferrer">
-                  全リリース一覧
+                <a href={publicDistribution.sha256SumsUrl} target="_blank" rel="noopener noreferrer">
+                  SHA256一覧
                 </a>
-                <a href={tagsUrl} target="_blank" rel="noopener noreferrer">
-                  タグ一覧
+                <a href={publicDistribution.releaseManifestUrl} target="_blank" rel="noopener noreferrer">
+                  配布マニフェスト
                 </a>
               </div>
             </div>
@@ -207,7 +233,7 @@ export function UpdatePage() {
                 {loading ? <p className="release-monitor__fallback">リリース情報を取得中です...</p> : null}
                 {error ? (
                   <p className="release-monitor__fallback">
-                    リリース情報の取得に失敗しました。下の公式リンクから GitHub 側の一覧を確認してください。
+                    リリース情報の取得に失敗しました。下の公式リンクから配布マニフェストとSHA256一覧を確認してください。
                   </p>
                 ) : null}
 
@@ -220,8 +246,8 @@ export function UpdatePage() {
                 ) : null}
 
                 <div className="subpage-support-callout__actions">
-                  <a className="brand-btn brand-btn--ghost" href={latestReleaseUrl} target="_blank" rel="noopener noreferrer">
-                    リリースノートを見る
+                  <a className="brand-btn brand-btn--ghost" href={publicDistribution.releaseNotesUrl} target="_blank" rel="noopener noreferrer">
+                    リリースデータを見る
                   </a>
                   <a className="brand-btn brand-btn--primary" href={downloadUrl}>
                     無料でダウンロード
@@ -247,14 +273,14 @@ export function UpdatePage() {
                   </div>
                 </div>
                 <div className="subpage-link-stack">
-                  <a href={releasesUrl} target="_blank" rel="noopener noreferrer">
-                    <span>全リリース一覧</span>
+                  <a href={publicDistribution.releaseManifestUrl} target="_blank" rel="noopener noreferrer">
+                    <span>配布マニフェスト</span>
                   </a>
-                  <a href={latestReleaseUrl} target="_blank" rel="noopener noreferrer">
-                    <span>最新リリース原文</span>
+                  <a href={publicDistribution.releaseNotesUrl} target="_blank" rel="noopener noreferrer">
+                    <span>最新リリースデータ</span>
                   </a>
-                  <a href={tagsUrl} target="_blank" rel="noopener noreferrer">
-                    <span>タグ一覧</span>
+                  <a href={publicDistribution.updateFeedUrl} target="_blank" rel="noopener noreferrer">
+                    <span>更新フィード</span>
                   </a>
                 </div>
                 <div className="subpage-support-callout__actions">
@@ -319,10 +345,10 @@ export function UpdatePage() {
 
             {error ? (
               <div>
-                <p className="release-monitor__fallback">リリース情報の取得に失敗しました。公式リリース一覧を確認してください。</p>
+                <p className="release-monitor__fallback">リリース情報の取得に失敗しました。公式配布マニフェストを確認してください。</p>
                 <div className="content-page__link-list" style={{ marginTop: '1rem' }}>
-                  <a href={releasesUrl} target="_blank" rel="noopener noreferrer">
-                    公式リリース一覧で確認
+                  <a href={publicDistribution.releaseManifestUrl} target="_blank" rel="noopener noreferrer">
+                    配布マニフェストで確認
                   </a>
                 </div>
               </div>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { InteractiveCard, PageIntro, PageMeta, Section } from '@/components/ui'
-import { downloadUrl, latestReleaseUrl, releaseIntegrity } from '@/data/site-content'
+import { downloadUrl, publicDistribution } from '@/data/site-content'
 import { MetricStrip } from '@/pages/shared'
 import { AnimatePresence, motion } from '@/lib/light-motion'
 import {
@@ -14,6 +14,7 @@ import {
   FolderCog,
   Send,
   Settings2,
+  ShieldCheck,
   Wrench,
 } from 'lucide-react'
 
@@ -106,11 +107,11 @@ const downloadSupportCards = [
 const distributionChecks = [
   {
     title: '公式リンク',
-    body: '標準配布は GitHub Releases の YukkuriMatomeProcessor.zip です。別名ファイルや再配布URLではなく、このページの公式リンクから取得してください。',
+    body: '標準配布は Cloudflare Workers/R2 のインストーラーとポータブルZIPです。別名ファイルや再配布URLではなく、このページの公式リンクから取得してください。',
   },
   {
     title: '初回起動前',
-    body: 'ZIPを解凍し、書き込み可能なフォルダへ置いてから起動します。Windowsの警告が出た場合は、配布元URL、ファイル名、SHA256を確認してください。',
+    body: 'インストーラーはそのまま実行、ポータブルZIPは解凍してから起動します。Windowsの警告が出た場合は、配布元URL、ファイル名、SHA256を確認してください。',
   },
   {
     title: '起動後に確認',
@@ -125,13 +126,13 @@ const distributionChecks = [
 const distributionReadinessCards = [
   {
     title: '取得前に見る情報',
-    body: '最新版、公開日、ファイル名、サイズ、SHA256、GitHub Releases のURLを確認します。',
-    done: ['公式ZIPの名前を確認', 'サイズとSHA256を確認', '配布元URLを確認'],
+    body: '最新版、公開日、ファイル名、サイズ、SHA256、Cloudflare配布URLを確認します。',
+    done: ['インストーラー名を確認', 'ポータブルZIPの有無を確認', 'サイズとSHA256を確認'],
     Icon: FileSearch,
   },
   {
     title: '解凍後に見ること',
-    body: 'ZIPを直接開いたまま使わず、書き込み可能なフォルダへ解凍してから起動します。',
+    body: 'ポータブルZIPを使う場合は、ZIPを直接開いたまま使わず、書き込み可能なフォルダへ解凍してから起動します。',
     done: ['ZIPを解凍済み', '作業フォルダに配置', 'Windows警告時は配布元を照合'],
     Icon: Wrench,
   },
@@ -150,54 +151,33 @@ const distributionReadinessCards = [
 ] as const
 
 const distributionCompletionChecks = [
-  '公式ZIPを取得した',
-  'ZIPを解凍してから起動した',
+  '公式インストーラーまたはポータブルZIPを取得した',
+  'ポータブルZIPは解凍してから起動した',
   'Windows警告が出た場合に配布元とSHA256を確認した',
   'YMM4.exeと保存先を保存した',
   '少数URLで候補一覧と出力先まで確認した',
 ] as const
 
-type ReleaseAssetResponse = {
-  name?: string
-  size?: number
-  digest?: string | null
-  browser_download_url?: string
-  download_count?: number
+type ReleaseNotesResponse = {
+  version?: string
+  title?: string
+  summary?: string
 }
 
-type LatestReleaseResponse = {
-  tag_name?: string
-  name?: string
-  published_at?: string
-  html_url?: string
-  assets?: ReleaseAssetResponse[]
-}
-
-type PublicReleaseInfo = {
-  tag: string
+type PublicDistributionInfo = {
+  version: string
+  title: string
+  summary: string
   publishedAt: string
-  releaseUrl: string
-  assetName: string
-  assetUrl: string
-  sizeBytes: number
-  sha256: string
   source: 'fallback' | 'live' | 'error'
-  downloadCount?: number
 }
 
-const fallbackReleaseInfo: PublicReleaseInfo = {
-  tag: releaseIntegrity.fallback.tag,
-  publishedAt: releaseIntegrity.fallback.publishedAt,
-  releaseUrl: releaseIntegrity.fallback.releaseUrl,
-  assetName: releaseIntegrity.fallback.assetName,
-  assetUrl: releaseIntegrity.fallback.assetUrl,
-  sizeBytes: releaseIntegrity.fallback.sizeBytes,
-  sha256: releaseIntegrity.fallback.sha256,
+const fallbackDistributionInfo: PublicDistributionInfo = {
+  version: publicDistribution.version,
+  title: `YMP ${publicDistribution.version}`,
+  summary: publicDistribution.summary,
+  publishedAt: publicDistribution.publishedAt,
   source: 'fallback',
-}
-
-function normalizeSha256(digest?: string | null) {
-  return digest?.replace(/^sha256:/i, '').trim() ?? ''
 }
 
 function formatReleaseDate(isoDate: string) {
@@ -219,66 +199,57 @@ function formatFileSize(bytes: number) {
 }
 
 function ReleaseIntegrityPanel() {
-  const [release, setRelease] = useState<PublicReleaseInfo>(fallbackReleaseInfo)
+  const [release, setRelease] = useState<PublicDistributionInfo>(fallbackDistributionInfo)
 
   useEffect(() => {
     const controller = new AbortController()
 
-    async function fetchLatestRelease() {
+    async function fetchReleaseNotes() {
       try {
-        const response = await fetch(releaseIntegrity.apiUrl, {
-          headers: { Accept: 'application/vnd.github+json' },
+        const response = await fetch(publicDistribution.releaseNotesUrl, {
+          headers: { Accept: 'application/json' },
           signal: controller.signal,
         })
 
-        if (!response.ok) throw new Error(`GitHub release fetch failed: ${response.status}`)
+        if (!response.ok) throw new Error(`Release notes fetch failed: ${response.status}`)
 
-        const data = (await response.json()) as LatestReleaseResponse
-        const asset =
-          data.assets?.find((candidate) => candidate.name === releaseIntegrity.fallback.assetName) ??
-          data.assets?.[0]
-
-        if (!data.tag_name || !data.published_at || !data.html_url || !asset?.name || !asset.browser_download_url) {
-          throw new Error('GitHub release response is missing required fields')
-        }
+        const data = (await response.json()) as ReleaseNotesResponse
 
         setRelease({
-          tag: data.tag_name,
-          publishedAt: data.published_at,
-          releaseUrl: data.html_url,
-          assetName: asset.name,
-          assetUrl: asset.browser_download_url,
-          sizeBytes: asset.size ?? releaseIntegrity.fallback.sizeBytes,
-          sha256: normalizeSha256(asset.digest) || releaseIntegrity.fallback.sha256,
+          version: data.version || publicDistribution.version,
+          title: data.title || `YMP ${publicDistribution.version}`,
+          summary: data.summary || publicDistribution.summary,
+          publishedAt: publicDistribution.publishedAt,
           source: 'live',
-          downloadCount: asset.download_count,
         })
       } catch {
         if (controller.signal.aborted) return
-        setRelease({ ...fallbackReleaseInfo, source: 'error' })
+        setRelease({ ...fallbackDistributionInfo, source: 'error' })
       }
     }
 
-    void fetchLatestRelease()
+    void fetchReleaseNotes()
 
     return () => controller.abort()
   }, [])
 
   const statusLabel =
     release.source === 'live'
-      ? 'GitHubから取得済み'
+      ? '配布ノート取得済み'
       : release.source === 'error'
-        ? `既知情報を表示中 / ${releaseIntegrity.fallback.verifiedAt}確認`
-        : `既知情報を表示中 / ${releaseIntegrity.fallback.verifiedAt}確認`
+        ? '既知情報を表示中 / 2026-06-01確認'
+        : '既知情報を表示中 / 2026-06-01確認'
+
+  const distributionAssets = [publicDistribution.assets.setup, publicDistribution.assets.portable]
 
   return (
     <InteractiveCard as="section" className="release-integrity-panel premium-glass">
       <div className="release-integrity-panel__top">
         <div>
           <span className="subpage-card__eyebrow">公式配布情報</span>
-          <h2>最新版のファイル名・サイズ・SHA256を確認できます</h2>
+          <h2>インストーラーとポータブルZIPのファイル名・サイズ・SHA256を確認できます</h2>
           <p>
-            ダウンロードボタンは GitHub Releases の最新版ZIPへ接続しています。取得前後にファイル名とハッシュを確認すると、
+            ダウンロードボタンは Cloudflare Workers/R2 の公式配布ファイルへ接続しています。取得前後にファイル名とハッシュを確認すると、
             別URLや古い配布物との取り違えを避けやすくなります。
           </p>
         </div>
@@ -287,38 +258,65 @@ function ReleaseIntegrityPanel() {
 
       <dl className="release-integrity-grid">
         <div>
-          <dt>最新版</dt>
-          <dd>{release.tag}</dd>
+          <dt>バージョン</dt>
+          <dd>{release.version}</dd>
         </div>
         <div>
           <dt>公開日</dt>
           <dd>{formatReleaseDate(release.publishedAt)}</dd>
         </div>
         <div>
-          <dt>ファイル</dt>
-          <dd>{release.assetName}</dd>
+          <dt>チャンネル</dt>
+          <dd>{publicDistribution.channel}</dd>
         </div>
         <div>
-          <dt>サイズ</dt>
-          <dd>{formatFileSize(release.sizeBytes)}</dd>
+          <dt>配布元</dt>
+          <dd>Cloudflare Workers/R2</dd>
         </div>
       </dl>
 
-      <div className="release-integrity-hash">
-        <span>SHA256</span>
-        <code>{release.sha256}</code>
+      <div className="release-note-panel">
+        <span>{release.title}</span>
+        <p>{release.summary}</p>
+      </div>
+
+      <div className="release-asset-grid">
+        {distributionAssets.map((asset) => (
+          <div key={asset.fileName} className="release-asset-card">
+            <span>{asset.label}</span>
+            <strong>{asset.fileName}</strong>
+            <p>{asset.description}</p>
+            <dl>
+              <div>
+                <dt>サイズ</dt>
+                <dd>{formatFileSize(asset.sizeBytes)}</dd>
+              </div>
+              <div>
+                <dt>SHA256</dt>
+                <dd>
+                  <code>{asset.sha256}</code>
+                </dd>
+              </div>
+            </dl>
+          </div>
+        ))}
+      </div>
+
+      <div className="release-integrity-note">
+        <ShieldCheck size={17} />
+        <span>{publicDistribution.trustNote}</span>
       </div>
 
       <div className="release-integrity-actions">
-        <a className="brand-btn brand-btn--primary" href={release.assetUrl} rel="noreferrer">
-          公式ZIPをダウンロード
+        <a className="brand-btn brand-btn--primary" href={publicDistribution.assets.setup.url} rel="noreferrer">
+          インストーラーをダウンロード
         </a>
-        <a className="brand-btn brand-btn--ghost" href={release.releaseUrl || latestReleaseUrl} rel="noreferrer">
-          リリースページで確認
+        <a className="brand-btn brand-btn--ghost" href={publicDistribution.assets.portable.url} rel="noreferrer">
+          ポータブルZIPを取得
         </a>
-        {typeof release.downloadCount === 'number' ? (
-          <span className="release-integrity-downloads">GitHub上のDL数: {release.downloadCount.toLocaleString('ja-JP')}</span>
-        ) : null}
+        <a className="brand-btn brand-btn--ghost" href={publicDistribution.sha256SumsUrl} target="_blank" rel="noreferrer">
+          SHA256一覧を見る
+        </a>
       </div>
     </InteractiveCard>
   )
@@ -330,11 +328,11 @@ const instructionSteps = [
     title: 'ダウンロードして解凍する',
     image: '/product_guide.webp',
     alt: '初期設定とガイドの画面',
-    action: '公式ZIPを取得し、作業しやすいフォルダへ解凍します。',
-    input: '入力なし。まずは配布ファイル名と保存先だけ確認します。',
+    action: '公式インストーラーを取得します。ポータブルZIPを使う場合は作業しやすいフォルダへ解凍します。',
+    input: '入力なし。まずは配布ファイル名、配布元URL、保存先だけ確認します。',
     click: '解凍後、アプリ本体を起動します。',
     success: 'アプリ画面が開き、初期設定へ進める状態です。',
-    trouble: ['Windows警告が出たら配布元URLを確認', 'ZIPを直接開かず、必ず解凍してから起動'],
+    trouble: ['Windows警告が出たら配布元URLとSHA256を確認', 'ポータブルZIPは直接開かず、必ず解凍してから起動'],
     Icon: Wrench,
   },
   {
@@ -572,7 +570,7 @@ export function DownloadPage() {
     <>
       <PageMeta
         title="ダウンロード｜最新版を無料ダウンロード"
-        description="ゆっくりまとめプロセッサーの最新版を無料でダウンロード。ファイル名、サイズ、SHA256、初回起動、YMM4パス設定、導入完了判定まで確認できます。"
+        description="ゆっくりまとめプロセッサーの最新版インストーラーとポータブルZIPを無料でダウンロード。ファイル名、サイズ、SHA256、初回起動、YMM4パス設定、導入完了判定まで確認できます。"
         keywords="ダウンロード, Windows, YMM4, 台本取得, CSV, .ymmp, ゆっくりまとめプロセッサー"
         path="/download/"
       />
