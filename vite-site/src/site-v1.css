@@ -12088,6 +12088,108 @@ html {
   max-width: 860px;
 }
 
+.instruction-ready-board {
+  display: grid;
+  gap: 1rem;
+  padding: clamp(1.15rem, 2vw, 1.6rem);
+  border-radius: 18px;
+}
+
+.instruction-ready-board__head {
+  display: grid;
+  gap: 0.62rem;
+  max-width: 820px;
+}
+
+.instruction-ready-board__head .subpage-card__eyebrow {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 0.42rem;
+}
+
+.instruction-ready-board__head h2,
+.instruction-ready-board__head p {
+  margin: 0;
+}
+
+.instruction-ready-board__head h2 {
+  color: #fff7e6;
+  font-size: clamp(1.32rem, 2vw, 1.82rem);
+  line-height: 1.36;
+}
+
+.instruction-ready-board__head p {
+  color: rgba(236, 233, 226, 0.76);
+  line-height: 1.76;
+}
+
+.instruction-ready-board__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.instruction-ready-card {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.62rem;
+  align-content: start;
+  padding: 0.95rem;
+  border: 1px solid rgba(255, 232, 190, 0.12);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.instruction-ready-card__label {
+  width: fit-content;
+  align-self: center;
+  padding: 0.28rem 0.58rem;
+  border: 1px solid rgba(224, 193, 132, 0.24);
+  border-radius: 999px;
+  color: #ffe8be;
+  background: rgba(224, 193, 132, 0.1);
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.instruction-ready-card__icon {
+  display: inline-grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(224, 193, 132, 0.2);
+  border-radius: 12px;
+  color: #e0c184;
+  background: rgba(224, 193, 132, 0.08);
+}
+
+.instruction-ready-card h3,
+.instruction-ready-card p,
+.instruction-ready-card strong {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+
+.instruction-ready-card h3 {
+  color: #fff7e6;
+  font-size: 1.02rem;
+  line-height: 1.42;
+}
+
+.instruction-ready-card p {
+  color: rgba(236, 233, 226, 0.72);
+  font-size: 0.86rem;
+  line-height: 1.62;
+}
+
+.instruction-ready-card strong {
+  color: #ffe3a4;
+  font-size: 0.84rem;
+  line-height: 1.48;
+}
+
 .instruction-practice-path {
   display: grid;
   gap: 1rem;
@@ -12808,6 +12910,7 @@ html {
   .sample-screen-grid,
   .sample-showcase-card,
   .sample-goal-grid,
+  .instruction-ready-board__grid,
   .instruction-goal-grid,
   .instruction-manual-grid,
   .instruction-trouble-grid,

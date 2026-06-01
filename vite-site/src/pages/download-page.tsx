@@ -45,6 +45,37 @@ const instructionMetrics = [
   { value: '詰まり対応', label: '原因を切り分ける', detail: '設定、URL、保存先、YMM4パスの順で見る' },
 ] as const
 
+const instructionPrepCards = [
+  {
+    label: '必須',
+    title: 'YMM4.exe の場所',
+    body: 'ショートカットではなく、YukkuriMovieMaker4.exe 本体の絶対パスを指定できる状態にします。',
+    check: '設定保存後も同じパスを使える',
+    Icon: Settings2,
+  },
+  {
+    label: '必須',
+    title: 'CSV/.ymmp の保存先',
+    body: '出力ファイルを置くフォルダを先に決めます。OneDrive同期中や権限が不安な場所は避けると切り分けが楽です。',
+    check: '書き込みできるフォルダを選ぶ',
+    Icon: FolderCog,
+  },
+  {
+    label: '入力',
+    title: '試すURLを1から3件',
+    body: '最初は大量取得せず、対応していそうな記事URL・スレッドURLを少数だけ入れて候補一覧を確認します。',
+    check: '候補タイトルとURLが並ぶ',
+    Icon: FileSearch,
+  },
+  {
+    label: '任意',
+    title: 'YouTube APIキー',
+    body: 'YouTube分析や候補比較を使う場合だけ用意します。台本取得の最初の確認だけなら後回しでも構いません。',
+    check: '使う機能だけ先に設定する',
+    Icon: BadgeCheck,
+  },
+] as const
+
 const instructionGoalCards = [
   {
     title: '初回設定を終える',
@@ -1153,6 +1184,39 @@ export function InstructionsPage() {
 
         <Section>
           <MetricStrip items={[...instructionMetrics]} ariaLabel="使い方ガイドの要点" />
+        </Section>
+
+        <Section>
+          <InteractiveCard className="instruction-ready-board premium-glass">
+            <div className="instruction-ready-board__head">
+              <span className="subpage-card__eyebrow">
+                <ClipboardCheck size={16} />
+                操作前に用意するもの
+              </span>
+              <h2>先に4つだけ揃えると、手順の途中で止まりにくい</h2>
+              <p>
+                使い方ページは、YMM4パス、保存先、少数URLを用意してから読むとそのまま実践できます。
+                YouTube APIキーは、分析機能を使う段階で設定すれば十分です。
+              </p>
+            </div>
+
+            <div className="instruction-ready-board__grid" aria-label="操作前の準備物">
+              {instructionPrepCards.map((item) => {
+                const PrepIcon = item.Icon
+                return (
+                  <article key={item.title} className="instruction-ready-card">
+                    <span className="instruction-ready-card__label">{item.label}</span>
+                    <span className="instruction-ready-card__icon" aria-hidden="true">
+                      <PrepIcon size={18} />
+                    </span>
+                    <h3>{item.title}</h3>
+                    <p>{item.body}</p>
+                    <strong>{item.check}</strong>
+                  </article>
+                )
+              })}
+            </div>
+          </InteractiveCard>
         </Section>
 
         <Section>
