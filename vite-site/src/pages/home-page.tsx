@@ -28,6 +28,57 @@ const proofItems = [
   'YouTube分析とコメント取得も利用可能',
 ] as const
 
+const goalMapItems = [
+  {
+    step: '01',
+    title: '最新版を入手する',
+    goal: '公式ZIPを取得し、Windowsでアプリを起動できる状態にします。',
+    output: '初期設定へ進める',
+    link: { label: 'ダウンロードへ', href: '/download/', external: false },
+    Icon: Download,
+  },
+  {
+    step: '02',
+    title: 'YMM4パスと保存先を決める',
+    goal: 'YMM4.exe、CSV/.ymmp保存先、必要なAPIキーを先に固定します。',
+    output: '出力先の迷いを減らす',
+    link: { label: '手順を見る', href: '/instructions/', external: false },
+    Icon: Monitor,
+  },
+  {
+    step: '03',
+    title: 'URLから候補を取得する',
+    goal: '記事URL・スレッドURLを入れ、タイトルやサムネイルが候補一覧に出るか確認します。',
+    output: '台本候補を選べる',
+    link: { label: '実画面を見る', href: '/samples/', external: false },
+    Icon: FileSearch,
+  },
+  {
+    step: '04',
+    title: '台本下地を整える',
+    goal: '不要行、役割、感情、長すぎる文を見直し、読み上げ前に確認できる形へ寄せます。',
+    output: '確認済みの台本下地',
+    link: { label: '使い方を見る', href: '/instructions/', external: false },
+    Icon: PencilLine,
+  },
+  {
+    step: '05',
+    title: 'YMM4前準備を通す',
+    goal: 'CSV/.ymmp、キャラ設定、素材パス、保存先を確認してからYMM4側へ進みます。',
+    output: '編集前のファイル準備',
+    link: { label: 'サンプルを見る', href: '/samples/', external: false },
+    Icon: Monitor,
+  },
+  {
+    step: '06',
+    title: 'FreeかPremiumか判断する',
+    goal: 'Freeで流れを試し、台本取得とAI台本生成の制限解除が必要なら買い切りを検討します。',
+    output: '継続利用の判断',
+    link: { label: '料金を見る', href: '/purchase/', external: false },
+    Icon: CreditCard,
+  },
+] as const
+
 const workflowSteps = [
   {
     step: '1',
@@ -118,8 +169,8 @@ export function HomePage() {
   return (
     <>
       <PageMeta
-        title="ゆっくりまとめプロセッサー｜記事URLからYMM4向け台本下地を作成"
-        description="記事URL・スレッドURLから、ゆっくり動画の台本下地を作成。5ch・あにまん等の素材取得、AI台本補助、CSV/.ymmp整理、YMM4前準備までWindowsで確認できます。無料プランあり。"
+        title="ゆっくりまとめプロセッサー｜記事URLから台本下地とYMM4前準備を作成"
+        description="記事URL・スレッドURLから、ゆっくり動画の台本下地とYMM4前準備を作成。5ch・あにまん等の素材取得、AI台本補助、CSV/.ymmp整理までWindowsで確認できます。無料プランあり。"
         keywords="ゆっくりまとめプロセッサー,YMM4,台本作成,CSV,.ymmp,反応集,5ch,あにまん,ゆっくり解説"
         path="/"
         structuredData={softwareApplicationLd}
@@ -129,7 +180,7 @@ export function HomePage() {
         <section className="home-focus-hero" aria-labelledby="home-focus-heading">
           <div className="home-focus-hero__copy">
             <p className="home-focus-kicker">YMM4向け Windows制作支援ツール</p>
-            <h1 id="home-focus-heading">記事URLから、ゆっくり動画の台本下地を作る</h1>
+            <h1 id="home-focus-heading">記事URL・スレッドURLから、台本下地とYMM4前準備を作る</h1>
             <p className="home-focus-lead">
               対応URLを入れると、台本候補の取得、AI補助、CSV/.ymmp前準備まで進められます。
               YMM4を開く前の作業を短く、確認しやすくするためのツールです。
@@ -181,6 +232,45 @@ export function HomePage() {
               <span>{item}</span>
             </div>
           ))}
+        </section>
+
+        <section className="home-focus-section home-focus-goal-map" aria-labelledby="home-goal-map-heading">
+          <div className="home-focus-section__head">
+            <p className="home-focus-kicker">使ってできるまでの目標</p>
+            <h2 id="home-goal-map-heading">最初の1本を作る前に、ここまで確認する</h2>
+            <p>
+              いきなり購入判断をせず、Freeで起動、設定、URL取得、台本整理、YMM4前準備まで順番に通します。
+            </p>
+          </div>
+
+          <div className="home-focus-goal-grid">
+            {goalMapItems.map((item) => {
+              const GoalIcon = item.Icon
+              return (
+                <article key={item.step} className="home-focus-goal-card">
+                  <div className="home-focus-goal-card__top">
+                    <span>{item.step}</span>
+                    <GoalIcon size={19} aria-hidden="true" />
+                  </div>
+                  <h3>{item.title}</h3>
+                  <dl>
+                    <div>
+                      <dt>やること</dt>
+                      <dd>{item.goal}</dd>
+                    </div>
+                    <div>
+                      <dt>成功状態</dt>
+                      <dd>{item.output}</dd>
+                    </div>
+                  </dl>
+                  <Link to={item.link.href}>
+                    {item.link.label}
+                    <ArrowRight size={15} />
+                  </Link>
+                </article>
+              )
+            })}
+          </div>
         </section>
 
         <section className="home-focus-section" aria-labelledby="home-flow-heading">
