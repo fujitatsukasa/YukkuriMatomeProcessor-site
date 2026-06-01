@@ -7,9 +7,12 @@ import {
   ArrowRight,
   BadgeCheck,
   Bug,
+  CheckCircle2,
+  ClipboardCheck,
   Clock3,
   CreditCard,
   FileText,
+  HelpCircle,
   Mail,
   MessageCircle,
 } from 'lucide-react'
@@ -48,6 +51,35 @@ const supportFacts = [
   { label: '受付時間', value: legal.support.operationHours },
   { label: '一次回答', value: legal.support.firstResponseSla },
   { label: '運営会社', value: legal.organization.legalName },
+] as const
+
+const contactPreflightChecks = [
+  'FAQで同じ症状を確認した',
+  '最新版と配布元URLを確認した',
+  '少数URLで再現するか試した',
+  'YMM4パスと保存先を見直した',
+  'エラー全文またはスクリーンショットを用意した',
+] as const
+
+const contactResolutionFlow = [
+  {
+    label: '01',
+    title: 'まず自分の環境を切り分ける',
+    body: 'OS、アプリ版、YMM4版、保存先、対象URLを確認し、少数URLで再現するか見ます。',
+    Icon: ClipboardCheck,
+  },
+  {
+    label: '02',
+    title: '近いテンプレートで送る',
+    body: '起動、URL取得、購入、導入相談のどれに近いかを選び、空欄を埋めてメールします。',
+    Icon: Mail,
+  },
+  {
+    label: '03',
+    title: '回答後に同じ条件で再確認する',
+    body: '案内された修正や設定変更を行ったら、まず少数URLで取得と台本下地まで再確認します。',
+    Icon: CheckCircle2,
+  },
 ] as const
 
 const intakeItems = [
@@ -242,6 +274,31 @@ export function ContactPage() {
           </div>
         </Section>
 
+        <Section>
+          <InteractiveCard className="release-panel premium-glass contact-preflight-panel">
+            <div className="contact-preflight-panel__copy">
+              <span className="subpage-card__eyebrow">
+                <HelpCircle size={16} />
+                問い合わせ前チェック
+              </span>
+              <h2>送る前にここまで確認すると、回答までの往復を減らせます</h2>
+              <p>
+                起動しない、URL取得できない、Premium権限が反映されないなどの相談は、
+                環境、対象URL、再現手順が揃っているほど切り分けが速くなります。
+              </p>
+            </div>
+
+            <ul className="contact-preflight-list">
+              {contactPreflightChecks.map((item) => (
+                <li key={item}>
+                  <CheckCircle2 size={16} />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </InteractiveCard>
+        </Section>
+
         <Section alt>
           <div className="subpage-section-head contact-section-head">
             <p>窓口の選び方</p>
@@ -274,6 +331,33 @@ export function ContactPage() {
                     <span>{formatChannelLabel(channel)}</span>
                     <ArrowRight size={16} />
                   </a>
+                </InteractiveCard>
+              )
+            })}
+          </div>
+        </Section>
+
+        <Section alt>
+          <div className="subpage-section-head contact-section-head">
+            <p>解決までの流れ</p>
+            <h2>問い合わせ後も、少数URLで再確認する</h2>
+            <p>
+              サポートは動画完成を代行する窓口ではなく、起動、取得、設定、権限の切り分けを進める窓口です。
+              回答後は同じ条件で確認してから本番件数へ戻してください。
+            </p>
+          </div>
+
+          <div className="contact-resolution-flow">
+            {contactResolutionFlow.map((item) => {
+              const FlowIcon = item.Icon
+              return (
+                <InteractiveCard key={item.label} className="release-panel premium-glass contact-resolution-card">
+                  <span className="contact-resolution-card__step">{item.label}</span>
+                  <span className="contact-channel-card__icon" aria-hidden="true">
+                    <FlowIcon size={19} />
+                  </span>
+                  <h3>{item.title}</h3>
+                  <p>{item.body}</p>
                 </InteractiveCard>
               )
             })}

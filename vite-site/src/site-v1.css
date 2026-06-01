@@ -6647,6 +6647,64 @@ html {
   line-height: 1.35;
 }
 
+.contact-preflight-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 0.86fr) minmax(280px, 0.72fr);
+  gap: clamp(1rem, 2.4vw, 1.6rem);
+  align-items: start;
+  padding: clamp(1.1rem, 2vw, 1.55rem);
+}
+
+.contact-preflight-panel__copy {
+  display: grid;
+  gap: 0.74rem;
+}
+
+.contact-preflight-panel__copy h2,
+.contact-preflight-panel__copy p,
+.contact-resolution-card h3,
+.contact-resolution-card p {
+  margin: 0;
+}
+
+.contact-preflight-panel__copy h2 {
+  color: #fff7e6;
+  font-size: clamp(1.45rem, 2.6vw, 2.1rem);
+  line-height: 1.28;
+}
+
+.contact-preflight-panel__copy p,
+.contact-resolution-card p {
+  color: rgba(236, 233, 226, 0.74);
+  line-height: 1.7;
+}
+
+.contact-preflight-list {
+  display: grid;
+  gap: 0.62rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contact-preflight-list li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.55rem;
+  align-items: start;
+  padding: 0.68rem 0.78rem;
+  border: 1px solid rgba(255, 232, 190, 0.12);
+  border-radius: 12px;
+  color: rgba(236, 233, 226, 0.8);
+  background: rgba(255, 255, 255, 0.035);
+  line-height: 1.55;
+}
+
+.contact-preflight-list svg {
+  color: #e0c184;
+  margin-top: 0.12rem;
+}
+
 .contact-section-head {
   max-width: 820px;
 }
@@ -6765,6 +6823,38 @@ html {
 
 .contact-template-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.contact-resolution-flow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.contact-resolution-card {
+  position: relative;
+  display: grid;
+  gap: 0.78rem;
+  align-content: start;
+  padding: clamp(1rem, 1.8vw, 1.35rem);
+}
+
+.contact-resolution-card__step {
+  position: absolute;
+  top: 0.95rem;
+  right: 1rem;
+  color: rgba(255, 232, 190, 0.22);
+  font-family: var(--display);
+  font-size: 2.4rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.contact-resolution-card h3 {
+  color: #fff7e6;
+  font-size: 1.12rem;
+  line-height: 1.42;
+  padding-right: 2rem;
 }
 
 .contact-template-card__body {
@@ -8322,6 +8412,8 @@ html {
 .contact-intake-grid,
 .contact-template-grid,
 .contact-info-layout,
+.contact-preflight-panel,
+.contact-resolution-flow,
 .blog-principle-grid,
 .blog-grid,
 .faq-support-rail__channels,
