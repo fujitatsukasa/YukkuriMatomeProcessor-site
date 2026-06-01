@@ -71,6 +71,69 @@ const instructionGoalCards = [
   },
 ] as const
 
+const instructionFeatureGoalMap = [
+  {
+    step: '01',
+    title: '初回設定',
+    goal: 'YMM4.exe、保存先、必要なAPIキーを固定する',
+    success: '次回起動後も同じ出力先で作業できる',
+    image: '/product_guide.webp',
+    alt: '初回設定とYMM4パス設定を確認する実アプリ画面',
+    href: '#instruction-step-02',
+    Icon: Settings2,
+  },
+  {
+    step: '02',
+    title: 'URL取得',
+    goal: '記事URL・スレッドURLを少数で試す',
+    success: '候補一覧にタイトル、URL、サムネイルが並ぶ',
+    image: '/product_get_script.webp',
+    alt: '記事URLから候補一覧を取得する実アプリ画面',
+    href: '#instruction-step-03',
+    Icon: FileSearch,
+  },
+  {
+    step: '03',
+    title: '台本整理・AI補助',
+    goal: '不要行、役割、感情、長い文を確認する',
+    success: '読み上げ前に人が確認できる台本下地になる',
+    image: '/product_edit_script.webp',
+    alt: '台本整理とAI補助の実アプリ画面',
+    href: '#instruction-step-04',
+    Icon: Bot,
+  },
+  {
+    step: '04',
+    title: 'CSV/.ymmp前準備',
+    goal: 'フォーマット、キャラ設定、出力名を決める',
+    success: '保存先に編集前準備ファイルを作れる',
+    image: '/product_format_list.webp',
+    alt: 'CSVと.ymmp前準備のフォーマット管理画面',
+    href: '#instruction-step-05',
+    Icon: FolderCog,
+  },
+  {
+    step: '05',
+    title: '題材確認',
+    goal: 'YouTube分析や候補比較で次の題材を見る',
+    success: '候補を選び、台本作成へ戻れる',
+    image: '/product_youtube_info.webp',
+    alt: 'YouTube分析と候補比較の実アプリ画面',
+    href: '/samples/',
+    Icon: FileSearch,
+  },
+  {
+    step: '06',
+    title: 'YMM4へ渡す前',
+    goal: '素材パス、保存先、キャラ設定を見直す',
+    success: 'YMM4側で最終編集へ進める',
+    image: '/product_keyword_material.webp',
+    alt: '素材パスとYMM4前準備を確認する実アプリ画面',
+    href: '#instruction-step-06',
+    Icon: Send,
+  },
+] as const
+
 const completionChecks = [
   'Freeプランで一連の流れを試した',
   '対象URLの取得可否を少数件で確認した',
@@ -1000,6 +1063,67 @@ export function InstructionsPage() {
                 </InteractiveCard>
               )
             })}
+          </div>
+
+          <div className="instruction-feature-goal-map">
+            <div className="instruction-feature-goal-map__head">
+              <span className="subpage-card__eyebrow">
+                <ClipboardCheck size={16} />
+                機能別ゴールマップ
+              </span>
+              <h2>各機能で「できた」と言える状態を先に決める</h2>
+              <p>
+                画面を眺めるだけで終わらせず、設定、URL取得、台本整理、CSV/.ymmp前準備、
+                題材確認、YMM4確認までを順番に照合します。
+              </p>
+            </div>
+
+            <div className="instruction-feature-goal-grid">
+              {instructionFeatureGoalMap.map((item) => {
+                const FeatureIcon = item.Icon
+                const route = item.href.startsWith('#') ? (
+                  <a href={item.href}>
+                    該当手順へ
+                    <ArrowRight size={15} />
+                  </a>
+                ) : (
+                  <Link to={item.href}>
+                    実画面を見る
+                    <ArrowRight size={15} />
+                  </Link>
+                )
+
+                return (
+                  <InteractiveCard key={item.step} className="instruction-feature-goal-card premium-glass">
+                    <figure>
+                      <img
+                        src={item.image}
+                        alt={item.alt}
+                        loading={item.step === '01' || item.step === '02' ? 'eager' : 'lazy'}
+                        decoding="async"
+                      />
+                    </figure>
+                    <div className="instruction-feature-goal-card__body">
+                      <span>
+                        <FeatureIcon size={16} />
+                        {item.step} {item.title}
+                      </span>
+                      <dl>
+                        <div>
+                          <dt>やること</dt>
+                          <dd>{item.goal}</dd>
+                        </div>
+                        <div>
+                          <dt>成功状態</dt>
+                          <dd>{item.success}</dd>
+                        </div>
+                      </dl>
+                      {route}
+                    </div>
+                  </InteractiveCard>
+                )
+              })}
+            </div>
           </div>
 
           <InteractiveCard className="instruction-completion-panel premium-glass">
