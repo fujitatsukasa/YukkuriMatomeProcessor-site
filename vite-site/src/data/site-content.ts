@@ -348,6 +348,25 @@ export const faqGroups: FaqGroup[] = [
 
 export const newsPosts: NewsPost[] = [
   {
+    path: '/2026-06-01-windows-release-0018/',
+    date: '2026-06-01T14:06:24+09:00',
+    dateLabel: '2026年06月01日',
+    title: `お知らせ: Windows配布版 ${publicDistribution.version} を公開しました`,
+    subtitle: 'インストーラー、ポータブルZIP、更新フィードをwin-x64-stable向けに揃えました。',
+    summary:
+      `Windows向け配布版 ${publicDistribution.version} の公開に合わせ、ダウンロードページとアップデート履歴の案内を更新しました。`,
+    seoDescription:
+      `ゆっくりまとめプロセッサー Windows配布版 ${publicDistribution.version} の公開告知です。インストーラー、ポータブルZIP、更新フィード、SmartScreen警告時の確認点を案内します。`,
+    seoImage: '/product_get_script.webp',
+    heroImageAlt: 'Windows配布版の更新告知イメージ',
+    body: [
+      `Windows向け配布版 ${publicDistribution.version} を公開しました。配布チャンネルは ${publicDistribution.channel} です。`,
+      '通常利用向けのインストーラーと、インストールせずに試せるポータブルZIPを用意しています。ダウンロードページではファイル名、サイズ、SHA256を確認できます。',
+      '現在の配布物は自己署名のため、WindowsやSmartScreenの警告が表示される場合があります。配布元URLとSHA256を確認してから起動してください。',
+      '更新後は、まず少数URLで起動、URL取得、台本下地、CSV/.ymmp前準備まで通るか確認してください。詳しい手順はダウンロード、使い方、アップデート履歴にまとめています。',
+    ],
+  },
+  {
     path: '/2026-01-15-download-guide/',
     date: '2026-01-15T18:30:00+09:00',
     dateLabel: '2026年01月15日',
