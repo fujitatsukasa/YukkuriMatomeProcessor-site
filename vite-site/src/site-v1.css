@@ -12065,18 +12065,22 @@ html {
   padding-top: 34px;
 }
 
-.home-focus-goal-grid {
+.home-focus-goal-list {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .home-focus-goal-card {
   min-width: 0;
   display: grid;
-  gap: 12px;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 7px 12px;
   align-content: start;
-  padding: 18px;
+  padding: 15px;
   border: 1px solid rgba(31, 42, 53, 0.13);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.86);
@@ -12084,10 +12088,13 @@ html {
 }
 
 .home-focus-goal-card__top {
+  grid-row: 1 / span 3;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-  gap: 12px;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 34px;
 }
 
 .home-focus-goal-card__top span {
@@ -12101,44 +12108,40 @@ html {
 }
 
 .home-focus-goal-card h3 {
+  grid-column: 2;
   font-size: 1.12rem;
   line-height: 1.38;
 }
 
-.home-focus-goal-card dl {
-  display: grid;
-  gap: 10px;
+.home-focus-goal-card p,
+.home-focus-goal-card strong {
+  grid-column: 2;
   margin: 0;
-}
-
-.home-focus-goal-card dl div {
-  display: grid;
-  gap: 3px;
   min-width: 0;
 }
 
-.home-focus-goal-card dt {
-  color: #1d756d;
-  font-size: 0.76rem;
-  font-weight: 900;
-}
-
-.home-focus-goal-card dd {
-  min-width: 0;
-  margin: 0;
+.home-focus-goal-card p {
   color: #4d5965;
-  font-size: 0.92rem;
-  line-height: 1.7;
+  font-size: 0.88rem;
+  line-height: 1.5;
   overflow-wrap: anywhere;
 }
 
+.home-focus-goal-card strong {
+  color: #1d756d;
+  font-size: 0.86rem;
+  line-height: 1.42;
+}
+
 .home-focus-goal-card a {
-  width: fit-content;
+  grid-column: 3;
+  grid-row: 1 / span 3;
+  align-self: center;
   min-height: 36px;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
-  margin-top: 2px;
   padding: 0 12px;
   border: 1px solid rgba(31, 42, 53, 0.15);
   border-radius: 8px;
@@ -12426,10 +12429,20 @@ html {
   }
 
   .home-focus-flow,
-  .home-focus-goal-grid,
+  .home-focus-goal-list,
   .home-focus-screen-grid,
   .home-focus-plans {
     grid-template-columns: 1fr;
+  }
+
+  .home-focus-goal-card {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .home-focus-goal-card a {
+    grid-column: 2;
+    grid-row: auto;
+    justify-self: start;
   }
 
   .home-focus-flow {

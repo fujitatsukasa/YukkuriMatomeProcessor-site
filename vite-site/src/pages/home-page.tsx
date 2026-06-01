@@ -32,48 +32,48 @@ const goalMapItems = [
   {
     step: '01',
     title: '最新版を入手する',
-    goal: '公式インストーラーまたはポータブルZIPを取得し、Windowsでアプリを起動できる状態にします。',
-    output: '初期設定へ進める',
+    goal: '公式配布ファイルを取得',
+    output: 'アプリが起動する',
     link: { label: 'ダウンロードへ', href: '/download/', external: false },
     Icon: Download,
   },
   {
     step: '02',
     title: 'YMM4パスと保存先を決める',
-    goal: 'YMM4.exe、CSV/.ymmp保存先、必要なAPIキーを先に固定します。',
-    output: '出力先の迷いを減らす',
+    goal: 'YMM4.exeと保存先を保存',
+    output: '出力先が固定される',
     link: { label: '手順を見る', href: '/instructions/', external: false },
     Icon: Monitor,
   },
   {
     step: '03',
     title: 'URLから候補を取得する',
-    goal: '記事URL・スレッドURLを入れ、タイトルやサムネイルが候補一覧に出るか確認します。',
-    output: '台本候補を選べる',
+    goal: '記事URL・スレッドURLを入力',
+    output: '候補一覧が出る',
     link: { label: '実画面を見る', href: '/samples/', external: false },
     Icon: FileSearch,
   },
   {
     step: '04',
     title: '台本下地を整える',
-    goal: '不要行、役割、感情、長すぎる文を見直し、読み上げ前に確認できる形へ寄せます。',
-    output: '確認済みの台本下地',
+    goal: '不要行と長い文を見直す',
+    output: '読み上げ前に確認できる',
     link: { label: '使い方を見る', href: '/instructions/', external: false },
     Icon: PencilLine,
   },
   {
     step: '05',
     title: 'YMM4前準備を通す',
-    goal: 'CSV/.ymmp、キャラ設定、素材パス、保存先を確認してからYMM4側へ進みます。',
-    output: '編集前のファイル準備',
+    goal: 'CSV/.ymmpと素材パスを確認',
+    output: 'YMM4側へ進める',
     link: { label: 'サンプルを見る', href: '/samples/', external: false },
     Icon: Monitor,
   },
   {
     step: '06',
     title: 'FreeかPremiumか判断する',
-    goal: 'Freeで流れを試し、台本取得とAI台本生成の制限解除が必要なら買い切りを検討します。',
-    output: '継続利用の判断',
+    goal: 'Freeで足りるか確認',
+    output: '必要なら制限解除へ',
     link: { label: '料金を見る', href: '/purchase/', external: false },
     Icon: CreditCard,
   },
@@ -269,34 +269,26 @@ export function HomePage() {
             </p>
           </div>
 
-          <div className="home-focus-goal-grid">
+          <ol className="home-focus-goal-list">
             {goalMapItems.map((item) => {
               const GoalIcon = item.Icon
               return (
-                <article key={item.step} className="home-focus-goal-card">
+                <li key={item.step} className="home-focus-goal-card">
                   <div className="home-focus-goal-card__top">
                     <span>{item.step}</span>
                     <GoalIcon size={19} aria-hidden="true" />
                   </div>
                   <h3>{item.title}</h3>
-                  <dl>
-                    <div>
-                      <dt>やること</dt>
-                      <dd>{item.goal}</dd>
-                    </div>
-                    <div>
-                      <dt>成功状態</dt>
-                      <dd>{item.output}</dd>
-                    </div>
-                  </dl>
+                  <p>{item.goal}</p>
+                  <strong>{item.output}</strong>
                   <Link to={item.link.href}>
                     {item.link.label}
                     <ArrowRight size={15} />
                   </Link>
-                </article>
+                </li>
               )
             })}
-          </div>
+          </ol>
         </section>
 
         <section className="home-focus-section" aria-labelledby="home-flow-heading">
