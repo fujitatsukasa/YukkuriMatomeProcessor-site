@@ -2,7 +2,82 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8" />
-    <title>Redirecting…</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta
+      name="description"
+      content="ページを確認しています。見つからない場合は、ゆっくりまとめプロセッサーの主要ページへ移動してください。"
+    />
+    <title>ページを確認しています | ゆっくりまとめプロセッサー</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family:
+          "Noto Sans JP",
+          "Yu Gothic",
+          "Yu Gothic UI",
+          "Meiryo",
+          system-ui,
+          sans-serif;
+        background: #151412;
+        color: #f7f0df;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        display: grid;
+        place-items: center;
+        padding: 28px;
+        background:
+          linear-gradient(rgba(255, 232, 190, 0.08) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 232, 190, 0.08) 1px, transparent 1px),
+          linear-gradient(145deg, #2a2723 0%, #181816 58%, #101113 100%);
+        background-size: 160px 160px, 160px 160px, auto;
+      }
+
+      main {
+        width: min(640px, 100%);
+        display: grid;
+        gap: 18px;
+      }
+
+      p,
+      h1 {
+        margin: 0;
+      }
+
+      h1 {
+        color: #ffe3a3;
+        font-size: clamp(1.7rem, 5vw, 2.7rem);
+        line-height: 1.22;
+      }
+
+      p {
+        color: rgba(247, 240, 223, 0.78);
+        line-height: 1.75;
+      }
+
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 6px;
+      }
+
+      a {
+        min-height: 42px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 16px;
+        border: 1px solid rgba(255, 232, 190, 0.22);
+        border-radius: 8px;
+        color: #ffe8b4;
+        font-weight: 800;
+        text-decoration: none;
+      }
+    </style>
     <script>
       (function () {
         var path = window.location.pathname + window.location.search + window.location.hash;
@@ -16,5 +91,20 @@
       })();
     </script>
   </head>
-  <body></body>
+  <body>
+    <main>
+      <p>ゆっくりまとめプロセッサー</p>
+      <h1>ページを確認しています</h1>
+      <p>
+        移動しない場合は、下の主要ページから目的の情報へ進んでください。
+        このページ自体は検索結果に表示しない設定です。
+      </p>
+      <nav aria-label="主要ページ">
+        <a href="/">ホーム</a>
+        <a href="/download/">無料でダウンロード</a>
+        <a href="/instructions/">使い方</a>
+        <a href="/faq/">FAQ</a>
+      </nav>
+    </main>
+  </body>
 </html>
