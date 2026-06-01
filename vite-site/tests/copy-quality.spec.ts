@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test'
 const primaryPages = [
   {
     path: '/',
-    heading: '記事URL・スレッドURLから、ゆっくり動画の台本下地とYMM4前準備を作る',
+    heading: 'ゆっくりまとめプロセッサー',
     ctas: ['無料でダウンロード', '実画面を見る'],
   },
   {

@@ -12,7 +12,11 @@ import {
   PencilLine,
 } from 'lucide-react'
 
-const heroBadges = ['Windows専用', 'YMM4前提', '無料で試せる'] as const
+const heroProofItems = [
+  { label: '対応環境', value: 'Windows専用 / YMM4前提' },
+  { label: '無料確認', value: 'URL取得と台本編集を試せる' },
+  { label: '制限解除', value: 'Premiumは買い切り ¥39,800' },
+] as const
 
 const flowItems = [
   { label: '入力', value: '記事URL / スレッドURL' },
@@ -163,10 +167,13 @@ export function HomePage() {
         <section className="home-focus-hero" aria-labelledby="home-focus-heading">
           <div className="home-focus-hero__copy">
             <p className="home-focus-kicker">YMM4向け Windows制作支援ツール</p>
-            <h1 id="home-focus-heading">記事URL・スレッドURLから、ゆっくり動画の台本下地とYMM4前準備を作る</h1>
+            <h1 id="home-focus-heading">ゆっくりまとめプロセッサー</h1>
+            <p className="home-focus-hero__statement">
+              記事URL・スレッドURLから、台本下地とYMM4前準備を作る
+            </p>
             <p className="home-focus-lead">
-              記事URLやスレッドURLを入れると、候補取得、台本整理、CSV/.ymmp前準備まで進められます。
-              最終編集はYMM4で行います。
+              候補取得、台本整理、CSV/.ymmp前準備までをWindows上で確認できます。
+              最終編集はYMM4で音声、字幕、立ち絵、間合いを仕上げます。
             </p>
 
             <div className="home-focus-actions">
@@ -179,9 +186,21 @@ export function HomePage() {
               </Link>
             </div>
 
+            <div className="home-focus-proof" role="list" aria-label="導入前に確認すること">
+              {heroProofItems.map((item) => (
+                <div key={item.label} role="listitem">
+                  <span>{item.label}</span>
+                  <strong>{item.value}</strong>
+                </div>
+              ))}
+            </div>
           </div>
 
           <figure className="home-focus-visual">
+            <div className="home-focus-visual__bar" aria-hidden="true">
+              <span>実アプリ画面</span>
+              <strong>URL入力 → 候補取得</strong>
+            </div>
             <img
               src="/product_get_script.webp"
               alt="記事URLから台本候補を取得する実アプリ画面"
@@ -189,19 +208,10 @@ export function HomePage() {
               decoding="async"
             />
             <figcaption>
-              <strong>実アプリ画面</strong>
-              URL入力から候補一覧までを確認できます
+              <strong>取得候補を選ぶ画面</strong>
+              <span>ここから台本整理とYMM4前準備へ進みます</span>
             </figcaption>
           </figure>
-
-          <div className="home-focus-badges" role="list" aria-label="対応条件">
-            {heroBadges.map((badge) => (
-              <span key={badge} role="listitem">
-                <CheckCircle2 size={15} />
-                {badge}
-              </span>
-            ))}
-          </div>
 
           <div className="home-focus-flow" aria-label="入力から出力まで">
             {flowItems.map((item, index) => (

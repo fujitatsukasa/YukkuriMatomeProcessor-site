@@ -13084,7 +13084,8 @@ html {
 
 .home-focus {
   color: #121722;
-  background: #f5f6f1;
+  background:
+    linear-gradient(180deg, #f7f8f2 0%, #eef4f0 46%, #f8faf7 100%);
   font-family: "Noto Sans JP", var(--font-base);
   overflow: hidden;
 }
@@ -13110,9 +13111,9 @@ html {
 .home-focus-hero {
   display: grid;
   grid-template-columns: minmax(0, 0.92fr) minmax(460px, 1.08fr);
-  gap: 14px 34px;
+  gap: 16px 34px;
   align-items: center;
-  padding: 34px 0 24px;
+  padding: 32px 0 26px;
 }
 
 .home-focus-hero__copy {
@@ -13145,17 +13146,27 @@ html {
 }
 
 .home-focus h1 {
-  max-width: 15em;
-  font-size: 2.58rem;
-  line-height: 1.16;
+  max-width: none;
+  font-size: 2.46rem;
+  line-height: 1.12;
+  text-wrap: balance;
+  word-break: keep-all;
+}
+
+.home-focus-hero__statement {
+  max-width: 17em;
+  color: #16202a;
+  font-size: 1.48rem;
+  font-weight: 900;
+  line-height: 1.42;
   text-wrap: balance;
 }
 
 .home-focus-lead {
-  max-width: 45rem;
+  max-width: 39rem;
   color: #4a5662;
   font-size: 1rem;
-  line-height: 1.8;
+  line-height: 1.76;
 }
 
 .home-focus-actions {
@@ -13202,13 +13213,48 @@ html {
   outline-offset: 3px;
 }
 
+.home-focus-proof {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  overflow: hidden;
+  border: 1px solid rgba(18, 28, 35, 0.14);
+  border-radius: 8px;
+  background: #172322;
+  box-shadow: 0 18px 34px -30px rgba(18, 22, 29, 0.55);
+}
+
+.home-focus-proof div {
+  min-width: 0;
+  display: grid;
+  gap: 4px;
+  align-content: start;
+  padding: 12px;
+}
+
+.home-focus-proof div + div {
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.home-focus-proof span {
+  color: #8fd7c8;
+  font-size: 0.72rem;
+  font-weight: 900;
+  line-height: 1.32;
+}
+
+.home-focus-proof strong {
+  color: #fff8e5;
+  font-size: 0.86rem;
+  line-height: 1.46;
+}
+
 .home-focus-badges {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
 }
 
-.home-focus-hero > .home-focus-badges,
 .home-focus-hero > .home-focus-flow {
   grid-column: 1;
 }
@@ -13282,7 +13328,7 @@ html {
 .home-focus-visual {
   position: relative;
   grid-column: 2;
-  grid-row: 1 / span 3;
+  grid-row: 1 / span 2;
   margin: 0;
   border: 1px solid rgba(31, 42, 53, 0.14);
   border-radius: 8px;
@@ -13291,10 +13337,34 @@ html {
   overflow: hidden;
 }
 
+.home-focus-visual__bar {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  min-height: 38px;
+  padding: 0 14px;
+  color: rgba(255, 248, 229, 0.92);
+  background: #121821;
+  font-size: 0.8rem;
+  font-weight: 900;
+}
+
+.home-focus-visual__bar span {
+  color: #8fd7c8;
+}
+
+.home-focus-visual__bar strong {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .home-focus-visual img {
   width: 100%;
   display: block;
-  aspect-ratio: 16 / 9.8;
+  aspect-ratio: 16 / 9.2;
   object-fit: cover;
 }
 
@@ -13311,6 +13381,10 @@ html {
 
 .home-focus-visual figcaption strong {
   color: #141b25;
+}
+
+.home-focus-visual figcaption span {
+  min-width: 0;
 }
 
 .home-focus-io {
@@ -13648,8 +13722,12 @@ html {
   }
 
   .home-focus h1 {
-    max-width: 14em;
-    font-size: 2.28rem;
+    max-width: none;
+    font-size: 2.32rem;
+  }
+
+  .home-focus-hero__statement {
+    font-size: 1.28rem;
   }
 
   .home-focus-visual {
@@ -13685,8 +13763,13 @@ html {
   }
 
   .home-focus h1 {
-    font-size: 2.12rem;
-    line-height: 1.24;
+    font-size: 2.28rem;
+    line-height: 1.14;
+  }
+
+  .home-focus-hero__statement {
+    font-size: 1.12rem;
+    line-height: 1.48;
   }
 
   .home-focus-section__head,
@@ -13762,7 +13845,6 @@ html {
   }
 
   .home-focus-visual,
-  .home-focus-hero > .home-focus-badges,
   .home-focus-hero > .home-focus-flow {
     grid-column: auto;
     grid-row: auto;
@@ -13772,8 +13854,12 @@ html {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
+  .home-focus-hero > .home-focus-flow {
+    display: none;
+  }
+
   .home-focus-visual img {
-    aspect-ratio: 16 / 7.4;
+    aspect-ratio: 16 / 6.6;
   }
 
 }
@@ -13793,13 +13879,39 @@ html {
   }
 
   .home-focus h1 {
-    font-size: 1.42rem;
-    line-height: 1.24;
+    font-size: 1.78rem;
+    line-height: 1.14;
+  }
+
+  .home-focus-hero__statement {
+    font-size: 1rem;
+    line-height: 1.46;
   }
 
   .home-focus-lead {
     font-size: 0.84rem;
     line-height: 1.58;
+  }
+
+  .home-focus-proof div {
+    padding: 9px 10px;
+  }
+
+  .home-focus-proof span {
+    font-size: 0.68rem;
+  }
+
+  .home-focus-proof strong {
+    font-size: 0.78rem;
+  }
+
+  .home-focus-proof {
+    grid-template-columns: 1fr;
+  }
+
+  .home-focus-proof div + div {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: 0;
   }
 
   .home-focus-actions,
@@ -13852,7 +13964,13 @@ html {
   }
 
   .home-focus-visual img {
-    aspect-ratio: 16 / 7.4;
+    aspect-ratio: 16 / 6.6;
+  }
+
+  .home-focus-visual__bar {
+    min-height: 34px;
+    padding: 0 9px;
+    font-size: 0.72rem;
   }
 
   .home-focus-visual figcaption {
