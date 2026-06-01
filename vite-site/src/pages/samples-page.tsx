@@ -78,6 +78,30 @@ const sampleGoalCards = [
   },
 ] as const
 
+const sampleDecisionCards = [
+  {
+    title: '実アプリ画面で判断',
+    body: 'URL取得、台本編集、YMM4前準備の画面が自分の制作手順に合うかを確認します。',
+    link: '#sample-screen-gallery',
+    linkLabel: '画面を見る',
+    Icon: MonitorPlay,
+  },
+  {
+    title: '構成見本として判断',
+    body: '動画化サンプルは完成動画ではなく、作れる方向性と画面からの流れを見るための見本です。',
+    link: '#sample-output-gallery',
+    linkLabel: '見本を見る',
+    Icon: Sparkles,
+  },
+  {
+    title: 'Freeで動作確認',
+    body: '見た後は少数URLで、候補取得、保存先、CSV/.ymmp前準備まで実際に通します。',
+    link: '/download/',
+    linkLabel: '配布物を確認',
+    Icon: Download,
+  },
+] as const
+
 const sampleShowcaseItems = [
   {
     title: '反応集・コメント解説',
@@ -210,6 +234,37 @@ export function SamplesPage() {
           }
         />
 
+        <Section className="sample-decision-section">
+          <div className="sample-decision-strip" aria-label="サンプルページで判断できること">
+            {sampleDecisionCards.map((item) => {
+              const DecisionIcon = item.Icon
+              const content = (
+                <>
+                  <span className="sample-decision-card__icon" aria-hidden="true">
+                    <DecisionIcon size={19} />
+                  </span>
+                  <strong>{item.title}</strong>
+                  <p>{item.body}</p>
+                  <small>
+                    {item.linkLabel}
+                    <ArrowRight size={14} />
+                  </small>
+                </>
+              )
+
+              return item.link.startsWith('#') ? (
+                <a key={item.title} className="sample-decision-card premium-glass" href={item.link}>
+                  {content}
+                </a>
+              ) : (
+                <Link key={item.title} className="sample-decision-card premium-glass" to={item.link}>
+                  {content}
+                </Link>
+              )
+            })}
+          </div>
+        </Section>
+
         <Section>
           <div className="subpage-section-head sample-gallery-head">
             <p>専用ギャラリー</p>
@@ -298,7 +353,7 @@ export function SamplesPage() {
           </div>
         </Section>
 
-        <Section alt>
+        <Section alt id="sample-screen-gallery">
           <div className="subpage-section-head sample-gallery-head">
             <p>実アプリ画面</p>
             <h2>URL取得からYMM4前準備までを画面で見る</h2>
@@ -374,7 +429,7 @@ export function SamplesPage() {
           </div>
         </Section>
 
-        <Section alt>
+        <Section alt id="sample-output-gallery">
           <div className="subpage-section-head sample-gallery-head">
             <p>動画化サンプル構成</p>
             <h2>作れる動画の方向性を、構成見本で確認する</h2>
