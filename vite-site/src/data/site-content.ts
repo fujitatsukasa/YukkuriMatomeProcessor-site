@@ -258,6 +258,11 @@ export const faqGroups: FaqGroup[] = [
           '記事URL・スレッドURLを起点に、台本下地、CSV、.ymmp、YMM4前準備を整えるWindows向け制作支援ツールです。',
       },
       {
+        question: '動画は自動で完成しますか？',
+        answer:
+          'いいえ。台本下地、CSV、.ymmp、YMM4前準備までを支援します。音声、字幕、立ち絵、間合い、投稿判断はYMM4側と利用者側で確認してください。',
+      },
+      {
         question: '無料で試せますか？',
         answer:
           'はい。Freeプランで起動、初期設定、URL取得、台本編集、CSV/.ymmp前準備の流れを確認できます。台本取得とAI台本生成の利用制限解除が必要になったらPremiumを検討してください。',

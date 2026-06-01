@@ -44,7 +44,16 @@ const faqCategoryMeta: Record<
   },
 }
 
-const faqQuickQueries = ['Mac', 'Windows', 'YMM4', '無料版', 'Premium', '返金', 'URL取得', 'API キー'] as const
+const faqQuickQueries = ['Mac', 'Windows', 'YMM4', '無料版', 'Premium', '返金', '自動', '収益化', 'URL取得', 'API キー'] as const
+
+const faqGroupDisplayOrder = [
+  'faq-onboarding',
+  'faq-general',
+  'faq-purchase',
+  'faq-settings',
+  'faq-script',
+  'faq-trouble',
+] as const
 
 const faqHeroFacts = [
   {
@@ -101,13 +110,20 @@ const priorityFaqQuestions = [
   '無料版では何ができますか？',
   'Premiumで何が解除されますか？',
   'YouTube APIキーは必要ですか？',
+  '動画は自動で完成しますか？',
   'AIが全部自動で動画を作りますか？',
   '対応していないURLは取得できますか？',
   '返金条件は何ですか？',
   '収益化は保証されますか？',
 ] as const
 
-const allFaqItems = faqGroups.flatMap((group) => group.items)
+const getFaqGroupRank = (id: string) => {
+  const rank = faqGroupDisplayOrder.findIndex((item) => item === id)
+  return rank === -1 ? faqGroupDisplayOrder.length : rank
+}
+
+const orderedFaqGroups = [...faqGroups].sort((a, b) => getFaqGroupRank(a.id) - getFaqGroupRank(b.id))
+const allFaqItems = orderedFaqGroups.flatMap((group) => group.items)
 const priorityFaqItems = priorityFaqQuestions
   .map((question) => allFaqItems.find((item) => item.question === question))
   .filter((item): item is (typeof allFaqItems)[number] => Boolean(item))
@@ -131,10 +147,10 @@ export function FaqPage() {
   const filteredGroups = useMemo(() => {
     const keyword = query.trim().toLowerCase()
     if (!keyword) {
-      return faqGroups
+      return orderedFaqGroups
     }
 
-    return faqGroups
+    return orderedFaqGroups
       .map((group) => ({
         ...group,
         items: group.items.filter((item) =>
