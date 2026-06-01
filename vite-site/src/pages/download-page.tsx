@@ -79,6 +79,57 @@ const completionChecks = [
   'YMM4側で最終編集が必要な前提を理解した',
 ] as const
 
+const completionGateItems = [
+  {
+    id: 'launch',
+    title: 'アプリが起動した',
+    body: 'インストーラーまたはポータブルZIPから起動し、最初の画面を確認できた。',
+    href: '#instruction-step-01',
+  },
+  {
+    id: 'settings',
+    title: 'YMM4パスと保存先を保存した',
+    body: 'YMM4.exeの絶対パス、CSV/.ymmp保存先、必要なAPIキーを固定した。',
+    href: '#instruction-step-02',
+  },
+  {
+    id: 'url',
+    title: '少数URLで候補一覧が出た',
+    body: 'まず少数の対象URLで、候補タイトルやサムネイルが表示されることを確認した。',
+    href: '#instruction-step-03',
+  },
+  {
+    id: 'script',
+    title: '台本下地を人が確認した',
+    body: '不要行、長い文、AI補助の結果を確認し、読み上げ前に見直した。',
+    href: '#instruction-step-04',
+  },
+  {
+    id: 'export',
+    title: 'CSV/.ymmp前準備を出力した',
+    body: '保存先に編集前準備のファイルが作成され、次の編集へ渡せる状態にした。',
+    href: '#instruction-step-05',
+  },
+  {
+    id: 'handoff',
+    title: 'YMM4で開く前の確認を終えた',
+    body: '素材パス、キャラ設定、保存先を見直し、YMM4側で最終編集する前提を理解した。',
+    href: '#instruction-step-06',
+  },
+  {
+    id: 'decision',
+    title: 'Freeで足りるか判断した',
+    body: '制限解除が必要な場合だけPremiumを検討し、購入前に料金と返金条件を確認した。',
+    href: '/purchase/',
+  },
+  {
+    id: 'support',
+    title: '詰まった時に送る情報を用意した',
+    body: 'OS、アプリ版、YMM4版、対象URL、エラー全文、再現手順を送れる状態にした。',
+    href: '/contact/',
+  },
+] as const
+
 const downloadSupportCards = [
   {
     eyebrow: '導入前',
@@ -616,6 +667,75 @@ function GuideSceneSwitcher({
   )
 }
 
+function InstructionCompletionChecklist() {
+  const [checkedIds, setCheckedIds] = useState<string[]>([])
+  const checkedCount = checkedIds.length
+  const progress = Math.round((checkedCount / completionGateItems.length) * 100)
+
+  const toggle = (id: string) => {
+    setCheckedIds((current) =>
+      current.includes(id) ? current.filter((item) => item !== id) : [...current, id],
+    )
+  }
+
+  return (
+    <InteractiveCard className="instruction-self-check premium-glass">
+      <div className="instruction-self-check__head">
+        <div>
+          <span className="subpage-card__eyebrow">
+            <ClipboardCheck size={16} />
+            導入完了セルフチェック
+          </span>
+          <h2>この8項目が埋まったら、YMM4側の編集へ進めます</h2>
+          <p>
+            Freeで触る段階でも、ここまで確認できれば「使ってできる」状態です。
+            途中で止まった項目は、右端のリンクから該当手順へ戻れます。
+          </p>
+        </div>
+        <div className="instruction-self-check__score" aria-live="polite">
+          <strong>{checkedCount}</strong>
+          <span>/ {completionGateItems.length} 完了</span>
+        </div>
+      </div>
+
+      <div className="instruction-self-check__meter" aria-hidden="true">
+        <span style={{ width: `${progress}%` }} />
+      </div>
+
+      <div className="instruction-self-check__grid">
+        {completionGateItems.map((item) => {
+          const inputId = `completion-gate-${item.id}`
+          const checked = checkedIds.includes(item.id)
+          const route = item.href.startsWith('#') ? (
+            <a href={item.href}>該当手順へ</a>
+          ) : (
+            <Link to={item.href}>関連ページへ</Link>
+          )
+
+          return (
+            <article key={item.id} className={checked ? 'is-checked' : undefined}>
+              <label htmlFor={inputId}>
+                <input
+                  id={inputId}
+                  type="checkbox"
+                  checked={checked}
+                  onChange={() => toggle(item.id)}
+                />
+                <span aria-hidden="true">
+                  <CheckCircle2 size={17} />
+                </span>
+                <strong>{item.title}</strong>
+              </label>
+              <p>{item.body}</p>
+              {route}
+            </article>
+          )
+        })}
+      </div>
+    </InteractiveCard>
+  )
+}
+
 export function DownloadPage() {
   return (
     <>
@@ -791,7 +911,7 @@ export function InstructionsPage() {
     <>
       <PageMeta
         title="使い方｜記事URLからYMM4へ渡すまでの手順"
-        description="記事URL・スレッドURLの入力、YMM4パス設定、台本整理、CSV/.ymmp前準備、YMM4確認までを実画面付きの手順書として解説します。"
+        description="記事URL・スレッドURLの入力、YMM4パス設定、台本整理、CSV/.ymmp前準備、YMM4確認、導入完了セルフチェックまでを実画面付きの手順書として解説します。"
         keywords="使い方, 初期設定, YMM4, 台本取得, CSV, .ymmp, AI補助, 手順"
         path="/instructions/"
       />
@@ -903,6 +1023,8 @@ export function InstructionsPage() {
               ))}
             </ul>
           </InteractiveCard>
+
+          <InstructionCompletionChecklist />
         </Section>
 
         <Section alt>
