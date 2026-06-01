@@ -61,6 +61,33 @@ const contactPreflightChecks = [
   'エラー全文またはスクリーンショットを用意した',
 ] as const
 
+const contactFastPack = [
+  {
+    label: '状況',
+    title: '何ができないか',
+    body: '起動しない、URL取得できない、Premium権限が反映されないなど、最初に困っている内容を書きます。',
+    Icon: HelpCircle,
+  },
+  {
+    label: '環境',
+    title: 'OS・アプリ版・YMM4版',
+    body: 'Windows 10 / 11、アプリのバージョン、YMM4のバージョンを並べてください。',
+    Icon: ClipboardCheck,
+  },
+  {
+    label: '再現',
+    title: '操作手順と対象URL',
+    body: '押したボタン、入力したURL、少数URLでも再現するかを書いてください。',
+    Icon: Bug,
+  },
+  {
+    label: '証拠',
+    title: 'エラー全文・画面',
+    body: 'エラー文は省略せず、可能ならスクリーンショットや画面録画も添えると確認が速くなります。',
+    Icon: FileText,
+  },
+] as const
+
 const contactResolutionFlow = [
   {
     label: '01',
@@ -222,7 +249,7 @@ export function ContactPage() {
     <>
       <PageMeta
         title="お問い合わせ｜サポート窓口"
-        description="ゆっくりまとめプロセッサーの問い合わせ窓口。契約、請求、返金、不具合、導入相談で送るべき情報と連絡先を確認できます。"
+        description="ゆっくりまとめプロセッサーの問い合わせ窓口。契約、請求、返金、不具合、導入相談で最初に送る情報と連絡先を確認できます。"
         keywords="お問い合わせ, サポート, 導入相談, 不具合報告, 返金, 請求"
         path="/contact/"
         structuredData={contactStructuredData}
@@ -262,6 +289,36 @@ export function ContactPage() {
             </InteractiveCard>
           }
         />
+
+        <Section>
+          <InteractiveCard className="release-panel premium-glass contact-fast-pack">
+            <div className="contact-fast-pack__head">
+              <span className="subpage-card__eyebrow">
+                <Mail size={16} />
+                返信が速くなる最初のメール
+              </span>
+              <h2>まずこの4点を送ってください</h2>
+              <p>
+                文章量よりも、状況、環境、再現手順、エラー全文が揃っていることが大事です。
+                購入・返金・不具合の相談は、記録が残るメールを優先してください。
+              </p>
+            </div>
+
+            <div className="contact-fast-pack__grid" aria-label="最初のメールに入れる情報">
+              {contactFastPack.map((item) => {
+                const FastPackIcon = item.Icon
+                return (
+                  <article key={item.label} className="contact-fast-pack__item">
+                    <span className="contact-fast-pack__badge">{item.label}</span>
+                    <FastPackIcon size={18} aria-hidden="true" />
+                    <h3>{item.title}</h3>
+                    <p>{item.body}</p>
+                  </article>
+                )
+              })}
+            </div>
+          </InteractiveCard>
+        </Section>
 
         <Section>
           <div className="contact-status-grid" aria-label="サポート体制">
