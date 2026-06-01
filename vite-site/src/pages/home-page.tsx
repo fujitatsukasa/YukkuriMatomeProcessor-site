@@ -15,9 +15,9 @@ import {
 const heroBadges = ['Windows専用', 'YMM4前提', '無料で試せる'] as const
 
 const flowItems = [
-  { label: '入れるもの', value: '記事URL / スレッドURL / まとめ記事' },
-  { label: '作るもの', value: '台本下地 / CSV / .ymmp前準備' },
-  { label: '次にやること', value: 'YMM4で音声・字幕を調整' },
+  { label: '入力', value: '記事URL / スレッドURL' },
+  { label: '出力', value: '台本下地 / CSV / .ymmp' },
+  { label: '仕上げ', value: 'YMM4で音声・字幕を調整' },
 ] as const
 
 const inputOutputCards = [
@@ -38,33 +38,6 @@ const inputOutputCards = [
     title: '動画完成はYMM4で仕上げる',
     body: '音声、字幕、立ち絵、間合いはYMM4側で確認します。まずFreeで流れを試せます。',
     points: ['Windows専用', 'YMM4前提', 'Premiumは制限解除'],
-  },
-] as const
-
-const goalMapItems = [
-  {
-    step: '01',
-    title: 'URLを入れる',
-    goal: '記事URL・スレッドURLを入力',
-    output: '候補一覧が出る',
-    link: { label: '実画面を見る', href: '/samples/', external: false },
-    Icon: FileSearch,
-  },
-  {
-    step: '02',
-    title: '台本下地を整える',
-    goal: '不要行と長い文を見直す',
-    output: '読み上げ前に確認できる',
-    link: { label: '使い方を見る', href: '/instructions/', external: false },
-    Icon: PencilLine,
-  },
-  {
-    step: '03',
-    title: 'YMM4前準備を通す',
-    goal: 'CSV/.ymmpと素材パスを確認',
-    output: 'YMM4側へ進める',
-    link: { label: 'サンプルを見る', href: '/samples/', external: false },
-    Icon: Monitor,
   },
 ] as const
 
@@ -263,37 +236,6 @@ export function HomePage() {
               </article>
             ))}
           </div>
-        </section>
-
-        <section className="home-focus-section home-focus-goal-map" aria-labelledby="home-goal-map-heading">
-          <div className="home-focus-section__head">
-            <p className="home-focus-kicker">無料で確認する目標</p>
-            <h2 id="home-goal-map-heading">自分のURLで試す前に見る3ステップ</h2>
-            <p>
-              Freeで実URLを試し、候補取得、台本整理、YMM4前準備まで通してから購入を判断できます。
-            </p>
-          </div>
-
-          <ol className="home-focus-goal-list">
-            {goalMapItems.map((item) => {
-              const GoalIcon = item.Icon
-              return (
-                <li key={item.step} className="home-focus-goal-card">
-                  <div className="home-focus-goal-card__top">
-                    <span>{item.step}</span>
-                    <GoalIcon size={19} aria-hidden="true" />
-                  </div>
-                  <h3>{item.title}</h3>
-                  <p>{item.goal}</p>
-                  <strong>{item.output}</strong>
-                  <Link to={item.link.href}>
-                    {item.link.label}
-                    <ArrowRight size={15} />
-                  </Link>
-                </li>
-              )
-            })}
-          </ol>
         </section>
 
         <section className="home-focus-section" aria-labelledby="home-flow-heading">
