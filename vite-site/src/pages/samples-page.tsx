@@ -78,6 +78,48 @@ const sampleGoalCards = [
   },
 ] as const
 
+const sampleShowcaseItems = [
+  {
+    title: '反応集・コメント解説',
+    body: '記事URLやコメント束を題材にし、賛否、論点、権利メモを見ながら台本下地へ落とす流れです。',
+    appImage: '/product_get_script.webp',
+    appAlt: '記事URLから反応集の候補を取得する実アプリ画面',
+    sampleImage: '/samples/sample-reaction-digest-thumbnail.png',
+    sampleAlt: '反応集・コメント解説の動画化サンプル構成',
+    orientation: 'landscape',
+    input: '記事URL / スレッドURL / コメント候補',
+    output: 'タイトル候補、台本下地、引用確認メモ',
+    beforeAfter: 'コピペで集める状態から、候補一覧で選ぶ状態へ',
+    checks: ['候補タイトルが一覧に出る', '使うコメントを選べる', '引用元と権利メモを残す'],
+  },
+  {
+    title: 'ゆっくり掛け合い解説',
+    body: '霊夢と魔理沙の会話に寄せ、疑問、分解、結論の順で読み上げ前の下書きを整えます。',
+    appImage: '/product_ai_script.webp',
+    appAlt: 'AI台本生成で掛け合い台本を作る実アプリ画面',
+    sampleImage: '/samples/sample-yukkuri-dialogue-thumbnail.png',
+    sampleAlt: 'ゆっくり掛け合い解説の動画化サンプル構成',
+    orientation: 'landscape',
+    input: '題材メモ / 取得済み本文 / キャラ指定',
+    output: '掛け合い台本、役割、感情メモ',
+    beforeAfter: '単なる本文整理から、会話として確認できる下書きへ',
+    checks: ['AI出力を人が確認する', '役割と感情を見直す', '長い行を読み上げ向けに分ける'],
+  },
+  {
+    title: '縦型ショートドラマ',
+    body: '短い導入、反転、締めを決め、ショート向けに余白とテンポを意識した台本下地にします。',
+    appImage: '/product_format_list.webp',
+    appAlt: 'フォーマット管理と出力形式を確認する実アプリ画面',
+    sampleImage: '/samples/sample-short-drama-thumbnail.png',
+    sampleAlt: '縦型ショートドラマの動画化サンプル構成',
+    orientation: 'portrait',
+    input: '短い題材 / セリフ案 / 出力形式',
+    output: '縦型用の構成、短い台本、保存形式',
+    beforeAfter: '長い説明文から、1本のショート構成へ',
+    checks: ['冒頭の一言を決める', '反転ポイントを入れる', '保存形式を再利用できる'],
+  },
+] as const
+
 const beforeAfterItems = [
   {
     title: 'URL探しとコピペ',
@@ -125,15 +167,15 @@ const samplesStructuredData = {
   '@type': 'CollectionPage',
   name: '実画面・サンプル',
   description:
-    'ゆっくりまとめプロセッサーの実アプリ画面、Before/After、動画化サンプル構成をまとめたギャラリーページです。',
+    'ゆっくりまとめプロセッサーの実アプリ画面、Before/After、動画化サンプル構成を専用ギャラリーで確認できるページです。',
 }
 
 export function SamplesPage() {
   return (
     <>
       <PageMeta
-        title="実画面・サンプル｜操作画面とBefore/After"
-        description="ゆっくりまとめプロセッサーの実アプリ画面、URL入力から台本整理、YMM4前準備までのBefore/After、動画化サンプル構成を確認できます。"
+        title="実画面・サンプルギャラリー｜操作画面とBefore/After"
+        description="ゆっくりまとめプロセッサーの実アプリ画面、URL入力から台本整理、YMM4前準備までのBefore/After、動画化サンプル構成を専用ギャラリーで確認できます。"
         keywords="実画面, サンプル, Before After, YMM4, 台本作成, ゆっくりまとめプロセッサー"
         image="/product_edit_script.webp"
         path="/samples/"
@@ -142,7 +184,7 @@ export function SamplesPage() {
 
       <main className="brand-shell">
         <PageIntro
-          kicker="実画面・サンプル"
+          kicker="実画面・サンプルギャラリー"
           title="どの画面で何ができるか、先に見て判断する"
           lead="URL入力、台本編集、AI補助、CSV/.ymmp前準備まで。雰囲気画像ではなく、実アプリ画面と具体的なBefore/Afterで確認できます。"
           actions={[
@@ -167,6 +209,67 @@ export function SamplesPage() {
             </InteractiveCard>
           }
         />
+
+        <Section>
+          <div className="subpage-section-head sample-gallery-head">
+            <p>専用ギャラリー</p>
+            <h2>実画面、Before/After、動画化サンプルをまとめて見る</h2>
+            <p>
+              画像だけで判断しづらい部分を、入力、成果物、成功状態まで並べて確認できます。
+              動画化サンプルは完成動画そのものではなく、作れる方向性を示す構成見本です。
+            </p>
+          </div>
+
+          <div className="sample-showcase-grid">
+            {sampleShowcaseItems.map((item) => (
+              <InteractiveCard key={item.title} className="sample-showcase-card premium-glass">
+                <div className="sample-showcase-card__media">
+                  <figure className="sample-showcase-card__app">
+                    <img src={item.appImage} alt={item.appAlt} loading="lazy" decoding="async" />
+                    <figcaption>実アプリ画面</figcaption>
+                  </figure>
+                  <figure className={`sample-showcase-card__output is-${item.orientation}`}>
+                    <img src={item.sampleImage} alt={item.sampleAlt} loading="lazy" decoding="async" />
+                    <figcaption>動画化サンプル</figcaption>
+                  </figure>
+                </div>
+
+                <div className="sample-showcase-card__copy">
+                  <span>
+                    <MonitorPlay size={16} />
+                    サンプル
+                  </span>
+                  <h3>{item.title}</h3>
+                  <p>{item.body}</p>
+
+                  <dl>
+                    <div>
+                      <dt>入力</dt>
+                      <dd>{item.input}</dd>
+                    </div>
+                    <div>
+                      <dt>成果物</dt>
+                      <dd>{item.output}</dd>
+                    </div>
+                    <div>
+                      <dt>Before/After</dt>
+                      <dd>{item.beforeAfter}</dd>
+                    </div>
+                  </dl>
+
+                  <ul>
+                    {item.checks.map((check) => (
+                      <li key={check}>
+                        <BadgeCheck size={15} />
+                        {check}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </InteractiveCard>
+            ))}
+          </div>
+        </Section>
 
         <Section>
           <div className="subpage-section-head sample-gallery-head">

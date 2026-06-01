@@ -10623,6 +10623,172 @@ html {
   line-height: 1.72;
 }
 
+.sample-showcase-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.sample-showcase-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(340px, 0.92fr);
+  gap: 0;
+  overflow: hidden;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 232, 190, 0.16);
+}
+
+.sample-showcase-card__media {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 0.56fr);
+  gap: 0.72rem;
+  align-items: stretch;
+  padding: clamp(0.8rem, 1.5vw, 1.1rem);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.018)),
+    rgba(0, 0, 0, 0.18);
+}
+
+.sample-showcase-card__media figure {
+  position: relative;
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255, 232, 190, 0.14);
+  border-radius: 12px;
+  background: rgba(7, 10, 20, 0.74);
+}
+
+.sample-showcase-card__media img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.sample-showcase-card__app img {
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.sample-showcase-card__output img {
+  aspect-ratio: 16 / 10;
+  object-fit: contain;
+  background: #111a2a;
+}
+
+.sample-showcase-card__output.is-portrait img {
+  aspect-ratio: 9 / 14;
+}
+
+.sample-showcase-card__media figcaption {
+  position: absolute;
+  left: 0.65rem;
+  bottom: 0.65rem;
+  display: inline-flex;
+  min-height: 26px;
+  align-items: center;
+  padding: 0 0.52rem;
+  border: 1px solid rgba(255, 232, 190, 0.2);
+  border-radius: 999px;
+  color: rgba(255, 248, 230, 0.92);
+  background: rgba(5, 8, 14, 0.74);
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.sample-showcase-card__copy {
+  display: grid;
+  gap: 0.85rem;
+  align-content: center;
+  padding: clamp(1rem, 2vw, 1.45rem);
+}
+
+.sample-showcase-card__copy > span {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 0.45rem;
+  color: rgba(255, 232, 190, 0.78);
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.sample-showcase-card__copy > span svg {
+  color: #e0c184;
+}
+
+.sample-showcase-card h3 {
+  margin: 0;
+  color: #fff7e6;
+  font-size: clamp(1.28rem, 2vw, 1.72rem);
+  line-height: 1.34;
+}
+
+.sample-showcase-card p {
+  margin: 0;
+  color: rgba(236, 233, 226, 0.74);
+  line-height: 1.76;
+}
+
+.sample-showcase-card dl {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.6rem;
+  margin: 0;
+}
+
+.sample-showcase-card dl div {
+  min-width: 0;
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.7rem;
+  border: 1px solid rgba(255, 232, 190, 0.11);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.sample-showcase-card dt {
+  color: rgba(255, 232, 190, 0.72);
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.sample-showcase-card dd {
+  margin: 0;
+  color: rgba(245, 247, 255, 0.84);
+  font-size: 0.86rem;
+  line-height: 1.56;
+  overflow-wrap: anywhere;
+}
+
+.sample-showcase-card ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sample-showcase-card li {
+  display: inline-flex;
+  gap: 0.38rem;
+  align-items: center;
+  min-height: 30px;
+  padding: 0.28rem 0.52rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  color: rgba(245, 247, 255, 0.82);
+  background: rgba(255, 255, 255, 0.045);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.sample-showcase-card li svg {
+  flex: 0 0 auto;
+  color: #e0c184;
+}
+
 .sample-goal-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -10857,6 +11023,14 @@ html {
 
 .sample-output-grid .actual-sample-card__copy p {
   min-height: 4.6rem;
+}
+
+.sample-output-card .actual-sample-card__media {
+  background: #111a2a;
+}
+
+.sample-output-card .actual-sample-card__media img {
+  object-fit: contain;
 }
 
 .instruction-manual-head {
@@ -11127,6 +11301,7 @@ html {
   }
 
   .sample-screen-grid,
+  .sample-showcase-card,
   .sample-goal-grid,
   .instruction-goal-grid,
   .instruction-manual-grid,
@@ -11145,6 +11320,8 @@ html {
 @media (max-width: 760px) {
   .release-integrity-grid,
   .distribution-check-grid,
+  .sample-showcase-card__media,
+  .sample-showcase-card dl,
   .sample-screen-card,
   .instruction-step-card__details,
   .sample-before-after-card__columns {
