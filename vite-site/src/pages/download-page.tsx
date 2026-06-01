@@ -8,6 +8,8 @@ import {
   ArrowRight,
   BadgeCheck,
   Bot,
+  CheckCircle2,
+  ClipboardCheck,
   FileSearch,
   FolderCog,
   Send,
@@ -39,6 +41,41 @@ const instructionMetrics = [
   { value: '6手順', label: '迷わない操作順', detail: '起動 -> 設定 -> URL -> 整理 -> 出力 -> 確認' },
   { value: '成功状態', label: '各ステップで確認', detail: '押す場所と終わりの状態を分けて確認' },
   { value: '詰まり対応', label: '原因を切り分ける', detail: '設定、URL、保存先、YMM4パスの順で見る' },
+] as const
+
+const instructionGoalCards = [
+  {
+    title: '初回設定を終える',
+    body: '起動、YMM4実行ファイル、保存先、必要なAPIキーを先に固定します。',
+    done: ['アプリが起動する', 'YMM4.exeの絶対パスを保存', 'CSV/.ymmp保存先を決める'],
+    Icon: Settings2,
+  },
+  {
+    title: 'URLから台本候補を取る',
+    body: '対応URLを少数で試し、候補一覧へ出るかを確認します。',
+    done: ['対象URLを入力', '候補一覧にタイトルが並ぶ', '取得できないURLを切り分ける'],
+    Icon: FileSearch,
+  },
+  {
+    title: '台本下地を確認できる形にする',
+    body: '不要行、役割、感情、読み上げ量を見て、YMM4へ渡す前の下書きにします。',
+    done: ['不要行を削る', 'AI補助の結果を人が確認', '長い行を読み上げ向けに分割'],
+    Icon: Bot,
+  },
+  {
+    title: 'YMM4前準備まで通す',
+    body: 'CSV/.ymmp前準備、素材パス、保存先を確認して、YMM4側の編集へ進める状態にします。',
+    done: ['CSV/.ymmp前準備を出力', '素材パスを確認', 'YMM4で開く前の確認を終える'],
+    Icon: FolderCog,
+  },
+] as const
+
+const completionChecks = [
+  'Freeプランで一連の流れを試した',
+  '対象URLの取得可否を少数件で確認した',
+  '台本下地をそのまま使わず内容確認した',
+  'CSV/.ymmp前準備の保存先を確認した',
+  'YMM4側で最終編集が必要な前提を理解した',
 ] as const
 
 const downloadSupportCards = [
@@ -649,6 +686,58 @@ export function InstructionsPage() {
 
         <Section>
           <MetricStrip items={[...instructionMetrics]} ariaLabel="使い方ガイドの要点" />
+        </Section>
+
+        <Section>
+          <div className="subpage-section-head instruction-manual-head">
+            <p>到達目標</p>
+            <h2>このページで「使ってできる」状態まで進める</h2>
+          </div>
+
+          <div className="instruction-goal-grid">
+            {instructionGoalCards.map((goal) => {
+              const GoalIcon = goal.Icon
+              return (
+                <InteractiveCard key={goal.title} className="instruction-goal-card premium-glass">
+                  <span className="instruction-goal-card__icon" aria-hidden="true">
+                    <GoalIcon size={21} />
+                  </span>
+                  <h3>{goal.title}</h3>
+                  <p>{goal.body}</p>
+                  <ul>
+                    {goal.done.map((item) => (
+                      <li key={item}>
+                        <CheckCircle2 size={15} />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </InteractiveCard>
+              )
+            })}
+          </div>
+
+          <InteractiveCard className="instruction-completion-panel premium-glass">
+            <div>
+              <span className="subpage-card__eyebrow">
+                <ClipboardCheck size={16} />
+                完了判定
+              </span>
+              <h2>ここまで確認できたら、YMM4側の編集へ進めます</h2>
+              <p>
+                ゆっくりまとめプロセッサーは動画完成を保証する道具ではなく、YMM4を開く前の前工程を揃える道具です。
+                下の項目が揃えば、次はYMM4側で音声、字幕、立ち絵、間合いを確認します。
+              </p>
+            </div>
+            <ul className="instruction-completion-list">
+              {completionChecks.map((item) => (
+                <li key={item}>
+                  <BadgeCheck size={16} />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </InteractiveCard>
         </Section>
 
         <Section alt>

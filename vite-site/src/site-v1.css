@@ -10772,6 +10772,108 @@ html {
   max-width: 860px;
 }
 
+.instruction-goal-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.instruction-goal-card {
+  display: grid;
+  gap: 0.78rem;
+  align-content: start;
+  padding: clamp(1rem, 1.8vw, 1.28rem);
+  border-radius: 18px;
+}
+
+.instruction-goal-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255, 232, 190, 0.18);
+  border-radius: 14px;
+  background: rgba(224, 193, 132, 0.12);
+  color: #ffe8be;
+}
+
+.instruction-goal-card h3 {
+  margin: 0;
+  color: #fff7e6;
+  font-size: 1.08rem;
+  line-height: 1.42;
+}
+
+.instruction-goal-card p {
+  margin: 0;
+  color: rgba(236, 233, 226, 0.74);
+  font-size: 0.9rem;
+  line-height: 1.68;
+}
+
+.instruction-goal-card ul,
+.instruction-completion-list {
+  display: grid;
+  gap: 0.52rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.instruction-goal-card li,
+.instruction-completion-list li {
+  display: flex;
+  gap: 0.45rem;
+  align-items: flex-start;
+  color: rgba(245, 247, 255, 0.82);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.instruction-goal-card li svg,
+.instruction-completion-list li svg {
+  flex: 0 0 auto;
+  color: #e0c184;
+  margin-top: 0.18rem;
+}
+
+.instruction-completion-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.8fr);
+  gap: 1.2rem;
+  align-items: start;
+  margin-top: 1rem;
+  padding: clamp(1.15rem, 2vw, 1.55rem);
+  border-radius: 18px;
+}
+
+.instruction-completion-panel .subpage-card__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42rem;
+}
+
+.instruction-completion-panel h2 {
+  margin: 0.55rem 0 0;
+  color: #fff7e6;
+  font-size: clamp(1.32rem, 2vw, 1.72rem);
+  line-height: 1.36;
+}
+
+.instruction-completion-panel p {
+  margin: 0.72rem 0 0;
+  color: rgba(236, 233, 226, 0.76);
+  line-height: 1.78;
+}
+
+.instruction-completion-list {
+  padding: 1rem;
+  border: 1px solid rgba(224, 193, 132, 0.16);
+  border-radius: 16px;
+  background: rgba(224, 193, 132, 0.06);
+}
+
 .instruction-manual-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -10934,9 +11036,11 @@ html {
   }
 
   .sample-screen-grid,
+  .instruction-goal-grid,
   .instruction-manual-grid,
   .instruction-trouble-grid,
   .sample-before-after-grid,
+  .instruction-completion-panel,
   .sample-final-cta {
     grid-template-columns: 1fr;
   }
