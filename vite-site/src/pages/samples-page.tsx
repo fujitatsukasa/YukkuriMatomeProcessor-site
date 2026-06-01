@@ -87,10 +87,10 @@ const sampleDecisionCards = [
     Icon: MonitorPlay,
   },
   {
-    title: '構成見本として判断',
-    body: '動画化サンプルは完成動画ではなく、作れる方向性と画面からの流れを見るための見本です。',
-    link: '#sample-output-gallery',
-    linkLabel: '見本を見る',
+    title: '実動画プレビューで判断',
+    body: '短い実動画で、字幕、画面の流れ、YMM4側で調整する余白を確認します。',
+    link: '#sample-video-gallery',
+    linkLabel: '動画を見る',
     Icon: Sparkles,
   },
   {
@@ -183,6 +183,30 @@ const sampleOutputs = [
     image: '/samples/sample-short-drama-thumbnail.png',
     alt: '縦型ショートドラマのサンプル構成画像',
     tags: ['ショート', '縦型', '台本構成'],
+  },
+] as const
+
+const videoSampleItems = [
+  {
+    title: 'ゆっくり掛け合い解説',
+    body: '会話形式の下書きが、実際の動画テンポに近い見え方になるかを確認できます。',
+    video: '/samples/sample-yukkuri-dialogue-preview.mp4',
+    poster: '/samples/sample-yukkuri-dialogue-thumbnail.png',
+    points: ['掛け合いのテンポ', '字幕と画面の読みやすさ', 'YMM4側で調整する余白'],
+  },
+  {
+    title: '反応集・コメント解説',
+    body: 'コメントや論点をまとめた構成が、動画の流れとして見えるかを確認できます。',
+    video: '/samples/sample-reaction-digest-preview.mp4',
+    poster: '/samples/sample-reaction-digest-thumbnail.png',
+    points: ['コメントの見せ方', '論点の区切り', '引用元確認の残し方'],
+  },
+  {
+    title: '縦型ショートドラマ',
+    body: '短い導入から締めまで、縦型向けの構成と尺感を確認できます。',
+    video: '/samples/sample-short-drama-preview.mp4',
+    poster: '/samples/sample-short-drama-thumbnail.png',
+    points: ['冒頭の入り', '縦画面の余白', '短尺の締め方'],
   },
 ] as const
 
@@ -455,6 +479,52 @@ export function SamplesPage() {
                   </div>
                 </div>
               </article>
+            ))}
+          </div>
+        </Section>
+
+        <Section id="sample-video-gallery">
+          <div className="subpage-section-head sample-gallery-head">
+            <p>実動画プレビュー</p>
+            <h2>短い動画で、画面の流れとテンポを確認する</h2>
+            <p>
+              ここでは軽量な実動画プレビューだけを載せています。完成品質を保証するものではなく、
+              YMM4側で字幕、音声、立ち絵、間合いを調整する前提の確認用です。
+            </p>
+          </div>
+
+          <div className="sample-video-grid">
+            {videoSampleItems.map((item) => (
+              <InteractiveCard key={item.title} className="sample-video-card premium-glass">
+                <div className="sample-video-card__media">
+                  <video
+                    controls
+                    muted
+                    playsInline
+                    preload="metadata"
+                    poster={item.poster}
+                    aria-label={`${item.title}の実動画プレビュー`}
+                  >
+                    <source src={item.video} type="video/mp4" />
+                  </video>
+                </div>
+                <div className="sample-video-card__body">
+                  <span>
+                    <MonitorPlay size={16} />
+                    実動画
+                  </span>
+                  <h3>{item.title}</h3>
+                  <p>{item.body}</p>
+                  <ul>
+                    {item.points.map((point) => (
+                      <li key={point}>
+                        <BadgeCheck size={15} />
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </InteractiveCard>
             ))}
           </div>
         </Section>
