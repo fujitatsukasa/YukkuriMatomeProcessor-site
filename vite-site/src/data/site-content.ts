@@ -1,5 +1,15 @@
 export type NavItem = {
-  key: 'home' | 'download' | 'instructions' | 'update' | 'news' | 'faq' | 'purchase' | 'contact' | 'blog'
+  key:
+    | 'home'
+    | 'download'
+    | 'instructions'
+    | 'samples'
+    | 'update'
+    | 'news'
+    | 'faq'
+    | 'purchase'
+    | 'contact'
+    | 'blog'
   label: string
   url: string
 }
@@ -50,12 +60,13 @@ export const siteDescription =
 export const navItems: NavItem[] = [
   { key: 'home', label: 'ホーム', url: '/' },
   { key: 'download', label: 'ダウンロード', url: '/download/' },
-  { key: 'update', label: 'アップデート', url: '/update/' },
-  { key: 'instructions', label: '機能と使い方', url: '/instructions/' },
+  { key: 'instructions', label: '使い方', url: '/instructions/' },
+  { key: 'samples', label: 'サンプル', url: '/samples/' },
   { key: 'purchase', label: '料金', url: '/purchase/' },
   { key: 'faq', label: 'FAQ', url: '/faq/' },
-  { key: 'blog', label: 'ブログ', url: '/blog/' },
+  { key: 'update', label: 'アップデート', url: '/update/' },
   { key: 'news', label: 'お知らせ', url: '/news/' },
+  { key: 'blog', label: 'ブログ', url: '/blog/' },
 ]
 
 export const primaryCta: ActionItem = {
@@ -342,8 +353,8 @@ export const newsPosts: NewsPost[] = [
 export const pageRegistry: Record<string, PageEntry> = {
   '/': { label: 'ホーム', navKey: 'home', hideBreadcrumbs: true },
   '/download/': { label: 'ダウンロード', navKey: 'download', parent: '/' },
-  '/instructions/': { label: '機能と使い方', navKey: 'instructions', parent: '/' },
-  '/samples/': { label: '実画面・サンプル', parent: '/' },
+  '/instructions/': { label: '使い方', navKey: 'instructions', parent: '/' },
+  '/samples/': { label: '実画面・サンプル', navKey: 'samples', parent: '/' },
   '/update/': { label: 'アップデート', navKey: 'update', parent: '/' },
   '/news/': { label: 'お知らせ', navKey: 'news', parent: '/' },
   '/faq/': { label: 'FAQ', navKey: 'faq', parent: '/' },
