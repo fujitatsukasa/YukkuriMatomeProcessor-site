@@ -142,6 +142,27 @@ const faqPreview = [
   },
 ] as const
 
+const finalRouteCards = [
+  {
+    title: '実画面を見る',
+    body: 'URL入力、台本整理、YMM4前準備の画面とBefore/Afterを確認します。',
+    href: '/samples/',
+    Icon: Monitor,
+  },
+  {
+    title: '配布物を確認',
+    body: '最新版ZIP、ファイル情報、初回起動、導入完了チェックを確認します。',
+    href: '/download/',
+    Icon: Download,
+  },
+  {
+    title: '使い方を見る',
+    body: '自分のURLで試す前に、設定と操作手順を順番に確認します。',
+    href: '/instructions/',
+    Icon: PencilLine,
+  },
+] as const
+
 const softwareApplicationLd = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
@@ -354,10 +375,30 @@ export function HomePage() {
         </section>
 
         <section className="home-focus-final" aria-labelledby="home-final-heading">
-          <div>
+          <div className="home-focus-final__copy">
             <p className="home-focus-kicker">まずは無料で確認</p>
-            <h2 id="home-final-heading">自分のURLで、台本下地とYMM4前準備まで試してください</h2>
+            <h2 id="home-final-heading">次に見る順番を決めて、自分のURLで試す</h2>
+            <p>
+              画面の流れ、配布物、操作手順を見てからFreeで動作確認してください。
+              Premiumは、制限解除が必要だと分かってから判断できます。
+            </p>
           </div>
+
+          <div className="home-focus-final__routes" aria-label="次に確認するページ">
+            {finalRouteCards.map((route) => {
+              const RouteIcon = route.Icon
+              return (
+                <Link key={route.title} to={route.href}>
+                  <span aria-hidden="true">
+                    <RouteIcon size={17} />
+                  </span>
+                  <strong>{route.title}</strong>
+                  <small>{route.body}</small>
+                </Link>
+              )
+            })}
+          </div>
+
           <div className="home-focus-actions">
             <a className="home-focus-btn home-focus-btn--primary" href={downloadUrl} target="_blank" rel="noopener noreferrer">
               <Download size={18} />
