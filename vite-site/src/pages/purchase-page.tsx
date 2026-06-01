@@ -3,6 +3,7 @@ import { InteractiveCard, PageMeta, Section } from '@/components/ui'
 import { PricingCards } from '@/components/PricingCards'
 import { legal } from '@/data/site-content'
 import { LegalLinksBlock } from '@/pages/shared'
+import { Bot, CheckCircle2, CreditCard, FileSearch, RotateCcw, ShieldCheck } from 'lucide-react'
 
 const planNarratives = [
   {
@@ -43,49 +44,52 @@ const pricingFlow = [
   },
 ] as const
 
-const planDecisionGuide = [
+const premiumUnlocks = [
   {
-    label: 'まず触って判断したい',
-    plan: 'Free',
-    title: '導入相性を無料で確認',
-    body: '記事URLの取得、台本整理、CSV/.ymmp前準備までの流れが今の制作手順に合うかを先に見ます。',
-    cues: ['初回導入', '個人の検証', 'YMM4前準備を試す'],
+    label: '台本取得',
+    title: '対応URLからの台本取得制限を解除',
+    body: '継続投稿でよく使う記事URL・スレッドURLの取得を、Freeの検証枠からPremium利用へ切り替えます。',
+    Icon: FileSearch,
   },
   {
-    label: '週1本以上を安定させたい',
-    plan: 'Premium',
-    title: '買い切りで制限解除',
-    body: '台本取得・生成の制限を外し、継続投稿の前工程を止めずに回せるようにします。',
-    cues: ['週1本以上', '反応集・解説の継続投稿', '台本取得とAI台本生成をよく使う'],
+    label: 'AI台本',
+    title: 'AI台本生成の利用制限を解除',
+    body: '13キャラ対応の掛け合い台本、感情や役割の整理など、生成補助を継続利用しやすくします。',
+    Icon: Bot,
+  },
+  {
+    label: '権限',
+    title: 'GoogleアカウントにPremium権限を保持',
+    body: '購入後はGoogleログインに紐づく権限同期で、アプリ内のPremium機能を有効化します。',
+    Icon: ShieldCheck,
   },
 ] as const
 
-const purchaseReassuranceItems = [
+const purchaseFactCards = [
+  {
+    label: '価格',
+    title: '39,800円 / 税込',
+    body: 'Premiumは買い切りです。月額自動更新や毎月の解約予約はありません。',
+    Icon: CheckCircle2,
+  },
   {
     label: '支払い',
-    title: '国内決済とStripe Checkout',
-    body: '購入はアプリ内の導線から Stripe Checkout を開いて行います。標準導線はクレジットカードの一度払いです。',
-  },
-  {
-    label: '更新',
-    title: '月額自動更新なし',
-    body: 'Premium は買い切りのため、解約予約や毎月の自動更新はありません。返金時は Premium 権限を停止します。',
-  },
-  {
-    label: '商用利用',
-    title: '継続投稿の前工程に利用可能',
-    body: '利用規約と各素材・音声ライセンスの範囲を守ったうえで、制作フローの前工程に組み込めます。',
-  },
-  {
-    label: 'サポート',
-    title: legal.support.firstResponseSla,
-    body: `問い合わせ窓口は ${legal.organization.email} です。導入、契約、支払い、制作手順の相談を用途別に確認できます。`,
+    title: 'Stripe Checkout',
+    body: '購入はアプリ内の導線からStripe Checkoutを開き、クレジットカード一度払いで行います。',
+    Icon: CreditCard,
   },
   {
     label: '返金',
-    title: '返金条件を事前に確認',
-    body: '返金・キャンセルポリシー、特定商取引法表記、利用規約を購入前に確認できます。',
+    title: '購入後7日以内を原則受付',
+    body: '返金成立時はPremium権限を停止します。詳細は返金・キャンセルポリシーで確認できます。',
+    Icon: RotateCcw,
   },
+] as const
+
+const purchaseCautions = [
+  '動画完成を自動保証するものではありません',
+  'YouTube収益化や再生数を保証するものではありません',
+  '素材、音声、引用元の利用条件は利用者側で確認してください',
 ] as const
 
 export function PurchasePage() {
@@ -162,84 +166,64 @@ export function PurchasePage() {
           <PricingCards />
         </Section>
 
-        <Section alt className="pricing-reassurance-section">
-          <div className="subpage-section-head pricing-reassurance__head">
-            <p>購入前の確認</p>
-            <h2>購入前の不安を、価格表の直後で片付ける</h2>
+        <Section alt className="pricing-clarity-section">
+          <div className="pricing-clarity-board">
+            <div className="pricing-clarity-board__head">
+              <p>購入前の判断材料</p>
+              <h2>Premiumで解除されるもの、支払い条件、注意点を一画面で確認</h2>
+              <span>迷う場合はFreeで実URLを試し、台本取得とAI台本生成の利用量が増えてからPremiumへ進んでください。</span>
+            </div>
+
+            <div className="pricing-unlock-grid" aria-label="Premiumで解除される内容">
+              {premiumUnlocks.map((item) => {
+                const ItemIcon = item.Icon
+                return (
+                  <article key={item.title} className="pricing-unlock-card">
+                    <span>
+                      <ItemIcon size={17} />
+                      {item.label}
+                    </span>
+                    <h3>{item.title}</h3>
+                    <p>{item.body}</p>
+                  </article>
+                )
+              })}
+            </div>
+
+            <div className="pricing-fact-row" aria-label="支払いと返金の要点">
+              {purchaseFactCards.map((item) => {
+                const ItemIcon = item.Icon
+                return (
+                  <article key={item.title} className="pricing-fact-card">
+                    <span>
+                      <ItemIcon size={17} />
+                      {item.label}
+                    </span>
+                    <strong>{item.title}</strong>
+                    <p>{item.body}</p>
+                  </article>
+                )
+              })}
+            </div>
+
+            <aside className="pricing-caution-panel" aria-label="購入前の注意点">
+              <div>
+                <span className="subpage-card__eyebrow">注意点</span>
+                <h3>Premiumは制作前工程の制限解除です</h3>
+              </div>
+              <ul>
+                {purchaseCautions.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </aside>
           </div>
 
-          <div className="pricing-reassurance-grid" aria-label="購入前の確認事項">
-            {purchaseReassuranceItems.map((item) => (
-              <article key={item.label} className="pricing-reassurance-card">
-                <span>{item.label}</span>
-                <strong>{item.title}</strong>
-                <p>{item.body}</p>
-              </article>
-            ))}
-          </div>
-
-          <div className="pricing-reassurance-links">
+          <div className="pricing-reassurance-links pricing-clarity-links">
             <Link to="/legal/terms/">利用規約</Link>
             <Link to="/legal/refund-policy/">返金・キャンセル</Link>
             <Link to="/legal/commercial-transactions/">特定商取引法表記</Link>
             <Link to="/contact/">問い合わせ</Link>
-          </div>
-        </Section>
-
-        <Section alt>
-          <div className="subpage-section-head pricing-decision-guide__head">
-            <p>選び方</p>
-            <h2>迷うなら、制限解除が必要かで選ぶ</h2>
-            <span>
-              まず Free で流れを確認し、台本取得・生成の利用量が増えてから Premium へ進む方が失敗しにくくなります。
-            </span>
-          </div>
-
-          <div className="pricing-decision-guide" aria-label="プラン選択の目安">
-            {planDecisionGuide.map((item) => (
-              <article key={item.plan} className="pricing-decision-guide__card">
-                <span className="pricing-decision-guide__label">{item.label}</span>
-                <strong className="pricing-decision-guide__plan">{item.plan}</strong>
-                <h3>{item.title}</h3>
-                <p>{item.body}</p>
-                <ul>
-                  {item.cues.map((cue) => (
-                    <li key={cue}>{cue}</li>
-                  ))}
-                </ul>
-              </article>
-            ))}
-          </div>
-        </Section>
-
-        <Section alt>
-          <div className="subpage-section-head">
-            <p>プランの流れ</p>
-            <h2>Free で確認し、Premium で制限を外す</h2>
-          </div>
-
-          <div className="pricing-plan-map">
-            {planNarratives.map((plan) => (
-              <InteractiveCard key={plan.title} className="release-panel premium-glass pricing-plan-card">
-                <span className="subpage-card__eyebrow">{plan.name}</span>
-                <h2>{plan.title}</h2>
-                <p>{plan.body}</p>
-                <ul className="brand-list pricing-plan-card__list">
-                  {plan.points.map((point) => (
-                    <li key={point}>{point}</li>
-                  ))}
-                </ul>
-                {plan.cta.href.startsWith('#') ? (
-                  <a className="pricing-plan-card__link" href={plan.cta.href}>
-                    <span>{plan.cta.label}</span>
-                  </a>
-                ) : (
-                  <Link className="pricing-plan-card__link" to={plan.cta.href}>
-                    <span>{plan.cta.label}</span>
-                  </Link>
-                )}
-              </InteractiveCard>
-            ))}
           </div>
         </Section>
 
