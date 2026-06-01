@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { InteractiveCard, PageMeta, Section } from '@/components/ui'
-import { changeLogUrl, downloadUrl, latestReleaseUrl, releasesUrl, tagsUrl } from '@/data/site-content'
+import { downloadUrl, latestReleaseUrl, releaseIntegrity, releasesUrl, tagsUrl } from '@/data/site-content'
+import { BadgeCheck, Clock3, Download, ExternalLink, ShieldCheck, Wrench } from 'lucide-react'
 
 interface Release {
   id: number
@@ -17,12 +18,52 @@ function formatDate(dateStr: string) {
   return `${d.getFullYear()}年${String(d.getMonth() + 1).padStart(2, '0')}月${String(d.getDate()).padStart(2, '0')}日`
 }
 
+function normalizeReleaseLine(line: string) {
+  return line
+    .replace(/<[^>]*>/g, '')
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/[*_`>]/g, '')
+    .replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu, '')
+    .replace(/^[-#\s]+/, '')
+    .replace(/再修正(?:修正)+/g, '修正')
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+
+function isNoiseReleaseLine(line: string) {
+  if (!line) return true
+  if (/^v?\d+(?:\.\d+){1,3}\s*アップデート内容$/i.test(line)) return true
+  if (/^(修正|追加機能|変更点|変更|改善|その他)$/.test(line)) return true
+  if (/^image$/i.test(line)) return true
+  if (/^https?:\/\//i.test(line)) return true
+  return false
+}
+
 function formatBody(body: string) {
   return body
     .split('\n')
-    .filter((line) => line.trim())
-    .map((line) => line.replace(/^[-*]\s*/, '').replace(/^#{1,3}\s*/, ''))
-    .filter((line) => line.trim())
+    .map(normalizeReleaseLine)
+    .filter((line) => !isNoiseReleaseLine(line))
+}
+
+function getReleaseLabels(body: string) {
+  const labels: string[] = []
+  if (/追加機能|取得サイトの追加|取得可能/.test(body)) labels.push('対応追加')
+  if (/修正|不具合|最適化/.test(body)) labels.push('不具合修正')
+  if (/必要|お知らせ|ver2\.0\.0|サービス開始/.test(body)) labels.push('重要なお知らせ')
+  return labels.length ? labels : ['更新']
+}
+
+function summarizeRelease(release: Release) {
+  const lines = formatBody(release.body || '')
+  const summary = lines[0] ?? '詳細は公式リリースノートで確認してください。'
+  const details = lines.slice(1, 4)
+  return {
+    summary,
+    details,
+    allLines: lines,
+    labels: getReleaseLabels(release.body || ''),
+  }
 }
 
 const updateGuideCards = [
@@ -35,7 +76,7 @@ const updateGuideCards = [
   {
     eyebrow: '変更点',
     title: '何を見てから更新するか',
-    body: '最新版のリリースノート、CHANGELOG、過去タグを先に確認すると、変更点の見落としを減らせます。',
+    body: '最新版の要約、公式リリースノート、過去タグを先に確認すると、変更点の見落としを減らせます。',
     points: ['最新の変更点を見る', '前バージョンとの差分を把握', '過去タグも遡れる'],
   },
   {
@@ -43,6 +84,38 @@ const updateGuideCards = [
     title: '困ったときの逃げ先',
     body: 'FAQ、使い方、問い合わせ窓口を先に固定しておくと、更新後の切り分けが速くなります。',
     points: ['FAQを先に確認', '手順変更は使い方で再確認', '解決しなければ問い合わせる'],
+  },
+] as const
+
+const fallbackReleases: Release[] = [
+  {
+    id: -1,
+    tag_name: releaseIntegrity.fallback.tag,
+    name: releaseIntegrity.fallback.tag,
+    published_at: releaseIntegrity.fallback.publishedAt,
+    html_url: releaseIntegrity.fallback.releaseUrl,
+    body: [
+      'あにまん／あにまん掲示板の画像取得不具合を修正',
+      'あにまんおよびあにまん掲示板の個別記事が取得できない状況を修正しました。',
+    ].join('\n'),
+  },
+]
+
+const updateSummaryCards = [
+  {
+    title: '更新前に設定を控える',
+    body: 'YMM4パス、保存先、CSV/.ymmp出力先を先に確認します。',
+    Icon: ShieldCheck,
+  },
+  {
+    title: '最新版ZIPを公式リンクから取得',
+    body: '配布元は公式リリース一覧です。別URLや古いZIPとの取り違えを避けます。',
+    Icon: Download,
+  },
+  {
+    title: '変更点は要約から確認',
+    body: '公式サイトでは要点だけを表示し、細かい原文は公式リリースで確認できます。',
+    Icon: BadgeCheck,
   },
 ] as const
 
@@ -67,14 +140,16 @@ export function UpdatePage() {
       })
   }, [])
 
-  const latestRelease = releases[0] ?? null
-  const latestReleaseLines = useMemo(() => formatBody(latestRelease?.body ?? '').slice(0, 4), [latestRelease?.body])
+  const displayReleases = releases.length ? releases : fallbackReleases
+  const latestRelease = displayReleases[0]
+  const latestReleaseInfo = useMemo(() => summarizeRelease(latestRelease), [latestRelease])
+  const isUsingFallback = !releases.length
 
   return (
     <>
       <PageMeta
-        title="アップデート｜最新版と変更履歴"
-        description="ゆっくりまとめプロセッサーの最新版、公開日、リリースノート、過去バージョンを確認できます。更新前の設定確認もまとめています。"
+        title="アップデート｜最新版の確認と更新前チェック"
+        description="ゆっくりまとめプロセッサーの最新版、公開日、直近変更の要約、更新前に確認する設定を確認できます。"
         keywords="アップデート, 最新版, リリースノート, 変更履歴, ダウンロード"
         path="/update/"
       />
@@ -84,18 +159,18 @@ export function UpdatePage() {
           <div className="utility-hero__shell">
             <div className="utility-hero__copy">
               <p className="brand-kicker">アップデート</p>
-              <h1>最新版と更新履歴</h1>
+              <h1>最新版の確認と更新前チェック</h1>
               <p className="brand-lead">
-                最新版の取得、公開日、変更点、過去バージョンを確認できます。更新前にYMM4パスと保存先も見直してください。
+                公開中の最新版、直近変更の要約、更新前に見るべき設定を確認できます。原文の長いログより先に、必要な判断材料だけを見える位置にまとめています。
               </p>
 
               <div className="utility-stat-grid">
                 <div className="utility-stat">
-                  <strong>{loading ? '--' : `${releases.length || 20}件`}</strong>
-                  <span>GitHub Releases を確認</span>
+                  <strong>{latestRelease.tag_name}</strong>
+                  <span>{isUsingFallback && loading ? '既知の最新版を表示中' : '公式配布元を確認'}</span>
                 </div>
                 <div className="utility-stat">
-                  <strong>{latestRelease ? formatDate(latestRelease.published_at) : '--'}</strong>
+                  <strong>{formatDate(latestRelease.published_at)}</strong>
                   <span>最新公開日</span>
                 </div>
               </div>
@@ -105,8 +180,8 @@ export function UpdatePage() {
                 <a href={latestReleaseUrl} target="_blank" rel="noopener noreferrer">
                   リリースノート
                 </a>
-                <a href={changeLogUrl} target="_blank" rel="noopener noreferrer">
-                  CHANGELOG
+                <a href={releasesUrl} target="_blank" rel="noopener noreferrer">
+                  全リリース一覧
                 </a>
                 <a href={tagsUrl} target="_blank" rel="noopener noreferrer">
                   タグ一覧
@@ -116,9 +191,18 @@ export function UpdatePage() {
 
             <div className="utility-hero__panel-stack">
               <InteractiveCard className="release-panel premium-glass utility-hero__panel">
-                <span className="subpage-card__eyebrow">最新リリース</span>
-                <h2>{latestRelease?.name || latestRelease?.tag_name || '最新リリースを確認中'}</h2>
-                <p>{latestRelease ? `${formatDate(latestRelease.published_at)} に公開` : 'GitHub Releases から最新の公開情報を読み込んでいます。'}</p>
+                <span className="subpage-card__eyebrow">最新リリース要約</span>
+                <h2>{latestRelease.name || latestRelease.tag_name}</h2>
+                <p>{formatDate(latestRelease.published_at)} に公開</p>
+
+                <div className="release-summary-badges" aria-label="更新種別">
+                  {latestReleaseInfo.labels.map((label) => (
+                    <span key={label}>{label}</span>
+                  ))}
+                  {isUsingFallback ? <span>既知情報</span> : null}
+                </div>
+
+                <p className="release-latest-summary">{latestReleaseInfo.summary}</p>
 
                 {loading ? <p className="release-monitor__fallback">リリース情報を取得中です...</p> : null}
                 {error ? (
@@ -127,9 +211,9 @@ export function UpdatePage() {
                   </p>
                 ) : null}
 
-                {!loading && !error && latestReleaseLines.length > 0 ? (
+                {latestReleaseInfo.details.length > 0 ? (
                   <ul className="release-monitor__list">
-                    {latestReleaseLines.map((line) => (
+                    {latestReleaseInfo.details.map((line) => (
                       <li key={line}>{line}</li>
                     ))}
                   </ul>
@@ -146,20 +230,33 @@ export function UpdatePage() {
               </InteractiveCard>
 
               <InteractiveCard className="release-panel premium-glass release-link-panel">
-                <span className="subpage-card__eyebrow">公式リンク</span>
-                <h2>更新判断に必要なリンク</h2>
+                <span className="subpage-card__eyebrow">更新前チェック</span>
+                <h2>先に確認する3項目</h2>
+                <div className="release-check-list">
+                  <div>
+                    <Wrench size={17} />
+                    <span>YMM4パスと保存先を控える</span>
+                  </div>
+                  <div>
+                    <Clock3 size={17} />
+                    <span>更新後は少数URLで動作確認する</span>
+                  </div>
+                  <div>
+                    <ExternalLink size={17} />
+                    <span>細かい原文は公式リリースで確認する</span>
+                  </div>
+                </div>
                 <div className="subpage-link-stack">
-                  <a href={changeLogUrl} target="_blank" rel="noopener noreferrer">
-                    <span>CHANGELOG を確認</span>
-                  </a>
                   <a href={releasesUrl} target="_blank" rel="noopener noreferrer">
                     <span>全リリース一覧</span>
+                  </a>
+                  <a href={latestReleaseUrl} target="_blank" rel="noopener noreferrer">
+                    <span>最新リリース原文</span>
                   </a>
                   <a href={tagsUrl} target="_blank" rel="noopener noreferrer">
                     <span>タグ一覧</span>
                   </a>
                 </div>
-                <p className="release-monitor__fallback">更新で手順が変わる場合は、使い方ページと FAQ も合わせて見直してください。</p>
                 <div className="subpage-support-callout__actions">
                   <Link className="brand-btn brand-btn--ghost" to="/instructions/">
                     使い方を見る
@@ -174,6 +271,21 @@ export function UpdatePage() {
         </section>
 
         <Section alt>
+          <div className="update-summary-grid">
+            {updateSummaryCards.map((card) => {
+              const SummaryIcon = card.Icon
+              return (
+                <InteractiveCard key={card.title} className="release-panel premium-glass update-summary-card">
+                  <span className="update-summary-card__icon" aria-hidden="true">
+                    <SummaryIcon size={18} />
+                  </span>
+                  <h2>{card.title}</h2>
+                  <p>{card.body}</p>
+                </InteractiveCard>
+              )
+            })}
+          </div>
+
           <div className="subpage-section-head">
             <p>更新前の確認</p>
             <h2>更新前後で見る順番を固定する</h2>
@@ -199,31 +311,29 @@ export function UpdatePage() {
           <div className="content-page">
             <div className="subpage-section-head">
               <p>更新履歴</p>
-              <h2>直近の更新を時系列で追う</h2>
+              <h2>直近の更新を要約で見る</h2>
+              <p>リリース本文をそのまま並べず、公式サイトでは読みやすい要点に整形して表示します。</p>
             </div>
 
             {loading ? <p className="release-monitor__fallback">リリース情報を取得中...</p> : null}
 
             {error ? (
               <div>
-                <p className="release-monitor__fallback">リリース情報の取得に失敗しました。GitHub 上の公式一覧を確認してください。</p>
+                <p className="release-monitor__fallback">リリース情報の取得に失敗しました。公式リリース一覧を確認してください。</p>
                 <div className="content-page__link-list" style={{ marginTop: '1rem' }}>
                   <a href={releasesUrl} target="_blank" rel="noopener noreferrer">
-                    GitHub Releases で確認
-                  </a>
-                  <a href={changeLogUrl} target="_blank" rel="noopener noreferrer">
-                    CHANGELOG で確認
+                    公式リリース一覧で確認
                   </a>
                 </div>
               </div>
             ) : null}
 
-            {!loading && !error && releases.length > 0 ? (
+            {displayReleases.length > 0 ? (
               <div className="release-timeline">
-                {releases.map((release) => {
-                  const lines = formatBody(release.body || '')
+                {displayReleases.map((release) => {
+                  const info = summarizeRelease(release)
                   return (
-                    <div key={release.id} className="release-timeline__item">
+                    <article key={release.id} className="release-timeline__item">
                       <div className="release-timeline__header">
                         <span className="release-timeline__tag">{release.tag_name}</span>
                         <span className="release-timeline__date">{formatDate(release.published_at)}</span>
@@ -233,14 +343,34 @@ export function UpdatePage() {
                           {release.name || release.tag_name}
                         </a>
                       </h3>
-                      {lines.length > 0 ? (
+
+                      <div className="release-summary-badges">
+                        {info.labels.map((label) => (
+                          <span key={label}>{label}</span>
+                        ))}
+                      </div>
+
+                      <p className="release-timeline__summary">{info.summary}</p>
+
+                      {info.details.length > 0 ? (
                         <ul className="release-timeline__changes">
-                          {lines.map((line) => (
+                          {info.details.map((line) => (
                             <li key={line}>{line}</li>
                           ))}
                         </ul>
                       ) : null}
-                    </div>
+
+                      {info.allLines.length > info.details.length + 1 ? (
+                        <details className="release-detail-block">
+                          <summary>整形した変更点をさらに見る</summary>
+                          <ul>
+                            {info.allLines.slice(0, 8).map((line) => (
+                              <li key={line}>{line}</li>
+                            ))}
+                          </ul>
+                        </details>
+                      ) : null}
+                    </article>
                   )
                 })}
               </div>

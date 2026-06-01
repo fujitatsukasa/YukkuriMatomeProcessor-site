@@ -7135,6 +7135,124 @@ html {
   font-size: 0.9rem;
 }
 
+.release-summary-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.42rem;
+  align-items: center;
+}
+
+.release-summary-badges span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0.28rem 0.58rem;
+  border: 1px solid rgba(255, 232, 190, 0.16);
+  border-radius: 999px;
+  color: rgba(255, 235, 198, 0.88);
+  background: rgba(224, 193, 132, 0.08);
+  font-size: 0.76rem;
+  font-weight: 900;
+}
+
+.release-latest-summary,
+.release-timeline__summary {
+  margin: 0;
+  color: rgba(255, 247, 230, 0.9);
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.62;
+}
+
+.release-check-list {
+  display: grid;
+  gap: 0.64rem;
+}
+
+.release-check-list div {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.58rem;
+  align-items: start;
+  padding: 0.72rem 0.78rem;
+  border: 1px solid rgba(255, 232, 190, 0.12);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.release-check-list svg {
+  color: #e0c184;
+  margin-top: 0.16rem;
+}
+
+.release-check-list span {
+  color: rgba(236, 233, 226, 0.78);
+  line-height: 1.55;
+}
+
+.update-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: clamp(1.4rem, 3vw, 2.2rem);
+}
+
+.update-summary-card {
+  display: grid;
+  gap: 0.72rem;
+  align-content: start;
+  padding: clamp(1rem, 1.7vw, 1.28rem);
+}
+
+.update-summary-card__icon {
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  color: #12100b;
+  background: #e0c184;
+}
+
+.update-summary-card h2,
+.update-summary-card p {
+  margin: 0;
+}
+
+.update-summary-card h2 {
+  color: #fff7e6;
+  font-size: 1.08rem;
+  line-height: 1.38;
+}
+
+.update-summary-card p {
+  color: rgba(236, 233, 226, 0.72);
+  line-height: 1.68;
+}
+
+.release-detail-block {
+  position: relative;
+  z-index: 1;
+  margin-top: 0.9rem;
+  padding: 0.84rem 0.95rem;
+  border: 1px solid rgba(255, 232, 190, 0.12);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.release-detail-block summary {
+  cursor: pointer;
+  color: rgba(255, 232, 190, 0.86);
+  font-weight: 900;
+}
+
+.release-detail-block ul {
+  margin: 0.75rem 0 0;
+  padding-left: 1.1rem;
+  color: rgba(236, 233, 226, 0.72);
+  line-height: 1.62;
+}
+
 .utility-hero,
 .pricing-command-hero,
 .editorial-hero {
@@ -7788,6 +7906,7 @@ html {
 .pricing-plan-map,
 .faq-category-grid,
 .faq-decision-grid,
+.update-summary-grid,
 .blog-grid,
 .faq-support-rail__channels,
 .blog-article-summary,
