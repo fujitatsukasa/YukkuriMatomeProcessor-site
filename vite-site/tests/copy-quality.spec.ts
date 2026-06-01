@@ -13,7 +13,7 @@ const primaryPages = [
   },
   {
     path: '/instructions/',
-    heading: '記事URLからYMM4へ渡すまでの手順',
+    heading: '記事URLから台本を取得し、YMM4に渡すまでの手順',
     ctas: ['無料でダウンロード', 'FAQを見る'],
   },
   {

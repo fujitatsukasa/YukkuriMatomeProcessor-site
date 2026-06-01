@@ -566,9 +566,9 @@ const instructionSteps = [
     title: '記事URL・スレッドURLを入力する',
     image: '/product_get_script.webp',
     alt: '記事URLから候補を取得する画面',
-    action: '動画化したい記事、スレッド、まとめ記事のURLを入力します。',
+    action: '画面上部の「台本取得」を開き、動画化したい記事、スレッド、まとめ記事のURLを入力します。',
     input: '対象URL、検索条件、必要なら取得件数や除外条件。',
-    click: '取得、検索、候補取得にあたるボタンを押します。',
+    click: '「記事取得」または取得系のボタンを押します。',
     success: '候補一覧にタイトル、サムネイル、URLが並びます。',
     trouble: ['対応外URLは取得できない場合あり', 'まず少数URLで取得できるか確認'],
     Icon: FileSearch,
@@ -1148,8 +1148,8 @@ export function InstructionsPage() {
   return (
     <>
       <PageMeta
-        title="使い方｜記事URLからYMM4へ渡すまでの手順"
-        description="記事URL・スレッドURLの入力、YMM4パス設定、台本整理、CSV/.ymmp前準備、YMM4確認、導入完了セルフチェックまでを実画面付きの手順書として解説します。"
+        title="使い方｜記事URLから台本を取得しYMM4に渡す手順"
+        description="記事URL・スレッドURLから台本を取得し、YMM4パス設定、台本整理、CSV/.ymmp前準備、YMM4確認、導入完了セルフチェックまでを実画面付きの手順書として解説します。"
         keywords="使い方, 初期設定, YMM4, 台本取得, CSV, .ymmp, AI補助, 手順"
         path="/instructions/"
       />
@@ -1157,8 +1157,8 @@ export function InstructionsPage() {
       <main className="brand-shell">
         <PageIntro
           kicker="使い方ガイド"
-          title="記事URLからYMM4へ渡すまでの手順"
-          lead="起動、YMM4パス設定、URL入力、台本整理、CSV/.ymmp前準備、YMM4確認の順に進めます"
+          title="記事URLから台本を取得し、YMM4に渡すまでの手順"
+          lead="ダウンロード、解凍、起動、YMM4パス設定、URL入力、台本整理、CSV/.ymmp前準備、YMM4確認の順に進めます"
           actions={[
             { label: '無料でダウンロード', href: downloadUrl, variant: 'primary', external: true },
             { label: 'FAQを見る', href: '/faq/', variant: 'ghost' },

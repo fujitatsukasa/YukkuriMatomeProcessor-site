@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test'
 const pages = [
   { path: '/', heading: '記事URL・スレッドURLから、ゆっくり動画の台本下地とYMM4前準備を作る' },
   { path: '/download/', heading: '最新版を無料ダウンロード' },
-  { path: '/instructions/', heading: '記事URLからYMM4へ渡す' },
+  { path: '/instructions/', heading: '記事URLから台本を取得し、YMM4に渡す' },
   { path: '/faq/', heading: '導入前によくある質問' },
   { path: '/purchase/', heading: 'Freeで試して' },
   { path: '/legal/commercial-transactions/', heading: '特定商取引法に基づく表記' },
@@ -100,7 +100,7 @@ test.describe('mobile layout', () => {
 
   test('legacy uppercase routes redirect to canonical lowercase pages', async ({ page }) => {
     const routes = [
-      { from: '/Instructions/', to: '/instructions/', heading: '記事URLからYMM4へ渡す' },
+      { from: '/Instructions/', to: '/instructions/', heading: '記事URLから台本を取得し、YMM4に渡す' },
       { from: '/FAQ/', to: '/faq/', heading: '導入前によくある質問' },
     ]
 
