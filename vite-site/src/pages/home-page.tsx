@@ -16,15 +16,15 @@ import {
 const heroBadges = ['Windows専用', 'YMM4向け', '20以上の対応サイト', 'Freeあり', 'Premium買い切り'] as const
 
 const flowItems = [
-  { label: '入力', value: '記事URL / スレッドURL' },
-  { label: '途中作業', value: '候補取得・台本整理' },
-  { label: '出力前', value: 'CSV / .ymmp前準備' },
+  { label: '入れるもの', value: '記事URL / スレッドURL' },
+  { label: 'できること', value: '候補取得・台本整理' },
+  { label: '渡す準備', value: 'CSV / .ymmp前準備' },
 ] as const
 
 const proofItems = [
   'YMM4を開く前の台本下地と出力準備を短縮',
-  '完成動画の自動生成ではなく、人が確認して仕上げる前提',
-  'Freeで起動、URL取得、台本整理、出力前確認まで試せる',
+  '動画完成ではなく、確認して仕上げる前提',
+  'Freeで起動、URL取得、台本整理まで試せる',
   'Premiumは台本取得とAI台本生成の制限解除',
 ] as const
 
@@ -201,10 +201,10 @@ export function HomePage() {
         <section className="home-focus-hero" aria-labelledby="home-focus-heading">
           <div className="home-focus-hero__copy">
             <p className="home-focus-kicker">YMM4向け Windows制作支援ツール</p>
-            <h1 id="home-focus-heading">URLを入れて、YMM4用の台本下地を作る</h1>
+            <h1 id="home-focus-heading">記事URLから、YMM4用の台本下地を作る</h1>
             <p className="home-focus-lead">
-              記事URLやスレッドURLから候補を取得し、読み上げ前の台本整理、AI補助、CSV/.ymmp前準備までをまとめます。
-              最終編集はYMM4で行い、その前の散らばりやすい作業を短くするためのツールです。
+              記事URLやスレッドURLを入れると、候補取得、台本整理、AI補助、CSV/.ymmp前準備まで進められます。
+              最終編集はYMM4で行います。
             </p>
 
             <div className="home-focus-actions">
@@ -263,9 +263,9 @@ export function HomePage() {
         <section className="home-focus-section home-focus-goal-map" aria-labelledby="home-goal-map-heading">
           <div className="home-focus-section__head">
             <p className="home-focus-kicker">使ってできるまでの目標</p>
-            <h2 id="home-goal-map-heading">最初の1本を作る前に、ここまで確認する</h2>
+            <h2 id="home-goal-map-heading">最初の1本を作る前に確認すること</h2>
             <p>
-              いきなり購入判断をせず、Freeで起動、設定、URL取得、台本整理、YMM4前準備まで順番に通します。
+              いきなり購入せず、Freeで起動、設定、URL取得、台本整理、YMM4前準備まで順番に通します。
             </p>
           </div>
 
@@ -302,7 +302,7 @@ export function HomePage() {
         <section className="home-focus-section" aria-labelledby="home-flow-heading">
           <div className="home-focus-section__head">
             <p className="home-focus-kicker">実画面で流れを見る</p>
-            <h2 id="home-flow-heading">URL入力からYMM4前準備まで、3つの画面で確認できます</h2>
+            <h2 id="home-flow-heading">URL入力、台本整理、YMM4前準備を実画面で確認する</h2>
           </div>
 
           <div className="home-focus-screen-grid">
@@ -377,7 +377,7 @@ export function HomePage() {
         <section className="home-focus-final" aria-labelledby="home-final-heading">
           <div className="home-focus-final__copy">
             <p className="home-focus-kicker">まずは無料で確認</p>
-            <h2 id="home-final-heading">次に見る順番を決めて、自分のURLで試す</h2>
+            <h2 id="home-final-heading">画面と手順を見てから、自分のURLで試す</h2>
             <p>
               画面の流れ、配布物、操作手順を見てからFreeで動作確認してください。
               Premiumは、制限解除が必要だと分かってから判断できます。

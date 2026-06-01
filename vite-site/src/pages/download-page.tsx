@@ -644,12 +644,12 @@ export function DownloadPage() {
             <InteractiveCard className="page-visual-card premium-glass">
               <img
                 className="page-visual-card__image"
-                src="/generated/template-ops-studio-v1.webp"
-                alt="URL取得、台本作成、YMM4前準備までをまとめたスタジオビジュアル"
+                src="/product_get_script.webp"
+                alt="ゆっくりまとめプロセッサーで記事URLから候補を取得する実アプリ画面"
               />
               <div className="page-visual-card__meta">
-                <strong>まずは実際のURLで、取得からYMM4前準備まで確認</strong>
-                <span>ダウンロード後はYMM4パス、保存先、対象URLの順で設定します。</span>
+                <strong>実アプリ画面で、URL取得の入口を確認</strong>
+                <span>ダウンロード後はYMM4パス、保存先、対象URLの順で進めます。</span>
               </div>
             </InteractiveCard>
           }

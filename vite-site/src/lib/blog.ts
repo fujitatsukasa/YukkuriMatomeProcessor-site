@@ -78,7 +78,7 @@ export function resolveBlogVisual(meta: Pick<BlogPostMeta, 'image' | 'tags'>) {
     return '/product_guide.webp'
   }
 
-  return '/generated/template-ops-studio-v1.webp'
+  return '/product_get_script.webp'
 }
 
 // Viteの機能を使って .md ファイルをすべて文字列(raw)として取得

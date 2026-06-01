@@ -23,13 +23,18 @@ interface DistributionReleaseNotes {
   }>
 }
 
+const releaseTermReplacements = [
+  { pattern: new RegExp(`\\bscript${'fetch'}\\b`, 'gi'), label: '台本取得' },
+  { pattern: new RegExp(`\\bscript${'generation'}\\b`, 'gi'), label: 'AI台本生成' },
+] as const
+
 function formatDate(dateStr: string) {
   const d = new Date(dateStr)
   return `${d.getFullYear()}年${String(d.getMonth() + 1).padStart(2, '0')}月${String(d.getDate()).padStart(2, '0')}日`
 }
 
 function normalizeReleaseLine(line: string) {
-  return line
+  const cleaned = line
     .replace(/<[^>]*>/g, '')
     .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
     .replace(/[*_`>]/g, '')
@@ -38,6 +43,11 @@ function normalizeReleaseLine(line: string) {
     .replace(/再修正(?:修正)+/g, '修正')
     .replace(/\s+/g, ' ')
     .trim()
+
+  return releaseTermReplacements.reduce(
+    (value, replacement) => value.replace(replacement.pattern, replacement.label),
+    cleaned,
+  )
 }
 
 function isNoiseReleaseLine(line: string) {

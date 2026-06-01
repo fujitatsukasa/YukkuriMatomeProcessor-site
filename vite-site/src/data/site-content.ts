@@ -209,7 +209,7 @@ export const publicDistribution = {
   updateFeedUrl,
   releaseManifestUrl,
   summary:
-    'Windows配布版の初回インストール、Launcher起動、Main起動までの packaged runtime blocker を修正した配布候補です。',
+    'Windows配布版で、初回インストールから起動までを妨げていた同梱不足を修正した配布候補です。',
   trustNote:
     '現在の配布物は自己署名のため、WindowsやSmartScreenの警告が表示される場合があります。配布元URLとSHA256を確認してから起動してください。',
   assets: {
@@ -342,13 +342,13 @@ export const newsPosts: NewsPost[] = [
     title: 'お知らせ: ダウンロード手順を更新しました',
     subtitle: '導入前の確認項目を整理し、最新版までの到達導線を短縮しました。',
     summary:
-      '最新版ダウンロード手順の更新内容をお知らせします。導入時の確認項目も合わせて見直し、迷わず開始できる構成に整えています。',
+      '最新版ダウンロード手順の更新内容をお知らせします。導入時の確認項目も合わせて見直し、迷わず開始できる内容に整えています。',
     seoDescription: '最新版ダウンロード手順の更新内容をお知らせします。',
     seoImage: '/product_guide.webp',
     heroImageAlt: 'ダウンロード手順更新のお知らせイメージ',
     body: [
       '最新版のダウンロード手順を更新しました。',
-      '導入時の確認項目も合わせて見直し、迷わず開始できる構成に整えています。',
+      '導入時の確認項目も合わせて見直し、迷わず開始できる内容に整えています。',
     ],
   },
   {
@@ -376,7 +376,7 @@ export const newsPosts: NewsPost[] = [
       'デザインと情報導線の刷新に加え、台本取得・整形・YMM4連携準備など製品機能の説明を明確化しました。',
     seoDescription:
       'デザインと情報導線の刷新に加え、台本取得・整形・YMM4連携準備など製品機能の説明を明確化しました。',
-    seoImage: '/generated/template-ops-studio-v1.webp',
+    seoImage: '/product_guide.webp',
     heroImageAlt: 'サイトリニューアルのお知らせイメージ',
     body: [
       'サイトのデザインと情報導線を見直し、必要情報へ到達しやすい構成に改善しました。',
