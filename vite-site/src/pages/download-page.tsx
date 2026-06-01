@@ -397,6 +397,57 @@ const instructionSteps = [
   },
 ] as const
 
+const instructionQuickRoute = [
+  {
+    href: '#instruction-step-01',
+    step: '01',
+    title: '解凍して起動',
+    result: 'アプリ画面が開く',
+    image: '/product_guide.webp',
+    Icon: Wrench,
+  },
+  {
+    href: '#instruction-step-02',
+    step: '02',
+    title: 'YMM4と保存先',
+    result: '出力先を固定する',
+    image: '/product_guide.webp',
+    Icon: Settings2,
+  },
+  {
+    href: '#instruction-step-03',
+    step: '03',
+    title: 'URL入力',
+    result: '候補一覧が出る',
+    image: '/product_get_script.webp',
+    Icon: FileSearch,
+  },
+  {
+    href: '#instruction-step-04',
+    step: '04',
+    title: '台本整理',
+    result: '読み上げ前に確認',
+    image: '/product_edit_script.webp',
+    Icon: Bot,
+  },
+  {
+    href: '#instruction-step-05',
+    step: '05',
+    title: 'CSV/.ymmp前準備',
+    result: '保存先に作成',
+    image: '/product_format_list.webp',
+    Icon: FolderCog,
+  },
+  {
+    href: '#instruction-step-06',
+    step: '06',
+    title: 'YMM4前の確認',
+    result: '素材とパスを確認',
+    image: '/product_keyword_material.webp',
+    Icon: Send,
+  },
+] as const
+
 const instructionTroubleCards = [
   {
     title: '起動しない',
@@ -777,6 +828,31 @@ export function InstructionsPage() {
           <MetricStrip items={[...instructionMetrics]} ariaLabel="使い方ガイドの要点" />
         </Section>
 
+        <Section className="instruction-route-section">
+          <div className="subpage-section-head instruction-manual-head">
+            <p>最短ルート</p>
+            <h2>最初に見る順番を固定して、該当手順へ移動する</h2>
+            <p>長い説明を全部読む前に、いま確認したい段階へ直接進めます。</p>
+          </div>
+
+          <nav className="instruction-route-grid" aria-label="使い方ガイドの最短ルート">
+            {instructionQuickRoute.map((item) => {
+              const RouteIcon = item.Icon
+              return (
+                <a key={item.href} className="instruction-route-card" href={item.href}>
+                  <img src={item.image} alt="" loading="lazy" decoding="async" aria-hidden="true" />
+                  <span>
+                    <RouteIcon size={15} />
+                    STEP {item.step}
+                  </span>
+                  <strong>{item.title}</strong>
+                  <small>{item.result}</small>
+                </a>
+              )
+            })}
+          </nav>
+        </Section>
+
         <Section>
           <div className="subpage-section-head instruction-manual-head">
             <p>到達目標</p>
@@ -839,7 +915,12 @@ export function InstructionsPage() {
             {instructionSteps.map((step) => {
               const StepIcon = step.Icon
               return (
-                <InteractiveCard key={step.number} as="article" className="instruction-step-card premium-glass">
+                <InteractiveCard
+                  key={step.number}
+                  id={`instruction-step-${step.number}`}
+                  as="article"
+                  className="instruction-step-card premium-glass"
+                >
                   <figure className="instruction-step-card__media">
                     <img src={step.image} alt={step.alt} loading="lazy" decoding="async" />
                   </figure>

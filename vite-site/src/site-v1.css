@@ -11312,6 +11312,77 @@ html {
   max-width: 860px;
 }
 
+.instruction-route-section {
+  padding-top: clamp(1.35rem, 3vw, 2.2rem);
+  scroll-margin-top: 104px;
+}
+
+.instruction-route-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0.82rem;
+}
+
+.instruction-route-card {
+  min-width: 0;
+  display: grid;
+  gap: 0.52rem;
+  align-content: start;
+  padding: 0.72rem;
+  border: 1px solid rgba(255, 232, 190, 0.13);
+  border-radius: 16px;
+  color: inherit;
+  text-decoration: none;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.02)),
+    rgba(14, 16, 22, 0.78);
+  transition:
+    border-color 180ms ease,
+    transform 180ms ease,
+    background 180ms ease;
+}
+
+.instruction-route-card:hover,
+.instruction-route-card:focus-visible {
+  border-color: rgba(255, 226, 172, 0.34);
+  background:
+    linear-gradient(180deg, rgba(224, 193, 132, 0.14), rgba(255, 255, 255, 0.03)),
+    rgba(16, 18, 25, 0.88);
+  transform: translateY(-2px);
+}
+
+.instruction-route-card img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  display: block;
+  object-fit: cover;
+  border: 1px solid rgba(255, 232, 190, 0.12);
+  border-radius: 11px;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.instruction-route-card span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: #ffe8be;
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.instruction-route-card strong {
+  color: #fff7e6;
+  font-size: 0.94rem;
+  line-height: 1.38;
+}
+
+.instruction-route-card small {
+  color: rgba(236, 233, 226, 0.68);
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1.45;
+}
+
 .instruction-goal-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -11425,6 +11496,7 @@ html {
   grid-template-rows: auto 1fr;
   overflow: hidden;
   border-radius: 18px;
+  scroll-margin-top: 104px;
 }
 
 .instruction-step-card__media {
@@ -11593,6 +11665,10 @@ html {
     grid-template-columns: 1fr;
   }
 
+  .instruction-route-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   .sample-final-cta .subpage-support-callout__actions {
     justify-content: flex-start;
   }
@@ -11604,6 +11680,7 @@ html {
   .distribution-check-grid,
   .distribution-readiness-grid,
   .sample-decision-strip,
+  .instruction-route-grid,
   .sample-showcase-card__media,
   .sample-showcase-card dl,
   .sample-screen-card,
