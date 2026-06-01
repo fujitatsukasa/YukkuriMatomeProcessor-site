@@ -2,10 +2,49 @@ import { Link } from 'react-router-dom'
 import { InteractiveCard, PageMeta, Section } from '@/components/ui'
 import { newsPosts } from '@/data/site-content'
 import { NewsTimelineCard } from '@/pages/shared'
+import { ArrowRight, BadgeCheck, Download, FileText, Monitor, RefreshCw } from 'lucide-react'
 
 const sortedNews = [...newsPosts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 const latestNews = sortedNews[0]
 const secondaryNews = sortedNews.slice(1, 3)
+
+const newsActionRoutes = [
+  {
+    label: '更新確認',
+    title: '最新版と更新前チェックを見る',
+    body: '配布ファイル、SHA256、更新後に少数URLで確認する流れを見ます。',
+    href: '/update/',
+    Icon: RefreshCw,
+  },
+  {
+    label: '導入',
+    title: '最新版を無料で取得する',
+    body: 'インストーラー、ポータブルZIP、配布元、初回起動の確認へ進みます。',
+    href: '/download/',
+    Icon: Download,
+  },
+  {
+    label: '手順',
+    title: '使い方で成功状態を見る',
+    body: 'URL入力、台本整理、CSV/.ymmp前準備、YMM4確認の順に確認します。',
+    href: '/instructions/',
+    Icon: FileText,
+  },
+  {
+    label: '実画面',
+    title: '画面とサンプルで確認する',
+    body: '雰囲気ではなく、実アプリ画面とBefore/Afterで判断します。',
+    href: '/samples/',
+    Icon: Monitor,
+  },
+] as const
+
+const newsCompletionChecks = [
+  '最新のお知らせで自分に関係ある変更を確認した',
+  '必要ならアップデート履歴で配布物と注意点を確認した',
+  '使い方またはサンプルで変更後の画面を確認した',
+  '迷う場合はFAQまたは問い合わせで状況を確認した',
+] as const
 
 export function NewsPage() {
   return (
@@ -78,6 +117,60 @@ export function NewsPage() {
             </div>
           </div>
         </section>
+
+        <Section>
+          <div className="news-action-board">
+            <div className="subpage-section-head news-action-head">
+              <p>今すぐ見る順番</p>
+              <h2>お知らせを読んだら、更新・導入・実画面確認へ進む</h2>
+              <p>
+                告知を読んで終わらせず、最新版、配布物、使い方、実画面の順に確認すると、
+                自分に関係ある変更か判断しやすくなります。
+              </p>
+            </div>
+
+            <div className="news-action-grid" aria-label="お知らせ後に確認するページ">
+              {newsActionRoutes.map((route) => {
+                const ActionIcon = route.Icon
+                return (
+                  <InteractiveCard key={route.href} className="release-panel premium-glass news-action-card">
+                    <span className="news-action-card__icon" aria-hidden="true">
+                      <ActionIcon size={19} />
+                    </span>
+                    <span className="subpage-card__eyebrow">{route.label}</span>
+                    <h3>{route.title}</h3>
+                    <p>{route.body}</p>
+                    <Link to={route.href}>
+                      <span>確認する</span>
+                      <ArrowRight size={15} />
+                    </Link>
+                  </InteractiveCard>
+                )
+              })}
+            </div>
+
+            <InteractiveCard className="release-panel premium-glass news-completion-panel">
+              <div>
+                <span className="subpage-card__eyebrow">
+                  <BadgeCheck size={16} />
+                  告知確認の完了判定
+                </span>
+                <h2>自分に関係ある変更か、次の行動まで決める</h2>
+                <p>
+                  最新告知、アップデート履歴、実画面、FAQを見て、更新するか、導入するか、問い合わせるかを決めます。
+                </p>
+              </div>
+              <ul className="news-completion-list">
+                {newsCompletionChecks.map((item) => (
+                  <li key={item}>
+                    <BadgeCheck size={16} />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </InteractiveCard>
+          </div>
+        </Section>
 
         <Section>
           <div className="content-page news-timeline-shell">

@@ -7622,6 +7622,112 @@ html {
   align-content: start;
 }
 
+.news-action-board {
+  display: grid;
+  gap: clamp(1rem, 2.6vw, 1.6rem);
+}
+
+.news-action-head {
+  max-width: 860px;
+}
+
+.news-action-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.news-action-card {
+  display: grid;
+  gap: 0.72rem;
+  align-content: start;
+  padding: clamp(1rem, 1.8vw, 1.35rem);
+}
+
+.news-action-card__icon {
+  display: inline-grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  color: #12100b;
+  background: #e0c184;
+  box-shadow: 0 12px 26px rgba(224, 193, 132, 0.14);
+}
+
+.news-action-card h3,
+.news-action-card p,
+.news-completion-panel h2,
+.news-completion-panel p {
+  margin: 0;
+}
+
+.news-action-card h3,
+.news-completion-panel h2 {
+  color: #fff7e6;
+  line-height: 1.38;
+}
+
+.news-action-card h3 {
+  font-size: 1.08rem;
+}
+
+.news-action-card p,
+.news-completion-panel p {
+  color: rgba(236, 233, 226, 0.74);
+  line-height: 1.68;
+}
+
+.news-action-card a {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: auto;
+  color: #fff1cd;
+  font-size: 0.9rem;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.news-action-card a svg {
+  color: #e0c184;
+}
+
+.news-completion-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 0.82fr) minmax(280px, 0.72fr);
+  gap: clamp(1rem, 2.4vw, 1.6rem);
+  align-items: start;
+  padding: clamp(1.05rem, 2vw, 1.45rem);
+}
+
+.news-completion-list {
+  display: grid;
+  gap: 0.62rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.news-completion-list li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.55rem;
+  align-items: start;
+  padding: 0.68rem 0.76rem;
+  border: 1px solid rgba(255, 232, 190, 0.12);
+  border-radius: 12px;
+  color: rgba(236, 233, 226, 0.8);
+  background: rgba(255, 255, 255, 0.035);
+  line-height: 1.55;
+}
+
+.news-completion-list svg {
+  color: #e0c184;
+  margin-top: 0.12rem;
+}
+
 .news-timeline-shell .subpage-section-head {
   margin-bottom: 1.2rem;
 }
@@ -8509,6 +8615,8 @@ html {
 .update-summary-grid,
 .release-readiness-grid,
 .release-update-completion-panel,
+.news-action-grid,
+.news-completion-panel,
 .contact-status-grid,
 .contact-channel-grid,
 .contact-intake-grid,
