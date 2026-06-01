@@ -13688,37 +13688,77 @@ html {
   }
 
   .home-focus-hero {
-    padding-top: 22px;
-    gap: 16px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    gap: 12px;
   }
 
   .home-focus h1 {
-    font-size: 1.46rem;
-    line-height: 1.28;
+    font-size: 1.42rem;
+    line-height: 1.24;
   }
 
   .home-focus-lead {
-    font-size: 0.86rem;
-    line-height: 1.66;
+    font-size: 0.84rem;
+    line-height: 1.58;
   }
 
   .home-focus-actions,
-  .home-focus-btn,
   .home-focus-final .home-focus-actions {
     width: 100%;
   }
 
+  .home-focus-actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: 8px;
+  }
+
   .home-focus-btn {
-    min-height: 44px;
+    width: 100%;
+    min-height: 42px;
+    padding: 0 10px;
+    font-size: 0.86rem;
+    white-space: nowrap;
+  }
+
+  .home-focus-badges {
+    gap: 6px;
+  }
+
+  .home-focus-badges span {
+    min-height: 28px;
+    padding: 0 8px;
+    font-size: 0.78rem;
+  }
+
+  .home-focus-flow {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 5px;
+    padding: 6px;
+  }
+
+  .home-focus-flow__item {
+    padding: 6px;
+  }
+
+  .home-focus-flow__item span {
+    font-size: 0.62rem;
+    white-space: normal;
+  }
+
+  .home-focus-flow__item strong {
+    font-size: 0.72rem;
+    line-height: 1.32;
   }
 
   .home-focus-visual img {
-    aspect-ratio: 16 / 8.7;
+    aspect-ratio: 16 / 7.4;
   }
 
   .home-focus-visual figcaption {
-    padding: 9px 10px;
-    font-size: 0.78rem;
+    padding: 7px 9px;
+    font-size: 0.72rem;
   }
 
   .home-focus-section {
