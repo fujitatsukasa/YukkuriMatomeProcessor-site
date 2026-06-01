@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test'
 
 const pages = [
-  { path: '/', heading: '記事URL・スレッドURLから' },
+  { path: '/', heading: '記事URLから、ゆっくり動画' },
   { path: '/download/', heading: '最新版を無料ダウンロード' },
   { path: '/instructions/', heading: '記事URLから台本を取得' },
   { path: '/faq/', heading: '導入前によくある質問' },
