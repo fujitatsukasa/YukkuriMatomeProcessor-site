@@ -13,7 +13,7 @@ import {
   PencilLine,
 } from 'lucide-react'
 
-const heroBadges = ['Windows専用', 'YMM4向け', '20以上の対応サイト', 'Freeあり', 'Premium買い切り'] as const
+const heroBadges = ['Windows専用', 'YMM4向け', 'Freeあり'] as const
 
 const flowItems = [
   { label: '入れるもの', value: '記事URL / スレッドURL' },
@@ -31,30 +31,14 @@ const proofItems = [
 const goalMapItems = [
   {
     step: '01',
-    title: '最新版を入手する',
-    goal: '公式配布ファイルを取得',
-    output: 'アプリが起動する',
-    link: { label: 'ダウンロードへ', href: '/download/', external: false },
-    Icon: Download,
-  },
-  {
-    step: '02',
-    title: 'YMM4パスと保存先を決める',
-    goal: 'YMM4.exeと保存先を保存',
-    output: '出力先が固定される',
-    link: { label: '手順を見る', href: '/instructions/', external: false },
-    Icon: Monitor,
-  },
-  {
-    step: '03',
-    title: 'URLから候補を取得する',
+    title: 'URLを入れる',
     goal: '記事URL・スレッドURLを入力',
     output: '候補一覧が出る',
     link: { label: '実画面を見る', href: '/samples/', external: false },
     Icon: FileSearch,
   },
   {
-    step: '04',
+    step: '02',
     title: '台本下地を整える',
     goal: '不要行と長い文を見直す',
     output: '読み上げ前に確認できる',
@@ -62,20 +46,12 @@ const goalMapItems = [
     Icon: PencilLine,
   },
   {
-    step: '05',
+    step: '03',
     title: 'YMM4前準備を通す',
     goal: 'CSV/.ymmpと素材パスを確認',
     output: 'YMM4側へ進める',
     link: { label: 'サンプルを見る', href: '/samples/', external: false },
     Icon: Monitor,
-  },
-  {
-    step: '06',
-    title: 'FreeかPremiumか判断する',
-    goal: 'Freeで足りるか確認',
-    output: '必要なら制限解除へ',
-    link: { label: '料金を見る', href: '/purchase/', external: false },
-    Icon: CreditCard,
   },
 ] as const
 
@@ -190,7 +166,7 @@ export function HomePage() {
   return (
     <>
       <PageMeta
-        title="ゆっくりまとめプロセッサー｜記事URLから台本下地とYMM4前準備を作成"
+        title="ゆっくりまとめプロセッサー｜記事URL・スレッドURLから台本下地を作成"
         description="記事URL・スレッドURLから、ゆっくり動画の台本下地とYMM4前準備を作成。5ch・あにまん等の素材取得、AI台本補助、CSV/.ymmp整理までWindowsで確認できます。無料プランあり。"
         keywords="ゆっくりまとめプロセッサー,YMM4,台本作成,CSV,.ymmp,反応集,5ch,あにまん,ゆっくり解説"
         path="/"
@@ -201,7 +177,7 @@ export function HomePage() {
         <section className="home-focus-hero" aria-labelledby="home-focus-heading">
           <div className="home-focus-hero__copy">
             <p className="home-focus-kicker">YMM4向け Windows制作支援ツール</p>
-            <h1 id="home-focus-heading">記事URLから、YMM4用の台本下地を作る</h1>
+            <h1 id="home-focus-heading">記事URL・スレッドURLから、YMM4用の台本下地を作る</h1>
             <p className="home-focus-lead">
               記事URLやスレッドURLを入れると、候補取得、台本整理、AI補助、CSV/.ymmp前準備まで進められます。
               最終編集はYMM4で行います。
@@ -217,24 +193,6 @@ export function HomePage() {
               </Link>
             </div>
 
-            <div className="home-focus-badges" role="list" aria-label="対応条件">
-              {heroBadges.map((badge) => (
-                <span key={badge} role="listitem">
-                  <CheckCircle2 size={15} />
-                  {badge}
-                </span>
-              ))}
-            </div>
-
-            <div className="home-focus-flow" aria-label="入力から出力まで">
-              {flowItems.map((item, index) => (
-                <div key={item.label} className="home-focus-flow__item">
-                  <span>{item.label}</span>
-                  <strong>{item.value}</strong>
-                  {index < flowItems.length - 1 ? <ArrowRight size={17} aria-hidden="true" /> : null}
-                </div>
-              ))}
-            </div>
           </div>
 
           <figure className="home-focus-visual">
@@ -249,6 +207,25 @@ export function HomePage() {
               URL入力から候補一覧までを確認できます
             </figcaption>
           </figure>
+
+          <div className="home-focus-badges" role="list" aria-label="対応条件">
+            {heroBadges.map((badge) => (
+              <span key={badge} role="listitem">
+                <CheckCircle2 size={15} />
+                {badge}
+              </span>
+            ))}
+          </div>
+
+          <div className="home-focus-flow" aria-label="入力から出力まで">
+            {flowItems.map((item, index) => (
+              <div key={item.label} className="home-focus-flow__item">
+                <span>{item.label}</span>
+                <strong>{item.value}</strong>
+                {index < flowItems.length - 1 ? <ArrowRight size={17} aria-hidden="true" /> : null}
+              </div>
+            ))}
+          </div>
         </section>
 
         <section className="home-focus-proof" aria-label="主な機能">
@@ -263,9 +240,9 @@ export function HomePage() {
         <section className="home-focus-section home-focus-goal-map" aria-labelledby="home-goal-map-heading">
           <div className="home-focus-section__head">
             <p className="home-focus-kicker">使ってできるまでの目標</p>
-            <h2 id="home-goal-map-heading">最初の1本を作る前に確認すること</h2>
+            <h2 id="home-goal-map-heading">最初に確認する3ステップ</h2>
             <p>
-              いきなり購入せず、Freeで起動、設定、URL取得、台本整理、YMM4前準備まで順番に通します。
+              Freeで実URLを試し、候補取得、台本整理、YMM4前準備まで通してから購入を判断できます。
             </p>
           </div>
 

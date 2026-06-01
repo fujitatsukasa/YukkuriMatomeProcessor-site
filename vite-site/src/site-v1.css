@@ -11990,7 +11990,7 @@ html {
 .home-focus-hero {
   display: grid;
   grid-template-columns: minmax(0, 0.92fr) minmax(460px, 1.08fr);
-  gap: 34px;
+  gap: 14px 34px;
   align-items: center;
   padding: 34px 0 24px;
 }
@@ -12025,8 +12025,8 @@ html {
 }
 
 .home-focus h1 {
-  max-width: 13em;
-  font-size: 2.92rem;
+  max-width: 15em;
+  font-size: 2.58rem;
   line-height: 1.16;
   text-wrap: balance;
 }
@@ -12087,6 +12087,11 @@ html {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+}
+
+.home-focus-hero > .home-focus-badges,
+.home-focus-hero > .home-focus-flow {
+  grid-column: 1;
 }
 
 .home-focus-badges span,
@@ -12168,6 +12173,8 @@ html {
 
 .home-focus-visual {
   position: relative;
+  grid-column: 2;
+  grid-row: 1 / span 3;
   margin: 0;
   border: 1px solid rgba(31, 42, 53, 0.14);
   border-radius: 8px;
@@ -12203,7 +12210,7 @@ html {
 }
 
 .home-focus-section {
-  padding: 36px 0;
+  padding: 30px 0;
   border-top: 1px solid rgba(31, 42, 53, 0.08);
 }
 
@@ -12254,10 +12261,10 @@ html {
 .home-focus-goal-card {
   min-width: 0;
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-columns: auto minmax(0, 1fr);
   gap: 7px 12px;
   align-content: start;
-  padding: 15px;
+  padding: 17px;
   border: 1px solid rgba(31, 42, 53, 0.13);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.86);
@@ -12311,9 +12318,8 @@ html {
 }
 
 .home-focus-goal-card a {
-  grid-column: 3;
-  grid-row: 1 / span 3;
-  align-self: center;
+  grid-column: 2;
+  align-self: start;
   min-height: 36px;
   display: inline-flex;
   align-items: center;
@@ -12660,6 +12666,13 @@ html {
     grid-template-columns: 1fr;
   }
 
+  .home-focus-visual,
+  .home-focus-hero > .home-focus-badges,
+  .home-focus-hero > .home-focus-flow {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
 }
 
 @media (max-width: 560px) {
@@ -12671,17 +12684,22 @@ html {
   }
 
   .home-focus h1 {
-    font-size: 1.82rem;
+    font-size: 1.62rem;
   }
 
   .home-focus-lead {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+    line-height: 1.72;
   }
 
   .home-focus-actions,
   .home-focus-btn,
   .home-focus-final .home-focus-actions {
     width: 100%;
+  }
+
+  .home-focus-btn {
+    min-height: 44px;
   }
 
   .home-focus-section {
