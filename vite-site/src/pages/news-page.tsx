@@ -33,7 +33,7 @@ const newsActionRoutes = [
   {
     label: '実画面',
     title: '画面とサンプルで確認する',
-    body: '雰囲気ではなく、実アプリ画面とBefore/Afterで判断します。',
+    body: '実アプリ画面とBefore/Afterで変更後の流れを確認します。',
     href: '/samples/',
     Icon: Monitor,
   },
@@ -63,7 +63,7 @@ export function NewsPage() {
               <p className="brand-kicker">お知らせ</p>
               <h1>直近の変更を、最短で把握する</h1>
               <p className="brand-lead">
-                ここでは告知を並べるだけでなく、自分に関係ある変更かどうかを判断しやすい順番でまとめています。最新告知、関連ページ、時系列の3段で辿れます。
+                ここでは告知を並べるだけでなく、自分に関係ある変更かどうかを確認しやすい順番でまとめています。最新告知、関連ページ、時系列の3段で辿れます。
               </p>
 
               <div className="utility-stat-grid">

@@ -80,14 +80,14 @@ const sampleGoalCards = [
 
 const sampleDecisionCards = [
   {
-    title: '実アプリ画面で判断',
+    title: '実アプリ画面で確認',
     body: 'URL取得、台本編集、YMM4前準備の画面が自分の制作手順に合うかを確認します。',
     link: '#sample-screen-gallery',
     linkLabel: '画面を見る',
     Icon: MonitorPlay,
   },
   {
-    title: '実動画プレビューで判断',
+    title: '実動画プレビューで確認',
     body: '短い実動画で、字幕、画面の流れ、YMM4側で調整する余白を確認します。',
     link: '#sample-video-gallery',
     linkLabel: '動画を見る',
@@ -222,8 +222,8 @@ export function SamplesPage() {
   return (
     <>
       <PageMeta
-        title="実画面・サンプルギャラリー｜操作画面とBefore/After"
-        description="ゆっくりまとめプロセッサーの実アプリ画面、URL入力から台本整理、YMM4前準備までのBefore/After、動画化サンプル構成を専用ギャラリーで確認できます。"
+        title="実画面・動画サンプル｜入力から出力まで確認"
+        description="ゆっくりまとめプロセッサーの実アプリ画面、URL入力から台本整理、YMM4前準備までのBefore/After、短い動画プレビューを専用ギャラリーで確認できます。"
         keywords="実画面, サンプル, Before After, YMM4, 台本作成, ゆっくりまとめプロセッサー"
         image="/product_edit_script.webp"
         path="/samples/"
@@ -233,8 +233,8 @@ export function SamplesPage() {
       <main className="brand-shell">
         <PageIntro
           kicker="実画面・サンプルギャラリー"
-          title="どの画面で何ができるか、先に見て判断する"
-          lead="URL入力、台本編集、AI補助、CSV/.ymmp前準備まで。雰囲気画像ではなく、実アプリ画面と具体的なBefore/Afterで確認できます。"
+          title="実アプリ画面と動画サンプルで、入力から出力まで確認する"
+          lead="URL入力、台本編集、AI補助、CSV/.ymmp前準備まで。実アプリ画面、Before/After、短い動画プレビューで、無料で試す前に流れを確認できます。"
           actions={[
             { label: '無料でダウンロード', href: downloadUrl, variant: 'primary', external: true },
             { label: '使い方を見る', href: '/instructions/', variant: 'ghost' },
@@ -251,8 +251,8 @@ export function SamplesPage() {
                 alt="台本編集とYMM4前準備を確認する実アプリ画面"
               />
               <div className="page-visual-card__meta">
-                <strong>実アプリ画面を中心に、導入前の不安を減らす</strong>
-                <span>まず無料で触り、画面の流れが自分の制作手順に合うか確認してください。</span>
+                <strong>実アプリ画面を中心に、操作の流れを確認</strong>
+                <span>まず画面で流れを見て、無料版で自分のURLを試してください。</span>
               </div>
             </InteractiveCard>
           }
@@ -536,7 +536,7 @@ export function SamplesPage() {
               <h2>自分のURLで、実画面と同じ流れを確認する</h2>
               <p>
                 まずはFreeで起動し、URL取得、台本整理、YMM4前準備まで進めてください。
-                Premiumが必要かは、実際の制作手順に合うと分かってから判断できます。
+                Premiumが必要かは、実際の制作手順に合うと分かってから確認できます。
               </p>
             </div>
             <div className="subpage-support-callout__actions">

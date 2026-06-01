@@ -42,7 +42,7 @@ const blogReadingPaths = [
 
 const blogDecisionRoutes = [
   {
-    label: '導入判断',
+    label: '導入前提',
     title: 'Windows / YMM4前提を確認する',
     body: 'Mac不可、YMM4前提、無料版で試せる範囲など、導入前の不安はFAQで確認します。',
     href: '/faq/',
@@ -56,12 +56,12 @@ const blogDecisionRoutes = [
   {
     label: '実画面',
     title: '画面とBefore/Afterを見る',
-    body: '雰囲気ではなく、URL取得、台本整理、YMM4前準備の実画面とサンプルで確認します。',
+    body: 'URL取得、台本整理、YMM4前準備の実画面とサンプルで確認します。',
     href: '/samples/',
   },
   {
-    label: '料金判断',
-    title: 'Freeで足りるか判断する',
+    label: '料金確認',
+    title: 'Freeで試してPremiumを確認する',
     body: '無料で試し、台本取得とAI台本生成の制限解除が必要になったらPremiumを確認します。',
     href: '/purchase/',
   },

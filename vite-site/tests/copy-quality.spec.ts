@@ -17,6 +17,11 @@ const primaryPages = [
     ctas: ['無料でダウンロード', 'FAQを見る'],
   },
   {
+    path: '/samples/',
+    heading: '実アプリ画面と動画サンプルで、入力から出力まで確認する',
+    ctas: ['無料でダウンロード', '使い方を見る'],
+  },
+  {
     path: '/purchase/',
     heading: '料金プラン｜Freeで試して、Premiumで制限解除',
     ctas: ['プラン比較を見る', '無料でダウンロード'],
@@ -47,6 +52,7 @@ const forbiddenCopy = [
   '01 Outputs',
   '02 Proof',
   '再修正修正',
+  '雰囲気',
 ]
 
 test.describe('primary page copy quality', () => {
