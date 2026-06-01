@@ -6619,6 +6619,7 @@ html {
 .contact-status-grid,
 .contact-channel-grid,
 .contact-intake-grid,
+.contact-template-grid,
 .contact-info-layout {
   display: grid;
   gap: 1rem;
@@ -6656,6 +6657,7 @@ html {
 
 .contact-channel-card,
 .contact-intake-card,
+.contact-template-card,
 .contact-info-card {
   display: grid;
   gap: 0.86rem;
@@ -6664,6 +6666,7 @@ html {
 }
 
 .contact-channel-card__top,
+.contact-template-card__head,
 .contact-info-card__head {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
@@ -6704,6 +6707,7 @@ html {
 }
 
 .contact-intake-card h3,
+.contact-template-card h3,
 .contact-channel-card h3 {
   color: #fff7e6;
   font-size: 1.08rem;
@@ -6712,6 +6716,7 @@ html {
 
 .contact-channel-card p,
 .contact-intake-card p,
+.contact-template-card p,
 .contact-info-card p,
 .contact-legal-panel p {
   color: rgba(236, 233, 226, 0.74);
@@ -6756,6 +6761,27 @@ html {
 
 .contact-intake-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.contact-template-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.contact-template-card__body {
+  display: grid;
+  gap: 0.38rem;
+  padding: 0.82rem;
+  border: 1px solid rgba(255, 232, 190, 0.12);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.contact-template-card__body span {
+  color: rgba(245, 247, 255, 0.82);
+  font-family: var(--font-base);
+  font-size: 0.82rem;
+  font-weight: 800;
+  line-height: 1.5;
 }
 
 .contact-info-layout {
@@ -8188,6 +8214,7 @@ html {
 .contact-status-grid,
 .contact-channel-grid,
 .contact-intake-grid,
+.contact-template-grid,
 .contact-info-layout,
 .blog-principle-grid,
 .blog-grid,

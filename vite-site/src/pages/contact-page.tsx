@@ -77,6 +77,62 @@ const requiredInfo = [
   '発生頻度、再現できるか、回避できるか',
 ] as const
 
+const mailTemplateItems = [
+  {
+    title: '起動しない・エラーが出る',
+    subject: '【不具合】ゆっくりまとめプロセッサーが起動しない/エラー',
+    description: '起動、画面表示、保存、YMM4連携などで止まる場合はこちらを使ってください。',
+    fields: [
+      '利用OS:',
+      'アプリバージョン:',
+      'YMM4バージョン:',
+      '発生した画面:',
+      'エラー全文:',
+      '再現手順:',
+      '回避できるか:',
+    ],
+  },
+  {
+    title: 'URL取得できない',
+    subject: '【URL取得】対象URLで取得できない',
+    description: '記事URL・スレッドURLを入れても候補が出ない、取得が途中で止まる場合はこちらです。',
+    fields: [
+      '対象URL:',
+      '対象サイト名:',
+      '取得したい内容:',
+      '押したボタン/操作:',
+      '表示されたエラー:',
+      '別URLでは取得できるか:',
+    ],
+  },
+  {
+    title: '購入・権限・返金',
+    subject: '【購入/権限】Premium購入・権限同期・返金相談',
+    description: 'Premium購入、Googleアカウント権限、Stripe決済、返金相談は記録が残るメール推奨です。',
+    fields: [
+      '問い合わせ内容:',
+      '購入日:',
+      'Googleログインのメールアドレス:',
+      '決済完了メールの有無:',
+      'アプリ内で見えるプラン:',
+      '返金希望理由:',
+    ],
+  },
+  {
+    title: '導入前相談',
+    subject: '【導入相談】利用環境と制作内容の確認',
+    description: '自分の環境や作りたい動画に合うか、購入前に確認したい場合に使えます。',
+    fields: [
+      '利用予定OS:',
+      'YMM4の利用有無:',
+      '作りたい動画形式:',
+      '試したいURLの種類:',
+      '無料版で確認済みの範囲:',
+      '相談したいこと:',
+    ],
+  },
+] as const
+
 const safetyNotes = [
   'APIキー、パスワード、決済カード番号は送らないでください。',
   '返金や契約条件の相談は、記録が残るメールを優先してください。',
@@ -109,19 +165,21 @@ function formatChannelLabel(channel: (typeof supportChannels)[number]) {
 }
 
 function buildSupportMailto() {
-  const subject = encodeURIComponent('ゆっくりまとめプロセッサー問い合わせ')
-  const body = encodeURIComponent(
-    [
-      '問い合わせ種別:',
-      '利用OS:',
-      'アプリバージョン:',
-      'YMM4バージョン:',
-      '対象URL:',
-      '発生している内容:',
-      'エラー全文:',
-      '再現手順:',
-    ].join('\n'),
-  )
+  return buildTemplateMailto('ゆっくりまとめプロセッサー問い合わせ', [
+    '問い合わせ種別:',
+    '利用OS:',
+    'アプリバージョン:',
+    'YMM4バージョン:',
+    '対象URL:',
+    '発生している内容:',
+    'エラー全文:',
+    '再現手順:',
+  ])
+}
+
+function buildTemplateMailto(subjectText: string, bodyLines: readonly string[]) {
+  const subject = encodeURIComponent(subjectText)
+  const body = encodeURIComponent(bodyLines.join('\n'))
   return `mailto:${legal.organization.email}?subject=${subject}&body=${body}`
 }
 
@@ -243,6 +301,46 @@ export function ContactPage() {
                 )
               })}
             </div>
+          </div>
+        </Section>
+
+        <Section>
+          <div className="subpage-section-head contact-section-head">
+            <p>メールテンプレート</p>
+            <h2>症状に近い入口から送る</h2>
+            <p>
+              何を書けばいいか迷う場合は、近いテンプレートを開いて空欄を埋めてください。
+              カード番号、APIキー、パスワードは含めないでください。
+            </p>
+          </div>
+
+          <div className="contact-template-grid">
+            {mailTemplateItems.map((item) => (
+              <InteractiveCard key={item.title} className="release-panel premium-glass contact-template-card">
+                <div className="contact-template-card__head">
+                  <span className="contact-channel-card__icon" aria-hidden="true">
+                    <Mail size={19} />
+                  </span>
+                  <div>
+                    <span className="subpage-card__eyebrow">メール</span>
+                    <h3>{item.title}</h3>
+                  </div>
+                </div>
+                <p>{item.description}</p>
+                <div className="contact-template-card__body" aria-label={`${item.title}で送る項目`}>
+                  {item.fields.map((field) => (
+                    <span key={field}>{field}</span>
+                  ))}
+                </div>
+                <a
+                  className="contact-channel-card__link"
+                  href={buildTemplateMailto(item.subject, item.fields)}
+                >
+                  <span>この内容でメールを開く</span>
+                  <ArrowRight size={16} />
+                </a>
+              </InteractiveCard>
+            ))}
           </div>
         </Section>
 
