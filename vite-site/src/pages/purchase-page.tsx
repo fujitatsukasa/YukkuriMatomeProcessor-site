@@ -167,8 +167,8 @@ export function PurchasePage() {
   return (
     <>
       <PageMeta
-        title="料金｜FreeとPremiumの違い"
-        description="無料プランとPremium買い切り39,800円の違いを比較。台本取得、AI台本生成、YMM4前準備、Googleアカウント権限同期、返金条件を確認できます。"
+        title="料金プラン｜Freeで試してPremiumで制限解除"
+        description="無料プランとPremium買い切り39,800円の違いを比較。台本取得、AI台本生成、YMM4前準備、Googleアカウント権限同期、返金条件を購入前に確認できます。"
         keywords="料金, 買い切り, Premium, 無料プラン, Stripe Checkout, 台本取得, AI台本生成"
         path="/purchase/"
       />
@@ -178,7 +178,7 @@ export function PurchasePage() {
           <div className="pricing-command-hero__shell">
             <div className="pricing-command-hero__copy">
               <p className="brand-kicker">料金プラン</p>
-              <h1>Freeで試して、Premiumで制限解除</h1>
+              <h1>料金プラン｜Freeで試して、Premiumで制限解除</h1>
               <p className="brand-lead">
                 Freeで確認できる範囲と、39,800円の買い切りで解除される範囲を比較できます。
               </p>
@@ -187,7 +187,7 @@ export function PurchasePage() {
                 <span role="listitem">買い切り</span>
                 <span role="listitem">月額なし</span>
                 <span role="listitem">Freeで実URLを確認</span>
-                <span role="listitem">Googleアカウントに権利保持</span>
+                <span role="listitem">Googleアカウントに権限を保持</span>
                 <span role="listitem">{legal.support.firstResponseSla}</span>
               </div>
 

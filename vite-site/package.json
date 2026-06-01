@@ -14,7 +14,8 @@
     "capture:motion": "node ./scripts/record-home-motion.mjs",
     "lint": "eslint .",
     "preview": "vite preview --host 127.0.0.1",
-    "test:mobile": "playwright test tests/mobile-layout.spec.ts"
+    "test:mobile": "playwright test tests/mobile-layout.spec.ts",
+    "test:copy": "playwright test tests/copy-quality.spec.ts"
   },
   "dependencies": {
     "lucide-react": "^1.7.0",
