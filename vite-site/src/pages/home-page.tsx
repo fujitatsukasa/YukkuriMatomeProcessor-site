@@ -16,16 +16,16 @@ import {
 const heroBadges = ['Windows専用', 'YMM4向け', '20以上の対応サイト', 'Freeあり', 'Premium買い切り'] as const
 
 const flowItems = [
-  { label: '入力', value: '記事URL・スレッドURL' },
-  { label: '整理', value: '台本候補・AI補助' },
-  { label: '出力', value: 'CSV・.ymmp前準備' },
+  { label: '入力', value: '記事URL / スレッドURL' },
+  { label: '途中作業', value: '候補取得・台本整理' },
+  { label: '出力前', value: 'CSV / .ymmp前準備' },
 ] as const
 
 const proofItems = [
-  '対応サイトから台本候補を取得',
-  '不要行を整理して読み上げ向けに調整',
-  'CSV / .ymmp / キャラ設定を確認',
-  'YouTube分析とコメント取得も利用可能',
+  'YMM4を開く前の台本下地と出力準備を短縮',
+  '完成動画の自動生成ではなく、人が確認して仕上げる前提',
+  'Freeで起動、URL取得、台本整理、出力前確認まで試せる',
+  'Premiumは台本取得とAI台本生成の制限解除',
 ] as const
 
 const goalMapItems = [
@@ -180,10 +180,10 @@ export function HomePage() {
         <section className="home-focus-hero" aria-labelledby="home-focus-heading">
           <div className="home-focus-hero__copy">
             <p className="home-focus-kicker">YMM4向け Windows制作支援ツール</p>
-            <h1 id="home-focus-heading">記事URL・スレッドURLから、台本下地とYMM4前準備を作る</h1>
+            <h1 id="home-focus-heading">URLを入れて、YMM4用の台本下地を作る</h1>
             <p className="home-focus-lead">
-              対応URLを入れると、台本候補の取得、AI補助、CSV/.ymmp前準備まで進められます。
-              YMM4を開く前の作業を短く、確認しやすくするためのツールです。
+              記事URLやスレッドURLから候補を取得し、読み上げ前の台本整理、AI補助、CSV/.ymmp前準備までをまとめます。
+              最終編集はYMM4で行い、その前の散らばりやすい作業を短くするためのツールです。
             </p>
 
             <div className="home-focus-actions">
@@ -217,10 +217,15 @@ export function HomePage() {
           </div>
 
           <figure className="home-focus-visual">
-            <img src="/product_get_script.webp" alt="記事URLから台本候補を取得する実アプリ画面" />
+            <img
+              src="/product_get_script.webp"
+              alt="記事URLから台本候補を取得する実アプリ画面"
+              loading="eager"
+              decoding="async"
+            />
             <figcaption>
               <strong>実アプリ画面</strong>
-              URL入力から候補取得までを確認できます
+              URL入力から候補一覧までを確認できます
             </figcaption>
           </figure>
         </section>
@@ -284,7 +289,7 @@ export function HomePage() {
               const StepIcon = step.Icon
               return (
                 <article key={step.step} className="home-focus-screen-card">
-                  <img src={step.image} alt={step.alt} loading="lazy" decoding="async" />
+                  <img src={step.image} alt={step.alt} loading="eager" decoding="async" />
                   <div>
                     <span>
                       <StepIcon size={16} />

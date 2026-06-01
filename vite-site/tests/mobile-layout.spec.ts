@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test'
 
 const pages = [
-  { path: '/', heading: '記事URL・スレッドURLから' },
+  { path: '/', heading: 'URLを入れて、YMM4用の台本下地を作る' },
   { path: '/download/', heading: '最新版を無料ダウンロード' },
   { path: '/instructions/', heading: '記事URLからYMM4へ渡す' },
   { path: '/faq/', heading: '導入前によくある質問' },
