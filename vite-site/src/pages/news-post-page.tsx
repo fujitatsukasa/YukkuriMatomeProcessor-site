@@ -32,7 +32,7 @@ export function NewsPostPage({ post }: { post: NewsPost }) {
         </div>
         <aside className="brand-article__cta brand-shell">
           <h2>次のアクション</h2>
-          <p>導入判断を進める場合は、無料トライアルとお問い合わせをご利用ください。</p>
+          <p>導入前の確認を進める場合は、無料ダウンロードとお問い合わせをご利用ください。</p>
           <ArticleActions />
         </aside>
       </article>

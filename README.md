@@ -2,7 +2,7 @@
 
 公開サイト本体は `vite-site/` の Vite + React 実装です。現在のサイトバージョンは **V1.4** として定義しています。
 
-## Local Preview
+## ローカル確認
 
 - F5 / VSCode default: `Serve: GUI (Default)`
 - Fallback: `Serve: No GUI`
@@ -23,7 +23,7 @@ cd vite-site
 npm run dev
 ```
 
-## Active Site V1.4
+## 公開サイト V1.4
 
 - Main app: `vite-site/`
 - Main stylesheet: `vite-site/src/site-v1.css`

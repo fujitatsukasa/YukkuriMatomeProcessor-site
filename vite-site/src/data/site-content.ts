@@ -210,7 +210,11 @@ export const faqGroups: FaqGroup[] = [
         answer:
           '記事URL・スレッドURLを起点に、台本下地、CSV、.ymmp、YMM4前準備を整えるWindows向け制作支援ツールです。',
       },
-      { question: '無料で試せますか？', answer: 'はい。Freeプランで基本導線と導入相性を確認できます。' },
+      {
+        question: '無料で試せますか？',
+        answer:
+          'はい。Freeプランで起動、初期設定、URL取得、台本編集、CSV/.ymmp前準備の流れを確認できます。台本取得とAI台本生成の利用制限解除が必要になったらPremiumを検討してください。',
+      },
       { question: '想定ユーザーは誰ですか？', answer: 'YMM4で反応集、5chまとめ、ショート、ゆっくり解説を作る個人・チームを想定しています。' },
       {
         question: '導入前に必ず確認すべきページは？',
@@ -226,6 +230,11 @@ export const faqGroups: FaqGroup[] = [
       { question: '導入時に最初にやるべきことは？', answer: '最新版のZIPを取得し、YMM4実行パス、保存先フォルダ、必要に応じて YouTube API キーを設定してください。' },
       { question: '対応OSは何ですか？', answer: 'Windows 10 / 11環境での利用を前提に設計しています。' },
       { question: 'Macで使えますか？', answer: '現時点ではMac版はありません。YMM4を使うWindows環境を前提にしています。' },
+      {
+        question: 'YMM4は必須ですか？',
+        answer:
+          'はい。ゆっくりまとめプロセッサーは、YMM4を開く前の台本下地、CSV、.ymmp前準備を整えるためのツールです。YMM4を使わない動画編集だけで完結する設計ではありません。',
+      },
       { question: '初期設定を早く終えるコツは？', answer: '使い方ページの手順どおりに設定し、変更内容をメモすると再作業を減らせます。' },
       { question: 'チーム導入時に決めるべき項目は？', answer: '保存先命名ルール、YMM4連携パス、確認チェックリストの3点を先に揃えてください。' },
     ],
@@ -267,6 +276,7 @@ export const faqGroups: FaqGroup[] = [
     label: '購入・契約',
     items: [
       { question: '料金プランはどう分かれていますか？', answer: 'Free（¥0）と Premium（買い切り39,800円）の2つです。まずはFreeで導入相性を確認し、台本取得とAI台本生成の利用制限解除が必要になったらPremiumを購入します。' },
+      { question: '月額料金はありますか？', answer: 'いいえ。Premiumは39,800円税込の買い切りで、月額自動更新はありません。' },
       { question: '購入申し込みはどのように進めますか？', answer: 'アプリ内の購入画面から Stripe Checkout を開き、買い切りライセンスを一度払いで購入します。' },
       { question: '購入後の権限はどう反映されますか？', answer: '決済完了後、Googleログインに紐づく課金状態と利用枠を同期し、アプリ内でPremium機能が有効化されます。' },
       { question: 'Premiumで何が解除されますか？', answer: '台本取得とAI台本生成の利用制限を解除します。月額ではなく39,800円の買い切りです。' },
@@ -314,7 +324,7 @@ export const newsPosts: NewsPost[] = [
     date: '2026-01-24T09:00:00+09:00',
     dateLabel: '2026年01月24日',
     title: 'お知らせ: サイトリニューアルのお知らせ',
-    subtitle: '情報導線と製品説明を整理し、導入判断の精度を上げました。',
+    subtitle: '情報導線と製品説明を整理し、導入前に確認すべき内容を見直しました。',
     summary:
       'デザインと情報導線の刷新に加え、台本取得・整形・YMM4連携準備など製品機能の説明を明確化しました。',
     seoDescription:

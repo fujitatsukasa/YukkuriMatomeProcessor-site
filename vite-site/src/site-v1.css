@@ -1,4 +1,4 @@
-/* Yukkuri Matome Processor Site V1. Current production selectors only. */
+/* Production V1 selectors only. */
 
 .brand-main {
   overflow: clip;
@@ -6255,6 +6255,179 @@ html {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.faq-fast-answer-list {
+  display: grid;
+  gap: 0.72rem;
+}
+
+.faq-fast-answer-card {
+  position: relative;
+  display: grid;
+  gap: 0.28rem;
+  padding: 0.86rem 0.95rem;
+  border: 1px solid rgba(255, 232, 190, 0.14);
+  border-radius: 14px;
+  color: inherit;
+  background: rgba(255, 255, 255, 0.04);
+  text-decoration: none;
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    transform 180ms ease;
+}
+
+.faq-fast-answer-card:hover,
+.faq-fast-answer-card:focus-visible {
+  transform: translateY(-1px);
+  border-color: rgba(255, 232, 190, 0.32);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.faq-fast-answer-card span,
+.faq-fast-answer-card strong,
+.faq-fast-answer-card p {
+  position: relative;
+  z-index: 1;
+}
+
+.faq-fast-answer-card span {
+  color: rgba(255, 232, 190, 0.74);
+  font-size: 0.76rem;
+  font-weight: 900;
+}
+
+.faq-fast-answer-card strong {
+  color: #fff7e6;
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+.faq-fast-answer-card p {
+  margin: 0;
+  color: rgba(236, 233, 226, 0.72);
+  font-size: 0.9rem;
+  line-height: 1.58;
+}
+
+.faq-decision-layout,
+.faq-priority-layout {
+  display: grid;
+  gap: clamp(1rem, 2.2vw, 1.6rem);
+}
+
+.faq-decision-head {
+  max-width: 780px;
+}
+
+.faq-decision-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.faq-decision-card {
+  display: grid;
+  gap: 0.78rem;
+  align-content: start;
+  padding: clamp(1rem, 1.8vw, 1.35rem);
+  min-height: 100%;
+}
+
+.faq-decision-card__icon {
+  display: inline-grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  color: #12100b;
+  background: #e0c184;
+  box-shadow: 0 12px 26px rgba(224, 193, 132, 0.14);
+}
+
+.faq-decision-card h3,
+.faq-decision-card p {
+  margin: 0;
+}
+
+.faq-decision-card h3 {
+  color: #fff7e6;
+  font-size: 1.08rem;
+  line-height: 1.42;
+}
+
+.faq-decision-card p {
+  color: rgba(236, 233, 226, 0.74);
+  line-height: 1.68;
+}
+
+.faq-decision-card strong {
+  align-self: end;
+  width: fit-content;
+  padding: 0.42rem 0.62rem;
+  border-radius: 999px;
+  color: #ffe7ae;
+  background: rgba(224, 193, 132, 0.1);
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+.faq-priority-layout {
+  grid-template-columns: minmax(260px, 0.42fr) minmax(0, 0.58fr);
+  align-items: start;
+}
+
+.faq-priority-copy {
+  position: sticky;
+  top: 92px;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.faq-priority-copy h2,
+.faq-priority-copy p {
+  margin: 0;
+}
+
+.faq-priority-copy h2 {
+  color: #fff7e6;
+  font-size: clamp(1.6rem, 2.4vw, 2.35rem);
+  line-height: 1.26;
+}
+
+.faq-priority-copy p {
+  color: rgba(236, 233, 226, 0.74);
+  line-height: 1.78;
+}
+
+.faq-priority-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.faq-priority-list {
+  display: grid;
+  gap: 0.72rem;
+}
+
+.faq-priority-item {
+  margin-bottom: 0;
+  border-color: rgba(255, 232, 190, 0.12);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.faq-priority-item summary span {
+  display: inline-flex;
+  gap: 0.58rem;
+  align-items: center;
+  min-width: 0;
+}
+
+.faq-priority-item summary svg {
+  flex: 0 0 auto;
+  color: #e0c184;
+}
+
 .faq-category-card {
   display: grid;
   padding: 0;
@@ -7581,6 +7754,7 @@ html {
 @media (max-width: 1180px) {
   .guide-scene-switcher__panel-inner,
 .pricing-trust-grid,
+.faq-priority-layout,
 .blog-article-hero,
 .blog-article-layout,
 .utility-hero__shell,
@@ -7597,6 +7771,10 @@ html {
     position: static;
   }
 
+  .faq-priority-copy {
+    position: static;
+  }
+
   .pricing-snapshot-card:nth-child(2),
 .pricing-snapshot-card:nth-child(2):hover,
 .pricing-snapshot-card:nth-child(2):focus-within {
@@ -7609,6 +7787,7 @@ html {
 .subpage-card-grid--3,
 .pricing-plan-map,
 .faq-category-grid,
+.faq-decision-grid,
 .blog-grid,
 .faq-support-rail__channels,
 .blog-article-summary,
@@ -7667,6 +7846,11 @@ html {
 
   .utility-link-row a,
 .utility-chip {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .faq-priority-actions .brand-btn {
     width: 100%;
     justify-content: center;
   }

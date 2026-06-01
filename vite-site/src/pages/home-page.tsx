@@ -211,7 +211,7 @@ export function HomePage() {
 
         <section className="home-focus-section home-focus-section--decision" aria-labelledby="home-decision-heading">
           <div className="home-focus-section__head home-focus-section__head--left">
-            <p className="home-focus-kicker">料金と導入判断</p>
+            <p className="home-focus-kicker">料金と前提確認</p>
             <h2 id="home-decision-heading">Freeで試して、必要ならPremiumで制限解除</h2>
             <p>
               先に無料で起動とURL取得を確認できます。購入判断に必要な価格、支払い、返金条件は料金ページにまとめています。

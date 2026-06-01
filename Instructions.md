@@ -1,8 +1,8 @@
-# Development Instructions
+# 開発手順
 
 公開サイト本体は `vite-site/` です。現在のサイトバージョンは **V1.4** です。
 
-## Local Preview
+## ローカル確認
 
 - 既定プロファイル: `Serve: GUI (Default)`
 - フォールバック: `Serve: No GUI`
@@ -10,14 +10,14 @@
 - CLI 実行: `serve_local.cmd --no-gui --open`
 - 研究用の別系統: `TechTouch Lab: GUI`
 
-## First Setup
+## 初回セットアップ
 
 ```bash
 cd vite-site
 npm install
 ```
 
-## Vite Commands
+## Vite コマンド
 
 ```bash
 cd vite-site
@@ -29,7 +29,7 @@ npm run audit:site
 npm run preview
 ```
 
-## Notes
+## 注意事項
 
 - V1.4 の主要 CSS は `vite-site/src/site-v1.css` です。
 - 旧デザインの `react-site.css` は使用しません。
