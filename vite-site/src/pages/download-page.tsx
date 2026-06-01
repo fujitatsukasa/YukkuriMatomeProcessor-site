@@ -10,6 +10,7 @@ import {
   Bot,
   CheckCircle2,
   ClipboardCheck,
+  Download,
   FileSearch,
   FolderCog,
   Send,
@@ -272,10 +273,43 @@ const distributionCompletionChecks = [
   '少数URLで候補一覧と出力先まで確認した',
 ] as const
 
+const downloadChoiceCards = [
+  {
+    label: '通常はこちら',
+    title: 'インストーラー',
+    fileName: publicDistribution.assets.setup.fileName,
+    shortName: 'Setup.exe',
+    body: 'Windowsのアプリとして入れて使う標準配布です。迷ったらこちらを選んでください。',
+    goodFor: ['初回導入', '継続利用', '自動更新フィードを使う'],
+    href: publicDistribution.assets.setup.url,
+    Icon: Download,
+  },
+  {
+    label: '試用・持ち運び',
+    title: 'ポータブルZIP',
+    fileName: publicDistribution.assets.portable.fileName,
+    shortName: 'Portable.zip',
+    body: 'インストールせずに確認したい場合向けです。ZIPを直接開かず、必ず解凍してから起動します。',
+    goodFor: ['管理者権限を避けたい', '検証用フォルダで試す', '環境を汚さず確認'],
+    href: publicDistribution.assets.portable.url,
+    Icon: Wrench,
+  },
+] as const
+
 type ReleaseNotesResponse = {
   version?: string
   title?: string
   summary?: string
+}
+
+type ReleaseManifestResponse = {
+  Assets?: Array<{
+    Version?: string
+    Type?: string
+    FileName?: string
+    SHA256?: string
+    Size?: number
+  }>
 }
 
 type PublicDistributionInfo = {
@@ -312,6 +346,27 @@ function formatFileSize(bytes: number) {
   })} MB`
 }
 
+function compareVersion(a: string, b: string) {
+  const left = a.split('.').map((part) => Number.parseInt(part, 10) || 0)
+  const right = b.split('.').map((part) => Number.parseInt(part, 10) || 0)
+  const length = Math.max(left.length, right.length)
+
+  for (let index = 0; index < length; index += 1) {
+    const diff = (left[index] ?? 0) - (right[index] ?? 0)
+    if (diff !== 0) return diff
+  }
+
+  return 0
+}
+
+function getLatestManifestVersion(manifest: ReleaseManifestResponse | null) {
+  return manifest?.Assets?.reduce<string | null>((latest, asset) => {
+    if (!asset.Version) return latest
+    if (!latest || compareVersion(asset.Version, latest) > 0) return asset.Version
+    return latest
+  }, null)
+}
+
 function ReleaseIntegrityPanel() {
   const [release, setRelease] = useState<PublicDistributionInfo>(fallbackDistributionInfo)
 
@@ -320,19 +375,33 @@ function ReleaseIntegrityPanel() {
 
     async function fetchReleaseNotes() {
       try {
-        const response = await fetch(publicDistribution.releaseNotesUrl, {
-          headers: { Accept: 'application/json' },
-          signal: controller.signal,
-        })
+        const [notesResult, manifestResult] = await Promise.allSettled([
+          fetch(publicDistribution.releaseNotesUrl, {
+            headers: { Accept: 'application/json' },
+            signal: controller.signal,
+          }),
+          fetch(publicDistribution.releaseManifestUrl, {
+            headers: { Accept: 'application/json' },
+            signal: controller.signal,
+          }),
+        ])
 
-        if (!response.ok) throw new Error(`Release notes fetch failed: ${response.status}`)
+        const notesResponse = notesResult.status === 'fulfilled' && notesResult.value.ok ? notesResult.value : null
+        const manifestResponse = manifestResult.status === 'fulfilled' && manifestResult.value.ok ? manifestResult.value : null
 
-        const data = (await response.json()) as ReleaseNotesResponse
+        if (!notesResponse && !manifestResponse) throw new Error('Distribution metadata fetch failed')
+
+        const data = notesResponse ? ((await notesResponse.json()) as ReleaseNotesResponse) : {}
+        const manifest = manifestResponse ? ((await manifestResponse.json()) as ReleaseManifestResponse) : null
+        const manifestVersion = getLatestManifestVersion(manifest)
+        const notesVersion = data.version || publicDistribution.version
+        const usesManifestVersion = manifestVersion ? compareVersion(manifestVersion, notesVersion) > 0 : false
+        const version = usesManifestVersion && manifestVersion ? manifestVersion : notesVersion
 
         setRelease({
-          version: data.version || publicDistribution.version,
-          title: data.title || `YMP ${publicDistribution.version}`,
-          summary: data.summary || publicDistribution.summary,
+          version,
+          title: usesManifestVersion ? `YMP ${version}` : data.title || `YMP ${publicDistribution.version}`,
+          summary: usesManifestVersion ? publicDistribution.summary : data.summary || publicDistribution.summary,
           publishedAt: publicDistribution.publishedAt,
           source: 'live',
         })
@@ -844,6 +913,42 @@ export function DownloadPage() {
 
         <Section alt>
           <ReleaseIntegrityPanel />
+
+          <div className="download-choice-board" aria-label="配布ファイルの選び方">
+            {downloadChoiceCards.map((item) => {
+              const ChoiceIcon = item.Icon
+              return (
+                <InteractiveCard key={item.title} className="release-panel premium-glass download-choice-card">
+                  <div className="download-choice-card__head">
+                    <span className="download-choice-card__icon" aria-hidden="true">
+                      <ChoiceIcon size={19} />
+                    </span>
+                    <div>
+                      <span className="subpage-card__eyebrow">{item.label}</span>
+                      <h2>{item.title}</h2>
+                    </div>
+                  </div>
+                  <p>{item.body}</p>
+                  <code>
+                    <strong>{item.shortName}</strong>
+                    <span>{item.fileName}</span>
+                  </code>
+                  <ul>
+                    {item.goodFor.map((point) => (
+                      <li key={point}>
+                        <CheckCircle2 size={15} />
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
+                  <a href={item.href} rel="noreferrer">
+                    <span>このファイルを取得</span>
+                    <ArrowRight size={15} />
+                  </a>
+                </InteractiveCard>
+              )
+            })}
+          </div>
 
           <div className="subpage-section-head distribution-readiness-head">
             <p>配布物の完成度</p>

@@ -11173,6 +11173,126 @@ html {
   font-weight: 700;
 }
 
+.download-choice-board {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: clamp(1.35rem, 3vw, 2.2rem);
+}
+
+.download-choice-card {
+  min-width: 0;
+  display: grid;
+  gap: 0.9rem;
+  align-content: start;
+  padding: clamp(1rem, 2vw, 1.35rem);
+}
+
+.download-choice-card__head {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.download-choice-card__head > div {
+  min-width: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.download-choice-card__icon {
+  flex: 0 0 auto;
+  display: inline-grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  color: #11140f;
+  background: #e0c184;
+  box-shadow: 0 12px 26px rgba(224, 193, 132, 0.14);
+}
+
+.download-choice-card h2,
+.download-choice-card p {
+  margin: 0;
+}
+
+.download-choice-card h2 {
+  color: #fff7e6;
+  font-size: 1.18rem;
+  line-height: 1.36;
+}
+
+.download-choice-card p {
+  color: rgba(236, 233, 226, 0.74);
+  line-height: 1.68;
+}
+
+.download-choice-card > code {
+  display: grid;
+  gap: 0.18rem;
+  width: 100%;
+  padding: 0.7rem 0.78rem;
+  border: 1px solid rgba(255, 232, 190, 0.12);
+  border-radius: 10px;
+  color: #fff6df;
+  background: rgba(255, 255, 255, 0.045);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  word-break: break-all;
+}
+
+.download-choice-card > code strong {
+  color: #ffe8be;
+  font-family: "Noto Sans JP", var(--body);
+  font-size: 0.84rem;
+  line-height: 1.35;
+}
+
+.download-choice-card > code span {
+  display: block;
+}
+
+.download-choice-card ul {
+  display: grid;
+  gap: 0.48rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.download-choice-card li {
+  display: flex;
+  gap: 0.45rem;
+  align-items: center;
+  color: rgba(236, 233, 226, 0.82);
+  font-size: 0.88rem;
+  font-weight: 800;
+  line-height: 1.45;
+}
+
+.download-choice-card li svg,
+.download-choice-card a svg {
+  color: #e0c184;
+}
+
+.download-choice-card a {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 38px;
+  margin-top: auto;
+  padding: 0 0.78rem;
+  border: 1px solid rgba(255, 232, 190, 0.18);
+  border-radius: 8px;
+  color: #fff1cd;
+  background: rgba(224, 193, 132, 0.08);
+  font-size: 0.9rem;
+  font-weight: 900;
+  text-decoration: none;
+}
+
 .distribution-readiness-board {
   display: grid;
   gap: 1rem;
@@ -12456,6 +12576,7 @@ html {
     grid-template-columns: 1fr;
   }
 
+  .download-choice-board,
   .distribution-check-grid,
   .distribution-readiness-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -12492,6 +12613,7 @@ html {
 @media (max-width: 760px) {
   .release-integrity-grid,
   .release-asset-grid,
+  .download-choice-board,
   .distribution-check-grid,
   .distribution-readiness-grid,
   .sample-decision-strip,
@@ -12519,6 +12641,15 @@ html {
 
   .release-integrity-actions .brand-btn {
     width: 100%;
+  }
+
+  .download-choice-card a {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .download-choice-card > code span {
+    display: none;
   }
 
   .sample-screen-card img {

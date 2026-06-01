@@ -200,7 +200,7 @@ export const tagsUrl = updateFeedUrl
 export const changeLogUrl = releaseNotesUrl
 
 export const publicDistribution = {
-  version: '0.0.17',
+  version: '0.0.18',
   channel: 'win-x64-stable',
   publishedAt: '2026-06-01T05:06:24Z',
   baseUrl: distributionBaseUrl,
@@ -209,7 +209,7 @@ export const publicDistribution = {
   updateFeedUrl,
   releaseManifestUrl,
   summary:
-    'Windows配布版で、初回インストールから起動までを妨げていた同梱不足を修正した配布候補です。',
+    'Windows配布版の更新フィード、インストーラー、ポータブルZIPを0.0.18系に揃えた自己署名リリース候補です。',
   trustNote:
     '現在の配布物は自己署名のため、WindowsやSmartScreenの警告が表示される場合があります。配布元URLとSHA256を確認してから起動してください。',
   assets: {
@@ -217,16 +217,16 @@ export const publicDistribution = {
       label: 'インストーラー',
       fileName: 'YukkuriMatomeProcessor-win-x64-stable-Setup.exe',
       url: setupDownloadUrl,
-      sizeBytes: 296291728,
-      sha256: '388b2d88ddbb3c80580659aa52cc771036ba2c952690faff95081e31725311b0',
+      sizeBytes: 296298648,
+      sha256: 'f94189480102667b1a0baa094769f7f618d54310e8139450c84626f5c48ea7c0',
       description: '通常はこちら。インストールして起動し、自動更新フィードへ接続できます。',
     },
     portable: {
       label: 'ポータブルZIP',
       fileName: 'YukkuriMatomeProcessor-win-x64-stable-Portable.zip',
       url: portableDownloadUrl,
-      sizeBytes: 293700746,
-      sha256: '8633b37601b5cc5b06cd8437f99c77409ea4849a06acae71708e34575dd2fc53',
+      sizeBytes: 293707665,
+      sha256: '6308813c5f80e7420a7627f13c7ae9ae6113f66d1923be8cfc0575e73dbbd64a',
       description: 'インストールせずに試したい場合向け。解凍してから起動します。',
     },
   },
