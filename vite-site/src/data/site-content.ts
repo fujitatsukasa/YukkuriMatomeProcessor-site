@@ -262,6 +262,11 @@ export const faqGroups: FaqGroup[] = [
         answer:
           'はい。Freeプランで起動、初期設定、URL取得、台本編集、CSV/.ymmp前準備の流れを確認できます。台本取得とAI台本生成の利用制限解除が必要になったらPremiumを検討してください。',
       },
+      {
+        question: '無料版では何ができますか？',
+        answer:
+          'Freeプランでは、アプリ起動、初期設定、少数URLでの取得確認、台本下地の編集、CSV/.ymmp前準備まで試せます。本番件数で継続利用する前に、自分の制作手順に合うか確認できます。',
+      },
       { question: '想定ユーザーは誰ですか？', answer: 'YMM4で反応集、5chまとめ、ショート、ゆっくり解説を作る個人・チームを想定しています。' },
       {
         question: '導入前に必ず確認すべきページは？',
@@ -276,6 +281,7 @@ export const faqGroups: FaqGroup[] = [
     items: [
       { question: '導入時に最初にやるべきことは？', answer: '最新版のインストーラーまたはポータブルZIPを取得し、YMM4実行パス、保存先フォルダ、必要に応じて YouTube API キーを設定してください。' },
       { question: '対応OSは何ですか？', answer: 'Windows 10 / 11環境での利用を前提に設計しています。' },
+      { question: 'Windows専用ですか？', answer: 'はい。現時点ではWindows 10 / 11専用です。Mac、スマホ、ブラウザだけで完結するツールではありません。' },
       { question: 'Macで使えますか？', answer: '現時点ではMac版はありません。YMM4を使うWindows環境を前提にしています。' },
       {
         question: 'YMM4は必須ですか？',
@@ -304,8 +310,9 @@ export const faqGroups: FaqGroup[] = [
       { question: '設定で優先すべき項目は？', answer: 'YMM4パス、台本保存先、CSV/.ymmpの保存先、フォルダルールを優先して固定してください。' },
       { question: '複数人で設定を揃えるには？', answer: '初期値を定義した手順書を用意し、更新時は同じチェックリストで確認します。' },
       { question: '設定変更が反映されない場合は？', answer: '再起動、権限確認、保存先アクセス権の順に確認してください。' },
+      { question: 'YouTube APIキーは必要ですか？', answer: '通常の導入確認や台本整理だけなら必須ではありません。YouTube分析、コメント取得、検索条件を使う機能では YouTube API キーの設定が必要です。' },
       { question: 'YouTube分析を使うのに追加設定は必要ですか？', answer: 'はい。YouTube分析では API キーの設定が必要です。検索条件、除外条件、コメント取得などの利用前に確認してください。' },
-      { question: 'AIが全部自動で動画を完成させますか？', answer: 'いいえ。AIは台本下地や整形を補助しますが、最終的な編集、内容確認、投稿判断は利用者側で行います。' },
+      { question: 'AIが全部自動で動画を作りますか？', answer: 'いいえ。AIは台本下地や整形を補助しますが、最終的な編集、内容確認、投稿判断は利用者側で行います。' },
     ],
   },
   {

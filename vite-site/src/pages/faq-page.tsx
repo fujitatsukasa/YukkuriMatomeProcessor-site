@@ -44,7 +44,7 @@ const faqCategoryMeta: Record<
   },
 }
 
-const faqQuickQueries = ['Mac', 'Windows', 'YMM4', 'Premium', '返金', 'URL取得', 'API キー'] as const
+const faqQuickQueries = ['Mac', 'Windows', 'YMM4', '無料版', 'Premium', '返金', 'URL取得', 'API キー'] as const
 
 const faqHeroFacts = [
   {
@@ -96,11 +96,13 @@ const faqDecisionCards = [
 
 const priorityFaqQuestions = [
   'Macで使えますか？',
+  'Windows専用ですか？',
   'YMM4は必須ですか？',
-  '無料で試せますか？',
+  '無料版では何ができますか？',
   'Premiumで何が解除されますか？',
-  'YouTube分析を使うのに追加設定は必要ですか？',
-  'AIが全部自動で動画を完成させますか？',
+  'YouTube APIキーは必要ですか？',
+  'AIが全部自動で動画を作りますか？',
+  '対応していないURLは取得できますか？',
   '返金条件は何ですか？',
   '収益化は保証されますか？',
 ] as const
@@ -148,8 +150,8 @@ export function FaqPage() {
     <>
       <PageMeta
         title="FAQ｜導入前によくある質問"
-        description="Windows対応、YMM4前提、Mac対応、FreeとPremiumの違い、URL取得、APIキー、返金条件を導入前に確認できます。"
-        keywords="FAQ, Windows, Mac, YMM4, Premium, 返金, URL取得, APIキー"
+        description="Windows専用、Mac非対応、YMM4前提、無料版でできること、Premiumの制限解除、URL取得、APIキー、返金条件を導入前に確認できます。"
+        keywords="FAQ, Windows, Mac, YMM4, 無料版, Premium, 返金, URL取得, APIキー"
         path="/faq/"
         structuredData={faqPageStructuredData}
       />
@@ -161,7 +163,7 @@ export function FaqPage() {
               <p className="brand-kicker">FAQ</p>
               <h1>導入前によくある質問</h1>
               <p className="brand-lead">
-                Windows専用か、YMM4は必要か、無料で何ができるか、Premiumで何が解除されるかを購入前に確認できます。
+                Windows専用か、YMM4は必要か、無料版で何ができるか、Premiumで何が解除されるかを購入前に確認できます。
               </p>
 
               <label className="utility-search">
@@ -260,7 +262,7 @@ export function FaqPage() {
               <span className="subpage-card__eyebrow">重要FAQ</span>
               <h2>導入前に確認されやすい質問</h2>
               <p>
-                Windows専用、YMM4前提、FreeとPremium、返金、収益化保証の有無を先に確認できます。
+                Windows専用、YMM4前提、無料版とPremium、返金、収益化保証の有無を先に確認できます。
                 細かい内容は下のカテゴリと検索で続けて探せます。
               </p>
               <div className="faq-priority-actions">
