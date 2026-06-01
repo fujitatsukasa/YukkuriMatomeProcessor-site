@@ -21,7 +21,7 @@ export function NewsPage() {
         <section className="utility-hero utility-hero--news">
           <div className="utility-hero__shell">
             <div className="utility-hero__copy">
-              <p className="brand-kicker">NEWSROOM</p>
+              <p className="brand-kicker">お知らせ</p>
               <h1>直近の変更を、最短で把握する</h1>
               <p className="brand-lead">
                 ここでは告知を並べるだけでなく、自分に関係ある変更かどうかを判断しやすい順番でまとめています。最新告知、関連ページ、時系列の3段で辿れます。
@@ -40,7 +40,8 @@ export function NewsPage() {
 
               <div className="utility-link-row">
                 <Link to="/update/">アップデート履歴</Link>
-                <Link to="/instructions/">機能と使い方</Link>
+                <Link to="/instructions/">使い方</Link>
+                <Link to="/samples/">実画面・サンプル</Link>
                 <Link to="/faq/">FAQ</Link>
                 <Link to="/download/">無料でダウンロード</Link>
               </div>
@@ -49,7 +50,7 @@ export function NewsPage() {
             <div className="utility-hero__panel-stack">
               {latestNews ? (
                 <InteractiveCard className="release-panel premium-glass utility-hero__panel">
-                  <span className="subpage-card__eyebrow">LATEST NOTICE</span>
+                  <span className="subpage-card__eyebrow">最新のお知らせ</span>
                   <p className="news-feature__date">{latestNews.dateLabel}</p>
                   <h2>{latestNews.title}</h2>
                   <p>{latestNews.subtitle}</p>
@@ -81,7 +82,7 @@ export function NewsPage() {
         <Section>
           <div className="content-page news-timeline-shell">
             <div className="subpage-section-head">
-              <p>TIMELINE</p>
+              <p>時系列</p>
               <h2>過去のお知らせも時系列で辿る</h2>
             </div>
 

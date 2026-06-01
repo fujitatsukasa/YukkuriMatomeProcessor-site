@@ -104,7 +104,7 @@ export function BlogIndex() {
         <section className="editorial-hero">
           <div className="editorial-hero__shell">
             <div className="editorial-hero__copy">
-              <p className="brand-kicker">OFFICIAL BLOG</p>
+              <p className="brand-kicker">公式ブログ</p>
               <h1>ゆっくり動画制作の手順とYMM4前準備を読む</h1>
               <p className="brand-lead">
                 記事URLから台本下地を作る流れ、素材・著作権、YMM4で確認する前工程までを検索とタグで横断できます。
@@ -142,7 +142,7 @@ export function BlogIndex() {
 
             {heroFeaturedPost ? (
               <InteractiveCard className="release-panel premium-glass editorial-hero__panel">
-                <span className="subpage-card__eyebrow">{filteredPosts.length > 0 ? 'EDITOR’S PICK' : 'LATEST ARTICLE'}</span>
+                <span className="subpage-card__eyebrow">{filteredPosts.length > 0 ? 'おすすめ記事' : '最新記事'}</span>
                 <Link to={`/blog/${heroFeaturedPost.meta.slug}`} className="editorial-hero__panel-media">
                   <img src={resolveBlogVisual(heroFeaturedPost.meta)} alt={heroFeaturedPost.meta.title} />
                 </Link>
@@ -175,7 +175,7 @@ export function BlogIndex() {
 
         <Section>
           <div className="subpage-section-head">
-            <p>START HERE</p>
+            <p>読み始める前に</p>
             <h2>読む順番と前提</h2>
           </div>
 
@@ -205,7 +205,7 @@ export function BlogIndex() {
         {sidePosts.length ? (
           <Section alt>
             <div className="subpage-section-head">
-              <p>LATEST PICKS</p>
+              <p>おすすめ記事</p>
               <h2>今読むべき記事</h2>
             </div>
 
@@ -225,7 +225,7 @@ export function BlogIndex() {
 
         <Section className="blog-index-section">
           <div className="subpage-section-head">
-            <p>ARTICLE LIBRARY</p>
+            <p>記事一覧</p>
             <h2>テーマ別に記事を探す</h2>
           </div>
 

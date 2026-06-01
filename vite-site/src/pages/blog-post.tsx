@@ -196,7 +196,7 @@ export function BlogPost() {
               ブログ一覧へ戻る
             </Link>
 
-            <p className="brand-kicker">OFFICIAL BLOG ARTICLE</p>
+            <p className="brand-kicker">公式ブログ記事</p>
             <h1>{meta.title}</h1>
             <p className="blog-article-hero__lead">{meta.description}</p>
 
@@ -229,7 +229,7 @@ export function BlogPost() {
             <img src={articleVisual} alt={meta.title} className="blog-article-hero__image" />
 
             <div className="blog-article-hero__visual-copy">
-              <span className="subpage-card__eyebrow">AT A GLANCE</span>
+              <span className="subpage-card__eyebrow">要点</span>
               <h2>先に押さえる論点</h2>
               <p>結論を先に確認してから、必要な章だけ本文で拾える構成です。</p>
               <ul className="blog-article-hero__points">
@@ -245,7 +245,7 @@ export function BlogPost() {
           <aside className="blog-article-rail">
             {headings.length ? (
               <InteractiveCard className="release-panel premium-glass blog-article-rail-card">
-                <span className="subpage-card__eyebrow">CONTENTS</span>
+                <span className="subpage-card__eyebrow">目次</span>
                 <h2>目次</h2>
                 <ol className="blog-article-outline">
                   {headings.map((heading) => (
@@ -258,7 +258,7 @@ export function BlogPost() {
             ) : null}
 
             <InteractiveCard className="release-panel premium-glass blog-article-rail-card">
-              <span className="subpage-card__eyebrow">READING GUIDE</span>
+              <span className="subpage-card__eyebrow">読み方ガイド</span>
               <h2>必要な章だけ拾って読める構成です</h2>
               <p>
                 まず要点を確認し、気になる節だけ目次から開き、実作業に戻す段階で使い方ページと照らし合わせる流れを想定しています。
@@ -318,7 +318,7 @@ export function BlogPost() {
 
             <InteractiveCard className="release-panel premium-glass blog-conversion-panel">
               <div>
-                <span className="subpage-card__eyebrow">NEXT ACTION</span>
+                <span className="subpage-card__eyebrow">次にやること</span>
                 <h2>読んだ内容を、無料プランで実際の制作フローに戻す</h2>
                 <p>
                   記事で確認した考え方を、対応サイト取得、台本整理、YMM4前準備の画面で試せます。
@@ -346,7 +346,7 @@ export function BlogPost() {
         {relatedPosts.length ? (
           <Section alt className="blog-article-related">
             <div className="subpage-section-head">
-              <p>RELATED ARTICLES</p>
+              <p>関連記事</p>
               <h2>次に読むと流れが繋がる記事</h2>
             </div>
 

@@ -220,7 +220,8 @@ export function FaqPage() {
               </div>
 
               <div className="utility-link-row">
-                <Link to="/instructions/">機能と使い方</Link>
+                <Link to="/instructions/">使い方を見る</Link>
+                <Link to="/samples/">実画面を見る</Link>
                 <Link to="/purchase/">料金を見る</Link>
                 <Link to="/contact/">問い合わせる</Link>
               </div>
