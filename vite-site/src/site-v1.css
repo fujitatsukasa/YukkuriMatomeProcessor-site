@@ -8206,7 +8206,7 @@ html {
 .pricing-snapshot-grid {
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .pricing-snapshot-card {
@@ -10039,6 +10039,121 @@ html {
   margin-top: 1rem;
 }
 
+.pricing-decision-matrix {
+  width: min(1180px, calc(100% - 48px));
+  margin: 0 auto;
+  display: grid;
+  gap: clamp(1.05rem, 2vw, 1.5rem);
+  scroll-margin-top: calc(var(--header-offset, 72px) + 24px);
+}
+
+.pricing-decision-matrix__head span {
+  display: block;
+  max-width: 760px;
+  margin: 0 auto;
+  color: rgba(236, 233, 226, 0.72);
+  font-size: clamp(1rem, 1.35vw, 1.14rem);
+  line-height: 1.75;
+}
+
+.pricing-decision-matrix__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.9rem, 1.8vw, 1.25rem);
+}
+
+.pricing-decision-matrix__card {
+  display: grid;
+  align-content: start;
+  gap: 0.82rem;
+  min-height: 100%;
+  padding: clamp(1.05rem, 1.8vw, 1.35rem);
+  border-color: rgba(224, 193, 132, 0.18) !important;
+}
+
+.pricing-decision-matrix__icon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(224, 193, 132, 0.24);
+  border-radius: 14px;
+  color: #f5d98d;
+  background: rgba(224, 193, 132, 0.08);
+}
+
+.pricing-decision-matrix__label {
+  width: fit-content;
+  padding: 0.34rem 0.68rem;
+  border: 1px solid rgba(224, 193, 132, 0.24);
+  border-radius: 999px;
+  color: rgba(255, 232, 190, 0.82);
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.pricing-decision-matrix__card h3,
+.pricing-decision-matrix__card p {
+  margin: 0;
+}
+
+.pricing-decision-matrix__card h3 {
+  color: #fff7e6;
+  font-size: clamp(1.12rem, 1.5vw, 1.36rem);
+  line-height: 1.36;
+}
+
+.pricing-decision-matrix__card p {
+  color: rgba(236, 233, 226, 0.72);
+  font-size: 0.94rem;
+  line-height: 1.72;
+}
+
+.pricing-decision-matrix__card ul {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pricing-decision-matrix__card li {
+  position: relative;
+  padding-left: 1.05rem;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.pricing-decision-matrix__card li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.68em;
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 999px;
+  background: #e0c184;
+  transform: translateY(-50%);
+}
+
+.pricing-decision-matrix__link {
+  align-self: end;
+  width: fit-content;
+  margin-top: 0.15rem;
+  color: #f5d98d;
+  font-size: 0.92rem;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.pricing-decision-matrix__link:hover,
+.pricing-decision-matrix__link:focus-visible {
+  color: #fff7e6;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
 .blog-conversion-panel {
   margin-top: clamp(1.4rem, 3vw, 2.4rem);
   display: grid;
@@ -10169,7 +10284,8 @@ html {
   .pricing-unlock-grid,
   .pricing-fact-row,
   .pricing-unlock-goal-grid,
-  .pricing-caution-panel {
+  .pricing-caution-panel,
+  .pricing-decision-matrix__grid {
     grid-template-columns: 1fr;
   }
 
@@ -10206,6 +10322,10 @@ html {
   }
 
   .pricing-decision-guide {
+    width: min(100% - 28px, 560px);
+  }
+
+  .pricing-decision-matrix {
     width: min(100% - 28px, 560px);
   }
 

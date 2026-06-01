@@ -104,6 +104,36 @@ const premiumCompletionGoals = [
   },
 ] as const
 
+const purchaseDecisionMatrix = [
+  {
+    label: 'まだFreeでよい',
+    title: '導入相性を見ている段階',
+    body: '起動、少数URL、台本整理、CSV/.ymmp前準備までを確認している段階なら、まだFreeで十分です。',
+    checks: ['対応URLを確認中', '月に数本だけ試したい', 'YMM4前準備まで触って判断したい'],
+    href: '/instructions/',
+    cta: '使い方で確認を続ける',
+    Icon: CheckCircle2,
+  },
+  {
+    label: 'Premium検討',
+    title: '制限が制作回数の足かせになった段階',
+    body: '継続投稿で台本取得やAI台本生成の利用量が増え、Freeの検証枠では足りないと分かったら検討します。',
+    checks: ['取得件数を増やしたい', 'AI台本生成を継続利用したい', 'Googleアカウントで権限を保持したい'],
+    href: '#pricing-cards',
+    cta: 'プラン比較を見る',
+    Icon: ShieldCheck,
+  },
+  {
+    label: '購入前に確認',
+    title: '返金条件と注意点を先に読む',
+    body: '39,800円の買い切りなので、購入前に返金条件、動作環境、Premiumで保証しない範囲を確認します。',
+    checks: ['購入後7日以内を原則受付', '動画完成や収益化は保証外', '素材利用条件は自分で確認'],
+    href: '/legal/refund-policy/',
+    cta: '返金条件を見る',
+    Icon: RotateCcw,
+  },
+] as const
+
 const purchaseFactCards = [
   {
     label: '価格',
@@ -203,6 +233,48 @@ export function PurchasePage() {
 
         <Section id="pricing-cards">
           <PricingCards />
+        </Section>
+
+        <Section>
+          <div className="pricing-decision-matrix">
+            <div className="subpage-section-head pricing-decision-matrix__head">
+              <p>購入判断チェック</p>
+              <h2>まだFreeでよいか、Premiumを検討する段階かを分ける</h2>
+              <span>
+                先にFreeで実URLを試し、制限が制作回数の足かせになった時だけPremiumを検討します。
+              </span>
+            </div>
+
+            <div className="pricing-decision-matrix__grid" aria-label="FreeとPremiumの購入判断">
+              {purchaseDecisionMatrix.map((item) => {
+                const DecisionIcon = item.Icon
+                return (
+                  <InteractiveCard key={item.label} className="pricing-decision-matrix__card premium-glass">
+                    <div className="pricing-decision-matrix__icon">
+                      <DecisionIcon size={18} />
+                    </div>
+                    <span className="pricing-decision-matrix__label">{item.label}</span>
+                    <h3>{item.title}</h3>
+                    <p>{item.body}</p>
+                    <ul>
+                      {item.checks.map((check) => (
+                        <li key={check}>{check}</li>
+                      ))}
+                    </ul>
+                    {item.href.startsWith('#') ? (
+                      <a className="pricing-decision-matrix__link" href={item.href}>
+                        {item.cta}
+                      </a>
+                    ) : (
+                      <Link className="pricing-decision-matrix__link" to={item.href}>
+                        {item.cta}
+                      </Link>
+                    )}
+                  </InteractiveCard>
+                )
+              })}
+            </div>
+          </div>
         </Section>
 
         <Section className="pricing-reassurance-section">
