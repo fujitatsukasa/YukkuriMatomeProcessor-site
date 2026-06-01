@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from '@/lib/light-motion'
 import { ArrowRight, BookOpen, Calendar, Clock, FileCheck2, ShieldCheck, Tag as TagIcon } from 'lucide-react'
 import { InteractiveCard, PageMeta, Section } from '@/components/ui'
-import { siteTitle } from '@/data/site-content'
+import { downloadUrl, siteTitle } from '@/data/site-content'
 import { getAllBlogPosts, resolveBlogVisual } from '@/lib/blog'
 
 function formatDate(date: string) {
@@ -39,6 +39,39 @@ const blogReadingPaths = [
     Icon: ShieldCheck,
   },
 ]
+
+const blogDecisionRoutes = [
+  {
+    label: '導入判断',
+    title: 'Windows / YMM4前提を確認する',
+    body: 'Mac不可、YMM4前提、無料版で試せる範囲など、導入前の不安はFAQで確認します。',
+    href: '/faq/',
+  },
+  {
+    label: '操作確認',
+    title: 'URL入力からYMM4前準備まで見る',
+    body: '記事で流れを読んだ後は、実際の手順で押す場所、入力するもの、成功状態を確認します。',
+    href: '/instructions/',
+  },
+  {
+    label: '実画面',
+    title: '画面とBefore/Afterを見る',
+    body: '雰囲気ではなく、URL取得、台本整理、YMM4前準備の実画面とサンプルで確認します。',
+    href: '/samples/',
+  },
+  {
+    label: '料金判断',
+    title: 'Freeで足りるか判断する',
+    body: '無料で試し、台本取得とAI台本生成の制限解除が必要になったらPremiumを確認します。',
+    href: '/purchase/',
+  },
+] as const
+
+const blogReaderChecks = [
+  '記事は一般論ではなく、YMM4前準備に関係するものから読む',
+  'AI出力や収益化は保証ではなく、確認が必要な下書きとして扱う',
+  '読んだ後は実画面、使い方、Free動作確認で自分の環境に合うか見る',
+] as const
 
 export function BlogIndex() {
   const allPosts = useMemo(
@@ -95,7 +128,7 @@ export function BlogIndex() {
     <>
       <PageMeta
         title={`オフィシャルブログ | ${siteTitle}`}
-        description="ゆっくり解説、反応集、YMM4、台本下地、素材・著作権、YMM4前準備に関する実践ノウハウをまとめた公式ブログです。"
+        description="ゆっくり解説、反応集、YMM4、台本下地、素材・著作権、YMM4前準備に関する公式ブログ。記事を読んだ後に実画面、使い方、無料版で確認できます。"
         keywords="ブログ,ゆっくり解説,動画編集,YMM4,YMM4前準備,制作手順"
         path="/blog/"
       />
@@ -200,6 +233,42 @@ export function BlogIndex() {
           <div className="blog-editorial-note" role="note">
             収益化や再生数を保証する記事ではありません。AI出力は下書きとして扱い、素材・引用・音声ライセンスを確認する前提で掲載しています。
           </div>
+
+          <InteractiveCard className="release-panel premium-glass blog-reader-gate">
+            <div className="blog-reader-gate__copy">
+              <span className="subpage-card__eyebrow">読む目的</span>
+              <h2>記事を読んだら、実画面と無料版で自分の環境に合うか確認する</h2>
+              <p>
+                ブログは検索流入用の記事置き場ではなく、導入前に迷いやすい前提を整理する入口です。
+                最後は実画面、使い方、Free動作確認で判断してください。
+              </p>
+              <ul>
+                {blogReaderChecks.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="blog-reader-gate__routes" aria-label="ブログ読後に確認するページ">
+              {blogDecisionRoutes.map((route) => (
+                <Link key={route.href} to={route.href}>
+                  <span>{route.label}</span>
+                  <strong>{route.title}</strong>
+                  <small>{route.body}</small>
+                  <ArrowRight size={15} />
+                </Link>
+              ))}
+            </div>
+
+            <div className="blog-reader-gate__actions">
+              <a className="brand-btn brand-btn--primary" href={downloadUrl} target="_blank" rel="noopener noreferrer">
+                無料でダウンロード
+              </a>
+              <Link className="brand-btn brand-btn--ghost" to="/samples/">
+                実画面を見る
+              </Link>
+            </div>
+          </InteractiveCard>
         </Section>
 
         {sidePosts.length ? (
