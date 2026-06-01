@@ -66,6 +66,25 @@ const downloadSupportCards = [
   },
 ] as const
 
+const distributionChecks = [
+  {
+    title: '配布ファイル',
+    body: '標準配布は GitHub Releases の `YukkuriMatomeProcessor.zip` です。別名ファイルや再配布URLではなく、公式リンクから取得してください。',
+  },
+  {
+    title: '初回起動前',
+    body: 'ZIPを解凍し、書き込み可能なフォルダへ置いてから起動します。Windowsの警告が出た場合は、配布元URLとファイル名を確認してください。',
+  },
+  {
+    title: '起動後に確認',
+    body: 'YMM4実行パス、保存先フォルダ、必要に応じたYouTube APIキーを設定してから、少数URLで動作確認します。',
+  },
+  {
+    title: '更新時',
+    body: 'アップデート前に保存先と設定を確認し、必要なら作業フォルダをバックアップしてください。変更点は更新履歴で確認できます。',
+  },
+] as const
+
 const instructionGuardrails = [
   {
     eyebrow: '最初に固定',
@@ -306,6 +325,7 @@ export function DownloadPage() {
           flowLinks={[
             { label: 'FAQを見る', href: '/faq/' },
             { label: '料金を確認', href: '/purchase/' },
+            { label: '実画面・サンプルを見る', href: '/samples/' },
           ]}
           media={
             <InteractiveCard className="page-visual-card premium-glass">
@@ -324,6 +344,22 @@ export function DownloadPage() {
 
         <Section>
           <MetricStrip items={[...downloadMetrics]} ariaLabel="ダウンロードページの要点" />
+        </Section>
+
+        <Section alt>
+          <div className="subpage-section-head distribution-check-head">
+            <p>配布物チェック</p>
+            <h2>ダウンロード前後に確認すること</h2>
+          </div>
+
+          <div className="distribution-check-grid">
+            {distributionChecks.map((item) => (
+              <InteractiveCard key={item.title} className="release-panel premium-glass distribution-check-card">
+                <span className="subpage-card__eyebrow">{item.title}</span>
+                <p>{item.body}</p>
+              </InteractiveCard>
+            ))}
+          </div>
         </Section>
 
         <Section alt>

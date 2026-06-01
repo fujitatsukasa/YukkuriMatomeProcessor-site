@@ -316,6 +316,7 @@ export function SiteLayout() {
               <h3>クイックリンク</h3>
               <ul>
                 <li><Link to="/download/">無料でダウンロード</Link></li>
+                <li><Link to="/samples/">実画面・サンプル</Link></li>
                 <li><Link to="/purchase/">料金を確認</Link></li>
                 <li><Link to="/news/">最新のお知らせ</Link></li>
               </ul>

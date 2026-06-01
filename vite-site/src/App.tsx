@@ -13,6 +13,7 @@ const PurchasePage = lazy(() => import('@/pages/purchase-page').then((module) =>
 const ContactPage = lazy(() => import('@/pages/contact-page').then((module) => ({ default: module.ContactPage })))
 const NewsPage = lazy(() => import('@/pages/news-page').then((module) => ({ default: module.NewsPage })))
 const UpdatePage = lazy(() => import('@/pages/update-page').then((module) => ({ default: module.UpdatePage })))
+const SamplesPage = lazy(() => import('@/pages/samples-page').then((module) => ({ default: module.SamplesPage })))
 const NewsPostPage = lazy(() => import('@/pages/news-post-page').then((module) => ({ default: module.NewsPostPage })))
 const BlogIndex = lazy(() => import('@/pages/blog-index').then((module) => ({ default: module.BlogIndex })))
 const BlogPost = lazy(() => import('@/pages/blog-post').then((module) => ({ default: module.BlogPost })))
@@ -78,6 +79,8 @@ function App() {
         <Route path="blog/:slug/" element={<BlogPost />} />
         <Route path="purchase" element={<PurchasePage />} />
         <Route path="purchase/" element={<PurchasePage />} />
+        <Route path="samples" element={<SamplesPage />} />
+        <Route path="samples/" element={<SamplesPage />} />
         <Route path="contact" element={<ContactPage />} />
         <Route path="contact/" element={<ContactPage />} />
         <Route path="news" element={<NewsPage />} />

@@ -317,6 +317,7 @@ export const pageRegistry: Record<string, PageEntry> = {
   '/': { label: 'ホーム', navKey: 'home', hideBreadcrumbs: true },
   '/download/': { label: 'ダウンロード', navKey: 'download', parent: '/' },
   '/instructions/': { label: '機能と使い方', navKey: 'instructions', parent: '/' },
+  '/samples/': { label: '実画面・サンプル', parent: '/' },
   '/update/': { label: 'アップデート', navKey: 'update', parent: '/' },
   '/news/': { label: 'お知らせ', navKey: 'news', parent: '/' },
   '/faq/': { label: 'FAQ', navKey: 'faq', parent: '/' },

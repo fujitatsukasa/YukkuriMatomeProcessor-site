@@ -250,6 +250,12 @@ export function HomePage() {
               ))}
             </ul>
           </div>
+
+          <div className="home-practical-center home-practical-center--split">
+            <Link className="brand-btn brand-btn--ghost" to="/samples/">
+              実画面・サンプルを見る
+            </Link>
+          </div>
         </section>
 
         <section className="home-practical-section" aria-labelledby="pricing-heading">
