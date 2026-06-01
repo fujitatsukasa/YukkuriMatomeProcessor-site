@@ -7549,6 +7549,110 @@ html {
   line-height: 1.68;
 }
 
+.release-readiness-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: clamp(1rem, 2.4vw, 1.7rem);
+}
+
+.release-readiness-card {
+  display: grid;
+  gap: 0.72rem;
+  align-content: start;
+  padding: clamp(1rem, 1.7vw, 1.28rem);
+}
+
+.release-readiness-card__label {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 0.42rem;
+  min-height: 30px;
+  padding: 0.32rem 0.62rem;
+  border: 1px solid rgba(255, 232, 190, 0.16);
+  border-radius: 999px;
+  color: rgba(255, 235, 198, 0.9);
+  background: rgba(224, 193, 132, 0.08);
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.release-readiness-card--ok .release-readiness-card__label {
+  border-color: rgba(68, 214, 117, 0.28);
+  color: rgba(188, 255, 211, 0.96);
+  background: rgba(68, 214, 117, 0.1);
+}
+
+.release-readiness-card--warning .release-readiness-card__label,
+.release-readiness-card--caution .release-readiness-card__label {
+  border-color: rgba(255, 203, 114, 0.28);
+  color: rgba(255, 232, 190, 0.96);
+  background: rgba(255, 203, 114, 0.1);
+}
+
+.release-readiness-card h2,
+.release-readiness-card p,
+.release-update-completion-panel h2,
+.release-update-completion-panel p {
+  margin: 0;
+}
+
+.release-readiness-card h2,
+.release-update-completion-panel h2 {
+  color: #fff7e6;
+  line-height: 1.38;
+}
+
+.release-readiness-card h2 {
+  font-size: 1.08rem;
+}
+
+.release-readiness-card p,
+.release-update-completion-panel p {
+  color: rgba(236, 233, 226, 0.72);
+  line-height: 1.68;
+}
+
+.release-update-completion-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 0.86fr) minmax(280px, 0.72fr);
+  gap: clamp(1rem, 2.6vw, 1.6rem);
+  align-items: start;
+  margin-bottom: clamp(1.4rem, 3vw, 2.2rem);
+  padding: clamp(1.05rem, 2vw, 1.45rem);
+}
+
+.release-update-completion-panel .subpage-card__eyebrow {
+  margin-bottom: 0.72rem;
+}
+
+.release-update-completion-list {
+  display: grid;
+  gap: 0.62rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.release-update-completion-list li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.55rem;
+  align-items: start;
+  padding: 0.68rem 0.76rem;
+  border: 1px solid rgba(255, 232, 190, 0.12);
+  border-radius: 12px;
+  color: rgba(236, 233, 226, 0.78);
+  background: rgba(255, 255, 255, 0.035);
+  line-height: 1.55;
+}
+
+.release-update-completion-list svg {
+  color: #e0c184;
+  margin-top: 0.12rem;
+}
+
 .release-detail-block {
   position: relative;
   z-index: 1;
@@ -8211,6 +8315,8 @@ html {
 .faq-category-grid,
 .faq-decision-grid,
 .update-summary-grid,
+.release-readiness-grid,
+.release-update-completion-panel,
 .contact-status-grid,
 .contact-channel-grid,
 .contact-intake-grid,

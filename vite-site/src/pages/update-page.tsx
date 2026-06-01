@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { InteractiveCard, PageMeta, Section } from '@/components/ui'
 import { downloadUrl, publicDistribution } from '@/data/site-content'
-import { BadgeCheck, Clock3, Download, ExternalLink, ShieldCheck, Wrench } from 'lucide-react'
+import { AlertTriangle, BadgeCheck, CheckCircle2, Clock3, Download, ExternalLink, ShieldCheck, Wrench } from 'lucide-react'
 
 interface Release {
   id: number
@@ -24,8 +24,33 @@ interface DistributionReleaseNotes {
 }
 
 const releaseTermReplacements = [
-  { pattern: new RegExp(`\\bscript${'fetch'}\\b`, 'gi'), label: '台本取得' },
-  { pattern: new RegExp(`\\bscript${'generation'}\\b`, 'gi'), label: 'AI台本生成' },
+  { pattern: /\bscript[_-]?fetch\b/gi, label: '台本取得' },
+  { pattern: /\bscript[_-]?generation\b/gi, label: 'AI台本生成' },
+  { pattern: /packaged runtime blocker/gi, label: '配布版の起動阻害要因' },
+  { pattern: /packaged runtime/gi, label: '配布版の実行環境' },
+  { pattern: /packaged exe/gi, label: '配布版exe' },
+  { pattern: /packaged smoke evidence/gi, label: '配布版の起動確認記録' },
+  { pattern: /release artifact inventory/gi, label: '配布ファイル一覧' },
+  { pattern: /production packaged app/gi, label: '本番配布アプリ' },
+  { pattern: /packaged app/gi, label: '配布アプリ' },
+  { pattern: /Web runtime/gi, label: 'Web実行環境' },
+  { pattern: /runtime module/gi, label: '実行時モジュール' },
+  { pattern: /windowed exe/gi, label: 'ウィンドウ版exe' },
+  { pattern: /stdout\/stderr/gi, label: '標準出力/エラー出力' },
+  { pattern: /Uvicorn/gi, label: '内部Webサーバー' },
+  { pattern: /Vite dev server \/ npm/gi, label: '開発用サーバー/npm' },
+  { pattern: /third-party game shell assets/gi, label: '別用途の画面素材' },
+  { pattern: /current\/_internal\/main\.dist\/YMP-Main-Web\.exe/gi, label: 'メイン画面の実行ファイル' },
+  { pattern: /Launcher/gi, label: '起動ランチャー' },
+  { pattern: /\bMain\b/gi, label: 'メイン画面' },
+  { pattern: /API status/gi, label: '内部APIの状態' },
+  { pattern: /self-signed Authenticode/gi, label: '自己署名のWindows署名' },
+  { pattern: /Authenticode/gi, label: 'Windows署名' },
+  { pattern: /SmartScreen/gi, label: 'Windows SmartScreen' },
+  { pattern: /public trust blocker/gi, label: '公開配布時の信頼表示課題' },
+  { pattern: /auth \/ billing/gi, label: 'ログイン/課金' },
+  { pattern: /E2E/gi, label: '実ユーザー確認' },
+  { pattern: /fresh VM final pass/gi, label: 'クリーン環境の最終確認' },
 ] as const
 
 function formatDate(dateStr: string) {
@@ -134,6 +159,38 @@ const updateSummaryCards = [
     body: '公式サイトでは要点だけを表示し、細かい原文は公式リリースで確認できます。',
     Icon: BadgeCheck,
   },
+] as const
+
+const releaseReadinessCards = [
+  {
+    label: '確認済み',
+    title: `${publicDistribution.version}はインストールからメイン起動まで確認済み`,
+    body: 'Windows 11 VMで署名確認、インストール、起動ランチャー、内部API、メイン画面の起動まで確認されています。',
+    tone: 'ok',
+    Icon: CheckCircle2,
+  },
+  {
+    label: '注意',
+    title: '自己署名のためWindows警告が出る場合があります',
+    body: '一般公開ではWindows SmartScreenや発行元の信頼表示に課題が残ります。公式URLとSHA256を照合してください。',
+    tone: 'warning',
+    Icon: AlertTriangle,
+  },
+  {
+    label: '残タスク',
+    title: 'ログイン/課金の実ユーザー確認は別途必要です',
+    body: '配布物の起動確認とは別に、ログイン、課金、完全にクリーンな環境での最終確認は継続確認が必要です。',
+    tone: 'caution',
+    Icon: Clock3,
+  },
+] as const
+
+const updateCompletionChecks = [
+  '公式リンクから最新版を取得した',
+  'ファイル名、サイズ、SHA256を確認した',
+  'インストールまたは解凍後に起動できた',
+  'YMM4パスと保存先設定が残っているか確認した',
+  '少数URLで候補取得と台本下地まで再確認した',
 ] as const
 
 export function UpdatePage() {
@@ -321,6 +378,46 @@ export function UpdatePage() {
               )
             })}
           </div>
+
+          <div className="release-readiness-grid" aria-label="最新版の確認状況">
+            {releaseReadinessCards.map((card) => {
+              const ReadinessIcon = card.Icon
+              return (
+                <InteractiveCard
+                  key={card.title}
+                  className={`release-panel premium-glass release-readiness-card release-readiness-card--${card.tone}`}
+                >
+                  <span className="release-readiness-card__label">
+                    <ReadinessIcon size={16} />
+                    {card.label}
+                  </span>
+                  <h2>{card.title}</h2>
+                  <p>{card.body}</p>
+                </InteractiveCard>
+              )
+            })}
+          </div>
+
+          <InteractiveCard className="release-panel premium-glass release-update-completion-panel">
+            <div>
+              <span className="subpage-card__eyebrow">
+                <CheckCircle2 size={16} />
+                更新後の完了判定
+              </span>
+              <h2>更新できたかは、起動だけでなく少数URLまで通して確認する</h2>
+              <p>
+                アップデート直後に本番件数へ戻さず、まず公式配布物、設定、少数URLの取得、台本下地までを確認してください。
+              </p>
+            </div>
+            <ul className="release-update-completion-list">
+              {updateCompletionChecks.map((item) => (
+                <li key={item}>
+                  <CheckCircle2 size={16} />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </InteractiveCard>
 
           <div className="subpage-section-head">
             <p>更新前の確認</p>
