@@ -12553,7 +12553,7 @@ html {
 }
 
 .home-focus-hero,
-.home-focus-proof,
+.home-focus-io,
 .home-focus-section,
 .home-focus-final {
   width: min(1180px, calc(100% - 48px));
@@ -12655,8 +12655,7 @@ html {
   outline-offset: 3px;
 }
 
-.home-focus-badges,
-.home-focus-proof {
+.home-focus-badges {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
@@ -12667,8 +12666,7 @@ html {
   grid-column: 1;
 }
 
-.home-focus-badges span,
-.home-focus-proof div {
+.home-focus-badges span {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -12679,21 +12677,11 @@ html {
   background: rgba(255, 255, 255, 0.82);
   font-size: 0.84rem;
   font-weight: 800;
-}
-
-.home-focus-badges span {
   padding: 0 10px;
 }
 
-.home-focus-proof div {
-  flex: 1 1 250px;
-  align-items: flex-start;
-  padding: 10px 12px;
-  line-height: 1.5;
-}
-
 .home-focus-badges svg,
-.home-focus-proof svg,
+.home-focus-io__card svg,
 .home-focus-screen-card span svg,
 .home-focus-faq__head svg {
   color: #1d756d;
@@ -12778,8 +12766,75 @@ html {
   color: #141b25;
 }
 
-.home-focus-proof {
+.home-focus-io {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.56fr) minmax(0, 1.44fr);
+  gap: 18px;
+  align-items: stretch;
   padding: 0 0 28px;
+}
+
+.home-focus-io .home-focus-section__head {
+  margin: 0;
+  align-self: center;
+}
+
+.home-focus-io__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.home-focus-io__card {
+  min-width: 0;
+  display: grid;
+  gap: 8px;
+  align-content: start;
+  padding: 16px;
+  border: 1px solid rgba(31, 42, 53, 0.13);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: 0 18px 34px -30px rgba(18, 22, 29, 0.45);
+}
+
+.home-focus-io__card > span {
+  width: fit-content;
+  padding: 5px 10px;
+  border-radius: 999px;
+  color: #1d756d;
+  background: #e6f1ee;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.home-focus-io__card h3 {
+  font-size: 1.06rem;
+  line-height: 1.38;
+}
+
+.home-focus-io__card p {
+  color: #4d5965;
+  font-size: 0.88rem;
+  line-height: 1.62;
+}
+
+.home-focus-io__card ul {
+  display: grid;
+  gap: 6px;
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.home-focus-io__card li {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  min-width: 0;
+  color: #27333d;
+  font-size: 0.84rem;
+  font-weight: 900;
+  line-height: 1.42;
 }
 
 .home-focus-section {
@@ -13126,6 +13181,10 @@ html {
     grid-template-columns: 1fr;
   }
 
+  .home-focus-io {
+    grid-template-columns: 1fr;
+  }
+
   .home-focus-hero {
     grid-template-columns: minmax(0, 0.92fr) minmax(340px, 1fr);
     gap: 24px;
@@ -13157,7 +13216,7 @@ html {
     width: min(100% - 32px, 760px);
   }
 
-  .home-focus-proof,
+  .home-focus-io,
   .home-focus-section,
   .home-focus-final {
     width: min(100% - 32px, 640px);
@@ -13185,6 +13244,7 @@ html {
   }
 
   .home-focus-flow,
+  .home-focus-io__grid,
   .home-focus-goal-list,
   .home-focus-screen-grid,
   .home-focus-plans {
@@ -13239,6 +13299,22 @@ html {
     grid-template-columns: 1fr;
   }
 
+  .home-focus-hero__copy {
+    order: 1;
+  }
+
+  .home-focus-hero > .home-focus-badges {
+    order: 2;
+  }
+
+  .home-focus-hero > .home-focus-flow {
+    order: 3;
+  }
+
+  .home-focus-visual {
+    order: 4;
+  }
+
   .home-focus-visual,
   .home-focus-hero > .home-focus-badges,
   .home-focus-hero > .home-focus-flow {
@@ -13250,19 +13326,25 @@ html {
 
 @media (max-width: 560px) {
   .home-focus-hero,
-  .home-focus-proof,
+  .home-focus-io,
   .home-focus-section,
   .home-focus-final {
     width: min(100% - 26px, 520px);
   }
 
+  .home-focus-hero {
+    padding-top: 22px;
+    gap: 16px;
+  }
+
   .home-focus h1 {
-    font-size: 1.62rem;
+    font-size: 1.46rem;
+    line-height: 1.28;
   }
 
   .home-focus-lead {
-    font-size: 0.9rem;
-    line-height: 1.72;
+    font-size: 0.86rem;
+    line-height: 1.66;
   }
 
   .home-focus-actions,
@@ -13275,13 +13357,19 @@ html {
     min-height: 44px;
   }
 
+  .home-focus-visual img {
+    aspect-ratio: 16 / 8.7;
+  }
+
+  .home-focus-visual figcaption {
+    padding: 9px 10px;
+    font-size: 0.78rem;
+  }
+
   .home-focus-section {
     padding: 30px 0;
   }
 
-  .home-focus-proof div {
-    flex-basis: 100%;
-  }
 }
 
 /* Final clarity overrides for the current public navigation. */

@@ -3,7 +3,6 @@ import { PageMeta } from '@/components/ui'
 import { downloadUrl, legal, siteOrigin, siteTitle } from '@/data/site-content'
 import {
   ArrowRight,
-  BadgeCheck,
   CheckCircle2,
   CreditCard,
   Download,
@@ -13,19 +12,33 @@ import {
   PencilLine,
 } from 'lucide-react'
 
-const heroBadges = ['Windows専用', 'YMM4向け', 'Freeあり'] as const
+const heroBadges = ['Windows専用', 'YMM4前提', '無料で試せる'] as const
 
 const flowItems = [
-  { label: '入れるもの', value: '記事URL / スレッドURL' },
-  { label: 'できること', value: '候補取得・台本整理' },
-  { label: '渡す準備', value: 'CSV / .ymmp前準備' },
+  { label: '入れるもの', value: '記事URL / スレッドURL / まとめ記事' },
+  { label: '作るもの', value: '台本下地 / CSV / .ymmp前準備' },
+  { label: '次にやること', value: 'YMM4で音声・字幕を調整' },
 ] as const
 
-const proofItems = [
-  'YMM4を開く前の台本下地と出力準備を短縮',
-  '動画完成ではなく、確認して仕上げる前提',
-  'Freeで起動、URL取得、台本整理まで試せる',
-  'Premiumは台本取得とAI台本生成の制限解除',
+const inputOutputCards = [
+  {
+    label: '入力',
+    title: '記事URL・スレッドURLを入れる',
+    body: '対応URLから題材候補を取得し、動画化する本文や画像候補を確認します。',
+    points: ['記事URL', 'スレッドURL', 'まとめ記事'],
+  },
+  {
+    label: '出力',
+    title: '台本下地とYMM4前準備を作る',
+    body: '読み上げ前の台本、CSV、.ymmp前準備、保存先や素材パスの確認へ進めます。',
+    points: ['台本下地', 'CSV', '.ymmp前準備'],
+  },
+  {
+    label: '前提',
+    title: '動画完成はYMM4で仕上げる',
+    body: '音声、字幕、立ち絵、間合いはYMM4側で確認します。まずFreeで流れを試せます。',
+    points: ['Windows専用', 'YMM4前提', 'Premiumは制限解除'],
+  },
 ] as const
 
 const goalMapItems = [
@@ -166,7 +179,7 @@ export function HomePage() {
   return (
     <>
       <PageMeta
-        title="ゆっくりまとめプロセッサー｜記事URL・スレッドURLから台本下地を作成"
+        title="ゆっくりまとめプロセッサー｜記事URLから台本下地とYMM4前準備を作成"
         description="記事URL・スレッドURLから、ゆっくり動画の台本下地とYMM4前準備を作成。5ch・あにまん等の素材取得、AI台本補助、CSV/.ymmp整理までWindowsで確認できます。無料プランあり。"
         keywords="ゆっくりまとめプロセッサー,YMM4,台本作成,CSV,.ymmp,反応集,5ch,あにまん,ゆっくり解説"
         path="/"
@@ -177,9 +190,9 @@ export function HomePage() {
         <section className="home-focus-hero" aria-labelledby="home-focus-heading">
           <div className="home-focus-hero__copy">
             <p className="home-focus-kicker">YMM4向け Windows制作支援ツール</p>
-            <h1 id="home-focus-heading">記事URL・スレッドURLから、YMM4用の台本下地を作る</h1>
+            <h1 id="home-focus-heading">記事URL・スレッドURLから、ゆっくり動画の台本下地とYMM4前準備を作る</h1>
             <p className="home-focus-lead">
-              記事URLやスレッドURLを入れると、候補取得、台本整理、AI補助、CSV/.ymmp前準備まで進められます。
+              記事URLやスレッドURLを入れると、候補取得、台本整理、CSV/.ymmp前準備まで進められます。
               最終編集はYMM4で行います。
             </p>
 
@@ -228,19 +241,34 @@ export function HomePage() {
           </div>
         </section>
 
-        <section className="home-focus-proof" aria-label="主な機能">
-          {proofItems.map((item) => (
-            <div key={item}>
-              <BadgeCheck size={17} />
-              <span>{item}</span>
-            </div>
-          ))}
+        <section className="home-focus-io" aria-labelledby="home-io-heading">
+          <div className="home-focus-section__head home-focus-section__head--left">
+            <p className="home-focus-kicker">入力から出力まで</p>
+            <h2 id="home-io-heading">何を入れると、何ができるかを先に確認する</h2>
+          </div>
+          <div className="home-focus-io__grid">
+            {inputOutputCards.map((item) => (
+              <article key={item.label} className="home-focus-io__card">
+                <span>{item.label}</span>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+                <ul>
+                  {item.points.map((point) => (
+                    <li key={point}>
+                      <CheckCircle2 size={15} />
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
         </section>
 
         <section className="home-focus-section home-focus-goal-map" aria-labelledby="home-goal-map-heading">
           <div className="home-focus-section__head">
-            <p className="home-focus-kicker">使ってできるまでの目標</p>
-            <h2 id="home-goal-map-heading">最初に確認する3ステップ</h2>
+            <p className="home-focus-kicker">無料で確認する目標</p>
+            <h2 id="home-goal-map-heading">自分のURLで試す前に見る3ステップ</h2>
             <p>
               Freeで実URLを試し、候補取得、台本整理、YMM4前準備まで通してから購入を判断できます。
             </p>
@@ -297,7 +325,7 @@ export function HomePage() {
         <section className="home-focus-section home-focus-section--decision" aria-labelledby="home-decision-heading">
           <div className="home-focus-section__head home-focus-section__head--left">
             <p className="home-focus-kicker">料金と前提確認</p>
-            <h2 id="home-decision-heading">Freeで試して、必要ならPremiumで制限解除</h2>
+            <h2 id="home-decision-heading">無料で試して、必要な時だけPremiumで制限解除</h2>
             <p>
               先に無料で起動とURL取得を確認できます。購入判断に必要な価格、支払い、返金条件は料金ページにまとめています。
             </p>
