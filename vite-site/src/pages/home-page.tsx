@@ -12,14 +12,6 @@ import {
   PencilLine,
 } from 'lucide-react'
 
-const heroProofItems = [
-  { label: '短縮できる工程', value: '台本下地 / 素材確認 / YMM4前準備' },
-  { label: '対象環境', value: 'Freeあり / Windows対応' },
-  { label: '料金', value: 'Premium買い切り ¥39,800 / 月額なし' },
-] as const
-
-const heroBadges = ['Freeあり', 'Windows対応', 'YMM4前準備対応'] as const
-
 const painCards = [
   {
     title: 'ネタ探しと候補整理で止まる',
@@ -173,12 +165,6 @@ const faqPreview = [
 
 const finalRouteCards = [
   {
-    title: '実画面を見る',
-    body: 'URL入力、台本整理、YMM4前準備の画面とBefore/Afterを確認します。',
-    href: '/samples/',
-    Icon: Monitor,
-  },
-  {
     title: '配布物を確認',
     body: '最新版インストーラー、ポータブルZIP、ファイル情報、初回起動、導入完了チェックを確認します。',
     href: '/download/',
@@ -219,7 +205,7 @@ export function HomePage() {
   return (
     <>
       <PageMeta
-        title="ゆっくりまとめプロセッサー｜反応集の台本下地とYMM4前準備を最短30秒で"
+        title="ゆっくりまとめプロセッサー｜反応集の下準備をURLからYMM4前準備まで"
         description="5chスレ・まとめ記事のURLから、反応集の台本下地、AI台本補助、素材候補、CSV/.ymmp前準備までを効率化。YMM4で仕上げる前の面倒な下準備を短縮できるWindowsソフトです。無料プランあり。"
         keywords="ゆっくりまとめプロセッサー,YMM4,台本作成,CSV,.ymmp,反応集,5ch,あにまん,ゆっくり解説"
         path="/"
@@ -229,21 +215,17 @@ export function HomePage() {
       <div className="home-focus">
         <section className="home-focus-hero" aria-labelledby="home-focus-heading">
           <div className="home-focus-hero__copy">
-            <p className="home-focus-kicker">ゆっくりまとめプロセッサー</p>
             <h1 id="home-focus-heading">
-              <span>5chスレ・</span>
-              <span>まとめ記事から、</span>
-              <span>反応集の台本下地と</span>
-              <span>YMM4前準備を</span>
-              <span>最短30秒で。</span>
+              <span>反応集の下準備を、</span>
+              <span>URLから</span>
+              <span>YMM4前準備まで。</span>
             </h1>
             <p className="home-focus-hero__statement">
-              YMM4で仕上げる前の、いちばん面倒な作業を短縮するソフト
+              5chスレ・まとめ記事から、台本下地・素材確認・CSV/.ymmp前準備を短縮。
             </p>
             <p className="home-focus-lead">
-              URLを入力して題材を選ぶだけで、読み上げ台本の下地、AI台本補助、
-              素材候補の確認、CSV/.ymmp前準備までをまとめて効率化。
-              面倒な下準備を短縮して、YMM4での仕上げ作業に集中できます。
+              完成動画はYMM4で仕上げる前提。ゆっくりまとめプロセッサーは、
+              YMM4に入る前の台本化・素材確認・出力準備だけを速くする制作支援ツールです。
             </p>
 
             <div className="home-focus-actions">
@@ -251,18 +233,6 @@ export function HomePage() {
                 <Download size={18} />
                 無料でダウンロード
               </a>
-              <Link className="home-focus-btn home-focus-btn--ghost" to="/samples/">
-                実画面を見る
-              </Link>
-            </div>
-
-            <div className="home-focus-badges" aria-label="製品の前提">
-              {heroBadges.map((badge) => (
-                <span key={badge}>
-                  <CheckCircle2 size={14} />
-                  {badge}
-                </span>
-              ))}
             </div>
 
           </div>
@@ -284,21 +254,6 @@ export function HomePage() {
             </figcaption>
           </figure>
 
-        </section>
-
-        <section className="home-focus-trust" aria-label="導入前の確認事項">
-          <div className="home-focus-proof" role="list">
-            {heroProofItems.map((item) => (
-              <div key={item.label} role="listitem">
-                <span>{item.label}</span>
-                <strong>{item.value}</strong>
-              </div>
-            ))}
-          </div>
-          <p className="home-focus-note">
-            ※完成動画の仕上げ、音声、字幕、立ち絵、間合い調整、書き出しはYMM4側で行います。
-            処理時間は対象URL、取得内容、通信環境、PC環境により異なります。
-          </p>
         </section>
 
         <section className="home-focus-section home-focus-pain" aria-labelledby="home-pain-heading">

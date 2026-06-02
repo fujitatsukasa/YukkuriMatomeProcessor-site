@@ -3,8 +3,8 @@ import { expect, test } from '@playwright/test'
 const primaryPages = [
   {
     path: '/',
-    heading: '5chスレ',
-    ctas: ['無料でダウンロード', '実画面を見る'],
+    heading: '反応集の下準備',
+    ctas: ['無料でダウンロード'],
   },
   {
     path: '/download/',

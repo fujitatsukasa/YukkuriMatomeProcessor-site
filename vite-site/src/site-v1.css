@@ -13663,7 +13663,7 @@ html {
 
 .home-focus-final__routes {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
 }
 
@@ -14112,6 +14112,8 @@ html {
   max-width: min(36rem, 100%);
   color: rgba(245, 247, 255, 0.78);
   font-size: 1.02rem;
+  overflow-wrap: anywhere;
+  word-break: normal;
 }
 
 .home-focus-btn {
@@ -14155,16 +14157,6 @@ html {
 .home-focus-proof strong {
   color: #fff8e9;
   overflow-wrap: anywhere;
-}
-
-.home-focus-badges {
-  gap: 6px;
-}
-
-.home-focus-badges span {
-  min-height: 28px;
-  padding: 0 8px;
-  font-size: 0.75rem;
 }
 
 .home-focus-mini-flow {
@@ -14577,34 +14569,6 @@ html {
   line-height: 1.68;
 }
 
-.home-focus-note {
-  max-width: min(40rem, 100%);
-  padding: 10px 12px;
-  border: 1px solid rgba(255, 232, 180, 0.14);
-  border-radius: 8px;
-  color: rgba(245, 247, 255, 0.64);
-  background: rgba(255, 255, 255, 0.055);
-  font-size: 0.78rem;
-  font-weight: 700;
-  line-height: 1.68;
-}
-
-.home-focus-trust {
-  width: min(1180px, calc(100% - 48px));
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.48fr);
-  gap: 12px;
-  align-items: stretch;
-  padding: 0 0 24px;
-}
-
-.home-focus-trust .home-focus-note {
-  max-width: none;
-  display: flex;
-  align-items: center;
-}
-
 .home-focus-pain {
   padding-top: 24px;
 }
@@ -14781,10 +14745,6 @@ html {
     grid-template-columns: 1fr;
   }
 
-  .home-focus-trust {
-    grid-template-columns: 1fr;
-  }
-
   .home-focus-pain__grid,
   .home-focus-scope__grid {
     grid-template-columns: 1fr;
@@ -14818,25 +14778,6 @@ html {
 
   .home-focus-value-card {
     min-height: auto;
-  }
-
-  .home-focus-note {
-    padding: 9px 10px;
-    font-size: 0.72rem;
-  }
-
-  .home-focus-trust {
-    width: min(100% - 24px, 520px);
-    padding-bottom: 18px;
-  }
-
-  .home-focus-trust .home-focus-proof {
-    grid-template-columns: 1fr;
-  }
-
-  .home-focus-trust .home-focus-proof div + div {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    border-left: 0;
   }
 
   .home-focus-pain-card,
