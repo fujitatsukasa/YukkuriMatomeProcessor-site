@@ -238,20 +238,12 @@ export function HomePage() {
           </div>
 
           <figure className="home-focus-visual">
-            <div className="home-focus-visual__bar" aria-hidden="true">
-              <span>実アプリ画面</span>
-              <strong>URL入力 → 候補選択 → 台本下地 → CSV/.ymmp前準備</strong>
-            </div>
             <img
-              src="/product_get_script.webp"
-              alt="記事URLから台本候補を取得する実アプリ画面"
+              src="/hero_workflow_imagegen_v1.webp"
+              alt="URLから台本下地、素材確認、YMM4前準備へ進む流れを示すビジュアル"
               loading="eager"
               decoding="async"
             />
-            <figcaption>
-              <strong>取得候補を選ぶ画面</strong>
-              <span>URL起点で台本下地、素材確認、YMM4前準備へ進みます</span>
-            </figcaption>
           </figure>
 
         </section>

@@ -14232,7 +14232,7 @@ html {
 }
 
 .home-focus-visual img {
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 1680 / 928;
   filter: saturate(1.08) contrast(1.04);
   object-position: left top;
 }
@@ -14368,7 +14368,7 @@ html {
   }
 
   .home-focus-visual img {
-    aspect-ratio: 16 / 8.5;
+    aspect-ratio: 1680 / 928;
   }
 
   .home-focus-visual__motion {
@@ -14452,7 +14452,7 @@ html {
   }
 
   .home-focus-visual img {
-    aspect-ratio: 16 / 7.4;
+    aspect-ratio: 1680 / 928;
   }
 
   .home-focus-visual figcaption {
