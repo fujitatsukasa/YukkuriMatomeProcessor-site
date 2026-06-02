@@ -14062,11 +14062,12 @@ html {
   min-height: auto;
   grid-template-columns: minmax(0, 0.88fr) minmax(440px, 1.12fr);
   gap: clamp(24px, 4vw, 56px);
-  padding: clamp(24px, 4svh, 36px) 0 10px;
+  align-items: start;
+  padding: clamp(12px, 2svh, 20px) 0 0;
 }
 
 .home-focus-hero__copy {
-  gap: clamp(14px, 2svh, 20px);
+  gap: clamp(12px, 1.6svh, 16px);
   min-width: 0;
 }
 
@@ -14078,12 +14079,12 @@ html {
 
 .home-focus h1 {
   max-width: 100%;
-  font-size: clamp(2.58rem, 4.05vw, 4.35rem);
-  line-height: 0.98;
+  font-size: 2.9rem;
+  line-height: 1;
   letter-spacing: 0;
   text-shadow: 0 18px 48px rgba(0, 0, 0, 0.38);
-  overflow-wrap: anywhere;
-  word-break: normal;
+  overflow-wrap: normal;
+  word-break: keep-all;
 }
 
 .home-focus h1 span {
@@ -14154,6 +14155,16 @@ html {
 .home-focus-proof strong {
   color: #fff8e9;
   overflow-wrap: anywhere;
+}
+
+.home-focus-badges {
+  gap: 6px;
+}
+
+.home-focus-badges span {
+  min-height: 28px;
+  padding: 0 8px;
+  font-size: 0.75rem;
 }
 
 .home-focus-mini-flow {
@@ -14351,7 +14362,7 @@ html {
   }
 
   .home-focus h1 {
-    font-size: clamp(2.25rem, 8vw, 3.2rem);
+    font-size: 2.55rem;
     line-height: 1.02;
   }
 
@@ -14387,7 +14398,7 @@ html {
   }
 
   .home-focus h1 {
-    font-size: clamp(2rem, 10vw, 2.45rem);
+    font-size: 2.15rem;
     line-height: 1.02;
   }
 
@@ -14566,6 +14577,160 @@ html {
   line-height: 1.68;
 }
 
+.home-focus-note {
+  max-width: min(40rem, 100%);
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 232, 180, 0.14);
+  border-radius: 8px;
+  color: rgba(245, 247, 255, 0.64);
+  background: rgba(255, 255, 255, 0.055);
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.68;
+}
+
+.home-focus-trust {
+  width: min(1180px, calc(100% - 48px));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.48fr);
+  gap: 12px;
+  align-items: stretch;
+  padding: 0 0 24px;
+}
+
+.home-focus-trust .home-focus-note {
+  max-width: none;
+  display: flex;
+  align-items: center;
+}
+
+.home-focus-pain {
+  padding-top: 24px;
+}
+
+.home-focus-pain__grid,
+.home-focus-scope__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.home-focus-pain-card,
+.home-focus-scope-card,
+.home-focus-comparison {
+  border: 1px solid rgba(255, 232, 180, 0.16);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.095), rgba(255, 255, 255, 0.055)),
+    rgba(8, 12, 16, 0.72);
+  box-shadow: 0 28px 60px -48px rgba(0, 0, 0, 0.78);
+  backdrop-filter: blur(10px);
+}
+
+.home-focus-pain-card,
+.home-focus-scope-card {
+  min-width: 0;
+  min-height: 182px;
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  padding: 18px;
+}
+
+.home-focus-pain-card > span {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  color: #17120a;
+  background: #ffd979;
+  font-size: 1.05rem;
+  font-weight: 900;
+}
+
+.home-focus-scope-card > svg {
+  color: #8fe5d5;
+}
+
+.home-focus-pain-card h3,
+.home-focus-scope-card h3 {
+  font-size: 1.08rem;
+  line-height: 1.42;
+}
+
+.home-focus-pain-card p,
+.home-focus-scope-card p {
+  margin: 0;
+  color: rgba(245, 247, 255, 0.72);
+  font-size: 0.92rem;
+  line-height: 1.72;
+}
+
+.home-focus-beforeafter {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.52fr) minmax(0, 1.48fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.home-focus-comparison {
+  min-width: 0;
+  overflow-x: auto;
+}
+
+.home-focus-comparison:focus-visible {
+  outline: 3px solid rgba(143, 215, 200, 0.28);
+  outline-offset: 3px;
+}
+
+.home-focus-comparison table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+  color: rgba(245, 247, 255, 0.82);
+  font-size: 0.92rem;
+}
+
+.home-focus-comparison th,
+.home-focus-comparison td {
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255, 232, 180, 0.12);
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.64;
+}
+
+.home-focus-comparison thead th {
+  color: #8fe5d5;
+  background: rgba(143, 215, 200, 0.09);
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.home-focus-comparison tbody th {
+  width: 8.5rem;
+  color: #fff8e9;
+  font-weight: 900;
+}
+
+.home-focus-comparison tbody td:last-child {
+  color: #fff1bf;
+  font-weight: 800;
+}
+
+.home-focus-comparison tbody tr:last-child th,
+.home-focus-comparison tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.home-focus-scope {
+  padding-top: 24px;
+}
+
+.home-focus-pain-card,
+.home-focus-scope-card,
 .home-focus-screen-card {
   transition:
     transform 180ms ease,
@@ -14584,6 +14749,8 @@ html {
 @media (hover: hover) and (pointer: fine) {
   .home-focus-io--deliverables .home-focus-io__card:hover,
   .home-focus-value-card:hover,
+  .home-focus-pain-card:hover,
+  .home-focus-scope-card:hover,
   .home-focus-screen-card:hover {
     transform: translateY(-3px);
     border-color: rgba(255, 232, 180, 0.3);
@@ -14593,6 +14760,10 @@ html {
 
 @media (max-width: 1120px) {
   .home-focus-io--deliverables {
+    grid-template-columns: 1fr;
+  }
+
+  .home-focus-beforeafter {
     grid-template-columns: 1fr;
   }
 
@@ -14607,6 +14778,15 @@ html {
 
 @media (max-width: 860px) {
   .home-focus-io--deliverables .home-focus-io__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-focus-trust {
+    grid-template-columns: 1fr;
+  }
+
+  .home-focus-pain__grid,
+  .home-focus-scope__grid {
     grid-template-columns: 1fr;
   }
 
@@ -14638,6 +14818,41 @@ html {
 
   .home-focus-value-card {
     min-height: auto;
+  }
+
+  .home-focus-note {
+    padding: 9px 10px;
+    font-size: 0.72rem;
+  }
+
+  .home-focus-trust {
+    width: min(100% - 24px, 520px);
+    padding-bottom: 18px;
+  }
+
+  .home-focus-trust .home-focus-proof {
+    grid-template-columns: 1fr;
+  }
+
+  .home-focus-trust .home-focus-proof div + div {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: 0;
+  }
+
+  .home-focus-pain-card,
+  .home-focus-scope-card {
+    min-height: auto;
+    padding: 15px;
+  }
+
+  .home-focus-comparison table {
+    min-width: 640px;
+    font-size: 0.84rem;
+  }
+
+  .home-focus-comparison th,
+  .home-focus-comparison td {
+    padding: 12px;
   }
 }
 
