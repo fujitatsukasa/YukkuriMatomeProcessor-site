@@ -27,6 +27,27 @@ const painCards = [
   },
 ] as const
 
+const heroScreenSteps = [
+  {
+    step: '1',
+    title: 'URLから候補取得',
+    image: '/product_get_script.webp',
+    alt: '記事URLから動画化候補を取得する実アプリ画面',
+  },
+  {
+    step: '2',
+    title: '台本下地を編集',
+    image: '/product_edit_script.webp',
+    alt: '読み上げ台本の下地を編集する実アプリ画面',
+  },
+  {
+    step: '3',
+    title: 'CSV/.ymmp前準備',
+    image: '/product_format_list.webp',
+    alt: 'CSVとymmp前準備の形式を確認する実アプリ画面',
+  },
+] as const
+
 const deliverableCards = [
   {
     label: '作れるもの 01',
@@ -237,13 +258,18 @@ export function HomePage() {
 
           </div>
 
-          <figure className="home-focus-visual">
-            <img
-              src="/hero_workflow_imagegen_v1.webp"
-              alt="URLから台本下地、素材確認、YMM4前準備へ進む流れを示すビジュアル"
-              loading="eager"
-              decoding="async"
-            />
+          <figure className="home-focus-visual home-focus-visual--actual" aria-label="実アプリ画面で見る制作前準備の流れ">
+            <div className="home-focus-actual-flow">
+              {heroScreenSteps.map((item) => (
+                <div key={item.step} className="home-focus-actual-step">
+                  <img src={item.image} alt={item.alt} loading="eager" decoding="async" />
+                  <div>
+                    <span>{item.step}</span>
+                    <strong>{item.title}</strong>
+                  </div>
+                </div>
+              ))}
+            </div>
           </figure>
 
         </section>

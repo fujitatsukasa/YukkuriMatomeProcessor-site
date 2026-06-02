@@ -14232,9 +14232,84 @@ html {
 }
 
 .home-focus-visual img {
-  aspect-ratio: 1680 / 928;
+  aspect-ratio: 16 / 9;
   filter: saturate(1.08) contrast(1.04);
   object-position: left top;
+}
+
+.home-focus-visual--actual {
+  padding: 10px;
+}
+
+.home-focus-visual--actual::after {
+  display: none;
+}
+
+.home-focus-actual-flow {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.home-focus-actual-step {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255, 232, 180, 0.18);
+  border-radius: 12px;
+  background: #090d12;
+}
+
+.home-focus-actual-step:first-child {
+  grid-row: 1 / span 2;
+}
+
+.home-focus-actual-step img {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  display: block;
+  aspect-ratio: auto;
+  object-fit: cover;
+  object-position: left top;
+}
+
+.home-focus-actual-step div {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  left: 10px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 9px 10px;
+  border: 1px solid rgba(255, 232, 180, 0.2);
+  border-radius: 10px;
+  color: #fff8e9;
+  background: rgba(6, 9, 13, 0.86);
+  box-shadow: 0 16px 28px -22px rgba(0, 0, 0, 0.92);
+  backdrop-filter: blur(10px);
+}
+
+.home-focus-actual-step span {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  color: #10140c;
+  background: #f0bd3f;
+  font-size: 0.8rem;
+  font-weight: 900;
+}
+
+.home-focus-actual-step strong {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: 0.92rem;
+  line-height: 1.25;
 }
 
 .home-focus-visual figcaption {
@@ -14367,8 +14442,22 @@ html {
     animation: none;
   }
 
+  .home-focus-actual-flow {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
+  .home-focus-actual-step:first-child {
+    grid-row: auto;
+  }
+
+  .home-focus-actual-step img {
+    height: auto;
+    aspect-ratio: 16 / 7.6;
+  }
+
   .home-focus-visual img {
-    aspect-ratio: 1680 / 928;
+    aspect-ratio: 16 / 8.5;
   }
 
   .home-focus-visual__motion {
@@ -14452,7 +14541,7 @@ html {
   }
 
   .home-focus-visual img {
-    aspect-ratio: 1680 / 928;
+    aspect-ratio: 16 / 7.4;
   }
 
   .home-focus-visual figcaption {
