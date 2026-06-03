@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test'
 
 const pages = [
-  { path: '/', heading: '反応集の下準備' },
+  { path: '/', heading: 'URLを貼るだけ' },
   { path: '/download/', heading: '最新版を無料ダウンロード' },
   { path: '/instructions/', heading: '記事URLから台本を取得し、YMM4に渡す' },
   { path: '/samples/', heading: '実アプリ画面と動画サンプルで、入力から出力まで確認する' },

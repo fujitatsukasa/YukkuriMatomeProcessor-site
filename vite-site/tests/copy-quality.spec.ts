@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test'
 const primaryPages = [
   {
     path: '/',
-    heading: '反応集の下準備',
+    heading: 'URLを貼るだけ',
     ctas: ['無料でダウンロード'],
   },
   {
