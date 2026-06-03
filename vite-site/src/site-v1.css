@@ -15146,8 +15146,7 @@ html {
 }
 
 .lp-hero__actions,
-.lp-final__actions,
-.lp-inline-actions {
+.lp-final__actions {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
@@ -15234,7 +15233,6 @@ html {
 
 .lp-workflow-mock,
 .lp-hero__screens,
-.lp-step-card,
 .lp-ba-card,
 .lp-workflow-step,
 .lp-sticky__mock,
@@ -15243,8 +15241,6 @@ html {
 .lp-video-player,
 .lp-video__copy,
 .lp-price-card,
-.lp-safety__cards article,
-.lp-distribution,
 .lp-faq-item,
 .lp-final {
   border: 1px solid var(--lp-line);
@@ -15413,7 +15409,6 @@ html {
   font-weight: 850;
 }
 
-.lp-step-card ul,
 .lp-price-card ul,
 .lp-ba-card ul,
 .lp-video__copy ol {
@@ -15427,67 +15422,28 @@ html {
   list-style: none;
 }
 
-.lp-first-run__grid {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.lp-step-card {
-  min-height: 210px;
-  display: grid;
-  gap: 10px;
-  align-content: start;
-  padding: 18px;
-  animation: lp-fade-up 0.5s ease both;
-  animation-delay: var(--delay);
-}
-
-.lp-step-card > span {
-  width: fit-content;
-  padding: 4px 9px;
-  border-radius: 999px;
-  color: #12100b;
-  background: var(--lp-gold);
-  font-size: 0.76rem;
-  font-weight: 900;
-}
-
-.lp-step-card svg,
 .lp-workflow-step svg,
 .lp-usecase-card__body svg,
 .lp-video__copy svg {
   color: var(--lp-cyan);
 }
 
-.lp-step-card h3,
 .lp-ba-card h3,
 .lp-workflow-step h3,
 .lp-usecase-card h3,
-.lp-price-card h3,
-.lp-safety__cards h3,
-.lp-distribution h3 {
+.lp-price-card h3 {
   color: #fff8e8;
   font-size: 1.08rem;
   line-height: 1.42;
 }
 
-.lp-step-card p,
 .lp-workflow-step p,
 .lp-usecase-card p,
 .lp-usecase-card dd,
 .lp-gallery-card span,
-.lp-price-card p,
-.lp-safety__cards p,
-.lp-distribution dd,
-.lp-pricing__note {
+.lp-price-card p {
   color: var(--lp-muted);
   line-height: 1.7;
-}
-
-.lp-inline-actions {
-  margin-top: 18px;
-  justify-content: center;
 }
 
 .lp-link-card {
@@ -15775,8 +15731,7 @@ html {
   box-shadow: 0 0 0 1px rgba(237, 199, 95, 0.08), 0 28px 68px -50px rgba(237, 199, 95, 0.78);
 }
 
-.lp-price-card > span,
-.lp-distribution > span {
+.lp-price-card > span {
   width: fit-content;
   padding: 4px 9px;
   border-radius: 999px;
@@ -15809,68 +15764,6 @@ html {
 .lp-card-link {
   width: fit-content;
   padding: 0 14px;
-}
-
-.lp-pricing__note {
-  max-width: 850px;
-  margin: 18px auto 0;
-  text-align: center;
-  font-size: 0.95rem;
-}
-
-.lp-safety__layout {
-  display: grid;
-  grid-template-columns: minmax(0, 0.92fr) minmax(360px, 1.08fr);
-  gap: 16px;
-}
-
-.lp-safety__cards {
-  display: grid;
-  gap: 12px;
-}
-
-.lp-safety__cards article {
-  display: grid;
-  gap: 8px;
-  padding: 18px;
-}
-
-.lp-safety__cards svg {
-  color: var(--lp-gold);
-}
-
-.lp-distribution {
-  display: grid;
-  gap: 13px;
-  padding: 22px;
-}
-
-.lp-distribution dl {
-  display: grid;
-  gap: 10px;
-  margin: 0;
-}
-
-.lp-distribution div {
-  display: grid;
-  gap: 3px;
-  padding: 10px;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.045);
-}
-
-.lp-distribution dt {
-  color: var(--lp-gold);
-  font-size: 0.76rem;
-  font-weight: 900;
-}
-
-.lp-distribution code {
-  display: block;
-  max-width: 100%;
-  overflow-wrap: anywhere;
-  color: #fff5d8;
-  font-size: 0.78rem;
 }
 
 .lp-faq__list {
@@ -16003,8 +15896,7 @@ html {
 @media (max-width: 1120px) {
   .lp-hero__content,
   .lp-sticky__layout,
-  .lp-video__layout,
-  .lp-safety__layout {
+  .lp-video__layout {
     grid-template-columns: 1fr;
   }
 
@@ -16016,9 +15908,6 @@ html {
     position: static;
   }
 
-  .lp-first-run__grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
 }
 
 @media (max-width: 860px) {
@@ -16080,10 +15969,6 @@ html {
     border-top: 1px solid var(--lp-line);
   }
 
-  .lp-first-run__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .lp-final {
     grid-template-columns: 1fr;
     padding: 22px;
@@ -16118,13 +16003,8 @@ html {
   }
 
   .lp-hero__actions,
-  .lp-final__actions,
-  .lp-inline-actions {
+  .lp-final__actions {
     align-items: stretch;
-  }
-
-  .lp-first-run__grid {
-    grid-template-columns: 1fr;
   }
 
   .lp-ba-card > div {
@@ -16136,18 +16016,12 @@ html {
   }
 
   .lp-workflow-panel,
-  .lp-step-card,
   .lp-ba-card,
   .lp-workflow-step,
   .lp-usecase-card__body,
   .lp-video__copy,
-  .lp-price-card,
-  .lp-distribution {
+  .lp-price-card {
     padding: 14px;
-  }
-
-  .lp-distribution code {
-    font-size: 0.7rem;
   }
 }
 

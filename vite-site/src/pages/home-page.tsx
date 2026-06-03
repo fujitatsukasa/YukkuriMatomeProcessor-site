@@ -2,37 +2,28 @@ import { Link } from 'react-router-dom'
 import type { CSSProperties, ReactNode } from 'react'
 import { PageMeta } from '@/components/ui'
 import {
-  downloadUrl,
   faqGroups,
   legal,
-  publicDistribution,
+  downloadUrl,
   siteOrigin,
   siteTitle,
 } from '@/data/site-content'
 import {
-  AlertTriangle,
   ArrowRight,
   CheckCircle2,
   ChevronDown,
   Clock3,
   CreditCard,
   Download,
-  ExternalLink,
-  Eye,
   FileArchive,
-  FileCheck2,
   FileCode2,
   FileSearch,
   Film,
-  FolderCog,
   HelpCircle,
-  LockKeyhole,
-  Monitor,
   MonitorPlay,
   MousePointerClick,
   Play,
   SearchCheck,
-  ShieldCheck,
   Sparkles,
   WandSparkles,
 } from 'lucide-react'
@@ -47,39 +38,6 @@ const scriptRows = [
   { speaker: 'A', text: 'まず、このURLから使う本文候補を選びます。' },
   { speaker: 'B', text: '長い行は読み上げ前に短く整えます。' },
   { speaker: 'A', text: 'CSVと.ymmpの準備まで整えて、編集に入ります。' },
-] as const
-
-const firstRunSteps = [
-  {
-    time: '5分',
-    title: '制作環境を用意',
-    body: 'Windows 10 / 11 と、仕上げに使う編集環境の場所を先にそろえます。',
-    Icon: Monitor,
-  },
-  {
-    time: '5分',
-    title: '保存先を決める',
-    body: 'CSV/.ymmpと素材を置くフォルダを先に固定します。',
-    Icon: FolderCog,
-  },
-  {
-    time: '5分',
-    title: 'URLを1から3件だけ入れる',
-    body: '大量取得の前に、自分の題材URLで候補一覧を出します。',
-    Icon: FileSearch,
-  },
-  {
-    time: '10分',
-    title: '台本下地を整える',
-    body: '不要行、長い文、AI補助の結果を読み上げ前に直します。',
-    Icon: SearchCheck,
-  },
-  {
-    time: '5分',
-    title: 'CSV/.ymmp前準備まで出す',
-    body: '保存先、出力形式、素材パスを見て、編集に入れる状態にします。',
-    Icon: FileCheck2,
-  },
 ] as const
 
 const beforeAfterItems = [
@@ -199,8 +157,8 @@ const galleryItems = [
     alt: 'AI台本生成と話者指定の実アプリ画面',
   },
   {
-    title: 'YouTube分析と候補比較',
-    body: '分析機能を使う段階でYouTube APIキーを設定します。',
+    title: '候補比較',
+    body: '取得した題材を並べて、動画に使う候補を絞ります。',
     image: '/product_youtube_info.webp',
     alt: 'YouTube分析と候補比較の実アプリ画面',
   },
@@ -228,42 +186,19 @@ const pricingCards = [
     price: '¥39,800',
     label: '買い切り / 税込',
     body: '台本取得とAI台本生成の利用制限を解除します。月額自動更新はありません。',
-    points: ['台本取得の制限解除', 'AI台本生成の制限解除', 'Googleアカウントに権限保持'],
+    points: ['台本取得の制限解除', 'AI台本生成の制限解除', '月額なしで続けて使う'],
     cta: '料金を見る',
     href: '/purchase/',
     external: false,
   },
 ] as const
 
-const safetyChecks = [
-  {
-    title: '公式配布元から取得',
-    body: 'インストーラーとポータブルZIPは公式ダウンロードページから取得できます。',
-    Icon: ShieldCheck,
-  },
-  {
-    title: 'SHA256を照合',
-    body: 'ファイル名、サイズ、SHA256を表示し、取り違えを防ぎます。',
-    Icon: LockKeyhole,
-  },
-  {
-    title: 'Windows警告への案内',
-    body: '自己署名のため警告が出る場合があります。公式URLとハッシュを照合してください。',
-    Icon: AlertTriangle,
-  },
-] as const
-
 const priorityQuestions = [
   '無料版では何ができますか？',
   'Premiumで何が解除されますか？',
-  'Windows専用ですか？',
-  'Macで使えますか？',
-  'YouTube APIキーは必要ですか？',
-  'YMM4は必須ですか？',
   '動画は自動で完成しますか？',
-  'AIが全部自動で動画を作りますか？',
-  '対応していないURLは取得できますか？',
-  '返金条件は何ですか？',
+  'Windows専用ですか？',
+  'YMM4は必須ですか？',
   '収益化は保証されますか？',
 ] as const
 
@@ -422,47 +357,11 @@ export function HomePage() {
           </div>
         </section>
 
-        <section className="lp-section lp-first-run" aria-labelledby="lp-first-run-heading">
-          <div className="lp-section__head lp-section__head--split">
-            <div>
-              <p className="lp-kicker">最初の30分</p>
-              <h2 id="lp-first-run-heading">まず、自分のURLで台本下地まで出す</h2>
-            </div>
-            <p>
-              YouTube APIキーは分析機能を使う段階で設定すれば十分です。
-              最初は起動、保存先、少数URL、台本下地、CSV/.ymmp前準備だけを通します。
-            </p>
-          </div>
-          <div className="lp-first-run__grid">
-            {firstRunSteps.map((step, index) => {
-              const StepIcon = step.Icon
-              return (
-                <article key={step.title} className="lp-step-card" style={{ '--delay': `${index * 0.05}s` } as CSSProperties}>
-                  <span>{step.time}</span>
-                  <StepIcon size={20} aria-hidden="true" />
-                  <h3>{step.title}</h3>
-                  <p>{step.body}</p>
-                </article>
-              )
-            })}
-          </div>
-          <div className="lp-inline-actions">
-            <Link className="lp-link-card" to="/instructions/">
-              使い方を見る
-              <ArrowRight size={16} />
-            </Link>
-            <a className="lp-link-card" href={downloadUrl} target="_blank" rel="noopener noreferrer">
-              無料でダウンロード
-              <ExternalLink size={16} />
-            </a>
-          </div>
-        </section>
-
         <section className="lp-section lp-before-after" aria-labelledby="lp-before-after-heading">
           <div className="lp-section__head">
-            <p className="lp-kicker">Before / After</p>
-            <h2 id="lp-before-after-heading">散らかった前工程を、一本の制作フローへ</h2>
-            <p>短縮するのは完成動画そのものではありません。題材探し、台本整理、出力前準備をまとめて、仕上げに集中しやすくします。</p>
+            <p className="lp-kicker">手作業を減らす</p>
+            <h2 id="lp-before-after-heading">URL探しとコピペを、台本下地づくりへ</h2>
+            <p>記事を開き直す、本文を拾う、コメントをメモに散らす。その前工程を、動画に使う下地へまとめます。</p>
           </div>
           <div className="lp-before-after__grid">
             {beforeAfterItems.map((item) => (
@@ -652,65 +551,13 @@ export function HomePage() {
               </article>
             ))}
           </div>
-          <p className="lp-pricing__note">
-            購入はアプリ内導線からStripe Checkoutで行います。返金条件は返金・キャンセルポリシーに従います。
-            収益化、再生数、完成品質は保証しません。
-          </p>
-        </section>
-
-        <section className="lp-section lp-safety" aria-labelledby="lp-safety-heading">
-          <div className="lp-section__head lp-section__head--split">
-            <div>
-              <p className="lp-kicker">配布ファイル</p>
-              <h2 id="lp-safety-heading">インストール前に、ファイル名とSHA256を見られる</h2>
-            </div>
-            <p>自己署名のためWindowsやSmartScreenの警告が出る場合があります。公式URL、ファイル名、SHA256を照合してから起動してください。</p>
-          </div>
-          <div className="lp-safety__layout">
-            <div className="lp-safety__cards">
-              {safetyChecks.map((item) => {
-                const SafetyIcon = item.Icon
-                return (
-                  <article key={item.title}>
-                    <SafetyIcon size={20} />
-                    <h3>{item.title}</h3>
-                    <p>{item.body}</p>
-                  </article>
-                )
-              })}
-            </div>
-            <aside className="lp-distribution">
-              <span>最新版 {publicDistribution.version}</span>
-              <h3>{publicDistribution.assets.setup.fileName}</h3>
-              <dl>
-                <div>
-                  <dt>チャンネル</dt>
-                  <dd>{publicDistribution.channel}</dd>
-                </div>
-                <div>
-                  <dt>インストーラー SHA256</dt>
-                  <dd>
-                    <code>{publicDistribution.assets.setup.sha256}</code>
-                  </dd>
-                </div>
-                <div>
-                  <dt>ポータブルZIP</dt>
-                  <dd>{publicDistribution.assets.portable.fileName}</dd>
-                </div>
-              </dl>
-              <Link className="lp-card-link" to="/download/">
-                <Eye size={16} />
-                ダウンロードページで確認
-              </Link>
-            </aside>
-          </div>
         </section>
 
         <section className="lp-section lp-faq" aria-labelledby="lp-faq-heading">
           <div className="lp-section__head">
             <p className="lp-kicker">FAQ</p>
-            <h2 id="lp-faq-heading">よく迷う点だけまとめる</h2>
-            <p>Windows環境、編集ソフト、Free、Premium、返金、できる範囲を短く読めます。</p>
+            <h2 id="lp-faq-heading">使い始める前に必要なことだけ</h2>
+            <p>無料版、Premium、対応環境、動画の仕上げ範囲だけを短くまとめています。</p>
           </div>
           <div className="lp-faq__list">
             {priorityFaqItems.map((item, index) => (
