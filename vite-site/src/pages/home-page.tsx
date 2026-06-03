@@ -39,41 +39,41 @@ import {
   XCircle,
 } from 'lucide-react'
 
-const heroBadges = ['Windows 10 / 11', 'YMM4必須', 'Freeで確認', 'Premiumは買い切り'] as const
+const heroBadges = ['反応集・解説向け', '台本下地を整理', 'CSV/.ymmp準備', 'Windows 10 / 11用'] as const
 
 const heroCandidates = [
   { title: 'コメントの論点が割れている記事', meta: '候補 01 / 本文・反応あり' },
   { title: '短尺化しやすいスレッド', meta: '候補 02 / 会話化しやすい' },
-  { title: 'YMM4前に素材パス確認', meta: '候補 03 / 保存先チェック' },
+  { title: '素材と保存先まで整理', meta: '候補 03 / 出力前チェック' },
 ] as const
 
 const scriptRows = [
   { speaker: 'A', text: 'まず、このURLから使う本文候補を選びます。' },
   { speaker: 'B', text: '長い行は読み上げ前に短く整えます。' },
-  { speaker: 'A', text: 'CSVと.ymmp前準備を出して、仕上げはYMM4へ。' },
+  { speaker: 'A', text: 'CSVと.ymmpの準備まで整えて、編集に入ります。' },
 ] as const
 
 const canItems = [
-  '記事URL・スレッドURLから候補取得',
-  '台本下地の整理とAI補助',
-  'CSV/.ymmp前準備',
-  '保存先・素材パスの確認',
-  'Freeで少数URLの導入相性確認',
+  '記事URL・スレッドURLから題材候補を並べる',
+  '反応集・解説向けの台本下地を整える',
+  'CSV/.ymmpの出力前準備',
+  '保存先・素材パスを先に整理する',
+  'Freeで少数URLの出方を確認する',
 ] as const
 
 const cannotItems = [
-  '動画を完全自動で完成させる',
-  '収益化や再生数を保証する',
-  '素材や引用元の権利確認を代行する',
-  'Macやスマホだけで完結する',
-  'YMM4なしで最終編集まで行う',
+  '音声、字幕、間合いの最終チェック',
+  '素材や引用元の権利確認',
+  '公開するかどうかの判断',
+  '収益化や再生数の保証',
+  'Macやスマホだけでの制作',
 ] as const
 
 const firstRunSteps = [
   {
     time: '5分',
-    title: 'YMM4.exeを用意',
-    body: 'ショートカットではなく、YukkuriMovieMaker4.exe本体の場所を確認します。',
+    title: 'Windows環境を確認',
+    body: 'Windows 10 / 11 と、仕上げに使う編集環境の場所を確認します。',
     Icon: Monitor,
   },
   {
@@ -97,7 +97,7 @@ const firstRunSteps = [
   {
     time: '5分',
     title: 'CSV/.ymmp前準備まで出す',
-    body: '保存先、出力形式、素材パスを見てYMM4へ進める状態にします。',
+    body: '保存先、出力形式、素材パスを見て、編集に入れる状態にします。',
     Icon: FileCheck2,
   },
 ] as const
@@ -114,9 +114,9 @@ const beforeAfterItems = [
     after: ['台本下地を編集', '役割と感情を確認', '長い行を分割'],
   },
   {
-    title: 'YMM4前準備',
-    before: ['保存先を探す', '素材パスを後で直す', 'YMM4で手戻りする'],
-    after: ['保存先を固定', 'CSV/.ymmp前準備', 'YMM4で仕上げに集中'],
+    title: '出力ファイル準備',
+    before: ['保存先を探す', '素材パスを後で直す', '編集画面で手戻りする'],
+    after: ['保存先を固定', 'CSV/.ymmp前準備', '仕上げ作業に集中'],
   },
 ] as const
 
@@ -155,10 +155,10 @@ const workflowSteps = [
   },
   {
     step: '05',
-    title: 'YMM4で仕上げ',
-    body: '音声、字幕、立ち絵、間合い、書き出しはYMM4側で最終確認します。',
+    title: '編集で仕上げ',
+    body: '音声、字幕、立ち絵、間合い、書き出しは編集画面で最終確認します。',
     image: '/product_keyword_material.webp',
-    alt: 'YMM4前準備と素材整理を確認する実アプリ画面',
+    alt: '出力前準備と素材整理を確認する実アプリ画面',
     Icon: MonitorPlay,
   },
 ] as const
@@ -207,10 +207,10 @@ const galleryItems = [
     alt: '取得した台本下地を編集する実アプリ画面',
   },
   {
-    title: 'YMM4前準備と素材整理',
-    body: '保存先、素材パス、キャラ設定をYMM4前に確認します。',
+    title: '出力前準備と素材整理',
+    body: '保存先、素材パス、キャラ設定を編集前に確認します。',
     image: '/product_keyword_material.webp',
-    alt: 'YMM4前準備と素材整理を確認する実アプリ画面',
+    alt: '出力前準備と素材整理を確認する実アプリ画面',
   },
   {
     title: 'AI台本生成',
@@ -228,7 +228,7 @@ const galleryItems = [
     title: 'フォーマット管理',
     body: 'CSV/.ymmp前準備の形式を再利用しやすくします。',
     image: '/product_format_list.webp',
-    alt: 'フォーマット管理とYMM4前準備の実アプリ画面',
+    alt: 'フォーマット管理と出力前準備の実アプリ画面',
   },
 ] as const
 
@@ -238,7 +238,7 @@ const pricingCards = [
     price: '¥0',
     label: 'まず導入相性を確認',
     body: '起動、初期設定、少数URL取得、台本下地編集、CSV/.ymmp前準備まで確認できます。',
-    points: ['少数URLで流れを見る', 'YMM4前準備まで試す', '購入前の相性確認'],
+    points: ['少数URLで流れを見る', '出力前準備まで試す', '自分の制作環境で確認'],
     cta: '無料でダウンロード',
     href: downloadUrl,
     external: true,
@@ -274,12 +274,12 @@ const safetyChecks = [
 ] as const
 
 const priorityQuestions = [
-  'Macで使えますか？',
-  'Windows専用ですか？',
-  'YMM4は必須ですか？',
   '無料版では何ができますか？',
   'Premiumで何が解除されますか？',
+  'Windows専用ですか？',
+  'Macで使えますか？',
   'YouTube APIキーは必要ですか？',
+  'YMM4は必須ですか？',
   '動画は自動で完成しますか？',
   'AIが全部自動で動画を作りますか？',
   '対応していないURLは取得できますか？',
@@ -301,7 +301,7 @@ const softwareApplicationLd = {
   url: `${siteOrigin}/`,
   downloadUrl: `${siteOrigin}/download/`,
   description:
-    '記事URL・スレッドURLから、ゆっくり動画の台本下地、CSV、.ymmp、YMM4前準備を整えるWindows向け制作支援ツールです。',
+    '記事URL・スレッドURLから、反応集や解説動画向けの台本下地、CSV、.ymmpの出力前準備を整えるWindows向け制作支援ツールです。',
   offers: {
     '@type': 'Offer',
     price: legal.pricing.unitPrice,
@@ -317,7 +317,7 @@ const softwareApplicationLd = {
 
 function WorkflowMock() {
   return (
-    <div className="lp-workflow-mock" aria-label="URLからYMM4前準備までの疑似デモ">
+    <div className="lp-workflow-mock" aria-label="URLから台本下地と出力前準備までの疑似デモ">
       <div className="lp-workflow-mock__url">
         <span>URL</span>
         <strong>https://example.com/thread/...</strong>
@@ -352,7 +352,7 @@ function WorkflowMock() {
             <FileCode2 size={18} aria-hidden="true" />
             <strong>prep.ymmp</strong>
           </div>
-          <small>仕上げはYMM4</small>
+          <small>編集で仕上げ</small>
         </div>
       </div>
     </div>
@@ -389,8 +389,8 @@ export function HomePage() {
   return (
     <>
       <PageMeta
-        title="ゆっくりまとめプロセッサー｜URLからYMM4前の下ごしらえまで"
-        description="記事URL・スレッドURLから、候補取得、台本下地、CSV/.ymmp前準備まで。YMM4で仕上げる前の面倒な前工程を短くするWindows向け制作支援ツールです。Freeで少数URLから確認できます。"
+        title="ゆっくりまとめプロセッサー｜URLから台本下地と出力前準備まで"
+        description="記事URL・スレッドURLから、候補取得、台本下地、CSV/.ymmp前準備まで。反応集や解説動画に入る前の題材整理と台本づくりを短くするWindows向け制作支援ツールです。Freeで少数URLから確認できます。"
         keywords="ゆっくりまとめプロセッサー,YMM4,台本作成,CSV,.ymmp,反応集,記事URL,スレッドURL,ゆっくり解説"
         image="/lp/hero-workflow-dummy.webp"
         path="/"
@@ -402,14 +402,14 @@ export function HomePage() {
           <img className="lp-hero__bg" src="/lp/hero-workflow-dummy.webp" alt="" aria-hidden="true" />
           <div className="lp-hero__content">
             <div className="lp-hero__copy">
-              <p className="lp-kicker">YMM4前の制作下ごしらえ</p>
+              <p className="lp-kicker">URLから台本下地と出力ファイルへ</p>
               <h1 id="lp-hero-heading">
                 URLを貼るだけ。
-                <span>YMM4前の下ごしらえを、一気に片づける。</span>
+                <span>反応集・解説動画の下地が整う。</span>
               </h1>
               <p className="lp-hero__lead">
-                記事URL・スレッドURLから、候補取得、台本下地、CSV/.ymmp前準備まで。
-                仕上げはYMM4。面倒な前工程を、Freeでまず確認できます。
+                記事URL・スレッドURLから、題材候補、台本下地、CSV/.ymmpの出力前準備まで。
+                コピペで散らかる前工程をまとめて、編集に入れる状態まで持っていけます。
               </p>
               <div className="lp-hero__actions">
                 <a className="lp-btn lp-btn--primary" href={downloadUrl} target="_blank" rel="noopener noreferrer">
@@ -421,7 +421,7 @@ export function HomePage() {
                   90秒で流れを見る
                 </a>
               </div>
-              <div className="lp-hero__badges" role="list" aria-label="導入前提">
+              <div className="lp-hero__badges" role="list" aria-label="主な特徴">
                 {heroBadges.map((badge) => (
                   <span key={badge} role="listitem">
                     <BadgeCheck size={14} />
@@ -432,7 +432,7 @@ export function HomePage() {
             </div>
 
             <div className="lp-hero__demo">
-              <div className="lp-hero-loop" aria-label="URL入力からYMM4前準備までのダミーループ動画">
+              <div className="lp-hero-loop" aria-label="URL入力から台本下地と出力前準備までのループ動画">
                 <video muted autoPlay loop playsInline preload="metadata" poster="/lp/hero-workflow-loop-poster.webp">
                   <source src="/lp/hero-workflow-loop.mp4" type="video/mp4" />
                 </video>
@@ -452,15 +452,15 @@ export function HomePage() {
 
         <section className="lp-section lp-answer" aria-labelledby="lp-answer-heading">
           <div className="lp-section__head">
-            <p className="lp-kicker">30秒で分かる対応範囲</p>
-            <h2 id="lp-answer-heading">できることと、できないことを先に分ける</h2>
-            <p>購入前に期待値を合わせるため、便利な範囲と保証しない範囲を同じ画面で確認できます。</p>
+            <p className="lp-kicker">最初に分かること</p>
+            <h2 id="lp-answer-heading">このツールで整う下地と、人が仕上げるところ</h2>
+            <p>丸投げで動画を作るものではありません。題材を選び、台本下地と出力前準備を整えて、仕上げの判断をしやすくする制作ツールです。</p>
           </div>
           <div className="lp-answer__grid">
             <article className="lp-answer-card lp-answer-card--yes">
               <h3>
                 <CheckCircle2 size={20} />
-                できること
+                このツールで整うもの
               </h3>
               <ul>
                 {canItems.map((item) => (
@@ -471,14 +471,14 @@ export function HomePage() {
             <article className="lp-answer-card lp-answer-card--no">
               <h3>
                 <XCircle size={20} />
-                できないこと / 保証しないこと
+                人が最後に見るもの
               </h3>
               <ul>
                 {cannotItems.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
               </ul>
-              <p>だから、まずFreeで自分のURLと制作環境に合うか確認できます。</p>
+              <p>だから、まずFreeで自分のURLを通して、下地の出方を見てください。</p>
             </article>
           </div>
         </section>
@@ -487,7 +487,7 @@ export function HomePage() {
           <div className="lp-section__head lp-section__head--split">
             <div>
               <p className="lp-kicker">初回30分の確認ルート</p>
-              <h2 id="lp-first-run-heading">買う前に、少数URLでYMM4直前まで通す</h2>
+              <h2 id="lp-first-run-heading">まず、自分のURLで台本下地まで出す</h2>
             </div>
             <p>
               YouTube APIキーは分析機能を使う段階で設定すれば十分です。
@@ -523,7 +523,7 @@ export function HomePage() {
           <div className="lp-section__head">
             <p className="lp-kicker">Before / After</p>
             <h2 id="lp-before-after-heading">散らかった前工程を、一本の制作フローへ</h2>
-            <p>短縮するのは完成動画ではありません。YMM4に入る前の調査、台本整理、出力前準備です。</p>
+            <p>短縮するのは完成動画そのものではありません。題材探し、台本整理、出力前準備をまとめて、仕上げに集中しやすくします。</p>
           </div>
           <div className="lp-before-after__grid">
             {beforeAfterItems.map((item) => (
@@ -558,10 +558,10 @@ export function HomePage() {
         <section className="lp-section lp-sticky" aria-labelledby="lp-workflow-heading">
           <div className="lp-section__head lp-section__head--split">
             <div>
-              <p className="lp-kicker">Sticky Workflow Demo</p>
-              <h2 id="lp-workflow-heading">URLから、YMM4で仕上げる直前まで</h2>
+              <p className="lp-kicker">使う流れ</p>
+              <h2 id="lp-workflow-heading">URLから、編集に入れる下地まで</h2>
             </div>
-            <p>左でステップを読み、右で実画面を確認できます。モバイルでは縦に積み、重い演出を抑えます。</p>
+            <p>URLを入れて、候補を選び、台本下地と出力ファイルの準備まで進む流れを実画面で確認できます。</p>
           </div>
           <div className="lp-sticky__layout">
             <div className="lp-sticky__steps">
@@ -593,7 +593,7 @@ export function HomePage() {
           <div className="lp-section__head">
             <p className="lp-kicker">用途別</p>
             <h2 id="lp-usecases-heading">自分の動画ジャンルに合うかを見る</h2>
-            <p>既存キャラクターや既存IP風の表現ではなく、抽象的な会話・ファイル・タイムラインで用途を示します。</p>
+            <p>反応集、掛け合い解説、縦型ショート。作りたい動画ごとに、入力するものと出てくる下地を確認できます。</p>
           </div>
           <div className="lp-usecases__grid">
             {useCases.map((item) => {
@@ -601,7 +601,7 @@ export function HomePage() {
               return (
                 <article key={item.title} className="lp-usecase-card">
                   <div className="lp-usecase-card__media">
-                    <video muted autoPlay loop playsInline preload="metadata" poster={item.poster} aria-label={`${item.title}のダミー動画プレビュー`}>
+                    <video muted autoPlay loop playsInline preload="metadata" poster={item.poster} aria-label={`${item.title}の動画プレビュー`}>
                       <source src={item.video} type="video/mp4" />
                     </video>
                     <img src={item.poster} alt="" loading="lazy" decoding="async" aria-hidden="true" />
@@ -659,13 +659,13 @@ export function HomePage() {
 
         <section id="demo-video" className="lp-section lp-video" aria-labelledby="lp-video-heading">
           <div className="lp-section__head">
-            <p className="lp-kicker">動画デモ枠</p>
-            <h2 id="lp-video-heading">90秒で、使う瞬間を確認する</h2>
-            <p>本番動画は差し替え予定です。今はダミーmp4とposterで、壊れない動画枠だけ先に用意しています。</p>
+            <p className="lp-kicker">90秒デモ</p>
+            <h2 id="lp-video-heading">URLが台本下地になるまでを見る</h2>
+            <p>記事URL・スレッドURLを入れて、候補、台本下地、CSV/.ymmpの準備まで進む流れを短く確認できます。</p>
           </div>
           <div className="lp-video__layout">
             <div className="lp-video-player">
-              <video controls playsInline preload="metadata" poster="/lp/main-demo-90s-poster.webp" aria-label="90秒メインデモのダミー動画">
+              <video controls playsInline preload="metadata" poster="/lp/main-demo-90s-poster.webp" aria-label="90秒メインデモ">
                 <source src="/lp/main-demo-90s.mp4" type="video/mp4" />
               </video>
             </div>
@@ -678,8 +678,8 @@ export function HomePage() {
                 <li>URL探し・コピペ・台本整理の悩み</li>
                 <li>記事URL・スレッドURLを入力</li>
                 <li>候補取得、台本下地編集、CSV/.ymmp前準備</li>
-                <li>最終編集はYMM4で行う</li>
-                <li>Freeで少数URLを試すCTA</li>
+                <li>編集画面で音声、字幕、間合いを仕上げる</li>
+                <li>Freeで少数URLを試す</li>
               </ol>
             </div>
           </div>
@@ -688,8 +688,8 @@ export function HomePage() {
         <section className="lp-section lp-pricing" aria-labelledby="lp-pricing-heading">
           <div className="lp-section__head">
             <p className="lp-kicker">Free / Premium</p>
-            <h2 id="lp-pricing-heading">Freeで合うと分かってから、Premiumを検討する</h2>
-            <p>Premiumを無理に煽りません。39,800円税込の買い切りなので、Freeで実URLを通してから判断できます。</p>
+            <h2 id="lp-pricing-heading">Freeで下地の出方を見てから、Premiumへ</h2>
+            <p>Premiumは39,800円税込の買い切りです。Freeで実URLを通して、続けて使うか判断できます。</p>
           </div>
           <div className="lp-pricing__grid">
             {pricingCards.map((plan) => (
@@ -722,8 +722,8 @@ export function HomePage() {
         <section className="lp-section lp-safety" aria-labelledby="lp-safety-heading">
           <div className="lp-section__head lp-section__head--split">
             <div>
-              <p className="lp-kicker">安全確認 / 配布物確認</p>
-              <h2 id="lp-safety-heading">インストール前に、配布物を確認できる</h2>
+              <p className="lp-kicker">配布物の確認</p>
+              <h2 id="lp-safety-heading">インストール前に、ファイル名とSHA256を見られる</h2>
             </div>
             <p>自己署名のためWindowsやSmartScreenの警告が出る場合があります。公式URL、ファイル名、SHA256を照合してから起動してください。</p>
           </div>
@@ -770,8 +770,8 @@ export function HomePage() {
         <section className="lp-section lp-faq" aria-labelledby="lp-faq-heading">
           <div className="lp-section__head">
             <p className="lp-kicker">FAQ</p>
-            <h2 id="lp-faq-heading">購入前の不安を最後に潰す</h2>
-            <p>Windows、YMM4、Free、Premium、返金、保証外範囲を短く確認できます。</p>
+            <h2 id="lp-faq-heading">迷いやすい点をまとめて確認</h2>
+            <p>Windows環境、編集ソフト、Free、Premium、返金、できる範囲を短く確認できます。</p>
           </div>
           <div className="lp-faq__list">
             {priorityFaqItems.map((item, index) => (
@@ -789,7 +789,7 @@ export function HomePage() {
         <section className="lp-final" aria-labelledby="lp-final-heading">
           <div>
             <p className="lp-kicker">まずは自分のURLで確認</p>
-            <h2 id="lp-final-heading">YMM4前の流れを、Freeで一度通してみる。</h2>
+            <h2 id="lp-final-heading">まずは自分のURLで、台本下地を出してみる。</h2>
             <p>
               URLを貼る、候補を選ぶ、台本下地を人が確認する、CSV/.ymmp前準備を出す。
               そこまで合うと分かってからPremiumを検討できます。
