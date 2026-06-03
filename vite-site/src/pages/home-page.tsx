@@ -12,7 +12,6 @@ import {
 import {
   AlertTriangle,
   ArrowRight,
-  BadgeCheck,
   CheckCircle2,
   ChevronDown,
   Clock3,
@@ -38,8 +37,6 @@ import {
   WandSparkles,
   XCircle,
 } from 'lucide-react'
-
-const heroBadges = ['反応集・解説向け', '台本下地を整理', 'CSV/.ymmp準備', 'Windows 10 / 11用'] as const
 
 const heroCandidates = [
   { title: 'コメントの論点が割れている記事', meta: '候補 01 / 本文・反応あり' },
@@ -420,14 +417,6 @@ export function HomePage() {
                   <Play size={18} />
                   90秒で流れを見る
                 </a>
-              </div>
-              <div className="lp-hero__badges" role="list" aria-label="主な特徴">
-                {heroBadges.map((badge) => (
-                  <span key={badge} role="listitem">
-                    <BadgeCheck size={14} />
-                    {badge}
-                  </span>
-                ))}
               </div>
             </div>
 

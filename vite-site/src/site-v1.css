@@ -15210,30 +15210,6 @@ html {
   outline-offset: 3px;
 }
 
-.lp-hero__badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.lp-hero__badges span {
-  min-height: 30px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 0 10px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 999px;
-  color: rgba(255, 247, 232, 0.88);
-  background: rgba(7, 10, 16, 0.72);
-  font-size: 0.82rem;
-  font-weight: 850;
-}
-
-.lp-hero__badges svg {
-  color: var(--lp-green);
-}
-
 .lp-hero__demo {
   display: grid;
   gap: 12px;
