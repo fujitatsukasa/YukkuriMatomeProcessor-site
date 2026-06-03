@@ -15234,7 +15234,6 @@ html {
 
 .lp-workflow-mock,
 .lp-hero__screens,
-.lp-answer-card,
 .lp-step-card,
 .lp-ba-card,
 .lp-workflow-step,
@@ -15414,36 +15413,6 @@ html {
   font-weight: 850;
 }
 
-.lp-answer__grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
-}
-
-.lp-answer-card {
-  display: grid;
-  gap: 14px;
-  padding: 22px;
-}
-
-.lp-answer-card h3 {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  color: #fff8e8;
-  font-size: 1.3rem;
-  line-height: 1.4;
-}
-
-.lp-answer-card--yes h3 svg {
-  color: var(--lp-green);
-}
-
-.lp-answer-card--no h3 svg {
-  color: var(--lp-red);
-}
-
-.lp-answer-card ul,
 .lp-step-card ul,
 .lp-price-card ul,
 .lp-ba-card ul,
@@ -15452,38 +15421,10 @@ html {
   padding: 0;
 }
 
-.lp-answer-card ul,
 .lp-price-card ul {
   display: grid;
   gap: 8px;
   list-style: none;
-}
-
-.lp-answer-card li {
-  position: relative;
-  padding-left: 18px;
-  color: var(--lp-muted);
-  line-height: 1.7;
-}
-
-.lp-answer-card li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.72em;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--lp-green);
-}
-
-.lp-answer-card--no li::before {
-  background: var(--lp-red);
-}
-
-.lp-answer-card p {
-  color: #fff0c6;
-  font-weight: 800;
 }
 
 .lp-first-run__grid {
@@ -16127,7 +16068,6 @@ html {
   }
 
   .lp-workflow-mock__columns,
-  .lp-answer__grid,
   .lp-before-after__grid,
   .lp-usecases__grid,
   .lp-gallery__grid,
@@ -16196,7 +16136,6 @@ html {
   }
 
   .lp-workflow-panel,
-  .lp-answer-card,
   .lp-step-card,
   .lp-ba-card,
   .lp-workflow-step,

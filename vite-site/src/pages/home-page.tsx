@@ -35,7 +35,6 @@ import {
   ShieldCheck,
   Sparkles,
   WandSparkles,
-  XCircle,
 } from 'lucide-react'
 
 const heroCandidates = [
@@ -50,27 +49,11 @@ const scriptRows = [
   { speaker: 'A', text: 'CSVと.ymmpの準備まで整えて、編集に入ります。' },
 ] as const
 
-const canItems = [
-  '記事URL・スレッドURLから題材候補を並べる',
-  '反応集・解説向けの台本下地を整える',
-  'CSV/.ymmpの出力前準備',
-  '保存先・素材パスを先に整理する',
-  'Freeで少数URLの出方を確認する',
-] as const
-
-const cannotItems = [
-  '音声、字幕、間合いの最終チェック',
-  '素材や引用元の権利確認',
-  '公開するかどうかの判断',
-  '収益化や再生数の保証',
-  'Macやスマホだけでの制作',
-] as const
-
 const firstRunSteps = [
   {
     time: '5分',
-    title: 'Windows環境を確認',
-    body: 'Windows 10 / 11 と、仕上げに使う編集環境の場所を確認します。',
+    title: '制作環境を用意',
+    body: 'Windows 10 / 11 と、仕上げに使う編集環境の場所を先にそろえます。',
     Icon: Monitor,
   },
   {
@@ -82,12 +65,12 @@ const firstRunSteps = [
   {
     time: '5分',
     title: 'URLを1から3件だけ入れる',
-    body: '大量取得の前に、自分の題材URLで候補一覧が出るか見ます。',
+    body: '大量取得の前に、自分の題材URLで候補一覧を出します。',
     Icon: FileSearch,
   },
   {
     time: '10分',
-    title: '台本下地を人が確認',
+    title: '台本下地を整える',
     body: '不要行、長い文、AI補助の結果を読み上げ前に直します。',
     Icon: SearchCheck,
   },
@@ -108,7 +91,7 @@ const beforeAfterItems = [
   {
     title: '台本整理',
     before: ['不要行を探す', '会話順を直す', '読み上げ量を目視調整'],
-    after: ['台本下地を編集', '役割と感情を確認', '長い行を分割'],
+    after: ['台本下地を編集', '役割と感情を整理', '長い行を分割'],
   },
   {
     title: '出力ファイル準備',
@@ -121,7 +104,7 @@ const workflowSteps = [
   {
     step: '01',
     title: 'URL入力',
-    body: '記事URL・スレッドURLを少数で試し、候補取得の相性を確認します。',
+    body: '記事URL・スレッドURLを少数で入れて、題材候補を並べます。',
     image: '/product_get_script.webp',
     alt: '記事URLから候補一覧を取得する実アプリ画面',
     Icon: FileSearch,
@@ -137,7 +120,7 @@ const workflowSteps = [
   {
     step: '03',
     title: '台本下地を編集',
-    body: '不要行、役割、感情、読み上げ向けの文量を人が確認します。',
+    body: '不要行、役割、感情、読み上げ向けの文量に手を入れます。',
     image: '/product_edit_script.webp',
     alt: '取得した台本下地を編集する実アプリ画面',
     Icon: WandSparkles,
@@ -153,7 +136,7 @@ const workflowSteps = [
   {
     step: '05',
     title: '編集で仕上げ',
-    body: '音声、字幕、立ち絵、間合い、書き出しは編集画面で最終確認します。',
+    body: '音声、字幕、立ち絵、間合い、書き出しは編集画面で仕上げます。',
     image: '/product_keyword_material.webp',
     alt: '出力前準備と素材整理を確認する実アプリ画面',
     Icon: MonitorPlay,
@@ -164,7 +147,7 @@ const useCases = [
   {
     title: '反応集・コメント解説',
     input: '記事URL / スレッドURL / コメント候補',
-    output: 'タイトル候補 / 台本下地 / 引用確認メモ',
+    output: 'タイトル候補 / 台本下地 / 引用メモ',
     fit: '賛否、論点、コメント束を整理して動画下地にしたい人',
     poster: '/lp/usecase-reaction-poster.webp',
     video: '/lp/usecase-reaction.mp4',
@@ -174,7 +157,7 @@ const useCases = [
     title: '掛け合い解説',
     input: '題材メモ / 取得済み本文 / 話者指定',
     output: '会話台本 / 役割 / 感情メモ',
-    fit: '読み上げ前に、会話として確認できる下書きを作りたい人',
+    fit: '読み上げ前に、会話として読める下書きを作りたい人',
     poster: '/lp/usecase-dialogue-poster.webp',
     video: '/lp/usecase-dialogue.mp4',
     Icon: Sparkles,
@@ -193,7 +176,7 @@ const useCases = [
 const galleryItems = [
   {
     title: 'URL入力から候補取得',
-    body: '候補一覧にタイトル、URL、サムネイルが並ぶか確認します。',
+    body: '候補一覧にタイトル、URL、サムネイルを並べます。',
     image: '/product_get_script.webp',
     alt: 'URL入力から記事候補を取得する実アプリ画面',
   },
@@ -205,13 +188,13 @@ const galleryItems = [
   },
   {
     title: '出力前準備と素材整理',
-    body: '保存先、素材パス、キャラ設定を編集前に確認します。',
+    body: '保存先、素材パス、キャラ設定を編集前にそろえます。',
     image: '/product_keyword_material.webp',
     alt: '出力前準備と素材整理を確認する実アプリ画面',
   },
   {
     title: 'AI台本生成',
-    body: 'AI出力は下書きとして使い、公開前に人が確認します。',
+    body: 'AI出力は下書きとして使い、公開前に人が手を入れます。',
     image: '/product_ai_script.webp',
     alt: 'AI台本生成と話者指定の実アプリ画面',
   },
@@ -233,9 +216,9 @@ const pricingCards = [
   {
     name: 'Free',
     price: '¥0',
-    label: 'まず導入相性を確認',
-    body: '起動、初期設定、少数URL取得、台本下地編集、CSV/.ymmp前準備まで確認できます。',
-    points: ['少数URLで流れを見る', '出力前準備まで試す', '自分の制作環境で確認'],
+    label: 'まず自分の題材で試す',
+    body: '起動、初期設定、少数URL取得、台本下地編集、CSV/.ymmp前準備まで使えます。',
+    points: ['少数URLで流れを見る', '出力前準備まで試す', '自分の制作環境で試す'],
     cta: '無料でダウンロード',
     href: downloadUrl,
     external: true,
@@ -255,7 +238,7 @@ const pricingCards = [
 const safetyChecks = [
   {
     title: '公式配布元から取得',
-    body: 'インストーラーとポータブルZIPは公式ダウンロードページから確認できます。',
+    body: 'インストーラーとポータブルZIPは公式ダウンロードページから取得できます。',
     Icon: ShieldCheck,
   },
   {
@@ -265,7 +248,7 @@ const safetyChecks = [
   },
   {
     title: 'Windows警告への案内',
-    body: '自己署名のため警告が出る場合があります。公式URLとハッシュを確認してください。',
+    body: '自己署名のため警告が出る場合があります。公式URLとハッシュを照合してください。',
     Icon: AlertTriangle,
   },
 ] as const
@@ -439,48 +422,15 @@ export function HomePage() {
           </div>
         </section>
 
-        <section className="lp-section lp-answer" aria-labelledby="lp-answer-heading">
-          <div className="lp-section__head">
-            <p className="lp-kicker">最初に分かること</p>
-            <h2 id="lp-answer-heading">このツールで整う下地と、人が仕上げるところ</h2>
-            <p>丸投げで動画を作るものではありません。題材を選び、台本下地と出力前準備を整えて、仕上げの判断をしやすくする制作ツールです。</p>
-          </div>
-          <div className="lp-answer__grid">
-            <article className="lp-answer-card lp-answer-card--yes">
-              <h3>
-                <CheckCircle2 size={20} />
-                このツールで整うもの
-              </h3>
-              <ul>
-                {canItems.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </article>
-            <article className="lp-answer-card lp-answer-card--no">
-              <h3>
-                <XCircle size={20} />
-                人が最後に見るもの
-              </h3>
-              <ul>
-                {cannotItems.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-              <p>だから、まずFreeで自分のURLを通して、下地の出方を見てください。</p>
-            </article>
-          </div>
-        </section>
-
         <section className="lp-section lp-first-run" aria-labelledby="lp-first-run-heading">
           <div className="lp-section__head lp-section__head--split">
             <div>
-              <p className="lp-kicker">初回30分の確認ルート</p>
+              <p className="lp-kicker">最初の30分</p>
               <h2 id="lp-first-run-heading">まず、自分のURLで台本下地まで出す</h2>
             </div>
             <p>
               YouTube APIキーは分析機能を使う段階で設定すれば十分です。
-              最初は起動、保存先、少数URL、台本下地、CSV/.ymmp前準備だけを見ます。
+              最初は起動、保存先、少数URL、台本下地、CSV/.ymmp前準備だけを通します。
             </p>
           </div>
           <div className="lp-first-run__grid">
@@ -550,7 +500,7 @@ export function HomePage() {
               <p className="lp-kicker">使う流れ</p>
               <h2 id="lp-workflow-heading">URLから、編集に入れる下地まで</h2>
             </div>
-            <p>URLを入れて、候補を選び、台本下地と出力ファイルの準備まで進む流れを実画面で確認できます。</p>
+            <p>URLを入れて、候補を選び、台本下地と出力ファイルの準備まで進む流れを実画面で追えます。</p>
           </div>
           <div className="lp-sticky__layout">
             <div className="lp-sticky__steps">
@@ -572,7 +522,7 @@ export function HomePage() {
               <WorkflowMock />
               <figure>
                 <img src="/product_edit_script.webp" alt="台本下地を編集する実アプリ画面" loading="lazy" decoding="async" />
-                <figcaption>実アプリ画面を確認しながら、台本下地を人が見直します。</figcaption>
+                <figcaption>実アプリ画面上で、台本下地に手を入れていきます。</figcaption>
               </figure>
             </aside>
           </div>
@@ -581,8 +531,8 @@ export function HomePage() {
         <section className="lp-section lp-usecases" aria-labelledby="lp-usecases-heading">
           <div className="lp-section__head">
             <p className="lp-kicker">用途別</p>
-            <h2 id="lp-usecases-heading">自分の動画ジャンルに合うかを見る</h2>
-            <p>反応集、掛け合い解説、縦型ショート。作りたい動画ごとに、入力するものと出てくる下地を確認できます。</p>
+            <h2 id="lp-usecases-heading">作りたい動画ジャンルから選ぶ</h2>
+            <p>反応集、掛け合い解説、縦型ショート。入力するものと出てくる下地を、ジャンル別に並べています。</p>
           </div>
           <div className="lp-usecases__grid">
             {useCases.map((item) => {
@@ -626,7 +576,7 @@ export function HomePage() {
           <div className="lp-section__head lp-section__head--split">
             <div>
               <p className="lp-kicker">実画面ギャラリー</p>
-              <h2 id="lp-gallery-heading">実アプリ画面で、入力から出力まで確認する</h2>
+              <h2 id="lp-gallery-heading">実アプリ画面で、入力から出力まで追う</h2>
             </div>
             <Link className="lp-link-card" to="/samples/">
               サンプルページを見る
@@ -650,7 +600,7 @@ export function HomePage() {
           <div className="lp-section__head">
             <p className="lp-kicker">90秒デモ</p>
             <h2 id="lp-video-heading">URLが台本下地になるまでを見る</h2>
-            <p>記事URL・スレッドURLを入れて、候補、台本下地、CSV/.ymmpの準備まで進む流れを短く確認できます。</p>
+            <p>記事URL・スレッドURLを入れて、候補、台本下地、CSV/.ymmpの準備まで進む流れを短く見られます。</p>
           </div>
           <div className="lp-video__layout">
             <div className="lp-video-player">
@@ -711,7 +661,7 @@ export function HomePage() {
         <section className="lp-section lp-safety" aria-labelledby="lp-safety-heading">
           <div className="lp-section__head lp-section__head--split">
             <div>
-              <p className="lp-kicker">配布物の確認</p>
+              <p className="lp-kicker">配布ファイル</p>
               <h2 id="lp-safety-heading">インストール前に、ファイル名とSHA256を見られる</h2>
             </div>
             <p>自己署名のためWindowsやSmartScreenの警告が出る場合があります。公式URL、ファイル名、SHA256を照合してから起動してください。</p>
@@ -759,8 +709,8 @@ export function HomePage() {
         <section className="lp-section lp-faq" aria-labelledby="lp-faq-heading">
           <div className="lp-section__head">
             <p className="lp-kicker">FAQ</p>
-            <h2 id="lp-faq-heading">迷いやすい点をまとめて確認</h2>
-            <p>Windows環境、編集ソフト、Free、Premium、返金、できる範囲を短く確認できます。</p>
+            <h2 id="lp-faq-heading">よく迷う点だけまとめる</h2>
+            <p>Windows環境、編集ソフト、Free、Premium、返金、できる範囲を短く読めます。</p>
           </div>
           <div className="lp-faq__list">
             {priorityFaqItems.map((item, index) => (
@@ -777,10 +727,10 @@ export function HomePage() {
 
         <section className="lp-final" aria-labelledby="lp-final-heading">
           <div>
-            <p className="lp-kicker">まずは自分のURLで確認</p>
+            <p className="lp-kicker">まずは自分のURLから</p>
             <h2 id="lp-final-heading">まずは自分のURLで、台本下地を出してみる。</h2>
             <p>
-              URLを貼る、候補を選ぶ、台本下地を人が確認する、CSV/.ymmp前準備を出す。
+              URLを貼る、候補を選ぶ、台本下地に手を入れる、CSV/.ymmp前準備を出す。
               そこまで合うと分かってからPremiumを検討できます。
             </p>
           </div>
