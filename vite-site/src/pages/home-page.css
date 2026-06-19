@@ -22,13 +22,16 @@
   --lp2-cyan: #68d6ff;
   --lp2-green: #78e4bd;
   --lp2-rose: #ff8db8;
+  --lp2-display: var(--font-display);
+  --lp2-readable: var(--font-readable);
   position: relative;
   isolation: isolate;
   overflow: clip;
   color: var(--lp2-text);
+  font-family: var(--lp2-readable);
   background:
-    linear-gradient(180deg, rgba(104, 214, 255, 0.07), transparent 560px),
-    linear-gradient(116deg, #05070b 0%, #0b0d12 44%, #07080c 100%);
+    linear-gradient(138deg, rgba(104, 214, 255, 0.11), transparent 34%, rgba(237, 199, 95, 0.06) 64%, transparent),
+    linear-gradient(116deg, #05070b 0%, #0c0d11 46%, #07080c 100%);
 }
 
 .lp2-home *,
@@ -56,7 +59,8 @@
   gap: 10px;
   width: fit-content;
   color: var(--lp2-gold);
-  font-size: 0.88rem;
+  font-family: var(--lp2-display);
+  font-size: 0.94rem;
   font-weight: 900;
   line-height: 1.45;
 }
@@ -98,11 +102,9 @@
   inset: 0;
   z-index: 0;
   background:
-    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.038) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(5, 7, 11, 0.04), rgba(5, 7, 11, 0.68));
-  background-size: 48px 48px, 48px 48px, auto;
-  opacity: 0.52;
+    linear-gradient(112deg, transparent 0%, rgba(104, 214, 255, 0.12) 46%, rgba(237, 199, 95, 0.12) 62%, transparent 82%),
+    linear-gradient(180deg, rgba(5, 7, 11, 0.02), rgba(5, 7, 11, 0.72));
+  opacity: 0.78;
   pointer-events: none;
 }
 
@@ -125,8 +127,9 @@
 .lp2-hero h1 {
   max-width: 9.6em;
   color: var(--lp2-ink);
-  font-size: 3.72rem;
-  font-weight: 950;
+  font-family: var(--lp2-display);
+  font-size: 4rem;
+  font-weight: 900;
   line-height: 1.03;
   font-feature-settings: "palt";
   text-wrap: balance;
@@ -135,10 +138,13 @@
   text-shadow:
     0 1px 0 rgba(255, 255, 255, 0.08),
     0 22px 42px rgba(0, 0, 0, 0.42),
-    0 0 42px rgba(237, 199, 95, 0.08);
+    0 0 34px rgba(104, 214, 255, 0.12),
+    0 0 48px rgba(237, 199, 95, 0.12);
 }
 
 .lp2-hero h1 span {
+  position: relative;
+  width: fit-content;
   display: block;
 }
 
@@ -147,7 +153,20 @@
   text-shadow:
     0 1px 0 rgba(255, 255, 255, 0.08),
     0 20px 42px rgba(0, 0, 0, 0.42),
-    0 0 30px rgba(237, 199, 95, 0.18);
+    0 0 32px rgba(237, 199, 95, 0.28);
+}
+
+.lp2-hero h1 span:nth-child(2)::after {
+  content: "";
+  position: absolute;
+  right: -0.1em;
+  bottom: 0.05em;
+  left: 0;
+  z-index: -1;
+  height: 0.28em;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(237, 199, 95, 0.34), rgba(104, 214, 255, 0.18), transparent);
+  filter: blur(7px);
 }
 
 .lp2-hero h1 span:nth-child(3) {
@@ -157,7 +176,7 @@
 .lp2-hero__lead {
   max-width: 600px;
   color: rgba(255, 248, 232, 0.84);
-  font-size: 1.02rem;
+  font-size: 1.1rem;
   font-weight: 700;
   line-height: 1.82;
 }
@@ -346,13 +365,13 @@
 
 .lp2-hero__visual-note span {
   color: var(--lp2-cyan);
-  font-size: 0.68rem;
+  font-size: 0.78rem;
   font-weight: 950;
 }
 
 .lp2-hero__visual-note strong {
   color: #fff8e8;
-  font-size: 0.86rem;
+  font-size: 0.96rem;
   line-height: 1.35;
 }
 
@@ -434,7 +453,7 @@
 .lp2-product-frame__bar strong {
   margin-left: 4px;
   color: rgba(255, 248, 232, 0.76);
-  font-size: 0.78rem;
+  font-size: 0.86rem;
 }
 
 .lp2-product-frame img {
@@ -458,13 +477,13 @@
 
 .lp2-product-frame figcaption span {
   color: var(--lp2-cyan);
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   font-weight: 900;
 }
 
 .lp2-product-frame figcaption strong {
   color: #fff7e6;
-  font-size: 0.94rem;
+  font-size: 1rem;
   line-height: 1.55;
 }
 
@@ -490,7 +509,7 @@
   border-radius: 8px;
   color: #eefaff;
   background: rgba(255, 255, 255, 0.06);
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   font-weight: 900;
   text-align: center;
 }
@@ -518,13 +537,13 @@
 
 .lp2-hero__peek span {
   color: var(--lp2-gold);
-  font-size: 0.78rem;
+  font-size: 0.86rem;
   font-weight: 900;
 }
 
 .lp2-hero__peek strong {
   color: #fff8e8;
-  font-size: 0.96rem;
+  font-size: 1.05rem;
 }
 
 .lp2-band {
@@ -566,8 +585,9 @@
 .lp2-diagram-copy h2,
 .lp2-demo-copy h2 {
   color: var(--lp2-ink);
+  font-family: var(--lp2-display);
   font-size: 2.55rem;
-  font-weight: 950;
+  font-weight: 900;
   line-height: 1.18;
   text-wrap: balance;
 }
@@ -577,7 +597,7 @@
 .lp2-demo-copy p,
 .lp2-final p {
   color: var(--lp2-muted);
-  font-size: 1rem;
+  font-size: 1.06rem;
   line-height: 1.86;
 }
 
@@ -619,7 +639,7 @@
   border-radius: 8px;
   color: #171107;
   background: var(--lp2-gold);
-  font-size: 0.75rem;
+  font-size: 0.82rem;
   font-weight: 950;
 }
 
@@ -632,7 +652,8 @@
 .lp2-plan-card h3,
 .lp2-trust-card h3 {
   color: #fff8e8;
-  font-size: 1.12rem;
+  font-family: var(--lp2-display);
+  font-size: 1.18rem;
   line-height: 1.45;
 }
 
@@ -643,6 +664,7 @@
 .lp2-gallery-card span,
 .lp2-faq-item p {
   color: var(--lp2-muted);
+  font-size: 1.02rem;
   line-height: 1.72;
 }
 
@@ -709,11 +731,10 @@
   content: "";
   position: absolute;
   inset: 0;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
-  background-size: 28px 28px;
-  opacity: 0.22;
+  background:
+    linear-gradient(112deg, transparent 0%, rgba(104, 214, 255, 0.08) 44%, rgba(237, 199, 95, 0.08) 60%, transparent 78%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent);
+  opacity: 0.76;
   pointer-events: none;
 }
 
@@ -744,13 +765,14 @@
 
 .lp2-blueprint__header span {
   color: var(--lp2-cyan);
-  font-size: 0.75rem;
+  font-size: 0.84rem;
   font-weight: 950;
 }
 
 .lp2-blueprint__header strong {
   color: #fff8e8;
-  font-size: 1rem;
+  font-family: var(--lp2-display);
+  font-size: 1.08rem;
   line-height: 1.35;
 }
 
@@ -804,13 +826,14 @@
 
 .lp2-blueprint-card__top span {
   color: rgba(255, 248, 232, 0.54);
-  font-size: 0.8rem;
+  font-size: 0.88rem;
   font-weight: 950;
 }
 
 .lp2-blueprint-card h3 {
   color: #fff8e8;
-  font-size: 1.04rem;
+  font-family: var(--lp2-display);
+  font-size: 1.12rem;
   font-weight: 950;
   line-height: 1.28;
   word-break: keep-all;
@@ -819,7 +842,7 @@
 
 .lp2-blueprint-card p {
   color: var(--lp2-muted);
-  font-size: 0.84rem;
+  font-size: 0.92rem;
   line-height: 1.7;
 }
 
@@ -833,7 +856,7 @@
   border-radius: 8px;
   color: #06090f;
   background: var(--lp2-gold);
-  font-size: 0.74rem;
+  font-size: 0.82rem;
   font-weight: 950;
 }
 
@@ -887,13 +910,13 @@
 
 .lp2-blueprint__footer strong {
   color: #fff6de;
-  font-size: 0.98rem;
+  font-size: 1.04rem;
   line-height: 1.4;
 }
 
 .lp2-blueprint__footer span {
   color: var(--lp2-muted);
-  font-size: 0.88rem;
+  font-size: 0.95rem;
   line-height: 1.65;
 }
 
@@ -968,7 +991,7 @@
   border-radius: 8px;
   color: rgba(255, 248, 232, 0.86);
   background: rgba(255, 255, 255, 0.055);
-  font-size: 0.86rem;
+  font-size: 0.92rem;
   font-weight: 850;
   text-align: center;
 }
@@ -1017,6 +1040,8 @@
 
 .lp2-gallery-card strong {
   color: #fff8e8;
+  font-family: var(--lp2-display);
+  font-size: 1.06rem;
 }
 
 .lp2-demo-list {
@@ -1025,6 +1050,7 @@
   margin: 0;
   padding-left: 1.2rem;
   color: var(--lp2-muted);
+  font-size: 1.02rem;
   line-height: 1.75;
 }
 
@@ -1063,7 +1089,8 @@
 }
 
 .lp2-plan-card h3 {
-  font-size: 1.35rem;
+  font-family: var(--lp2-display);
+  font-size: 1.44rem;
 }
 
 .lp2-plan-card strong {
@@ -1130,6 +1157,8 @@
   gap: 14px;
   padding: 0 18px;
   color: #fff8e8;
+  font-family: var(--lp2-display);
+  font-size: 1.06rem;
   font-weight: 900;
   list-style: none;
   cursor: pointer;
@@ -1174,12 +1203,10 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
-  background-size: 42px 42px;
-  opacity: 0.42;
-  mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
+  background:
+    linear-gradient(112deg, transparent 0%, rgba(255, 255, 255, 0.08) 34%, transparent 58%),
+    linear-gradient(90deg, transparent, rgba(104, 214, 255, 0.08), transparent);
+  opacity: 0.62;
 }
 
 .lp2-final__grid {
