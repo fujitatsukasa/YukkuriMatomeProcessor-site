@@ -38,9 +38,9 @@ const proofChips = [
 ] as const
 
 const heroFlowItems = [
-  { label: '貼る', value: '記事・スレURL' },
-  { label: '直す', value: '台本下地・CSV' },
-  { label: '渡す', value: 'YMM4前準備' },
+  { label: 'URL', value: '記事・スレURL' },
+  { label: 'テンプレ化', value: '台本下地・構成' },
+  { label: 'YMM4へ', value: 'CSV/.ymmp前準備' },
 ] as const
 
 const answerCards = [
@@ -313,8 +313,8 @@ export function HomePage() {
   return (
     <>
       <PageMeta
-        title="ゆっくりまとめプロセッサー｜URLからYMM4前の下ごしらえ"
-        description="記事URL・スレッドURLから、台本下地、CSV、.ymmp前準備まで。YMM4を開く前の下ごしらえを支援するWindows向けツールです。Freeで少数URLから確認できます。"
+        title="ゆっくりまとめプロセッサー｜URLから動画テンプレ化"
+        description="記事URL・スレッドURLから、ゆっくり動画向けのテンプレ下地、台本下地、CSV、.ymmp前準備まで。YMM4で仕上げる前の準備をまとめるWindows向けツールです。"
         keywords="ゆっくりまとめプロセッサー,YMM4,台本下地,CSV,.ymmp,反応集,記事URL,スレッドURL,Windows"
         image="/lp/screen-main-script-edit-v2.webp"
         path="/"
@@ -325,15 +325,15 @@ export function HomePage() {
         <section className="lp2-hero" aria-labelledby="lp2-hero-heading">
           <div className="lp2-container lp2-hero__grid">
             <div className="lp2-hero__copy" data-reveal>
-              <p className="lp2-kicker">記事URL・スレッドURLから / YMM4前の下地作り</p>
+              <p className="lp2-kicker">ゆっくり動画テンプレ化ツール / Windows + YMM4</p>
               <h1 id="lp2-hero-heading">
-                <span>URLを貼るだけ</span>
-                <span>台本下地へ。</span>
-                <span>仕上げはYMM4</span>
+                <span>記事URLから</span>
+                <span>ゆっくり動画を</span>
+                <span>テンプレ化</span>
               </h1>
               <p className="lp2-hero__lead">
-                URLを貼る。取得して直す。CSV準備、.ymmp準備、素材パス整理まで。
-                動画はYMM4で仕上げる。
+                題材集め、台本下地、CSV/.ymmp前準備、素材パス整理までをまとめてテンプレ化。
+                YMM4で仕上げる前の編集準備を短縮します。
               </p>
               <div className="lp2-hero-io" aria-label="URLからYMM4前準備まで">
                 {heroFlowItems.map((item, index) => (
@@ -366,7 +366,7 @@ export function HomePage() {
 
             <div className="lp2-hero__visual" data-reveal>
               <div className="lp2-hero__visual-note lp2-hero__visual-note--input" aria-hidden="true">
-                <span>貼るもの</span>
+                <span>素材元</span>
                 <strong>記事URL / スレッドURL</strong>
               </div>
               <figure className="lp2-product-frame lp2-product-frame--hero">
@@ -384,12 +384,12 @@ export function HomePage() {
                 />
                 <figcaption>
                   <span>実アプリ画面</span>
-                  <strong>取得した内容を見ながら、台本下地を直す。</strong>
+                  <strong>ゆっくり動画用のテンプレ下地を編集する。</strong>
                 </figcaption>
               </figure>
               <div className="lp2-hero__visual-note lp2-hero__visual-note--output" aria-hidden="true">
-                <span>できるもの</span>
-                <strong>台本下地 / CSV / .ymmp前準備</strong>
+                <span>作る下地</span>
+                <strong>動画テンプレ下地 / CSV / .ymmp前準備</strong>
               </div>
               <div className="lp2-flow-strip" aria-label="主な流れ">
                 {heroFlowItems.map((item, index) => (
@@ -402,8 +402,8 @@ export function HomePage() {
             </div>
           </div>
           <div className="lp2-hero__peek" aria-hidden="true">
-            <span>YMM4前まで</span>
-            <strong>URL、台本下地、YMM4前準備</strong>
+            <span>作るもの</span>
+            <strong>動画テンプレ下地、CSV/.ymmp前準備</strong>
           </div>
         </section>
 
@@ -412,7 +412,7 @@ export function HomePage() {
             <SectionHead
               kicker="URLからYMM4前準備まで"
               title="YMM4に入る前を、まとめて短く。"
-              body="記事URL・スレッドURLから題材選び、台本下地、CSV/.ymmp前準備まで。仕上げはYMM4で、散らかりがちな下準備だけを軽くします。"
+              body="記事URL・スレッドURLから題材選び、台本下地、CSV/.ymmp前準備まで。YMM4で編集する前に、散らかりがちな下準備をまとめます。"
               align="split"
             />
             <div className="lp2-answer-grid">
