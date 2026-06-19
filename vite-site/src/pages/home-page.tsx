@@ -38,9 +38,9 @@ const proofChips = [
 ] as const
 
 const heroFlowItems = [
-  { label: '入れる', value: '記事URL・スレッドURL' },
-  { label: '出る', value: '台本下地 / CSV / .ymmp前準備' },
-  { label: '仕上げ', value: 'YMM4で編集' },
+  { label: '入れる', value: '記事・スレURL' },
+  { label: '作る', value: '台本下地・CSV' },
+  { label: '仕上げ', value: 'YMM4編集' },
 ] as const
 
 const answerCards = [
@@ -325,15 +325,15 @@ export function HomePage() {
         <section className="lp2-hero" aria-labelledby="lp2-hero-heading">
           <div className="lp2-container lp2-hero__grid">
             <div className="lp2-hero__copy" data-reveal>
-              <p className="lp2-kicker">記事URL・スレッドURLから</p>
+              <p className="lp2-kicker">記事URL・スレッドURLから / YMM4前の下地作り</p>
               <h1 id="lp2-hero-heading">
-                <span>URLを貼るだけ。</span>
+                <span>URLを貼るだけ</span>
                 <span>台本下地へ。</span>
                 <span>仕上げはYMM4</span>
               </h1>
               <p className="lp2-hero__lead">
-                取得、下書き編集、CSV / .ymmp前準備、素材パス整理まで。
-                動画完成はYMM4で仕上げます。
+                URLを貼る。取得して直す。CSV準備、.ymmp準備、素材パス整理まで。
+                動画はYMM4で仕上げる。
               </p>
               <div className="lp2-hero-io" aria-label="入力と出力">
                 {heroFlowItems.map((item, index) => (
