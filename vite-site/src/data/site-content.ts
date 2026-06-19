@@ -53,9 +53,9 @@ export type PageEntry = {
 export const siteOrigin = 'https://yukkurimatomeprocessor.com'
 export const siteTitle = 'ゆっくりまとめプロセッサー'
 export const siteSubtitle = 'Yukkuri Matome Processor'
-export const siteTagline = 'URL取得・台本作成・YMM4前準備ツール'
+export const siteTagline = '台本作成・素材整理・YMM4動画編集支援ツール'
 export const siteDescription =
-  '記事URL・スレッドURLから、ゆっくり動画の台本下地、CSV、.ymmp、YMM4前準備を整えるWindows向け制作支援ツール。'
+  '台本作成、素材整理、YMM4向け出力、動画作成までの導線をまとめて進めるWindows向け動画制作支援ツール。'
 
 export const navItems: NavItem[] = [
   { key: 'home', label: 'ホーム', url: '/' },
@@ -255,7 +255,7 @@ export const faqGroups: FaqGroup[] = [
       {
         question: 'ゆっくりまとめプロセッサーは何を解決するツールですか？',
         answer:
-          '記事URL・スレッドURLを起点に、台本下地、CSV、.ymmp、YMM4前準備を整えるWindows向け制作支援ツールです。',
+          '台本作成、素材整理、YMM4向け出力、動画作成までの導線をまとめるWindows向け制作支援ツールです。',
       },
       {
         question: '動画は自動で完成しますか？',
@@ -265,14 +265,14 @@ export const faqGroups: FaqGroup[] = [
       {
         question: '無料で試せますか？',
         answer:
-          'はい。Freeプランで起動、初期設定、URL取得、台本編集、CSV/.ymmp前準備の流れを確認できます。台本取得とAI台本生成の利用制限解除が必要になったらPremiumを検討してください。',
+          'はい。Freeプランで起動、初期設定、台本編集、素材整理、YMM4前準備の流れを確認できます。制限解除が必要になったらPremiumを検討してください。',
       },
       {
         question: '無料版では何ができますか？',
         answer:
-          'Freeプランでは、起動、初期設定、少数URLでの取得確認、台本下地の編集、CSV/.ymmp前準備まで試せます。Premiumに進む前に、手元の題材で続けられるか確認できます。',
+          'Freeプランでは、起動、初期設定、台本編集、素材整理、YMM4前準備まで試せます。Premiumに進む前に、自分の制作環境で続けられるか確認できます。',
       },
-      { question: '想定ユーザーは誰ですか？', answer: 'YMM4で反応集、5chまとめ、ショート、ゆっくり解説を作る個人・チームを想定しています。' },
+      { question: '想定ユーザーは誰ですか？', answer: 'YMM4で反応集、解説、ショート、まとめ、ゆっくり動画を作る個人・チームを想定しています。' },
       {
         question: '導入前に必ず確認すべきページは？',
         answer:
@@ -334,11 +334,11 @@ export const faqGroups: FaqGroup[] = [
     id: 'faq-purchase',
     label: '購入・契約',
     items: [
-      { question: '料金プランはどう分かれていますか？', answer: 'Free（¥0）と Premium（買い切り39,800円）の2つです。まずはFreeで手元のURLを試し、台本取得とAI台本生成の利用制限解除が必要になったらPremiumを購入します。' },
+      { question: '料金プランはどう分かれていますか？', answer: 'Free（¥0）と Premium（買い切り39,800円）の2つです。まずはFreeで編集の流れを試し、台本取得、AI台本生成、動画作成の利用制限解除が必要になったらPremiumを購入します。' },
       { question: '月額料金はありますか？', answer: 'いいえ。Premiumは39,800円税込の買い切りで、月額自動更新はありません。' },
       { question: '購入申し込みはどのように進めますか？', answer: 'アプリ内の購入画面から Stripe Checkout を開き、買い切りライセンスを一度払いで購入します。' },
       { question: '購入後の権限はどう反映されますか？', answer: '決済完了後、Googleログインに紐づく課金状態と利用枠を同期し、アプリ内でPremium機能が有効化されます。' },
-      { question: 'Premiumで何が解除されますか？', answer: '台本取得とAI台本生成の利用制限を解除します。月額ではなく39,800円の買い切りです。' },
+      { question: 'Premiumで何が解除されますか？', answer: '台本取得、AI台本生成、動画作成の利用制限を解除します。月額ではなく39,800円の買い切りです。' },
       { question: '返金条件は何ですか？', answer: '購入後7日以内を原則受付とし、返金成立時はPremium権限を停止します。詳細は返金・キャンセルポリシーを確認してください。' },
       { question: '収益化は保証されますか？', answer: 'いいえ。動画の品質、投稿頻度、チャンネル状況、各プラットフォームの審査に左右されるため、収益化は保証していません。' },
       { question: '契約・請求に関する相談先は？', answer: '記録の残るメール窓口を推奨します。詳細はお問い合わせページを参照してください。' },
@@ -363,7 +363,7 @@ export const newsPosts: NewsPost[] = [
       `Windows向け配布版 ${publicDistribution.version} を公開しました。配布チャンネルは ${publicDistribution.channel} です。`,
       '通常利用向けのインストーラーと、インストールせずに試せるポータブルZIPを用意しています。ダウンロードページではファイル名、サイズ、SHA256を確認できます。',
       '現在の配布物は自己署名のため、WindowsやSmartScreenの警告が表示される場合があります。配布元URLとSHA256を確認してから起動してください。',
-      '更新後は、まず少数URLで起動、URL取得、台本下地、CSV/.ymmp前準備まで通るか確認してください。詳しい手順はダウンロード、使い方、アップデート履歴にまとめています。',
+      '更新後は、まず起動、台本編集、素材整理、YMM4前準備まで通るか確認してください。詳しい手順はダウンロード、使い方、アップデート履歴にまとめています。',
     ],
   },
   {

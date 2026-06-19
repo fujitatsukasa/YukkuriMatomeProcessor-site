@@ -20,7 +20,6 @@ import {
   HelpCircle,
   Laptop,
   Layers3,
-  Link2,
   MonitorPlay,
   Play,
   SearchCheck,
@@ -38,28 +37,28 @@ const proofChips = [
 ] as const
 
 const heroFlowItems = [
-  { label: 'URL', value: '記事・スレURL' },
-  { label: 'テンプレ化', value: '台本下地・構成' },
-  { label: 'YMM4へ', value: 'CSV/.ymmp前準備' },
+  { label: '型', value: '動画の形式を選ぶ' },
+  { label: '編集', value: '台本・素材を整える' },
+  { label: '出力', value: 'YMM4へ反映' },
 ] as const
 
 const answerCards = [
   {
-    label: '集める',
-    title: '記事URL・スレURLをまとめる',
-    body: '候補を一覧で見て、使う題材を選びやすくします。',
-    Icon: Link2,
+    label: '作れる',
+    title: '反応集・解説・ショートに使える',
+    body: '動画の型を選んで、台本と素材を編集しやすい状態へ持っていきます。',
+    Icon: Layers3,
   },
   {
-    label: '整える',
-    title: '台本下地を編集しやすくする',
-    body: '会話順、不要行、読み上げ量を見ながら、YMM4前に整えます。',
+    label: '直せる',
+    title: '台本と素材を見ながら整える',
+    body: '会話順、不要行、読み上げ量、素材パスを見て、編集前の手戻りを減らします。',
     Icon: FileText,
   },
   {
-    label: '渡す',
-    title: 'YMM4前準備まで揃える',
-    body: 'CSV、.ymmp前準備、保存先、素材パスまでまとめます。',
+    label: '進める',
+    title: 'YMM4反映と動画作成へ進む',
+    body: '設定反映、.ymmp前準備、動画作成ボタンまで同じ流れで進めます。',
     Icon: MonitorPlay,
   },
 ] as const
@@ -67,34 +66,34 @@ const answerCards = [
 const workflowSteps = [
   {
     step: '01',
-    title: '手元のURLを試す',
-    body: '記事URLやスレッドURLを貼って、取れるかを先に見ます。',
-    image: '/lp/screen-main-get-scripts-v2.webp',
-    alt: '台本取得画面でURLと取得設定を確認している実アプリ画面',
-    Icon: Link2,
+    title: '動画の型を決める',
+    body: '反応集、解説、ショート、まとめなど、作る形式に合わせて始めます。',
+    image: '/lp/screen-main-guide-v2.webp',
+    alt: '動画編集の入口を確認する実アプリガイド画面',
+    Icon: Layers3,
   },
   {
     step: '02',
-    title: '台本として直す',
-    body: '会話順、不要行、役割、読み上げ量を見て手で直します。',
+    title: '台本と素材を直す',
+    body: '会話順、不要行、役割、読み上げ量、素材パスを見て直します。',
     image: '/lp/screen-main-script-edit-v2.webp',
     alt: '台本編集画面で取得結果とボードを確認している実アプリ画面',
     Icon: FileText,
   },
   {
     step: '03',
-    title: 'YMM4前を揃える',
-    body: 'CSV、.ymmp前準備、保存先、素材パスをまとめます。',
+    title: '設定を反映する',
+    body: 'CSV、.ymmp前準備、保存先、素材パスをまとめてYMM4へつなぎます。',
     image: '/lp/screen-main-board-v2.webp',
     alt: 'YMM4前準備に使うボード画面の実アプリスクリーンショット',
     Icon: FileCode2,
   },
   {
     step: '04',
-    title: 'YMM4で仕上げ',
-    body: '音声、字幕、立ち絵、間合い、公開前チェックはYMM4で進めます。',
-    image: '/lp/screen-main-guide-v2.webp',
-    alt: '初回起動や編集手順を確認するガイド画面の実アプリスクリーンショット',
+    title: '動画作成へ進める',
+    body: 'YMM4で音声、字幕、立ち絵、間合いを確認して仕上げます。',
+    image: '/lp/screen-main-get-scripts-v2.webp',
+    alt: '素材取り込みと動画制作の準備画面を確認する実アプリスクリーンショット',
     Icon: MonitorPlay,
   },
 ] as const
@@ -102,33 +101,33 @@ const workflowSteps = [
 const blueprintSteps = [
   {
     step: '01',
-    title: 'URLを貼る',
-    body: 'まず少数URLで、手元の題材が取れるか見る。',
-    output: '取れるか確認',
-    Icon: Link2,
+    title: '型を選ぶ',
+    body: '作りたい動画の形式を決めて、編集に入る。',
+    output: '編集開始',
+    Icon: Layers3,
     tone: 'cyan',
   },
   {
     step: '02',
-    title: '下書きを直す',
+    title: '台本を直す',
     body: '会話順、不要行、役割、読み上げ量を整える。',
-    output: '台本下地',
+    output: '台本編集',
     Icon: FileText,
     tone: 'blue',
   },
   {
     step: '03',
-    title: '保存先を揃える',
-    body: 'CSV、.ymmp前準備、素材パスをまとめる。',
-    output: '前準備',
+    title: '素材を揃える',
+    body: '保存先、素材パス、CSV、.ymmp前準備をまとめる。',
+    output: '反映準備',
     Icon: FileCode2,
     tone: 'green',
   },
   {
     step: '04',
-    title: 'YMM4で仕上げ',
-    body: '音声、字幕、素材、間合いを見て仕上げる。',
-    output: '最終編集',
+    title: 'YMM4で作る',
+    body: '反映後に音声、字幕、素材、間合いを見て仕上げる。',
+    output: '動画作成',
     Icon: MonitorPlay,
     tone: 'gold',
   },
@@ -136,20 +135,20 @@ const blueprintSteps = [
 
 const galleryItems = [
   {
-    title: '台本取得',
-    body: '手元のURLが取れるかを見る画面です。',
+    title: '素材取り込み',
+    body: 'URLを使う場合に、候補を取り込む画面です。',
     image: '/lp/screen-main-get-scripts-v2.webp',
     alt: '台本取得画面の実アプリスクリーンショット',
   },
   {
     title: '台本編集',
-    body: '取得した内容を台本として直す画面です。',
+    body: '台本と画面構成を見ながら直す画面です。',
     image: '/lp/screen-main-script-edit-v2.webp',
     alt: '台本編集画面の実アプリスクリーンショット',
   },
   {
-    title: '下書き生成の確認',
-    body: '生成文を見て、使う前に直す画面です。',
+    title: '台本生成の確認',
+    body: '題材から台本案を作り、使う前に直す画面です。',
     image: '/lp/screen-main-script-gen-v2.webp',
     alt: 'AI台本生成結果を確認する実アプリスクリーンショット',
   },
@@ -165,8 +164,8 @@ const planCards = [
   {
     name: 'Free',
     price: '¥0',
-    lead: 'まず手元のURLで試す',
-    points: ['起動できるか見る', 'URLが取れるか見る', '台本を直せるか見る', 'YMM4前準備まで触る'],
+    lead: 'まず編集の流れを試す',
+    points: ['起動できるか見る', '台本と素材を触る', 'YMM4前準備まで触る', '動画作成までの導線を確認'],
     href: downloadUrl,
     cta: '無料でダウンロード',
     external: true,
@@ -176,7 +175,7 @@ const planCards = [
     name: 'Premium',
     price: '¥39,800',
     lead: '税込 / 買い切り / 月額なし',
-    points: ['台本取得の制限解除', 'AI台本生成の制限解除', 'Googleログインで権限同期', '本数が増えた時向け'],
+    points: ['台本取得の制限解除', 'AI台本生成の制限解除', '動画作成の制限解除', '本数が増えた時向け'],
     href: '/purchase/',
     cta: '料金と条件を見る',
     external: false,
@@ -214,7 +213,7 @@ const softwareApplicationLd = {
   url: `${siteOrigin}/`,
   downloadUrl: `${siteOrigin}/download/`,
   description:
-    '記事URL・スレッドURLから、ゆっくり動画向けの台本下地、CSV、.ymmp、YMM4前準備を整えるWindows向け制作支援ツールです。',
+    '台本作成、素材整理、YMM4向け出力、動画作成までの導線をまとめて進めるWindows向け動画制作支援ツールです。',
   offers: {
     '@type': 'Offer',
     price: legal.pricing.unitPrice,
@@ -313,9 +312,9 @@ export function HomePage() {
   return (
     <>
       <PageMeta
-        title="ゆっくりまとめプロセッサー｜URLから動画テンプレ作成"
-        description="記事URL・スレッドURLから、まとめ動画・解説動画・ショート向けのテンプレ下地、台本下地、CSV、.ymmp前準備まで。YMM4で仕上げる前の準備をまとめるWindows向けツールです。"
-        keywords="ゆっくりまとめプロセッサー,YMM4,台本下地,CSV,.ymmp,反応集,記事URL,スレッドURL,Windows"
+        title="ゆっくりまとめプロセッサー｜30秒で動画編集を始めるWindowsツール"
+        description="反応集、解説、ショート、まとめ動画など。台本作成、素材整理、YMM4向け出力、動画作成までの導線をまとめるWindows向け動画制作支援ツールです。"
+        keywords="ゆっくりまとめプロセッサー,YMM4,動画編集,動画作成,台本作成,素材整理,反応集,解説動画,ショート動画,Windows"
         image="/lp/screen-main-script-edit-v2.webp"
         path="/"
         structuredData={softwareApplicationLd}
@@ -325,17 +324,17 @@ export function HomePage() {
         <section className="lp2-hero" aria-labelledby="lp2-hero-heading">
           <div className="lp2-container lp2-hero__grid">
             <div className="lp2-hero__copy" data-reveal>
-              <p className="lp2-kicker">まとめ・解説・ショート向けテンプレ作成ツール / Windows + YMM4</p>
+              <p className="lp2-kicker">動画編集支援ツール / Windows + YMM4</p>
               <h1 id="lp2-hero-heading">
-                <span>記事URLから</span>
-                <span>動画テンプレ</span>
-                <span>作成</span>
+                <span>いろんな動画</span>
+                <span>30秒で</span>
+                <span>編集開始</span>
               </h1>
               <p className="lp2-hero__lead">
-                反応集、解説、ショート、まとめ動画の題材集めから台本下地、CSV/.ymmp前準備までをテンプレ化。
-                YMM4で仕上げる前の編集準備を短縮します。
+                反応集、解説、ショート、まとめ動画。テンプレを選び、台本と素材を整え、YMM4へ反映。
+                動画完成を約束するツールではなく、編集に入るまでを短くする制作支援ツールです。
               </p>
-              <div className="lp2-hero-io" aria-label="URLからYMM4前準備まで">
+              <div className="lp2-hero-io" aria-label="動画編集開始までの流れ">
                 {heroFlowItems.map((item, index) => (
                   <div className="lp2-hero-io__item" key={item.label}>
                     <span>{item.label}</span>
@@ -366,8 +365,8 @@ export function HomePage() {
 
             <div className="lp2-hero__visual" data-reveal>
               <div className="lp2-hero__visual-note lp2-hero__visual-note--input" aria-hidden="true">
-                <span>素材元</span>
-                <strong>記事URL / スレッドURL</strong>
+                <span>動画の型</span>
+                <strong>反応集 / 解説 / ショート / まとめ</strong>
               </div>
               <figure className="lp2-product-frame lp2-product-frame--hero">
                 <div className="lp2-product-frame__bar" aria-hidden="true">
@@ -384,12 +383,12 @@ export function HomePage() {
                 />
                 <figcaption>
                   <span>実アプリ画面</span>
-                  <strong>動画テンプレの下地を見ながら編集する。</strong>
+                  <strong>台本と素材を見ながら、動画作成へ進める。</strong>
                 </figcaption>
               </figure>
               <div className="lp2-hero__visual-note lp2-hero__visual-note--output" aria-hidden="true">
-                <span>作る下地</span>
-                <strong>動画テンプレ下地 / CSV / .ymmp前準備</strong>
+                <span>YMM4連携</span>
+                <strong>設定反映 / .ymmp / 動画作成へ</strong>
               </div>
               <div className="lp2-flow-strip" aria-label="主な流れ">
                 {heroFlowItems.map((item, index) => (
@@ -402,17 +401,17 @@ export function HomePage() {
             </div>
           </div>
           <div className="lp2-hero__peek" aria-hidden="true">
-            <span>作るもの</span>
-            <strong>動画テンプレ下地、CSV/.ymmp前準備</strong>
+            <span>作る流れ</span>
+            <strong>型を選ぶ、台本を整える、YMM4へ反映</strong>
           </div>
         </section>
 
         <section className="lp2-band lp2-band--answers" aria-labelledby="lp2-answers-heading">
           <div className="lp2-container">
             <SectionHead
-              kicker="URLからYMM4前準備まで"
-              title="YMM4に入る前を、まとめて短く。"
-              body="記事URL・スレッドURLから題材選び、台本下地、CSV/.ymmp前準備まで。YMM4で編集する前に、散らかりがちな下準備をまとめます。"
+              kicker="30秒で編集開始へ"
+              title="何の動画を作るかから始める。"
+              body="反応集、解説、ショート、まとめ。作りたい形式を選んで、台本と素材を揃え、YMM4で仕上げます。"
               align="split"
             />
             <div className="lp2-answer-grid">
@@ -437,7 +436,7 @@ export function HomePage() {
               <p className="lp2-kicker">作業範囲</p>
               <h2 id="lp2-diagram-heading">YMM4に入る前で迷わない。</h2>
               <p>
-                URLを集める、下書きを直す、保存先や素材パスを揃える。
+                動画の型を選ぶ、台本を直す、保存先や素材パスを揃える。
                 編集前に散らかりやすいところをまとめます。
               </p>
               <div className="lp2-note-panel">
@@ -482,15 +481,15 @@ export function HomePage() {
                   </div>
                   <img
                     src="/lp/screen-main-get-scripts-v2.webp"
-                    alt="URLから台本取得の設定を確認する実アプリ画面"
+                    alt="素材取り込みと台本取得の設定を確認する実アプリ画面"
                     loading="lazy"
                     decoding="async"
                   />
                 </figure>
                 <div className="lp2-metric-row" aria-label="制作フローの要点">
-                  <span><Gauge size={16} aria-hidden="true" />少数URLで確認</span>
+                  <span><Gauge size={16} aria-hidden="true" />30秒で編集開始</span>
                   <span><Layers3 size={16} aria-hidden="true" />素材パスを整理</span>
-                  <span><SearchCheck size={16} aria-hidden="true" />編集前に点検</span>
+                  <span><SearchCheck size={16} aria-hidden="true" />YMM4へ反映</span>
                 </div>
               </div>
             </div>
@@ -525,13 +524,13 @@ export function HomePage() {
               <p className="lp2-kicker">90秒</p>
               <h2 id="lp2-demo-heading">90秒で流れを見る。</h2>
               <p>
-                URLを貼ってからYMM4前準備までを短く見られます。
+                台本と素材を整えてからYMM4前準備までを短く見られます。
                 再生できない場合は、上のスクショで同じ流れを確認できます。
               </p>
               <ol className="lp2-demo-list">
-                <li>URLを貼る</li>
-                <li>下書きを直す</li>
-                <li>YMM4前に保存先と素材パスを揃える</li>
+                <li>動画の型を選ぶ</li>
+                <li>台本と素材を直す</li>
+                <li>YMM4へ反映して動画作成へ進む</li>
               </ol>
             </div>
             <div className="lp2-video-frame" data-reveal>
@@ -631,10 +630,10 @@ export function HomePage() {
           <div className="lp2-container lp2-final__grid">
             <div>
               <p className="lp2-kicker">最初の1本</p>
-              <h2 id="lp2-final-heading">まずFreeで、手元のURLを試す。</h2>
+              <h2 id="lp2-final-heading">まずFreeで、編集の流れを試す。</h2>
               <p>
-                取れるか。台本として直せるか。YMM4前準備まで迷わないか。
-                買う前に自分の題材で判断できます。
+                起動できるか。台本と素材を扱えるか。YMM4へ反映できるか。
+                買う前に自分の制作環境で判断できます。
               </p>
             </div>
             <div className="lp2-final__actions">

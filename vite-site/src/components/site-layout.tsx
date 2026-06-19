@@ -291,7 +291,7 @@ export function SiteLayout() {
         <div className="brand-footer__inner">
           <div className="brand-footer__lead">
             <h2>{siteTitle}</h2>
-            <p>記事URL・スレッドURLから台本下地を作り、YMM4を開く前の準備を短くするWindows向けツール。</p>
+            <p>台本作成、素材整理、YMM4向け出力、動画作成までの導線をまとめるWindows向け制作支援ツール。</p>
           </div>
 
           <div className="brand-footer__grid">
