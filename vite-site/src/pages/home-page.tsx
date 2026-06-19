@@ -360,11 +360,11 @@ function AutomationLab() {
     <section className="lp2-band lp2-band--auto-lab" aria-labelledby="lp2-auto-lab-heading">
       <div className="lp2-container lp2-auto-lab">
         <div className="lp2-auto-lab__copy" data-reveal>
-          <p className="lp2-kicker">自動化の中身</p>
-          <h2 id="lp2-auto-lab-heading">ネタを、動画編集用の下地に変える。</h2>
+          <p className="lp2-kicker">実アプリでやること</p>
+          <h2 id="lp2-auto-lab-heading">編集前の面倒を30秒でまとめる。</h2>
           <p>
-            ただ文章を並べるだけではなく、台本、素材枠、字幕量、YMM4前チェックまでまとめます。
-            仕上げはYMM4で見て直せます。
+            素材メモ、下書き、URL任意を入れると、台本、素材枠、確認項目、YMM4へ渡す準備まで整理します。
+            完成動画はYMM4で見て仕上げます。
           </p>
           <div className="lp2-auto-lab__cards" aria-label="自動化される主な流れ">
             {automationCards.map((item) => (
@@ -376,13 +376,41 @@ function AutomationLab() {
             ))}
           </div>
         </div>
-        <figure className="lp2-auto-figure" data-reveal>
-          <img src="/lp/automation-core-v1.webp" alt="ネタ、素材、台本を自動で整理する流れを表した抽象図" loading="lazy" decoding="async" />
-          <figcaption>
-            <span>自動整理</span>
-            <strong>ネタ、素材、台本、音声、動画の流れをひとつにまとめる。</strong>
-          </figcaption>
-        </figure>
+        <div className="lp2-auto-stage" aria-label="自動動画編集の実アプリ画面" data-reveal>
+          <figure className="lp2-auto-screen lp2-auto-screen--main">
+            <div className="lp2-product-frame__bar" aria-hidden="true">
+              <span />
+              <span />
+              <span />
+              <strong>台本編集</strong>
+            </div>
+            <img src="/lp/screen-main-script-edit-v2.webp" alt="台本を動画用に整える台本編集画面" loading="lazy" decoding="async" />
+            <figcaption>
+              <span>台本編集</span>
+              <strong>下書きを会話、字幕量、素材枠に合わせて整える。</strong>
+            </figcaption>
+          </figure>
+          <figure className="lp2-auto-screen lp2-auto-screen--side">
+            <div className="lp2-product-frame__bar" aria-hidden="true">
+              <span />
+              <span />
+              <span />
+              <strong>動画作成ボード</strong>
+            </div>
+            <img src="/lp/screen-main-board-v2.webp" alt="素材と動画作成状況を確認するボード画面" loading="lazy" decoding="async" />
+            <figcaption>
+              <span>確認ボード</span>
+              <strong>素材と出力前チェックを見ながら進める。</strong>
+            </figcaption>
+          </figure>
+          <div className="lp2-auto-stage__rail" aria-label="入力からYMM4確認までの流れ">
+            <span>ネタ・素材</span>
+            <ArrowRight size={16} aria-hidden="true" />
+            <span>台本・素材枠</span>
+            <ArrowRight size={16} aria-hidden="true" />
+            <span>YMM4で確認</span>
+          </div>
+        </div>
       </div>
     </section>
   )

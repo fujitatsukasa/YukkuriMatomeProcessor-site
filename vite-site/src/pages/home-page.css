@@ -355,7 +355,7 @@
 }
 
 .lp2-hero__visual::after,
-.lp2-auto-figure::after {
+.lp2-auto-stage::after {
   content: "";
   position: absolute;
   z-index: 3;
@@ -603,8 +603,8 @@
 .lp2-band--auto-lab {
   overflow: hidden;
   background:
-    radial-gradient(circle at 22% 32%, rgba(167, 139, 250, 0.12), transparent 26%),
-    radial-gradient(circle at 78% 54%, rgba(104, 214, 255, 0.12), transparent 28%),
+    linear-gradient(90deg, rgba(5, 7, 11, 0.82) 0%, rgba(5, 7, 11, 0.62) 46%, rgba(5, 7, 11, 0.9) 100%),
+    url("/lp/hero-ribbon-bg-v3.webp") center / cover no-repeat,
     rgba(255, 255, 255, 0.012);
 }
 
@@ -682,6 +682,8 @@
 }
 
 .lp2-auto-lab {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: minmax(0, 0.82fr) minmax(560px, 1.18fr);
   gap: 34px;
@@ -760,33 +762,78 @@
   line-height: 1.64;
 }
 
-.lp2-auto-figure {
+.lp2-auto-stage {
   position: relative;
   min-width: 0;
-  margin: 0;
+  min-height: 500px;
+  display: grid;
+  align-items: center;
+  padding: 28px 24px 78px;
   overflow: hidden;
   border: 1px solid rgba(237, 199, 95, 0.24);
   border-radius: 8px;
-  background: rgba(4, 6, 10, 0.74);
+  background:
+    linear-gradient(120deg, rgba(6, 10, 16, 0.9), rgba(14, 20, 29, 0.74) 48%, rgba(4, 6, 10, 0.92)),
+    rgba(4, 6, 10, 0.74);
   box-shadow:
     0 0 0 1px rgba(104, 214, 255, 0.08),
     0 34px 90px -60px rgba(104, 214, 255, 0.72);
 }
 
-.lp2-auto-figure img {
+.lp2-auto-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 18% 20%, rgba(104, 214, 255, 0.13), transparent 24%),
+    radial-gradient(circle at 84% 72%, rgba(237, 199, 95, 0.16), transparent 26%),
+    linear-gradient(90deg, transparent 0%, rgba(104, 214, 255, 0.08) 50%, transparent 100%);
+  pointer-events: none;
+}
+
+.lp2-auto-stage::after {
+  right: 8%;
+  bottom: 24%;
+}
+
+.lp2-auto-screen {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  background: #080b12;
+  box-shadow: 0 32px 78px -54px rgba(0, 0, 0, 0.92);
+}
+
+.lp2-auto-screen--main {
+  width: min(82%, 650px);
+  border-color: rgba(104, 214, 255, 0.24);
+}
+
+.lp2-auto-screen--side {
+  position: absolute;
+  right: 22px;
+  bottom: 82px;
+  z-index: 2;
+  width: min(38%, 300px);
+  border-color: rgba(237, 199, 95, 0.3);
+  box-shadow:
+    0 24px 72px -48px rgba(237, 199, 95, 0.6),
+    0 18px 58px -40px rgba(0, 0, 0, 0.92);
+}
+
+.lp2-auto-screen img {
   width: 100%;
   display: block;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 16 / 10;
   object-fit: cover;
-  opacity: 0.94;
+  object-position: top left;
 }
 
-.lp2-auto-figure::after {
-  right: 9%;
-  bottom: 20%;
-}
-
-.lp2-auto-figure figcaption {
+.lp2-auto-screen figcaption {
   display: grid;
   gap: 4px;
   padding: 12px 14px 14px;
@@ -794,16 +841,52 @@
   background: rgba(7, 10, 15, 0.86);
 }
 
-.lp2-auto-figure figcaption span {
+.lp2-auto-screen figcaption span {
   color: var(--lp2-gold);
   font-size: 0.8rem;
   font-weight: 950;
 }
 
-.lp2-auto-figure figcaption strong {
+.lp2-auto-screen figcaption strong {
   color: #fff8e8;
   font-size: 0.95rem;
   line-height: 1.55;
+}
+
+.lp2-auto-stage__rail {
+  position: absolute;
+  right: 24px;
+  bottom: 22px;
+  left: 24px;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  background: rgba(5, 8, 13, 0.86);
+  box-shadow: 0 18px 44px -34px rgba(0, 0, 0, 0.9);
+}
+
+.lp2-auto-stage__rail span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0 12px;
+  border-radius: 8px;
+  color: #fff8e8;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.028));
+  font-size: 0.92rem;
+  font-weight: 900;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.lp2-auto-stage__rail svg {
+  color: var(--lp2-gold);
 }
 
 .lp2-answer-card::before {
@@ -1766,6 +1849,34 @@
 
   .lp2-auto-mini-card span {
     min-width: 0;
+  }
+
+  .lp2-auto-stage {
+    min-height: auto;
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .lp2-auto-screen--main,
+  .lp2-auto-screen--side {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    width: 100%;
+  }
+
+  .lp2-auto-stage__rail {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    grid-template-columns: 1fr;
+    margin-top: 2px;
+  }
+
+  .lp2-auto-stage__rail svg {
+    justify-self: center;
+    transform: rotate(90deg);
   }
 
   .lp2-flow-strip {
