@@ -319,10 +319,10 @@ export function BlogPost() {
             <InteractiveCard className="release-panel premium-glass blog-conversion-panel">
               <div>
                 <span className="subpage-card__eyebrow">次にやること</span>
-                <h2>読んだ内容を、無料プランで実際の制作フローに戻す</h2>
+                <h2>読んだ内容を、無料プランで手元のURLに戻す</h2>
                 <p>
                   記事で確認した考え方を、対応サイト取得、台本整理、YMM4前準備の画面で試せます。
-                  まずは無料プランで導入相性を確認してください。
+                  まずは無料プランで、手元の題材が取れるか確認してください。
                 </p>
               </div>
               <div className="blog-conversion-panel__actions">

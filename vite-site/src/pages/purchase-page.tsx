@@ -10,9 +10,9 @@ const planNarratives = [
     name: 'Free',
     price: '¥0',
     term: 'ずっと無料',
-    title: 'まずは導入相性を確認する',
+    title: 'まず手元のURLで試す',
     body: '記事URLの取得、台本編集、CSV/.ymmpの前準備までを無料で確認できます。',
-    points: ['初回導入の確認', '台本取得と整形の相性を見る', 'YMM4前準備まで試す'],
+    points: ['起動できるか見る', 'URLが取れるか見る', 'YMM4前準備まで試す'],
     cta: { label: '無料でダウンロード', href: '/download/' },
   },
   {
@@ -49,7 +49,7 @@ const purchaseGoalCards = [
     label: '購入前',
     plan: 'Freeで確認',
     title: '少数URLで一連の流れを通す',
-    body: 'まず無料で起動、URL取得、台本整理、CSV/.ymmp前準備まで触り、自分の制作手順に合うか確認します。',
+    body: 'まず無料で起動、URL取得、台本整理、CSV/.ymmp前準備まで触り、手元の題材で続けられるか確認します。',
     checks: ['アプリが起動する', '候補一覧が出る', 'YMM4前準備まで試す'],
   },
   {
@@ -107,7 +107,7 @@ const premiumCompletionGoals = [
 const purchaseDecisionMatrix = [
   {
     label: 'まだFreeでよい',
-    title: '導入相性を見ている段階',
+    title: '手元のURLで試している段階',
     body: '起動、少数URL、台本整理、CSV/.ymmp前準備までを確認している段階なら、まだFreeで十分です。',
     checks: ['対応URLを確認中', '月に数本だけ試したい', 'YMM4前準備まで触って判断したい'],
     href: '/instructions/',
@@ -158,7 +158,7 @@ const purchaseFactCards = [
 const purchaseCautions = [
   '動画完成を自動保証するものではありません',
   'YouTube収益化や再生数を保証するものではありません',
-  '素材、音声、引用元の利用条件は利用者側で確認してください',
+  '素材、音声、引用元の利用条件は投稿前に確認してください',
 ] as const
 
 export function PurchasePage() {

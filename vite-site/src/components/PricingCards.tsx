@@ -28,8 +28,8 @@ const pricingPlans: PricingPlan[] = [
     eyebrow: '初回導入の入口',
     price: '¥0',
     term: 'ずっと無料',
-    bestFor: 'まず動作確認をして、自分の制作フローにハマるかを見たい',
-    summary: '対応サイト取得、基本編集、YMM4出力の流れを見て、導入相性を確かめるための入口プランです。',
+    bestFor: 'まず手元のURLで使えるか見たい',
+    summary: '対応サイト取得、基本編集、YMM4前準備までを見て、続けて使えそうか確かめる入口プランです。',
     note: '初回導入や動作確認、無料での試運転に最適',
     badge: null,
     features: [
@@ -71,7 +71,7 @@ const comparisonRows = [
   },
   {
     label: '主な強み',
-    values: ['導入相性の確認', '買い切りで Premium 権限を保持'],
+    values: ['手元のURLで確認', '買い切りで Premium 権限を保持'],
   },
   {
     label: 'CSV/.ymmp管理',

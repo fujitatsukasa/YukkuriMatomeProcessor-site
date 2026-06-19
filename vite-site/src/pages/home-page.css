@@ -624,7 +624,7 @@
 .lp2-answer-card {
   display: grid;
   gap: 13px;
-  min-height: 244px;
+  min-height: 218px;
   padding: 22px;
 }
 
@@ -1418,6 +1418,7 @@
   .lp2-step-card,
   .lp2-plan-card,
   .lp2-trust-card {
+    min-height: auto;
     padding: 16px;
   }
 

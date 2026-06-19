@@ -86,7 +86,7 @@ const faqDecisionCards = [
   {
     title: '動画を丸ごと自動生成するツールではありません',
     body: '記事URL・スレッドURLから台本下地を作り、YMM4へ渡す前の準備を短くするツールです。',
-    note: '最終確認と編集は利用者側で行います',
+    note: '最後はYMM4で見て直します',
     Icon: Sparkles,
   },
   {

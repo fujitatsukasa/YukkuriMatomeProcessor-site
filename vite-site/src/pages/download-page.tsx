@@ -747,7 +747,7 @@ const downloadScenes: readonly GuideScene[] = [
     key: 'collect',
     eyebrow: '手順2',
     title: '対応サイトから記事とスレッドを取得する',
-    body: 'まずは少ない件数で、記事取得 -> 候補選択 -> 台本化の流れを一度通して、導入相性を確認します。',
+    body: 'まずは少ない件数で、記事取得 -> 候補選択 -> 台本化の流れを一度通して、手元の題材で続けられるか確認します。',
     image: '/product_get_script.webp',
     alt: '対応サイトから記事候補を取得する画面',
     checkpoint: 'URL から台本取得までの入口が通る',

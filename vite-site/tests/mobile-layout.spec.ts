@@ -4,7 +4,7 @@ const pages = [
   { path: '/', heading: 'URLを貼るだけ' },
   { path: '/download/', heading: '最新版を無料ダウンロード' },
   { path: '/instructions/', heading: '記事URLから台本を取得し、YMM4に渡す' },
-  { path: '/samples/', heading: '実アプリ画面と動画サンプルで、入力から出力まで確認する' },
+  { path: '/samples/', heading: '実アプリ画面と動画サンプルで、使う前の流れを確認する' },
   { path: '/faq/', heading: '導入前によくある質問' },
   { path: '/purchase/', heading: 'Freeで試して' },
   { path: '/legal/commercial-transactions/', heading: '特定商取引法に基づく表記' },

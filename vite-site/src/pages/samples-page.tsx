@@ -5,8 +5,8 @@ import { ArrowRight, BadgeCheck, ClipboardCheck, Download, FileText, MonitorPlay
 
 const screenGallery = [
   {
-    title: 'URL入力から記事候補を取得',
-    body: '対応サイトやスレッドURLを入れ、動画化する候補を一覧で確認します。',
+    title: 'URLを貼って候補を見る',
+    body: '対応サイトやスレッドURLを貼り、動画化する候補を一覧で確認します。',
     goal: '候補一覧にタイトル、URL、サムネイルが並ぶ',
     next: '使う候補を選び、台本下地へ進む',
     image: '/product_get_script.webp',
@@ -51,12 +51,12 @@ const screenGallery = [
   },
   {
     title: 'フォーマットを追加する',
-    body: 'CSV/.ymmpに渡しやすい形を残し、次の動画でも手順を再利用しやすくします。',
-    goal: '出力形式と命名ルールを再利用できる状態にする',
+    body: 'CSV/.ymmpに渡しやすい形を残し、次の動画でも同じ流れを使いやすくします。',
+    goal: '形式と命名ルールを再利用できる状態にする',
     next: '次回の動画でも同じ前工程を使う',
     image: '/product_format_list.webp',
     alt: 'フォーマット管理とYMM4前準備の実アプリ画面',
-    tags: ['フォーマット', '再利用', '制作手順'],
+    tags: ['フォーマット', '再利用', '前工程'],
   },
 ] as const
 
@@ -81,7 +81,7 @@ const sampleGoalCards = [
 const sampleDecisionCards = [
   {
     title: '実アプリ画面で確認',
-    body: 'URL取得、台本編集、YMM4前準備の画面が自分の制作手順に合うかを確認します。',
+    body: 'URL取得、台本編集、YMM4前準備の画面が手元の題材に合うかを確認します。',
     link: '#sample-screen-gallery',
     linkLabel: '画面を見る',
     Icon: MonitorPlay,
@@ -222,8 +222,8 @@ export function SamplesPage() {
   return (
     <>
       <PageMeta
-        title="実画面・動画サンプル｜入力から出力まで確認"
-        description="ゆっくりまとめプロセッサーの実アプリ画面、URL入力から台本整理、YMM4前準備までのBefore/After、短い動画プレビューを専用ギャラリーで確認できます。"
+        title="実画面・動画サンプル｜使う前の流れを確認"
+        description="ゆっくりまとめプロセッサーの実アプリ画面、URLを貼ってから台本整理、YMM4前準備までのBefore/After、短い動画プレビューを専用ギャラリーで確認できます。"
         keywords="実画面, サンプル, Before After, YMM4, 台本作成, ゆっくりまとめプロセッサー"
         image="/product_edit_script.webp"
         path="/samples/"
@@ -233,8 +233,8 @@ export function SamplesPage() {
       <main className="brand-shell">
         <PageIntro
           kicker="実画面・サンプルギャラリー"
-          title="実アプリ画面と動画サンプルで、入力から出力まで確認する"
-          lead="URL入力、台本編集、AI補助、CSV/.ymmp前準備まで。実アプリ画面、Before/After、短い動画プレビューで、無料で試す前に流れを確認できます。"
+          title="実アプリ画面と動画サンプルで、使う前の流れを確認する"
+          lead="URLを貼る、台本を直す、CSV/.ymmp前準備まで。実アプリ画面、Before/After、短い動画プレビューで、無料で試す前に流れを確認できます。"
           actions={[
             { label: '無料でダウンロード', href: downloadUrl, variant: 'primary', external: true },
             { label: '使い方を見る', href: '/instructions/', variant: 'ghost' },
@@ -294,7 +294,7 @@ export function SamplesPage() {
             <p>専用ギャラリー</p>
             <h2>実画面、Before/After、動画化サンプルをまとめて見る</h2>
             <p>
-              画像だけで判断しづらい部分を、入力、成果物、成功状態まで並べて確認できます。
+              画像だけで判断しづらい部分を、貼るもの、できるもの、成功状態まで並べて確認できます。
               動画化サンプルは完成動画そのものではなく、作れる方向性を示す構成見本です。
             </p>
           </div>

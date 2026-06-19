@@ -34,32 +34,32 @@ const proofChips = [
   'YMM4前提',
   'Freeあり',
   '39,800円 買い切り',
-  '動画完成はYMM4',
+  '月額なし',
 ] as const
 
 const heroFlowItems = [
-  { label: '入れる', value: '記事・スレURL' },
-  { label: '作る', value: '台本下地・CSV' },
-  { label: '仕上げ', value: 'YMM4編集' },
+  { label: '貼る', value: '記事・スレURL' },
+  { label: '直す', value: '台本下地・CSV' },
+  { label: '渡す', value: 'YMM4前準備' },
 ] as const
 
 const answerCards = [
   {
-    label: '入力',
-    title: 'URLを入れる',
-    body: '記事URL・スレッドURLを貼ります。まず少数URLで、自分の題材が取れるか確認します。',
+    label: '買う前 1',
+    title: 'そのURL、取れる？',
+    body: 'まずFreeで1〜2件貼って、手元の記事URLやスレッドURLが取れるか見られます。',
     Icon: Link2,
   },
   {
-    label: '出力',
-    title: '台本下地と前準備',
-    body: '会話のたたき台、CSV、.ymmp前準備を整えます。完成動画は出しません。',
+    label: '買う前 2',
+    title: '台本として直せる？',
+    body: '取れた内容を見ながら、会話順、不要行、読み上げ量を手で直せます。',
     Icon: FileText,
   },
   {
-    label: '仕上げ',
-    title: 'YMM4で編集する',
-    body: '音声、字幕、立ち絵、間合い、権利確認、投稿判断はYMM4側と利用者側で行います。',
+    label: '買う前 3',
+    title: 'YMM4にはどう渡す？',
+    body: 'CSVや.ymmp前準備、素材パス整理まで。音声、字幕、間合いはYMM4で仕上げます。',
     Icon: MonitorPlay,
   },
 ] as const
@@ -67,24 +67,24 @@ const answerCards = [
 const workflowSteps = [
   {
     step: '01',
-    title: 'URL取得',
-    body: '対象URLとキャラ設定を入れます。取れないURLはここで判断します。',
+    title: '手元のURLを試す',
+    body: '記事URLやスレッドURLを貼って、取れるかを先に見ます。',
     image: '/lp/screen-main-get-scripts-v2.webp',
     alt: '台本取得画面でURLと取得設定を確認している実アプリ画面',
     Icon: Link2,
   },
   {
     step: '02',
-    title: '下書き編集',
-    body: 'そのまま出さず、行の順番、役割、読み上げ量を見て直します。',
+    title: '台本として直す',
+    body: '会話順、不要行、役割、読み上げ量を見て手で直します。',
     image: '/lp/screen-main-script-edit-v2.webp',
     alt: '台本編集画面で取得結果とボードを確認している実アプリ画面',
     Icon: FileText,
   },
   {
     step: '03',
-    title: 'YMM4前準備',
-    body: 'CSV、.ymmp前準備、保存先、素材パスを編集前に揃えます。',
+    title: 'YMM4前を揃える',
+    body: 'CSV、.ymmp前準備、保存先、素材パスをまとめます。',
     image: '/lp/screen-main-board-v2.webp',
     alt: 'YMM4前準備に使うボード画面の実アプリスクリーンショット',
     Icon: FileCode2,
@@ -92,7 +92,7 @@ const workflowSteps = [
   {
     step: '04',
     title: 'YMM4で仕上げ',
-    body: '読み、字幕、素材、間合い、公開前チェックはYMM4で行います。',
+    body: '音声、字幕、立ち絵、間合い、公開前チェックはYMM4で進めます。',
     image: '/lp/screen-main-guide-v2.webp',
     alt: '初回起動や編集手順を確認するガイド画面の実アプリスクリーンショット',
     Icon: MonitorPlay,
@@ -103,15 +103,15 @@ const blueprintSteps = [
   {
     step: '01',
     title: 'URLを貼る',
-    body: '記事URL・スレッドURL。少数URLで取れるか確認。',
-    output: '取得候補',
+    body: 'まず少数URLで、手元の題材が取れるか見る。',
+    output: '取れるか確認',
     Icon: Link2,
     tone: 'cyan',
   },
   {
     step: '02',
     title: '下書きを直す',
-    body: '会話順、不要行、役割、読み上げ量を確認。',
+    body: '会話順、不要行、役割、読み上げ量を整える。',
     output: '台本下地',
     Icon: FileText,
     tone: 'blue',
@@ -119,7 +119,7 @@ const blueprintSteps = [
   {
     step: '03',
     title: '保存先を揃える',
-    body: 'CSV、.ymmp前準備、素材パスを編集前に揃える。',
+    body: 'CSV、.ymmp前準備、素材パスをまとめる。',
     output: '前準備',
     Icon: FileCode2,
     tone: 'green',
@@ -127,7 +127,7 @@ const blueprintSteps = [
   {
     step: '04',
     title: 'YMM4で仕上げ',
-    body: '字幕、音声、立ち絵、間合い、公開前チェック。',
+    body: '音声、字幕、素材、間合いを見て仕上げる。',
     output: '最終編集',
     Icon: MonitorPlay,
     tone: 'gold',
@@ -137,25 +137,25 @@ const blueprintSteps = [
 const galleryItems = [
   {
     title: '台本取得',
-    body: 'URLを入れて、取れるかを見る画面です。',
+    body: '手元のURLが取れるかを見る画面です。',
     image: '/lp/screen-main-get-scripts-v2.webp',
     alt: '台本取得画面の実アプリスクリーンショット',
   },
   {
     title: '台本編集',
-    body: '取得した下地を、人が直す画面です。',
+    body: '取得した内容を台本として直す画面です。',
     image: '/lp/screen-main-script-edit-v2.webp',
     alt: '台本編集画面の実アプリスクリーンショット',
   },
   {
     title: '下書き生成の確認',
-    body: '生成文はそのまま出さず、確認して直します。',
+    body: '生成文を見て、使う前に直す画面です。',
     image: '/lp/screen-main-script-gen-v2.webp',
     alt: 'AI台本生成結果を確認する実アプリスクリーンショット',
   },
   {
     title: 'ランチャー',
-    body: '更新、認証、課金状態を確認します。',
+    body: '更新、ログイン、Premium状態を見る画面です。',
     image: '/lp/screen-launcher-update-dialog-v2.webp',
     alt: 'ランチャーの更新確認ダイアログを切り出した実アプリスクリーンショット',
   },
@@ -165,8 +165,8 @@ const planCards = [
   {
     name: 'Free',
     price: '¥0',
-    lead: '少数URLで試す',
-    points: ['起動確認', 'URL取得の流れ', '台本下地編集', 'YMM4前準備の確認'],
+    lead: 'まず手元のURLで試す',
+    points: ['起動できるか見る', 'URLが取れるか見る', '台本を直せるか見る', 'YMM4前準備まで触る'],
     href: downloadUrl,
     cta: '無料でダウンロード',
     external: true,
@@ -176,7 +176,7 @@ const planCards = [
     name: 'Premium',
     price: '¥39,800',
     lead: '税込 / 買い切り / 月額なし',
-    points: ['台本取得の制限解除', 'AI台本生成の制限解除', 'Googleログインで権限同期', '継続制作向け'],
+    points: ['台本取得の制限解除', 'AI台本生成の制限解除', 'Googleログインで権限同期', '本数が増えた時向け'],
     href: '/purchase/',
     cta: '料金と条件を見る',
     external: false,
@@ -187,7 +187,7 @@ const planCards = [
 const trustItems = [
   { title: 'Windows専用', body: 'Windows 10 / 11。Mac、スマホだけでは使えません。', Icon: Laptop },
   { title: 'YMM4が必要', body: 'YMM4で仕上げる前提です。YMM4なしで動画完成までは進みません。', Icon: MonitorPlay },
-  { title: '権利は自分で見る', body: '出典、引用、素材、音声、投稿前の確認は利用者側で行います。', Icon: ShieldCheck },
+  { title: '投稿前に見る', body: '出典、引用、素材、音声、投稿判断は、投稿前に自分で見ておきます。', Icon: ShieldCheck },
   { title: '成果保証なし', body: '収益化、再生数、審査通過は保証しません。', Icon: TriangleAlert },
 ] as const
 
@@ -302,8 +302,8 @@ function WorkRangePanel() {
       </ol>
       <div className="lp2-blueprint__footer">
         <ShieldCheck size={20} aria-hidden="true" />
-        <strong>動画完成は編集で仕上げる</strong>
-        <span>ゆっくりまとめプロセッサーは、公開前の下地とYMM4前準備まで。</span>
+        <strong>動画はYMM4で仕上げる</strong>
+        <span>公開前の下地とYMM4前準備まで。最後はYMM4で確認します。</span>
       </div>
     </div>
   )
@@ -335,7 +335,7 @@ export function HomePage() {
                 URLを貼る。取得して直す。CSV準備、.ymmp準備、素材パス整理まで。
                 動画はYMM4で仕上げる。
               </p>
-              <div className="lp2-hero-io" aria-label="入力と出力">
+              <div className="lp2-hero-io" aria-label="URLからYMM4前準備まで">
                 {heroFlowItems.map((item, index) => (
                   <div className="lp2-hero-io__item" key={item.label}>
                     <span>{item.label}</span>
@@ -366,7 +366,7 @@ export function HomePage() {
 
             <div className="lp2-hero__visual" data-reveal>
               <div className="lp2-hero__visual-note lp2-hero__visual-note--input" aria-hidden="true">
-                <span>INPUT</span>
+                <span>貼るもの</span>
                 <strong>記事URL / スレッドURL</strong>
               </div>
               <figure className="lp2-product-frame lp2-product-frame--hero">
@@ -374,7 +374,7 @@ export function HomePage() {
                   <span />
                   <span />
                   <span />
-                  <strong>Main / 台本編集</strong>
+                  <strong>実アプリ / 台本編集</strong>
                 </div>
                 <img
                   src="/lp/screen-main-script-edit-v2.webp"
@@ -388,7 +388,7 @@ export function HomePage() {
                 </figcaption>
               </figure>
               <div className="lp2-hero__visual-note lp2-hero__visual-note--output" aria-hidden="true">
-                <span>OUTPUT</span>
+                <span>できるもの</span>
                 <strong>台本下地 / CSV / .ymmp前準備</strong>
               </div>
               <div className="lp2-flow-strip" aria-label="主な流れ">
@@ -403,7 +403,7 @@ export function HomePage() {
           </div>
           <div className="lp2-hero__peek" aria-hidden="true">
             <span>まず見るところ</span>
-            <strong>入力、出力、仕上げる場所</strong>
+            <strong>URL、台本下地、YMM4前準備</strong>
           </div>
         </section>
 
@@ -411,8 +411,8 @@ export function HomePage() {
           <div className="lp2-container">
             <SectionHead
               kicker="先にここだけ"
-              title="買う前に見るのは、この3つ。"
-              body="機能名より先に、自分の制作に入るかどうかを確認してください。"
+              title="買う前に知りたいことだけ。"
+              body="手元のURLで使えるか。台本として直せるか。YMM4にどうつながるか。先にここだけ見てください。"
             />
             <div className="lp2-answer-grid">
               {answerCards.map((item) => {
@@ -434,15 +434,15 @@ export function HomePage() {
           <div className="lp2-container lp2-diagram-layout">
             <div className="lp2-diagram-copy" data-reveal>
               <p className="lp2-kicker">作業範囲</p>
-              <h2 id="lp2-diagram-heading">YMM4を開く前の面倒を減らす。</h2>
+              <h2 id="lp2-diagram-heading">YMM4に入る前で迷わない。</h2>
               <p>
-                URL拾い、下書き整理、保存先、素材パス。ここが散らかる人向けです。
-                完成判断はYMM4と人の目に残します。
+                URLを集める、下書きを直す、保存先や素材パスを揃える。
+                編集前に散らかりやすいところをまとめます。
               </p>
               <div className="lp2-note-panel">
                 <ShieldCheck size={20} aria-hidden="true" />
-                <strong>完成動画は出しません。</strong>
-                <span>最後はYMM4で見て直します。権利、出典、素材も自分で確認してください。</span>
+                <strong>動画まで自動完成ではありません。</strong>
+                <span>最後はYMM4で見て直します。出典、権利、素材も投稿前に見ておきます。</span>
               </div>
             </div>
             <WorkRangePanel />
@@ -453,8 +453,8 @@ export function HomePage() {
           <div className="lp2-container">
             <SectionHead
               kicker="画面で確認"
-              title="触る前に、どの画面を使うか見る。"
-              body="導入後に迷いやすいところだけ、実画面で確認できます。"
+              title="実際に触る画面を先に見る。"
+              body="起動後に迷いやすい画面だけ、スクショで確認できます。"
               align="split"
             />
             <div className="lp2-workflow">
@@ -500,8 +500,8 @@ export function HomePage() {
           <div className="lp2-container">
             <SectionHead
               kicker="実画面"
-              title="作っていない画面は見せない。"
-              body="スクショは実アプリから。導入前に見たい画面だけ置いています。"
+              title="実アプリの画面だけ載せています。"
+              body="AIで作った架空画面ではありません。購入前に見たいところだけ置いています。"
               align="split"
             />
             <div className="lp2-gallery-grid">
@@ -522,13 +522,13 @@ export function HomePage() {
           <div className="lp2-container lp2-demo-layout">
             <div className="lp2-demo-copy" data-reveal>
               <p className="lp2-kicker">90秒</p>
-              <h2 id="lp2-demo-heading">動画で全体、スクショで細部。</h2>
+              <h2 id="lp2-demo-heading">90秒で流れを見る。</h2>
               <p>
-                URL取得から台本下地、YMM4前準備までを短く確認できます。
-                再生できない場合は、実画面ギャラリーで同じ流れを見られます。
+                URLを貼ってからYMM4前準備までを短く見られます。
+                再生できない場合は、上のスクショで同じ流れを確認できます。
               </p>
               <ol className="lp2-demo-list">
-                <li>URLを入れる</li>
+                <li>URLを貼る</li>
                 <li>下書きを直す</li>
                 <li>YMM4前に保存先と素材パスを揃える</li>
               </ol>
@@ -546,7 +546,7 @@ export function HomePage() {
           <div className="lp2-container">
             <SectionHead
               kicker="料金"
-              title="まずFree。続けるならPremium。"
+              title="まずFree。必要ならPremium。"
               body="Premiumは39,800円税込の買い切りです。月額はありません。"
             />
             <div className="lp2-plan-grid">
@@ -580,8 +580,8 @@ export function HomePage() {
           <div className="lp2-container">
             <SectionHead
               kicker="先に用意するもの"
-              title="環境と責任範囲を確認。"
-              body="ここが合わないなら、先にFreeで止めて大丈夫です。"
+              title="使える環境と注意点。"
+              body="WindowsとYMM4が前提です。Macだけ、スマホだけでは使えません。"
               align="split"
             />
             <div className="lp2-trust-grid">
@@ -603,8 +603,8 @@ export function HomePage() {
           <div className="lp2-container">
             <SectionHead
               kicker="よくある確認"
-              title="購入前につまずきやすいところ。"
-              body="長い説明より、先に答えだけ確認できます。"
+              title="買う前に聞かれやすいこと。"
+              body="料金、無料版、YMM4、収益化保証の有無を先に確認できます。"
             />
             <div className="lp2-faq-list">
               {priorityFaqItems.map((item, index) => (
@@ -630,10 +630,10 @@ export function HomePage() {
           <div className="lp2-container lp2-final__grid">
             <div>
               <p className="lp2-kicker">最初の1本</p>
-              <h2 id="lp2-final-heading">まずFreeで、手元のURLが使えるか見る。</h2>
+              <h2 id="lp2-final-heading">まずFreeで、手元のURLを試す。</h2>
               <p>
-                取れるか、下書きが直しやすいか、YMM4前準備まで迷わないか。
-                買う前にそこで決められます。
+                取れるか。台本として直せるか。YMM4前準備まで迷わないか。
+                買う前に自分の題材で判断できます。
               </p>
             </div>
             <div className="lp2-final__actions">
