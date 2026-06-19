@@ -622,13 +622,40 @@
 }
 
 .lp2-answer-card {
+  position: relative;
   display: grid;
-  gap: 13px;
-  min-height: 218px;
-  padding: 22px;
+  gap: 15px;
+  min-height: 202px;
+  padding: 22px 24px 24px;
+  overflow: hidden;
+  border-color: rgba(108, 230, 255, 0.2);
+  background:
+    linear-gradient(180deg, rgba(94, 205, 255, 0.08), rgba(255, 255, 255, 0.026)),
+    var(--lp2-panel);
 }
 
-.lp2-answer-card__label,
+.lp2-answer-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--lp2-cyan), rgba(249, 206, 94, 0.86));
+}
+
+.lp2-answer-card__label {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 10px;
+  border: 1px solid rgba(108, 230, 255, 0.28);
+  border-radius: 8px;
+  color: #9eefff;
+  background: rgba(11, 22, 29, 0.72);
+  font-size: 0.78rem;
+  font-weight: 950;
+}
+
 .lp2-plan-card__eyebrow,
 .lp2-step-card__number {
   width: fit-content;
@@ -643,8 +670,13 @@
   font-weight: 950;
 }
 
-.lp2-answer-card svg {
+.lp2-answer-card > svg {
+  box-sizing: content-box;
+  padding: 9px;
+  border: 1px solid rgba(108, 230, 255, 0.22);
+  border-radius: 999px;
   color: var(--lp2-cyan);
+  background: rgba(15, 34, 45, 0.62);
 }
 
 .lp2-answer-card h3,

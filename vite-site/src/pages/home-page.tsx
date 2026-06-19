@@ -45,21 +45,21 @@ const heroFlowItems = [
 
 const answerCards = [
   {
-    label: '買う前 1',
-    title: 'そのURL、取れる？',
-    body: 'まずFreeで1〜2件貼って、手元の記事URLやスレッドURLが取れるか見られます。',
+    label: 'URL取得',
+    title: '対応URLで取得できるか',
+    body: 'Freeで少数URLを貼って、候補一覧まで出るか確認できます。',
     Icon: Link2,
   },
   {
-    label: '買う前 2',
-    title: '台本として直せる？',
-    body: '取れた内容を見ながら、会話順、不要行、読み上げ量を手で直せます。',
+    label: '台本編集',
+    title: '下書きを編集できるか',
+    body: '取得した内容を見ながら、会話順、不要行、読み上げ量を調整できます。',
     Icon: FileText,
   },
   {
-    label: '買う前 3',
-    title: 'YMM4にはどう渡す？',
-    body: 'CSVや.ymmp前準備、素材パス整理まで。音声、字幕、間合いはYMM4で仕上げます。',
+    label: 'YMM4前準備',
+    title: '編集前の準備まで進むか',
+    body: 'CSV、.ymmp前準備、保存先、素材パスまで確認できます。',
     Icon: MonitorPlay,
   },
 ] as const
@@ -402,7 +402,7 @@ export function HomePage() {
             </div>
           </div>
           <div className="lp2-hero__peek" aria-hidden="true">
-            <span>まず見るところ</span>
+            <span>Freeで確認</span>
             <strong>URL、台本下地、YMM4前準備</strong>
           </div>
         </section>
@@ -410,9 +410,10 @@ export function HomePage() {
         <section className="lp2-band lp2-band--answers" aria-labelledby="lp2-answers-heading">
           <div className="lp2-container">
             <SectionHead
-              kicker="先にここだけ"
-              title="買う前に知りたいことだけ。"
-              body="手元のURLで使えるか。台本として直せるか。YMM4にどうつながるか。先にここだけ見てください。"
+              kicker="購入前チェック"
+              title="Freeで確認する範囲"
+              body="対応URLの取得、台本下地の編集、CSV/.ymmp前準備。Premium購入前に、手元の題材で確認できます。"
+              align="split"
             />
             <div className="lp2-answer-grid">
               {answerCards.map((item) => {
