@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test'
 
 const pages = [
-  { path: '/', heading: 'いろんな動画を30秒で編集開始' },
+  { path: '/', heading: '30秒で自動動画編集' },
   { path: '/download/', heading: '最新版を無料ダウンロード' },
   { path: '/instructions/', heading: '記事URLから台本を取得し、YMM4に渡す' },
   { path: '/samples/', heading: '実アプリ画面と動画サンプルで、使う前の流れを確認する' },

@@ -81,9 +81,9 @@
   padding: 44px 0 24px;
   overflow: hidden;
   background:
-    radial-gradient(circle at 20% 45%, rgba(104, 214, 255, 0.18), transparent 26%),
-    linear-gradient(90deg, rgba(5, 7, 11, 0.98), rgba(5, 7, 11, 0.78) 45%, rgba(5, 7, 11, 0.72)),
-    url("/lp/hero-studio-flow-v4.webp") 62% center / cover no-repeat,
+    radial-gradient(circle at 74% 44%, rgba(104, 214, 255, 0.18), transparent 28%),
+    radial-gradient(circle at 28% 42%, rgba(237, 199, 95, 0.12), transparent 25%),
+    linear-gradient(118deg, #05070b 0%, #08121a 48%, #08080b 100%),
     #05070b;
 }
 
@@ -1365,8 +1365,8 @@
   .lp2-hero {
     padding-top: 34px;
     background:
-      linear-gradient(180deg, rgba(5, 7, 11, 0.78), rgba(5, 7, 11, 0.94) 48%, #05070b 100%),
-      url("/lp/hero-studio-flow-v4.webp") 56% 0 / 860px auto no-repeat,
+      radial-gradient(circle at 76% 12%, rgba(104, 214, 255, 0.16), transparent 30%),
+      linear-gradient(180deg, #070d13 0%, #05070b 60%, #05070b 100%),
       #05070b;
   }
 

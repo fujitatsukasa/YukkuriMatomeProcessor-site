@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test'
 const primaryPages = [
   {
     path: '/',
-    heading: 'いろんな動画を30秒で編集開始',
+    heading: '30秒で自動動画編集',
     ctas: ['無料でダウンロード'],
   },
   {
