@@ -95,6 +95,41 @@ const workflowSteps = [
   },
 ] as const
 
+const blueprintSteps = [
+  {
+    step: '01',
+    title: 'URL入力',
+    body: '記事URL・スレッドURLを入れて、少数URLでまず確認。',
+    output: '候補リスト',
+    Icon: Link2,
+    tone: 'cyan',
+  },
+  {
+    step: '02',
+    title: '台本下地',
+    body: '会話にしやすい下書きへ整え、不要行や流れを見る。',
+    output: '編集前の下書き',
+    Icon: FileText,
+    tone: 'blue',
+  },
+  {
+    step: '03',
+    title: 'CSV / .ymmp前準備',
+    body: '保存先、素材パス、出力形式を揃えてYMM4前へ。',
+    output: '出力前準備',
+    Icon: FileCode2,
+    tone: 'green',
+  },
+  {
+    step: '04',
+    title: 'YMM4で仕上げ',
+    body: '音声、字幕、間合い、素材、権利を人の目で確認。',
+    output: '完成判断',
+    Icon: MonitorPlay,
+    tone: 'gold',
+  },
+] as const
+
 const galleryItems = [
   {
     title: '台本取得',
@@ -237,6 +272,39 @@ function SectionHead({
   )
 }
 
+function WorkflowBlueprint() {
+  return (
+    <div className="lp2-blueprint" data-reveal aria-label="YMM4前の下ごしらえワークフロー">
+      <div className="lp2-blueprint__header">
+        <span>Workflow</span>
+        <strong>YMM4前の下ごしらえ</strong>
+      </div>
+      <ol className="lp2-blueprint__track">
+        {blueprintSteps.map((item, index) => {
+          const Icon = item.Icon
+          return (
+            <li className={`lp2-blueprint-card lp2-blueprint-card--${item.tone}`} key={item.step}>
+              <div className="lp2-blueprint-card__top">
+                <span>{item.step}</span>
+                <Icon size={24} aria-hidden="true" />
+              </div>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+              <strong>{item.output}</strong>
+              {index < blueprintSteps.length - 1 ? <ArrowRight className="lp2-blueprint-card__arrow" size={26} aria-hidden="true" /> : null}
+            </li>
+          )
+        })}
+      </ol>
+      <div className="lp2-blueprint__footer">
+        <ShieldCheck size={20} aria-hidden="true" />
+        <strong>動画完成は編集で仕上げる</strong>
+        <span>ゆっくりまとめプロセッサーは、公開前の下地とYMM4前準備まで。</span>
+      </div>
+    </div>
+  )
+}
+
 export function HomePage() {
   return (
     <>
@@ -244,21 +312,20 @@ export function HomePage() {
         title="ゆっくりまとめプロセッサー｜URLからYMM4前の下ごしらえ"
         description="記事URL・スレッドURLから、台本下地、CSV、.ymmp前準備まで。YMM4を開く前の下ごしらえを支援するWindows向けツールです。Freeで少数URLから確認できます。"
         keywords="ゆっくりまとめプロセッサー,YMM4,台本下地,CSV,.ymmp,反応集,記事URL,スレッドURL,Windows"
-        image="/lp/workflow-diagram-jp-v2.webp"
+        image="/lp/screen-main-script-edit-v2.webp"
         path="/"
         structuredData={softwareApplicationLd}
       />
 
       <main className="lp2-home">
         <section className="lp2-hero" aria-labelledby="lp2-hero-heading">
-          <img className="lp2-hero__bg" src="/lp/creator-studio-bg-v2.webp" alt="" aria-hidden="true" />
           <div className="lp2-container lp2-hero__grid">
             <div className="lp2-hero__copy" data-reveal>
-              <p className="lp2-kicker">URLから、YMM4前の下ごしらえ</p>
+              <p className="lp2-kicker">Real app first / Windows + YMM4</p>
               <h1 id="lp2-hero-heading">
-                URLを貼るだけ。
+                <span>URLを貼るだけ</span>
                 <span>YMM4前の</span>
-                <span>下ごしらえまで。</span>
+                <span>下ごしらえ。</span>
               </h1>
               <p className="lp2-hero__lead">
                 記事URL・スレッドURLを貼って、題材候補、台本下地、CSV / .ymmp前準備へ。
@@ -357,15 +424,7 @@ export function HomePage() {
                 <span>公開前に、権利、出典、読み上げ、字幕、素材を必ず確認してください。</span>
               </div>
             </div>
-            <figure className="lp2-diagram-card" data-reveal>
-              <img
-                src="/lp/workflow-diagram-jp-v2.webp"
-                alt="URL入力、台本下地、CSVと.ymmp前準備、仕上げはYMM4の流れを示した図解"
-                loading="lazy"
-                decoding="async"
-              />
-              <figcaption>image_genで作成した日本語入りのワークフロー図解。</figcaption>
-            </figure>
+            <WorkflowBlueprint />
           </div>
         </section>
 

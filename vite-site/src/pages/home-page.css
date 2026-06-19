@@ -3,6 +3,11 @@
   background: #05070b;
 }
 
+.brand-home .brand-header {
+  border-bottom: 1px solid rgba(237, 199, 95, 0.18);
+  background: rgba(9, 10, 14, 0.96);
+}
+
 .lp2-home {
   --lp2-bg: #05070b;
   --lp2-ink: #fff8e8;
@@ -22,8 +27,8 @@
   overflow: clip;
   color: var(--lp2-text);
   background:
-    linear-gradient(180deg, rgba(104, 214, 255, 0.08), transparent 620px),
-    linear-gradient(115deg, #05070b 0%, #0a0f16 45%, #05070b 100%);
+    linear-gradient(180deg, rgba(104, 214, 255, 0.07), transparent 560px),
+    linear-gradient(116deg, #05070b 0%, #0b0d12 44%, #07080c 100%);
 }
 
 .lp2-home *,
@@ -71,6 +76,9 @@
   align-items: center;
   padding: 48px 0 26px;
   overflow: hidden;
+  background:
+    linear-gradient(130deg, rgba(255, 255, 255, 0.035), transparent 34%),
+    linear-gradient(90deg, rgba(5, 7, 11, 0.98), rgba(7, 10, 15, 0.9) 54%, rgba(5, 7, 11, 0.98));
 }
 
 .lp2-hero::after {
@@ -83,26 +91,18 @@
   background: linear-gradient(90deg, transparent, rgba(237, 199, 95, 0.44), transparent);
 }
 
-.lp2-hero__bg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  opacity: 0.56;
-  filter: saturate(1.08) contrast(1.06);
-  transform: scale(1.02);
-}
-
 .lp2-hero::before {
   content: "";
   position: absolute;
   inset: 0;
-  z-index: 1;
+  z-index: 0;
   background:
-    linear-gradient(90deg, rgba(5, 7, 11, 0.96) 0%, rgba(5, 7, 11, 0.78) 38%, rgba(5, 7, 11, 0.32) 76%, rgba(5, 7, 11, 0.8) 100%),
-    linear-gradient(180deg, rgba(5, 7, 11, 0.1), rgba(5, 7, 11, 0.92));
+    linear-gradient(rgba(255, 255, 255, 0.052) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.044) 1px, transparent 1px),
+    linear-gradient(108deg, transparent 0%, rgba(104, 214, 255, 0.1) 44%, rgba(237, 199, 95, 0.09) 62%, transparent 82%);
+  background-size: 52px 52px, 52px 52px, auto;
+  mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.66) 58%, transparent);
+  opacity: 0.68;
   pointer-events: none;
 }
 
@@ -125,12 +125,13 @@
 .lp2-hero h1 {
   max-width: 12em;
   color: var(--lp2-ink);
-  font-size: 3.85rem;
+  font-size: 4.02rem;
   font-weight: 950;
-  line-height: 1.08;
+  line-height: 1.04;
   text-wrap: balance;
   word-break: keep-all;
   overflow-wrap: anywhere;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.08), 0 22px 42px rgba(0, 0, 0, 0.34);
 }
 
 .lp2-hero h1 span {
@@ -259,10 +260,23 @@
 }
 
 .lp2-product-frame--hero {
+  isolation: isolate;
   border-color: rgba(237, 199, 95, 0.32);
   box-shadow:
     0 0 0 1px rgba(104, 214, 255, 0.06),
     0 36px 90px -58px rgba(237, 199, 95, 0.78);
+}
+
+.lp2-product-frame--hero::before {
+  content: "";
+  position: absolute;
+  inset: 36px 0 auto;
+  z-index: 2;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(104, 214, 255, 0.74), rgba(237, 199, 95, 0.7), transparent);
+  opacity: 0.76;
+  animation: lp2-line-sweep 5.8s ease-in-out infinite;
+  pointer-events: none;
 }
 
 .lp2-product-frame__bar {
@@ -517,6 +531,10 @@
   align-items: center;
 }
 
+.lp2-diagram-layout {
+  grid-template-columns: minmax(0, 0.74fr) minmax(540px, 1.26fr);
+}
+
 .lp2-diagram-copy,
 .lp2-demo-copy,
 .lp2-final__grid > div:first-child {
@@ -550,26 +568,209 @@
   line-height: 1.7;
 }
 
-.lp2-diagram-card {
-  margin: 0;
+.lp2-blueprint {
+  position: relative;
   overflow: hidden;
-  border: 1px solid rgba(237, 199, 95, 0.26);
+  border: 1px solid rgba(237, 199, 95, 0.24);
   border-radius: 8px;
-  background: #070a10;
-  box-shadow: 0 28px 70px -54px rgba(237, 199, 95, 0.65);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.02)),
+    linear-gradient(118deg, rgba(8, 13, 20, 0.96), rgba(5, 8, 13, 0.98));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 28px 70px -52px rgba(237, 199, 95, 0.54);
 }
 
-.lp2-diagram-card img {
-  width: 100%;
-  display: block;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
+.lp2-blueprint::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 28px 28px;
+  opacity: 0.22;
+  pointer-events: none;
 }
 
-.lp2-diagram-card figcaption {
-  padding: 10px 12px;
-  color: var(--lp2-soft);
-  font-size: 0.78rem;
+.lp2-blueprint::after {
+  content: "";
+  position: absolute;
+  top: 54px;
+  right: -20%;
+  left: -20%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(104, 214, 255, 0.78), rgba(237, 199, 95, 0.72), transparent);
+  opacity: 0.74;
+  animation: lp2-line-sweep 6.4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.lp2-blueprint__header {
+  position: relative;
+  z-index: 1;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.lp2-blueprint__header span {
+  color: var(--lp2-cyan);
+  font-size: 0.75rem;
+  font-weight: 950;
+}
+
+.lp2-blueprint__header strong {
+  color: #fff8e8;
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+.lp2-blueprint__track {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 18px;
+  list-style: none;
+}
+
+.lp2-blueprint-card {
+  position: relative;
+  min-height: 236px;
+  display: grid;
+  align-content: start;
+  gap: 11px;
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 8px;
+  background: rgba(5, 8, 13, 0.72);
+}
+
+.lp2-blueprint-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), transparent 54%);
+  opacity: 0.88;
+  pointer-events: none;
+}
+
+.lp2-blueprint-card__top,
+.lp2-blueprint-card h3,
+.lp2-blueprint-card p,
+.lp2-blueprint-card strong {
+  position: relative;
+  z-index: 1;
+}
+
+.lp2-blueprint-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.lp2-blueprint-card__top span {
+  color: rgba(255, 248, 232, 0.54);
+  font-size: 0.8rem;
+  font-weight: 950;
+}
+
+.lp2-blueprint-card h3 {
+  color: #fff8e8;
+  font-size: 1.04rem;
+  font-weight: 950;
+  line-height: 1.28;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.lp2-blueprint-card p {
+  color: var(--lp2-muted);
+  font-size: 0.84rem;
+  line-height: 1.7;
+}
+
+.lp2-blueprint-card strong {
+  width: fit-content;
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  margin-top: auto;
+  padding: 0 10px;
+  border-radius: 8px;
+  color: #06090f;
+  background: var(--lp2-gold);
+  font-size: 0.74rem;
+  font-weight: 950;
+}
+
+.lp2-blueprint-card svg {
+  color: var(--lp2-cyan);
+}
+
+.lp2-blueprint-card--green svg {
+  color: var(--lp2-green);
+}
+
+.lp2-blueprint-card--gold {
+  border-color: rgba(237, 199, 95, 0.34);
+}
+
+.lp2-blueprint-card--gold svg {
+  color: var(--lp2-gold);
+}
+
+.lp2-blueprint-card--gold strong {
+  color: #f8fbff;
+  background: rgba(104, 214, 255, 0.18);
+}
+
+.lp2-blueprint-card__arrow {
+  position: absolute;
+  top: 50%;
+  right: -20px;
+  z-index: 2;
+  color: var(--lp2-gold) !important;
+  filter: drop-shadow(0 0 10px rgba(237, 199, 95, 0.42));
+  transform: translateY(-50%);
+  animation: lp2-pulse-arrow 2.8s ease-in-out infinite;
+}
+
+.lp2-blueprint__footer {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  padding: 14px 18px 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(237, 199, 95, 0.07);
+}
+
+.lp2-blueprint__footer svg {
+  color: var(--lp2-green);
+}
+
+.lp2-blueprint__footer strong {
+  color: #fff6de;
+  font-size: 0.98rem;
+  line-height: 1.4;
+}
+
+.lp2-blueprint__footer span {
+  color: var(--lp2-muted);
+  font-size: 0.88rem;
+  line-height: 1.65;
 }
 
 .lp2-workflow {
@@ -886,6 +1087,18 @@
   }
 }
 
+@keyframes lp2-line-sweep {
+  0%,
+  100% {
+    opacity: 0.34;
+    transform: translateX(-4%);
+  }
+  48% {
+    opacity: 0.9;
+    transform: translateX(4%);
+  }
+}
+
 @keyframes lp2-panel-scan {
   0%,
   72%,
@@ -944,8 +1157,13 @@
 
   .lp2-answer-grid,
   .lp2-trust-grid,
-  .lp2-gallery-grid {
+  .lp2-gallery-grid,
+  .lp2-blueprint__track {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .lp2-blueprint-card__arrow {
+    display: none;
   }
 
   .lp2-section-head--split {
@@ -999,8 +1217,29 @@
   .lp2-gallery-grid,
   .lp2-plan-grid,
   .lp2-trust-grid,
-  .lp2-metric-row {
+  .lp2-metric-row,
+  .lp2-blueprint__track {
     grid-template-columns: 1fr;
+  }
+
+  .lp2-blueprint__track {
+    padding: 14px;
+  }
+
+  .lp2-blueprint-card {
+    min-height: auto;
+  }
+
+  .lp2-blueprint__header,
+  .lp2-blueprint__footer {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .lp2-blueprint__header {
+    min-height: auto;
+    display: grid;
+    padding: 14px;
   }
 
   .lp2-flow-strip {
