@@ -313,8 +313,8 @@ export function HomePage() {
   return (
     <>
       <PageMeta
-        title="ゆっくりまとめプロセッサー｜URLから動画テンプレ化"
-        description="記事URL・スレッドURLから、ゆっくり動画向けのテンプレ下地、台本下地、CSV、.ymmp前準備まで。YMM4で仕上げる前の準備をまとめるWindows向けツールです。"
+        title="ゆっくりまとめプロセッサー｜URLから動画テンプレ作成"
+        description="記事URL・スレッドURLから、まとめ動画・解説動画・ショート向けのテンプレ下地、台本下地、CSV、.ymmp前準備まで。YMM4で仕上げる前の準備をまとめるWindows向けツールです。"
         keywords="ゆっくりまとめプロセッサー,YMM4,台本下地,CSV,.ymmp,反応集,記事URL,スレッドURL,Windows"
         image="/lp/screen-main-script-edit-v2.webp"
         path="/"
@@ -325,14 +325,14 @@ export function HomePage() {
         <section className="lp2-hero" aria-labelledby="lp2-hero-heading">
           <div className="lp2-container lp2-hero__grid">
             <div className="lp2-hero__copy" data-reveal>
-              <p className="lp2-kicker">ゆっくり動画テンプレ化ツール / Windows + YMM4</p>
+              <p className="lp2-kicker">まとめ・解説・ショート向けテンプレ作成ツール / Windows + YMM4</p>
               <h1 id="lp2-hero-heading">
                 <span>記事URLから</span>
-                <span>ゆっくり動画を</span>
-                <span>テンプレ化</span>
+                <span>動画テンプレ</span>
+                <span>作成</span>
               </h1>
               <p className="lp2-hero__lead">
-                題材集め、台本下地、CSV/.ymmp前準備、素材パス整理までをまとめてテンプレ化。
+                反応集、解説、ショート、まとめ動画の題材集めから台本下地、CSV/.ymmp前準備までをテンプレ化。
                 YMM4で仕上げる前の編集準備を短縮します。
               </p>
               <div className="lp2-hero-io" aria-label="URLからYMM4前準備まで">
@@ -384,7 +384,7 @@ export function HomePage() {
                 />
                 <figcaption>
                   <span>実アプリ画面</span>
-                  <strong>ゆっくり動画用のテンプレ下地を編集する。</strong>
+                  <strong>動画テンプレの下地を見ながら編集する。</strong>
                 </figcaption>
               </figure>
               <div className="lp2-hero__visual-note lp2-hero__visual-note--output" aria-hidden="true">
