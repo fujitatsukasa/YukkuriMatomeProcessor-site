@@ -1,196 +1,155 @@
 import { Link } from 'react-router-dom'
-import type { CSSProperties, ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import { PageMeta } from '@/components/ui'
 import {
+  downloadUrl,
   faqGroups,
   legal,
-  downloadUrl,
   siteOrigin,
   siteTitle,
 } from '@/data/site-content'
 import {
   ArrowRight,
   CheckCircle2,
-  ChevronDown,
-  Clock3,
   CreditCard,
   Download,
-  FileArchive,
+  ExternalLink,
   FileCode2,
-  FileSearch,
-  Film,
+  FileText,
+  Gauge,
   HelpCircle,
+  Laptop,
+  Layers3,
+  Link2,
   MonitorPlay,
-  MousePointerClick,
   Play,
   SearchCheck,
+  ShieldCheck,
   Sparkles,
+  TriangleAlert,
   WandSparkles,
 } from 'lucide-react'
+import './home-page.css'
 
-const heroCandidates = [
-  { title: 'コメントの論点が割れている記事', meta: '候補 01 / 本文・反応あり' },
-  { title: '短尺化しやすいスレッド', meta: '候補 02 / 会話化しやすい' },
-  { title: '素材と保存先まで整理', meta: '候補 03 / 出力前チェック' },
+const proofChips = [
+  'Windows 10 / 11',
+  'YMM4前提',
+  'Freeあり',
+  'Premium 39,800円 買い切り',
+  '動画完成はYMM4で仕上げ',
 ] as const
 
-const scriptRows = [
-  { speaker: 'A', text: 'まず、このURLから使う本文候補を選びます。' },
-  { speaker: 'B', text: '長い行は読み上げ前に短く整えます。' },
-  { speaker: 'A', text: 'CSVと.ymmpの準備まで整えて、編集に入ります。' },
-] as const
-
-const beforeAfterItems = [
+const answerCards = [
   {
-    title: 'URLを開いてコピペ',
-    before: ['記事を行き来する', '本文を手でコピー', '候補をメモに散らす'],
-    after: ['URLを入力', '候補を一覧化', '使う題材だけ選ぶ'],
+    label: '何を入れる？',
+    title: '記事URL・スレッドURL',
+    body: '少数URLでまず確認。対応する題材を取得し、動画に使う候補を選びます。',
+    Icon: Link2,
   },
   {
-    title: '台本整理',
-    before: ['不要行を探す', '会話順を直す', '読み上げ量を目視調整'],
-    after: ['台本下地を編集', '役割と感情を整理', '長い行を分割'],
+    label: '何が出る？',
+    title: '台本下地と出力前準備',
+    body: '会話化しやすい下書き、CSV、.ymmp前準備、保存先と素材パスの整理を支援します。',
+    Icon: FileText,
   },
   {
-    title: '出力ファイル準備',
-    before: ['保存先を探す', '素材パスを後で直す', '編集画面で手戻りする'],
-    after: ['保存先を固定', 'CSV/.ymmp前準備', '仕上げ作業に集中'],
+    label: 'どこで仕上げる？',
+    title: 'YMM4で編集して完成',
+    body: '音声、字幕、立ち絵、間合い、権利確認、投稿判断は編集側と利用者側で行います。',
+    Icon: MonitorPlay,
   },
 ] as const
 
 const workflowSteps = [
   {
     step: '01',
-    title: 'URL入力',
-    body: '記事URL・スレッドURLを少数で入れて、題材候補を並べます。',
-    image: '/product_get_script.webp',
-    alt: '記事URLから候補一覧を取得する実アプリ画面',
-    Icon: FileSearch,
+    title: 'URLを貼る',
+    body: '記事URL・スレッドURLを入れ、題材候補を一覧で確認します。',
+    image: '/lp/screen-main-get-scripts-v2.webp',
+    alt: '台本取得画面でURLと取得設定を確認している実アプリ画面',
+    Icon: Link2,
   },
   {
     step: '02',
-    title: '候補取得',
-    body: 'タイトル、サムネイル、URLを見ながら動画化する候補を選びます。',
-    image: '/product_get_script.webp',
-    alt: '候補一覧を確認する実アプリ画面',
-    Icon: SearchCheck,
-  },
-  {
-    step: '03',
-    title: '台本下地を編集',
-    body: '不要行、役割、感情、読み上げ向けの文量に手を入れます。',
-    image: '/product_edit_script.webp',
-    alt: '取得した台本下地を編集する実アプリ画面',
+    title: '台本下地を整える',
+    body: '不要行、役割、感情、読み上げ量を見ながら編集します。',
+    image: '/lp/screen-main-script-edit-v2.webp',
+    alt: '台本編集画面で取得結果とボードを確認している実アプリ画面',
     Icon: WandSparkles,
   },
   {
-    step: '04',
-    title: 'CSV/.ymmp前準備',
-    body: 'フォーマット、キャラ設定、保存先、素材パスを揃えます。',
-    image: '/product_format_list.webp',
-    alt: 'CSVと.ymmp前準備のフォーマット管理画面',
+    step: '03',
+    title: 'CSV / .ymmp前準備',
+    body: 'フォーマット、保存先、素材パスを揃えて、編集に入れる状態へ近づけます。',
+    image: '/lp/screen-main-board-v2.webp',
+    alt: 'YMM4前準備に使うボード画面の実アプリスクリーンショット',
     Icon: FileCode2,
   },
   {
-    step: '05',
-    title: '編集で仕上げ',
-    body: '音声、字幕、立ち絵、間合い、書き出しは編集画面で仕上げます。',
-    image: '/product_keyword_material.webp',
-    alt: '出力前準備と素材整理を確認する実アプリ画面',
+    step: '04',
+    title: 'YMM4で仕上げる',
+    body: '動画の完成、最終確認、投稿判断はYMM4と人の目で仕上げます。',
+    image: '/lp/screen-main-guide-v2.webp',
+    alt: '初回起動や編集手順を確認するガイド画面の実アプリスクリーンショット',
     Icon: MonitorPlay,
-  },
-] as const
-
-const useCases = [
-  {
-    title: '反応集・コメント解説',
-    input: '記事URL / スレッドURL / コメント候補',
-    output: 'タイトル候補 / 台本下地 / 引用メモ',
-    fit: '賛否、論点、コメント束を整理して動画下地にしたい人',
-    poster: '/lp/usecase-reaction-poster.webp',
-    video: '/lp/usecase-reaction.mp4',
-    Icon: HelpCircle,
-  },
-  {
-    title: '掛け合い解説',
-    input: '題材メモ / 取得済み本文 / 話者指定',
-    output: '会話台本 / 役割 / 感情メモ',
-    fit: '読み上げ前に、会話として読める下書きを作りたい人',
-    poster: '/lp/usecase-dialogue-poster.webp',
-    video: '/lp/usecase-dialogue.mp4',
-    Icon: Sparkles,
-  },
-  {
-    title: '縦型ショートドラマ',
-    input: '短い題材 / セリフ案 / 出力形式',
-    output: '導入 / 反転 / 締めの短尺構成',
-    fit: '短い尺で入り、反転、締めを整理したい人',
-    poster: '/lp/usecase-shorts-poster.webp',
-    video: '/lp/usecase-shorts.mp4',
-    Icon: Film,
   },
 ] as const
 
 const galleryItems = [
   {
-    title: 'URL入力から候補取得',
-    body: '候補一覧にタイトル、URL、サムネイルを並べます。',
-    image: '/product_get_script.webp',
-    alt: 'URL入力から記事候補を取得する実アプリ画面',
+    title: '台本取得',
+    body: 'URL、サイト、キャラクター設定を同じ画面で確認できます。',
+    image: '/lp/screen-main-get-scripts-v2.webp',
+    alt: '台本取得画面の実アプリスクリーンショット',
   },
   {
-    title: '台本下地を編集',
-    body: '不要行、役割、感情、読み上げ量を見ながら整えます。',
-    image: '/product_edit_script.webp',
-    alt: '取得した台本下地を編集する実アプリ画面',
+    title: '台本編集',
+    body: '取得後の下地を見ながら、役割と流れを整えます。',
+    image: '/lp/screen-main-script-edit-v2.webp',
+    alt: '台本編集画面の実アプリスクリーンショット',
   },
   {
-    title: '出力前準備と素材整理',
-    body: '保存先、素材パス、キャラ設定を編集前にそろえます。',
-    image: '/product_keyword_material.webp',
-    alt: '出力前準備と素材整理を確認する実アプリ画面',
+    title: 'AI台本の下書き',
+    body: 'AI出力は公開前の下書きとして扱い、人が確認します。',
+    image: '/lp/screen-main-script-gen-v2.webp',
+    alt: 'AI台本生成結果を確認する実アプリスクリーンショット',
   },
   {
-    title: 'AI台本生成',
-    body: 'AI出力は下書きとして使い、公開前に人が手を入れます。',
-    image: '/product_ai_script.webp',
-    alt: 'AI台本生成と話者指定の実アプリ画面',
-  },
-  {
-    title: '候補比較',
-    body: '取得した題材を並べて、動画に使う候補を絞ります。',
-    image: '/product_youtube_info.webp',
-    alt: 'YouTube分析と候補比較の実アプリ画面',
-  },
-  {
-    title: 'フォーマット管理',
-    body: 'CSV/.ymmp前準備の形式を再利用しやすくします。',
-    image: '/product_format_list.webp',
-    alt: 'フォーマット管理と出力前準備の実アプリ画面',
+    title: 'Launcher導線',
+    body: '更新、認証、課金状態を導入前後に確認できます。',
+    image: '/lp/screen-launcher-update-dialog-v2.webp',
+    alt: 'ランチャーの更新確認ダイアログを切り出した実アプリスクリーンショット',
   },
 ] as const
 
-const pricingCards = [
+const planCards = [
   {
     name: 'Free',
     price: '¥0',
-    label: 'まず自分の題材で試す',
-    body: '起動、初期設定、少数URL取得、台本下地編集、CSV/.ymmp前準備まで使えます。',
-    points: ['少数URLで流れを見る', '出力前準備まで試す', '自分の制作環境で試す'],
-    cta: '無料でダウンロード',
+    lead: '少数URLで流れを見る',
+    points: ['起動と初期設定', '少数URLで取得確認', '台本下地編集', 'CSV / .ymmp前準備'],
     href: downloadUrl,
+    cta: '無料でダウンロード',
     external: true,
+    Icon: Download,
   },
   {
     name: 'Premium',
     price: '¥39,800',
-    label: '買い切り / 税込',
-    body: '台本取得とAI台本生成の利用制限を解除します。月額自動更新はありません。',
-    points: ['台本取得の制限解除', 'AI台本生成の制限解除', '月額なしで続けて使う'],
-    cta: '料金を見る',
+    lead: '税込 / 買い切り / 月額なし',
+    points: ['台本取得の制限解除', 'AI台本生成の制限解除', 'Googleログインに紐づく権限同期', '継続制作向け'],
     href: '/purchase/',
+    cta: '料金と条件を見る',
     external: false,
+    Icon: CreditCard,
   },
+] as const
+
+const trustItems = [
+  { title: '対応環境', body: 'Windows 10 / 11。Mac、スマホ、ブラウザだけでは完結しません。', Icon: Laptop },
+  { title: '編集前提', body: 'YMM4を開く前の下ごしらえ支援です。動画を自動で完成させるものではありません。', Icon: MonitorPlay },
+  { title: '権利確認', body: '引用、素材、音声、出典、最終編集は利用者側で確認してください。', Icon: ShieldCheck },
+  { title: '保証しないこと', body: '収益化、再生数、審査通過、投稿成果は保証していません。', Icon: TriangleAlert },
 ] as const
 
 const priorityQuestions = [
@@ -216,7 +175,7 @@ const softwareApplicationLd = {
   url: `${siteOrigin}/`,
   downloadUrl: `${siteOrigin}/download/`,
   description:
-    '記事URL・スレッドURLから、反応集や解説動画向けの台本下地、CSV、.ymmpの出力前準備を整えるWindows向け制作支援ツールです。',
+    '記事URL・スレッドURLから、ゆっくり動画向けの台本下地、CSV、.ymmp、YMM4前準備を整えるWindows向け制作支援ツールです。',
   offers: {
     '@type': 'Offer',
     price: legal.pricing.unitPrice,
@@ -228,50 +187,6 @@ const softwareApplicationLd = {
     name: legal.organization.legalName,
     url: siteOrigin,
   },
-}
-
-function WorkflowMock() {
-  return (
-    <div className="lp-workflow-mock" aria-label="URLから台本下地と出力前準備までの疑似デモ">
-      <div className="lp-workflow-mock__url">
-        <span>URL</span>
-        <strong>https://example.com/thread/...</strong>
-        <MousePointerClick size={16} aria-hidden="true" />
-      </div>
-      <div className="lp-workflow-mock__columns">
-        <div className="lp-workflow-panel lp-workflow-panel--candidates">
-          <span className="lp-mini-label">候補取得</span>
-          {heroCandidates.map((item, index) => (
-            <article key={item.title} style={{ '--delay': `${index * 0.18}s` } as CSSProperties}>
-              <small>{item.meta}</small>
-              <strong>{item.title}</strong>
-            </article>
-          ))}
-        </div>
-        <div className="lp-workflow-panel lp-workflow-panel--script">
-          <span className="lp-mini-label">台本下地</span>
-          {scriptRows.map((row, index) => (
-            <div key={row.text} className="lp-script-row" style={{ '--delay': `${0.28 + index * 0.16}s` } as CSSProperties}>
-              <span>{row.speaker}</span>
-              <p>{row.text}</p>
-            </div>
-          ))}
-        </div>
-        <div className="lp-workflow-panel lp-workflow-panel--files">
-          <span className="lp-mini-label">出力前準備</span>
-          <div>
-            <FileArchive size={18} aria-hidden="true" />
-            <strong>script.csv</strong>
-          </div>
-          <div>
-            <FileCode2 size={18} aria-hidden="true" />
-            <strong>prep.ymmp</strong>
-          </div>
-          <small>編集で仕上げ</small>
-        </div>
-      </div>
-    </div>
-  )
 }
 
 function CtaLink({
@@ -294,9 +209,31 @@ function CtaLink({
   }
 
   return (
-    <Link className={className} to={href}>
+    <Link className={className} to={href} discover="none">
       {children}
     </Link>
+  )
+}
+
+function SectionHead({
+  kicker,
+  title,
+  body,
+  align = 'center',
+}: {
+  kicker: string
+  title: string
+  body?: string
+  align?: 'center' | 'split'
+}) {
+  return (
+    <div className={`lp2-section-head lp2-section-head--${align}`}>
+      <div>
+        <p className="lp2-kicker">{kicker}</p>
+        <h2>{title}</h2>
+      </div>
+      {body ? <p>{body}</p> : null}
+    </div>
   )
 }
 
@@ -304,297 +241,337 @@ export function HomePage() {
   return (
     <>
       <PageMeta
-        title="ゆっくりまとめプロセッサー｜URLから台本下地と出力前準備まで"
-        description="記事URL・スレッドURLから、候補取得、台本下地、CSV/.ymmp前準備まで。反応集や解説動画に入る前の題材整理と台本づくりを短くするWindows向け制作支援ツールです。Freeで少数URLから確認できます。"
-        keywords="ゆっくりまとめプロセッサー,YMM4,台本作成,CSV,.ymmp,反応集,記事URL,スレッドURL,ゆっくり解説"
-        image="/lp/hero-workflow-dummy.webp"
+        title="ゆっくりまとめプロセッサー｜URLからYMM4前の下ごしらえ"
+        description="記事URL・スレッドURLから、台本下地、CSV、.ymmp前準備まで。YMM4を開く前の下ごしらえを支援するWindows向けツールです。Freeで少数URLから確認できます。"
+        keywords="ゆっくりまとめプロセッサー,YMM4,台本下地,CSV,.ymmp,反応集,記事URL,スレッドURL,Windows"
+        image="/lp/workflow-diagram-jp-v2.webp"
         path="/"
         structuredData={softwareApplicationLd}
       />
 
-      <main className="lp-home">
-        <section className="lp-hero" aria-labelledby="lp-hero-heading">
-          <img className="lp-hero__bg" src="/lp/hero-workflow-dummy.webp" alt="" aria-hidden="true" />
-          <div className="lp-hero__content">
-            <div className="lp-hero__copy">
-              <p className="lp-kicker">URLから台本下地と出力ファイルへ</p>
-              <h1 id="lp-hero-heading">
+      <main className="lp2-home">
+        <section className="lp2-hero" aria-labelledby="lp2-hero-heading">
+          <img className="lp2-hero__bg" src="/lp/creator-studio-bg-v2.webp" alt="" aria-hidden="true" />
+          <div className="lp2-container lp2-hero__grid">
+            <div className="lp2-hero__copy" data-reveal>
+              <p className="lp2-kicker">URLから、YMM4前の下ごしらえ</p>
+              <h1 id="lp2-hero-heading">
                 URLを貼るだけ。
-                <span>反応集・解説動画の下地が整う。</span>
+                <span>YMM4前の</span>
+                <span>下ごしらえまで。</span>
               </h1>
-              <p className="lp-hero__lead">
-                記事URL・スレッドURLから、題材候補、台本下地、CSV/.ymmpの出力前準備まで。
-                コピペで散らかる前工程をまとめて、編集に入れる状態まで持っていけます。
+              <p className="lp2-hero__lead">
+                記事URL・スレッドURLを貼って、題材候補、台本下地、CSV / .ymmp前準備へ。
+                コピペで散らかる作業を、YMM4に入る前の流れとして整えます。
               </p>
-              <div className="lp-hero__actions">
-                <a className="lp-btn lp-btn--primary" href={downloadUrl} target="_blank" rel="noopener noreferrer">
-                  <Download size={18} />
+              <div className="lp2-hero__actions">
+                <a className="lp2-btn lp2-btn--primary" href={downloadUrl} target="_blank" rel="noopener noreferrer">
+                  <Download size={18} aria-hidden="true" />
                   無料で少数URLを試す
                 </a>
-                <a className="lp-btn lp-btn--ghost" href="#demo-video">
-                  <Play size={18} />
+                <a className="lp2-btn lp2-btn--ghost" href="#lp2-demo">
+                  <Play size={18} aria-hidden="true" />
                   90秒で流れを見る
                 </a>
               </div>
-            </div>
-
-            <div className="lp-hero__demo">
-              <div className="lp-hero-loop" aria-label="URL入力から台本下地と出力前準備までのループ動画">
-                <video muted autoPlay loop playsInline preload="metadata" poster="/lp/hero-workflow-loop-poster.webp">
-                  <source src="/lp/hero-workflow-loop.mp4" type="video/mp4" />
-                </video>
-              </div>
-              <WorkflowMock />
-              <div className="lp-hero__screens" aria-label="実アプリ画面の例">
-                {workflowSteps.slice(0, 3).map((step) => (
-                  <figure key={step.step}>
-                    <img src={step.image} alt={step.alt} loading={step.step === '01' ? 'eager' : 'lazy'} decoding="async" />
-                    <figcaption>{step.title}</figcaption>
-                  </figure>
+              <ul className="lp2-proof-list" aria-label="導入前に確認する前提">
+                {proofChips.map((chip) => (
+                  <li key={chip}>
+                    <CheckCircle2 size={15} aria-hidden="true" />
+                    {chip}
+                  </li>
                 ))}
+              </ul>
+            </div>
+
+            <div className="lp2-hero__visual" data-reveal>
+              <figure className="lp2-product-frame lp2-product-frame--hero">
+                <div className="lp2-product-frame__bar" aria-hidden="true">
+                  <span />
+                  <span />
+                  <span />
+                  <strong>Main / 台本編集</strong>
+                </div>
+                <img
+                  src="/lp/screen-main-script-edit-v2.webp"
+                  alt="ゆっくりまとめプロセッサーの台本編集画面"
+                  loading="eager"
+                  decoding="async"
+                />
+                <figcaption>
+                  <span>実アプリ画面</span>
+                  <strong>URL取得後の台本下地を、YMM4前準備へつなげる。</strong>
+                </figcaption>
+              </figure>
+              <div className="lp2-flow-strip" aria-label="主な流れ">
+                <span>URL入力</span>
+                <ArrowRight size={16} aria-hidden="true" />
+                <span>台本下地</span>
+                <ArrowRight size={16} aria-hidden="true" />
+                <span>CSV / .ymmp</span>
+                <ArrowRight size={16} aria-hidden="true" />
+                <span>YMM4で仕上げ</span>
               </div>
             </div>
           </div>
-        </section>
-
-        <section className="lp-section lp-before-after" aria-labelledby="lp-before-after-heading">
-          <div className="lp-section__head">
-            <p className="lp-kicker">手作業を減らす</p>
-            <h2 id="lp-before-after-heading">URL探しとコピペを、台本下地づくりへ</h2>
-            <p>記事を開き直す、本文を拾う、コメントをメモに散らす。その前工程を、動画に使う下地へまとめます。</p>
-          </div>
-          <div className="lp-before-after__grid">
-            {beforeAfterItems.map((item) => (
-              <article key={item.title} className="lp-ba-card">
-                <h3>{item.title}</h3>
-                <div>
-                  <section>
-                    <span>Before</span>
-                    <ul>
-                      {item.before.map((point) => (
-                        <li key={point}>{point}</li>
-                      ))}
-                    </ul>
-                  </section>
-                  <section>
-                    <span>After</span>
-                    <ul>
-                      {item.after.map((point) => (
-                        <li key={point}>
-                          <CheckCircle2 size={14} />
-                          {point}
-                        </li>
-                      ))}
-                    </ul>
-                  </section>
-                </div>
-              </article>
-            ))}
+          <div className="lp2-hero__peek" aria-hidden="true">
+            <span>次に確認すること</span>
+            <strong>何を入れると、何が出るか</strong>
           </div>
         </section>
 
-        <section className="lp-section lp-sticky" aria-labelledby="lp-workflow-heading">
-          <div className="lp-section__head lp-section__head--split">
-            <div>
-              <p className="lp-kicker">使う流れ</p>
-              <h2 id="lp-workflow-heading">URLから、編集に入れる下地まで</h2>
-            </div>
-            <p>URLを入れて、候補を選び、台本下地と出力ファイルの準備まで進む流れを実画面で追えます。</p>
-          </div>
-          <div className="lp-sticky__layout">
-            <div className="lp-sticky__steps">
-              {workflowSteps.map((step) => {
-                const StepIcon = step.Icon
+        <section className="lp2-band lp2-band--answers" aria-labelledby="lp2-answers-heading">
+          <div className="lp2-container">
+            <SectionHead
+              kicker="購入前にまず知りたいこと"
+              title="入力、成果物、YMM4との関係を最初に明確にします。"
+              body="機能名を並べる前に、自分の制作フローへ入るかどうかを判断できるようにしています。"
+            />
+            <div className="lp2-answer-grid">
+              {answerCards.map((item) => {
+                const Icon = item.Icon
                 return (
-                  <article key={step.step} className="lp-workflow-step">
-                    <span>
-                      <StepIcon size={17} />
-                      STEP {step.step}
-                    </span>
-                    <h3>{step.title}</h3>
-                    <p>{step.body}</p>
+                  <article className="lp2-answer-card" key={item.title} data-reveal>
+                    <span className="lp2-answer-card__label">{item.label}</span>
+                    <Icon size={28} aria-hidden="true" />
+                    <h3>{item.title}</h3>
+                    <p>{item.body}</p>
                   </article>
                 )
               })}
             </div>
-            <aside className="lp-sticky__mock" aria-label="実アプリ画面の流れ">
-              <WorkflowMock />
-              <figure>
-                <img src="/product_edit_script.webp" alt="台本下地を編集する実アプリ画面" loading="lazy" decoding="async" />
-                <figcaption>実アプリ画面上で、台本下地に手を入れていきます。</figcaption>
-              </figure>
-            </aside>
           </div>
         </section>
 
-        <section className="lp-section lp-usecases" aria-labelledby="lp-usecases-heading">
-          <div className="lp-section__head">
-            <p className="lp-kicker">用途別</p>
-            <h2 id="lp-usecases-heading">作りたい動画ジャンルから選ぶ</h2>
-            <p>反応集、掛け合い解説、縦型ショート。入力するものと出てくる下地を、ジャンル別に並べています。</p>
-          </div>
-          <div className="lp-usecases__grid">
-            {useCases.map((item) => {
-              const UseCaseIcon = item.Icon
-              return (
-                <article key={item.title} className="lp-usecase-card">
-                  <div className="lp-usecase-card__media">
-                    <video muted autoPlay loop playsInline preload="metadata" poster={item.poster} aria-label={`${item.title}の動画プレビュー`}>
-                      <source src={item.video} type="video/mp4" />
-                    </video>
-                    <img src={item.poster} alt="" loading="lazy" decoding="async" aria-hidden="true" />
-                  </div>
-                  <div className="lp-usecase-card__body">
-                    <span>
-                      <UseCaseIcon size={16} />
-                      用途
-                    </span>
-                    <h3>{item.title}</h3>
-                    <dl>
-                      <div>
-                        <dt>入力</dt>
-                        <dd>{item.input}</dd>
-                      </div>
-                      <div>
-                        <dt>成果物</dt>
-                        <dd>{item.output}</dd>
-                      </div>
-                      <div>
-                        <dt>向いている人</dt>
-                        <dd>{item.fit}</dd>
-                      </div>
-                    </dl>
-                  </div>
-                </article>
-              )
-            })}
-          </div>
-        </section>
-
-        <section className="lp-section lp-gallery" aria-labelledby="lp-gallery-heading">
-          <div className="lp-section__head lp-section__head--split">
-            <div>
-              <p className="lp-kicker">実画面ギャラリー</p>
-              <h2 id="lp-gallery-heading">実アプリ画面で、入力から出力まで追う</h2>
+        <section className="lp2-band lp2-band--diagram" aria-labelledby="lp2-diagram-heading">
+          <div className="lp2-container lp2-diagram-layout">
+            <div className="lp2-diagram-copy" data-reveal>
+              <p className="lp2-kicker">図で見る位置づけ</p>
+              <h2 id="lp2-diagram-heading">動画を完成させるツールではなく、YMM4前の下ごしらえを整えるツールです。</h2>
+              <p>
+                ここを曖昧にすると期待値がズレます。ゆっくりまとめプロセッサーは、URLから台本下地と出力前準備を作るところまでを支援し、完成判断は編集工程に残します。
+              </p>
+              <div className="lp2-note-panel">
+                <ShieldCheck size={20} aria-hidden="true" />
+                <strong>AI出力も下書きです。</strong>
+                <span>公開前に、権利、出典、読み上げ、字幕、素材を必ず確認してください。</span>
+              </div>
             </div>
-            <Link className="lp-link-card" to="/samples/">
-              サンプルページを見る
-              <ArrowRight size={16} />
-            </Link>
-          </div>
-          <div className="lp-gallery__grid">
-            {galleryItems.map((item) => (
-              <figure key={item.title} className="lp-gallery-card">
-                <img src={item.image} alt={item.alt} loading="lazy" decoding="async" />
-                <figcaption>
-                  <strong>{item.title}</strong>
-                  <span>{item.body}</span>
-                </figcaption>
-              </figure>
-            ))}
+            <figure className="lp2-diagram-card" data-reveal>
+              <img
+                src="/lp/workflow-diagram-jp-v2.webp"
+                alt="URL入力、台本下地、CSVと.ymmp前準備、仕上げはYMM4の流れを示した図解"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>image_genで作成した日本語入りのワークフロー図解。</figcaption>
+            </figure>
           </div>
         </section>
 
-        <section id="demo-video" className="lp-section lp-video" aria-labelledby="lp-video-heading">
-          <div className="lp-section__head">
-            <p className="lp-kicker">90秒デモ</p>
-            <h2 id="lp-video-heading">URLが台本下地になるまでを見る</h2>
-            <p>記事URL・スレッドURLを入れて、候補、台本下地、CSV/.ymmpの準備まで進む流れを短く見られます。</p>
-          </div>
-          <div className="lp-video__layout">
-            <div className="lp-video-player">
-              <video controls playsInline preload="metadata" poster="/lp/main-demo-90s-poster.webp" aria-label="90秒メインデモ">
-                <source src="/lp/main-demo-90s.mp4" type="video/mp4" />
-              </video>
+        <section className="lp2-band lp2-band--workflow" aria-labelledby="lp2-workflow-heading">
+          <div className="lp2-container">
+            <SectionHead
+              kicker="実アプリ画面で追う"
+              title="URLを入れてから、YMM4へ渡す前準備まで。"
+              body="画面そのものを見せることで、何ができて何ができないかを誤魔化さずに伝えます。"
+              align="split"
+            />
+            <div className="lp2-workflow">
+              <div className="lp2-workflow__steps">
+                {workflowSteps.map((step) => {
+                  const Icon = step.Icon
+                  return (
+                    <article className="lp2-step-card" key={step.step} data-reveal>
+                      <span className="lp2-step-card__number">{step.step}</span>
+                      <Icon size={22} aria-hidden="true" />
+                      <h3>{step.title}</h3>
+                      <p>{step.body}</p>
+                    </article>
+                  )
+                })}
+              </div>
+              <div className="lp2-workflow__screen" data-reveal>
+                <figure className="lp2-product-frame">
+                  <div className="lp2-product-frame__bar" aria-hidden="true">
+                    <span />
+                    <span />
+                    <span />
+                    <strong>Main / 台本取得</strong>
+                  </div>
+                  <img
+                    src="/lp/screen-main-get-scripts-v2.webp"
+                    alt="URLから台本取得の設定を確認する実アプリ画面"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </figure>
+                <div className="lp2-metric-row" aria-label="制作フローの要点">
+                  <span><Gauge size={16} aria-hidden="true" />少数URLで確認</span>
+                  <span><Layers3 size={16} aria-hidden="true" />素材パスを整理</span>
+                  <span><SearchCheck size={16} aria-hidden="true" />編集前に点検</span>
+                </div>
+              </div>
             </div>
-            <div className="lp-video__copy">
-              <span>
-                <Clock3 size={16} />
-                推奨構成 60から90秒
-              </span>
-              <ol>
-                <li>URL探し・コピペ・台本整理の悩み</li>
-                <li>記事URL・スレッドURLを入力</li>
-                <li>候補取得、台本下地編集、CSV/.ymmp前準備</li>
-                <li>編集画面で音声、字幕、間合いを仕上げる</li>
-                <li>Freeで少数URLを試す</li>
+          </div>
+        </section>
+
+        <section className="lp2-band lp2-band--gallery" aria-labelledby="lp2-gallery-heading">
+          <div className="lp2-container">
+            <SectionHead
+              kicker="本物の画面"
+              title="スクショは実アプリから。生成画像でUIを偽装しません。"
+              body="Main画面、台本取得、台本編集、Launcher導線のスクリーンショットで導入後の見え方を確認できます。"
+              align="split"
+            />
+            <div className="lp2-gallery-grid">
+              {galleryItems.map((item) => (
+                <figure className="lp2-gallery-card" key={item.title} data-reveal>
+                  <img src={item.image} alt={item.alt} loading="lazy" decoding="async" />
+                  <figcaption>
+                    <strong>{item.title}</strong>
+                    <span>{item.body}</span>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="lp2-demo" className="lp2-band lp2-band--demo" aria-labelledby="lp2-demo-heading">
+          <div className="lp2-container lp2-demo-layout">
+            <div className="lp2-demo-copy" data-reveal>
+              <p className="lp2-kicker">90秒デモ</p>
+              <h2 id="lp2-demo-heading">動画で流れを見て、下のスクショで細部を見る。</h2>
+              <p>
+                URL取得から台本下地、CSV / .ymmp前準備までの流れを短く確認できます。
+                動画が再生できない環境でも、poster画像と実画面ギャラリーで内容を追えます。
+              </p>
+              <ol className="lp2-demo-list">
+                <li>URLを入力して候補を取得</li>
+                <li>台本下地を編集し、会話の流れを整える</li>
+                <li>保存先と素材パスを揃え、YMM4で仕上げる</li>
               </ol>
             </div>
+            <div className="lp2-video-frame" data-reveal>
+              <video controls playsInline preload="metadata" poster="/lp/main-demo-90s-poster.webp" aria-label="90秒メインデモ">
+                <source src="/lp/main-demo-90s.mp4" type="video/mp4" />
+                <a href="/lp/main-demo-90s.mp4">90秒メインデモを開く</a>
+              </video>
+            </div>
           </div>
         </section>
 
-        <section className="lp-section lp-pricing" aria-labelledby="lp-pricing-heading">
-          <div className="lp-section__head">
-            <p className="lp-kicker">Free / Premium</p>
-            <h2 id="lp-pricing-heading">Freeで下地の出方を見てから、Premiumへ</h2>
-            <p>Premiumは39,800円税込の買い切りです。Freeで実URLを通して、続けて使うか判断できます。</p>
-          </div>
-          <div className="lp-pricing__grid">
-            {pricingCards.map((plan) => (
-              <article key={plan.name} className={`lp-price-card lp-price-card--${plan.name.toLowerCase()}`}>
-                <span>{plan.label}</span>
-                <h3>{plan.name}</h3>
-                <strong>{plan.price}</strong>
-                <p>{plan.body}</p>
-                <ul>
-                  {plan.points.map((point) => (
-                    <li key={point}>
-                      <CheckCircle2 size={15} />
-                      {point}
-                    </li>
-                  ))}
-                </ul>
-                <CtaLink href={plan.href} external={plan.external} className="lp-card-link">
-                  {plan.name === 'Premium' ? <CreditCard size={16} /> : <Download size={16} />}
-                  {plan.cta}
-                </CtaLink>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="lp-section lp-faq" aria-labelledby="lp-faq-heading">
-          <div className="lp-section__head">
-            <p className="lp-kicker">FAQ</p>
-            <h2 id="lp-faq-heading">使い始める前に必要なことだけ</h2>
-            <p>無料版、Premium、対応環境、動画の仕上げ範囲だけを短くまとめています。</p>
-          </div>
-          <div className="lp-faq__list">
-            {priorityFaqItems.map((item, index) => (
-              <details key={item.question} className="lp-faq-item" open={index < 3}>
-                <summary>
-                  <span>{item.question}</span>
-                  <ChevronDown size={17} aria-hidden="true" />
-                </summary>
-                <p>{item.answer}</p>
-              </details>
-            ))}
+        <section className="lp2-band lp2-band--pricing" aria-labelledby="lp2-pricing-heading">
+          <div className="lp2-container">
+            <SectionHead
+              kicker="Free / Premium"
+              title="Freeで流れを見て、必要ならPremiumで制限解除。"
+              body="Premiumは39,800円税込の買い切りです。月額自動更新はありません。"
+            />
+            <div className="lp2-plan-grid">
+              {planCards.map((plan) => {
+                const Icon = plan.Icon
+                return (
+                  <article className={`lp2-plan-card lp2-plan-card--${plan.name.toLowerCase()}`} key={plan.name} data-reveal>
+                    <span className="lp2-plan-card__eyebrow">{plan.lead}</span>
+                    <h3>{plan.name}</h3>
+                    <strong>{plan.price}</strong>
+                    <ul>
+                      {plan.points.map((point) => (
+                        <li key={point}>
+                          <CheckCircle2 size={16} aria-hidden="true" />
+                          {point}
+                        </li>
+                      ))}
+                    </ul>
+                    <CtaLink href={plan.href} external={plan.external} className="lp2-card-link">
+                      <Icon size={17} aria-hidden="true" />
+                      {plan.cta}
+                    </CtaLink>
+                  </article>
+                )
+              })}
+            </div>
           </div>
         </section>
 
-        <section className="lp-final" aria-labelledby="lp-final-heading">
-          <div>
-            <p className="lp-kicker">まずは自分のURLから</p>
-            <h2 id="lp-final-heading">まずは自分のURLで、台本下地を出してみる。</h2>
-            <p>
-              URLを貼る、候補を選ぶ、台本下地に手を入れる、CSV/.ymmp前準備を出す。
-              そこまで合うと分かってからPremiumを検討できます。
-            </p>
+        <section className="lp2-band lp2-band--trust" aria-labelledby="lp2-trust-heading">
+          <div className="lp2-container">
+            <SectionHead
+              kicker="導入前チェック"
+              title="用意するものと、保証しないことを先に確認。"
+              body="購入前に知りたい前提を隠しません。Windows、YMM4、権利確認、収益化保証の有無をここで整理します。"
+              align="split"
+            />
+            <div className="lp2-trust-grid">
+              {trustItems.map((item) => {
+                const Icon = item.Icon
+                return (
+                  <article className="lp2-trust-card" key={item.title} data-reveal>
+                    <Icon size={24} aria-hidden="true" />
+                    <h3>{item.title}</h3>
+                    <p>{item.body}</p>
+                  </article>
+                )
+              })}
+            </div>
           </div>
-          <div className="lp-final__actions">
-            <a className="lp-btn lp-btn--primary" href={downloadUrl} target="_blank" rel="noopener noreferrer">
-              <Download size={18} />
-              無料でダウンロード
-            </a>
-            <Link className="lp-btn lp-btn--ghost" to="/samples/">
-              <MonitorPlay size={18} />
-              実画面を見る
-            </Link>
-            <Link className="lp-btn lp-btn--ghost" to="/purchase/">
-              <CreditCard size={18} />
-              料金を見る
-            </Link>
+        </section>
+
+        <section className="lp2-band lp2-band--faq" aria-labelledby="lp2-faq-heading">
+          <div className="lp2-container">
+            <SectionHead
+              kicker="FAQ"
+              title="買う前に迷いやすいことだけ、短く。"
+              body="詳しい項目はFAQページにまとめています。"
+            />
+            <div className="lp2-faq-list">
+              {priorityFaqItems.map((item, index) => (
+                <details className="lp2-faq-item" key={item.question} open={index < 2} data-reveal>
+                  <summary>
+                    <span>{item.question}</span>
+                    <HelpCircle size={18} aria-hidden="true" />
+                  </summary>
+                  <p>{item.answer}</p>
+                </details>
+              ))}
+            </div>
+            <div className="lp2-faq-link">
+              <Link to="/faq/" discover="none">
+                FAQをすべて見る
+                <ArrowRight size={16} aria-hidden="true" />
+              </Link>
+            </div>
           </div>
+        </section>
+
+        <section className="lp2-final" aria-labelledby="lp2-final-heading">
+          <div className="lp2-container lp2-final__grid">
+            <div>
+              <p className="lp2-kicker">まずは自分のURLから</p>
+              <h2 id="lp2-final-heading">Freeで下地の出方を見て、続けるか判断する。</h2>
+              <p>
+                URLを貼る、候補を見る、台本下地に手を入れる、CSV / .ymmp前準備を確認する。
+                その流れが制作に合うかを、購入前に試せます。
+              </p>
+            </div>
+            <div className="lp2-final__actions">
+              <a className="lp2-btn lp2-btn--primary" href={downloadUrl} target="_blank" rel="noopener noreferrer">
+                <Download size={18} aria-hidden="true" />
+                無料でダウンロード
+              </a>
+              <Link className="lp2-btn lp2-btn--ghost" to="/purchase/" discover="none">
+                <CreditCard size={18} aria-hidden="true" />
+                料金を見る
+              </Link>
+              <Link className="lp2-btn lp2-btn--ghost" to="/samples/" discover="none">
+                <ExternalLink size={18} aria-hidden="true" />
+                サンプルを見る
+              </Link>
+            </div>
+          </div>
+          <Sparkles className="lp2-final__spark" size={34} aria-hidden="true" />
         </section>
       </main>
     </>
