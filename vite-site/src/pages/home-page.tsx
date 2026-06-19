@@ -45,21 +45,21 @@ const heroFlowItems = [
 
 const answerCards = [
   {
-    label: 'URL取得',
-    title: '対応URLで取得できるか',
-    body: 'Freeで少数URLを貼って、候補一覧まで出るか確認できます。',
+    label: '集める',
+    title: '記事URL・スレURLをまとめる',
+    body: '候補を一覧で見て、使う題材を選びやすくします。',
     Icon: Link2,
   },
   {
-    label: '台本編集',
-    title: '下書きを編集できるか',
-    body: '取得した内容を見ながら、会話順、不要行、読み上げ量を調整できます。',
+    label: '整える',
+    title: '台本下地を編集しやすくする',
+    body: '会話順、不要行、読み上げ量を見ながら、YMM4前に整えます。',
     Icon: FileText,
   },
   {
-    label: 'YMM4前準備',
-    title: '編集前の準備まで進むか',
-    body: 'CSV、.ymmp前準備、保存先、素材パスまで確認できます。',
+    label: '渡す',
+    title: 'YMM4前準備まで揃える',
+    body: 'CSV、.ymmp前準備、保存先、素材パスまでまとめます。',
     Icon: MonitorPlay,
   },
 ] as const
@@ -402,7 +402,7 @@ export function HomePage() {
             </div>
           </div>
           <div className="lp2-hero__peek" aria-hidden="true">
-            <span>Freeで確認</span>
+            <span>YMM4前まで</span>
             <strong>URL、台本下地、YMM4前準備</strong>
           </div>
         </section>
@@ -410,9 +410,9 @@ export function HomePage() {
         <section className="lp2-band lp2-band--answers" aria-labelledby="lp2-answers-heading">
           <div className="lp2-container">
             <SectionHead
-              kicker="購入前チェック"
-              title="Freeで確認する範囲"
-              body="対応URLの取得、台本下地の編集、CSV/.ymmp前準備。Premium購入前に、手元の題材で確認できます。"
+              kicker="URLからYMM4前準備まで"
+              title="YMM4に入る前を、まとめて短く。"
+              body="記事URL・スレッドURLから題材選び、台本下地、CSV/.ymmp前準備まで。仕上げはYMM4で、散らかりがちな下準備だけを軽くします。"
               align="split"
             />
             <div className="lp2-answer-grid">
