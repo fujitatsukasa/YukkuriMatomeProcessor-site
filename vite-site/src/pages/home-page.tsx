@@ -37,6 +37,12 @@ const proofChips = [
   '動画完成はYMM4',
 ] as const
 
+const heroFlowItems = [
+  { label: '入れる', value: '記事URL・スレッドURL' },
+  { label: '出る', value: '台本下地 / CSV / .ymmp前準備' },
+  { label: '仕上げ', value: 'YMM4で編集' },
+] as const
+
 const answerCards = [
   {
     label: '入力',
@@ -319,16 +325,25 @@ export function HomePage() {
         <section className="lp2-hero" aria-labelledby="lp2-hero-heading">
           <div className="lp2-container lp2-hero__grid">
             <div className="lp2-hero__copy" data-reveal>
-              <p className="lp2-kicker">Windows向け / YMM4前準備</p>
+              <p className="lp2-kicker">記事URL・スレッドURLから</p>
               <h1 id="lp2-hero-heading">
-                <span>URLを貼るだけ</span>
-                <span>YMM4に入る前を</span>
-                <span>整える。</span>
+                <span>URLを貼るだけ。</span>
+                <span>台本下地へ。</span>
+                <span>仕上げはYMM4</span>
               </h1>
               <p className="lp2-hero__lead">
-                URLを集める、下書きを直す、保存先と素材パスを揃える。
-                そこまでを短くして、仕上げはYMM4でやるためのツールです。
+                取得、下書き編集、CSV / .ymmp前準備、素材パス整理まで。
+                動画完成はYMM4で仕上げます。
               </p>
+              <div className="lp2-hero-io" aria-label="入力と出力">
+                {heroFlowItems.map((item, index) => (
+                  <div className="lp2-hero-io__item" key={item.label}>
+                    <span>{item.label}</span>
+                    <strong>{item.value}</strong>
+                    {index < heroFlowItems.length - 1 ? <ArrowRight size={17} aria-hidden="true" /> : null}
+                  </div>
+                ))}
+              </div>
               <div className="lp2-hero__actions">
                 <a className="lp2-btn lp2-btn--primary" href={downloadUrl} target="_blank" rel="noopener noreferrer">
                   <Download size={18} aria-hidden="true" />
@@ -350,6 +365,10 @@ export function HomePage() {
             </div>
 
             <div className="lp2-hero__visual" data-reveal>
+              <div className="lp2-hero__visual-note lp2-hero__visual-note--input" aria-hidden="true">
+                <span>INPUT</span>
+                <strong>記事URL / スレッドURL</strong>
+              </div>
               <figure className="lp2-product-frame lp2-product-frame--hero">
                 <div className="lp2-product-frame__bar" aria-hidden="true">
                   <span />
@@ -368,14 +387,17 @@ export function HomePage() {
                   <strong>取得した内容を見ながら、台本下地を直す。</strong>
                 </figcaption>
               </figure>
+              <div className="lp2-hero__visual-note lp2-hero__visual-note--output" aria-hidden="true">
+                <span>OUTPUT</span>
+                <strong>台本下地 / CSV / .ymmp前準備</strong>
+              </div>
               <div className="lp2-flow-strip" aria-label="主な流れ">
-                <span>URL</span>
-                <ArrowRight size={16} aria-hidden="true" />
-                <span>下書き</span>
-                <ArrowRight size={16} aria-hidden="true" />
-                <span>CSV / .ymmp前準備</span>
-                <ArrowRight size={16} aria-hidden="true" />
-                <span>YMM4</span>
+                {heroFlowItems.map((item, index) => (
+                  <span key={item.label}>
+                    {item.value}
+                    {index < heroFlowItems.length - 1 ? <ArrowRight size={16} aria-hidden="true" /> : null}
+                  </span>
+                ))}
               </div>
             </div>
           </div>
