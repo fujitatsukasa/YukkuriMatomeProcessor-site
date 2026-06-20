@@ -44,6 +44,24 @@ const heroFlowItems = [
   { label: '30秒', title: 'YMM4へ', body: '起動 / 接続 / 直反映' },
 ] as const
 
+const decisionHighlights = [
+  {
+    label: '入れる',
+    title: 'URL、下書き、素材メモ',
+    body: 'URLだけに縛りません。手元のネタやメモから始められます。',
+  },
+  {
+    label: '作る',
+    title: '台本取得、AI台本生成、動画作成',
+    body: '動画の型に合わせて、会話順、字幕量、素材配置までまとめます。',
+  },
+  {
+    label: '反映',
+    title: 'YMM4起動、接続、直反映',
+    body: 'YMM4で見て、音声、字幕、間合い、公開判断を仕上げます。',
+  },
+] as const
+
 const automationTargets = [
   {
     label: '台本取得',
@@ -98,6 +116,32 @@ const beforeAfterItems = [
   { before: 'YMM4で最初から組む', after: '直反映してYMM4で仕上げる' },
 ] as const
 
+const compareRows = [
+  { task: 'ネタ投入', manual: 'メモ、URL、素材を別々に管理', ymp: '入口を1つにまとめる' },
+  { task: '台本', manual: '構成、会話、字幕量を手で調整', ymp: 'AI台本生成で動画の型へ合わせる' },
+  { task: '素材配置', manual: '保存先と素材パスを行き来する', ymp: '素材配置と不足を画面で確認' },
+  { task: 'YMM4', manual: 'タイムラインを手で組み始める', ymp: '起動、接続、直反映へ進む' },
+] as const
+
+const buyerAssuranceItems = [
+  {
+    title: 'Freeで先に触れる',
+    body: '起動、ログイン、台本編集、動画作成導線、YMM4連携の前提を確認できます。',
+  },
+  {
+    title: 'Premiumは買い切り',
+    body: '39,800円税込。月額ではなく、台本取得、AI台本生成、動画作成の制限を解除します。',
+  },
+  {
+    title: 'YMM4で最後に見る',
+    body: '音声、字幕、立ち絵、間合い、権利確認、投稿判断はYMM4で確認します。',
+  },
+  {
+    title: '成果保証はしない',
+    body: '収益化、再生数、審査通過は保証しません。ツールは制作時間の短縮に集中します。',
+  },
+] as const
+
 const workflowSteps = [
   {
     step: '01',
@@ -137,24 +181,28 @@ const galleryItems = [
   {
     title: '台本取得',
     body: 'URLを使う時は、取得候補を確認してから取り込みます。',
+    focus: 'URL候補',
     image: '/lp/screen-main-get-scripts-v2.webp',
     alt: '台本取得画面の実アプリスクリーンショット',
   },
   {
     title: '台本編集',
     body: '会話順、字幕量、素材配置を見ながら調整できます。',
+    focus: '会話順',
     image: '/lp/screen-main-script-edit-v2.webp',
     alt: '台本編集画面の実アプリスクリーンショット',
   },
   {
     title: 'AI台本生成',
     body: '動画の型に合わせて台本案を作り、使う前に確認します。',
+    focus: '生成結果',
     image: '/lp/screen-main-script-gen-v2.webp',
     alt: '台本生成結果を確認する実アプリスクリーンショット',
   },
   {
     title: 'ランチャー',
     body: 'ログイン、更新、Premium状態を起動時に確認します。',
+    focus: '更新確認',
     image: '/lp/screen-launcher-update-dialog-v2.webp',
     alt: 'ランチャーの更新確認ダイアログを切り出した実アプリスクリーンショット',
   },
@@ -357,6 +405,63 @@ function ThirtySecondDemo() {
   )
 }
 
+function DecisionStrip() {
+  return (
+    <section className="lp3-decision" aria-label="30秒で何をするか">
+      <div className="lp3-container lp3-decision__grid">
+        {decisionHighlights.map((item) => (
+          <article className="lp3-decision-card" key={item.label} data-reveal>
+            <span>{item.label}</span>
+            <h2>{item.title}</h2>
+            <p>{item.body}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function CampaignDemoPanel() {
+  return (
+    <section className="lp3-band lp3-band--campaign" aria-labelledby="lp3-campaign-heading">
+      <div className="lp3-container lp3-campaign-layout">
+        <div className="lp3-campaign-copy" data-reveal>
+          <p className="lp3-kicker">広告デモ</p>
+          <h2 id="lp3-campaign-heading">30秒の中身を、もっと具体的に見せます。</h2>
+          <p>
+            入力して終わりではありません。台本取得、AI台本生成、動画作成、YMM4直反映まで、
+            どこが短くなるかを見える形にしました。
+          </p>
+          <div className="lp3-campaign-meter" aria-label="30秒の進行">
+            {heroFlowItems.map((item) => (
+              <div key={item.label}>
+                <span>{item.label}</span>
+                <strong>{item.title}</strong>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="lp3-campaign-stage" data-reveal>
+          <BrowserFrame title="Main / 台本編集 + 動画作成" className="lp3-frame--campaign">
+            <img
+              src="/lp/screen-main-script-edit-v2.webp"
+              alt="台本編集と動画作成ボードを確認する実アプリ画面"
+              loading="lazy"
+              decoding="async"
+            />
+          </BrowserFrame>
+          <div className="lp3-campaign-badges" aria-label="実画面で確認できるポイント">
+            <span>台本取得</span>
+            <span>AI台本生成</span>
+            <span>素材配置</span>
+            <span>YMM4直反映</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 export function HomePage() {
   return (
     <>
@@ -425,12 +530,14 @@ export function HomePage() {
           </div>
         </section>
 
+        <DecisionStrip />
+
         <section className="lp3-band lp3-band--targets" aria-labelledby="lp3-targets-heading">
           <div className="lp3-container">
             <SectionHead
               kicker="自動化する範囲"
               title="売りはここ。台本取得、AI台本生成、動画作成。"
-              body="何が自動化されるかを先に確認できます。YMM4で最終確認する前提も隠しません。"
+              body="何が自動化されるかを先に確認できます。YMM4で最終確認する前提も先に出します。"
             />
             <div className="lp3-target-grid">
               {automationTargets.map((item) => {
@@ -447,6 +554,8 @@ export function HomePage() {
             </div>
           </div>
         </section>
+
+        <CampaignDemoPanel />
 
         <section className="lp3-band lp3-band--proof" aria-labelledby="lp3-proof-heading">
           <div className="lp3-container lp3-proof-layout">
@@ -481,6 +590,30 @@ export function HomePage() {
                 <span><SearchCheck size={16} aria-hidden="true" />YMM4直反映</span>
                 <span><ShieldCheck size={16} aria-hidden="true" />最終確認は自分で</span>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="lp3-band lp3-band--compare" aria-labelledby="lp3-compare-heading">
+          <div className="lp3-container">
+            <SectionHead
+              kicker="比較"
+              title="手作業で詰まるところを、YMM4制作向けにまとめる。"
+              body="一般的な動画編集ソフトの代わりではなく、YMM4で動画作成する前提の作業を短くします。"
+            />
+            <div className="lp3-compare-table" data-reveal>
+              <div className="lp3-compare-table__head">
+                <span>作業</span>
+                <span>手作業</span>
+                <span>ゆっくりまとめプロセッサー</span>
+              </div>
+              {compareRows.map((row) => (
+                <div className="lp3-compare-row" key={row.task}>
+                  <strong>{row.task}</strong>
+                  <span>{row.manual}</span>
+                  <span>{row.ymp}</span>
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -545,6 +678,7 @@ export function HomePage() {
             <div className="lp3-gallery-grid">
               {galleryItems.map((item) => (
                 <figure className="lp3-gallery-card" key={item.title} data-reveal>
+                  <div className="lp3-gallery-card__focus">{item.focus}</div>
                   <img src={item.image} alt={item.alt} loading="lazy" decoding="async" />
                   <figcaption>
                     <strong>{item.title}</strong>
@@ -576,6 +710,25 @@ export function HomePage() {
                 <source src="/lp/main-demo-90s.mp4" type="video/mp4" />
                 <a href="/lp/main-demo-90s.mp4">90秒メインデモを開く</a>
               </video>
+            </div>
+          </div>
+        </section>
+
+        <section className="lp3-band lp3-band--assurance" aria-labelledby="lp3-assurance-heading">
+          <div className="lp3-container">
+            <SectionHead
+              kicker="購入前の不安"
+              title="買う前に見るべき条件を、先にまとめます。"
+              body="料金、制限、YMM4前提、成果保証なし。後から分かると不満になる点をここで確認できます。"
+            />
+            <div className="lp3-assurance-grid">
+              {buyerAssuranceItems.map((item) => (
+                <article className="lp3-assurance-card" key={item.title} data-reveal>
+                  <CheckCircle2 size={20} aria-hidden="true" />
+                  <h3>{item.title}</h3>
+                  <p>{item.body}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>

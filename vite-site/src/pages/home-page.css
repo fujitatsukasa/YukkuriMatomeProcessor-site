@@ -541,8 +541,77 @@
   animation: lp3-progress-run 4.8s ease-in-out infinite;
 }
 
+.lp3-decision {
+  position: relative;
+  z-index: 2;
+  scroll-margin-top: 84px;
+  padding: 24px 0 28px;
+  border-top: 1px solid rgba(240, 199, 95, 0.18);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(90deg, rgba(101, 216, 255, 0.08), transparent 42%, rgba(240, 199, 95, 0.1)),
+    rgba(5, 7, 10, 0.94);
+}
+
+.lp3-decision__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.lp3-decision-card {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  gap: 8px;
+  min-height: 156px;
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.024)),
+    rgba(10, 13, 18, 0.84);
+  box-shadow: 0 20px 46px -38px rgba(0, 0, 0, 0.9);
+}
+
+.lp3-decision-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--lp3-cyan), var(--lp3-gold));
+}
+
+.lp3-decision-card span {
+  width: fit-content;
+  min-height: 28px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 10px;
+  border-radius: 8px;
+  color: #081019;
+  background: var(--lp3-gold);
+  font-size: 0.78rem;
+  font-weight: 950;
+}
+
+.lp3-decision-card h2 {
+  color: #fff8e5;
+  font-family: var(--lp3-display);
+  font-size: 1.22rem;
+  font-weight: 950;
+  line-height: 1.34;
+}
+
+.lp3-decision-card p {
+  color: var(--lp3-muted);
+  font-size: 0.96rem;
+  line-height: 1.68;
+}
+
 .lp3-band {
   position: relative;
+  scroll-margin-top: 84px;
   padding: 86px 0;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   background:
@@ -551,12 +620,23 @@
 }
 
 .lp3-band--targets,
+.lp3-band--campaign,
 .lp3-band--workflow,
 .lp3-band--pricing,
-.lp3-band--faq {
+.lp3-band--faq,
+.lp3-band--compare,
+.lp3-band--assurance {
   background:
     radial-gradient(circle at 80% 12%, rgba(101, 216, 255, 0.08), transparent 24%),
     rgba(255, 255, 255, 0.008);
+}
+
+.lp3-band--campaign {
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 78% 28%, rgba(240, 199, 95, 0.12), transparent 28%),
+    linear-gradient(100deg, rgba(5, 5, 7, 0.9), rgba(8, 13, 18, 0.98)),
+    #050507;
 }
 
 .lp3-band--proof {
@@ -697,13 +777,15 @@
 .lp3-gallery-card span,
 .lp3-plan-card li,
 .lp3-trust-card p,
-.lp3-faq-item p {
+.lp3-faq-item p,
+.lp3-assurance-card p {
   color: var(--lp3-muted);
   font-size: 1rem;
   line-height: 1.72;
 }
 
 .lp3-proof-layout,
+.lp3-campaign-layout,
 .lp3-demo-layout,
 .lp3-final__grid {
   display: grid;
@@ -713,11 +795,111 @@
 }
 
 .lp3-proof-copy,
+.lp3-campaign-copy,
 .lp3-demo-copy,
 .lp3-final__grid > div:first-child {
   display: grid;
   gap: 16px;
   min-width: 0;
+}
+
+.lp3-campaign-copy h2 {
+  color: var(--lp3-ink);
+  font-family: var(--lp3-display);
+  font-size: 2.72rem;
+  font-weight: 950;
+  line-height: 1.16;
+  text-wrap: balance;
+}
+
+.lp3-campaign-copy p {
+  color: var(--lp3-muted);
+  font-size: 1.08rem;
+  font-weight: 650;
+  line-height: 1.82;
+}
+
+.lp3-campaign-meter {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 4px;
+  padding: 8px;
+  border: 1px solid rgba(240, 199, 95, 0.2);
+  border-radius: 8px;
+  background: rgba(5, 8, 12, 0.7);
+}
+
+.lp3-campaign-meter div {
+  min-height: 78px;
+  display: grid;
+  gap: 6px;
+  align-content: center;
+  padding: 10px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.lp3-campaign-meter span {
+  width: fit-content;
+  min-height: 25px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 8px;
+  border-radius: 8px;
+  color: #071018;
+  background: var(--lp3-gold);
+  font-size: 0.74rem;
+  font-weight: 950;
+}
+
+.lp3-campaign-meter strong {
+  color: #fff8e5;
+  font-size: 0.92rem;
+  line-height: 1.35;
+}
+
+.lp3-campaign-stage {
+  position: relative;
+  min-width: 0;
+  padding: 20px 18px 74px;
+  border: 1px solid rgba(240, 199, 95, 0.18);
+  border-radius: 8px;
+  background:
+    linear-gradient(116deg, rgba(101, 216, 255, 0.08), transparent 44%, rgba(240, 199, 95, 0.08)),
+    rgba(5, 8, 12, 0.64);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 34px 90px -64px rgba(101, 216, 255, 0.58);
+}
+
+.lp3-frame--campaign {
+  border-color: rgba(101, 216, 255, 0.24);
+}
+
+.lp3-campaign-badges {
+  position: absolute;
+  right: 30px;
+  bottom: 18px;
+  left: 30px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.lp3-campaign-badges span {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 8px;
+  color: rgba(255, 248, 229, 0.9);
+  background: rgba(5, 8, 12, 0.82);
+  font-size: 0.88rem;
+  font-weight: 950;
+  text-align: center;
 }
 
 .lp3-before-after {
@@ -791,6 +973,75 @@
 
 .lp3-proof-stage__strip svg {
   color: var(--lp3-green);
+}
+
+.lp3-compare-table {
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.024)),
+    var(--lp3-panel);
+  box-shadow: 0 26px 58px -46px rgba(0, 0, 0, 0.9);
+}
+
+.lp3-compare-table__head,
+.lp3-compare-row {
+  display: grid;
+  grid-template-columns: minmax(120px, 0.42fr) minmax(0, 0.9fr) minmax(0, 1fr);
+  gap: 0;
+}
+
+.lp3-compare-table__head {
+  min-height: 54px;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(240, 199, 95, 0.08);
+}
+
+.lp3-compare-table__head span,
+.lp3-compare-row strong,
+.lp3-compare-row span {
+  min-width: 0;
+  padding: 15px 18px;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  line-height: 1.62;
+}
+
+.lp3-compare-table__head span:last-child,
+.lp3-compare-row span:last-child {
+  border-right: 0;
+}
+
+.lp3-compare-table__head span {
+  color: var(--lp3-gold);
+  font-family: var(--lp3-display);
+  font-size: 0.95rem;
+  font-weight: 950;
+}
+
+.lp3-compare-row {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.lp3-compare-row:last-child {
+  border-bottom: 0;
+}
+
+.lp3-compare-row strong {
+  color: #fff8e5;
+  font-family: var(--lp3-display);
+  font-weight: 950;
+}
+
+.lp3-compare-row span {
+  color: var(--lp3-muted);
+}
+
+.lp3-compare-row span:last-child {
+  color: rgba(255, 248, 229, 0.9);
+  background: rgba(101, 216, 255, 0.055);
+  font-weight: 850;
 }
 
 .lp3-usecase-grid {
@@ -894,11 +1145,30 @@
 }
 
 .lp3-gallery-card {
+  position: relative;
   margin: 0;
   overflow: hidden;
   transition:
     transform 180ms ease,
     border-color 180ms ease;
+}
+
+.lp3-gallery-card__focus {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+  min-height: 30px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 10px;
+  border: 1px solid rgba(101, 216, 255, 0.26);
+  border-radius: 8px;
+  color: #9eefff;
+  background: rgba(5, 8, 12, 0.82);
+  font-size: 0.78rem;
+  font-weight: 950;
+  box-shadow: 0 18px 34px -26px rgba(0, 0, 0, 0.9);
 }
 
 .lp3-gallery-card:hover,
@@ -945,6 +1215,44 @@
   display: block;
   aspect-ratio: 16 / 9;
   background: #050507 url("/lp/main-demo-90s-poster.webp") center / cover no-repeat;
+}
+
+.lp3-assurance-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.lp3-assurance-card {
+  position: relative;
+  min-height: 212px;
+  display: grid;
+  gap: 12px;
+  align-content: start;
+  padding: 20px;
+  border: 1px solid rgba(112, 228, 184, 0.18);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(112, 228, 184, 0.075), rgba(255, 255, 255, 0.024)),
+    var(--lp3-panel);
+  box-shadow: 0 26px 58px -46px rgba(0, 0, 0, 0.9);
+}
+
+.lp3-assurance-card svg {
+  box-sizing: content-box;
+  padding: 8px;
+  border: 1px solid rgba(112, 228, 184, 0.24);
+  border-radius: 999px;
+  color: var(--lp3-green);
+  background: rgba(112, 228, 184, 0.08);
+}
+
+.lp3-assurance-card h3 {
+  color: #fff8e5;
+  font-family: var(--lp3-display);
+  font-size: 1.14rem;
+  font-weight: 950;
+  line-height: 1.38;
 }
 
 .lp3-plan-grid {
@@ -1084,6 +1392,7 @@
 .lp3-final {
   position: relative;
   isolation: isolate;
+  scroll-margin-top: 84px;
   padding: 72px 0 78px;
   overflow: hidden;
   background:
@@ -1167,6 +1476,7 @@
 
   .lp3-hero__grid,
   .lp3-proof-layout,
+  .lp3-campaign-layout,
   .lp3-demo-layout,
   .lp3-final__grid {
     grid-template-columns: 1fr;
@@ -1183,9 +1493,11 @@
   }
 
   .lp3-target-grid,
+  .lp3-decision__grid,
   .lp3-workflow,
   .lp3-gallery-grid,
-  .lp3-trust-grid {
+  .lp3-trust-grid,
+  .lp3-assurance-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1280,6 +1592,7 @@
 
   .lp3-section-head h2,
   .lp3-proof-copy h2,
+  .lp3-campaign-copy h2,
   .lp3-demo-copy h2,
   .lp3-final h2 {
     font-size: 2.04rem;
@@ -1287,19 +1600,71 @@
 
   .lp3-section-head p:not(.lp3-kicker),
   .lp3-proof-copy p,
+  .lp3-campaign-copy p,
   .lp3-demo-copy p,
   .lp3-final p {
     font-size: 1rem;
   }
 
   .lp3-target-grid,
+  .lp3-decision__grid,
   .lp3-usecase-grid,
   .lp3-workflow,
   .lp3-gallery-grid,
   .lp3-plan-grid,
   .lp3-trust-grid,
+  .lp3-assurance-grid,
   .lp3-proof-stage__strip {
     grid-template-columns: 1fr;
+  }
+
+  .lp3-decision-card {
+    min-height: auto;
+  }
+
+  .lp3-campaign-meter,
+  .lp3-campaign-badges {
+    grid-template-columns: 1fr;
+  }
+
+  .lp3-campaign-stage {
+    padding: 14px;
+  }
+
+  .lp3-campaign-badges {
+    position: static;
+    margin-top: 10px;
+  }
+
+  .lp3-compare-table {
+    display: grid;
+    gap: 10px;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .lp3-compare-table__head {
+    display: none;
+  }
+
+  .lp3-compare-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    border-radius: 8px;
+    background: var(--lp3-panel);
+  }
+
+  .lp3-compare-row strong,
+  .lp3-compare-row span {
+    border-right: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .lp3-compare-row span:last-child {
+    border-bottom: 0;
   }
 
   .lp3-before-after__row {
@@ -1355,6 +1720,7 @@
 
   .lp3-section-head h2,
   .lp3-proof-copy h2,
+  .lp3-campaign-copy h2,
   .lp3-demo-copy h2,
   .lp3-final h2 {
     font-size: 1.78rem;
