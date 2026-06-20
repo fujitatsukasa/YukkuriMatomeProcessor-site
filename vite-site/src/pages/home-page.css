@@ -724,11 +724,11 @@
 
 .lp3-target-card {
   position: relative;
-  min-height: 250px;
+  min-height: 364px;
   display: grid;
-  gap: 14px;
-  align-content: start;
-  padding: 22px;
+  grid-template-rows: auto 1fr;
+  gap: 0;
+  padding: 0;
   overflow: hidden;
 }
 
@@ -740,7 +740,41 @@
   background: linear-gradient(180deg, var(--lp3-cyan), var(--lp3-gold));
 }
 
-.lp3-target-card > span {
+.lp3-target-card__visual {
+  position: relative;
+  overflow: hidden;
+  min-height: 128px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: #050507;
+}
+
+.lp3-target-card__visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, transparent 32%, rgba(5, 5, 7, 0.72)),
+    linear-gradient(90deg, rgba(5, 5, 7, 0.24), transparent 46%, rgba(5, 5, 7, 0.18));
+  pointer-events: none;
+}
+
+.lp3-target-card__visual img {
+  width: 100%;
+  height: 100%;
+  min-height: 128px;
+  display: block;
+  object-fit: cover;
+  transform: scale(1.02);
+}
+
+.lp3-target-card__copy {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+  padding: 18px 20px 22px;
+}
+
+.lp3-target-card__copy > span {
   width: fit-content;
   min-height: 28px;
   display: inline-flex;
@@ -754,7 +788,7 @@
   font-weight: 950;
 }
 
-.lp3-target-card svg {
+.lp3-target-card__copy svg {
   color: var(--lp3-gold);
 }
 
@@ -857,6 +891,14 @@
   color: #fff8e5;
   font-size: 0.92rem;
   line-height: 1.35;
+}
+
+.lp3-campaign-meter p {
+  margin: 0;
+  color: rgba(248, 242, 230, 0.64);
+  font-size: 0.82rem;
+  font-weight: 850;
+  line-height: 1.42;
 }
 
 .lp3-campaign-stage {
@@ -1687,11 +1729,19 @@
     align-items: stretch;
   }
 
-  .lp3-target-card,
   .lp3-plan-card,
   .lp3-trust-card {
     min-height: auto;
     padding: 18px;
+  }
+
+  .lp3-target-card {
+    min-height: auto;
+  }
+
+  .lp3-target-card__visual,
+  .lp3-target-card__visual img {
+    min-height: 156px;
   }
 
   .lp3-step-card__copy {

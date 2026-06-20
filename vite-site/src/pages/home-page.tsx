@@ -46,45 +46,49 @@ const heroFlowItems = [
 
 const decisionHighlights = [
   {
-    label: '入れる',
-    title: 'URL、下書き、素材メモ',
-    body: 'URLだけに縛りません。手元のネタやメモから始められます。',
+    label: 'Freeで確認',
+    title: '自分のPCとYMM4で動くか',
+    body: '起動、ログイン、YMM4接続、動画作成の流れを購入前に確認できます。',
   },
   {
-    label: '作る',
-    title: '台本取得、AI台本生成、動画作成',
-    body: '動画の型に合わせて、会話順、字幕量、素材配置までまとめます。',
+    label: '作れる型',
+    title: '反応集、解説、ショート、掛け合い',
+    body: 'URLだけに縛らず、下書きや素材メモから動画用にまとめます。',
   },
   {
-    label: '反映',
-    title: 'YMM4起動、接続、直反映',
-    body: 'YMM4で見て、音声、字幕、間合い、公開判断を仕上げます。',
+    label: 'Premium',
+    title: '39,800円税込の買い切り',
+    body: '月額なし。台本取得、AI台本生成、動画作成の制限を解除します。',
   },
 ] as const
 
 const automationTargets = [
   {
-    label: '台本取得',
-    title: 'URLや素材から台本にする',
-    body: '対応URL、スレッド、手元メモを取り込み、編集しやすい台本へ整理します。',
-    Icon: FileText,
+    label: 'ネタ投入',
+    title: 'URLなしでも始められる',
+    body: '記事URL、スレッドURL、下書き、素材メモ。手元にあるネタから動画作成を始められます。',
+    image: '/lp/decision-workflow-visual-v1.jpg',
+    Icon: SearchCheck,
   },
   {
     label: 'AI台本生成',
     title: '動画の型に合わせて作る',
-    body: '反応集、解説、ショート、掛け合いなど、作りたい型に合わせて生成します。',
+    body: '反応集、解説、ショート、掛け合いなど、作りたい動画に合わせて会話順と字幕量を整えます。',
+    image: '/lp/video-types-visual-v1.jpg',
     Icon: Layers3,
   },
   {
     label: '動画作成',
-    title: '素材配置まで進める',
-    body: '会話順、字幕量、素材、確認項目をまとめ、動画作成jobへつなげます。',
+    title: '素材配置までまとめて進める',
+    body: '画像、音声、字幕、素材パスを確認し、YMM4で見やすい形へ反映します。',
+    image: '/lp/material-placement-visual-v1.jpg',
     Icon: MonitorPlay,
   },
   {
-    label: 'YMM4連携',
-    title: '起動・接続・直反映',
-    body: 'YMM4フォルダを登録し、タイムライン反映とプロジェクト保存へ進めます。',
+    label: 'YMM4',
+    title: '直反映して自分で仕上げる',
+    body: 'YMM4で音声、字幕、間合い、素材権利、公開前の最終判断を確認します。',
+    image: '/lp/trust-purchase-visual-v1.jpg',
     Icon: FileCode2,
   },
 ] as const
@@ -111,9 +115,9 @@ const useCaseClips = [
 ] as const
 
 const beforeAfterItems = [
-  { before: '台本を手で整える', after: 'AI台本生成で型に合わせる' },
-  { before: '素材の置き場で迷う', after: '素材配置と保存先をまとめる' },
-  { before: 'YMM4で最初から組む', after: '直反映してYMM4で仕上げる' },
+  { before: '自分のネタで使える？', after: 'URLなしでも下書き・素材メモから開始' },
+  { before: 'どこまで自動で進む？', after: '台本取得、AI台本生成、動画作成まで' },
+  { before: '最後はどう確認する？', after: 'YMM4直反映後に目で見て仕上げ' },
 ] as const
 
 const compareRows = [
@@ -426,17 +430,18 @@ function CampaignDemoPanel() {
     <section className="lp3-band lp3-band--campaign" aria-labelledby="lp3-campaign-heading">
       <div className="lp3-container lp3-campaign-layout">
         <div className="lp3-campaign-copy" data-reveal>
-          <p className="lp3-kicker">広告デモ</p>
-          <h2 id="lp3-campaign-heading">30秒の中身を、もっと具体的に見せます。</h2>
+          <p className="lp3-kicker">30秒オート編集</p>
+          <h2 id="lp3-campaign-heading">ネタを入れた後に、何が進むか。</h2>
           <p>
-            入力して終わりではありません。台本取得、AI台本生成、動画作成、YMM4直反映まで、
-            どこが短くなるかを見える形にしました。
+            ただの入力フォームではありません。台本取得、AI台本生成、素材配置、動画作成、
+            YMM4直反映までを1本の流れで見せます。
           </p>
           <div className="lp3-campaign-meter" aria-label="30秒の進行">
             {heroFlowItems.map((item) => (
               <div key={item.label}>
                 <span>{item.label}</span>
                 <strong>{item.title}</strong>
+                <p>{item.body}</p>
               </div>
             ))}
           </div>
@@ -535,19 +540,24 @@ export function HomePage() {
         <section className="lp3-band lp3-band--targets" aria-labelledby="lp3-targets-heading">
           <div className="lp3-container">
             <SectionHead
-              kicker="自動化する範囲"
-              title="売りはここ。台本取得、AI台本生成、動画作成。"
-              body="何が自動化されるかを先に確認できます。YMM4で最終確認する前提も先に出します。"
+              kicker="できること"
+              title="動画作りで面倒なところを、YMM4向けにまとめて進める。"
+              body="反応集、解説、ショート、掛け合いまで。ネタ、台本、素材、YMM4直反映を動画作成の流れでつなぎます。"
             />
             <div className="lp3-target-grid">
               {automationTargets.map((item) => {
                 const Icon = item.Icon
                 return (
                   <article className="lp3-target-card" key={item.label} data-reveal>
-                    <span>{item.label}</span>
-                    <Icon size={28} aria-hidden="true" />
-                    <h3>{item.title}</h3>
-                    <p>{item.body}</p>
+                    <div className="lp3-target-card__visual">
+                      <img src={item.image} alt="" loading="lazy" decoding="async" aria-hidden="true" />
+                    </div>
+                    <div className="lp3-target-card__copy">
+                      <span>{item.label}</span>
+                      <Icon size={26} aria-hidden="true" />
+                      <h3>{item.title}</h3>
+                      <p>{item.body}</p>
+                    </div>
                   </article>
                 )
               })}
@@ -560,11 +570,11 @@ export function HomePage() {
         <section className="lp3-band lp3-band--proof" aria-labelledby="lp3-proof-heading">
           <div className="lp3-container lp3-proof-layout">
             <div className="lp3-proof-copy" data-reveal>
-              <p className="lp3-kicker">30秒の見える化</p>
-              <h2 id="lp3-proof-heading">何が短くなるかを、画面で見せる。</h2>
+              <p className="lp3-kicker">購入前に見るところ</p>
+              <h2 id="lp3-proof-heading">自分の制作に入るかを、先に判断できる。</h2>
               <p>
-                入力から出力までが見えないLPでは、買う判断ができません。
-                ネタ投入からYMM4直反映までを実機画面で見せます。
+                Freeでネタを入れて、台本取得、AI台本生成、動画作成、YMM4直反映までの流れを確認できます。
+                買ってから分かると困る条件も、先に出します。
               </p>
               <div className="lp3-before-after" aria-label="手作業と自動化の比較">
                 {beforeAfterItems.map((item) => (
