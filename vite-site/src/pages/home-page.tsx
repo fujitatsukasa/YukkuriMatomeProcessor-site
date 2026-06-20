@@ -39,8 +39,8 @@ const proofChips = [
 
 const heroFlowItems = [
   { label: '入れる', value: 'ネタ・下書き・素材' },
-  { label: '整える', value: '台本・素材枠・字幕量' },
-  { label: '確認する', value: 'YMM4前チェック' },
+  { label: '整える', value: '台本・素材配置・字幕量' },
+  { label: '仕上げる', value: 'YMM4で確認' },
 ] as const
 
 const buyerCheckItems = [
@@ -51,7 +51,7 @@ const buyerCheckItems = [
   },
   {
     label: '何が出る？',
-    title: '台本、素材枠、確認項目',
+    title: '台本、素材配置、確認項目',
     body: 'YMM4へ進む前に、会話順と不足を見て直せる形にします。',
   },
   {
@@ -82,7 +82,7 @@ const answerCards = [
   {
     label: 'ショート',
     title: '短尺の流れに整える',
-    body: '冒頭、展開、締め、字幕量を絞り、短い動画の下地にします。',
+    body: '冒頭、展開、締め、字幕量を絞り、短い動画として編集しやすくします。',
     Icon: MonitorPlay,
   },
 ] as const
@@ -96,25 +96,25 @@ const automationCards = [
   {
     label: 'AUTO',
     title: '動画用に整える',
-    body: '台本、素材枠、会話順、字幕量をまとめて整理します。',
+    body: '台本、素材配置、会話順、字幕量をまとめて自動整理します。',
   },
   {
     label: 'CHECK',
-    title: 'YMM4前に見る',
-    body: '足りない素材、権利メモ、反映前チェックを先に出します。',
+    title: 'YMM4で確認する',
+    body: '足りない素材、権利メモ、YMM4反映前チェックを出します。',
   },
 ] as const
 
 const painReliefItems = [
   { before: '台本を1行ずつ作る', after: '会話順と字幕量を先に整える' },
-  { before: '素材の置き場所で迷う', after: '素材枠と保存先を見ながら進める' },
+  { before: '素材の置き場所で迷う', after: '素材配置と保存先を見ながら進める' },
   { before: 'YMM4に入れてから詰まる', after: '反映前に不足と確認項目を見る' },
 ] as const
 
 const useCaseClips = [
   {
     title: '反応集',
-    body: 'コメントと補足を並べて、テンポよく見せる下地へ。',
+    body: 'コメントと補足を並べて、テンポよく見せる動画へ。',
     video: '/lp/usecase-reaction.mp4',
     poster: '/lp/usecase-reaction-poster.webp',
   },
@@ -126,7 +126,7 @@ const useCaseClips = [
   },
   {
     title: 'ショート',
-    body: '短尺向けに字幕量と素材枠を絞って編集しやすく。',
+    body: '短尺向けに字幕量と素材配置を絞って編集しやすく。',
     video: '/lp/usecase-shorts.mp4',
     poster: '/lp/usecase-shorts-poster.webp',
   },
@@ -152,9 +152,9 @@ const workflowSteps = [
   {
     step: '03',
     title: '台本と素材を自動整理',
-    body: '会話順、字幕量、素材枠、足りない素材をまとめます。',
+    body: '会話順、字幕量、素材配置、足りない素材をまとめます。',
     image: '/lp/screen-main-board-v2.webp',
-    alt: 'YMM4前準備に使うボード画面の実アプリスクリーンショット',
+    alt: 'YMM4連携に使う動画作成ボード画面の実アプリスクリーンショット',
     Icon: FileCode2,
   },
   {
@@ -162,7 +162,7 @@ const workflowSteps = [
     title: 'YMM4で仕上げる',
     body: '内容を見てから、YMM4反映やMP4出力へ進みます。',
     image: '/lp/screen-main-get-scripts-v2.webp',
-    alt: '素材取り込みと動画制作の準備画面を確認する実アプリスクリーンショット',
+    alt: '素材取り込みと動画制作画面を確認する実アプリスクリーンショット',
     Icon: MonitorPlay,
   },
 ] as const
@@ -179,7 +179,7 @@ const blueprintSteps = [
   {
     step: '02',
     title: '動画の型',
-    body: 'ジャンル別の型で、場面、尺、素材枠を決める。',
+    body: 'ジャンル別の型で、場面、尺、素材配置を決める。',
     output: '構成',
     Icon: FileText,
     tone: 'blue',
@@ -187,7 +187,7 @@ const blueprintSteps = [
   {
     step: '03',
     title: '不足チェック',
-    body: '素材不足、権利メモ、字幕量、YMM4前の詰まりを見る。',
+    body: '素材不足、権利メモ、字幕量、YMM4反映前のズレを見る。',
     output: '確認',
     Icon: FileCode2,
     tone: 'green',
@@ -211,7 +211,7 @@ const galleryItems = [
   },
   {
     title: '台本編集',
-    body: '会話順、字幕量、素材枠を見ながら直します。',
+    body: '会話順、字幕量、素材配置を見ながら直します。',
     image: '/lp/screen-main-script-edit-v2.webp',
     alt: '台本編集画面の実アプリスクリーンショット',
   },
@@ -234,7 +234,7 @@ const planCards = [
     name: 'Free',
     price: '¥0',
     lead: '買う前に自分の環境で試す',
-    points: ['起動できるか見る', 'ネタと素材で試す', 'YMM4前チェックまで触る', '編集準備の流れを見る'],
+    points: ['起動できるか見る', 'ネタと素材で試す', 'YMM4連携まで触る', '自動動画編集の流れを見る'],
     href: downloadUrl,
     cta: '無料でダウンロード',
     external: true,
@@ -254,12 +254,12 @@ const planCards = [
 
 const evidenceItems = [
   {
-    title: 'YMM4へ渡す前に確認',
+    title: 'YMM4連携前に確認',
     body: 'ボイス、テキスト、画像、動画、音声、図形、立ち絵などを扱う制作フローを検証しています。',
   },
   {
     title: '配置のズレを見逃しにくい',
-    body: '開始位置、レイヤー、長さを読み返し、YMM4へ渡す前後のズレを確認する設計です。',
+    body: '開始位置、レイヤー、長さを読み返し、YMM4連携前後のズレを確認する設計です。',
   },
   {
     title: '勝手に公開しない',
@@ -269,7 +269,7 @@ const evidenceItems = [
 
 const trustItems = [
   { title: 'Windows専用', body: 'Windows 10 / 11。Mac、スマホだけでは使えません。', Icon: Laptop },
-  { title: 'YMM4が必要', body: 'YMM4で仕上げる前提です。YMM4なしで動画完成までは進みません。', Icon: MonitorPlay },
+  { title: 'YMM4が必要', body: 'YMM4で仕上げる前提です。YMM4なしで自動編集の仕上げまでは進みません。', Icon: MonitorPlay },
   { title: '確認して進める', body: '保存、YMM4反映、MP4出力は、内容を見てから進めます。', Icon: ShieldCheck },
   { title: '成果保証なし', body: '収益化、再生数、審査通過は保証しません。', Icon: TriangleAlert },
 ] as const
@@ -297,7 +297,7 @@ const softwareApplicationLd = {
   url: `${siteOrigin}/`,
   downloadUrl: `${siteOrigin}/download/`,
   description:
-    '台本作成、素材整理、YMM4前チェックまでの導線をまとめて進めるWindows向け動画制作支援ツールです。',
+    '台本作成、素材整理、YMM4連携までの導線をまとめて進めるWindows向け自動動画編集ソフトです。',
   featureList: [
     '台本作成',
     '素材整理',
@@ -368,10 +368,10 @@ function SectionHead({
 
 function WorkRangePanel() {
   return (
-    <div className="lp2-blueprint" data-reveal aria-label="YMM4前の下ごしらえワークフロー">
+    <div className="lp2-blueprint" data-reveal aria-label="YMM4自動動画編集のワークフロー">
       <div className="lp2-blueprint__header">
         <span>作業範囲</span>
-        <strong>YMM4前の準備</strong>
+        <strong>YMM4自動編集</strong>
       </div>
       <ol className="lp2-blueprint__track">
         {blueprintSteps.map((item, index) => {
@@ -393,7 +393,7 @@ function WorkRangePanel() {
       <div className="lp2-blueprint__footer">
         <ShieldCheck size={20} aria-hidden="true" />
         <strong>動画はYMM4で仕上げる</strong>
-        <span>公開前の下地とYMM4前準備まで。最後はYMM4で確認します。</span>
+        <span>動画作成ボードからYMM4連携へ。最後はYMM4で確認します。</span>
       </div>
     </div>
   )
@@ -427,10 +427,10 @@ function AutomationLab() {
       <div className="lp2-container lp2-auto-lab">
         <div className="lp2-auto-lab__copy" data-reveal>
           <p className="lp2-kicker">実アプリでやること</p>
-          <h2 id="lp2-auto-lab-heading">編集前に詰まる作業を、30秒で整理。</h2>
+          <h2 id="lp2-auto-lab-heading">YMM4自動編集を、30秒で動かす。</h2>
           <p>
-            素材メモ、下書き、URL任意を入れると、台本、素材枠、確認項目、YMM4へ渡す準備まで整理します。
-            完成動画はYMM4で見て仕上げます。
+            素材メモ、下書き、URL任意を入れると、台本、素材配置、確認項目、YMM4連携まで自動整理します。
+            完成前にYMM4で見て仕上げます。
           </p>
           <div className="lp2-auto-lab__cards" aria-label="自動化される主な流れ">
             {automationCards.map((item) => (
@@ -451,7 +451,7 @@ function AutomationLab() {
             ))}
           </div>
         </div>
-        <div className="lp2-auto-stage" aria-label="編集準備の実アプリ画面" data-reveal>
+        <div className="lp2-auto-stage" aria-label="YMM4自動動画編集の実アプリ画面" data-reveal>
           <figure className="lp2-auto-screen lp2-auto-screen--main">
             <div className="lp2-product-frame__bar" aria-hidden="true">
               <span />
@@ -462,7 +462,7 @@ function AutomationLab() {
             <img src="/lp/screen-main-script-edit-v2.webp" alt="台本を動画用に整える台本編集画面" loading="lazy" decoding="async" />
             <figcaption>
               <span>台本編集</span>
-              <strong>下書きを会話、字幕量、素材枠に合わせて整える。</strong>
+              <strong>下書きを会話、字幕量、素材配置に合わせて整える。</strong>
             </figcaption>
           </figure>
           <figure className="lp2-auto-screen lp2-auto-screen--side">
@@ -481,7 +481,7 @@ function AutomationLab() {
           <div className="lp2-auto-stage__rail" aria-label="入力からYMM4確認までの流れ">
             <span>ネタ・素材</span>
             <ArrowRight size={16} aria-hidden="true" />
-            <span>台本・素材枠</span>
+            <span>台本・素材配置</span>
             <ArrowRight size={16} aria-hidden="true" />
             <span>YMM4で確認</span>
           </div>
@@ -495,8 +495,8 @@ export function HomePage() {
   return (
     <>
       <PageMeta
-        title="ゆっくりまとめプロセッサー｜30秒で編集準備を自動整理"
-        description="ネタ、下書き、素材メモを入れて、台本・素材枠・YMM4前チェックを整理するWindows向け制作支援ツール。Freeで確認、Premiumは39,800円税込の買い切り。"
+        title="ゆっくりまとめプロセッサー｜30秒で自動動画編集"
+        description="ネタ、下書き、素材メモから台本・素材配置・字幕量・YMM4連携まで進めるWindows向け自動動画編集ソフト。Freeで確認、Premiumは39,800円税込の買い切り。"
         keywords="ゆっくりまとめプロセッサー,YMM4,動画編集,動画作成,台本作成,素材整理,反応集,解説動画,ショート動画,Windows"
         image="/lp/screen-main-script-edit-v2.webp"
         path="/"
@@ -507,19 +507,19 @@ export function HomePage() {
         <section className="lp2-hero" aria-labelledby="lp2-hero-heading">
           <div className="lp2-container lp2-hero__grid">
             <div className="lp2-hero__copy" data-reveal>
-              <p className="lp2-kicker">Windows + YMM4 / 動画制作支援</p>
+              <p className="lp2-kicker">Windows + YMM4 / 自動動画編集ソフト</p>
               <h1 id="lp2-hero-heading">
                 <span>30秒で</span>
-                <span>編集準備が整う</span>
+                <span>自動動画編集</span>
               </h1>
               <p className="lp2-hero__lead">
-                ネタ、下書き、素材メモから、台本・素材枠・字幕量・確認項目をまとめて整理。
-                反応集、解説、ショート、対談など、いろんな動画の下地づくりに使えます。
+                ネタ、下書き、素材メモから、台本・素材配置・字幕量・確認項目をまとめて自動整理。
+                YMM4で仕上げる反応集、解説、ショート、対談など、いろんな動画に使えます。
               </p>
               <p className="lp2-hero__subline">
                 URLは任意。Freeで流れを見て、必要ならPremiumで制限解除。仕上げと公開判断はYMM4で確認します。
               </p>
-              <div className="lp2-hero-io" aria-label="編集準備の流れ">
+              <div className="lp2-hero-io" aria-label="自動動画編集の流れ">
                 {heroFlowItems.map((item, index) => (
                   <div className="lp2-hero-io__item" key={item.label}>
                     <span>{item.label}</span>
@@ -573,7 +573,7 @@ export function HomePage() {
               </figure>
               <div className="lp2-hero__visual-note lp2-hero__visual-note--output" aria-hidden="true">
                 <span>出すもの</span>
-                <strong>台本 / 素材枠 / 確認項目</strong>
+                <strong>台本 / 素材配置 / YMM4連携</strong>
               </div>
               <div className="lp2-flow-strip" aria-label="主な流れ">
                 {heroFlowItems.map((item, index) => (
@@ -595,7 +595,7 @@ export function HomePage() {
             <SectionHead
               kicker="動画タイプ"
               title="反応集も、解説も、ショートも。"
-              body="作りたい動画の型を選んで、台本と素材枠を先に整えます。ゆっくり動画だけに閉じません。"
+              body="作りたい動画の型を選んで、台本と素材配置を自動整理します。ゆっくり動画だけに閉じません。"
               align="split"
             />
             <div className="lp2-answer-grid">
@@ -647,7 +647,7 @@ export function HomePage() {
               <p className="lp2-kicker">作業範囲</p>
               <h2 id="lp2-diagram-heading">自動で整える。最後は自分で仕上げる。</h2>
               <p>
-                ツールは台本、素材枠、字幕量、YMM4前チェックを整理します。
+                ツールは台本、素材配置、字幕量、YMM4連携までを自動整理します。
                 投稿前の判断、権利確認、最終編集は自分で行います。
               </p>
               <div className="lp2-note-panel">
@@ -664,8 +664,8 @@ export function HomePage() {
           <div className="lp2-container">
             <SectionHead
               kicker="使う流れ"
-              title="ネタを入れて、YMM4に入る前まで整える。"
-              body="起動、入力、台本、素材、確認まで。買う前にFreeで自分のネタを試せます。"
+              title="ネタを入れて、YMM4で自動編集へ。"
+              body="起動、入力、台本、素材、YMM4連携まで。買う前にFreeで自分のネタを試せます。"
               align="split"
             />
             <div className="lp2-workflow">
@@ -700,7 +700,7 @@ export function HomePage() {
                 <div className="lp2-metric-row" aria-label="制作フローの要点">
                   <span><Gauge size={16} aria-hidden="true" />30秒で自動整理</span>
                   <span><Layers3 size={16} aria-hidden="true" />型を選ぶ</span>
-                  <span><SearchCheck size={16} aria-hidden="true" />YMM4前チェック</span>
+                  <span><SearchCheck size={16} aria-hidden="true" />YMM4連携</span>
                 </div>
               </div>
             </div>
@@ -735,13 +735,13 @@ export function HomePage() {
               <p className="lp2-kicker">90秒</p>
               <h2 id="lp2-demo-heading">90秒で、操作の流れを見る。</h2>
               <p>
-                ネタから台本、素材、YMM4前チェックまでを短く確認できます。
+                ネタから台本、素材、YMM4連携までを短く確認できます。
                 動画が再生できない場合は、スクリーンショットでも同じ流れを確認できます。
               </p>
               <ol className="lp2-demo-list">
                 <li>ネタや素材メモを入れる</li>
                 <li>ジャンルの型を選ぶ</li>
-                <li>YMM4に入る前に不足を確認する</li>
+                <li>YMM4連携前に不足を確認する</li>
               </ol>
             </div>
             <div className="lp2-video-frame" data-reveal>
@@ -863,7 +863,7 @@ export function HomePage() {
               <p className="lp2-kicker">最初の1本</p>
               <h2 id="lp2-final-heading">まずFreeで、自分のネタを動かす。</h2>
               <p>
-                自分の素材で始められるか。台本と素材枠が合うか。YMM4前チェックまで進められるか。
+                自分の素材で始められるか。台本と素材配置が合うか。YMM4連携まで進められるか。
                 購入前に自分の制作環境で確認してください。
               </p>
             </div>
