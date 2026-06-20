@@ -291,7 +291,7 @@ export function SiteLayout() {
         <div className="brand-footer__inner">
           <div className="brand-footer__lead">
             <h2>{siteTitle}</h2>
-            <p>台本作成、素材整理、YMM4向け出力、動画作成までの導線をまとめるWindows向け制作支援ツール。</p>
+            <p>台本取得、AI台本生成、素材配置、動画作成、YMM4連携まで進めるWindows向け自動動画編集ソフト。</p>
           </div>
 
           <div className="brand-footer__grid">

@@ -53,9 +53,9 @@ export type PageEntry = {
 export const siteOrigin = 'https://yukkurimatomeprocessor.com'
 export const siteTitle = 'ゆっくりまとめプロセッサー'
 export const siteSubtitle = 'Yukkuri Matome Processor'
-export const siteTagline = '台本作成・素材整理・YMM4動画編集支援ツール'
+export const siteTagline = '台本取得・AI台本生成・YMM4動画作成ツール'
 export const siteDescription =
-  '台本作成、素材整理、YMM4向け出力、動画作成までの導線をまとめて進めるWindows向け動画制作支援ツール。'
+  '台本取得、AI台本生成、素材配置、動画作成、YMM4連携まで進めるWindows向け自動動画編集ソフト。'
 
 export const navItems: NavItem[] = [
   { key: 'home', label: 'ホーム', url: '/' },
@@ -255,22 +255,22 @@ export const faqGroups: FaqGroup[] = [
       {
         question: 'ゆっくりまとめプロセッサーは何を解決するツールですか？',
         answer:
-          '台本作成、素材整理、YMM4向け出力、動画作成までの導線をまとめるWindows向け制作支援ツールです。',
+          '台本取得、AI台本生成、素材配置、動画作成、YMM4連携までをまとめるWindows向け自動動画編集ソフトです。',
       },
       {
         question: '動画は自動で完成しますか？',
         answer:
-          'いいえ。台本下地、CSV、.ymmp、YMM4前準備までを支援します。音声、字幕、立ち絵、間合い、投稿判断はYMM4で見て直してください。',
+          'YMM4へ直反映して動画作成を進めます。音声、字幕、立ち絵、間合い、権利確認、投稿判断はYMM4で見て直してください。',
       },
       {
         question: '無料で試せますか？',
         answer:
-          'はい。Freeプランで起動、初期設定、台本編集、素材整理、YMM4前準備の流れを確認できます。制限解除が必要になったらPremiumを検討してください。',
+          'はい。Freeプランで起動、初期設定、台本編集、動画作成導線、YMM4連携の流れを確認できます。制限解除が必要になったらPremiumを検討してください。',
       },
       {
         question: '無料版では何ができますか？',
         answer:
-          'Freeプランでは、起動、初期設定、台本編集、素材整理、YMM4前準備まで試せます。Premiumに進む前に、自分の制作環境で続けられるか確認できます。',
+          'Freeプランでは、起動、初期設定、台本編集、動画作成導線、YMM4連携まで試せます。Premiumに進む前に、自分の制作環境で続けられるか確認できます。',
       },
       { question: '想定ユーザーは誰ですか？', answer: 'YMM4で反応集、解説、ショート、まとめ、ゆっくり動画を作る個人・チームを想定しています。' },
       {
@@ -291,7 +291,7 @@ export const faqGroups: FaqGroup[] = [
       {
         question: 'YMM4は必須ですか？',
         answer:
-          'はい。ゆっくりまとめプロセッサーは、YMM4を開く前の台本下地、CSV、.ymmp前準備を整えるためのツールです。YMM4を使わない動画編集だけで完結する設計ではありません。',
+          'はい。ゆっくりまとめプロセッサーは、YMM4と連携して使うWindows向けソフトです。YMM4を使わない動画編集だけで完結する設計ではありません。',
       },
       { question: '初期設定を早く終えるコツは？', answer: '使い方ページの手順どおりに設定し、変更内容をメモすると再作業を減らせます。' },
       { question: 'チーム導入時に決めるべき項目は？', answer: '保存先命名ルール、YMM4連携パス、確認チェックリストの3点を先に揃えてください。' },
@@ -317,7 +317,7 @@ export const faqGroups: FaqGroup[] = [
       { question: '設定変更が反映されない場合は？', answer: '再起動、権限確認、保存先アクセス権の順に確認してください。' },
       { question: 'YouTube APIキーは必要ですか？', answer: '通常の導入確認や台本整理だけなら必須ではありません。YouTube分析、コメント取得、検索条件を使う機能では YouTube API キーの設定が必要です。' },
       { question: 'YouTube分析を使うのに追加設定は必要ですか？', answer: 'はい。YouTube分析では API キーの設定が必要です。検索条件、除外条件、コメント取得などの利用前に確認してください。' },
-      { question: 'AIが全部自動で動画を作りますか？', answer: 'いいえ。AIは台本下地や整形を補助しますが、最後の編集、内容確認、投稿判断はYMM4で見て直してください。' },
+      { question: 'AIが全部自動で動画を作りますか？', answer: 'いいえ。AI台本生成や動画作成導線は使えますが、最後の編集、内容確認、権利確認、投稿判断はYMM4で見て直してください。' },
     ],
   },
   {
