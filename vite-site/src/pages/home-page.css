@@ -131,7 +131,7 @@
   max-width: 8.8em;
   color: var(--lp2-ink);
   font-family: var(--lp2-display);
-  font-size: clamp(4.3rem, 6.2vw, 6.35rem);
+  font-size: clamp(4rem, 5.4vw, 5.65rem);
   font-weight: 900;
   line-height: 1;
   font-feature-settings: "palt";
@@ -589,12 +589,94 @@
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+.lp2-buyer-strip {
+  position: relative;
+  padding: 34px 0 42px;
+  border-top: 1px solid rgba(237, 199, 95, 0.18);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(90deg, rgba(104, 214, 255, 0.08), transparent 42%, rgba(237, 199, 95, 0.08)),
+    rgba(4, 7, 12, 0.9);
+}
+
+.lp2-buyer-strip__head {
+  display: grid;
+  grid-template-columns: minmax(0, 0.64fr) minmax(0, 1fr);
+  gap: 20px;
+  align-items: end;
+  margin-bottom: 18px;
+}
+
+.lp2-buyer-strip__head h2 {
+  color: #fff8e8;
+  font-family: var(--lp2-display);
+  font-size: 2.24rem;
+  font-weight: 900;
+  line-height: 1.15;
+}
+
+.lp2-buyer-grid,
+.lp2-evidence-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.lp2-buyer-card,
+.lp2-evidence-card {
+  position: relative;
+  min-width: 0;
+  display: grid;
+  gap: 8px;
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.024)),
+    rgba(10, 14, 21, 0.84);
+  box-shadow: 0 18px 44px -38px rgba(0, 0, 0, 0.86);
+}
+
+.lp2-buyer-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--lp2-cyan), var(--lp2-gold));
+}
+
+.lp2-buyer-card span,
+.lp2-evidence-card svg {
+  color: var(--lp2-cyan);
+}
+
+.lp2-buyer-card span {
+  font-size: 0.82rem;
+  font-weight: 950;
+}
+
+.lp2-buyer-card h3,
+.lp2-evidence-card h3 {
+  color: #fff8e8;
+  font-family: var(--lp2-display);
+  font-size: 1.08rem;
+  line-height: 1.38;
+}
+
+.lp2-buyer-card p,
+.lp2-evidence-card p {
+  color: var(--lp2-muted);
+  font-size: 0.94rem;
+  line-height: 1.62;
+}
+
 .lp2-band--answers,
 .lp2-band--workflow,
 .lp2-band--pricing,
 .lp2-band--faq,
 .lp2-band--auto-lab,
-.lp2-band--usecases {
+.lp2-band--usecases,
+.lp2-band--evidence {
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent),
     rgba(255, 255, 255, 0.01);
@@ -760,6 +842,43 @@
   color: var(--lp2-muted);
   font-size: 0.95rem;
   line-height: 1.64;
+}
+
+.lp2-relief-list {
+  display: grid;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.lp2-relief-item {
+  display: grid;
+  grid-template-columns: minmax(0, 0.86fr) auto minmax(0, 1.14fr);
+  gap: 8px;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px 10px;
+  border: 1px solid rgba(237, 199, 95, 0.18);
+  border-radius: 8px;
+  background: rgba(5, 8, 13, 0.58);
+}
+
+.lp2-relief-item span,
+.lp2-relief-item strong {
+  min-width: 0;
+  font-size: 0.9rem;
+  line-height: 1.42;
+}
+
+.lp2-relief-item span {
+  color: rgba(246, 242, 233, 0.58);
+}
+
+.lp2-relief-item strong {
+  color: #fff8e8;
+}
+
+.lp2-relief-item svg {
+  color: var(--lp2-gold);
 }
 
 .lp2-auto-stage {
@@ -1419,6 +1538,31 @@
   gap: 16px;
 }
 
+.lp2-band--evidence {
+  background:
+    radial-gradient(circle at 82% 24%, rgba(120, 228, 189, 0.1), transparent 25%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.018), transparent),
+    rgba(4, 7, 12, 0.8);
+}
+
+.lp2-evidence-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.lp2-evidence-card {
+  min-height: 182px;
+  padding: 20px;
+  border-color: rgba(120, 228, 189, 0.18);
+}
+
+.lp2-evidence-card svg {
+  box-sizing: content-box;
+  padding: 8px;
+  border: 1px solid rgba(120, 228, 189, 0.22);
+  border-radius: 999px;
+  background: rgba(120, 228, 189, 0.08);
+}
+
 .lp2-plan-card {
   display: grid;
   gap: 14px;
@@ -1661,7 +1805,9 @@
   .lp2-trust-grid,
   .lp2-gallery-grid,
   .lp2-usecase-grid,
-  .lp2-blueprint__track {
+  .lp2-blueprint__track,
+  .lp2-buyer-grid,
+  .lp2-evidence-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1732,8 +1878,33 @@
   .lp2-plan-grid,
   .lp2-trust-grid,
   .lp2-metric-row,
-  .lp2-blueprint__track {
+  .lp2-blueprint__track,
+  .lp2-buyer-grid,
+  .lp2-evidence-grid {
     grid-template-columns: 1fr;
+  }
+
+  .lp2-buyer-strip {
+    padding: 28px 0 34px;
+  }
+
+  .lp2-buyer-strip__head {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .lp2-buyer-strip__head h2 {
+    font-size: 1.8rem;
+  }
+
+  .lp2-relief-item {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    align-items: start;
+  }
+
+  .lp2-relief-item svg {
+    transform: rotate(90deg);
   }
 
   .lp2-blueprint__track {

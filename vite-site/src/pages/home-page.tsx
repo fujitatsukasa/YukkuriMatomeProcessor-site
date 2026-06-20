@@ -29,18 +29,41 @@ import {
 import './home-page.css'
 
 const proofChips = [
+  'Freeで確認',
+  'Premiumは買い切り',
+  'YMM4必須',
   'Windows 10 / 11',
-  'YMM4連携',
-  'URL任意',
-  'Freeあり',
-  '39,800円 買い切り',
-  '仕上げはYMM4',
+  '自動公開なし',
+  '成果保証なし',
 ] as const
 
 const heroFlowItems = [
-  { label: '入れる', value: 'ネタ・素材・下書き' },
-  { label: '整える', value: '台本・素材枠' },
-  { label: '仕上げる', value: 'YMM4で確認' },
+  { label: '入れる', value: 'ネタ・下書き・素材' },
+  { label: '整える', value: '台本・素材枠・字幕量' },
+  { label: '確認する', value: 'YMM4前チェック' },
+] as const
+
+const buyerCheckItems = [
+  {
+    label: '何を入れる？',
+    title: 'ネタ、下書き、素材メモ',
+    body: 'URLは任意。自分で持っている素材やメモから始められます。',
+  },
+  {
+    label: '何が出る？',
+    title: '台本、素材枠、確認項目',
+    body: 'YMM4へ進む前に、会話順と不足を見て直せる形にします。',
+  },
+  {
+    label: '無料で何を見る？',
+    title: '起動と制作フロー',
+    body: 'まずFreeで、自分の環境とネタで流れを確認できます。',
+  },
+  {
+    label: '有料で何が変わる？',
+    title: '制限解除。月額なし。',
+    body: 'Premiumは39,800円税込の買い切りです。',
+  },
 ] as const
 
 const answerCards = [
@@ -68,18 +91,24 @@ const automationCards = [
   {
     label: 'INPUT',
     title: 'ネタを入れる',
-    body: 'テーマ、素材メモ、下書き、URL。入口はひとつにまとめます。',
+    body: 'テーマ、素材メモ、下書き、URL任意。入口をひとつにまとめます。',
   },
   {
     label: 'AUTO',
     title: '動画用に整える',
-    body: '台本、素材枠、会話順、字幕量を自動で整理します。',
+    body: '台本、素材枠、会話順、字幕量をまとめて整理します。',
   },
   {
     label: 'CHECK',
     title: 'YMM4前に見る',
     body: '足りない素材、権利メモ、反映前チェックを先に出します。',
   },
+] as const
+
+const painReliefItems = [
+  { before: '台本を1行ずつ作る', after: '会話順と字幕量を先に整える' },
+  { before: '素材の置き場所で迷う', after: '素材枠と保存先を見ながら進める' },
+  { before: 'YMM4に入れてから詰まる', after: '反映前に不足と確認項目を見る' },
 ] as const
 
 const useCaseClips = [
@@ -190,7 +219,7 @@ const galleryItems = [
     title: '台本生成の確認',
     body: 'ネタから台本案を作り、使う前に確認します。',
     image: '/lp/screen-main-script-gen-v2.webp',
-    alt: 'AI台本生成結果を確認する実アプリスクリーンショット',
+    alt: '台本生成結果を確認する実アプリスクリーンショット',
   },
   {
     title: 'ランチャー',
@@ -205,7 +234,7 @@ const planCards = [
     name: 'Free',
     price: '¥0',
     lead: '買う前に自分の環境で試す',
-    points: ['起動できるか見る', 'ネタと素材で試す', 'YMM4前チェックまで触る', '自動編集の流れを見る'],
+    points: ['起動できるか見る', 'ネタと素材で試す', 'YMM4前チェックまで触る', '編集準備の流れを見る'],
     href: downloadUrl,
     cta: '無料でダウンロード',
     external: true,
@@ -215,11 +244,26 @@ const planCards = [
     name: 'Premium',
     price: '¥39,800',
     lead: '税込 / 買い切り / 月額なし',
-    points: ['台本取得の制限解除', 'AI台本生成の制限解除', '動画作成の制限解除', '本数を増やす人向け'],
+    points: ['台本取得の制限解除', '台本生成の制限解除', '動画作成の制限解除', '本数を増やす人向け'],
     href: '/purchase/',
     cta: '料金と条件を見る',
     external: false,
     Icon: CreditCard,
+  },
+] as const
+
+const evidenceItems = [
+  {
+    title: 'YMM4へ渡す前に確認',
+    body: 'ボイス、テキスト、画像、動画、音声、図形、立ち絵などを扱う制作フローを検証しています。',
+  },
+  {
+    title: '配置のズレを見逃しにくい',
+    body: '開始位置、レイヤー、長さを読み返し、YMM4へ渡す前後のズレを確認する設計です。',
+  },
+  {
+    title: '勝手に公開しない',
+    body: '最終判断、権利確認、音声、字幕、立ち絵、公開作業はユーザー側で確認します。',
   },
 ] as const
 
@@ -253,7 +297,7 @@ const softwareApplicationLd = {
   url: `${siteOrigin}/`,
   downloadUrl: `${siteOrigin}/download/`,
   description:
-    '台本作成、素材整理、YMM4向け出力、動画作成までの導線をまとめて進めるWindows向け動画制作支援ツールです。',
+    '台本作成、素材整理、YMM4前チェックまでの導線をまとめて進めるWindows向け動画制作支援ツールです。',
   featureList: [
     '台本作成',
     '素材整理',
@@ -355,13 +399,35 @@ function WorkRangePanel() {
   )
 }
 
+function BuyerCheckStrip() {
+  return (
+    <section className="lp2-buyer-strip" aria-labelledby="lp2-buyer-strip-heading">
+      <div className="lp2-container">
+        <div className="lp2-buyer-strip__head">
+          <p className="lp2-kicker">買う前の確認</p>
+          <h2 id="lp2-buyer-strip-heading">購入前にここを確認</h2>
+        </div>
+        <div className="lp2-buyer-grid">
+          {buyerCheckItems.map((item) => (
+            <article className="lp2-buyer-card" key={item.label} data-reveal>
+              <span>{item.label}</span>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 function AutomationLab() {
   return (
     <section className="lp2-band lp2-band--auto-lab" aria-labelledby="lp2-auto-lab-heading">
       <div className="lp2-container lp2-auto-lab">
         <div className="lp2-auto-lab__copy" data-reveal>
           <p className="lp2-kicker">実アプリでやること</p>
-          <h2 id="lp2-auto-lab-heading">編集前の面倒を30秒でまとめる。</h2>
+          <h2 id="lp2-auto-lab-heading">編集前に詰まる作業を、30秒で整理。</h2>
           <p>
             素材メモ、下書き、URL任意を入れると、台本、素材枠、確認項目、YMM4へ渡す準備まで整理します。
             完成動画はYMM4で見て仕上げます。
@@ -375,8 +441,17 @@ function AutomationLab() {
               </article>
             ))}
           </div>
+          <div className="lp2-relief-list" aria-label="手作業で詰まるところと短縮できるところ">
+            {painReliefItems.map((item) => (
+              <div className="lp2-relief-item" key={item.before}>
+                <span>{item.before}</span>
+                <ArrowRight size={15} aria-hidden="true" />
+                <strong>{item.after}</strong>
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="lp2-auto-stage" aria-label="自動動画編集の実アプリ画面" data-reveal>
+        <div className="lp2-auto-stage" aria-label="編集準備の実アプリ画面" data-reveal>
           <figure className="lp2-auto-screen lp2-auto-screen--main">
             <div className="lp2-product-frame__bar" aria-hidden="true">
               <span />
@@ -420,8 +495,8 @@ export function HomePage() {
   return (
     <>
       <PageMeta
-        title="ゆっくりまとめプロセッサー｜30秒で自動動画編集"
-        description="反応集、解説、ショート、対談など。ネタ、下書き、素材メモから台本、素材枠、YMM4反映前チェック、MP4出力の導線までまとめるWindows向け自動動画編集ツールです。"
+        title="ゆっくりまとめプロセッサー｜30秒で編集準備を自動整理"
+        description="ネタ、下書き、素材メモを入れて、台本・素材枠・YMM4前チェックを整理するWindows向け制作支援ツール。Freeで確認、Premiumは39,800円税込の買い切り。"
         keywords="ゆっくりまとめプロセッサー,YMM4,動画編集,動画作成,台本作成,素材整理,反応集,解説動画,ショート動画,Windows"
         image="/lp/screen-main-script-edit-v2.webp"
         path="/"
@@ -435,16 +510,16 @@ export function HomePage() {
               <p className="lp2-kicker">Windows + YMM4 / 動画制作支援</p>
               <h1 id="lp2-hero-heading">
                 <span>30秒で</span>
-                <span>自動動画編集</span>
+                <span>編集準備が整う</span>
               </h1>
               <p className="lp2-hero__lead">
-                ネタ、下書き、素材メモを入れたら、台本、素材枠、YMM4反映前チェックまで自動で整理。
-                反応集、解説、ショート、対談に使えます。
+                ネタ、下書き、素材メモから、台本・素材枠・字幕量・確認項目をまとめて整理。
+                反応集、解説、ショート、対談など、いろんな動画の下地づくりに使えます。
               </p>
               <p className="lp2-hero__subline">
-                URLは任意です。最後の確認、音声、字幕、立ち絵、公開判断はYMM4側で行います。
+                URLは任意。Freeで流れを見て、必要ならPremiumで制限解除。仕上げと公開判断はYMM4で確認します。
               </p>
-              <div className="lp2-hero-io" aria-label="自動動画編集の流れ">
+              <div className="lp2-hero-io" aria-label="編集準備の流れ">
                 {heroFlowItems.map((item, index) => (
                   <div className="lp2-hero-io__item" key={item.label}>
                     <span>{item.label}</span>
@@ -493,12 +568,12 @@ export function HomePage() {
                 />
                 <figcaption>
                   <span>実アプリ画面</span>
-                  <strong>台本、素材、確認ボード、動画作成まで実画面で進める。</strong>
+                  <strong>台本、素材、確認ボードを実画面で確認できる。</strong>
                 </figcaption>
               </figure>
               <div className="lp2-hero__visual-note lp2-hero__visual-note--output" aria-hidden="true">
                 <span>出すもの</span>
-                <strong>YMM4反映前チェック / MP4出力へ</strong>
+                <strong>台本 / 素材枠 / 確認項目</strong>
               </div>
               <div className="lp2-flow-strip" aria-label="主な流れ">
                 {heroFlowItems.map((item, index) => (
@@ -512,14 +587,15 @@ export function HomePage() {
           </div>
         </section>
 
+        <BuyerCheckStrip />
         <AutomationLab />
 
         <section className="lp2-band lp2-band--answers" aria-labelledby="lp2-answers-heading">
           <div className="lp2-container">
             <SectionHead
-              kicker="ゆっくりだけではない"
-              title="作れる動画を、最初に見せる。"
-              body="反応集、解説、ショート、対談。売り場で迷わせないように、作れる動画の型を先に出します。"
+              kicker="動画タイプ"
+              title="反応集も、解説も、ショートも。"
+              body="作りたい動画の型を選んで、台本と素材枠を先に整えます。ゆっくり動画だけに閉じません。"
               align="split"
             />
             <div className="lp2-answer-grid">
@@ -541,9 +617,9 @@ export function HomePage() {
         <section className="lp2-band lp2-band--usecases" aria-labelledby="lp2-usecases-heading">
           <div className="lp2-container">
             <SectionHead
-              kicker="動画タイプ"
-              title="文字だけで説明しない。"
-              body="用途ごとに、実際のサンプル動画を見せます。再生しなくてもポスターで内容が伝わるようにしています。"
+              kicker="サンプル"
+              title="どんな動画に使うか、見てから決める。"
+              body="反応集、解説、ショートのサンプルを用意しています。自分のチャンネルに合うか先に確認できます。"
               align="split"
             />
             <div className="lp2-usecase-grid">
@@ -569,14 +645,14 @@ export function HomePage() {
           <div className="lp2-container lp2-diagram-layout">
             <div className="lp2-diagram-copy" data-reveal>
               <p className="lp2-kicker">作業範囲</p>
-              <h2 id="lp2-diagram-heading">自動で整える。最後は確認する。</h2>
+              <h2 id="lp2-diagram-heading">自動で整える。最後は自分で仕上げる。</h2>
               <p>
-                台本づくり、素材枠、YMM4前チェックはツール側で整理。
-                最後の仕上げと公開判断は自分で確認します。
+                ツールは台本、素材枠、字幕量、YMM4前チェックを整理します。
+                投稿前の判断、権利確認、最終編集は自分で行います。
               </p>
               <div className="lp2-note-panel">
                 <ShieldCheck size={20} aria-hidden="true" />
-                <strong>自動で勝手に公開しません。</strong>
+                <strong>勝手に公開しません。</strong>
                 <span>保存、YMM4反映、MP4出力は、内容を見てから進めます。</span>
               </div>
             </div>
@@ -587,9 +663,9 @@ export function HomePage() {
         <section className="lp2-band lp2-band--workflow" aria-labelledby="lp2-workflow-heading">
           <div className="lp2-container">
             <SectionHead
-              kicker="実機フロー"
-              title="触る画面を、順番に見せる。"
-              body="ネタ、台本、素材、YMM4前チェック。買う前に、自分の動画で試せます。"
+              kicker="使う流れ"
+              title="ネタを入れて、YMM4に入る前まで整える。"
+              body="起動、入力、台本、素材、確認まで。買う前にFreeで自分のネタを試せます。"
               align="split"
             />
             <div className="lp2-workflow">
@@ -635,8 +711,8 @@ export function HomePage() {
           <div className="lp2-container">
             <SectionHead
               kicker="実画面"
-              title="UIは実アプリだけ。"
-              body="合成UIで盛らず、実際の画面を並べます。起動後に見る場所を先に確認できます。"
+              title="購入前に、触る画面を確認。"
+              body="画面は実アプリのスクリーンショットです。どこを使うか、起動前にイメージできます。"
               align="split"
             />
             <div className="lp2-gallery-grid">
@@ -657,15 +733,15 @@ export function HomePage() {
           <div className="lp2-container lp2-demo-layout">
             <div className="lp2-demo-copy" data-reveal>
               <p className="lp2-kicker">90秒</p>
-              <h2 id="lp2-demo-heading">90秒で、流れを先に見る。</h2>
+              <h2 id="lp2-demo-heading">90秒で、操作の流れを見る。</h2>
               <p>
                 ネタから台本、素材、YMM4前チェックまでを短く確認できます。
-                再生できない場合は、上のスクショで同じ流れを確認できます。
+                動画が再生できない場合は、スクリーンショットでも同じ流れを確認できます。
               </p>
               <ol className="lp2-demo-list">
                 <li>ネタや素材メモを入れる</li>
                 <li>ジャンルの型を選ぶ</li>
-                <li>YMM4 / MP4へ進める前に確認する</li>
+                <li>YMM4に入る前に不足を確認する</li>
               </ol>
             </div>
             <div className="lp2-video-frame" data-reveal>
@@ -673,6 +749,26 @@ export function HomePage() {
                 <source src="/lp/main-demo-90s.mp4" type="video/mp4" />
                 <a href="/lp/main-demo-90s.mp4">90秒メインデモを開く</a>
               </video>
+            </div>
+          </div>
+        </section>
+
+        <section className="lp2-band lp2-band--evidence" aria-labelledby="lp2-evidence-heading">
+          <div className="lp2-container">
+            <SectionHead
+              kicker="購入前の安心材料"
+              title="できること、できないことを先に出します。"
+              body="Free、Premium、YMM4前提、成果保証なし。買ってから困りやすい点を先に確認できます。"
+              align="split"
+            />
+            <div className="lp2-evidence-grid">
+              {evidenceItems.map((item) => (
+                <article className="lp2-evidence-card" key={item.title} data-reveal>
+                  <CheckCircle2 size={20} aria-hidden="true" />
+                  <h3>{item.title}</h3>
+                  <p>{item.body}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>
@@ -714,9 +810,9 @@ export function HomePage() {
         <section className="lp2-band lp2-band--trust" aria-labelledby="lp2-trust-heading">
           <div className="lp2-container">
             <SectionHead
-              kicker="先に用意するもの"
-              title="使える環境と注意点。"
-              body="WindowsとYMM4が前提です。Macだけ、スマホだけでは使えません。"
+              kicker="利用条件"
+              title="WindowsとYMM4で使うツールです。"
+              body="Macだけ、スマホだけでは使えません。導入前に環境を確認してください。"
               align="split"
             />
             <div className="lp2-trust-grid">
@@ -738,8 +834,8 @@ export function HomePage() {
           <div className="lp2-container">
             <SectionHead
               kicker="よくある確認"
-              title="買う前に聞かれやすいこと。"
-              body="料金、無料版、YMM4、収益化保証の有無を先に確認できます。"
+              title="買う前の疑問を先に確認。"
+              body="料金、無料版、YMM4、収益化保証の有無をここで確認できます。"
             />
             <div className="lp2-faq-list">
               {priorityFaqItems.map((item, index) => (
@@ -765,10 +861,10 @@ export function HomePage() {
           <div className="lp2-container lp2-final__grid">
             <div>
               <p className="lp2-kicker">最初の1本</p>
-              <h2 id="lp2-final-heading">まずFreeで、自分のネタを試す。</h2>
+              <h2 id="lp2-final-heading">まずFreeで、自分のネタを動かす。</h2>
               <p>
-                自分のネタで動くか。台本と素材を扱えるか。YMM4前チェックまで進めるか。
-                買う前に自分の制作環境で見てください。
+                自分の素材で始められるか。台本と素材枠が合うか。YMM4前チェックまで進められるか。
+                購入前に自分の制作環境で確認してください。
               </p>
             </div>
             <div className="lp2-final__actions">
