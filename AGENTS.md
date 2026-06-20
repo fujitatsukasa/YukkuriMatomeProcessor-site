@@ -84,11 +84,16 @@
 ### Visual direction
 - Dark premium creator studio.
 - Real app screenshots first.
-- Generated images only for decoration.
+- Generated images only for restrained decoration.
 - Product demo and workflow animation are more important than abstract visuals.
 - Do not fake UI screenshots with generated images.
 - Avoid existing anime/IP character imitation.
 - Use abstract speech bubbles, timeline blocks, file cards, and creator workflow visuals.
+- Strictly avoid AI-looking generated visuals:
+  - no glossy 3D icon sets, shields, download arrows, glowing badges, floating panels, fake app screens, sci-fi devices, or surreal workflow machines
+  - no generated image may be used as product evidence or as a replacement for real app screenshots
+  - if image generation is used, keep it to subtle background texture, lighting, or non-evidence atmosphere that looks like ordinary photographed material
+  - feature cards and proof sections should use real app screenshots, real video stills, or code/CSS-native diagrams instead of AI-looking decorative renders
 
 ### Animation rules
 - Use animation to clarify workflow, not to distract.

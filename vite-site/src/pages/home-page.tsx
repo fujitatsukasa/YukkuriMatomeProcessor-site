@@ -67,28 +67,32 @@ const automationTargets = [
     label: 'ネタ投入',
     title: 'URLなしでも始められる',
     body: '記事URL、スレッドURL、下書き、素材メモ。手元にあるネタから動画作成を始められます。',
-    image: '/lp/decision-workflow-visual-v1.jpg',
+    image: '/lp/screen-main-get-scripts-v2.webp',
+    alt: '台本取得画面の実アプリスクリーンショット',
     Icon: SearchCheck,
   },
   {
     label: 'AI台本生成',
     title: '動画の型に合わせて作る',
     body: '反応集、解説、ショート、掛け合いなど、作りたい動画に合わせて会話順と字幕量を整えます。',
-    image: '/lp/video-types-visual-v1.jpg',
+    image: '/lp/screen-main-script-gen-v2.webp',
+    alt: 'AI台本生成結果を確認する実アプリスクリーンショット',
     Icon: Layers3,
   },
   {
     label: '動画作成',
     title: '素材配置までまとめて進める',
     body: '画像、音声、字幕、素材パスを確認し、YMM4で見やすい形へ反映します。',
-    image: '/lp/material-placement-visual-v1.jpg',
+    image: '/lp/screen-main-script-edit-v2.webp',
+    alt: '素材配置と動画作成ボードを確認する実アプリスクリーンショット',
     Icon: MonitorPlay,
   },
   {
     label: 'YMM4',
     title: '直反映して自分で仕上げる',
     body: 'YMM4で音声、字幕、間合い、素材権利、公開前の最終判断を確認します。',
-    image: '/lp/trust-purchase-visual-v1.jpg',
+    image: '/lp/screen-main-script-edit-v2.webp',
+    alt: 'YMM4直反映前の台本編集画面を確認する実アプリスクリーンショット',
     Icon: FileCode2,
   },
 ] as const
@@ -550,7 +554,7 @@ export function HomePage() {
                 return (
                   <article className="lp3-target-card" key={item.label} data-reveal>
                     <div className="lp3-target-card__visual">
-                      <img src={item.image} alt="" loading="lazy" decoding="async" aria-hidden="true" />
+                      <img src={item.image} alt={item.alt} loading="lazy" decoding="async" />
                     </div>
                     <div className="lp3-target-card__copy">
                       <span>{item.label}</span>

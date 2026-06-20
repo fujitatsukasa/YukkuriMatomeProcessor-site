@@ -627,6 +627,8 @@
 .lp3-band--compare,
 .lp3-band--assurance {
   background:
+    linear-gradient(180deg, rgba(5, 5, 7, 0.74), rgba(5, 5, 7, 0.95)),
+    url("/lp/matte-section-texture-v1.jpg") center / cover no-repeat,
     radial-gradient(circle at 80% 12%, rgba(101, 216, 255, 0.08), transparent 24%),
     rgba(255, 255, 255, 0.008);
 }
@@ -724,7 +726,7 @@
 
 .lp3-target-card {
   position: relative;
-  min-height: 364px;
+  min-height: 386px;
   display: grid;
   grid-template-rows: auto 1fr;
   gap: 0;
@@ -743,7 +745,7 @@
 .lp3-target-card__visual {
   position: relative;
   overflow: hidden;
-  min-height: 128px;
+  min-height: 154px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   background: #050507;
 }
@@ -753,18 +755,18 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, transparent 32%, rgba(5, 5, 7, 0.72)),
-    linear-gradient(90deg, rgba(5, 5, 7, 0.24), transparent 46%, rgba(5, 5, 7, 0.18));
+    linear-gradient(180deg, transparent 58%, rgba(5, 5, 7, 0.34)),
+    linear-gradient(90deg, rgba(5, 5, 7, 0.16), transparent 42%, rgba(5, 5, 7, 0.12));
   pointer-events: none;
 }
 
 .lp3-target-card__visual img {
   width: 100%;
   height: 100%;
-  min-height: 128px;
+  min-height: 154px;
   display: block;
   object-fit: cover;
-  transform: scale(1.02);
+  object-position: center top;
 }
 
 .lp3-target-card__copy {
