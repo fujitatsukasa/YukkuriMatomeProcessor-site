@@ -53,9 +53,9 @@ export type PageEntry = {
 export const siteOrigin = 'https://yukkurimatomeprocessor.com'
 export const siteTitle = 'ゆっくりまとめプロセッサー'
 export const siteSubtitle = 'Yukkuri Matome Processor'
-export const siteTagline = '台本取得・AI台本生成・YMM4動画作成ツール'
+export const siteTagline = 'YMM4前の台本・素材準備ツール'
 export const siteDescription =
-  '台本取得、AI台本生成、素材配置、動画作成、YMM4連携まで進めるWindows向け自動動画編集ソフト。'
+  '記事URL・スレッドURL・下書きから、台本下地と素材配置を整え、YMM4前の準備を支援するWindows向けツール。'
 
 export const navItems: NavItem[] = [
   { key: 'home', label: 'ホーム', url: '/' },
@@ -255,7 +255,7 @@ export const faqGroups: FaqGroup[] = [
       {
         question: 'ゆっくりまとめプロセッサーは何を解決するツールですか？',
         answer:
-          '台本取得、AI台本生成、素材配置、動画作成、YMM4連携までをまとめるWindows向け自動動画編集ソフトです。',
+          '記事URL・スレッドURL・下書きから、台本下地と素材配置を整え、YMM4前の準備を支援するWindows向けツールです。',
       },
       {
         question: '動画は自動で完成しますか？',
@@ -317,7 +317,7 @@ export const faqGroups: FaqGroup[] = [
       { question: '設定変更が反映されない場合は？', answer: '再起動、権限確認、保存先アクセス権の順に確認してください。' },
       { question: 'YouTube APIキーは必要ですか？', answer: '通常の導入確認や台本整理だけなら必須ではありません。YouTube分析、コメント取得、検索条件を使う機能では YouTube API キーの設定が必要です。' },
       { question: 'YouTube分析を使うのに追加設定は必要ですか？', answer: 'はい。YouTube分析では API キーの設定が必要です。検索条件、除外条件、コメント取得などの利用前に確認してください。' },
-      { question: 'AIが全部自動で動画を作りますか？', answer: 'いいえ。AI台本生成や動画作成導線は使えますが、最後の編集、内容確認、権利確認、投稿判断はYMM4で見て直してください。' },
+      { question: 'AIだけで動画を作れますか？', answer: 'いいえ。AI台本生成や動画作成導線は使えますが、最後の編集、内容確認、権利確認、投稿判断はYMM4で見て直してください。' },
     ],
   },
   {
@@ -325,7 +325,7 @@ export const faqGroups: FaqGroup[] = [
     label: 'トラブル',
     items: [
       { question: '起動しない場合の基本対応は？', answer: '実行権限、依存ソフト、セキュリティ設定を確認してください。' },
-      { question: 'YMM4連携が失敗する場合は？', answer: 'YMM4パスを絶対パスで再指定し、設定保存後に再起動してください。' },
+      { question: 'YMM4連携が失敗する場合は？', answer: 'YMM4.exe本体のパスを再指定し、設定保存後に再起動してください。' },
       { question: '保存エラーが出る場合は？', answer: '保存先の空き容量と書き込み権限を確認してください。' },
       { question: '問い合わせ時に必要な情報は？', answer: 'OS、再現手順、発生時刻、エラー全文、回避可否を記載してください。' },
     ],
@@ -340,7 +340,7 @@ export const faqGroups: FaqGroup[] = [
       { question: '購入後の権限はどう反映されますか？', answer: '決済完了後、Googleログインに紐づく課金状態と利用枠を同期し、アプリ内でPremium機能が有効化されます。' },
       { question: 'Premiumで何が解除されますか？', answer: '台本取得、AI台本生成、動画作成の利用制限を解除します。月額ではなく39,800円の買い切りです。' },
       { question: '返金条件は何ですか？', answer: '購入後7日以内を原則受付とし、返金成立時はPremium権限を停止します。詳細は返金・キャンセルポリシーを確認してください。' },
-      { question: '収益化は保証されますか？', answer: 'いいえ。動画の品質、投稿頻度、チャンネル状況、各プラットフォームの審査に左右されるため、収益化は保証していません。' },
+      { question: '収益化は約束されますか？', answer: 'いいえ。動画の品質、投稿頻度、チャンネル状況、各プラットフォームの審査に左右されるため、収益化は約束していません。' },
       { question: '契約・請求に関する相談先は？', answer: '記録の残るメール窓口を推奨します。詳細はお問い合わせページを参照してください。' },
     ],
   },

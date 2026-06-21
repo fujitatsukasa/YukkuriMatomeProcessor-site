@@ -96,7 +96,7 @@ const faqDecisionCards = [
     Icon: CreditCard,
   },
   {
-    title: '収益化や再生数は保証しません',
+    title: '収益化や再生数は約束しません',
     body: '投稿結果は動画内容、チャンネル状況、各プラットフォームの審査に左右されます。',
     note: '素材・音声・引用元の規約確認も必要です',
     Icon: ShieldCheck,
@@ -111,10 +111,10 @@ const priorityFaqQuestions = [
   'Premiumで何が解除されますか？',
   'YouTube APIキーは必要ですか？',
   '動画は自動で完成しますか？',
-  'AIが全部自動で動画を作りますか？',
+  'AIだけで動画を作れますか？',
   '対応していないURLは取得できますか？',
   '返金条件は何ですか？',
-  '収益化は保証されますか？',
+  '収益化は約束されますか？',
 ] as const
 
 const getFaqGroupRank = (id: string) => {
@@ -278,7 +278,7 @@ export function FaqPage() {
               <span className="subpage-card__eyebrow">重要FAQ</span>
               <h2>導入前に確認されやすい質問</h2>
               <p>
-                Windows専用、YMM4前提、無料版とPremium、返金、収益化保証の有無を先に確認できます。
+                Windows専用、YMM4前提、無料版とPremium、返金、収益化の約束がないことを先に確認できます。
                 細かい内容は下のカテゴリと検索で続けて探せます。
               </p>
               <div className="faq-priority-actions">

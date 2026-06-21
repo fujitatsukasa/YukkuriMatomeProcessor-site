@@ -1,347 +1,128 @@
-import { Link } from 'react-router-dom'
-import type { ReactNode } from 'react'
-import { PageMeta } from '@/components/ui'
 import {
-  downloadUrl,
-  faqGroups,
-  legal,
-  siteOrigin,
-  siteTitle,
-} from '@/data/site-content'
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type KeyboardEvent,
+  type ReactNode,
+  type SyntheticEvent,
+} from 'react'
+import { Link } from 'react-router-dom'
+import { PageMeta } from '@/components/ui'
+import { trackEvent } from '@/lib/analytics'
 import {
   ArrowRight,
   CheckCircle2,
-  CreditCard,
+  ChevronRight,
   Download,
   ExternalLink,
-  FileCode2,
-  FileText,
-  Gauge,
-  HelpCircle,
-  Laptop,
-  Layers3,
-  MonitorPlay,
+  FileCheck2,
+  Focus,
+  MousePointer2,
   Play,
-  SearchCheck,
   ShieldCheck,
-  TriangleAlert,
+  TableProperties,
+  X,
 } from 'lucide-react'
+import {
+  comparisonRows,
+  demoOutline,
+  downloadTrustItems,
+  fitItems,
+  freeChecks,
+  heroContent,
+  homeFacts,
+  homeFaqs,
+  premiumFit,
+  premiumMismatch,
+  problemItems,
+  productTourItems,
+  requirementRows,
+  responsibilityItems,
+  sampleItems,
+  workflowSteps,
+  type ProductTourItem,
+  type SampleItem,
+} from './home-content'
 import './home-page.css'
 
-const proofChips = [
-  'Freeで動作確認',
-  '台本取得',
-  'AI台本生成',
-  '動画作成',
-  'YMM4直反映',
-  'Premiumは買い切り',
-] as const
+type CtaLocation =
+  | 'hero'
+  | 'flow'
+  | 'free'
+  | 'pricing_free'
+  | 'pricing_premium'
+  | 'sticky_mobile'
+  | 'final'
 
-const heroFlowItems = [
-  { label: '00秒', title: 'ネタ投入', body: 'URL / メモ / 素材' },
-  { label: '10秒', title: '型を選択', body: '反応集 / 解説 / ショート' },
-  { label: '20秒', title: '自動整理', body: '台本 / 字幕量 / 素材配置' },
-  { label: '30秒', title: 'YMM4へ', body: '起動 / 接続 / 直反映' },
-] as const
+type LightboxImage = {
+  src: string
+  alt: string
+  title: string
+}
 
-const decisionHighlights = [
-  {
-    label: 'Freeで確認',
-    title: '自分のPCとYMM4で動くか',
-    body: '起動、ログイン、YMM4接続、動画作成の流れを購入前に確認できます。',
-  },
-  {
-    label: '作れる型',
-    title: '反応集、解説、ショート、掛け合い',
-    body: 'URLだけに縛らず、下書きや素材メモから動画用にまとめます。',
-  },
-  {
-    label: 'Premium',
-    title: '39,800円税込の買い切り',
-    body: '月額なし。台本取得、AI台本生成、動画作成の制限を解除します。',
-  },
-] as const
-
-const automationTargets = [
-  {
-    label: 'ネタ投入',
-    title: 'URLなしでも始められる',
-    body: '記事URL、スレッドURL、下書き、素材メモ。手元にあるネタから動画作成を始められます。',
-    image: '/lp/screen-main-get-scripts-v2.webp',
-    alt: '台本取得画面の実アプリスクリーンショット',
-    Icon: SearchCheck,
-  },
-  {
-    label: 'AI台本生成',
-    title: '動画の型に合わせて作る',
-    body: '反応集、解説、ショート、掛け合いなど、作りたい動画に合わせて会話順と字幕量を整えます。',
-    image: '/lp/screen-main-script-gen-v2.webp',
-    alt: 'AI台本生成結果を確認する実アプリスクリーンショット',
-    Icon: Layers3,
-  },
-  {
-    label: '動画作成',
-    title: '素材配置までまとめて進める',
-    body: '画像、音声、字幕、素材パスを確認し、YMM4で見やすい形へ反映します。',
-    image: '/lp/screen-main-script-edit-v2.webp',
-    alt: '素材配置と動画作成ボードを確認する実アプリスクリーンショット',
-    Icon: MonitorPlay,
-  },
-  {
-    label: 'YMM4',
-    title: '直反映して自分で仕上げる',
-    body: 'YMM4で音声、字幕、間合い、素材権利、公開前の最終判断を確認します。',
-    image: '/lp/screen-main-script-edit-v2.webp',
-    alt: 'YMM4直反映前の台本編集画面を確認する実アプリスクリーンショット',
-    Icon: FileCode2,
-  },
-] as const
-
-const useCaseClips = [
-  {
-    title: '反応集',
-    body: 'コメント、補足、進行を並べて、テンポのある動画にします。',
-    video: '/lp/usecase-reaction.mp4',
-    poster: '/lp/usecase-reaction-poster.webp',
-  },
-  {
-    title: '解説・対談',
-    body: '問い、答え、事例、まとめを台本化して見やすく整えます。',
-    video: '/lp/usecase-dialogue.mp4',
-    poster: '/lp/usecase-dialogue-poster.webp',
-  },
-  {
-    title: 'ショート',
-    body: '冒頭、展開、締めを短くまとめ、字幕量も抑えます。',
-    video: '/lp/usecase-shorts.mp4',
-    poster: '/lp/usecase-shorts-poster.webp',
-  },
-] as const
-
-const beforeAfterItems = [
-  { before: '自分のネタで使える？', after: 'URLなしでも下書き・素材メモから開始' },
-  { before: 'どこまで自動で進む？', after: '台本取得、AI台本生成、動画作成まで' },
-  { before: '最後はどう確認する？', after: 'YMM4直反映後に目で見て仕上げ' },
-] as const
-
-const compareRows = [
-  { task: 'ネタ投入', manual: 'メモ、URL、素材を別々に管理', ymp: '入口を1つにまとめる' },
-  { task: '台本', manual: '構成、会話、字幕量を手で調整', ymp: 'AI台本生成で動画の型へ合わせる' },
-  { task: '素材配置', manual: '保存先と素材パスを行き来する', ymp: '素材配置と不足を画面で確認' },
-  { task: 'YMM4', manual: 'タイムラインを手で組み始める', ymp: '起動、接続、直反映へ進む' },
-] as const
-
-const buyerAssuranceItems = [
-  {
-    title: 'Freeで先に触れる',
-    body: '起動、ログイン、台本編集、動画作成導線、YMM4連携の前提を確認できます。',
-  },
-  {
-    title: 'Premiumは買い切り',
-    body: '39,800円税込。月額ではなく、台本取得、AI台本生成、動画作成の制限を解除します。',
-  },
-  {
-    title: 'YMM4で最後に見る',
-    body: '音声、字幕、立ち絵、間合い、権利確認、投稿判断はYMM4で確認します。',
-  },
-  {
-    title: '成果保証はしない',
-    body: '収益化、再生数、審査通過は保証しません。ツールは制作時間の短縮に集中します。',
-  },
-] as const
-
-const workflowSteps = [
-  {
-    step: '01',
-    title: 'ネタを入れる',
-    body: 'URL、下書き、素材メモ、テーマ。URLなしでも始められます。',
-    image: '/lp/screen-main-guide-v2.webp',
-    alt: '動画編集の入口を確認する実アプリガイド画面',
-    Icon: Layers3,
-  },
-  {
-    step: '02',
-    title: '動画の型を選ぶ',
-    body: '反応集、解説、ショート、掛け合いなど、目的に合わせます。',
-    image: '/lp/screen-main-script-edit-v2.webp',
-    alt: '台本編集画面で取得結果とボードを確認している実アプリ画面',
-    Icon: FileText,
-  },
-  {
-    step: '03',
-    title: '自動で動画作成へ',
-    body: '台本、素材配置、字幕量、YMM4連携の確認項目をまとめます。',
-    image: '/lp/screen-main-board-v2.webp',
-    alt: 'YMM4連携に使う動画作成ボード画面の実アプリスクリーンショット',
-    Icon: MonitorPlay,
-  },
-  {
-    step: '04',
-    title: 'YMM4で仕上げる',
-    body: '起動、接続、直反映後に、YMM4側で最終確認します。',
-    image: '/lp/screen-main-get-scripts-v2.webp',
-    alt: '素材取り込みと動画制作画面を確認する実アプリスクリーンショット',
-    Icon: FileCode2,
-  },
-] as const
-
-const galleryItems = [
-  {
-    title: '台本取得',
-    body: 'URLを使う時は、取得候補を確認してから取り込みます。',
-    focus: 'URL候補',
-    image: '/lp/screen-main-get-scripts-v2.webp',
-    alt: '台本取得画面の実アプリスクリーンショット',
-  },
-  {
-    title: '台本編集',
-    body: '会話順、字幕量、素材配置を見ながら調整できます。',
-    focus: '会話順',
-    image: '/lp/screen-main-script-edit-v2.webp',
-    alt: '台本編集画面の実アプリスクリーンショット',
-  },
-  {
-    title: 'AI台本生成',
-    body: '動画の型に合わせて台本案を作り、使う前に確認します。',
-    focus: '生成結果',
-    image: '/lp/screen-main-script-gen-v2.webp',
-    alt: '台本生成結果を確認する実アプリスクリーンショット',
-  },
-  {
-    title: 'ランチャー',
-    body: 'ログイン、更新、Premium状態を起動時に確認します。',
-    focus: '更新確認',
-    image: '/lp/screen-launcher-update-dialog-v2.webp',
-    alt: 'ランチャーの更新確認ダイアログを切り出した実アプリスクリーンショット',
-  },
-] as const
-
-const planCards = [
-  {
-    name: 'Free',
-    price: '¥0',
-    lead: 'まず自分のPCで試す',
-    points: ['起動とログインを確認', '台本編集の流れを見る', '動画作成導線を触る', 'YMM4連携の前提を確認'],
-    href: downloadUrl,
-    cta: '無料でダウンロード',
-    external: true,
-    Icon: Download,
-  },
-  {
-    name: 'Premium',
-    price: '¥39,800',
-    lead: '税込 / 買い切り / 月額なし',
-    points: ['台本取得の制限解除', 'AI台本生成の制限解除', '動画作成の制限解除', '本数を増やす人向け'],
-    href: '/purchase/',
-    cta: '料金と条件を見る',
-    external: false,
-    Icon: CreditCard,
-  },
-] as const
-
-const trustItems = [
-  { title: 'Windows専用', body: 'Windows 10 / 11向け。Mac、スマホだけでは使えません。', Icon: Laptop },
-  { title: 'YMM4が必要', body: 'YMM4で最終確認して仕上げる前提です。', Icon: MonitorPlay },
-  { title: '勝手に公開しない', body: '保存、YMM4反映、MP4出力、投稿判断は確認して進めます。', Icon: ShieldCheck },
-  { title: '成果保証なし', body: '収益化、再生数、審査通過は保証しません。', Icon: TriangleAlert },
-] as const
-
-const priorityQuestions = [
-  '無料版では何ができますか？',
-  'Premiumで何が解除されますか？',
-  '動画は自動で完成しますか？',
-  'Windows専用ですか？',
-  'YMM4は必須ですか？',
-  '収益化は保証されますか？',
-] as const
-
-const allFaqItems = faqGroups.flatMap((group) => group.items)
-const priorityFaqItems = priorityQuestions
-  .map((question) => allFaqItems.find((item) => item.question === question))
-  .filter((item): item is (typeof allFaqItems)[number] => Boolean(item))
-  .map((item) => {
-    if (item.question === '動画は自動で完成しますか？') {
-      return {
-        question: item.question,
-        answer:
-          'YMM4へ直反映して動画作成を進めます。音声、字幕、間合い、権利確認、投稿判断はYMM4で最終確認してください。',
-      }
-    }
-
-    if (item.question === 'YMM4は必須ですか？') {
-      return {
-        question: item.question,
-        answer:
-          'はい。YMM4と連携して使うWindows向けソフトです。YMM4なしで編集完了まで進める設計ではありません。',
-      }
-    }
-
-    if (item.question === '無料版では何ができますか？') {
-      return {
-        question: item.question,
-        answer:
-          'Freeでは、起動、ログイン、台本編集、動画作成導線、YMM4連携の前提を確認できます。Premium購入前に自分のPCで試せます。',
-      }
-    }
-
-    return item
-  })
+const primaryCtaLabel = heroContent.primaryCta
 
 const softwareApplicationLd = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
-  name: siteTitle,
+  name: homeFacts.productName,
   applicationCategory: 'MultimediaApplication',
-  operatingSystem: 'Windows 10, Windows 11',
-  url: `${siteOrigin}/`,
-  downloadUrl: `${siteOrigin}/download/`,
+  operatingSystem: homeFacts.os.join(', '),
+  softwareRequirements: `${homeFacts.osLabel}、YMM4必須`,
+  url: `${homeFacts.siteOrigin}/`,
+  downloadUrl: homeFacts.downloadUrl,
+  image: `${homeFacts.siteOrigin}/lp/screen-main-script-edit-v2.webp`,
   description:
-    '台本取得、AI台本生成、動画作成、YMM4連携までを進めるWindows向け自動動画編集ソフトです。',
-  featureList: [
-    '台本取得',
-    'AI台本生成',
-    '動画作成',
-    '素材配置',
-    'CSVプロジェクト化',
-    'YMM4起動・接続・直反映',
+    '記事URL・スレッドURL・下書きから、台本取得、AI台本生成、素材配置の確認、YMM4反映までを支援するWindows 10 / 11向けソフト。',
+  offers: [
+    {
+      '@type': 'Offer',
+      name: 'Free',
+      price: '0',
+      priceCurrency: homeFacts.currency,
+      url: `${homeFacts.siteOrigin}/download/`,
+    },
+    {
+      '@type': 'Offer',
+      name: 'Premium',
+      price: homeFacts.premiumPriceValue,
+      priceCurrency: homeFacts.currency,
+      url: `${homeFacts.siteOrigin}/purchase/`,
+    },
   ],
-  offers: {
-    '@type': 'Offer',
-    price: legal.pricing.unitPrice,
-    priceCurrency: legal.pricing.currency,
-    availability: 'https://schema.org/InStock',
-  },
   publisher: {
     '@type': 'Organization',
-    name: legal.organization.legalName,
-    url: siteOrigin,
+    name: homeFacts.productName,
+    url: homeFacts.siteOrigin,
   },
 }
 
-function CtaLink({
-  href,
-  children,
-  className,
-  external = false,
-}: {
-  href: string
-  children: ReactNode
-  className: string
-  external?: boolean
-}) {
-  if (external || href.startsWith('http')) {
-    return (
-      <a className={className} href={href} target="_blank" rel="noopener noreferrer">
-        {children}
-      </a>
-    )
-  }
+const faqPageLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: homeFaqs.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
+}
 
-  return (
-    <Link className={className} to={href} discover="none">
-      {children}
-    </Link>
-  )
+function useHomeViewTracking() {
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const device = window.matchMedia('(max-width: 760px)').matches ? 'mobile' : 'desktop'
+    trackEvent('lp_view', {
+      source: params.get('utm_source') || 'direct',
+      medium: params.get('utm_medium') || 'none',
+      campaign: params.get('utm_campaign') || 'none',
+      device,
+    })
+  }, [])
 }
 
 function SectionHead({
@@ -353,12 +134,12 @@ function SectionHead({
   kicker: string
   title: string
   body?: string
-  align?: 'center' | 'split'
+  align?: 'split' | 'center'
 }) {
   return (
-    <div className={`lp3-section-head lp3-section-head--${align}`}>
+    <div className={`home-lp-section-head home-lp-section-head--${align}`}>
       <div>
-        <p className="lp3-kicker">{kicker}</p>
+        <p className="home-lp-kicker">{kicker}</p>
         <h2>{title}</h2>
       </div>
       {body ? <p>{body}</p> : null}
@@ -366,465 +147,783 @@ function SectionHead({
   )
 }
 
-function BrowserFrame({
-  title,
+function HomeCta({
+  href,
+  label,
+  location,
+  variant = 'primary',
+  external = false,
   children,
-  className = '',
+  id,
 }: {
-  title: string
-  children: ReactNode
-  className?: string
+  href: string
+  label: string
+  location: CtaLocation
+  variant?: 'primary' | 'secondary' | 'text'
+  external?: boolean
+  children?: ReactNode
+  id?: string
+}) {
+  const handleClick = () => {
+    trackEvent('lp_cta_click', { location, label, destination: href })
+
+    if (href === homeFacts.downloadUrl) {
+      trackEvent('lp_download_click', { location, url: href })
+    }
+
+    if (href.includes('/purchase/')) {
+      trackEvent('lp_purchase_click', { location, price: homeFacts.premiumPriceValue })
+    }
+  }
+
+  const className = `home-lp-btn home-lp-btn--${variant}`
+  const content = children ?? label
+
+  if (external || href.startsWith('http')) {
+    return (
+      <a
+        id={id}
+        className={className}
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={handleClick}
+      >
+        {content}
+      </a>
+    )
+  }
+
+  if (href.startsWith('#')) {
+    return (
+      <a id={id} className={className} href={href} onClick={handleClick}>
+        {content}
+      </a>
+    )
+  }
+
+  return (
+    <Link id={id} className={className} to={href} discover="none" onClick={handleClick}>
+      {content}
+    </Link>
+  )
+}
+
+function AnnotatedImage({
+  item,
+  onZoom,
+  priority = false,
+}: {
+  item: ProductTourItem
+  onZoom: (image: LightboxImage) => void
+  priority?: boolean
 }) {
   return (
-    <div className={`lp3-frame ${className}`}>
-      <div className="lp3-frame__bar" aria-hidden="true">
-        <span />
-        <span />
-        <span />
-        <strong>{title}</strong>
+    <button
+      className="home-lp-annotated-image"
+      type="button"
+      onClick={() => {
+        trackEvent('lp_image_zoom', { image_name: item.id })
+        onZoom({ src: item.image, alt: item.alt, title: item.title })
+      }}
+    >
+      <img
+        src={item.image}
+        alt={item.alt}
+        loading={priority ? 'eager' : 'lazy'}
+        decoding="async"
+        fetchPriority={priority ? 'high' : undefined}
+      />
+      {item.annotations.map((annotation) => (
+        <span
+          key={`${item.id}-${annotation.label}`}
+          className="home-lp-annotation"
+          style={{ left: `${annotation.x}%`, top: `${annotation.y}%` }}
+        >
+          {annotation.label}
+        </span>
+      ))}
+      <span className="home-lp-zoom-cue">
+        <Focus size={16} aria-hidden="true" />
+        拡大
+      </span>
+    </button>
+  )
+}
+
+function ImageLightbox({
+  image,
+  onClose,
+}: {
+  image: LightboxImage | null
+  onClose: () => void
+}) {
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null)
+  const previousFocusRef = useRef<HTMLElement | null>(null)
+
+  useEffect(() => {
+    if (!image) {
+      return undefined
+    }
+
+    previousFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null
+    closeButtonRef.current?.focus()
+
+    const handleKeyDown = (event: globalThis.KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        onClose()
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+      previousFocusRef.current?.focus()
+    }
+  }, [image, onClose])
+
+  if (!image) {
+    return null
+  }
+
+  return (
+    <div className="home-lp-lightbox" role="dialog" aria-modal="true" aria-label={`${image.title}を拡大表示`}>
+      <button className="home-lp-lightbox__backdrop" type="button" aria-label="閉じる" onClick={onClose} />
+      <div className="home-lp-lightbox__panel">
+        <div className="home-lp-lightbox__head">
+          <strong>{image.title}</strong>
+          <button ref={closeButtonRef} type="button" onClick={onClose} aria-label="拡大表示を閉じる">
+            <X size={20} aria-hidden="true" />
+          </button>
+        </div>
+        <img src={image.src} alt={image.alt} />
       </div>
-      {children}
     </div>
   )
 }
 
-function ThirtySecondDemo() {
+function ProductTour({ onZoom }: { onZoom: (image: LightboxImage) => void }) {
+  const [activeId, setActiveId] = useState(productTourItems[0].id)
+  const activeItem = useMemo(
+    () => productTourItems.find((item) => item.id === activeId) ?? productTourItems[0],
+    [activeId],
+  )
+
+  const activateTab = (item: ProductTourItem) => {
+    setActiveId(item.id)
+    trackEvent('lp_product_tab', { tab_name: item.id })
+  }
+
+  const handleTabKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft') {
+      return
+    }
+
+    event.preventDefault()
+    const index = productTourItems.findIndex((item) => item.id === activeId)
+    const nextIndex =
+      event.key === 'ArrowRight'
+        ? (index + 1) % productTourItems.length
+        : (index - 1 + productTourItems.length) % productTourItems.length
+    const nextItem = productTourItems[nextIndex]
+    setActiveId(nextItem.id)
+    document.getElementById(`home-tour-tab-${nextItem.id}`)?.focus()
+    trackEvent('lp_product_tab', { tab_name: nextItem.id })
+  }
+
   return (
-    <div className="lp3-quick-demo" aria-label="30秒で自動動画編集の流れ">
-      <div className="lp3-quick-demo__head">
-        <span>30 SEC AUTO EDIT</span>
-        <strong>ネタからYMM4直反映まで</strong>
-      </div>
-      <ol>
-        {heroFlowItems.map((item) => (
-          <li key={item.label}>
+    <div className="home-lp-tour" data-reveal>
+      <div
+        className="home-lp-tour__tabs"
+        role="tablist"
+        aria-label="実画面プロダクトツアー"
+        onKeyDown={handleTabKeyDown}
+      >
+        {productTourItems.map((item) => (
+          <button
+            id={`home-tour-tab-${item.id}`}
+            key={item.id}
+            type="button"
+            role="tab"
+            aria-selected={item.id === activeId}
+            aria-controls={`home-tour-panel-${item.id}`}
+            tabIndex={item.id === activeId ? 0 : -1}
+            onClick={() => activateTab(item)}
+          >
             <span>{item.label}</span>
-            <div>
-              <strong>{item.title}</strong>
-              <p>{item.body}</p>
+            <strong>{item.title}</strong>
+          </button>
+        ))}
+      </div>
+
+      <div
+        id={`home-tour-panel-${activeItem.id}`}
+        className="home-lp-tour__panel"
+        role="tabpanel"
+        aria-labelledby={`home-tour-tab-${activeItem.id}`}
+      >
+        <div className="home-lp-tour__copy">
+          <span>{activeItem.label}</span>
+          <h3>{activeItem.title}</h3>
+          <p>{activeItem.body}</p>
+        </div>
+        <AnnotatedImage item={activeItem} onZoom={onZoom} />
+      </div>
+    </div>
+  )
+}
+
+function LazyVideo({ item }: { item: SampleItem }) {
+  const [active, setActive] = useState(false)
+  const [progressMarks, setProgressMarks] = useState<number[]>([])
+
+  const handlePlay = () => {
+    setActive(true)
+    trackEvent('lp_sample_play', { sample_type: item.id })
+  }
+
+  const handleProgress = (event: SyntheticEvent<HTMLVideoElement>) => {
+    const video = event.currentTarget
+    if (!video.duration) {
+      return
+    }
+
+    const percent = Math.floor((video.currentTime / video.duration) * 100)
+    const mark = [25, 50, 75, 100].find((value) => percent >= value && !progressMarks.includes(value))
+
+    if (!mark) {
+      return
+    }
+
+    setProgressMarks((current) => {
+      if (current.includes(mark)) {
+        return current
+      }
+      trackEvent('lp_demo_progress', { percent: mark })
+      return [...current, mark]
+    })
+  }
+
+  return (
+    <div className="home-lp-video-shell">
+      {active ? (
+        <video controls playsInline preload="none" poster={item.poster} onTimeUpdate={handleProgress}>
+          <source src={item.video} type="video/mp4" />
+          <a href={item.video}>動画ファイルを開く</a>
+        </video>
+      ) : (
+        <button className="home-lp-video-poster" type="button" onClick={handlePlay} aria-label={`${item.title}の動画を再生`}>
+          <img src={item.poster} alt={`${item.title}のサンプル動画ポスター`} loading="lazy" decoding="async" />
+          <span>
+            <Play size={20} aria-hidden="true" />
+            再生
+          </span>
+        </button>
+      )}
+      <a className="home-lp-video-fallback" href={item.video} target="_blank" rel="noopener noreferrer">
+        動画を別タブで開く
+        <ExternalLink size={14} aria-hidden="true" />
+      </a>
+    </div>
+  )
+}
+
+function MobileStickyCta() {
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const heroCta = document.getElementById('home-hero-primary-cta')
+    const finalCta = document.getElementById('home-final-cta')
+    const mobileQuery = window.matchMedia('(max-width: 760px)')
+
+    if (!heroCta || !finalCta || !('IntersectionObserver' in window)) {
+      return undefined
+    }
+
+    const state = { heroVisible: true, finalVisible: false, mobile: mobileQuery.matches }
+    const update = () => setVisible(state.mobile && !state.heroVisible && !state.finalVisible)
+
+    const heroObserver = new IntersectionObserver(([entry]) => {
+      state.heroVisible = entry.isIntersecting
+      update()
+    })
+
+    const finalObserver = new IntersectionObserver(([entry]) => {
+      state.finalVisible = entry.isIntersecting
+      update()
+    })
+
+    const handleMediaChange = (event: MediaQueryListEvent) => {
+      state.mobile = event.matches
+      update()
+    }
+
+    heroObserver.observe(heroCta)
+    finalObserver.observe(finalCta)
+    mobileQuery.addEventListener('change', handleMediaChange)
+
+    return () => {
+      heroObserver.disconnect()
+      finalObserver.disconnect()
+      mobileQuery.removeEventListener('change', handleMediaChange)
+    }
+  }, [])
+
+  return (
+    <div className="home-lp-sticky-cta" data-visible={visible}>
+      <HomeCta href={homeFacts.downloadUrl} label="無料版で確認" location="sticky_mobile" external>
+        <Download size={18} aria-hidden="true" />
+        無料版で確認
+      </HomeCta>
+    </div>
+  )
+}
+
+function HomePageContent() {
+  const [lightboxImage, setLightboxImage] = useState<LightboxImage | null>(null)
+  const closeLightbox = useCallback(() => setLightboxImage(null), [])
+  const pricingRef = useRef<HTMLElement | null>(null)
+
+  useHomeViewTracking()
+
+  useEffect(() => {
+    const target = pricingRef.current
+    if (!target || !('IntersectionObserver' in window)) {
+      return undefined
+    }
+
+    let tracked = false
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.5 && !tracked) {
+          tracked = true
+          trackEvent('lp_pricing_view')
+          observer.disconnect()
+        }
+      },
+      { threshold: [0.5] },
+    )
+
+    observer.observe(target)
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <>
+      <div className="home-lp">
+        <section className="home-lp-hero" aria-labelledby="home-hero-heading">
+          <div className="home-lp-container home-lp-hero__grid">
+            <div className="home-lp-hero__copy" data-reveal>
+              <p className="home-lp-kicker">{heroContent.kicker}</p>
+              <h1 id="home-hero-heading">
+                <span>{heroContent.titleLine1}</span>
+                <span>台本と素材を整えて</span>
+                <span>YMM4へ。</span>
+              </h1>
+              <p className="home-lp-hero__lead">{heroContent.lead}</p>
+              <div className="home-lp-hero__actions">
+                <HomeCta
+                  id="home-hero-primary-cta"
+                  href={homeFacts.downloadUrl}
+                  label={primaryCtaLabel}
+                  location="hero"
+                  external
+                >
+                  <Download size={19} aria-hidden="true" />
+                  {primaryCtaLabel}
+                </HomeCta>
+                <HomeCta href="#demo" label={heroContent.secondaryCta} location="hero" variant="secondary">
+                  <Play size={18} aria-hidden="true" />
+                  {heroContent.secondaryCta}
+                </HomeCta>
+              </div>
+              <p className="home-lp-hero__microcopy">{heroContent.microcopy}</p>
             </div>
-          </li>
-        ))}
-      </ol>
-      <div className="lp3-quick-demo__progress" aria-hidden="true">
-        <span />
-      </div>
-    </div>
-  )
-}
 
-function DecisionStrip() {
-  return (
-    <section className="lp3-decision" aria-label="30秒で何をするか">
-      <div className="lp3-container lp3-decision__grid">
-        {decisionHighlights.map((item) => (
-          <article className="lp3-decision-card" key={item.label} data-reveal>
-            <span>{item.label}</span>
-            <h2>{item.title}</h2>
-            <p>{item.body}</p>
-          </article>
-        ))}
-      </div>
-    </section>
-  )
-}
+            <div className="home-lp-hero__visual" data-reveal>
+              <div className="home-lp-product-window" aria-label="実アプリ画面">
+                <div className="home-lp-product-window__bar" aria-hidden="true">
+                  <span />
+                  <span />
+                  <span />
+                  <strong>台本編集 / 素材確認</strong>
+                </div>
+                <img
+                  src="/lp/screen-main-script-edit-v2.webp"
+                  alt="台本編集と素材配置を確認するゆっくりまとめプロセッサーの実アプリ画面"
+                  loading="eager"
+                  decoding="async"
+                  fetchPriority="high"
+                />
+                <span className="home-lp-hero-note home-lp-hero-note--input">入力 / URL・下書き・素材メモ</span>
+                <span className="home-lp-hero-note home-lp-hero-note--organize">整理 / 台本・字幕量・素材配置</span>
+                <span className="home-lp-hero-note home-lp-hero-note--handoff">反映 / YMM4で最終確認</span>
+              </div>
+            </div>
+          </div>
+        </section>
 
-function CampaignDemoPanel() {
-  return (
-    <section className="lp3-band lp3-band--campaign" aria-labelledby="lp3-campaign-heading">
-      <div className="lp3-container lp3-campaign-layout">
-        <div className="lp3-campaign-copy" data-reveal>
-          <p className="lp3-kicker">30秒オート編集</p>
-          <h2 id="lp3-campaign-heading">ネタを入れた後に、何が進むか。</h2>
-          <p>
-            ただの入力フォームではありません。台本取得、AI台本生成、素材配置、動画作成、
-            YMM4直反映までを1本の流れで見せます。
-          </p>
-          <div className="lp3-campaign-meter" aria-label="30秒の進行">
-            {heroFlowItems.map((item) => (
-              <div key={item.label}>
-                <span>{item.label}</span>
-                <strong>{item.title}</strong>
-                <p>{item.body}</p>
+        <section className="home-lp-fit" aria-label="導入前に確認する条件">
+          <div className="home-lp-container home-lp-fit__grid">
+            {fitItems.map((item) => (
+              <div className="home-lp-fit__item" key={item.label} data-reveal>
+                <strong>{item.label}</strong>
+                <span>{item.body}</span>
               </div>
             ))}
           </div>
-        </div>
-        <div className="lp3-campaign-stage" data-reveal>
-          <BrowserFrame title="Main / 台本編集 + 動画作成" className="lp3-frame--campaign">
-            <img
-              src="/lp/screen-main-script-edit-v2.webp"
-              alt="台本編集と動画作成ボードを確認する実アプリ画面"
-              loading="lazy"
-              decoding="async"
-            />
-          </BrowserFrame>
-          <div className="lp3-campaign-badges" aria-label="実画面で確認できるポイント">
-            <span>台本取得</span>
-            <span>AI台本生成</span>
-            <span>素材配置</span>
-            <span>YMM4直反映</span>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
+        </section>
 
-export function HomePage() {
-  return (
-    <>
-      <PageMeta
-        title="ゆっくりまとめプロセッサー｜30秒で自動動画編集"
-        description="台本取得、AI台本生成、動画作成、素材配置、YMM4直反映まで進めるWindows向け自動動画編集ソフト。Freeで確認、Premiumは39,800円税込の買い切り。"
-        keywords="ゆっくりまとめプロセッサー,YMM4,自動動画編集,動画作成,台本取得,AI台本生成,素材配置,反応集,解説動画,ショート動画,Windows"
-        image="/lp/screen-main-script-edit-v2.webp"
-        path="/"
-        structuredData={softwareApplicationLd}
-      />
-
-      <main className="lp3-home">
-        <section className="lp3-hero" aria-labelledby="lp3-hero-heading">
-          <div className="lp3-hero__backdrop" aria-hidden="true" />
-          <div className="lp3-container lp3-hero__grid">
-            <div className="lp3-hero__copy" data-reveal>
-              <p className="lp3-kicker">Windows + YMM4 / 自動動画編集ソフト</p>
-              <h1 id="lp3-hero-heading">
-                <span>30秒で</span>
-                <span>自動動画編集</span>
-              </h1>
-              <p className="lp3-hero__lead">
-                台本取得、AI台本生成、素材配置、動画作成、YMM4直反映までを一気に進める。
-                反応集、解説、ショート、掛け合いまで、YMM4制作を短くします。
+        <section className="home-lp-section home-lp-problem" aria-labelledby="home-problem-heading">
+          <div className="home-lp-container home-lp-problem__grid">
+            <div data-reveal>
+              <p className="home-lp-kicker">YMM4前の下ごしらえ</p>
+              <h2 id="home-problem-heading">毎回、編集を始める前の作業で止まっていませんか。</h2>
+              <p>
+                ネタを集め、会話順に整理し、字幕量を整え、素材の保存先を確認してから、YMM4で並べ始める。
+                ゆっくりまとめプロセッサーは、この繰り返しを一つの流れにまとめます。
               </p>
-              <div className="lp3-hero__actions">
-                <a className="lp3-btn lp3-btn--primary" href={downloadUrl} target="_blank" rel="noopener noreferrer">
-                  <Download size={18} aria-hidden="true" />
-                  無料でダウンロード
-                </a>
-                <a className="lp3-btn lp3-btn--ghost" href="#lp3-demo">
-                  <Play size={18} aria-hidden="true" />
-                  実機デモを見る
-                </a>
+              <div className="home-lp-positioning">
+                <strong>完成を丸投げするソフトではありません。</strong>
+                <span>YMM4で仕上げる前の台本・素材準備を短くするソフトです。</span>
               </div>
-              <ul className="lp3-proof-list" aria-label="導入前に確認する前提">
-                {proofChips.map((chip) => (
-                  <li key={chip}>
-                    <CheckCircle2 size={15} aria-hidden="true" />
-                    {chip}
+            </div>
+
+            <div className="home-lp-problem__board" data-reveal>
+              <ul className="home-lp-problem-list">
+                {problemItems.map((item) => (
+                  <li key={item.title}>
+                    <span />
+                    <div>
+                      <strong>{item.title}</strong>
+                      <p>{item.body}</p>
+                    </div>
                   </li>
                 ))}
               </ul>
-            </div>
-
-            <div className="lp3-hero__visual" data-reveal>
-              <BrowserFrame title="実アプリ / 台本編集" className="lp3-frame--hero">
-                <img
-                  src="/lp/screen-main-script-edit-v2.webp"
-                  alt="ゆっくりまとめプロセッサーの台本編集画面"
-                  loading="eager"
-                  decoding="async"
-                />
-              </BrowserFrame>
-              <div className="lp3-hero-callout lp3-hero-callout--left">
-                <span>入力</span>
-                <strong>URL / 下書き / 素材メモ</strong>
+              <div className="home-lp-flow-diagram" aria-label="下ごしらえが一つにつながる流れ">
+                <span>URL / メモ</span>
+                <ChevronRight size={18} aria-hidden="true" />
+                <span>台本</span>
+                <ChevronRight size={18} aria-hidden="true" />
+                <span>素材</span>
+                <ChevronRight size={18} aria-hidden="true" />
+                <span>YMM4</span>
               </div>
-              <div className="lp3-hero-callout lp3-hero-callout--right">
-                <span>出力</span>
-                <strong>台本 / 素材配置 / YMM4直反映</strong>
-              </div>
-              <ThirtySecondDemo />
             </div>
           </div>
         </section>
 
-        <DecisionStrip />
-
-        <section className="lp3-band lp3-band--targets" aria-labelledby="lp3-targets-heading">
-          <div className="lp3-container">
+        <section id="flow" className="home-lp-section" aria-labelledby="home-flow-heading">
+          <div className="home-lp-container">
             <SectionHead
-              kicker="できること"
-              title="動画作りで面倒なところを、YMM4向けにまとめて進める。"
-              body="反応集、解説、ショート、掛け合いまで。ネタ、台本、素材、YMM4直反映を動画作成の流れでつなぎます。"
+              kicker="入力から出力まで"
+              title="何を入れると、どこまで進むのか。"
+              body="入力、アプリ内の処理、YMM4での仕上げを分けて表示します。自動化の範囲と、自分で確認する範囲を曖昧にしません。"
             />
-            <div className="lp3-target-grid">
-              {automationTargets.map((item) => {
-                const Icon = item.Icon
-                return (
-                  <article className="lp3-target-card" key={item.label} data-reveal>
-                    <div className="lp3-target-card__visual">
-                      <img src={item.image} alt={item.alt} loading="lazy" decoding="async" />
-                    </div>
-                    <div className="lp3-target-card__copy">
-                      <span>{item.label}</span>
-                      <Icon size={26} aria-hidden="true" />
-                      <h3>{item.title}</h3>
-                      <p>{item.body}</p>
-                    </div>
-                  </article>
-                )
-              })}
-            </div>
-          </div>
-        </section>
-
-        <CampaignDemoPanel />
-
-        <section className="lp3-band lp3-band--proof" aria-labelledby="lp3-proof-heading">
-          <div className="lp3-container lp3-proof-layout">
-            <div className="lp3-proof-copy" data-reveal>
-              <p className="lp3-kicker">購入前に見るところ</p>
-              <h2 id="lp3-proof-heading">自分の制作に入るかを、先に判断できる。</h2>
-              <p>
-                Freeでネタを入れて、台本取得、AI台本生成、動画作成、YMM4直反映までの流れを確認できます。
-                買ってから分かると困る条件も、先に出します。
-              </p>
-              <div className="lp3-before-after" aria-label="手作業と自動化の比較">
-                {beforeAfterItems.map((item) => (
-                  <div className="lp3-before-after__row" key={item.before}>
-                    <span>{item.before}</span>
-                    <ArrowRight size={16} aria-hidden="true" />
-                    <strong>{item.after}</strong>
+            <div className="home-lp-workflow">
+              {workflowSteps.map((step, index) => (
+                <article className="home-lp-workflow-card" key={step.id} data-reveal>
+                  <div className="home-lp-workflow-card__copy">
+                    <span>{step.step}</span>
+                    <p>{step.label}</p>
+                    <h3>{step.title}</h3>
+                    <ul>
+                      {step.items.map((item) => (
+                        <li key={item}>
+                          <CheckCircle2 size={15} aria-hidden="true" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                    <small>{step.note}</small>
                   </div>
-                ))}
-              </div>
+                  <img src={step.image} alt={step.alt} loading={index === 0 ? 'eager' : 'lazy'} decoding="async" />
+                </article>
+              ))}
             </div>
-            <div className="lp3-proof-stage" data-reveal>
-              <BrowserFrame title="Main / 動画作成ボード" className="lp3-frame--board">
-                <img
-                  src="/lp/screen-main-board-v2.webp"
-                  alt="動画作成ボードで素材とYMM4連携を確認する実アプリ画面"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </BrowserFrame>
-              <div className="lp3-proof-stage__strip">
-                <span><Gauge size={16} aria-hidden="true" />30秒で自動動画編集</span>
-                <span><SearchCheck size={16} aria-hidden="true" />YMM4直反映</span>
-                <span><ShieldCheck size={16} aria-hidden="true" />最終確認は自分で</span>
-              </div>
+            <div className="home-lp-section-cta">
+              <HomeCta href={homeFacts.downloadUrl} label="Freeでこの流れを確認する" location="flow" external>
+                <Download size={18} aria-hidden="true" />
+                Freeでこの流れを確認する
+              </HomeCta>
             </div>
           </div>
         </section>
 
-        <section className="lp3-band lp3-band--compare" aria-labelledby="lp3-compare-heading">
-          <div className="lp3-container">
+        <section id="samples" className="home-lp-section home-lp-section--muted" aria-labelledby="home-samples-heading">
+          <div className="home-lp-container">
             <SectionHead
-              kicker="比較"
-              title="手作業で詰まるところを、YMM4制作向けにまとめる。"
-              body="一般的な動画編集ソフトの代わりではなく、YMM4で動画作成する前提の作業を短くします。"
+              kicker="完成イメージ"
+              title="反応集・解説・ショート。実際の作例で確かめる。"
+              body="サイト内の実動画プレビューで、どこまでアプリが進め、どこを自分で仕上げたかを確認できます。"
             />
-            <div className="lp3-compare-table" data-reveal>
-              <div className="lp3-compare-table__head">
-                <span>作業</span>
-                <span>手作業</span>
-                <span>ゆっくりまとめプロセッサー</span>
+            <div className="home-lp-samples">
+              {sampleItems.map((item) => (
+                <article className="home-lp-sample-card" key={item.id} data-reveal>
+                  <LazyVideo item={item} />
+                  <div className="home-lp-sample-card__body">
+                    <h3>{item.title}</h3>
+                    <dl>
+                      <div>
+                        <dt>入力</dt>
+                        <dd>{item.input}</dd>
+                      </div>
+                      <div>
+                        <dt>本ソフト</dt>
+                        <dd>{item.supportScope}</dd>
+                      </div>
+                      <div>
+                        <dt>ユーザー / YMM4</dt>
+                        <dd>{item.userScope}</dd>
+                      </div>
+                    </dl>
+                  </div>
+                </article>
+              ))}
+            </div>
+            <div className="home-lp-section-cta">
+              <Link className="home-lp-text-link" to={homeFacts.samplesUrl} discover="none">
+                作例と制作手順をもっと見る
+                <ArrowRight size={16} aria-hidden="true" />
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        <section id="product" className="home-lp-section" aria-labelledby="home-product-heading">
+          <div className="home-lp-container">
+            <SectionHead
+              kicker="実画面"
+              title="機能名より、画面を見れば分かる。"
+              body="実際に触る画面だけを使い、入力からYMM4へ渡す前の確認までを順番に見られます。"
+            />
+            <ProductTour onZoom={setLightboxImage} />
+          </div>
+        </section>
+
+        <section id="demo" className="home-lp-section home-lp-demo" aria-labelledby="home-demo-heading">
+          <div className="home-lp-container home-lp-demo__grid">
+            <div data-reveal>
+              <p className="home-lp-kicker">実機デモ</p>
+              <h2 id="home-demo-heading">入力からYMM4反映までの確認ポイントを見る。</h2>
+              <p>
+                古い抽象デモ動画ではなく、現行ページでは実画面ツアーとサンプル動画で操作理解を補強します。
+                実操作デモ動画は、実アプリと実YMM4の収録素材に差し替える前提です。
+              </p>
+            </div>
+            <div className="home-lp-demo__panel" data-reveal>
+              <div className="home-lp-demo__poster">
+                <img src="/lp/screen-main-script-edit-v2.webp" alt="台本編集からYMM4へ渡す前の確認画面" loading="lazy" decoding="async" />
+                <span>
+                  <MousePointer2 size={16} aria-hidden="true" />
+                  実画面で確認
+                </span>
               </div>
-              {compareRows.map((row) => (
-                <div className="lp3-compare-row" key={row.task}>
-                  <strong>{row.task}</strong>
-                  <span>{row.manual}</span>
-                  <span>{row.ymp}</span>
+              <ol>
+                {demoOutline.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ol>
+            </div>
+          </div>
+        </section>
+
+        <section id="free" className="home-lp-section home-lp-section--muted" aria-labelledby="home-free-heading">
+          <div className="home-lp-container home-lp-free__grid">
+            <div data-reveal>
+              <p className="home-lp-kicker">購入前に</p>
+              <h2 id="home-free-heading">まずFreeで、自分のPCとYMM4環境を確認。</h2>
+              <p>
+                Premiumを購入する前に、起動、ログイン、台本編集、動画作成導線、YMM4連携の前提を確認できます。
+              </p>
+              <div className="home-lp-free__actions">
+                <HomeCta href={homeFacts.downloadUrl} label="Free版をダウンロード" location="free" external>
+                  <Download size={18} aria-hidden="true" />
+                  Free版をダウンロード
+                </HomeCta>
+                <span>{homeFacts.osLabel}専用・YMM4必須</span>
+              </div>
+            </div>
+            <div className="home-lp-free__checks" data-reveal>
+              {freeChecks.map((item) => (
+                <div key={item}>
+                  <CheckCircle2 size={18} aria-hidden="true" />
+                  <span>{item}</span>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="lp3-band lp3-band--usecases" aria-labelledby="lp3-usecases-heading">
-          <div className="lp3-container">
-            <SectionHead
-              kicker="作れる動画"
-              title="ゆっくりだけで終わらない。いろんな動画に使う。"
-              body="反応集、解説、ショート、掛け合い。型を選んで、台本と素材配置を動画用にまとめます。"
-            />
-            <div className="lp3-usecase-grid">
-              {useCaseClips.map((item) => (
-                <article className="lp3-usecase-card" key={item.title} data-reveal>
-                  <video controls playsInline preload="metadata" poster={item.poster} aria-label={`${item.title}のサンプル動画`}>
-                    <source src={item.video} type="video/mp4" />
-                    <a href={item.video}>{item.title}のサンプル動画を開く</a>
-                  </video>
-                  <div>
-                    <h3>{item.title}</h3>
-                    <p>{item.body}</p>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="lp3-band lp3-band--workflow" aria-labelledby="lp3-workflow-heading">
-          <div className="lp3-container">
-            <SectionHead
-              kicker="使う流れ"
-              title="ネタを入れる。型を選ぶ。YMM4へ反映する。"
-              body="Freeで自分のPCとYMM4環境に合うか確認できます。使う順番は実機画面で見られます。"
-            />
-            <div className="lp3-workflow">
-              {workflowSteps.map((step) => {
-                const Icon = step.Icon
-                return (
-                  <article className="lp3-step-card" key={step.step} data-reveal>
-                    <div className="lp3-step-card__copy">
-                      <span>{step.step}</span>
-                      <Icon size={24} aria-hidden="true" />
-                      <h3>{step.title}</h3>
-                      <p>{step.body}</p>
-                    </div>
-                    <img src={step.image} alt={step.alt} loading="lazy" decoding="async" />
-                  </article>
-                )
-              })}
-            </div>
-          </div>
-        </section>
-
-        <section className="lp3-band lp3-band--gallery" aria-labelledby="lp3-gallery-heading">
-          <div className="lp3-container">
-            <SectionHead
-              kicker="実画面"
-              title="実際に触る画面を、そのまま見せます。"
-              body="購入前に見るべき画面だけを並べます。どこで台本取得し、どこで動画作成するかが分かります。"
-            />
-            <div className="lp3-gallery-grid">
-              {galleryItems.map((item) => (
-                <figure className="lp3-gallery-card" key={item.title} data-reveal>
-                  <div className="lp3-gallery-card__focus">{item.focus}</div>
-                  <img src={item.image} alt={item.alt} loading="lazy" decoding="async" />
-                  <figcaption>
-                    <strong>{item.title}</strong>
-                    <span>{item.body}</span>
-                  </figcaption>
-                </figure>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="lp3-demo" className="lp3-band lp3-band--demo" aria-labelledby="lp3-demo-heading">
-          <div className="lp3-container lp3-demo-layout">
-            <div className="lp3-demo-copy" data-reveal>
-              <p className="lp3-kicker">実機デモ</p>
-              <h2 id="lp3-demo-heading">90秒で、操作の流れを見る。</h2>
-              <p>
-                ネタ投入、台本、素材、YMM4連携までを短く確認できます。
-                動画が再生できない場合は、スクリーンショットでも同じ流れを確認できます。
-              </p>
-              <ol>
-                <li>ネタや素材メモを入れる</li>
-                <li>動画の型を選ぶ</li>
-                <li>YMM4へ反映して仕上げる</li>
-              </ol>
-            </div>
-            <div className="lp3-video-frame" data-reveal>
-              <video controls playsInline preload="metadata" poster="/lp/main-demo-90s-poster.webp" aria-label="90秒メインデモ">
-                <source src="/lp/main-demo-90s.mp4" type="video/mp4" />
-                <a href="/lp/main-demo-90s.mp4">90秒メインデモを開く</a>
-              </video>
-            </div>
-          </div>
-        </section>
-
-        <section className="lp3-band lp3-band--assurance" aria-labelledby="lp3-assurance-heading">
-          <div className="lp3-container">
-            <SectionHead
-              kicker="購入前の不安"
-              title="買う前に見るべき条件を、先にまとめます。"
-              body="料金、制限、YMM4前提、成果保証なし。後から分かると不満になる点をここで確認できます。"
-            />
-            <div className="lp3-assurance-grid">
-              {buyerAssuranceItems.map((item) => (
-                <article className="lp3-assurance-card" key={item.title} data-reveal>
-                  <CheckCircle2 size={20} aria-hidden="true" />
-                  <h3>{item.title}</h3>
-                  <p>{item.body}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="lp3-band lp3-band--pricing" aria-labelledby="lp3-pricing-heading">
-          <div className="lp3-container">
+        <section
+          id="pricing"
+          ref={pricingRef}
+          className="home-lp-section home-lp-pricing"
+          aria-labelledby="home-pricing-heading"
+        >
+          <div className="home-lp-container">
             <SectionHead
               kicker="料金"
-              title="Freeで試す。Premiumで制限解除。"
-              body="Premiumは39,800円税込の買い切りです。月額ではありません。"
+              title={`Premiumは${homeFacts.premiumPrice}の買い切り。`}
+              body="月額料金はありません。Freeで自分の環境を確認し、継続して使うと決めてから購入できます。"
               align="center"
             />
-            <div className="lp3-plan-grid">
-              {planCards.map((plan) => {
-                const Icon = plan.Icon
-                return (
-                  <article className={`lp3-plan-card lp3-plan-card--${plan.name.toLowerCase()}`} key={plan.name} data-reveal>
-                    <span className="lp3-plan-card__lead">{plan.lead}</span>
-                    <h3>{plan.name}</h3>
-                    <strong>{plan.price}</strong>
-                    <ul>
-                      {plan.points.map((point) => (
-                        <li key={point}>
-                          <CheckCircle2 size={16} aria-hidden="true" />
-                          {point}
-                        </li>
-                      ))}
-                    </ul>
-                    <CtaLink href={plan.href} external={plan.external} className="lp3-card-link">
-                      <Icon size={17} aria-hidden="true" />
-                      {plan.cta}
-                    </CtaLink>
-                  </article>
-                )
-              })}
+
+            <div className="home-lp-plan-grid" aria-label="FreeとPremiumの概要">
+              <article className="home-lp-plan-card" data-reveal>
+                <span>購入前の動作確認</span>
+                <h3>Free</h3>
+                <strong>0円</strong>
+                <p>自分のPCとYMM4環境に合うか、実際の画面で確認します。</p>
+                <HomeCta href={homeFacts.downloadUrl} label="Free版をダウンロード" location="pricing_free" external>
+                  <Download size={18} aria-hidden="true" />
+                  Free版をダウンロード
+                </HomeCta>
+              </article>
+              <article className="home-lp-plan-card home-lp-plan-card--premium" data-reveal>
+                <span>買い切り・月額なし</span>
+                <h3>Premium</h3>
+                <strong>{homeFacts.premiumPrice}</strong>
+                <p>YMM4動画を継続制作し、台本取得・AI台本生成・動画作成の制限を解除したい方へ。</p>
+                <HomeCta href={homeFacts.purchaseUrl} label="Premiumを購入する" location="pricing_premium" variant="secondary">
+                  <ExternalLink size={18} aria-hidden="true" />
+                  Premiumを購入する
+                </HomeCta>
+              </article>
             </div>
+
+            <div className="home-lp-comparison" data-reveal>
+              <div className="home-lp-comparison__head">
+                <TableProperties size={18} aria-hidden="true" />
+                <h3>Free / Premium 比較</h3>
+              </div>
+              <div className="home-lp-comparison__table">
+                <div className="home-lp-comparison__row home-lp-comparison__row--head">
+                  <span>項目</span>
+                  <span>Free</span>
+                  <span>Premium</span>
+                </div>
+                {comparisonRows.map((row) => (
+                  <div className="home-lp-comparison__row" key={row.id}>
+                    <strong>{row.label}</strong>
+                    <span>{row.free}</span>
+                    <span>{row.premium}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="home-lp-fit-matrix" data-reveal>
+              <div>
+                <h3>Premiumが向いている方</h3>
+                <ul>
+                  {premiumFit.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h3>購入前にご確認ください</h3>
+                <ul>
+                  {premiumMismatch.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <nav className="home-lp-legal-links" aria-label="購入前に確認する法務リンク">
+              <Link to={homeFacts.termsUrl}>利用規約</Link>
+              <Link to={homeFacts.privacyUrl}>プライバシーポリシー</Link>
+              <Link to={homeFacts.commercialTransactionsUrl}>特定商取引法に基づく表記</Link>
+              <Link to={homeFacts.refundUrl}>返金・キャンセル条件</Link>
+            </nav>
           </div>
         </section>
 
-        <section className="lp3-band lp3-band--trust" aria-labelledby="lp3-trust-heading">
-          <div className="lp3-container">
+        <section id="requirements" className="home-lp-section home-lp-section--muted" aria-labelledby="home-requirements-heading">
+          <div className="home-lp-container">
             <SectionHead
-              kicker="導入前の確認"
-              title="買ってから困る条件を先に出します。"
-              body="Windows、YMM4、Free、Premium、成果保証なし。購入前の不安をここで潰します。"
+              kicker="導入条件"
+              title="買う前に、必要な環境と責任範囲を確認。"
+              body="Windows、YMM4、通信、ライセンス、サポート、権利確認など、購入前に必要な情報をまとめます。"
             />
-            <div className="lp3-trust-grid">
-              {trustItems.map((item) => {
-                const Icon = item.Icon
-                return (
-                  <article className="lp3-trust-card" key={item.title} data-reveal>
-                    <Icon size={24} aria-hidden="true" />
-                    <h3>{item.title}</h3>
-                    <p>{item.body}</p>
-                  </article>
-                )
-              })}
+            <div className="home-lp-requirements">
+              <div className="home-lp-requirements__table" data-reveal>
+                {requirementRows.map((row) => (
+                  <div key={row.label}>
+                    <strong>{row.label}</strong>
+                    <span>{row.value}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="home-lp-responsibility" data-reveal>
+                <h3>責任範囲</h3>
+                <ul>
+                  {responsibilityItems.map((item) => (
+                    <li key={item}>
+                      <ShieldCheck size={16} aria-hidden="true" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
+
+            <div className="home-lp-download-trust" data-reveal>
+              <div>
+                <p className="home-lp-kicker">配布確認情報</p>
+                <h3>ファイル名・サイズ・SHA-256を確認できます。</h3>
+                <p>{homeFacts.trustNote}</p>
+              </div>
+              <dl>
+                {downloadTrustItems.map((item) => (
+                  <div key={item.label}>
+                    <dt>{item.label}</dt>
+                    <dd>{item.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+
+            <p className="home-lp-trademark-note">
+              YMM4等の製品名・サービス名は各権利者の商標または登録商標です。本製品は連携対象を示すもので、公式提携・推奨を意味するものではありません。
+            </p>
           </div>
         </section>
 
-        <section className="lp3-band lp3-band--faq" aria-labelledby="lp3-faq-heading">
-          <div className="lp3-container">
+        <section id="faq" className="home-lp-section" aria-labelledby="home-faq-heading">
+          <div className="home-lp-container">
             <SectionHead
               kicker="FAQ"
-              title="料金と制限は、購入前に確認。"
+              title="料金と条件は、購入前に確認。"
               body="Freeで何ができるか、Premiumで何が解除されるか、YMM4が必要かを短く確認できます。"
               align="center"
             />
-            <div className="lp3-faq-list">
-              {priorityFaqItems.map((item, index) => (
-                <details className="lp3-faq-item" key={item.question} open={index < 2} data-reveal>
+            <div className="home-lp-faq-list">
+              {homeFaqs.map((item) => (
+                <details
+                  id={`faq-${item.id}`}
+                  className="home-lp-faq-item"
+                  key={item.id}
+                  onToggle={(event) => {
+                    if (event.currentTarget.open) {
+                      trackEvent('lp_faq_open', { question_id: item.id })
+                    }
+                  }}
+                  data-reveal
+                >
                   <summary>
                     <span>{item.question}</span>
-                    <HelpCircle size={18} aria-hidden="true" />
+                    <span aria-hidden="true">+</span>
                   </summary>
                   <p>{item.answer}</p>
                 </details>
               ))}
             </div>
-            <div className="lp3-faq-link">
-              <Link to="/faq/" discover="none">
+            <div className="home-lp-section-cta">
+              <Link className="home-lp-text-link" to={homeFacts.faqUrl} discover="none">
                 FAQをすべて見る
                 <ArrowRight size={16} aria-hidden="true" />
               </Link>
@@ -832,33 +931,49 @@ export function HomePage() {
           </div>
         </section>
 
-        <section className="lp3-final" aria-labelledby="lp3-final-heading">
-          <div className="lp3-container lp3-final__grid">
+        <section className="home-lp-final" aria-labelledby="home-final-heading">
+          <div className="home-lp-container home-lp-final__grid">
             <div>
-              <p className="lp3-kicker">START</p>
-              <h2 id="lp3-final-heading">まずFreeで、30秒の流れを試す。</h2>
+              <p className="home-lp-kicker">まずはFreeから</p>
+              <h2 id="home-final-heading">自分のネタとYMM4環境で、実際の流れを確かめてください。</h2>
               <p>
-                自分のネタで台本取得、AI台本生成、動画作成、YMM4連携まで触ってください。
-                続けて使うならPremiumで制限解除できます。
+                台本編集、動画作成導線、YMM4連携の前提をFreeで確認できます。
+                自分の制作に合うと分かってから、Premiumを選べます。
               </p>
+              <span>{heroContent.microcopy}</span>
             </div>
-            <div className="lp3-final__actions">
-              <a className="lp3-btn lp3-btn--primary" href={downloadUrl} target="_blank" rel="noopener noreferrer">
-                <Download size={18} aria-hidden="true" />
-                無料でダウンロード
-              </a>
-              <Link className="lp3-btn lp3-btn--ghost" to="/purchase/" discover="none">
-                <CreditCard size={18} aria-hidden="true" />
-                料金を見る
-              </Link>
-              <Link className="lp3-btn lp3-btn--ghost" to="/samples/" discover="none">
-                <ExternalLink size={18} aria-hidden="true" />
-                サンプルを見る
-              </Link>
+            <div className="home-lp-final__actions">
+              <HomeCta id="home-final-cta" href={homeFacts.downloadUrl} label={primaryCtaLabel} location="final" external>
+                <Download size={19} aria-hidden="true" />
+                {primaryCtaLabel}
+              </HomeCta>
+              <HomeCta href={homeFacts.purchaseUrl} label="Premiumの料金と条件を見る" location="final" variant="secondary">
+                <FileCheck2 size={18} aria-hidden="true" />
+                Premiumの料金と条件を見る
+              </HomeCta>
             </div>
           </div>
         </section>
-      </main>
+
+        <MobileStickyCta />
+      </div>
+      <ImageLightbox image={lightboxImage} onClose={closeLightbox} />
+    </>
+  )
+}
+
+export function HomePage() {
+  return (
+    <>
+      <PageMeta
+        title="YMM4前の台本・素材準備を効率化｜ゆっくりまとめプロセッサー"
+        description="記事URL・スレッドURL・下書きから、台本取得、AI台本生成、素材配置の確認、YMM4反映までを支援するWindows 10 / 11向けソフト。Freeで動作確認。Premiumは39,800円（税込）の買い切り・月額なし。"
+        keywords="ゆっくりまとめプロセッサー,YMM4,台本,素材準備,反応集,解説動画,ショート動画,Windows,Free,Premium"
+        image="/lp/screen-main-script-edit-v2.webp"
+        path="/"
+        structuredData={[softwareApplicationLd, faqPageLd]}
+      />
+      <HomePageContent />
     </>
   )
 }

@@ -4,16 +4,27 @@ import { Link, Outlet, useLocation } from 'react-router-dom'
 import { ActionLink, GlobalShareButtons } from '@/components/ui'
 import { media } from '@/data/assets'
 import {
+  downloadUrl,
   legal,
   navItems,
   normalizePath,
   pageRegistry,
   primaryCta,
   secondaryCta,
+  siteDescription,
   siteOrigin,
   siteTagline,
   siteTitle,
 } from '@/data/site-content'
+
+const homeHeaderNavItems = [
+  { label: 'できること', href: '#flow' },
+  { label: '作例', href: '#samples' },
+  { label: '実画面', href: '#product' },
+  { label: '料金', href: '#pricing' },
+  { label: '動作条件', href: '#requirements' },
+  { label: 'FAQ', href: '#faq' },
+] as const
 
 function buildBreadcrumbs(pathname: string) {
   const normalized = normalizePath(pathname)
@@ -184,7 +195,13 @@ export function SiteLayout() {
 
   useRouteEffects(location.pathname, location.hash)
 
-  const customPrimaryCta = useMemo(() => ({ ...primaryCta, label: '無料でダウンロード' }), [])
+  const customPrimaryCta = useMemo(
+    () =>
+      isHome
+        ? { label: '無料版を試す', href: downloadUrl, variant: 'primary' as const, external: true }
+        : { ...primaryCta, label: '無料でダウンロード' },
+    [isHome],
+  )
 
   return (
     <>
@@ -240,25 +257,31 @@ export function SiteLayout() {
             data-nav
             data-open={navOpen}
           >
-            {headerNavItems.map((item) => (
-              <Link
-                key={item.key}
-                className={item.key === activeKey ? 'is-active' : undefined}
-                aria-current={item.key === activeKey ? 'page' : undefined}
-                to={item.url}
-                discover="none"
-              >
-                {item.label}
-              </Link>
-            ))}
+            {isHome
+              ? homeHeaderNavItems.map((item) => (
+                  <a key={item.href} href={item.href}>
+                    {item.label}
+                  </a>
+                ))
+              : headerNavItems.map((item) => (
+                  <Link
+                    key={item.key}
+                    className={item.key === activeKey ? 'is-active' : undefined}
+                    aria-current={item.key === activeKey ? 'page' : undefined}
+                    to={item.url}
+                    discover="none"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
             <div className="brand-nav__cta-stack" aria-label="モバイルCTA">
               <ActionLink action={customPrimaryCta} className="brand-btn" />
-              <ActionLink action={secondaryCta} className="brand-btn brand-btn--ghost" />
+              {isHome ? null : <ActionLink action={secondaryCta} className="brand-btn brand-btn--ghost" />}
             </div>
           </nav>
 
           <div className="header-actions brand-header__actions home-compact-cta__actions brand-header__actions--flush">
-            <ActionLink action={secondaryCta} className="header-cta brand-btn" />
+            {isHome ? null : <ActionLink action={secondaryCta} className="header-cta brand-btn" />}
             <ActionLink action={customPrimaryCta} className="brand-btn" />
           </div>
         </div>
@@ -291,7 +314,7 @@ export function SiteLayout() {
         <div className="brand-footer__inner">
           <div className="brand-footer__lead">
             <h2>{siteTitle}</h2>
-            <p>台本取得、AI台本生成、素材配置、動画作成、YMM4連携まで進めるWindows向け自動動画編集ソフト。</p>
+            <p>{siteDescription}</p>
           </div>
 
           <div className="brand-footer__grid">
