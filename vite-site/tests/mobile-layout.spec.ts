@@ -111,4 +111,39 @@ test.describe('mobile layout', () => {
       await expect(page.locator('h1').first()).toContainText(route.heading)
     }
   })
+
+  test('home hero shows the product screen before long conditions on the first viewport', async ({ page }) => {
+    await page.goto('/', { waitUntil: 'networkidle' })
+
+    const metrics = await page.evaluate(() => {
+      const heroImage = document.querySelector<HTMLImageElement>('.home-lp-hero__visual img')
+      const primaryCta = document.getElementById('home-hero-primary-cta')
+      const facts = document.querySelector<HTMLElement>('.home-lp-hero__facts')
+      const imageRect = heroImage?.getBoundingClientRect()
+      const ctaRect = primaryCta?.getBoundingClientRect()
+      const factsRect = facts?.getBoundingClientRect()
+
+      return {
+        viewportHeight: window.innerHeight,
+        ctaVisible: Boolean(ctaRect && ctaRect.top >= 0 && ctaRect.bottom <= window.innerHeight),
+        imageVisible: Boolean(imageRect && imageRect.top < window.innerHeight && imageRect.height >= 120),
+        imageBeforeFacts: Boolean(imageRect && factsRect && imageRect.top < factsRect.top),
+      }
+    })
+
+    expect(metrics.ctaVisible).toBeTruthy()
+    expect(metrics.imageVisible).toBeTruthy()
+    expect(metrics.imageBeforeFacts).toBeTruthy()
+  })
+
+  test('home sticky CTA is removed while inline CTAs are visible', async ({ page }) => {
+    await page.goto('/', { waitUntil: 'networkidle' })
+    await expect(page.locator('.home-lp-sticky-cta')).toHaveCount(0)
+
+    await page.locator('#product').scrollIntoViewIfNeeded()
+    await expect(page.locator('.home-lp-sticky-cta')).toBeVisible()
+
+    await page.locator('#home-pricing-free-cta').scrollIntoViewIfNeeded()
+    await expect(page.locator('.home-lp-sticky-cta')).toHaveCount(0)
+  })
 })

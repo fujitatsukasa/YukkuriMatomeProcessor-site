@@ -75,4 +75,26 @@ test.describe('primary page copy quality', () => {
       }
     })
   }
+
+  test('home keeps unverified proof claims out of visible copy and structured data', async ({ page }) => {
+    await page.goto('/', { waitUntil: 'networkidle' })
+
+    const visibleText = await page.locator('body').innerText()
+    for (const phrase of ['60秒の操作デモ', '実際の完成映像', '動画作成の上限', '利用制限を解除', '実操作デモ']) {
+      expect(visibleText).not.toContain(phrase)
+    }
+
+    const structuredData = await page.locator('script[type="application/ld+json"]').evaluateAll((nodes) =>
+      nodes.map((node) => JSON.parse(node.textContent || '{}')),
+    )
+    const types = structuredData.map((entry) => entry['@type'])
+    expect(types).toContain('SoftwareApplication')
+    expect(types).toContain('FAQPage')
+    expect(types).not.toContain('VideoObject')
+
+    const faqLd = structuredData.find((entry) => entry['@type'] === 'FAQPage')
+    const visibleFaqQuestions = await page.locator('#faq details summary span:first-child').allInnerTexts()
+    expect(faqLd.mainEntity).toHaveLength(visibleFaqQuestions.length)
+    expect(faqLd.mainEntity.map((entry: { name: string }) => entry.name)).toEqual(visibleFaqQuestions)
+  })
 })

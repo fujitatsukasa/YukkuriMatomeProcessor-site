@@ -1,7 +1,6 @@
 import {
   useCallback,
   useEffect,
-  useMemo,
   useRef,
   useState,
   type ReactNode,
@@ -35,6 +34,7 @@ import {
   premiumFit,
   premiumMismatch,
   productFeatures,
+  purchaseConditionRows,
   requirementRows,
   responsibilityItems,
   sampleItems,
@@ -65,6 +65,8 @@ const primaryCtaLabel = heroContent.primaryCta
 
 const metaDescription =
   '記事URL・スレッドURL・下書きから、本文・コメント取得、話者割り当て、台本整形、AI台本生成、素材確認、YMM4反映まで。Windows 10 / 11対応。Free版あり、Premiumは39,800円（税込）の買い切り。'
+
+const visibleHomeFaqs = homeFaqs.slice(0, 10)
 
 function getCommonParams() {
   const params = new URLSearchParams(window.location.search)
@@ -109,7 +111,7 @@ const softwareApplicationLd = {
   ],
   publisher: {
     '@type': 'Organization',
-    name: homeFacts.productName,
+    name: homeFacts.publisherName,
     url: homeFacts.siteOrigin,
   },
 }
@@ -117,7 +119,7 @@ const softwareApplicationLd = {
 const faqPageLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: homeFaqs.map((item) => ({
+  mainEntity: visibleHomeFaqs.map((item) => ({
     '@type': 'Question',
     name: item.question,
     acceptedAnswer: {
@@ -125,17 +127,6 @@ const faqPageLd = {
       text: item.answer,
     },
   })),
-}
-
-const demoVideoLd = {
-  '@context': 'https://schema.org',
-  '@type': 'VideoObject',
-  name: '60秒で、URLからYMM4反映までを見る。',
-  description: '実アプリ画面を使い、取り込み、台本設定、AI生成、素材確認、YMM4反映までの流れを順番に示すデモです。',
-  thumbnailUrl: `${homeFacts.siteOrigin}${homeAssets.hero}`,
-  uploadDate: '2026-06-22',
-  duration: 'PT1M3S',
-  contentUrl: `${homeFacts.siteOrigin}/lp/home-demo-60s.mp4`,
 }
 
 function useHomeViewTracking() {
@@ -379,17 +370,17 @@ function DemoVideo() {
     <div className="home-lp-demo-card" data-reveal>
       <div className="home-lp-demo-card__media">
         {active ? (
-          <video controls playsInline preload="none" poster={homeAssets.hero} onTimeUpdate={handleProgress}>
+          <video controls playsInline autoPlay preload="none" poster={homeAssets.hero} onTimeUpdate={handleProgress}>
             <source src="/lp/home-demo-60s.mp4" type="video/mp4" />
             <track kind="captions" src="/lp/home-demo-60s.vtt" srcLang="ja" label="日本語" default />
-            <a href="/lp/home-demo-60s.mp4">操作デモ動画を開く</a>
+            <a href="/lp/home-demo-60s.mp4">制作フロー動画を開く</a>
           </video>
         ) : (
           <button className="home-lp-demo-poster" type="button" onClick={handlePlayClick}>
-            <img src={homeAssets.hero} alt="URLからYMM4反映までの操作デモポスター" loading="lazy" decoding="async" />
+            <img src={homeAssets.hero} alt="URLからYMM4前準備までの制作フローポスター" loading="lazy" decoding="async" />
             <span>
               <Play size={20} aria-hidden="true" />
-              操作デモを再生
+              制作フローを再生
             </span>
           </button>
         )}
@@ -504,45 +495,65 @@ function MobileStickyCta() {
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    const heroCta = document.getElementById('home-hero-primary-cta')
-    const finalCta = document.getElementById('home-final-cta')
+    const guardedIds = [
+      'home-hero-primary-cta',
+      'home-workflow-primary-cta',
+      'home-free-primary-cta',
+      'home-pricing-free-cta',
+      'home-pricing-premium-cta',
+      'home-final-cta',
+    ]
+    const guardedNodes = guardedIds
+      .map((id) => document.getElementById(id))
+      .filter((node): node is HTMLElement => Boolean(node))
     const mobileQuery = window.matchMedia('(max-width: 760px)')
 
-    if (!heroCta || !finalCta || !('IntersectionObserver' in window)) {
+    if (!guardedNodes.length || !('IntersectionObserver' in window)) {
       return undefined
     }
 
-    const state = { heroVisible: true, finalVisible: false, mobile: mobileQuery.matches }
-    const update = () => setVisible(state.mobile && !state.heroVisible && !state.finalVisible)
+    const state = {
+      mobile: mobileQuery.matches,
+      inlineVisible: new Map(guardedNodes.map((node) => [node.id, false])),
+    }
+    const update = () => {
+      const hasInlineCta = Array.from(state.inlineVisible.values()).some(Boolean)
+      setVisible(state.mobile && !hasInlineCta)
+    }
 
-    const heroObserver = new IntersectionObserver(([entry]) => {
-      state.heroVisible = entry.isIntersecting
-      update()
-    })
-
-    const finalObserver = new IntersectionObserver(([entry]) => {
-      state.finalVisible = entry.isIntersecting
-      update()
-    })
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.target instanceof HTMLElement) {
+            state.inlineVisible.set(entry.target.id, entry.isIntersecting)
+          }
+        }
+        update()
+      },
+      { threshold: 0.1 },
+    )
 
     const handleMediaChange = (event: MediaQueryListEvent) => {
       state.mobile = event.matches
       update()
     }
 
-    heroObserver.observe(heroCta)
-    finalObserver.observe(finalCta)
+    guardedNodes.forEach((node) => observer.observe(node))
     mobileQuery.addEventListener('change', handleMediaChange)
+    update()
 
     return () => {
-      heroObserver.disconnect()
-      finalObserver.disconnect()
+      observer.disconnect()
       mobileQuery.removeEventListener('change', handleMediaChange)
     }
   }, [])
 
+  if (!visible) {
+    return null
+  }
+
   return (
-    <div className="home-lp-sticky-cta" data-visible={visible}>
+    <div className="home-lp-sticky-cta">
       <HomeCta href={homeFacts.downloadUrl} label="Free版を試す" location="mobile_sticky" external>
         <Download size={18} aria-hidden="true" />
         Free版を試す
@@ -580,8 +591,6 @@ function HomePageContent() {
     return () => observer.disconnect()
   }, [])
 
-  const faqPreview = useMemo(() => homeFaqs.slice(0, 10), [])
-
   return (
     <>
       <div className="home-lp">
@@ -610,16 +619,14 @@ function HomePageContent() {
                   {heroContent.secondaryCta}
                 </HomeCta>
               </div>
-              <p className="home-lp-hero__microcopy">{heroContent.microcopy}</p>
-              <p className="home-lp-hero__note">{heroContent.note}</p>
             </div>
 
             <div className="home-lp-hero__visual" data-reveal>
               <ProductScreenshot
                 image={{
                   src: homeAssets.hero,
-                  alt: '実台本行と素材が入った台本編集画面',
-                  title: '台本編集と素材確認の画面',
+                  alt: '台本編集と素材確認の画面例',
+                  title: '台本編集と素材確認の画面例',
                   annotations: [
                     { x: 15, y: 20, label: 'URL / 下書きから開始' },
                     { x: 48, y: 39, label: '話者・台本・素材を整える' },
@@ -629,6 +636,15 @@ function HomePageContent() {
                 onZoom={setLightboxImage}
                 priority
               />
+            </div>
+
+            <div className="home-lp-hero__facts" data-reveal>
+              <p className="home-lp-hero__microcopy">{heroContent.microcopy}</p>
+              <div className="home-lp-hero__scope" aria-label="本製品とYMM4の役割分担">
+                <p>{heroContent.productScope}</p>
+                <p>{heroContent.yymm4Scope}</p>
+              </div>
+              <p className="home-lp-hero__trust">{heroContent.trustNote}</p>
             </div>
           </div>
 
@@ -672,7 +688,7 @@ function HomePageContent() {
           <div className="home-lp-container">
             <SectionHead
               kicker="WORKFLOW"
-              title="ネタを入れる。台本を整える。YMM4へ反映する。"
+              title="URL・下書きから、台本と素材を整えてYMM4へ。"
               body="どこをアプリに任せ、どこを自分で確認するかが分かる流れです。AIに丸投げせず、最後の品質は自分で決められます。"
             />
             <div className="home-lp-steps">
@@ -697,7 +713,13 @@ function HomePageContent() {
               ))}
             </div>
             <div className="home-lp-section-cta">
-              <HomeCta href={homeFacts.downloadUrl} label="Free版でこの流れを試す" location="workflow" external>
+              <HomeCta
+                id="home-workflow-primary-cta"
+                href={homeFacts.downloadUrl}
+                label="Free版でこの流れを試す"
+                location="workflow"
+                external
+              >
                 <Download size={18} aria-hidden="true" />
                 Free版でこの流れを試す
               </HomeCta>
@@ -717,8 +739,8 @@ function HomePageContent() {
           <div className="home-lp-container">
             <SectionHead
               kicker="LIVE DEMO"
-              title="60秒で、URLからYMM4反映までを見る。"
-              body="実アプリ画面を使い、取り込み、台本設定、AI生成、素材確認、YMM4反映までを順番に見せます。"
+              title="画面で見る制作フロー"
+              body="現在の動画は、連続した操作記録ではなく制作フローの解説です。YMM4反映後のタイムラインを含む実記録は、撮影でき次第差し替えます。"
             />
             <DemoVideo />
           </div>
@@ -729,7 +751,7 @@ function HomePageContent() {
             <SectionHead
               kicker="USE CASES"
               title="動画の型に合わせて、台本の作り方を変える。"
-              body="反応集、解説、ショート。それぞれで入力、台本ルール、YMM4で仕上げる箇所が違います。実際の完成映像と制作手順を並べて見せます。"
+              body="反応集、解説、ショート。それぞれで入力、台本ルール、YMM4で仕上げる箇所が違います。掲載中の動画は用途説明用のサンプルで、完成映像の証拠としては扱いません。"
             />
             <div className="home-lp-samples">
               {sampleItems.map((item) => (
@@ -774,7 +796,13 @@ function HomePageContent() {
                 起動確認だけで終わらせず、台本編集とYMM4連携が自分の環境で使えるかを実際に確認してください。
               </p>
               <div className="home-lp-free__actions">
-                <HomeCta href={homeFacts.downloadUrl} label={primaryCtaLabel} location="free_section" external>
+                <HomeCta
+                  id="home-free-primary-cta"
+                  href={homeFacts.downloadUrl}
+                  label={primaryCtaLabel}
+                  location="free_section"
+                  external
+                >
                   <Download size={18} aria-hidden="true" />
                   {primaryCtaLabel}
                 </HomeCta>
@@ -813,8 +841,8 @@ function HomePageContent() {
           <div className="home-lp-container">
             <SectionHead
               kicker="PRICING"
-              title="月額なし。Premiumは39,800円（税込）の買い切り。"
-              body="Free版で操作と環境を確認し、継続して制作すると決めた段階でPremiumへ。料金と機能差を隠さず、同じ画面で比較できます。"
+              title="Premiumは39,800円（税込）。月額なしの買い切りです。"
+              body="Freeで動作とYMM4連携を確かめ、継続利用が必要になったらPremiumへ。公開済みの条件と、購入前に確認すべき条件を分けて表示します。"
               align="center"
             />
 
@@ -824,7 +852,13 @@ function HomePageContent() {
                 <h3>Free</h3>
                 <strong>0円</strong>
                 <p>自分のWindowsとYMM4環境で、台本編集と連携の流れを確認するための無料版です。</p>
-                <HomeCta href={homeFacts.downloadUrl} label={primaryCtaLabel} location="pricing_free" external>
+                <HomeCta
+                  id="home-pricing-free-cta"
+                  href={homeFacts.downloadUrl}
+                  label={primaryCtaLabel}
+                  location="pricing_free"
+                  external
+                >
                   <Download size={18} aria-hidden="true" />
                   {primaryCtaLabel}
                 </HomeCta>
@@ -833,8 +867,14 @@ function HomePageContent() {
                 <span>買い切り・月額なし</span>
                 <h3>Premium</h3>
                 <strong>{homeFacts.premiumPrice}</strong>
-                <p>YMM4動画を継続して作り、台本取得・AI台本生成・動画作成の上限を解除したい方向けです。</p>
-                <HomeCta href={homeFacts.purchaseUrl} label="Premiumの詳細を見る" location="pricing_premium" variant="secondary">
+                <p>URL取得、AI台本案、プロジェクト保存、YMM4前準備を、購入前に確認した条件で継続利用したい方向けです。</p>
+                <HomeCta
+                  id="home-pricing-premium-cta"
+                  href={homeFacts.purchaseUrl}
+                  label="Premiumの詳細を見る"
+                  location="pricing_premium"
+                  variant="secondary"
+                >
                   <FileCheck2 size={18} aria-hidden="true" />
                   Premiumの詳細を見る
                 </HomeCta>
@@ -860,6 +900,22 @@ function HomePageContent() {
                   </div>
                 ))}
               </div>
+            </div>
+
+            <div className="home-lp-condition-panel" data-reveal>
+              <div>
+                <p className="home-lp-kicker">購入前確認</p>
+                <h3>39,800円を判断するために、未確認の条件は残さず確認してください。</h3>
+                <p>このLPでは、確認できていない数値を無制限や確定条件として表示しません。</p>
+              </div>
+              <dl>
+                {purchaseConditionRows.map((row) => (
+                  <div key={row.label}>
+                    <dt>{row.label}</dt>
+                    <dd>{row.value}</dd>
+                  </div>
+                ))}
+              </dl>
             </div>
 
             <div className="home-lp-fit-matrix" data-reveal>
@@ -963,7 +1019,7 @@ function HomePageContent() {
               align="center"
             />
             <div className="home-lp-faq-list">
-              {faqPreview.map((item) => (
+              {visibleHomeFaqs.map((item) => (
                 <details
                   id={`faq-${item.id}`}
                   className="home-lp-faq-item"
@@ -1029,7 +1085,7 @@ export function HomePage() {
         keywords="ゆっくりまとめプロセッサー,YMM4,台本,素材,記事URL,スレッドURL,反応集,解説動画,ショート動画,Windows,Free,Premium"
         image={homeAssets.hero}
         path="/"
-        structuredData={[softwareApplicationLd, faqPageLd, demoVideoLd]}
+        structuredData={[softwareApplicationLd, faqPageLd]}
       />
       <HomePageContent />
     </>
