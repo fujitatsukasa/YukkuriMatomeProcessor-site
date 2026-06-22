@@ -1,4 +1,5 @@
 import { expect, test, type Page } from '@playwright/test'
+import { decisionRecords, productFacts, readinessGates } from '../src/data/product-facts'
 
 const primaryPages = [
   {
@@ -116,6 +117,43 @@ async function collectInspectableCopy(page: Page) {
 }
 
 test.describe('primary page copy quality', () => {
+  test('readiness gates are derived from D1-D12 decisions', () => {
+    expect(decisionRecords).toHaveLength(12)
+    expect(decisionRecords.map((decision) => decision.id)).toEqual([
+      'D1',
+      'D2',
+      'D3',
+      'D4',
+      'D5',
+      'D6',
+      'D7',
+      'D8',
+      'D9',
+      'D10',
+      'D11',
+      'D12',
+    ])
+
+    expect(productFacts.purchaseReady.value).toBe(false)
+    expect(productFacts.downloadReady.value).toBe(false)
+    expect(productFacts.publishReady.value).toBe(false)
+
+    expect(productFacts.purchaseReady.source).toContain('派生No-Go')
+    expect(productFacts.downloadReady.source).toContain('派生No-Go')
+    expect(productFacts.publishReady.source).toContain('派生No-Go')
+
+    expect(productFacts.purchaseReady.blockers).toEqual(expect.arrayContaining(['D2', 'D3', 'D4', 'D5', 'D6', 'D12']))
+    expect(productFacts.downloadReady.blockers).toEqual(expect.arrayContaining(['D8', 'D10', 'D12']))
+    expect(productFacts.publishReady.blockers).toEqual(
+      expect.arrayContaining(['D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7', 'D8', 'D9', 'D10', 'D11', 'D12']),
+    )
+
+    for (const gate of Object.values(readinessGates)) {
+      expect(gate.criteria.length).toBeGreaterThan(0)
+      expect(gate.value).toBe(gate.blockers.length === 0)
+    }
+  })
+
   for (const entry of primaryPages) {
     test(`${entry.path} has a concrete heading, stable CTA labels, and no internal copy`, async ({ page }) => {
       await page.goto(entry.path, { waitUntil: 'networkidle' })
