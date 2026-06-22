@@ -1,0 +1,38 @@
+[
+  {
+    "route": "/",
+    "file": "C:\\Users\\takas\\AppData\\Local\\Temp\\ymp-site-visual-qa-final-20260622\\home-mobile-final.png",
+    "metrics": {
+      "h1": "記事・スレッドから、YMM4で仕上げる前準備まで。",
+      "overflow": 0,
+      "riskyLinks": [],
+      "purchaseLinks": [],
+      "hasOldDownloadCta": false,
+      "hasOldApiPhrase": false
+    }
+  },
+  {
+    "route": "/download/",
+    "file": "C:\\Users\\takas\\AppData\\Local\\Temp\\ymp-site-visual-qa-final-20260622\\download-mobile-final.png",
+    "metrics": {
+      "h1": "配布条件を確認してFree版を試す",
+      "overflow": 0,
+      "riskyLinks": [],
+      "purchaseLinks": [],
+      "hasOldDownloadCta": false,
+      "hasOldApiPhrase": false
+    }
+  },
+  {
+    "route": "/purchase/",
+    "file": "C:\\Users\\takas\\AppData\\Local\\Temp\\ymp-site-visual-qa-final-20260622\\purchase-mobile-final.png",
+    "metrics": {
+      "h1": "料金プラン｜Freeで試して、Premium条件を確認",
+      "overflow": 0,
+      "riskyLinks": [],
+      "purchaseLinks": [],
+      "hasOldDownloadCta": false,
+      "hasOldApiPhrase": false
+    }
+  }
+]
