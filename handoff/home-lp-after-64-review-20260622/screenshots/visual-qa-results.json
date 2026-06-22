@@ -1,0 +1,149 @@
+[
+  {
+    "name": "desktop-hero-1440x900",
+    "url": "http://127.0.0.1:4178/",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "scrollY": 0,
+    "docScrollWidth": 1440,
+    "bodyScrollWidth": 1440,
+    "heroImageInViewport": true,
+    "heroCtaInViewport": true,
+    "pricingCtaInViewport": false,
+    "stickyVisible": false,
+    "faqCount": 10,
+    "jsonLdTypes": [
+      "SoftwareApplication",
+      "FAQPage"
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "name": "desktop-pricing-1440x900",
+    "url": "http://127.0.0.1:4178/#pricing",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "scrollY": 10877,
+    "docScrollWidth": 1440,
+    "bodyScrollWidth": 1440,
+    "heroImageInViewport": false,
+    "heroCtaInViewport": false,
+    "pricingCtaInViewport": true,
+    "stickyVisible": false,
+    "faqCount": 10,
+    "jsonLdTypes": [
+      "SoftwareApplication",
+      "FAQPage"
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "name": "tablet-hero-1024x768",
+    "url": "http://127.0.0.1:4178/",
+    "viewport": {
+      "width": 1024,
+      "height": 768
+    },
+    "scrollY": 0,
+    "docScrollWidth": 1024,
+    "bodyScrollWidth": 1024,
+    "heroImageInViewport": true,
+    "heroCtaInViewport": true,
+    "pricingCtaInViewport": false,
+    "stickyVisible": false,
+    "faqCount": 10,
+    "jsonLdTypes": [
+      "SoftwareApplication",
+      "FAQPage"
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "name": "mobile-hero-390x844",
+    "url": "http://127.0.0.1:4178/",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "scrollY": 0,
+    "docScrollWidth": 390,
+    "bodyScrollWidth": 390,
+    "heroImageInViewport": true,
+    "heroCtaInViewport": true,
+    "pricingCtaInViewport": false,
+    "stickyVisible": false,
+    "faqCount": 10,
+    "jsonLdTypes": [
+      "SoftwareApplication",
+      "FAQPage"
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "name": "mobile-pricing-390x844",
+    "url": "http://127.0.0.1:4178/#pricing",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "scrollY": 13230,
+    "docScrollWidth": 390,
+    "bodyScrollWidth": 390,
+    "heroImageInViewport": false,
+    "heroCtaInViewport": false,
+    "pricingCtaInViewport": true,
+    "stickyVisible": false,
+    "faqCount": 10,
+    "jsonLdTypes": [
+      "SoftwareApplication",
+      "FAQPage"
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "name": "mobile-product-390x844",
+    "url": "http://127.0.0.1:4178/#product",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "scrollY": 6533,
+    "docScrollWidth": 390,
+    "bodyScrollWidth": 390,
+    "heroImageInViewport": false,
+    "heroCtaInViewport": false,
+    "pricingCtaInViewport": false,
+    "stickyVisible": false,
+    "faqCount": 10,
+    "jsonLdTypes": [
+      "SoftwareApplication",
+      "FAQPage"
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "name": "narrow-mobile-hero-360x800",
+    "url": "http://127.0.0.1:4178/",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    },
+    "scrollY": 0,
+    "docScrollWidth": 360,
+    "bodyScrollWidth": 360,
+    "heroImageInViewport": true,
+    "heroCtaInViewport": true,
+    "pricingCtaInViewport": false,
+    "stickyVisible": false,
+    "faqCount": 10,
+    "jsonLdTypes": [
+      "SoftwareApplication",
+      "FAQPage"
+    ],
+    "horizontalOverflow": false
+  }
+]
