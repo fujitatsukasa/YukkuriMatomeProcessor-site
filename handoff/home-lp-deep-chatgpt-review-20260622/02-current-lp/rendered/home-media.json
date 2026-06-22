@@ -1,0 +1,140 @@
+{
+  "images": [
+    {
+      "src": "data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='64'%20height='64'%20viewBox='0%200%2064%2064'%20role='img'%20aria-label='YMP%20monogram'%3e%3cdefs%3e%3clinearGradient%20id='gold'%20x1='0'%20y1='0'%20x2='1'%20y2='1'%3e%3cstop%20offset='0'%20stop-color='%23f7e7c7'/%3e%3cstop%20offset='0.55'%20stop-color='%23d6b27c'/%3e%3cstop%20offset='1'%20stop-color='%23b28a56'/%3e%3c/linearGradient%3e%3c/defs%3e%3ccircle%20cx='32'%20cy='32'%20r='26'%20fill='none'%20stroke='url(%23gold)'%20stroke-width='3'/%3e%3cpath%20d='M20%2018%20L32%2030%20L44%2018'%20stroke='url(%23gold)'%20stroke-width='3.5'%20stroke-linecap='round'%20stroke-linejoin='round'%20fill='none'/%3e%3cpath%20d='M32%2030%20L32%2046'%20stroke='url(%23gold)'%20stroke-width='3.5'%20stroke-linecap='round'%20fill='none'/%3e%3cpath%20d='M18%2034%20H26'%20stroke='url(%23gold)'%20stroke-width='2.5'%20stroke-linecap='round'%20opacity='0.85'/%3e%3cpath%20d='M38%2034%20H46'%20stroke='url(%23gold)'%20stroke-width='2.5'%20stroke-linecap='round'%20opacity='0.85'/%3e%3c/svg%3e",
+      "alt": "",
+      "loading": "auto",
+      "width": 24,
+      "height": 24,
+      "naturalWidth": 64,
+      "naturalHeight": 64
+    },
+    {
+      "src": "http://127.0.0.1:4181/lp/screen-home-hero-v1.webp",
+      "alt": "台本編集と素材確認の画面例",
+      "loading": "eager",
+      "width": 587,
+      "height": 367,
+      "naturalWidth": 900,
+      "naturalHeight": 566
+    },
+    {
+      "src": "http://127.0.0.1:4181/lp/screen-home-capture-v1.webp",
+      "alt": "対応するサイトとURLを指定し、取得候補を確認する台本取得画面",
+      "loading": "eager",
+      "width": 754,
+      "height": 1086,
+      "naturalWidth": 640,
+      "naturalHeight": 922
+    },
+    {
+      "src": "http://127.0.0.1:4181/lp/screen-home-shape-v1.webp",
+      "alt": "話者、改行、タイトル読みをプリセットで設定する画面",
+      "loading": "lazy",
+      "width": 754,
+      "height": 1158,
+      "naturalWidth": 620,
+      "naturalHeight": 952
+    },
+    {
+      "src": "http://127.0.0.1:4181/lp/screen-home-ai-result-v1.webp",
+      "alt": "構成と文字量を指定し、AI台本の生成結果を確認する画面",
+      "loading": "lazy",
+      "width": 754,
+      "height": 909,
+      "naturalWidth": 390,
+      "naturalHeight": 470
+    },
+    {
+      "src": "http://127.0.0.1:4181/lp/screen-home-material-board-v1.webp",
+      "alt": "台本行と素材の配置を一覧で確認する素材ボード",
+      "loading": "lazy",
+      "width": 754,
+      "height": 409,
+      "naturalWidth": 0,
+      "naturalHeight": 0
+    },
+    {
+      "src": "http://127.0.0.1:4181/lp/screen-home-capture-v1.webp",
+      "alt": "対応するサイトとURLを指定し、取得候補を確認する台本取得画面",
+      "loading": "eager",
+      "width": 705,
+      "height": 396,
+      "naturalWidth": 640,
+      "naturalHeight": 922
+    },
+    {
+      "src": "http://127.0.0.1:4181/lp/screen-home-shape-v1.webp",
+      "alt": "話者、改行、タイトル読みをプリセットで設定する画面",
+      "loading": "lazy",
+      "width": 705,
+      "height": 396,
+      "naturalWidth": 620,
+      "naturalHeight": 952
+    },
+    {
+      "src": "http://127.0.0.1:4181/lp/screen-home-ai-result-v1.webp",
+      "alt": "構成と文字量を指定し、AI台本の生成結果を確認する画面",
+      "loading": "lazy",
+      "width": 493,
+      "height": 277,
+      "naturalWidth": 390,
+      "naturalHeight": 470
+    },
+    {
+      "src": "http://127.0.0.1:4181/lp/screen-home-material-board-v1.webp",
+      "alt": "台本行と素材の配置を一覧で確認する素材ボード",
+      "loading": "lazy",
+      "width": 705,
+      "height": 396,
+      "naturalWidth": 0,
+      "naturalHeight": 0
+    },
+    {
+      "src": "http://127.0.0.1:4181/lp/screen-home-hero-v1.webp",
+      "alt": "URLからYMM4前準備までの制作フローポスター",
+      "loading": "lazy",
+      "width": 755,
+      "height": 472,
+      "naturalWidth": 900,
+      "naturalHeight": 566
+    },
+    {
+      "src": "http://127.0.0.1:4181/samples/sample-reaction-digest-thumbnail.png",
+      "alt": "コメントの順番と話者を整え、テンポはYMM4で仕上げる。のサンプル動画ポスター",
+      "loading": "lazy",
+      "width": 394,
+      "height": 222,
+      "naturalWidth": 0,
+      "naturalHeight": 0
+    },
+    {
+      "src": "http://127.0.0.1:4181/samples/sample-yukkuri-dialogue-thumbnail.png",
+      "alt": "導入・本編・まとめの構成で、台本案を作る。のサンプル動画ポスター",
+      "loading": "lazy",
+      "width": 394,
+      "height": 222,
+      "naturalWidth": 0,
+      "naturalHeight": 0
+    },
+    {
+      "src": "http://127.0.0.1:4181/samples/sample-short-drama-thumbnail.png",
+      "alt": "冒頭・展開・締めに絞り、短尺向けの文字量へ。のサンプル動画ポスター",
+      "loading": "lazy",
+      "width": 394,
+      "height": 222,
+      "naturalWidth": 0,
+      "naturalHeight": 0
+    },
+    {
+      "src": "http://127.0.0.1:4181/lp/screen-home-free-v1.webp",
+      "alt": "Free状態と更新確認を表示する画面",
+      "loading": "lazy",
+      "width": 681,
+      "height": 426,
+      "naturalWidth": 0,
+      "naturalHeight": 0
+    }
+  ],
+  "videos": []
+}

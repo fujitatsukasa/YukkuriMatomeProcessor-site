@@ -1,0 +1,386 @@
+[
+  {
+    "text": "本文へスキップ",
+    "href": "http://127.0.0.1:4181/#main-content",
+    "target": "",
+    "rel": "",
+    "id": "",
+    "className": "skip-link"
+  },
+  {
+    "text": "ゆっくりまとめプロセッサーYMM4向け台本・素材準備ツール",
+    "href": "http://127.0.0.1:4181/",
+    "target": "",
+    "rel": "",
+    "id": "",
+    "className": "logo brand-logo"
+  },
+  {
+    "text": "制作フロー",
+    "href": "http://127.0.0.1:4181/#workflow",
+    "target": "",
+    "rel": "",
+    "id": "",
+    "className": ""
+  },
+  {
+    "text": "実画面",
+    "href": "http://127.0.0.1:4181/#product",
+    "target": "",
+    "rel": "",
+    "id": "",
+    "className": ""
+  },
+  {
+    "text": "作例",
+    "href": "http://127.0.0.1:4181/#samples",
+    "target": "",
+    "rel": "",
+    "id": "",
+    "className": ""
+  },
+  {
+    "text": "料金",
+    "href": "http://127.0.0.1:4181/#pricing",
+    "target": "",
+    "rel": "",
+    "id": "",
+    "className": ""
+  },
+  {
+    "text": "FAQ",
+    "href": "http://127.0.0.1:4181/#faq",
+    "target": "",
+    "rel": "",
+    "id": "",
+    "className": ""
+  },
+  {
+    "text": "Free版を試す",
+    "href": "https://ymp-api.fujita-otm.workers.dev/updates/ymp/win-x64-stable/YukkuriMatomeProcessor-win-x64-stable-Setup.exe",
+    "target": "_blank",
+    "rel": "noopener noreferrer",
+    "id": "",
+    "className": "brand-btn brand-btn--primary"
+  },
+  {
+    "text": "Free版を試す",
+    "href": "https://ymp-api.fujita-otm.workers.dev/updates/ymp/win-x64-stable/YukkuriMatomeProcessor-win-x64-stable-Setup.exe",
+    "target": "_blank",
+    "rel": "noopener noreferrer",
+    "id": "",
+    "className": "brand-btn brand-btn--primary"
+  },
+  {
+    "text": "Free版をダウンロード",
+    "href": "https://ymp-api.fujita-otm.workers.dev/updates/ymp/win-x64-stable/YukkuriMatomeProcessor-win-x64-stable-Setup.exe",
+    "target": "_blank",
+    "rel": "noopener noreferrer",
+    "id": "home-hero-primary-cta",
+    "className": "home-lp-btn home-lp-btn--primary"
+  },
+  {
+    "text": "制作フローを見る",
+    "href": "http://127.0.0.1:4181/#demo",
+    "target": "",
+    "rel": "",
+    "id": "",
+    "className": "home-lp-btn home-lp-btn--secondary"
+  },
+  {
+    "text": "Free版でこの流れを試す",
+    "href": "https://ymp-api.fujita-otm.workers.dev/updates/ymp/win-x64-stable/YukkuriMatomeProcessor-win-x64-stable-Setup.exe",
+    "target": "_blank",
+    "rel": "noopener noreferrer",
+    "id": "home-workflow-primary-cta",
+    "className": "home-lp-btn home-lp-btn--primary"
+  },
+  {
+    "text": "動画を別タブで開く",
+    "href": "http://127.0.0.1:4181/lp/home-demo-60s.mp4",
+    "target": "_blank",
+    "rel": "noopener noreferrer",
+    "id": "",
+    "className": "home-lp-video-fallback"
+  },
+  {
+    "text": "動画を別タブで開く",
+    "href": "http://127.0.0.1:4181/samples/sample-reaction-digest-preview.mp4",
+    "target": "_blank",
+    "rel": "noopener noreferrer",
+    "id": "",
+    "className": "home-lp-video-fallback"
+  },
+  {
+    "text": "動画を別タブで開く",
+    "href": "http://127.0.0.1:4181/samples/sample-yukkuri-dialogue-preview.mp4",
+    "target": "_blank",
+    "rel": "noopener noreferrer",
+    "id": "",
+    "className": "home-lp-video-fallback"
+  },
+  {
+    "text": "動画を別タブで開く",
+    "href": "http://127.0.0.1:4181/samples/sample-short-drama-preview.mp4",
+    "target": "_blank",
+    "rel": "noopener noreferrer",
+    "id": "",
+    "className": "home-lp-video-fallback"
+  },
+  {
+    "text": "作例と制作手順をもっと見る",
+    "href": "http://127.0.0.1:4181/samples/",
+    "target": "",
+    "rel": "",
+    "id": "",
+    "className": "home-lp-text-link"
+  },
+  {
+    "text": "Free版をダウンロード",
+    "href": "https://ymp-api.fujita-otm.workers.dev/updates/ymp/win-x64-stable/YukkuriMatomeProcessor-win-x64-stable-Setup.exe",
+    "target": "_blank",
+    "rel": "noopener noreferrer",
+    "id": "home-free-primary-cta",
+    "className": "home-lp-btn home-lp-btn--primary"
+  },
+  {
+    "text": "Free版をダウンロード",
+    "href": "https://ymp-api.fujita-otm.workers.dev/updates/ymp/win-x64-stable/YukkuriMatomeProcessor-win-x64-stable-Setup.exe",
+    "target": "_blank",
+    "rel": "noopener noreferrer",
+    "id": "home-pricing-free-cta",
+    "className": "home-lp-btn home-lp-btn--primary"
+  },
+  {
+    "text": "Premiumの詳細を見る",
+    "href": "http://127.0.0.1:4181/purchase/",
+    "target": "",
+    "rel": "",
+    "id": "home-pricing-premium-cta",
+    "className": "home-lp-btn home-lp-btn--secondary"
+  },
+  {
+    "text": "利用規約",
+    "href": "http://127.0.0.1:4181/legal/terms/",
+    "target": "",
+    "rel": "",
+    "id": "",
+    "className": ""
+  },
+  {
+    "text": "プライバシーポリシー",
+    "href": "http://127.0.0.1:4181/legal/privacy/",
+    "target": "",
+    "rel": "",
+    "id": "",
+    "className": ""
+  },
+  {
+    "text": "特定商取引法に基づく表記",
+    "href": "http://127.0.0.1:4181/legal/commercial-transactions/",
+    "target": "",
+    "rel": "",
+    "id": "",
+    "className": ""
+  },
+  {
+    "text": "返金・キャンセル条件",
+    "href": "http://127.0.0.1:4181/legal/refund-policy/",
+    "target": "",
+    "rel": "",
+    "id": "",
+    "className": ""
+  },
+  {
+    "text": "FAQをすべて見る",
+    "href": "http://127.0.0.1:4181/faq/",
+    "target": "",
+    "rel": "",
+    "id": "",
+    "className": "home-lp-text-link"
+  },
+  {
+    "text": "Free版をダウンロード",
+    "href": "https://ymp-api.fujita-otm.workers.dev/updates/ymp/win-x64-stable/YukkuriMatomeProcessor-win-x64-stable-Setup.exe",
+    "target": "_blank",
+    "rel": "noopener noreferrer",
+    "id": "home-final-cta",
+    "className": "home-lp-btn home-lp-btn--primary"
+  },
+  {
+    "text": "Premiumの料金を見る",
+    "href": "http://127.0.0.1:4181/#pricing",
+    "target": "",
+    "rel": "",
+    "id": "",
+    "className": "home-lp-btn home-lp-btn--secondary"
+  },
+  {
+    "text": "ホーム",
+    "href": "http://127.0.0.1:4181/",
+    "target": "",
+    "rel": "",
+    "id": "",
+    "className": ""
+  },
+  {
+    "text": "ダウンロード",
+    "href": "http://127.0.0.1:4181/download/",
+    "target": "",
+    "rel": "",
+    "id": "",
+    "className": ""
+  },
+  {
+    "text": "使い方",
+    "href": "http://127.0.0.1:4181/instructions/",
+    "target": "",
+    "rel": "",
+    "id": "",
+    "className": ""
+  },
+  {
+    "text": "サンプル",
+    "href": "http://127.0.0.1:4181/samples/",
+    "target": "",
+    "rel": "",
+    "id": "",
+    "className": ""
+  },
+  {
+    "text": "料金",
+    "href": "http://127.0.0.1:4181/purchase/",
+    "target": "",
+    "rel": "",
+    "id": "",
+    "className": ""
+  },
+  {
+    "text": "FAQ",
+    "href": "http://127.0.0.1:4181/faq/",
+    "target": "",
+    "rel": "",
+    "id": "",
+    "className": ""
+  },
+  {
+    "text": "アップデート",
+    "href": "http://127.0.0.1:4181/update/",
+    "target": "",
+    "rel": "",
+    "id": "",
+    "className": ""
+  },
+  {
+    "text": "お知らせ",
+    "href": "http://127.0.0.1:4181/news/",
+    "target": "",
+    "rel": "",
+    "id": "",
+    "className": ""
+  },
+  {
+    "text": "ブログ",
+    "href": "http://127.0.0.1:4181/blog/",
+    "target": "",
+    "rel": "",
+    "id": "",
+    "className": ""
+  },
+  {
+    "text": "メール",
+    "href": "mailto:fujita.otm@gmail.com",
+    "target": "",
+    "rel": "",
+    "id": "",
+    "className": ""
+  },
+  {
+    "text": "X (Twitter)",
+    "href": "https://x.com/OTM_corp",
+    "target": "_blank",
+    "rel": "noopener noreferrer",
+    "id": "",
+    "className": ""
+  },
+  {
+    "text": "Discord",
+    "href": "https://discordapp.com/users/762244902124912695",
+    "target": "_blank",
+    "rel": "noopener noreferrer",
+    "id": "",
+    "className": ""
+  },
+  {
+    "text": "GitHub",
+    "href": "https://github.com/fujitatsukasa",
+    "target": "_blank",
+    "rel": "noopener noreferrer",
+    "id": "",
+    "className": ""
+  },
+  {
+    "text": "無料でダウンロード",
+    "href": "http://127.0.0.1:4181/download/",
+    "target": "",
+    "rel": "",
+    "id": "",
+    "className": ""
+  },
+  {
+    "text": "実画面・サンプル",
+    "href": "http://127.0.0.1:4181/samples/",
+    "target": "",
+    "rel": "",
+    "id": "",
+    "className": ""
+  },
+  {
+    "text": "料金を確認",
+    "href": "http://127.0.0.1:4181/purchase/",
+    "target": "",
+    "rel": "",
+    "id": "",
+    "className": ""
+  },
+  {
+    "text": "最新のお知らせ",
+    "href": "http://127.0.0.1:4181/news/",
+    "target": "",
+    "rel": "",
+    "id": "",
+    "className": ""
+  },
+  {
+    "text": "特定商取引法に基づく表記",
+    "href": "http://127.0.0.1:4181/legal/commercial-transactions/",
+    "target": "",
+    "rel": "",
+    "id": "",
+    "className": ""
+  },
+  {
+    "text": "利用規約",
+    "href": "http://127.0.0.1:4181/legal/terms/",
+    "target": "",
+    "rel": "",
+    "id": "",
+    "className": ""
+  },
+  {
+    "text": "プライバシーポリシー",
+    "href": "http://127.0.0.1:4181/legal/privacy/",
+    "target": "",
+    "rel": "",
+    "id": "",
+    "className": ""
+  },
+  {
+    "text": "返金・キャンセルポリシー",
+    "href": "http://127.0.0.1:4181/legal/refund-policy/",
+    "target": "",
+    "rel": "",
+    "id": "",
+    "className": ""
+  }
+]

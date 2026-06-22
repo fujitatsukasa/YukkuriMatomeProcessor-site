@@ -1,0 +1,162 @@
+[
+  {
+    "name": "desktop-hero-1440x900.png",
+    "viewport": "1440x900",
+    "scrollWidth": 1440,
+    "scrollHeight": 16963,
+    "horizontalOverflow": false,
+    "stickyCtaPresent": false
+  },
+  {
+    "name": "desktop-workflow-1440x900.png",
+    "viewport": "1440x900",
+    "scrollWidth": 1440,
+    "scrollHeight": 16982,
+    "horizontalOverflow": false,
+    "stickyCtaPresent": false
+  },
+  {
+    "name": "desktop-product-1440x900.png",
+    "viewport": "1440x900",
+    "scrollWidth": 1440,
+    "scrollHeight": 16982,
+    "horizontalOverflow": false,
+    "stickyCtaPresent": false
+  },
+  {
+    "name": "desktop-demo-1440x900.png",
+    "viewport": "1440x900",
+    "scrollWidth": 1440,
+    "scrollHeight": 16982,
+    "horizontalOverflow": false,
+    "stickyCtaPresent": false
+  },
+  {
+    "name": "desktop-samples-1440x900.png",
+    "viewport": "1440x900",
+    "scrollWidth": 1440,
+    "scrollHeight": 16982,
+    "horizontalOverflow": false,
+    "stickyCtaPresent": false
+  },
+  {
+    "name": "desktop-free-1440x900.png",
+    "viewport": "1440x900",
+    "scrollWidth": 1440,
+    "scrollHeight": 16982,
+    "horizontalOverflow": false,
+    "stickyCtaPresent": false
+  },
+  {
+    "name": "desktop-pricing-1440x900.png",
+    "viewport": "1440x900",
+    "scrollWidth": 1440,
+    "scrollHeight": 16963,
+    "horizontalOverflow": false,
+    "stickyCtaPresent": false
+  },
+  {
+    "name": "desktop-specs-1440x900.png",
+    "viewport": "1440x900",
+    "scrollWidth": 1440,
+    "scrollHeight": 16963,
+    "horizontalOverflow": false,
+    "stickyCtaPresent": false
+  },
+  {
+    "name": "desktop-faq-1440x900.png",
+    "viewport": "1440x900",
+    "scrollWidth": 1440,
+    "scrollHeight": 16963,
+    "horizontalOverflow": false,
+    "stickyCtaPresent": false
+  },
+  {
+    "name": "desktop-full-1440x900.png",
+    "viewport": "1440x900",
+    "scrollWidth": 1440,
+    "scrollHeight": 16963,
+    "horizontalOverflow": false,
+    "stickyCtaPresent": false
+  },
+  {
+    "name": "tablet-hero-1024x768.png",
+    "viewport": "1024x768",
+    "scrollWidth": 1024,
+    "scrollHeight": 19677,
+    "horizontalOverflow": false,
+    "stickyCtaPresent": false
+  },
+  {
+    "name": "tablet-pricing-1024x768.png",
+    "viewport": "1024x768",
+    "scrollWidth": 1024,
+    "scrollHeight": 19677,
+    "horizontalOverflow": false,
+    "stickyCtaPresent": false
+  },
+  {
+    "name": "wide-mobile-hero-430x932.png",
+    "viewport": "430x932",
+    "scrollWidth": 430,
+    "scrollHeight": 23785,
+    "horizontalOverflow": false,
+    "stickyCtaPresent": false
+  },
+  {
+    "name": "mobile-hero-390x844.png",
+    "viewport": "390x844",
+    "scrollWidth": 390,
+    "scrollHeight": 23710,
+    "horizontalOverflow": false,
+    "stickyCtaPresent": false
+  },
+  {
+    "name": "mobile-product-390x844.png",
+    "viewport": "390x844",
+    "scrollWidth": 390,
+    "scrollHeight": 24053,
+    "horizontalOverflow": false,
+    "stickyCtaPresent": true
+  },
+  {
+    "name": "mobile-pricing-390x844.png",
+    "viewport": "390x844",
+    "scrollWidth": 390,
+    "scrollHeight": 23710,
+    "horizontalOverflow": false,
+    "stickyCtaPresent": true
+  },
+  {
+    "name": "mobile-faq-390x844.png",
+    "viewport": "390x844",
+    "scrollWidth": 390,
+    "scrollHeight": 23710,
+    "horizontalOverflow": false,
+    "stickyCtaPresent": true
+  },
+  {
+    "name": "mobile-full-390x844.png",
+    "viewport": "390x844",
+    "scrollWidth": 390,
+    "scrollHeight": 23710,
+    "horizontalOverflow": false,
+    "stickyCtaPresent": false
+  },
+  {
+    "name": "narrow-mobile-hero-360x800.png",
+    "viewport": "360x800",
+    "scrollWidth": 360,
+    "scrollHeight": 24092,
+    "horizontalOverflow": false,
+    "stickyCtaPresent": false
+  },
+  {
+    "name": "narrow-mobile-pricing-360x800.png",
+    "viewport": "360x800",
+    "scrollWidth": 360,
+    "scrollHeight": 24092,
+    "horizontalOverflow": false,
+    "stickyCtaPresent": true
+  }
+]

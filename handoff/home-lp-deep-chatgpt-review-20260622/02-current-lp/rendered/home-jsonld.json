@@ -1,0 +1,121 @@
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "ゆっくりまとめプロセッサー",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Windows 10, Windows 11",
+    "softwareRequirements": "Windows 10 / 11、YMM4必須",
+    "url": "https://yukkurimatomeprocessor.com/",
+    "downloadUrl": "https://ymp-api.fujita-otm.workers.dev/updates/ymp/win-x64-stable/YukkuriMatomeProcessor-win-x64-stable-Setup.exe",
+    "image": "https://yukkurimatomeprocessor.com/lp/screen-home-hero-v1.webp",
+    "description": "記事URL・スレッドURL・下書きから、本文・コメント取得、話者割り当て、台本整形、AI台本生成、素材確認、YMM4反映まで。Windows 10 / 11対応。Free版あり、Premiumは39,800円（税込）の買い切り。",
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "Free",
+        "price": "0",
+        "priceCurrency": "JPY",
+        "url": "https://yukkurimatomeprocessor.com/download/"
+      },
+      {
+        "@type": "Offer",
+        "name": "Premium",
+        "price": "39800",
+        "priceCurrency": "JPY",
+        "url": "https://yukkurimatomeprocessor.com/purchase/"
+      }
+    ],
+    "publisher": {
+      "@type": "Organization",
+      "name": "OTM株式会社",
+      "url": "https://yukkurimatomeprocessor.com"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Free版では何ができますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Free版では、起動、ログイン、台本編集、素材確認、YMM4連携前後の流れを確認できます。URL取得、AI台本案、保存などの上限は、アプリ内表示または購入前案内で確認してください。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Premiumにすると何が変わりますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Premiumは39,800円（税込）の買い切りで、月額料金はありません。URL取得、AI台本案、保存、YMM4前準備などの継続利用条件は、購入前に料金ページと案内で確認してください。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "動画は自動で完成しますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "完成・投稿まで自動で進めるアプリではありません。本製品は台本・話者・素材を整え、YMM4へ反映するところまでを支援します。音声、字幕、間、演出、出典、公開前の確認はYMM4で行います。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "YMM4は必要ですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "はい。YMM4へ反映し、最後はYMM4で仕上げるWindows向けアプリです。YMM4なしで編集を完結する設計ではありません。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Macやスマートフォンで使えますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "使えません。Windows 10 / 11向けです。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "URLがなくても始められますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "はい。下書き、テーマ、素材メモなどから開始できます。URL取得を使う場合は、対応サイトと取得条件をご確認ください。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "どのサイトから取得できますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "対応サイトと取得できる内容は、アプリ内のサイト選択とFAQで確認できます。対象外URLは取得できない場合があります。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "どのような動画に使えますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "反応集、まとめ、解説、ショート、掛け合いなど、台本と素材をYMM4で組む動画に使えます。形式ごとの完成作例はサンプルページで確認できます。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "AIが作った台本はそのまま使えますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "内容、事実、表現、出典、権利、文字量を確認してから使用してください。生成結果はプレビューと台本編集画面で修正できます。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "YouTubeなどへ自動投稿されますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "されません。保存、YMM4反映、MP4出力、投稿・公開は利用者が確認して行います。"
+        }
+      }
+    ]
+  }
+]
