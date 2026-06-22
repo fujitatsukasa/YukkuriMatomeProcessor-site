@@ -18,11 +18,10 @@ import {
 } from '@/data/site-content'
 
 const homeHeaderNavItems = [
-  { label: 'できること', href: '#flow' },
-  { label: '作例', href: '#samples' },
+  { label: '制作フロー', href: '#workflow' },
   { label: '実画面', href: '#product' },
+  { label: '作例', href: '#samples' },
   { label: '料金', href: '#pricing' },
-  { label: '動作条件', href: '#requirements' },
   { label: 'FAQ', href: '#faq' },
 ] as const
 
@@ -198,7 +197,7 @@ export function SiteLayout() {
   const customPrimaryCta = useMemo(
     () =>
       isHome
-        ? { label: '無料版を試す', href: downloadUrl, variant: 'primary' as const, external: true }
+        ? { label: 'Free版を試す', href: downloadUrl, variant: 'primary' as const, external: true }
         : { ...primaryCta, label: '無料でダウンロード' },
     [isHome],
   )

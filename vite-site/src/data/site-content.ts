@@ -53,9 +53,9 @@ export type PageEntry = {
 export const siteOrigin = 'https://yukkurimatomeprocessor.com'
 export const siteTitle = 'ゆっくりまとめプロセッサー'
 export const siteSubtitle = 'Yukkuri Matome Processor'
-export const siteTagline = 'YMM4前の台本・素材準備ツール'
+export const siteTagline = 'YMM4向け台本・素材準備ツール'
 export const siteDescription =
-  '記事URL・スレッドURL・下書きから、台本下地と素材配置を整え、YMM4前の準備を支援するWindows向けツール。'
+  '対応する記事URL・スレッドURLや下書きから、台本・話者・素材を整え、YMM4へ反映するWindows向け制作支援アプリ。'
 
 export const navItems: NavItem[] = [
   { key: 'home', label: 'ホーム', url: '/' },
@@ -255,7 +255,7 @@ export const faqGroups: FaqGroup[] = [
       {
         question: 'ゆっくりまとめプロセッサーは何を解決するツールですか？',
         answer:
-          '記事URL・スレッドURL・下書きから、台本下地と素材配置を整え、YMM4前の準備を支援するWindows向けツールです。',
+          '対応する記事URL・スレッドURLや下書きから、台本・話者・素材を整え、YMM4へ反映するWindows向け制作支援アプリです。',
       },
       {
         question: '動画は自動で完成しますか？',

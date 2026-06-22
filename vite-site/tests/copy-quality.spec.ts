@@ -3,8 +3,8 @@ import { expect, test } from '@playwright/test'
 const primaryPages = [
   {
     path: '/',
-    heading: 'ネタを入れたら、台本と素材を整えてYMM4へ。',
-    ctas: ['無料版で動作を確認する'],
+    heading: '記事・スレッドから、YMM4のタイムラインまで。',
+    ctas: ['Free版をダウンロード'],
   },
   {
     path: '/download/',
@@ -53,6 +53,9 @@ const forbiddenCopy = [
   '02 Proof',
   '再修正修正',
   '雰囲気',
+  '下ごしらえ',
+  'まとめて進める',
+  '自分の制作に入る',
 ]
 
 test.describe('primary page copy quality', () => {
