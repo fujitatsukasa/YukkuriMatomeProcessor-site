@@ -63,8 +63,50 @@ export type GateFact = ProductFact<boolean> & {
   blockers: DecisionId[]
 }
 
+export type DistributionCandidateStatus = 'pending' | 'confirmed'
+
+export type DistributionAsset = {
+  label: string
+  fileName: string
+  url: string
+  sizeBytes: number
+  sha256: string
+  description: string
+}
+
+export type DistributionCandidate = {
+  status: DistributionCandidateStatus
+  statusLabel: string
+  version: string
+  versionLabel: string
+  channel: string
+  checkedAt: string
+  checkedAtLabel: string
+  publishedAt: string
+  baseUrl: string
+  releaseNotesUrl: string
+  sha256SumsUrl: string
+  updateFeedUrl: string
+  releaseManifestUrl: string
+  summary: string
+  trustNote: string
+  source: string
+  sourceRefs: SourceRef[]
+  assets: {
+    setup: DistributionAsset
+    portable: DistributionAsset
+  }
+}
+
 export const publicDownloadPage = '/download/'
 export const purchasePage = '/purchase/'
+export const distributionBaseUrl = 'https://ymp-api.fujita-otm.workers.dev/updates/ymp/win-x64-stable/'
+export const setupDownloadUrl = `${distributionBaseUrl}YukkuriMatomeProcessor-win-x64-stable-Setup.exe`
+export const portableDownloadUrl = `${distributionBaseUrl}YukkuriMatomeProcessor-win-x64-stable-Portable.zip`
+export const releaseNotesUrl = `${distributionBaseUrl}release-notes.json`
+export const sha256SumsUrl = `${distributionBaseUrl}sha256sums.txt`
+export const updateFeedUrl = `${distributionBaseUrl}RELEASES-win-x64-stable`
+export const releaseManifestUrl = `${distributionBaseUrl}releases.win-x64-stable.json`
 
 const verifiedAt = '2026-06-22'
 const currentSiteCommit = null
@@ -95,6 +137,45 @@ const pendingReviewTriggers = [
   '法務文書変更時',
   '配布manifest変更時',
 ]
+
+export const releaseCandidateDistribution = {
+  status: 'pending',
+  statusLabel: '配布候補 / D10確認中',
+  version: '0.0.18',
+  versionLabel: '0.0.18候補',
+  channel: 'win-x64-stable',
+  checkedAt: '2026-06-01',
+  checkedAtLabel: '2026年06月01日確認',
+  publishedAt: '2026-06-01T05:06:24Z',
+  baseUrl: distributionBaseUrl,
+  releaseNotesUrl,
+  sha256SumsUrl,
+  updateFeedUrl,
+  releaseManifestUrl,
+  summary: 'D10未確定の配布候補です。更新フィード、インストーラー、ポータブルZIPの候補情報を確認用に表示しています。',
+  trustNote:
+    'D10確認中のため、配布版・署名・SmartScreen実測が揃うまで直接取得ボタンは表示しません。候補ファイルの情報は配布ゲート確認用です。',
+  source: 'D10未確定の配布候補。公開配布版の正本ではなく、配布ゲート確認用の候補値として扱う。',
+  sourceRefs: [refs.hundredPointDefinition, refs.productFacts],
+  assets: {
+    setup: {
+      label: 'インストーラー候補',
+      fileName: 'YukkuriMatomeProcessor-win-x64-stable-Setup.exe',
+      url: setupDownloadUrl,
+      sizeBytes: 296298648,
+      sha256: 'f94189480102667b1a0baa094769f7f618d54310e8139450c84626f5c48ea7c0',
+      description: 'D10確認中のインストーラー候補です。配布ゲート通過までは直接取得CTAに使いません。',
+    },
+    portable: {
+      label: 'ポータブルZIP候補',
+      fileName: 'YukkuriMatomeProcessor-win-x64-stable-Portable.zip',
+      url: portableDownloadUrl,
+      sizeBytes: 293707665,
+      sha256: '6308813c5f80e7420a7627f13c7ae9ae6113f66d1923be8cfc0575e73dbbd64a',
+      description: 'D10確認中のポータブルZIP候補です。配布ゲート通過までは直接取得CTAに使いません。',
+    },
+  },
+} satisfies DistributionCandidate
 
 export const decisionRecords: DecisionRecord[] = [
   {
@@ -524,10 +605,10 @@ const baseFacts = {
     validForSiteCommit: currentSiteCommit,
   },
   publicVersion: {
-    value: null,
+    value: releaseCandidateDistribution.version,
     status: 'pending',
-    source: 'D10未確定。公開配布版、manifest、SHA、署名、SmartScreen実測が必要',
-    sourceRefs: [refs.hundredPointDefinition],
+    source: 'D10未確定。値は配布候補であり、公開配布版としては未承認',
+    sourceRefs: releaseCandidateDistribution.sourceRefs,
     lastVerifiedAt: verifiedAt,
     owner: 'アプリ・リリース責任者',
     approvedBy: null,

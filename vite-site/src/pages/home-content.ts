@@ -32,8 +32,8 @@ export const homeFacts = {
   privacyUrl: '/legal/privacy/',
   commercialTransactionsUrl: '/legal/commercial-transactions/',
   refundUrl: '/legal/refund-policy/',
-  releaseVersion: publicDistribution.version,
-  releaseDate: '2026年06月01日',
+  releaseVersion: publicDistribution.versionLabel,
+  releaseDate: publicDistribution.checkedAtLabel,
   releaseChannel: publicDistribution.channel,
   setupFileName: publicDistribution.assets.setup.fileName,
   setupSizeMb,
@@ -69,7 +69,7 @@ export const heroContent = {
   microcopy: `${homeFacts.osLabel}｜${homeFacts.yymm4Label}｜Premium ${homeFacts.premiumPrice}・${homeFacts.billingLabel}`,
   productScope: '本製品で整える：本文・コメント / 話者 / 台本 / 素材',
   yymm4Scope: 'YMM4で仕上げる：音声 / 字幕 / 間 / 演出 / 最終確認',
-  trustNote: `約${homeFacts.setupSizeMb}の自己署名配布物です。配布元URLとSHA-256を確認してから起動してください。`,
+  trustNote: `配布候補は約${homeFacts.setupSizeMb}です。D10確認が揃うまで実行ファイルの直接取得CTAは表示しません。`,
 } as const
 
 export const workflowSummary = [
@@ -343,7 +343,7 @@ export const requirementRows = [
   { label: '対応OS', value: homeFacts.osLabel },
   { label: 'Mac', value: '非対応' },
   { label: 'YMM4', value: '必須。反映後の仕上げはYMM4で行います。' },
-  { label: '配布ファイル', value: `${homeFacts.setupFileName} / 約${homeFacts.setupSizeMb}` },
+  { label: '配布候補', value: `${homeFacts.setupFileName} / 約${homeFacts.setupSizeMb}` },
   { label: 'インターネット', value: 'ログイン、配布確認、URL取得、外部AI連携などで通信を使います。' },
   { label: '対応入力', value: '記事URL、スレッドURL、下書き、テーマ。対応URLはFAQで確認してください。' },
   { label: 'APIキー', value: '外部API連携など一部機能ではAPIキーが必要です。' },
@@ -367,8 +367,8 @@ export const userResponsibilityItems = [
 ] as const
 
 export const downloadTrustItems = [
-  { label: '現行バージョン', value: homeFacts.releaseVersion },
-  { label: '公開日', value: homeFacts.releaseDate },
+  { label: '候補バージョン', value: homeFacts.releaseVersion },
+  { label: '確認日', value: homeFacts.releaseDate },
   { label: 'チャンネル', value: homeFacts.releaseChannel },
   { label: 'ファイルサイズ', value: `約${homeFacts.setupSizeMb}` },
   { label: 'SHA-256', value: homeFacts.setupSha256 },

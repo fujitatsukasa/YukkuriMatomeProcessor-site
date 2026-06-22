@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { InteractiveCard, PageMeta, Section } from '@/components/ui'
 import { downloadUrl, publicDistribution } from '@/data/site-content'
+import { productFacts } from '@/data/product-facts'
 import { AlertTriangle, BadgeCheck, CheckCircle2, Clock3, Download, ExternalLink, ShieldCheck, Wrench } from 'lucide-react'
 
 interface Release {
@@ -101,7 +102,7 @@ function getReleaseLabels(body: string) {
 
 function summarizeRelease(release: Release) {
   const lines = formatBody(release.body || '')
-  const summary = lines[0] ?? '詳細は公式リリースノートで確認してください。'
+  const summary = lines[0] ?? '詳細は配布候補情報とリリースノートで確認してください。'
   const details = lines.slice(1, 4)
   return {
     summary,
@@ -121,8 +122,8 @@ const updateGuideCards = [
   {
     eyebrow: '変更点',
     title: '何を見てから更新するか',
-    body: '最新版の要約、公式リリースノート、過去タグを先に確認すると、変更点の見落としを減らせます。',
-    points: ['最新の変更点を見る', '前バージョンとの差分を把握', '過去タグも遡れる'],
+    body: '配布候補の要約、リリースノート、過去タグを先に確認すると、変更点の見落としを減らせます。',
+    points: ['候補の変更点を見る', '前バージョンとの差分を把握', '過去タグも遡れる'],
   },
   {
     eyebrow: '困ったとき',
@@ -135,8 +136,8 @@ const updateGuideCards = [
 const fallbackReleases: Release[] = [
   {
     id: -1,
-    tag_name: publicDistribution.version,
-    name: `YMP ${publicDistribution.version}`,
+    tag_name: publicDistribution.versionLabel,
+    name: `YMP ${publicDistribution.versionLabel}`,
     published_at: publicDistribution.publishedAt,
     html_url: publicDistribution.releaseNotesUrl,
     body: publicDistribution.summary,
@@ -163,7 +164,7 @@ const updateSummaryCards = [
   },
   {
     title: '変更点は要約から確認',
-    body: '公式サイトでは要点だけを表示し、細かい原文は公式リリースで確認できます。',
+    body: '公式サイトでは要点だけを表示し、D10確認後は細かい原文をリリースデータで確認できます。',
     Icon: BadgeCheck,
   },
 ] as const
@@ -171,8 +172,8 @@ const updateSummaryCards = [
 const releaseReadinessCards = [
   {
     label: '確認項目',
-    title: `${publicDistribution.version}の配布ファイル情報`,
-    body: 'インストーラーとポータブルZIPのファイル名、サイズ、SHA256を確認できます。更新前に配布元URLとファイル情報を照合してください。',
+    title: `${publicDistribution.versionLabel}の配布候補情報`,
+    body: 'インストーラー候補とポータブルZIP候補のファイル名、サイズ、SHA256を確認できます。D10確認が揃うまで正式配布とは扱いません。',
     tone: 'ok',
     Icon: CheckCircle2,
   },
@@ -201,11 +202,14 @@ const updateCompletionChecks = [
 ] as const
 
 export function UpdatePage() {
+  const downloadReady = productFacts.downloadReady.value
   const [releases, setReleases] = useState<Release[]>([])
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(downloadReady)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
+    if (!downloadReady) return
+
     fetch(publicDistribution.releaseNotesUrl)
       .then((res) => {
         if (!res.ok) throw new Error(`Release notes fetch failed: ${res.status}`)
@@ -242,7 +246,7 @@ export function UpdatePage() {
         setError(err.message)
         setLoading(false)
       })
-  }, [])
+  }, [downloadReady])
 
   const displayReleases = releases.length ? releases : fallbackReleases
   const latestRelease = displayReleases[0]
@@ -252,9 +256,9 @@ export function UpdatePage() {
   return (
     <>
       <PageMeta
-        title="アップデート｜最新版の確認と更新前チェック"
-        description="ゆっくりまとめプロセッサーの配布情報、公開日、直近変更の要約、更新前に確認する設定を確認できます。"
-        keywords="アップデート, 最新版, リリースノート, 変更履歴, ダウンロード"
+        title="アップデート｜配布候補の確認と更新前チェック"
+        description="ゆっくりまとめプロセッサーの配布候補情報、確認日、直近変更の要約、更新前に確認する設定を確認できます。"
+        keywords="アップデート, 配布候補, リリースノート, 変更履歴, ダウンロード"
         path="/update/"
       />
 
@@ -263,41 +267,47 @@ export function UpdatePage() {
           <div className="utility-hero__shell">
             <div className="utility-hero__copy">
               <p className="brand-kicker">アップデート</p>
-              <h1>最新版の確認と更新前チェック</h1>
+              <h1>配布候補の確認と更新前チェック</h1>
               <p className="brand-lead">
-                配布情報、直近変更の要約、更新前に見るべき設定を確認できます。Cloudflare配布のファイル名と変更点を、必要な判断材料だけに絞ってまとめています。
+                配布候補情報、直近変更の要約、更新前に見るべき設定を確認できます。Cloudflare配布候補のファイル名と変更点を、必要な判断材料だけに絞ってまとめています。
               </p>
 
               <div className="utility-stat-grid">
                 <div className="utility-stat">
                   <strong>{latestRelease.tag_name}</strong>
-                  <span>{isUsingFallback && loading ? '既知の最新版を表示中' : '公式配布元を確認'}</span>
+                  <span>{downloadReady ? (isUsingFallback && loading ? '既知の最新版を表示中' : '公式配布元を確認') : 'D10確認中の候補'}</span>
                 </div>
                 <div className="utility-stat">
                   <strong>{formatDate(latestRelease.published_at)}</strong>
-                  <span>最新公開日</span>
+                  <span>{downloadReady ? 'リリース確認日' : '候補確認日'}</span>
                 </div>
               </div>
 
               <div className="utility-link-row">
                 <a href={downloadUrl}>Free版を試す</a>
-                <a href={publicDistribution.releaseNotesUrl} target="_blank" rel="noopener noreferrer">
-                  リリースデータ
-                </a>
-                <a href={publicDistribution.sha256SumsUrl} target="_blank" rel="noopener noreferrer">
-                  SHA256一覧
-                </a>
-                <a href={publicDistribution.releaseManifestUrl} target="_blank" rel="noopener noreferrer">
-                  配布マニフェスト
-                </a>
+                {downloadReady ? (
+                  <>
+                    <a href={publicDistribution.releaseNotesUrl} target="_blank" rel="noopener noreferrer">
+                      リリースデータ
+                    </a>
+                    <a href={publicDistribution.sha256SumsUrl} target="_blank" rel="noopener noreferrer">
+                      SHA256一覧
+                    </a>
+                    <a href={publicDistribution.releaseManifestUrl} target="_blank" rel="noopener noreferrer">
+                      配布マニフェスト
+                    </a>
+                  </>
+                ) : (
+                  <a href={downloadUrl}>配布候補情報を見る</a>
+                )}
               </div>
             </div>
 
             <div className="utility-hero__panel-stack">
               <InteractiveCard className="release-panel premium-glass utility-hero__panel">
-                <span className="subpage-card__eyebrow">最新リリース要約</span>
+                <span className="subpage-card__eyebrow">{downloadReady ? '最新リリース要約' : '配布候補要約'}</span>
                 <h2>{latestRelease.name || latestRelease.tag_name}</h2>
-                <p>{formatDate(latestRelease.published_at)} に公開</p>
+                <p>{downloadReady ? `${formatDate(latestRelease.published_at)} に公開` : `${formatDate(latestRelease.published_at)} に確認`}</p>
 
                 <div className="release-summary-badges" aria-label="更新種別">
                   {latestReleaseInfo.labels.map((label) => (
@@ -311,7 +321,7 @@ export function UpdatePage() {
                 {loading ? <p className="release-monitor__fallback">リリース情報を取得中です...</p> : null}
                 {error ? (
                   <p className="release-monitor__fallback">
-                    リリース情報の取得に失敗しました。下の公式リンクから配布マニフェストとSHA256一覧を確認してください。
+                    リリース情報の取得に失敗しました。下の確認リンクから配布マニフェストとSHA256一覧を確認してください。
                   </p>
                 ) : null}
 
@@ -324,9 +334,15 @@ export function UpdatePage() {
                 ) : null}
 
                 <div className="subpage-support-callout__actions">
-                  <a className="brand-btn brand-btn--ghost" href={publicDistribution.releaseNotesUrl} target="_blank" rel="noopener noreferrer">
-                    リリースデータを見る
-                  </a>
+                  {downloadReady ? (
+                    <a className="brand-btn brand-btn--ghost" href={publicDistribution.releaseNotesUrl} target="_blank" rel="noopener noreferrer">
+                      リリースデータを見る
+                    </a>
+                  ) : (
+                    <a className="brand-btn brand-btn--ghost" href={downloadUrl}>
+                      配布候補情報を見る
+                    </a>
+                  )}
                   <a className="brand-btn brand-btn--primary" href={downloadUrl}>
                     Free版を試す
                   </a>
@@ -347,20 +363,28 @@ export function UpdatePage() {
                   </div>
                   <div>
                     <ExternalLink size={17} />
-                    <span>細かい原文は公式リリースで確認する</span>
+                    <span>{downloadReady ? '細かい原文は公式リリースで確認する' : 'D10確認後に外部リリースを確認する'}</span>
                   </div>
                 </div>
-                <div className="subpage-link-stack">
-                  <a href={publicDistribution.releaseManifestUrl} target="_blank" rel="noopener noreferrer">
-                    <span>配布マニフェスト</span>
-                  </a>
-                  <a href={publicDistribution.releaseNotesUrl} target="_blank" rel="noopener noreferrer">
-                    <span>最新リリースデータ</span>
-                  </a>
-                  <a href={publicDistribution.updateFeedUrl} target="_blank" rel="noopener noreferrer">
-                    <span>更新フィード</span>
-                  </a>
-                </div>
+                {downloadReady ? (
+                  <div className="subpage-link-stack">
+                    <a href={publicDistribution.releaseManifestUrl} target="_blank" rel="noopener noreferrer">
+                      <span>配布マニフェスト</span>
+                    </a>
+                    <a href={publicDistribution.releaseNotesUrl} target="_blank" rel="noopener noreferrer">
+                      <span>最新リリースデータ</span>
+                    </a>
+                    <a href={publicDistribution.updateFeedUrl} target="_blank" rel="noopener noreferrer">
+                      <span>更新フィード</span>
+                    </a>
+                  </div>
+                ) : (
+                  <div className="subpage-link-stack">
+                    <a href={downloadUrl}>
+                      <span>配布候補情報</span>
+                    </a>
+                  </div>
+                )}
                 <div className="subpage-support-callout__actions">
                   <Link className="brand-btn brand-btn--ghost" to="/instructions/">
                     使い方を見る
@@ -390,7 +414,7 @@ export function UpdatePage() {
             })}
           </div>
 
-          <div className="release-readiness-grid" aria-label="最新版の確認状況">
+          <div className="release-readiness-grid" aria-label="配布候補の確認状況">
             {releaseReadinessCards.map((card) => {
               const ReadinessIcon = card.Icon
               return (
@@ -417,7 +441,7 @@ export function UpdatePage() {
               </span>
               <h2>更新できたかは、起動だけでなく少数URLまで通して確認する</h2>
               <p>
-                アップデート直後に件数を増やさず、まず公式配布物、設定、少数URLの取得、台本下地までを確認してください。
+                アップデート直後に件数を増やさず、まず配布候補情報、設定、少数URLの取得、台本下地までを確認してください。
               </p>
             </div>
             <ul className="release-update-completion-list">
@@ -465,9 +489,13 @@ export function UpdatePage() {
               <div>
                 <p className="release-monitor__fallback">リリース情報の取得に失敗しました。公式配布マニフェストを確認してください。</p>
                 <div className="content-page__link-list" style={{ marginTop: '1rem' }}>
-                  <a href={publicDistribution.releaseManifestUrl} target="_blank" rel="noopener noreferrer">
-                    配布マニフェストで確認
-                  </a>
+                  {downloadReady ? (
+                    <a href={publicDistribution.releaseManifestUrl} target="_blank" rel="noopener noreferrer">
+                      配布マニフェストで確認
+                    </a>
+                  ) : (
+                    <a href={downloadUrl}>配布候補情報で確認</a>
+                  )}
                 </div>
               </div>
             ) : null}

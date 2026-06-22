@@ -1,5 +1,6 @@
 import { expect, test, type Page } from '@playwright/test'
-import { decisionRecords, productFacts, readinessGates } from '../src/data/product-facts'
+import { newsPosts, publicDistribution } from '../src/data/site-content'
+import { decisionRecords, productFacts, readinessGates, releaseCandidateDistribution } from '../src/data/product-facts'
 
 const primaryPages = [
   {
@@ -34,7 +35,7 @@ const primaryPages = [
   },
   {
     path: '/update/',
-    heading: '最新版の確認と更新前チェック',
+    heading: '配布候補の確認と更新前チェック',
     ctas: ['Free版を試す'],
   },
 ]
@@ -152,6 +153,23 @@ test.describe('primary page copy quality', () => {
       expect(gate.criteria.length).toBeGreaterThan(0)
       expect(gate.value).toBe(gate.blockers.length === 0)
     }
+  })
+
+  test('pending distribution facts stay candidate-scoped until D10 is confirmed', () => {
+    expect(publicDistribution).toBe(releaseCandidateDistribution)
+    expect(publicDistribution.status).toBe('pending')
+    expect(publicDistribution.statusLabel).toContain('D10確認中')
+    expect(productFacts.publicVersion.status).toBe('pending')
+    expect(productFacts.publicVersion.value).toBe(releaseCandidateDistribution.version)
+    expect(productFacts.downloadReady.value).toBe(false)
+
+    const releasePost = newsPosts.find((post) => post.path === '/2026-06-01-windows-release-0018/')
+    expect(releasePost).toBeTruthy()
+
+    const releaseCopy = JSON.stringify(releasePost)
+    expect(releaseCopy).toContain('配布候補')
+    expect(releaseCopy).not.toContain('公開しました')
+    expect(releaseCopy).not.toContain('公開に合わせ')
   })
 
   for (const entry of primaryPages) {

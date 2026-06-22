@@ -1,4 +1,14 @@
-import { publicDownloadPage } from './product-facts'
+import {
+  distributionBaseUrl as productDistributionBaseUrl,
+  portableDownloadUrl as productPortableDownloadUrl,
+  publicDownloadPage,
+  releaseCandidateDistribution,
+  releaseManifestUrl as productReleaseManifestUrl,
+  releaseNotesUrl as productReleaseNotesUrl,
+  setupDownloadUrl as productSetupDownloadUrl,
+  sha256SumsUrl as productSha256SumsUrl,
+  updateFeedUrl as productUpdateFeedUrl,
+} from './product-facts'
 
 export type NavItem = {
   key:
@@ -187,13 +197,13 @@ export const supportChannels = [
   },
 ]
 
-export const distributionBaseUrl = 'https://ymp-api.fujita-otm.workers.dev/updates/ymp/win-x64-stable/'
-export const setupDownloadUrl = `${distributionBaseUrl}YukkuriMatomeProcessor-win-x64-stable-Setup.exe`
-export const portableDownloadUrl = `${distributionBaseUrl}YukkuriMatomeProcessor-win-x64-stable-Portable.zip`
-export const releaseNotesUrl = `${distributionBaseUrl}release-notes.json`
-export const sha256SumsUrl = `${distributionBaseUrl}sha256sums.txt`
-export const updateFeedUrl = `${distributionBaseUrl}RELEASES-win-x64-stable`
-export const releaseManifestUrl = `${distributionBaseUrl}releases.win-x64-stable.json`
+export const distributionBaseUrl = productDistributionBaseUrl
+export const setupDownloadUrl = productSetupDownloadUrl
+export const portableDownloadUrl = productPortableDownloadUrl
+export const releaseNotesUrl = productReleaseNotesUrl
+export const sha256SumsUrl = productSha256SumsUrl
+export const updateFeedUrl = productUpdateFeedUrl
+export const releaseManifestUrl = productReleaseManifestUrl
 
 export const downloadUrl = publicDownloadPage
 export const latestReleaseUrl = releaseNotesUrl
@@ -201,38 +211,7 @@ export const releasesUrl = releaseManifestUrl
 export const tagsUrl = updateFeedUrl
 export const changeLogUrl = releaseNotesUrl
 
-export const publicDistribution = {
-  version: '0.0.18',
-  channel: 'win-x64-stable',
-  publishedAt: '2026-06-01T05:06:24Z',
-  baseUrl: distributionBaseUrl,
-  releaseNotesUrl,
-  sha256SumsUrl,
-  updateFeedUrl,
-  releaseManifestUrl,
-  summary:
-    'Windows配布版の更新フィード、インストーラー、ポータブルZIPを0.0.18系に揃えた自己署名リリース候補です。',
-  trustNote:
-    '現在の配布物は自己署名のため、WindowsやSmartScreenの警告が表示される場合があります。配布元URLとSHA256を確認してから起動してください。',
-  assets: {
-    setup: {
-      label: 'インストーラー',
-      fileName: 'YukkuriMatomeProcessor-win-x64-stable-Setup.exe',
-      url: setupDownloadUrl,
-      sizeBytes: 296298648,
-      sha256: 'f94189480102667b1a0baa094769f7f618d54310e8139450c84626f5c48ea7c0',
-      description: '通常はこちら。インストールして起動し、自動更新フィードへ接続できます。',
-    },
-    portable: {
-      label: 'ポータブルZIP',
-      fileName: 'YukkuriMatomeProcessor-win-x64-stable-Portable.zip',
-      url: portableDownloadUrl,
-      sizeBytes: 293707665,
-      sha256: '6308813c5f80e7420a7627f13c7ae9ae6113f66d1923be8cfc0575e73dbbd64a',
-      description: 'インストールせずに試したい場合向け。解凍してから起動します。',
-    },
-  },
-} as const
+export const publicDistribution = releaseCandidateDistribution
 
 export const releaseIntegrity = {
   repository: 'fujitatsukasa/YukkuriMatomeProcessor',
@@ -353,18 +332,18 @@ export const newsPosts: NewsPost[] = [
     path: '/2026-06-01-windows-release-0018/',
     date: '2026-06-01T14:06:24+09:00',
     dateLabel: '2026年06月01日',
-    title: `お知らせ: Windows配布版 ${publicDistribution.version} を公開しました`,
-    subtitle: 'インストーラー、ポータブルZIP、更新フィードをwin-x64-stable向けに揃えました。',
+    title: `お知らせ: Windows配布候補 ${publicDistribution.versionLabel} の確認情報を整理しました`,
+    subtitle: 'インストーラー候補、ポータブルZIP候補、更新フィードをwin-x64-stable向けに確認しています。',
     summary:
-      `Windows向け配布版 ${publicDistribution.version} の公開に合わせ、ダウンロードページとアップデート履歴の案内を更新しました。`,
+      `Windows向け配布候補 ${publicDistribution.versionLabel} の確認情報として、ダウンロードページとアップデート履歴の案内を更新しました。`,
     seoDescription:
-      `ゆっくりまとめプロセッサー Windows配布版 ${publicDistribution.version} の公開告知です。インストーラー、ポータブルZIP、更新フィード、SmartScreen警告時の確認点を案内します。`,
+      `ゆっくりまとめプロセッサー Windows配布候補 ${publicDistribution.versionLabel} の確認情報です。インストーラー候補、ポータブルZIP候補、更新フィード、SmartScreen確認項目を案内します。`,
     seoImage: '/product_get_script.webp',
-    heroImageAlt: 'Windows配布版の更新告知イメージ',
+    heroImageAlt: 'Windows配布候補の確認情報イメージ',
     body: [
-      `Windows向け配布版 ${publicDistribution.version} を公開しました。配布チャンネルは ${publicDistribution.channel} です。`,
-      '通常利用向けのインストーラーと、インストールせずに試せるポータブルZIPを用意しています。ダウンロードページではファイル名、サイズ、SHA256を確認できます。',
-      '現在の配布物は自己署名のため、WindowsやSmartScreenの警告が表示される場合があります。配布元URLとSHA256を確認してから起動してください。',
+      `Windows向け配布候補 ${publicDistribution.versionLabel} の確認情報を整理しました。候補チャンネルは ${publicDistribution.channel} です。`,
+      'ダウンロードページでは、候補ファイル名、サイズ、SHA256を確認できます。D10確認が揃うまで実行ファイルの直接取得CTAは表示しません。',
+      '署名状態、発行者表示、SmartScreen実測は配布ゲートで別途確認します。未確認の状態で正式公開済みとは扱いません。',
       '更新後は、まず起動、台本編集、素材整理、YMM4前準備まで通るか確認してください。詳しい手順はダウンロード、使い方、アップデート履歴にまとめています。',
     ],
   },

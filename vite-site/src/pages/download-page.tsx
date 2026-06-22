@@ -253,12 +253,12 @@ const downloadSupportCards = [
 
 const distributionChecks = [
   {
-    title: '公式リンク',
-    body: '標準配布は Cloudflare Workers/R2 のインストーラーとポータブルZIPです。別名ファイルや再配布URLではなく、このページの公式リンクから取得してください。',
+    title: '候補リンク',
+    body: '配布候補は Cloudflare Workers/R2 のインストーラー候補とポータブルZIP候補です。D10確認が揃うまで直接取得CTAは表示しません。',
   },
   {
     title: '初回起動前',
-    body: 'インストーラーはそのまま実行、ポータブルZIPは解凍してから起動します。Windowsの警告が出た場合は、配布元URL、ファイル名、SHA256を確認してください。',
+    body: '配布ゲート通過後に取得する場合、インストーラーはそのまま実行、ポータブルZIPは解凍してから起動します。Windowsの警告が出た場合は、配布元URL、ファイル名、SHA256を確認してください。',
   },
   {
     title: '起動後に確認',
@@ -273,8 +273,8 @@ const distributionChecks = [
 const distributionReadinessCards = [
   {
     title: '取得前に見る情報',
-    body: '最新版、公開日、ファイル名、サイズ、SHA256、Cloudflare配布URLを確認します。',
-    done: ['インストーラー名を確認', 'ポータブルZIPの有無を確認', 'サイズとSHA256を確認'],
+    body: 'D10確認中の候補バージョン、確認日、ファイル名、サイズ、SHA256、配布元候補を確認します。',
+    done: ['インストーラー候補名を確認', 'ポータブルZIP候補の有無を確認', 'サイズとSHA256を確認'],
     Icon: FileSearch,
   },
   {
@@ -298,7 +298,7 @@ const distributionReadinessCards = [
 ] as const
 
 const distributionCompletionChecks = [
-  '配布ページでファイル情報を確認した',
+  '配布ページで候補ファイル情報を確認した',
   'ポータブルZIPは解凍してから起動した',
   'Windows警告が出た場合に配布元とSHA256を確認した',
   'YMM4.exeと保存先を保存した',
@@ -307,22 +307,22 @@ const distributionCompletionChecks = [
 
 const downloadChoiceCards = [
   {
-    label: '通常はこちら',
-    title: 'インストーラー',
+    label: '候補ファイル',
+    title: 'インストーラー候補',
     fileName: publicDistribution.assets.setup.fileName,
     shortName: 'Setup.exe',
-    body: 'Windowsのアプリとして入れて使う標準配布です。迷ったらこちらを選んでください。',
-    goodFor: ['初回導入', '継続利用', '自動更新フィードを使う'],
+    body: 'Windowsアプリとして入れる形式の候補です。D10確認完了までは直接取得CTAに使いません。',
+    goodFor: ['候補ファイル名の確認', 'サイズ確認', 'SHA256照合'],
     href: publicDistribution.assets.setup.url,
     Icon: Download,
   },
   {
-    label: '試用・持ち運び',
-    title: 'ポータブルZIP',
+    label: '候補ファイル',
+    title: 'ポータブルZIP候補',
     fileName: publicDistribution.assets.portable.fileName,
     shortName: 'Portable.zip',
-    body: 'インストールせずに確認したい場合向けです。ZIPを直接開かず、必ず解凍してから起動します。',
-    goodFor: ['管理者権限を避けたい', '検証用フォルダで試す', '環境を汚さず確認'],
+    body: 'インストールせずに確認する形式の候補です。D10確認完了までは直接取得CTAに使いません。',
+    goodFor: ['候補ファイル名の確認', '解凍手順の確認', 'SHA256照合'],
     href: publicDistribution.assets.portable.url,
     Icon: Wrench,
   },
@@ -353,8 +353,8 @@ type PublicDistributionInfo = {
 }
 
 const fallbackDistributionInfo: PublicDistributionInfo = {
-  version: publicDistribution.version,
-  title: `YMP ${publicDistribution.version}`,
+  version: publicDistribution.versionLabel,
+  title: `YMP ${publicDistribution.versionLabel}`,
   summary: publicDistribution.summary,
   publishedAt: publicDistribution.publishedAt,
   source: 'fallback',
@@ -404,6 +404,11 @@ function ReleaseIntegrityPanel() {
   const downloadReady = productFacts.downloadReady.value
 
   useEffect(() => {
+    if (!downloadReady) {
+      setRelease(fallbackDistributionInfo)
+      return
+    }
+
     const controller = new AbortController()
 
     async function fetchReleaseNotes() {
@@ -447,11 +452,13 @@ function ReleaseIntegrityPanel() {
     void fetchReleaseNotes()
 
     return () => controller.abort()
-  }, [])
+  }, [downloadReady])
 
   const statusLabel =
-    release.source === 'live'
-      ? '配布ノート取得済み'
+    !downloadReady
+      ? 'D10確認中 / 配布候補'
+      : release.source === 'live'
+        ? '配布ノート取得済み'
       : release.source === 'error'
         ? '既知情報を表示中 / 2026-06-01確認'
         : '既知情報を表示中 / 2026-06-01確認'
@@ -462,10 +469,10 @@ function ReleaseIntegrityPanel() {
     <InteractiveCard as="section" className="release-integrity-panel premium-glass">
       <div className="release-integrity-panel__top">
         <div>
-          <span className="subpage-card__eyebrow">公式配布情報</span>
-          <h2>インストーラーとポータブルZIPのファイル名・サイズ・SHA256を確認できます</h2>
+          <span className="subpage-card__eyebrow">配布候補情報</span>
+          <h2>候補ファイル名・サイズ・SHA256を確認できます</h2>
           <p>
-            配布条件が確定したら、Cloudflare Workers/R2 の公式配布ファイルへ案内します。取得前後にファイル名とハッシュを確認すると、
+            配布条件が確定したら、Cloudflare Workers/R2 の配布ファイルへ案内します。取得前後にファイル名とハッシュを確認すると、
             別URLや古い配布物との取り違えを避けやすくなります。
           </p>
         </div>
@@ -478,7 +485,7 @@ function ReleaseIntegrityPanel() {
           <dd>{release.version}</dd>
         </div>
         <div>
-          <dt>公開日</dt>
+          <dt>確認日</dt>
           <dd>{formatReleaseDate(release.publishedAt)}</dd>
         </div>
         <div>
@@ -486,7 +493,7 @@ function ReleaseIntegrityPanel() {
           <dd>{publicDistribution.channel}</dd>
         </div>
         <div>
-          <dt>配布元</dt>
+          <dt>候補配布元</dt>
           <dd>Cloudflare Workers/R2</dd>
         </div>
       </dl>
@@ -538,9 +545,13 @@ function ReleaseIntegrityPanel() {
             配布バージョン、署名状態、公開ゲートの確認中です。確認が揃うまで、このページでは実行ファイルの直接取得ボタンを表示しません。
           </div>
         )}
-        <a className="brand-btn brand-btn--ghost" href={publicDistribution.sha256SumsUrl} target="_blank" rel="noreferrer">
-          SHA256一覧を見る
-        </a>
+        {downloadReady ? (
+          <a className="brand-btn brand-btn--ghost" href={publicDistribution.sha256SumsUrl} target="_blank" rel="noreferrer">
+            SHA256一覧を見る
+          </a>
+        ) : (
+          <span className="download-choice-card__pending">SHA256一覧はD10確認完了後に外部リンクとして表示します</span>
+        )}
       </div>
     </InteractiveCard>
   )

@@ -803,7 +803,7 @@ function HomePageContent() {
                   <Download size={18} aria-hidden="true" />
                   {primaryCtaLabel}
                 </HomeCta>
-                <span>{homeFacts.osLabel}｜YMM4必須｜約{homeFacts.setupSizeMb}</span>
+                <span>{homeFacts.osLabel}｜YMM4必須｜配布候補 約{homeFacts.setupSizeMb}</span>
               </div>
             </div>
             <div className="home-lp-free__panel" data-reveal>
@@ -839,7 +839,7 @@ function HomePageContent() {
             <SectionHead
               kicker="PRICING"
               title="Premiumは39,800円（税込）。月額なしの買い切りです。"
-              body="Freeで動作とYMM4連携を確かめ、継続利用が必要になったらPremiumへ。公開済みの条件と、購入前に確認すべき条件を分けて表示します。"
+              body="Freeで動作とYMM4連携を確かめ、継続利用が必要になったらPremiumへ。確定済みの条件と、購入前に確認すべき条件を分けて表示します。"
               align="center"
             />
 
@@ -993,7 +993,7 @@ function HomePageContent() {
             <div className="home-lp-download-trust" data-reveal>
               <div>
                 <p className="home-lp-kicker">配布確認情報</p>
-                <h3>ファイル名・サイズ・SHA-256を確認できます。</h3>
+                <h3>候補ファイル名・サイズ・SHA-256を確認できます。</h3>
                 <p>{homeFacts.trustNote}</p>
               </div>
               <dl>
