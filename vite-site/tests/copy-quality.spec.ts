@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test'
+import { expect, test, type Page } from '@playwright/test'
 
 const primaryPages = [
   {
@@ -72,6 +72,7 @@ const unsafeMarketingCopy = [
   '13キャラ',
   'YouTube分析',
   'YouTube 分析',
+  'YouTube API',
   '安心の国内決済',
   '本番件数',
   '月に数本',
@@ -81,7 +82,38 @@ const unsafeMarketingCopy = [
   '動画作成の上限',
   '利用制限を解除',
   '制限が制作回数',
+  'Premiumで解除',
+  '解除される内容',
 ]
+
+const blockedPhrases = [...forbiddenCopy, ...unsafeMarketingCopy]
+
+async function collectInspectableCopy(page: Page) {
+  return page.evaluate(() => {
+    const chunks: string[] = []
+
+    chunks.push(document.body.innerText)
+    chunks.push(document.title)
+
+    document.querySelectorAll<HTMLMetaElement>('meta[name], meta[property]').forEach((meta) => {
+      chunks.push(meta.getAttribute('content') || '')
+      chunks.push(meta.getAttribute('name') || '')
+      chunks.push(meta.getAttribute('property') || '')
+    })
+
+    document.querySelectorAll<HTMLElement>('[aria-label], [alt], [title]').forEach((node) => {
+      chunks.push(node.getAttribute('aria-label') || '')
+      chunks.push(node.getAttribute('alt') || '')
+      chunks.push(node.getAttribute('title') || '')
+    })
+
+    document.querySelectorAll<HTMLScriptElement>('script[type="application/ld+json"]').forEach((node) => {
+      chunks.push(node.textContent || '')
+    })
+
+    return chunks.filter(Boolean).join('\n')
+  })
+}
 
 test.describe('primary page copy quality', () => {
   for (const entry of primaryPages) {
@@ -90,13 +122,9 @@ test.describe('primary page copy quality', () => {
 
       await expect(page.locator('h1').first()).toContainText(entry.heading)
 
-      const visibleText = await page.locator('body').innerText()
-      for (const phrase of forbiddenCopy) {
-        expect(visibleText).not.toContain(phrase)
-      }
-
-      for (const phrase of unsafeMarketingCopy) {
-        expect(visibleText).not.toContain(phrase)
+      const inspectableCopy = await collectInspectableCopy(page)
+      for (const phrase of blockedPhrases) {
+        expect(inspectableCopy).not.toContain(phrase)
       }
 
       for (const cta of entry.ctas) {
@@ -108,7 +136,7 @@ test.describe('primary page copy quality', () => {
   test('home keeps unverified proof claims out of visible copy and structured data', async ({ page }) => {
     await page.goto('/', { waitUntil: 'networkidle' })
 
-    const visibleText = await page.locator('body').innerText()
+    const visibleText = await collectInspectableCopy(page)
     for (const phrase of unsafeMarketingCopy) {
       expect(visibleText).not.toContain(phrase)
     }

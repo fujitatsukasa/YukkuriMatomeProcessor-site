@@ -320,7 +320,7 @@ export function PurchasePage() {
               <span>迷う場合はFreeで実URLを試し、台本取得とAI台本生成の利用量が増えてからPremiumへ進んでください。</span>
             </div>
 
-            <div className="pricing-unlock-grid" aria-label="Premiumで解除される内容">
+            <div className="pricing-unlock-grid" aria-label="Premiumの確認中条件">
               {premiumUnlocks.map((item) => {
                 const ItemIcon = item.Icon
                 return (

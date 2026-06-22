@@ -45,7 +45,7 @@
 ### Product positioning
 - ゆっくりまとめプロセッサーは、記事URL・スレッドURLから、ゆっくり動画の台本下地とYMM4前準備を支援するWindows向けツールです。
 - 動画を完全自動生成するツールではありません。
-- YMM4を開く前の下ごしらえを支援するツールです。
+- YMM4を開く前の前準備を支援するツールです。
 
 ### Customer-first LP rule
 - LPでは、機能を並べる前に、購入前のユーザーが知りたいことに答えてください。
@@ -53,7 +53,7 @@
   - 何を入れると何が出るか
   - YMM4とどう関係するか
   - Freeでどこまで確認できるか
-  - Premiumで何が解除されるか
+  - Premiumで何が追加・変更されるか
   - Windows/YMM4前提か
   - 動画は自動完成するのか
   - 39,800円は買い切りか月額か
@@ -65,10 +65,10 @@
 - Use short, concrete Japanese copy.
 - Prefer:
   - URLを貼るだけ
-  - YMM4前の下ごしらえ
+  - YMM4前の前準備
   - 少数URLでまず確認
   - Freeで流れを見る
-  - Premiumで制限解除
+  - Premium条件を確認
   - 動画完成はYMM4で仕上げる
   - 保存先と素材パスを先に揃える
 - Avoid:
@@ -80,6 +80,12 @@
   - 爆速収益化
   - 再生数保証
   - AIが全部やります
+  - 下ごしらえ
+  - 制限解除
+  - 無制限
+  - 使い放題
+  - 13キャラ
+  - YouTube分析
 
 ### Visual direction
 - Dark premium creator studio.
