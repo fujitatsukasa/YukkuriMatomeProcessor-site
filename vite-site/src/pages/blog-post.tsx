@@ -328,7 +328,7 @@ export function BlogPost() {
               <div className="blog-conversion-panel__actions">
                 <Link className="brand-btn brand-btn--primary" to="/download/">
                   <Download size={18} />
-                  無料でダウンロード
+                  Free版を試す
                 </Link>
                 <Link className="brand-btn brand-btn--ghost" to="/instructions/">
                   <BookOpen size={18} />

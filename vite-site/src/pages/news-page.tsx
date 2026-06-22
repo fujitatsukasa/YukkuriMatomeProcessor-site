@@ -18,8 +18,8 @@ const newsActionRoutes = [
   },
   {
     label: '導入',
-    title: '最新版を無料で取得する',
-    body: 'インストーラー、ポータブルZIP、配布元、初回起動の確認へ進みます。',
+    title: '配布条件を確認してFree版を試す',
+    body: '配布条件、ファイル情報、初回起動の確認へ進みます。',
     href: '/download/',
     Icon: Download,
   },
@@ -82,7 +82,7 @@ export function NewsPage() {
                 <Link to="/instructions/">使い方</Link>
                 <Link to="/samples/">実画面・サンプル</Link>
                 <Link to="/faq/">FAQ</Link>
-                <Link to="/download/">無料でダウンロード</Link>
+                <Link to="/download/">Free版を試す</Link>
               </div>
             </div>
 

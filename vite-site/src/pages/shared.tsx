@@ -8,16 +8,16 @@ const productViews = [
   {
     key: 'topics',
     label: 'ネタ取得',
-    title: '記事やスレを一覧で自動ストック',
-    body: '複数サイトから保存した候補を比較して、動画に使うネタを効率的に絞り込みます。',
+    title: '入力したURLから候補を確認',
+    body: '対応する記事URL・スレッドURLを入力し、使う本文や候補を見てから台本下地へ進めます。',
     image: '/product_get_script.webp',
     alt: '台本取得・ネタ一覧画面',
   },
   {
     key: 'ai_script',
     label: 'AI台本生成',
-    title: 'ノイズを除去し、自動で掛け合い形式に',
-    body: '集めたネタから不要な部分を削り、AIが自然な会話台本へと一気に再構築します。',
+    title: 'AI台本案は確認してから使う',
+    body: 'AI台本案は任意の下書き補助です。内容、事実、表現を確認してから台本編集へ送ります。',
     image: '/product_ai_script.webp',
     alt: 'AI機能付き台本作成画面',
   },
@@ -32,8 +32,8 @@ const productViews = [
   {
     key: 'materials',
     label: '素材・出力',
-    title: 'YMM4へそのまま読み込める形式で',
-    body: 'キーワードや立ち絵の素材を整理し、YMM4へ直結するフォーマットで即出力します。',
+    title: 'YMM4で仕上げる前の素材確認',
+    body: 'キーワードや素材フォルダを整理し、YMM4側で最終編集する前に保存先と素材パスを確認します。',
     image: '/product_keyword_material.webp',
     alt: '素材・出力設定画面',
   },
@@ -172,7 +172,7 @@ export function ArticleActions() {
   return (
     <div className="brand-inline-actions">
       <Link className="brand-btn brand-btn--primary" to="/download/">
-        無料でダウンロード
+        Free版を試す
       </Link>
       <Link className="brand-btn brand-btn--ghost" to="/contact/">
         導入について問い合わせる

@@ -157,8 +157,8 @@ const updateSummaryCards = [
     Icon: ShieldCheck,
   },
   {
-    title: '最新版インストーラーを公式リンクから取得',
-    body: '配布元は Cloudflare Workers/R2 の公式URLです。別URLや古いファイルとの取り違えを避けます。',
+    title: '配布情報を公式ページで確認',
+    body: '配布元、ファイル名、SHA256は公式ページで確認します。別URLや古いファイルとの取り違えを避けます。',
     Icon: Download,
   },
   {
@@ -170,9 +170,9 @@ const updateSummaryCards = [
 
 const releaseReadinessCards = [
   {
-    label: '確認済み',
-    title: `${publicDistribution.version}の配布ファイルを公開中`,
-    body: 'インストーラーとポータブルZIPのファイル名、サイズ、SHA256を公開しています。更新前に配布元URLとファイル情報を確認してください。',
+    label: '確認項目',
+    title: `${publicDistribution.version}の配布ファイル情報`,
+    body: 'インストーラーとポータブルZIPのファイル名、サイズ、SHA256を確認できます。更新前に配布元URLとファイル情報を照合してください。',
     tone: 'ok',
     Icon: CheckCircle2,
   },
@@ -186,14 +186,14 @@ const releaseReadinessCards = [
   {
     label: '残タスク',
     title: '購入・ログインは実環境で再確認してください',
-    body: '更新後は本番件数に戻す前に、ログイン状態、Premium権限、少数URLでの取得と台本下地までを確認してください。',
+    body: '更新後は件数を増やす前に、ログイン状態、Premium権限、少数URLでの取得と台本下地までを確認してください。',
     tone: 'caution',
     Icon: Clock3,
   },
 ] as const
 
 const updateCompletionChecks = [
-  '公式リンクから最新版を取得した',
+  '公式ページで配布情報を確認した',
   'ファイル名、サイズ、SHA256を確認した',
   'インストールまたは解凍後に起動できた',
   'YMM4パスと保存先設定が残っているか確認した',
@@ -253,7 +253,7 @@ export function UpdatePage() {
     <>
       <PageMeta
         title="アップデート｜最新版の確認と更新前チェック"
-        description="ゆっくりまとめプロセッサーの最新版、公開日、直近変更の要約、更新前に確認する設定を確認できます。"
+        description="ゆっくりまとめプロセッサーの配布情報、公開日、直近変更の要約、更新前に確認する設定を確認できます。"
         keywords="アップデート, 最新版, リリースノート, 変更履歴, ダウンロード"
         path="/update/"
       />
@@ -265,7 +265,7 @@ export function UpdatePage() {
               <p className="brand-kicker">アップデート</p>
               <h1>最新版の確認と更新前チェック</h1>
               <p className="brand-lead">
-                公開中の最新版、直近変更の要約、更新前に見るべき設定を確認できます。Cloudflare配布のファイル名と変更点を、必要な判断材料だけに絞ってまとめています。
+                配布情報、直近変更の要約、更新前に見るべき設定を確認できます。Cloudflare配布のファイル名と変更点を、必要な判断材料だけに絞ってまとめています。
               </p>
 
               <div className="utility-stat-grid">
@@ -280,7 +280,7 @@ export function UpdatePage() {
               </div>
 
               <div className="utility-link-row">
-                <a href={downloadUrl}>無料でダウンロード</a>
+                <a href={downloadUrl}>Free版を試す</a>
                 <a href={publicDistribution.releaseNotesUrl} target="_blank" rel="noopener noreferrer">
                   リリースデータ
                 </a>
@@ -328,7 +328,7 @@ export function UpdatePage() {
                     リリースデータを見る
                   </a>
                   <a className="brand-btn brand-btn--primary" href={downloadUrl}>
-                    無料でダウンロード
+                    Free版を試す
                   </a>
                 </div>
               </InteractiveCard>
@@ -417,7 +417,7 @@ export function UpdatePage() {
               </span>
               <h2>更新できたかは、起動だけでなく少数URLまで通して確認する</h2>
               <p>
-                アップデート直後に本番件数へ戻さず、まず公式配布物、設定、少数URLの取得、台本下地までを確認してください。
+                アップデート直後に件数を増やさず、まず公式配布物、設定、少数URLの取得、台本下地までを確認してください。
               </p>
             </div>
             <ul className="release-update-completion-list">

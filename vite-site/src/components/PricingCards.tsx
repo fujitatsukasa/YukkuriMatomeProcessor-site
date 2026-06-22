@@ -1,5 +1,6 @@
 import { InteractiveCard } from '@/components/ui'
 import { legal } from '@/data/site-content'
+import { productFacts } from '@/data/product-facts'
 import { ShieldCheck, CheckCircle2, Clock, CreditCard } from 'lucide-react'
 
 type PlanFeature = {
@@ -27,37 +28,37 @@ const pricingPlans: PricingPlan[] = [
     name: 'Free',
     eyebrow: '初回導入の入口',
     price: '¥0',
-    term: 'ずっと無料',
+    term: '0円のFree版',
     bestFor: 'まず手元のURLで使えるか見たい',
-    summary: '対応サイト取得、基本編集、YMM4前準備までを見て、続けて使えそうか確かめる入口プランです。',
+    summary: '起動、基本編集、素材確認、YMM4で仕上げる前準備までを見て、続けて使えそうか確かめる入口プランです。',
     note: '初回導入や動作確認、無料での試運転に最適',
     badge: null,
     features: [
       { label: '対応サイトからの台本取得を試用', active: true },
-      { label: '基本編集とYMM4出力の確認', active: true },
+      { label: '基本編集とYMM4前準備の確認', active: true },
       { label: 'デフォルトプリセットで編集開始', active: true },
       { label: '内蔵操作ガイド', active: true },
       { label: '導入前の動作検証', active: true },
-      { label: '台本取得・生成の制限解除', active: false },
+      { label: '公開前確認中のPremium条件', active: false },
     ],
   },
   {
     key: 'premium',
     name: 'Premium',
-    eyebrow: '買い切りで制限解除',
+    eyebrow: '買い切り / 条件確認中',
     price: '¥39,800',
     term: '買い切り / 税込',
-    bestFor: '台本取得と台本生成の制限を外して、継続投稿の前工程を止めずに回したい',
-    summary: '一度払いで Premium 権限を付与し、台本取得とAI台本生成の利用制限を解除する買い切りライセンスです。',
-    note: 'Googleログインに紐づく権限同期で、購入後は月額なしで Premium 機能を利用',
+    bestFor: 'Freeで流れを確認し、公開済み条件を見てから買い切りを判断したい',
+    summary: 'Premiumは月額なしの買い切りです。具体的な利用枠、PC台数、更新範囲は公開条件の確定後に案内します。',
+    note: '未確認の条件を強く売らないため、購入実行は条件確定後に案内',
     badge: '買い切り',
     features: [
       { label: 'Freeプランの全機能', active: true },
       { label: 'CSV/.ymmpとフォーマット管理', active: true, emphasis: true },
-      { label: '台本取得の利用制限解除', active: true, emphasis: true },
-      { label: 'AI台本生成の利用制限解除', active: true, emphasis: true },
-      { label: '13キャラ対応のAI台本作成', active: true, emphasis: true },
-      { label: 'YouTube分析と候補比較', active: true, emphasis: true },
+      { label: '具体的なURL取得条件は確認中', active: true, emphasis: true },
+      { label: 'AI台本案の利用条件は確認中', active: true, emphasis: true },
+      { label: 'PC台数・再認証条件は確認中', active: true, emphasis: true },
+      { label: '更新範囲は確認中', active: true, emphasis: true },
       { label: 'Googleアカウントへの権限保持', active: true, emphasis: true },
       { label: '購入者向けサポート', active: true, emphasis: true },
     ],
@@ -67,7 +68,7 @@ const pricingPlans: PricingPlan[] = [
 const comparisonRows = [
   {
     label: '導入フェーズ',
-    values: ['まず動作確認', '継続投稿の制限解除'],
+    values: ['まず動作確認', '購入条件の確認後に案内'],
   },
   {
     label: '主な強み',
@@ -79,11 +80,11 @@ const comparisonRows = [
   },
   {
     label: 'AI補助 / AI台本',
-    values: ['基本確認中心', '13キャラ台本と生成枠を本格利用'],
+    values: ['基本確認中心', '具体的な利用条件は確認中'],
   },
   {
     label: '向いている規模感',
-    values: ['導入検証', '個人・チームの継続投稿'],
+    values: ['導入検証', '継続利用を検討する人'],
   },
   {
     label: 'サポート密度',
@@ -92,8 +93,20 @@ const comparisonRows = [
 ] as const
 
 export function PricingCards() {
+  const purchaseReady = productFacts.purchaseReady.value
+
   return (
     <>
+      {!purchaseReady ? (
+        <div className="pricing-gate-notice pricing-layer" role="status">
+          <strong>Premiumの購入条件は最終確認中です</strong>
+          <p>
+            39,800円（税込）の買い切り、月額なし、Stripe Checkoutの一度払いは確認済みです。
+            Free/Premiumの具体的な利用枠、PC台数、再認証、更新範囲が揃うまで購入実行CTAは表示しません。
+          </p>
+        </div>
+      ) : null}
+
       <div className="pricing-grid-container premium-pricing-grid">
         {pricingPlans.map((plan) => (
           <InteractiveCard key={plan.name} className={`premium-pricing-card pricing-card--${plan.key}`}>
@@ -145,9 +158,9 @@ export function PricingCards() {
         <div className="pricing-comparison-board__head">
           <h3>プラン差分を一目で把握</h3>
           <p>
-            Freeで確認できる範囲と、Premiumで解除される範囲を短く整理しています。
+            Freeで確認できる範囲と、Premiumで確定待ちの条件を分けて整理しています。
           </p>
-          <span className="pricing-comparison-board__hint">モバイルでは横スクロールで比較できます。</span>
+          <span className="pricing-comparison-board__hint">モバイルでも各値にFree / Premiumラベルを表示します。</span>
         </div>
 
         <div className="pricing-comparison-table-scroll">
@@ -163,7 +176,10 @@ export function PricingCards() {
               <div key={row.label} className="pricing-comparison-table__row" role="row">
                 <span role="rowheader">{row.label}</span>
                 {row.values.map((value, index) => (
-                  <span key={`${row.label}-${pricingPlans[index].name}`} role="cell">{value}</span>
+                  <span key={`${row.label}-${pricingPlans[index].name}`} role="cell">
+                    <em className="pricing-comparison-table__mobile-label">{pricingPlans[index].name}</em>
+                    {value}
+                  </span>
                 ))}
               </div>
             ))}
@@ -186,7 +202,7 @@ export function PricingCards() {
         </div>
         <div className="trust-badge-bar__item">
           <CreditCard size={20} color="#e0c184" />
-          <span>安心の国内決済</span>
+          <span>{productFacts.paymentMethod.value}</span>
         </div>
       </div>
     </>

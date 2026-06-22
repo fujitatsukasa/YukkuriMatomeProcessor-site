@@ -33,21 +33,21 @@ const screenGallery = [
   },
   {
     title: 'AI台本生成を使う',
-    body: '13キャラの掛け合い補助を使い、取得素材を会話形式へ寄せます。',
+    body: '掛け合い補助を使い、取得素材を会話形式へ寄せます。AI出力は必ず人が確認します。',
     goal: 'AI出力を下書きとして作り、人が内容確認できる状態にする',
     next: '事実確認、引用、言い回しを修正する',
     image: '/product_ai_script.webp',
     alt: 'AI台本生成とキャラ指定の実アプリ画面',
-    tags: ['AI補助', '13キャラ', '掛け合い'],
+    tags: ['AI補助', '掛け合い', '確認前提'],
   },
   {
-    title: 'YouTube分析で題材を見る',
+    title: '外部API連携で題材を見る',
     body: '候補動画、コメント、比較情報を確認し、次に作る題材の判断材料にします。',
     goal: '題材候補の比較材料を集める',
     next: '使う題材を選び、URL取得か台本作成へ戻る',
     image: '/product_youtube_info.webp',
-    alt: 'YouTube分析と候補比較の実アプリ画面',
-    tags: ['YouTube分析', 'コメント', '題材選定'],
+    alt: '外部API連携と候補確認の実アプリ画面',
+    tags: ['外部API', 'コメント', '題材選定'],
   },
   {
     title: 'フォーマットを追加する',
@@ -236,7 +236,7 @@ export function SamplesPage() {
           title="実アプリ画面と動画サンプルで、使う前の流れを確認する"
           lead="URLを貼る、台本を直す、CSV/.ymmp前準備まで。実アプリ画面、Before/After、短い動画プレビューで、無料で試す前に流れを確認できます。"
           actions={[
-            { label: '無料でダウンロード', href: downloadUrl, variant: 'primary', external: true },
+            { label: 'Free版を試す', href: downloadUrl, variant: 'primary' },
             { label: '使い方を見る', href: '/instructions/', variant: 'ghost' },
           ]}
           flowLinks={[
@@ -540,10 +540,10 @@ export function SamplesPage() {
               </p>
             </div>
             <div className="subpage-support-callout__actions">
-              <a className="brand-btn brand-btn--primary" href={downloadUrl} target="_blank" rel="noopener noreferrer">
+              <Link className="brand-btn brand-btn--primary" to={downloadUrl}>
                 <Download size={18} />
-                無料でダウンロード
-              </a>
+                Free版を試す
+              </Link>
               <Link className="brand-btn brand-btn--ghost" to="/download/">
                 <FileText size={18} />
                 配布物を確認する

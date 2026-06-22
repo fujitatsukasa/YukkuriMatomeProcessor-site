@@ -1,3 +1,5 @@
+import { publicDownloadPage } from './product-facts'
+
 export type NavItem = {
   key:
     | 'home'
@@ -55,7 +57,7 @@ export const siteTitle = 'ゆっくりまとめプロセッサー'
 export const siteSubtitle = 'Yukkuri Matome Processor'
 export const siteTagline = 'YMM4向け台本・素材準備ツール'
 export const siteDescription =
-  '対応する記事URL・スレッドURLや下書きから、台本・話者・素材を整え、YMM4へ反映するWindows向け制作支援アプリ。'
+  '対応する記事URL・スレッドURLや下書きから、台本・話者・素材を整え、YMM4で仕上げる前準備を支援するWindows向け制作支援アプリ。'
 
 export const navItems: NavItem[] = [
   { key: 'home', label: 'ホーム', url: '/' },
@@ -70,7 +72,7 @@ export const navItems: NavItem[] = [
 ]
 
 export const primaryCta: ActionItem = {
-  label: '無料でダウンロード',
+  label: 'Free版を試す',
   href: '/download/',
   variant: 'primary',
 }
@@ -101,8 +103,8 @@ export const legal = {
   ],
   pricing: {
     plans: [
-      { name: 'Free', price: '¥0', priceTax: '無料', term: 'ずっと無料', description: '基本機能をフル活用' },
-      { name: 'Premium', price: '¥39,800', priceTax: '税込 39,800円', term: '買い切り', description: '台本取得・生成の制限解除' },
+      { name: 'Free', price: '¥0', priceTax: '無料', term: '0円のFree版', description: '起動と基本フローを確認' },
+      { name: 'Premium', price: '¥39,800', priceTax: '税込 39,800円', term: '買い切り', description: '購入条件の確定後に案内' },
     ],
     productName: 'ゆっくりまとめプロセッサー',
     modelLabel: '無料プラン + 39,800円の買い切りライセンス',
@@ -193,7 +195,7 @@ export const sha256SumsUrl = `${distributionBaseUrl}sha256sums.txt`
 export const updateFeedUrl = `${distributionBaseUrl}RELEASES-win-x64-stable`
 export const releaseManifestUrl = `${distributionBaseUrl}releases.win-x64-stable.json`
 
-export const downloadUrl = setupDownloadUrl
+export const downloadUrl = publicDownloadPage
 export const latestReleaseUrl = releaseNotesUrl
 export const releasesUrl = releaseManifestUrl
 export const tagsUrl = updateFeedUrl
@@ -255,22 +257,22 @@ export const faqGroups: FaqGroup[] = [
       {
         question: 'ゆっくりまとめプロセッサーは何を解決するツールですか？',
         answer:
-          '対応する記事URL・スレッドURLや下書きから、台本・話者・素材を整え、YMM4へ反映するWindows向け制作支援アプリです。',
+          '対応する記事URL・スレッドURLや下書きから、台本・話者・素材を整え、YMM4で仕上げる前準備を支援するWindows向け制作支援アプリです。',
       },
       {
         question: '動画は自動で完成しますか？',
         answer:
-          'YMM4へ直反映して動画作成を進めます。音声、字幕、立ち絵、間合い、権利確認、投稿判断はYMM4で見て直してください。',
+          '完成・投稿まで自動で進めるツールではありません。台本下地、話者、素材確認などを整え、音声、字幕、間合い、演出、権利確認、投稿判断はYMM4と利用者側で行います。',
       },
       {
         question: '無料で試せますか？',
         answer:
-          'はい。Freeプランで起動、初期設定、台本編集、動画作成導線、YMM4連携の流れを確認できます。制限解除が必要になったらPremiumを検討してください。',
+          'はい。Freeプランで起動、初期設定、台本編集、素材確認、YMM4で仕上げる前準備の流れを確認できます。',
       },
       {
         question: '無料版では何ができますか？',
         answer:
-          'Freeプランでは、起動、初期設定、台本編集、動画作成導線、YMM4連携まで試せます。Premiumに進む前に、自分の制作環境で続けられるか確認できます。',
+          'Freeプランでは、起動、初期設定、台本編集、素材確認、YMM4前準備の流れを確認できます。具体的な利用上限は公開条件が確定するまで断定しません。',
       },
       { question: '想定ユーザーは誰ですか？', answer: 'YMM4で反応集、解説、ショート、まとめ、ゆっくり動画を作る個人・チームを想定しています。' },
       {
@@ -284,7 +286,7 @@ export const faqGroups: FaqGroup[] = [
     id: 'faq-onboarding',
     label: '導入',
     items: [
-      { question: '導入時に最初にやるべきことは？', answer: '最新版のインストーラーまたはポータブルZIPを取得し、YMM4実行パス、保存先フォルダ、必要に応じて YouTube API キーを設定してください。' },
+      { question: '導入時に最初にやるべきことは？', answer: '配布ページで公開条件を確認し、YMM4実行パス、保存先フォルダ、必要に応じて外部APIキーを設定してください。' },
       { question: '対応OSは何ですか？', answer: 'Windows 10 / 11環境での利用を前提に設計しています。' },
       { question: 'Windows専用ですか？', answer: 'はい。現時点ではWindows 10 / 11専用です。Mac、スマホ、ブラウザだけで完結するツールではありません。' },
       { question: 'Macで使えますか？', answer: '現時点ではMac版はありません。YMM4を使うWindows環境を前提にしています。' },
@@ -305,7 +307,7 @@ export const faqGroups: FaqGroup[] = [
       { question: '取得した台本は再編集できますか？', answer: 'はい。不要行削除、見出し整理、読み上げ向け調整、感情や役割の微修正が可能です。' },
       { question: 'URLエラーで取得できない場合は？', answer: 'URL形式、対象サイトの対応状況、ネットワークの順で確認してください。' },
       { question: '対応していないURLは取得できますか？', answer: '対応外URLは取得できない場合があります。対象サイト、URL形式、ログの内容を確認してください。' },
-      { question: '取得件数が多いときはどう進めますか？', answer: 'まず少数のURLで取得、台本整理、CSV/.ymmp前準備まで通し、その後に本番件数へ増やしてください。' },
+      { question: '取得件数が多いときはどう進めますか？', answer: 'まず少数のURLで取得、台本整理、CSV/.ymmp前準備まで通し、保存先とYMM4側の確認が済んでから件数を増やしてください。' },
     ],
   },
   {
@@ -315,9 +317,9 @@ export const faqGroups: FaqGroup[] = [
       { question: '設定で優先すべき項目は？', answer: 'YMM4パス、台本保存先、CSV/.ymmpの保存先、フォルダルールを優先して固定してください。' },
       { question: '複数人で設定を揃えるには？', answer: '初期値を定義した手順書を用意し、更新時は同じチェックリストで確認します。' },
       { question: '設定変更が反映されない場合は？', answer: '再起動、権限確認、保存先アクセス権の順に確認してください。' },
-      { question: 'YouTube APIキーは必要ですか？', answer: '通常の導入確認や台本整理だけなら必須ではありません。YouTube分析、コメント取得、検索条件を使う機能では YouTube API キーの設定が必要です。' },
-      { question: 'YouTube分析を使うのに追加設定は必要ですか？', answer: 'はい。YouTube分析では API キーの設定が必要です。検索条件、除外条件、コメント取得などの利用前に確認してください。' },
-      { question: 'AIだけで動画を作れますか？', answer: 'いいえ。AI台本生成や動画作成導線は使えますが、最後の編集、内容確認、権利確認、投稿判断はYMM4で見て直してください。' },
+      { question: '外部APIキーは必要ですか？', answer: '通常の導入確認や台本整理だけなら必須ではありません。外部APIを使う一部機能では API キーの設定が必要になる場合があります。' },
+      { question: '外部APIを使うのに追加設定は必要ですか？', answer: 'はい。外部API連携を使う機能では API キーや通信内容を確認してから利用してください。' },
+      { question: 'AIだけで動画を作れますか？', answer: 'いいえ。AI台本案は任意の下書き補助です。最後の編集、内容確認、権利確認、投稿判断はYMM4と利用者側で行ってください。' },
     ],
   },
   {
@@ -334,11 +336,11 @@ export const faqGroups: FaqGroup[] = [
     id: 'faq-purchase',
     label: '購入・契約',
     items: [
-      { question: '料金プランはどう分かれていますか？', answer: 'Free（¥0）と Premium（買い切り39,800円）の2つです。まずはFreeで編集の流れを試し、台本取得、AI台本生成、動画作成の利用制限解除が必要になったらPremiumを購入します。' },
+      { question: '料金プランはどう分かれていますか？', answer: 'Free（¥0）と Premium（買い切り39,800円）の2つです。まずはFreeで起動、台本編集、素材確認、YMM4前準備の流れを確認してください。' },
       { question: '月額料金はありますか？', answer: 'いいえ。Premiumは39,800円税込の買い切りで、月額自動更新はありません。' },
       { question: '購入申し込みはどのように進めますか？', answer: 'アプリ内の購入画面から Stripe Checkout を開き、買い切りライセンスを一度払いで購入します。' },
-      { question: '購入後の権限はどう反映されますか？', answer: '決済完了後、Googleログインに紐づく課金状態と利用枠を同期し、アプリ内でPremium機能が有効化されます。' },
-      { question: 'Premiumで何が解除されますか？', answer: '台本取得、AI台本生成、動画作成の利用制限を解除します。月額ではなく39,800円の買い切りです。' },
+      { question: '購入後の権限はどう反映されますか？', answer: '決済完了後、Googleログインに紐づく課金状態と利用枠を同期します。現在、公開LPでは具体的な上限値を未確定値として扱っています。' },
+      { question: 'Premiumで何が変わりますか？', answer: 'Premiumは39,800円税込の買い切りで、月額料金はありません。具体的な利用条件、PC台数、更新範囲は公開条件が確定するまで断定しません。' },
       { question: '返金条件は何ですか？', answer: '購入後7日以内を原則受付とし、返金成立時はPremium権限を停止します。詳細は返金・キャンセルポリシーを確認してください。' },
       { question: '収益化は約束されますか？', answer: 'いいえ。動画の品質、投稿頻度、チャンネル状況、各プラットフォームの審査に左右されるため、収益化は約束していません。' },
       { question: '契約・請求に関する相談先は？', answer: '記録の残るメール窓口を推奨します。詳細はお問い合わせページを参照してください。' },
@@ -370,15 +372,15 @@ export const newsPosts: NewsPost[] = [
     path: '/2026-01-15-download-guide/',
     date: '2026-01-15T18:30:00+09:00',
     dateLabel: '2026年01月15日',
-    title: 'お知らせ: ダウンロード手順を更新しました',
-    subtitle: '導入前の確認項目を整理し、最新版までの到達導線を短縮しました。',
+    title: 'お知らせ: 配布確認手順を更新しました',
+    subtitle: '導入前の確認項目を整理し、配布ページまでの到達導線を短縮しました。',
     summary:
-      '最新版ダウンロード手順の更新内容をお知らせします。導入時の確認項目も合わせて見直し、迷わず開始できる内容に整えています。',
-    seoDescription: '最新版ダウンロード手順の更新内容をお知らせします。',
+      '配布確認手順の更新内容をお知らせします。導入時の確認項目も合わせて見直し、迷わず開始できる内容に整えています。',
+    seoDescription: '配布確認手順の更新内容をお知らせします。',
     seoImage: '/product_guide.webp',
     heroImageAlt: 'ダウンロード手順更新のお知らせイメージ',
     body: [
-      '最新版のダウンロード手順を更新しました。',
+      '配布ページの確認手順を更新しました。',
       '導入時の確認項目も合わせて見直し、迷わず開始できる内容に整えています。',
     ],
   },

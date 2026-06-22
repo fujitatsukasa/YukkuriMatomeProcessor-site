@@ -3,28 +3,28 @@ import { expect, test } from '@playwright/test'
 const primaryPages = [
   {
     path: '/',
-    heading: '記事・スレッドから、YMM4のタイムラインまで。',
-    ctas: ['Free版をダウンロード'],
+    heading: '記事・スレッドから、YMM4で仕上げる前準備まで。',
+    ctas: ['Free版を試す'],
   },
   {
     path: '/download/',
-    heading: '最新版を無料ダウンロード',
-    ctas: ['無料でダウンロード', '使い方を見る'],
+    heading: '配布条件を確認してFree版を試す',
+    ctas: ['配布情報を見る', '使い方を見る'],
   },
   {
     path: '/instructions/',
     heading: '記事URLから台本を取得し、YMM4に渡すまでの手順',
-    ctas: ['無料でダウンロード', 'FAQを見る'],
+    ctas: ['Free版を試す', 'FAQを見る'],
   },
   {
     path: '/samples/',
     heading: '実アプリ画面と動画サンプルで、使う前の流れを確認する',
-    ctas: ['無料でダウンロード', '使い方を見る'],
+    ctas: ['Free版を試す', '使い方を見る'],
   },
   {
     path: '/purchase/',
-    heading: '料金プラン｜Freeで試して、Premiumで制限解除',
-    ctas: ['プラン比較を見る', '無料でダウンロード'],
+    heading: '料金プラン｜Freeで試して、Premium条件を確認',
+    ctas: ['プラン比較を見る', 'Free版を試す'],
   },
   {
     path: '/faq/',
@@ -34,7 +34,7 @@ const primaryPages = [
   {
     path: '/update/',
     heading: '最新版の確認と更新前チェック',
-    ctas: ['無料でダウンロード'],
+    ctas: ['Free版を試す'],
   },
 ]
 
@@ -58,6 +58,31 @@ const forbiddenCopy = [
   '自分の制作に入る',
 ]
 
+const unsafeMarketingCopy = [
+  '制限解除',
+  '無制限',
+  '使い放題',
+  '直反映',
+  'タイムラインまで',
+  '動画作成導線',
+  '自動ストック',
+  '一気に再構築',
+  'そのまま読み込める',
+  'ずっと無料',
+  '13キャラ',
+  'YouTube分析',
+  'YouTube 分析',
+  '安心の国内決済',
+  '本番件数',
+  '月に数本',
+  '実操作デモ',
+  '60秒の操作デモ',
+  '実際の完成映像',
+  '動画作成の上限',
+  '利用制限を解除',
+  '制限が制作回数',
+]
+
 test.describe('primary page copy quality', () => {
   for (const entry of primaryPages) {
     test(`${entry.path} has a concrete heading, stable CTA labels, and no internal copy`, async ({ page }) => {
@@ -67,6 +92,10 @@ test.describe('primary page copy quality', () => {
 
       const visibleText = await page.locator('body').innerText()
       for (const phrase of forbiddenCopy) {
+        expect(visibleText).not.toContain(phrase)
+      }
+
+      for (const phrase of unsafeMarketingCopy) {
         expect(visibleText).not.toContain(phrase)
       }
 
@@ -80,7 +109,7 @@ test.describe('primary page copy quality', () => {
     await page.goto('/', { waitUntil: 'networkidle' })
 
     const visibleText = await page.locator('body').innerText()
-    for (const phrase of ['60秒の操作デモ', '実際の完成映像', '動画作成の上限', '利用制限を解除', '実操作デモ']) {
+    for (const phrase of unsafeMarketingCopy) {
       expect(visibleText).not.toContain(phrase)
     }
 
@@ -96,5 +125,25 @@ test.describe('primary page copy quality', () => {
     const visibleFaqQuestions = await page.locator('#faq details summary span:first-child').allInnerTexts()
     expect(faqLd.mainEntity).toHaveLength(visibleFaqQuestions.length)
     expect(faqLd.mainEntity.map((entry: { name: string }) => entry.name)).toEqual(visibleFaqQuestions)
+  })
+
+  test('home and download CTAs do not link directly to executable archives while distribution is gated', async ({ page }) => {
+    for (const path of ['/', '/download/']) {
+      await page.goto(path, { waitUntil: 'networkidle' })
+
+      const riskyLinks = await page.locator('a[href$=".exe"], a[href$=".zip"], a[href*="Setup.exe"], a[href*="Portable.zip"]').evaluateAll(
+        (nodes) => nodes.map((node) => ({ text: node.textContent?.trim(), href: (node as HTMLAnchorElement).href })),
+      )
+
+      expect(riskyLinks).toEqual([])
+    }
+  })
+
+  test('purchase page suppresses execution purchase CTA while Premium conditions are pending', async ({ page }) => {
+    await page.goto('/purchase/', { waitUntil: 'networkidle' })
+
+    await expect(page.getByText('Premiumの購入条件は最終確認中です')).toBeVisible()
+    await expect(page.getByText('購入実行CTAは表示しません').first()).toBeVisible()
+    await expect(page.getByRole('link', { name: /購入する|決済|Checkout|今すぐ購入/ })).toHaveCount(0)
   })
 })

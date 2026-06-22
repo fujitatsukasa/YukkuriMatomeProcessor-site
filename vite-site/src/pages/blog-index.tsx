@@ -62,7 +62,7 @@ const blogDecisionRoutes = [
   {
     label: '料金確認',
     title: 'Freeで試してPremiumを確認する',
-    body: '無料で試し、台本取得とAI台本生成の制限解除が必要になったらPremiumを確認します。',
+    body: '無料で試し、台本取得とAI台本案の公開条件が合う場合だけPremiumを確認します。',
     href: '/purchase/',
   },
 ] as const
@@ -261,9 +261,9 @@ export function BlogIndex() {
             </div>
 
             <div className="blog-reader-gate__actions">
-              <a className="brand-btn brand-btn--primary" href={downloadUrl} target="_blank" rel="noopener noreferrer">
-                無料でダウンロード
-              </a>
+              <Link className="brand-btn brand-btn--primary" to={downloadUrl}>
+                Free版を試す
+              </Link>
               <Link className="brand-btn brand-btn--ghost" to="/samples/">
                 実画面を見る
               </Link>

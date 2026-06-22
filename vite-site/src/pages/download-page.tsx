@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { InteractiveCard, PageIntro, PageMeta, Section } from '@/components/ui'
 import { downloadUrl, publicDistribution } from '@/data/site-content'
+import { productFacts } from '@/data/product-facts'
 import { MetricStrip } from '@/pages/shared'
 import { AnimatePresence, motion } from '@/lib/light-motion'
 import {
@@ -23,7 +24,7 @@ const onboardingChecks = [
   'Windows 10 / 11 環境であること',
   'YMM4 の実行ファイルパスを指定できること',
   '解凍先フォルダに書き込み権限があること',
-  '必要に応じて YouTube API キーを用意できること',
+  '必要に応じて外部APIキーを用意できること',
 ] as const
 
 const supportBundle = [
@@ -69,8 +70,8 @@ const instructionPrepCards = [
   },
   {
     label: '任意',
-    title: 'YouTube APIキー',
-    body: 'YouTube分析や候補比較を使う場合だけ用意します。台本取得の最初の確認だけなら後回しでも構いません。',
+    title: '外部APIキー',
+    body: '外部API連携を使う場合だけ用意します。台本取得の最初の確認だけなら後回しでも構いません。',
     check: '使う機能だけ先に設定する',
     Icon: BadgeCheck,
   },
@@ -147,10 +148,10 @@ const instructionFeatureGoalMap = [
   {
     step: '05',
     title: '題材確認',
-    goal: 'YouTube分析や候補比較で次の題材を見る',
+    goal: '外部API連携で次の題材を見る',
     success: '候補を選び、台本作成へ戻れる',
     image: '/product_youtube_info.webp',
-    alt: 'YouTube分析と候補比較の実アプリ画面',
+    alt: '外部API連携と候補確認の実アプリ画面',
     href: '/samples/',
     Icon: FileSearch,
   },
@@ -214,7 +215,7 @@ const completionGateItems = [
   {
     id: 'decision',
     title: 'Freeで足りるか判断した',
-    body: '制限解除が必要な場合だけPremiumを検討し、購入前に料金と返金条件を確認した。',
+    body: 'Premiumが必要な場合だけ検討し、購入前に料金と返金条件を確認した。',
     href: '/purchase/',
   },
   {
@@ -241,7 +242,7 @@ const downloadSupportCards = [
   {
     eyebrow: '次に見るページ',
     title: '導入後に進むべきページ',
-    body: '使い方で操作手順、料金で制限解除、FAQで詰まりどころを確認できます。',
+    body: '使い方で操作手順、料金で確認中条件、FAQで詰まりどころを確認できます。',
     links: [
       { label: '使い方を見る', href: '/instructions/' },
       { label: '料金を確認', href: '/purchase/' },
@@ -261,7 +262,7 @@ const distributionChecks = [
   },
   {
     title: '起動後に確認',
-    body: 'YMM4実行パス、保存先フォルダ、必要に応じたYouTube APIキーを設定してから、少数URLで動作確認します。',
+    body: 'YMM4実行パス、保存先フォルダ、必要に応じた外部APIキーを設定してから、少数URLで動作確認します。',
   },
   {
     title: '更新時',
@@ -297,7 +298,7 @@ const distributionReadinessCards = [
 ] as const
 
 const distributionCompletionChecks = [
-  '公式インストーラーまたはポータブルZIPを取得した',
+  '配布ページでファイル情報を確認した',
   'ポータブルZIPは解凍してから起動した',
   'Windows警告が出た場合に配布元とSHA256を確認した',
   'YMM4.exeと保存先を保存した',
@@ -400,6 +401,7 @@ function getLatestManifestVersion(manifest: ReleaseManifestResponse | null) {
 
 function ReleaseIntegrityPanel() {
   const [release, setRelease] = useState<PublicDistributionInfo>(fallbackDistributionInfo)
+  const downloadReady = productFacts.downloadReady.value
 
   useEffect(() => {
     const controller = new AbortController()
@@ -463,7 +465,7 @@ function ReleaseIntegrityPanel() {
           <span className="subpage-card__eyebrow">公式配布情報</span>
           <h2>インストーラーとポータブルZIPのファイル名・サイズ・SHA256を確認できます</h2>
           <p>
-            ダウンロードボタンは Cloudflare Workers/R2 の公式配布ファイルへ接続しています。取得前後にファイル名とハッシュを確認すると、
+            配布条件が確定したら、Cloudflare Workers/R2 の公式配布ファイルへ案内します。取得前後にファイル名とハッシュを確認すると、
             別URLや古い配布物との取り違えを避けやすくなります。
           </p>
         </div>
@@ -522,12 +524,20 @@ function ReleaseIntegrityPanel() {
       </div>
 
       <div className="release-integrity-actions">
-        <a className="brand-btn brand-btn--primary" href={publicDistribution.assets.setup.url} rel="noreferrer">
-          インストーラーをダウンロード
-        </a>
-        <a className="brand-btn brand-btn--ghost" href={publicDistribution.assets.portable.url} rel="noreferrer">
-          ポータブルZIPを取得
-        </a>
+        {downloadReady ? (
+          <>
+            <a className="brand-btn brand-btn--primary" href={publicDistribution.assets.setup.url} rel="noreferrer">
+              インストーラーをダウンロード
+            </a>
+            <a className="brand-btn brand-btn--ghost" href={publicDistribution.assets.portable.url} rel="noreferrer">
+              ポータブルZIPを取得
+            </a>
+          </>
+        ) : (
+          <div className="download-gate-note" role="status">
+            配布バージョン、署名状態、公開ゲートの確認中です。確認が揃うまで、このページでは実行ファイルの直接取得ボタンを表示しません。
+          </div>
+        )}
         <a className="brand-btn brand-btn--ghost" href={publicDistribution.sha256SumsUrl} target="_blank" rel="noreferrer">
           SHA256一覧を見る
         </a>
@@ -539,10 +549,10 @@ function ReleaseIntegrityPanel() {
 const instructionSteps = [
   {
     number: '01',
-    title: 'ダウンロードして解凍する',
+    title: '配布ページを確認する',
     image: '/product_guide.webp',
     alt: '初期設定とガイドの画面',
-    action: '公式インストーラーを取得します。ポータブルZIPを使う場合は作業しやすいフォルダへ解凍します。',
+    action: '配布条件とファイル情報を確認します。取得できる状態になったら作業しやすいフォルダで起動準備をします。',
     input: '入力なし。まずは配布ファイル名、配布元URL、保存先だけ確認します。',
     click: '解凍後、アプリ本体を起動します。',
     success: 'アプリ画面が開き、初期設定へ進める状態です。',
@@ -555,7 +565,7 @@ const instructionSteps = [
     image: '/product_guide.webp',
     alt: 'YMM4パスと保存先を設定する画面',
     action: '最初にYMM4実行ファイルと出力先フォルダを固定します。',
-    input: 'YMM4.exeの絶対パス、CSV/.ymmpの保存先、必要に応じてYouTube APIキー。',
+    input: 'YMM4.exeの絶対パス、CSV/.ymmpの保存先、必要に応じて外部APIキー。',
     click: '設定保存またはガイド内の保存ボタンを押します。',
     success: '次回以降も同じ保存先で出力できる状態です。',
     trouble: ['YMM4パスはショートカットではなく実体を指定', '保存先は書き込み権限のあるフォルダにする'],
@@ -736,7 +746,7 @@ const downloadScenes: readonly GuideScene[] = [
     key: 'setup',
     eyebrow: '手順1',
     title: 'YMM4 パスと保存先を先に固定する',
-    body: '最初に設定を終えることで、後の台本取得や出力で迷う回数を減らします。YouTube 分析を使うなら API キーもここで揃えます。',
+    body: '最初に設定を終えることで、後の台本取得や出力で迷う回数を減らします。外部API連携を使うならAPIキーもここで揃えます。',
     image: '/product_guide.webp',
     alt: '内蔵ガイドと設定確認のイメージ',
     checkpoint: '起動直後に固定する設定が揃う',
@@ -939,11 +949,13 @@ function InstructionCompletionChecklist() {
 }
 
 export function DownloadPage() {
+  const downloadReady = productFacts.downloadReady.value
+
   return (
     <>
       <PageMeta
-        title="ダウンロード｜最新版を無料ダウンロード"
-        description="ゆっくりまとめプロセッサーの最新版インストーラーとポータブルZIPを無料でダウンロード。ファイル名、サイズ、SHA256、初回起動、YMM4パス設定、導入完了判定まで確認できます。"
+        title="ダウンロード｜配布条件とFree版の確認"
+        description="ゆっくりまとめプロセッサーの配布条件、ファイル名、サイズ、SHA256、初回起動、YMM4パス設定、導入完了判定を確認できます。"
         keywords="ダウンロード, Windows, YMM4, 台本取得, CSV, .ymmp, ゆっくりまとめプロセッサー"
         path="/download/"
       />
@@ -951,10 +963,10 @@ export function DownloadPage() {
       <main className="brand-shell">
         <PageIntro
           kicker="ダウンロード"
-          title="最新版を無料ダウンロード"
+          title="配布条件を確認してFree版を試す"
           lead="Windows環境で、記事URLから台本下地とYMM4前準備まで試せます"
           actions={[
-            { label: '無料でダウンロード', href: downloadUrl, variant: 'primary', external: true },
+            { label: '配布情報を見る', href: '#distribution-files', variant: 'primary' },
             { label: '使い方を見る', href: '/instructions/', variant: 'ghost' },
           ]}
           flowLinks={[
@@ -981,7 +993,7 @@ export function DownloadPage() {
           <MetricStrip items={[...downloadMetrics]} ariaLabel="ダウンロードページの要点" />
         </Section>
 
-        <Section alt>
+        <Section id="distribution-files" alt>
           <ReleaseIntegrityPanel />
 
           <div className="download-choice-board" aria-label="配布ファイルの選び方">
@@ -1011,10 +1023,14 @@ export function DownloadPage() {
                       </li>
                     ))}
                   </ul>
-                  <a href={item.href} rel="noreferrer">
-                    <span>このファイルを取得</span>
-                    <ArrowRight size={15} />
-                  </a>
+                  {downloadReady ? (
+                    <a href={item.href} rel="noreferrer">
+                      <span>このファイルを取得</span>
+                      <ArrowRight size={15} />
+                    </a>
+                  ) : (
+                    <span className="download-choice-card__pending">直接取得は確認完了後に表示します</span>
+                  )}
                 </InteractiveCard>
               )
             })}
@@ -1160,7 +1176,7 @@ export function InstructionsPage() {
           title="記事URLから台本を取得し、YMM4に渡すまでの手順"
           lead="ダウンロード、解凍、起動、YMM4パス設定、URL入力、台本整理、CSV/.ymmp前準備、YMM4確認の順に進めます"
           actions={[
-            { label: '無料でダウンロード', href: downloadUrl, variant: 'primary', external: true },
+            { label: 'Free版を試す', href: downloadUrl, variant: 'primary' },
             { label: 'FAQを見る', href: '/faq/', variant: 'ghost' },
           ]}
           flowLinks={[
@@ -1196,7 +1212,7 @@ export function InstructionsPage() {
               <h2>先に4つだけ揃えると、手順の途中で止まりにくい</h2>
               <p>
                 使い方ページは、YMM4パス、保存先、少数URLを用意してから読むとそのまま実践できます。
-                YouTube APIキーは、分析機能を使う段階で設定すれば十分です。
+                外部APIキーは、連携機能を使う段階で設定すれば十分です。
               </p>
             </div>
 

@@ -4415,6 +4415,30 @@ html {
   padding: 1.25rem;
 }
 
+.pricing-gate-notice {
+  display: grid;
+  gap: 10px;
+  width: min(1180px, calc(100% - 48px));
+  margin: 0 auto clamp(1.2rem, 3vh, 1.8rem);
+  padding: 18px 20px;
+  border: 1px solid rgba(243, 182, 90, 0.34);
+  border-radius: 14px;
+  background:
+    linear-gradient(180deg, rgba(243, 182, 90, 0.12), rgba(255, 255, 255, 0.04)),
+    rgba(13, 18, 31, 0.9);
+}
+
+.pricing-gate-notice strong {
+  color: #f7d28a;
+  font-size: 1.05rem;
+}
+
+.pricing-gate-notice p {
+  margin: 0;
+  color: rgba(234, 238, 246, 0.78);
+  line-height: 1.75;
+}
+
 .pricing-comparison-board__head {
   display: grid;
   gap: 0.45rem;
@@ -4473,6 +4497,14 @@ html {
 .pricing-comparison-table__row > span:first-child {
   color: rgba(236, 233, 226, 0.62);
   font-weight: 700;
+}
+
+.pricing-comparison-table__mobile-label {
+  display: none;
+  margin-right: 8px;
+  color: #6ee7c8;
+  font-style: normal;
+  font-weight: 850;
 }
 
 .pricing-comparison-table__row--head > span {
@@ -4625,6 +4657,11 @@ html {
 
   .pricing-comparison-table__row > span {
     padding: 0.8rem 0.9rem;
+  }
+
+  .pricing-comparison-table__mobile-label {
+    display: inline-flex;
+    min-width: 5.5em;
   }
 }
 
@@ -8167,6 +8204,16 @@ html {
     color 220ms ease;
 }
 
+.pricing-command-hero__notice {
+  max-width: 720px;
+  padding: 0.95rem 1rem;
+  border: 1px solid rgba(243, 182, 90, 0.3);
+  border-radius: 14px;
+  background: rgba(243, 182, 90, 0.1);
+  color: rgba(255, 235, 196, 0.92);
+  line-height: 1.7;
+}
+
 .utility-chip {
   cursor: pointer;
 }
@@ -11376,6 +11423,16 @@ html {
   align-items: center;
 }
 
+.download-gate-note {
+  max-width: 620px;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid rgba(243, 182, 90, 0.28);
+  border-radius: 10px;
+  background: rgba(243, 182, 90, 0.1);
+  color: rgba(255, 235, 196, 0.9);
+  line-height: 1.65;
+}
+
 .release-integrity-downloads {
   color: rgba(236, 233, 226, 0.68);
   font-size: 0.86rem;
@@ -11500,6 +11557,21 @@ html {
   font-size: 0.9rem;
   font-weight: 900;
   text-decoration: none;
+}
+
+.download-choice-card__pending {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 38px;
+  align-items: center;
+  margin-top: auto;
+  padding: 0 0.78rem;
+  border: 1px solid rgba(243, 182, 90, 0.24);
+  border-radius: 8px;
+  color: rgba(255, 235, 196, 0.88);
+  background: rgba(243, 182, 90, 0.09);
+  font-size: 0.88rem;
+  font-weight: 850;
 }
 
 .distribution-readiness-board {

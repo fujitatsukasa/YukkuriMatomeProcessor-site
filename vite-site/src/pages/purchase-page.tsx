@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { InteractiveCard, PageMeta, Section } from '@/components/ui'
 import { PricingCards } from '@/components/PricingCards'
 import { legal } from '@/data/site-content'
+import { productFacts } from '@/data/product-facts'
 import { LegalLinksBlock } from '@/pages/shared'
 import { Bot, CheckCircle2, CreditCard, FileSearch, RotateCcw, ShieldCheck } from 'lucide-react'
 
@@ -9,20 +10,20 @@ const planNarratives = [
   {
     name: 'Free',
     price: '¥0',
-    term: 'ずっと無料',
+    term: '0円のFree版',
     title: 'まず手元のURLで試す',
     body: '記事URLの取得、台本編集、CSV/.ymmpの前準備までを無料で確認できます。',
     points: ['起動できるか見る', 'URLが取れるか見る', 'YMM4前準備まで試す'],
-    cta: { label: '無料でダウンロード', href: '/download/' },
+    cta: { label: 'Free版を試す', href: '/download/' },
   },
   {
     name: 'Premium',
     price: '¥39,800',
     term: '買い切り / 税込',
-    title: '制限を外して継続投稿へ移る',
-    body: '台本取得とAI台本生成の利用制限を解除し、継続投稿の下準備を止めずに回したい人向けの一度払いライセンスです。',
-    points: ['台本取得の制限解除', '台本生成の制限解除', 'Googleアカウントに権利保持'],
-    cta: { label: 'プラン比較へ進む', href: '#pricing-cards' },
+    title: '公開条件を確認してから判断する',
+    body: '月額なしの買い切り価格は確認済みです。利用枠、PC台数、更新範囲は公開条件の確定後に案内します。',
+    points: ['39,800円税込', '月額なし', 'Googleアカウントに権限を同期'],
+    cta: { label: '確認中の条件を見る', href: '#pricing-cards' },
   },
 ] as const
 
@@ -39,8 +40,8 @@ const pricingFlow = [
   },
   {
     eyebrow: '手順3',
-    title: '権限同期後に制限解除',
-    body: '決済完了後、Googleログインに紐づく Premium 権限を同期し、台本取得とAI台本生成の制限を外します。',
+    title: '権限同期後に条件を確認',
+    body: '決済完了後、Googleログインに紐づく Premium 権限を同期します。公開前の上限値やPC台数は確定後に案内します。',
   },
 ] as const
 
@@ -63,22 +64,22 @@ const purchaseGoalCards = [
     label: '購入後',
     plan: 'Premium同期',
     title: 'Googleアカウントで権限を確認する',
-    body: '決済後はGoogleログインに紐づくPremium権限を同期し、制限解除後の動作を少数URLで確認します。',
-    checks: ['権限同期を確認', '台本取得の制限解除', 'AI台本生成の制限解除'],
+    body: '決済後はGoogleログインに紐づくPremium権限を同期します。利用条件は公開済みの範囲だけを確認します。',
+    checks: ['権限同期を確認', '公開済み条件を確認', '少数URLで再確認'],
   },
 ] as const
 
 const premiumUnlocks = [
   {
     label: '台本取得',
-    title: '対応URLからの台本取得制限を解除',
-    body: '継続投稿でよく使う記事URL・スレッドURLの取得を、Freeの検証枠からPremium利用へ切り替えます。',
+    title: '対応URLからの台本取得条件を確認中',
+    body: 'FreeとPremiumの具体的な取得条件は、公開UI・料金・法務の一致確認後に案内します。',
     Icon: FileSearch,
   },
   {
     label: 'AI台本',
-    title: 'AI台本生成の利用制限を解除',
-    body: '13キャラ対応の掛け合い台本、感情や役割の整理など、生成補助を継続利用しやすくします。',
+    title: 'AI台本案の利用条件を確認中',
+    body: 'AI台本案は任意の下書き補助です。具体的な利用条件は確定後に表示します。',
     Icon: Bot,
   },
   {
@@ -91,16 +92,16 @@ const premiumUnlocks = [
 
 const premiumCompletionGoals = [
   {
-    title: '台本取得を本番件数へ増やす',
-    body: 'Freeで確認した対応URLの取得を、継続投稿で使う量へ増やせる状態にします。',
+    title: '台本取得の公開条件を確認する',
+    body: '対応URLの取得条件、上限、公正利用を確定値として確認できる状態にします。',
   },
   {
-    title: 'AI台本生成を継続利用する',
-    body: '掛け合い台本、役割、感情、読み上げ向けの整理を、制作ごとに使える状態にします。',
+    title: 'AI台本案の公開条件を確認する',
+    body: '外部AI連携の有無、利用条件、確認責任を公開前に揃えます。',
   },
   {
-    title: '制限解除後も少数URLで確認する',
-    body: '購入直後にいきなり本番件数へ増やさず、少数URLで取得、生成、出力まで再確認します。',
+    title: '条件確定後も少数URLで確認する',
+    body: '購入直後にいきなり件数を増やさず、少数URLで取得、編集、出力まで再確認します。',
   },
 ] as const
 
@@ -109,16 +110,16 @@ const purchaseDecisionMatrix = [
     label: 'まだFreeでよい',
     title: '手元のURLで試している段階',
     body: '起動、少数URL、台本整理、CSV/.ymmp前準備までを確認している段階なら、まだFreeで十分です。',
-    checks: ['対応URLを確認中', '月に数本だけ試したい', 'YMM4前準備まで触って判断したい'],
+    checks: ['対応URLを確認中', '少数URLで試したい', 'YMM4前準備まで触って判断したい'],
     href: '/instructions/',
     cta: '使い方で確認を続ける',
     Icon: CheckCircle2,
   },
   {
     label: 'Premium検討',
-    title: '制限が制作回数の足かせになった段階',
-    body: '継続投稿で台本取得やAI台本生成の利用量が増え、Freeの検証枠では足りないと分かったら検討します。',
-    checks: ['取得件数を増やしたい', 'AI台本生成を継続利用したい', 'Googleアカウントで権限を保持したい'],
+    title: '公開済み条件で納得できた段階',
+    body: '台本取得やAI台本案の利用量が増え、公開済み条件で納得できると分かったら検討します。',
+    checks: ['取得条件を確認したい', 'AI台本案の条件を確認したい', 'Googleアカウントで権限を保持したい'],
     href: '#pricing-cards',
     cta: 'プラン比較を見る',
     Icon: ShieldCheck,
@@ -167,8 +168,8 @@ export function PurchasePage() {
   return (
     <>
       <PageMeta
-        title="料金プラン｜Freeで試してPremiumで制限解除"
-        description="無料プランとPremium買い切り39,800円の違いを比較。台本取得、AI台本生成、YMM4前準備、Googleアカウント権限同期、返金条件を購入前に確認できます。"
+        title="料金プラン｜Freeで試してPremium条件を確認"
+        description="Free版とPremium買い切り39,800円の前提を比較。YMM4前準備、Googleアカウント権限同期、返金条件、未確定の利用条件を購入前に確認できます。"
         keywords="料金, 買い切り, Premium, 無料プラン, Stripe Checkout, 台本取得, AI台本生成"
         path="/purchase/"
       />
@@ -178,25 +179,32 @@ export function PurchasePage() {
           <div className="pricing-command-hero__shell">
             <div className="pricing-command-hero__copy">
               <p className="brand-kicker">料金プラン</p>
-              <h1>料金プラン｜Freeで試して、Premiumで制限解除</h1>
+              <h1>料金プラン｜Freeで試して、Premium条件を確認</h1>
               <p className="brand-lead">
-                Freeで確認できる範囲と、39,800円の買い切りで解除される範囲を比較できます。
+                Freeで確認できる範囲と、39,800円の買い切りで確定済みの前提を比較できます。
               </p>
 
               <div className="pricing-command-hero__chips" role="list" aria-label="料金ページの前提">
                 <span role="listitem">買い切り</span>
                 <span role="listitem">月額なし</span>
-                <span role="listitem">Freeで実URLを確認</span>
+                <span role="listitem">Freeで流れを確認</span>
                 <span role="listitem">Googleアカウントに権限を保持</span>
                 <span role="listitem">{legal.support.firstResponseSla}</span>
               </div>
+
+              {!productFacts.purchaseReady.value ? (
+                <div className="pricing-command-hero__notice" role="status">
+                  Premiumの利用枠、PC台数、再認証、更新範囲は公開条件の確定待ちです。
+                  確定するまで購入実行CTAは表示しません。
+                </div>
+              ) : null}
 
               <div className="brand-inline-actions pricing-command-hero__actions">
                 <a className="brand-btn brand-btn--primary" href="#pricing-cards">
                   プラン比較を見る
                 </a>
                 <Link className="brand-btn brand-btn--ghost" to="/download/">
-                  無料でダウンロード
+                  Free版を試す
                 </Link>
               </div>
             </div>
@@ -241,7 +249,7 @@ export function PurchasePage() {
               <p>購入判断チェック</p>
               <h2>まだFreeでよいか、Premiumを検討する段階かを分ける</h2>
               <span>
-                先にFreeで実URLを試し、制限が制作回数の足かせになった時だけPremiumを検討します。
+                先にFreeで実URLを試し、制作量と公開条件が合う場合だけPremiumを検討します。
               </span>
             </div>
 
@@ -280,10 +288,10 @@ export function PurchasePage() {
         <Section className="pricing-reassurance-section">
           <div className="subpage-section-head pricing-decision-guide__head">
             <p>購入前後の到達目標</p>
-            <h2>Freeで試し、Premiumで制限解除し、少数URLで再確認する</h2>
+              <h2>Freeで試し、Premium条件を確認し、少数URLで再確認する</h2>
             <span>
               料金だけで判断せず、購入前、購入時、購入後の確認を分けます。
-              ここまで揃ってから本番件数へ増やしてください。
+              ここまで揃ってから件数を増やしてください。
             </span>
           </div>
 
@@ -308,7 +316,7 @@ export function PurchasePage() {
           <div className="pricing-clarity-board">
             <div className="pricing-clarity-board__head">
               <p>購入前の判断材料</p>
-              <h2>Premiumで解除されるもの、支払い条件、注意点を一画面で確認</h2>
+              <h2>Premiumの確認中条件、支払い条件、注意点を一画面で確認</h2>
               <span>迷う場合はFreeで実URLを試し、台本取得とAI台本生成の利用量が増えてからPremiumへ進んでください。</span>
             </div>
 
@@ -329,9 +337,9 @@ export function PurchasePage() {
             </div>
 
             <div className="pricing-clarity-board__head pricing-clarity-board__head--compact">
-              <p>制限解除後の完了判定</p>
+              <p>条件確定後の完了判定</p>
               <h2>Premium後に「できた」と言える状態</h2>
-              <span>購入後も、まず少数URLで台本取得、AI台本生成、出力確認までを通します。</span>
+              <span>購入後も、まず少数URLで台本取得、台本編集、出力確認までを通します。</span>
             </div>
 
             <div className="pricing-unlock-goal-grid" aria-label="Premium後の完了判定">
@@ -365,7 +373,7 @@ export function PurchasePage() {
             <aside className="pricing-caution-panel" aria-label="購入前の注意点">
               <div>
                 <span className="subpage-card__eyebrow">注意点</span>
-                <h3>Premiumは制作前工程の制限解除です</h3>
+                <h3>Premiumは制作前工程の買い切り権限です</h3>
               </div>
               <ul>
                 {purchaseCautions.map((item) => (

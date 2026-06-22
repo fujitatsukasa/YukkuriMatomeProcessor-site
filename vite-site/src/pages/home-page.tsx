@@ -64,7 +64,7 @@ type LightboxImage = {
 const primaryCtaLabel = heroContent.primaryCta
 
 const metaDescription =
-  '記事URL・スレッドURL・下書きから、本文・コメント取得、話者割り当て、台本整形、AI台本生成、素材確認、YMM4反映まで。Windows 10 / 11対応。Free版あり、Premiumは39,800円（税込）の買い切り。'
+  '記事URL・スレッドURL・下書きから、台本下地・話者・改行・素材確認を整えるWindows 10 / 11向けツール。YMM4必須。Free版あり。Premiumは39,800円（税込）の買い切り。動画の完成・投稿は自動化しません。'
 
 const visibleHomeFaqs = homeFaqs.slice(0, 10)
 
@@ -90,7 +90,7 @@ const softwareApplicationLd = {
   operatingSystem: homeFacts.os.join(', '),
   softwareRequirements: `${homeFacts.osLabel}、YMM4必須`,
   url: `${homeFacts.siteOrigin}/`,
-  downloadUrl: homeFacts.downloadUrl,
+  downloadUrl: `${homeFacts.siteOrigin}${homeFacts.downloadUrl}`,
   image: `${homeFacts.siteOrigin}${homeAssets.hero}`,
   description: metaDescription,
   offers: [
@@ -554,7 +554,7 @@ function MobileStickyCta() {
 
   return (
     <div className="home-lp-sticky-cta">
-      <HomeCta href={homeFacts.downloadUrl} label="Free版を試す" location="mobile_sticky" external>
+      <HomeCta href={homeFacts.downloadUrl} label="Free版を試す" location="mobile_sticky">
         <Download size={18} aria-hidden="true" />
         Free版を試す
       </HomeCta>
@@ -600,7 +600,7 @@ function HomePageContent() {
               <p className="home-lp-kicker">{heroContent.kicker}</p>
               <h1 id="home-hero-heading">
                 <span>記事・スレッドから、</span>
-                <span>YMM4のタイムラインまで。</span>
+                <span>YMM4で仕上げる前準備まで。</span>
               </h1>
               <p className="home-lp-hero__lead">{heroContent.lead}</p>
               <div className="home-lp-hero__actions">
@@ -609,7 +609,6 @@ function HomePageContent() {
                   href={homeFacts.downloadUrl}
                   label={primaryCtaLabel}
                   location="hero"
-                  external
                 >
                   <Download size={19} aria-hidden="true" />
                   {primaryCtaLabel}
@@ -628,9 +627,9 @@ function HomePageContent() {
                   alt: '台本編集と素材確認の画面例',
                   title: '台本編集と素材確認の画面例',
                   annotations: [
-                    { x: 15, y: 20, label: 'URL / 下書きから開始' },
-                    { x: 48, y: 39, label: '話者・台本・素材を整える' },
-                    { x: 82, y: 11, label: 'YMM4へ反映' },
+                    { x: 18, y: 19, label: 'URLを入力' },
+                    { x: 50, y: 24, label: '候補を確認' },
+                    { x: 78, y: 12, label: '台本準備へ' },
                   ],
                 }}
                 onZoom={setLightboxImage}
@@ -718,7 +717,6 @@ function HomePageContent() {
                 href={homeFacts.downloadUrl}
                 label="Free版でこの流れを試す"
                 location="workflow"
-                external
               >
                 <Download size={18} aria-hidden="true" />
                 Free版でこの流れを試す
@@ -738,9 +736,9 @@ function HomePageContent() {
         <section id="demo" className="home-lp-section home-lp-section--muted home-lp-demo" aria-labelledby="home-demo-heading">
           <div className="home-lp-container">
             <SectionHead
-              kicker="LIVE DEMO"
-              title="画面で見る制作フロー"
-              body="現在の動画は、連続した操作記録ではなく制作フローの解説です。YMM4反映後のタイムラインを含む実記録は、撮影でき次第差し替えます。"
+              kicker="FLOW GUIDE"
+              title="画面で見る制作フロー解説"
+              body="現在の動画は、連続した操作記録ではなく制作フローの解説です。操作証跡や完成サンプルの証拠としては扱いません。"
             />
             <DemoVideo />
           </div>
@@ -751,7 +749,7 @@ function HomePageContent() {
             <SectionHead
               kicker="USE CASES"
               title="動画の型に合わせて、台本の作り方を変える。"
-              body="反応集、解説、ショート。それぞれで入力、台本ルール、YMM4で仕上げる箇所が違います。掲載中の動画は用途説明用のサンプルで、完成映像の証拠としては扱いません。"
+              body="反応集、解説、ショート。それぞれで入力、台本ルール、YMM4で仕上げる箇所が違います。掲載中の動画は用途説明用のサンプルで、完成品質の証拠としては扱いません。"
             />
             <div className="home-lp-samples">
               {sampleItems.map((item) => (
@@ -801,7 +799,6 @@ function HomePageContent() {
                   href={homeFacts.downloadUrl}
                   label={primaryCtaLabel}
                   location="free_section"
-                  external
                 >
                   <Download size={18} aria-hidden="true" />
                   {primaryCtaLabel}
@@ -813,8 +810,8 @@ function HomePageContent() {
               <ProductScreenshot
                 image={{
                   src: homeAssets.free,
-                  alt: 'Free状態と更新確認を表示する画面',
-                  title: 'Free状態と配布確認の画面',
+                  alt: 'Freeで最初に確認するURL取得入口の画面',
+                  title: 'Freeで確認するURL取得入口',
                   annotations: [],
                 }}
                 onZoom={setLightboxImage}
@@ -857,7 +854,6 @@ function HomePageContent() {
                   href={homeFacts.downloadUrl}
                   label={primaryCtaLabel}
                   location="pricing_free"
-                  external
                 >
                   <Download size={18} aria-hidden="true" />
                   {primaryCtaLabel}
@@ -895,8 +891,14 @@ function HomePageContent() {
                 {comparisonRows.map((row) => (
                   <div className="home-lp-comparison__row" key={row.id}>
                     <strong>{row.label}</strong>
-                    <span>{row.free}</span>
-                    <span>{row.premium}</span>
+                    <span>
+                      <em className="home-lp-comparison__mobile-label">Free</em>
+                      {row.free}
+                    </span>
+                    <span>
+                      <em className="home-lp-comparison__mobile-label">Premium</em>
+                      {row.premium}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -906,7 +908,7 @@ function HomePageContent() {
               <div>
                 <p className="home-lp-kicker">購入前確認</p>
                 <h3>39,800円を判断するために、未確認の条件は残さず確認してください。</h3>
-                <p>このLPでは、確認できていない数値を無制限や確定条件として表示しません。</p>
+                <p>このLPでは、確認できていない数値や契約条件を確定値として表示しません。</p>
               </div>
               <dl>
                 {purchaseConditionRows.map((row) => (
@@ -1057,7 +1059,7 @@ function HomePageContent() {
               <span>{heroContent.microcopy}</span>
             </div>
             <div className="home-lp-final__actions">
-              <HomeCta id="home-final-cta" href={homeFacts.downloadUrl} label={primaryCtaLabel} location="final" external>
+              <HomeCta id="home-final-cta" href={homeFacts.downloadUrl} label={primaryCtaLabel} location="final">
                 <Download size={19} aria-hidden="true" />
                 {primaryCtaLabel}
               </HomeCta>
@@ -1080,7 +1082,7 @@ export function HomePage() {
   return (
     <>
       <PageMeta
-        title="ゆっくりまとめプロセッサー｜YMM4向け台本・素材準備ツール"
+        title="ゆっくりまとめプロセッサー｜記事・スレッドからYMM4前準備を支援"
         description={metaDescription}
         keywords="ゆっくりまとめプロセッサー,YMM4,台本,素材,記事URL,スレッドURL,反応集,解説動画,ショート動画,Windows,Free,Premium"
         image={homeAssets.hero}

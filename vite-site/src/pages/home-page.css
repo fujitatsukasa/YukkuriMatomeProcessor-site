@@ -1070,6 +1070,14 @@
   color: rgba(243, 245, 247, 0.92);
 }
 
+.home-lp-comparison__mobile-label {
+  display: none;
+  margin-right: 8px;
+  color: var(--home-mint);
+  font-style: normal;
+  font-weight: 850;
+}
+
 .home-lp-fit-matrix {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1433,6 +1441,11 @@
   .home-lp-comparison__row > * {
     border-right: 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .home-lp-comparison__mobile-label {
+    display: inline-flex;
+    min-width: 5.5em;
   }
 
   .home-lp-comparison__row > :last-child {

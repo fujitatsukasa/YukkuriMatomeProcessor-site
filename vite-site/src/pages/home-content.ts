@@ -49,22 +49,22 @@ export const homeFacts = {
 } as const
 
 export const homeAssets = {
-  hero: '/lp/screen-home-hero-v1.webp',
-  capture: '/lp/screen-home-capture-v1.webp',
+  hero: '/product_get_script.webp',
+  capture: '/product_get_script.webp',
   shape: '/lp/screen-home-shape-v1.webp',
-  aiResult: '/lp/screen-home-ai-result-v1.webp',
-  materialBoard: '/lp/screen-home-material-board-v1.webp',
+  aiResult: '/product_ai_script.webp',
+  materialBoard: '/product_keyword_material.webp',
   yymm4Reflect: '/lp/screen-home-ymm4-reflected-v1.webp',
-  free: '/lp/screen-home-free-v1.webp',
+  free: '/product_get_script.webp',
   launcher: '/lp/screen-home-launcher-v1.webp',
 } as const
 
 export const heroContent = {
   kicker: 'YMM4向け まとめ動画制作支援ソフト',
-  title: '記事・スレッドから、YMM4のタイムラインまで。',
+  title: '記事・スレッドから、YMM4で仕上げる前準備まで。',
   lead:
-    '記事URL・スレッドURL・下書きから、使う本文やコメントを選び、話者・改行・素材を整えてYMM4へ反映。音声・字幕・間・演出・最終確認はYMM4で行います。',
-  primaryCta: 'Free版をダウンロード',
+    '記事URL・スレッドURL・下書きから、使う本文・コメントを選び、話者・改行・素材を整理。音声・字幕・間・演出はYMM4で仕上げます。',
+  primaryCta: 'Free版を試す',
   secondaryCta: '制作フローを見る',
   microcopy: `${homeFacts.osLabel}｜${homeFacts.yymm4Label}｜Premium ${homeFacts.premiumPrice}・${homeFacts.billingLabel}`,
   productScope: '本製品で整える：本文・コメント / 話者 / 台本 / 素材',
@@ -236,14 +236,14 @@ export const productFeatures: ProductFeature[] = [
 ]
 
 export const demoTimeline = [
-  { time: '0〜4秒', screen: 'タイトル＋制作フロー', caption: '記事・スレッドから、YMM4のタイムラインまで。' },
+  { time: '0〜4秒', screen: 'タイトル＋制作フロー', caption: '記事・スレッドから、YMM4で仕上げる前準備まで。' },
   { time: '4〜12秒', screen: 'サイト選択・URL入力・取得', caption: '対応URLから本文・コメント候補を取得' },
   { time: '12〜20秒', screen: '候補選択・コメント設定', caption: '使う内容を確認して取り込む' },
   { time: '20〜30秒', screen: 'プリセット・話者・改行', caption: '話者・改行・タイトルを動画の型に揃える' },
   { time: '30〜40秒', screen: 'AI台本案', caption: '任意で台本案を作り、結果を確認' },
   { time: '40〜49秒', screen: '台本編集・素材ボード', caption: '台本と素材の抜けを確認' },
   { time: '49〜57秒', screen: 'YMM4前準備', caption: 'YMM4で仕上げる前の材料を揃える' },
-  { time: '57〜59秒', screen: '仕上げ範囲', caption: '最後の演出と確認はYMM4で' },
+  { time: '57〜59秒', screen: '仕上げ範囲', caption: '最後の音声・字幕・演出はYMM4で' },
 ] as const
 
 export type SampleItem = {
@@ -302,23 +302,23 @@ export type PlanComparisonRow = {
 export const comparisonRows: PlanComparisonRow[] = [
   { id: 'price', label: '価格', free: '0円', premium: homeFacts.premiumPrice },
   { id: 'billing', label: '課金', free: 'なし', premium: '買い切り / 月額なし' },
-  { id: 'fetch', label: 'URLからの台本取得', free: '少数URLで動作を確認。公開上限は購入前に確認', premium: '継続利用向け。上限・条件は購入前に確認' },
-  { id: 'ai-script', label: 'AI台本案（任意）', free: '利用可否と上限をアプリ内表示で確認', premium: 'Premium権限同期後の条件で利用' },
+  { id: 'fetch', label: 'URLからの台本取得', free: '少数URLで動作確認', premium: '具体的な利用条件は公開前確認中' },
+  { id: 'ai-script', label: 'AI台本案（任意）', free: '任意機能として流れを確認', premium: '具体的な利用条件は公開前確認中' },
   { id: 'editor', label: '台本編集', free: '画面操作と編集の流れを確認', premium: '自分の制作ルールで継続利用' },
   { id: 'preset', label: 'プリセット', free: '基本設定の流れを確認', premium: '制作ルールを保存して継続利用' },
   { id: 'materials', label: '素材ボード', free: '素材パスと不足確認の流れを確認', premium: '継続制作の素材確認に利用' },
   { id: 'save', label: 'プロジェクト保存', free: '保存先と形式を確認', premium: '保存条件を確認して継続利用' },
-  { id: 'handoff', label: 'YMM4接続・反映前準備', free: 'YMM4パス設定と流れを確認', premium: 'YMM4で仕上げる前準備に利用' },
-  { id: 'account', label: '権限同期', free: 'Free状態', premium: 'GoogleログインにPremium権限を同期' },
+  { id: 'handoff', label: 'YMM4前準備', free: 'YMM4パス設定と流れを確認', premium: '仕上げ前の準備条件を確認中' },
+  { id: 'account', label: '権限確認', free: 'Free状態を確認', premium: '購入後の権限反映を確認' },
   { id: 'updates', label: 'アップデート', free: '公開配布版を利用', premium: '公開配布版を利用' },
   { id: 'support', label: 'サポート', free: homeFacts.supportSla, premium: homeFacts.supportSla },
 ]
 
 export const purchaseConditionRows = [
-  { label: '利用可能PC台数', value: '確定条件を購入前に確認してください。' },
-  { label: 'PC変更・再認証', value: '確定条件を購入前に確認してください。' },
-  { label: 'FreeのURL取得・AI台本案・保存上限', value: 'アプリ内表示または購入前案内で確認してください。' },
-  { label: 'Premiumの上限・公正利用条件', value: '購入前に確認してください。未確認のまま無制限とは表記しません。' },
+  { label: '利用可能PC台数', value: '公開条件の確定待ちです。確定するまで購入実行CTAは出しません。' },
+  { label: 'PC変更・再認証', value: '公開条件の確定待ちです。確定後に料金ページへ反映します。' },
+  { label: 'FreeのURL取得・AI台本案・保存上限', value: '公開UI・料金・法務が一致するまで断定しません。' },
+  { label: 'Premiumの上限・公正利用条件', value: '公開条件の確定待ちです。未確認のまま強い表現は使いません。' },
   { label: '返金条件', value: homeFacts.refundSummary },
   { label: 'サポート', value: `${homeFacts.supportHours} / ${homeFacts.supportSla}` },
 ] as const
@@ -346,7 +346,7 @@ export const requirementRows = [
   { label: '配布ファイル', value: `${homeFacts.setupFileName} / 約${homeFacts.setupSizeMb}` },
   { label: 'インターネット', value: 'ログイン、配布確認、URL取得、外部AI連携などで通信を使います。' },
   { label: '対応入力', value: '記事URL、スレッドURL、下書き、テーマ。対応URLはFAQで確認してください。' },
-  { label: 'APIキー', value: 'YouTube分析など一部機能ではYouTube APIキーが必要です。' },
+  { label: 'APIキー', value: '外部API連携など一部機能ではAPIキーが必要です。' },
   { label: 'サポート', value: `${homeFacts.supportHours} / ${homeFacts.supportSla}` },
 ] as const
 
@@ -438,7 +438,7 @@ export const homeFaqs = [
     id: 'license',
     question: '1ライセンスで何台のPCに使えますか？',
     answer:
-      'PC台数、PC変更、再認証ルールは購入前に確定条件を確認してください。決済後はGoogleログインに紐づくPremium権限を同期します。',
+      'PC台数、PC変更、再認証ルールは公開条件の確定待ちです。確定するまで購入実行CTAは出さず、未確認の台数を表示しません。',
   },
   {
     id: 'updates',
@@ -461,7 +461,7 @@ export const homeFaqs = [
     id: 'data',
     question: '入力内容は外部サービスへ送信されますか？',
     answer:
-      'URL取得、YouTube分析、外部AI連携など、使う機能によって通信先が変わります。個人情報や入力内容の扱いはプライバシーポリシーとアプリ内の案内を確認してください。',
+      'URL取得、外部API連携、外部AI連携など、使う機能によって通信先が変わります。個人情報や入力内容の扱いはプライバシーポリシーとアプリ内の案内を確認してください。',
   },
   {
     id: 'results',

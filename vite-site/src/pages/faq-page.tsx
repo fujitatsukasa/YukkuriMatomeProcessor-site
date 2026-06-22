@@ -31,7 +31,7 @@ const faqCategoryMeta: Record<
     cue: 'URL取得を見る',
   },
   'faq-settings': {
-    lead: 'YMM4パス、CSV/.ymmp保存先、YouTube APIキーの前提をまとめています。',
+    lead: 'YMM4パス、CSV/.ymmp保存先、外部APIキーの前提をまとめています。',
     cue: '設定を見る',
   },
   'faq-trouble': {
@@ -70,8 +70,8 @@ const faqHeroFacts = [
   },
   {
     label: '料金',
-    title: 'Freeで試してPremiumで制限解除',
-    body: 'Premiumは39,800円の買い切りです。月額自動更新はありません。',
+    title: 'Freeで試してPremium条件を確認',
+    body: 'Premiumは39,800円の買い切りです。月額自動更新はありません。具体的な利用条件は確定後に案内します。',
     href: '#faq-purchase',
   },
 ] as const
@@ -90,9 +90,9 @@ const faqDecisionCards = [
     Icon: Sparkles,
   },
   {
-    title: 'Premiumは制限解除の買い切りです',
-    body: '台本取得とAI台本生成の利用制限を解除します。Stripe Checkoutで一度だけ決済します。',
-    note: '39,800円税込 / 月額なし',
+    title: 'Premiumは買い切りです',
+    body: '39,800円税込、月額なし、Stripe Checkoutの一度払いです。利用枠やPC台数は公開条件の確定待ちです。',
+    note: '購入実行CTAは条件確定後に案内',
     Icon: CreditCard,
   },
   {
@@ -108,8 +108,8 @@ const priorityFaqQuestions = [
   'Windows専用ですか？',
   'YMM4は必須ですか？',
   '無料版では何ができますか？',
-  'Premiumで何が解除されますか？',
-  'YouTube APIキーは必要ですか？',
+  'Premiumで何が変わりますか？',
+  '外部APIキーは必要ですか？',
   '動画は自動で完成しますか？',
   'AIだけで動画を作れますか？',
   '対応していないURLは取得できますか？',
@@ -166,7 +166,7 @@ export function FaqPage() {
     <>
       <PageMeta
         title="FAQ｜導入前によくある質問"
-        description="Windows専用、Mac非対応、YMM4前提、無料版でできること、Premiumの制限解除、URL取得、APIキー、返金条件を導入前に確認できます。"
+        description="Windows専用、Mac非対応、YMM4前提、無料版でできること、Premiumの価格と確認中条件、URL取得、APIキー、返金条件を導入前に確認できます。"
         keywords="FAQ, Windows, Mac, YMM4, 無料版, Premium, 返金, URL取得, APIキー"
         path="/faq/"
         structuredData={faqPageStructuredData}
@@ -179,7 +179,7 @@ export function FaqPage() {
               <p className="brand-kicker">FAQ</p>
               <h1>導入前によくある質問</h1>
               <p className="brand-lead">
-                Windows専用か、YMM4は必要か、無料版で何ができるか、Premiumで何が解除されるかを購入前に確認できます。
+                Windows専用か、YMM4は必要か、無料版で何ができるか、Premiumの価格と確認中条件を購入前に確認できます。
               </p>
 
               <label className="utility-search">
@@ -283,7 +283,7 @@ export function FaqPage() {
               </p>
               <div className="faq-priority-actions">
                 <Link className="brand-btn brand-btn--primary" to="/download/">
-                  無料でダウンロード
+                  Free版を試す
                 </Link>
                 <Link className="brand-btn brand-btn--ghost" to="/purchase/">
                   料金を見る

@@ -1,12 +1,12 @@
 import { expect, test } from '@playwright/test'
 
 const pages = [
-  { path: '/', heading: '記事・スレッドから、YMM4のタイムラインまで。' },
-  { path: '/download/', heading: '最新版を無料ダウンロード' },
+  { path: '/', heading: '記事・スレッドから、YMM4で仕上げる前準備まで。' },
+  { path: '/download/', heading: '配布条件を確認してFree版を試す' },
   { path: '/instructions/', heading: '記事URLから台本を取得し、YMM4に渡す' },
   { path: '/samples/', heading: '実アプリ画面と動画サンプルで、使う前の流れを確認する' },
   { path: '/faq/', heading: '導入前によくある質問' },
-  { path: '/purchase/', heading: 'Freeで試して' },
+  { path: '/purchase/', heading: 'Premium条件を確認' },
   { path: '/legal/commercial-transactions/', heading: '特定商取引法に基づく表記' },
 ]
 
@@ -145,5 +145,14 @@ test.describe('mobile layout', () => {
 
     await page.locator('#home-pricing-free-cta').scrollIntoViewIfNeeded()
     await expect(page.locator('.home-lp-sticky-cta')).toHaveCount(0)
+  })
+
+  test('home pricing comparison keeps Free and Premium labels on mobile cards', async ({ page }) => {
+    await page.goto('/', { waitUntil: 'networkidle' })
+    await page.locator('#pricing').scrollIntoViewIfNeeded()
+
+    const labels = await page.locator('.home-lp-comparison__mobile-label').allInnerTexts()
+    expect(labels).toContain('Free')
+    expect(labels).toContain('Premium')
   })
 })
