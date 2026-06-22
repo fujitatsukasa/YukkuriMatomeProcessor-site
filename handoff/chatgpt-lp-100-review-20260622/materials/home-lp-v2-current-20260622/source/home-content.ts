@@ -1,0 +1,470 @@
+import {
+  downloadUrl,
+  legal,
+  publicDistribution,
+  siteOrigin,
+  siteTitle,
+} from '@/data/site-content'
+
+const premiumPriceNumber = Number(legal.pricing.unitPrice)
+const premiumPrice = `${premiumPriceNumber.toLocaleString('ja-JP')}円（税込）`
+const setupSizeMb = `${(publicDistribution.assets.setup.sizeBytes / 1000 / 1000).toLocaleString('ja-JP', {
+  maximumFractionDigits: 1,
+})} MB`
+
+export const homeFacts = {
+  productName: siteTitle,
+  siteOrigin,
+  os: ['Windows 10', 'Windows 11'],
+  osLabel: 'Windows 10 / 11',
+  yymm4Label: 'YMM4必須',
+  premiumPrice,
+  premiumPriceValue: legal.pricing.unitPrice,
+  currency: legal.pricing.currency,
+  billingLabel: '買い切り',
+  monthlyFeeLabel: '月額なし',
+  downloadUrl,
+  purchaseUrl: '/purchase/',
+  samplesUrl: '/samples/',
+  faqUrl: '/faq/',
+  updateUrl: '/update/',
+  termsUrl: '/legal/terms/',
+  privacyUrl: '/legal/privacy/',
+  commercialTransactionsUrl: '/legal/commercial-transactions/',
+  refundUrl: '/legal/refund-policy/',
+  releaseVersion: publicDistribution.version,
+  releaseDate: '2026年06月01日',
+  releaseChannel: publicDistribution.channel,
+  setupFileName: publicDistribution.assets.setup.fileName,
+  setupSizeMb,
+  setupSha256: publicDistribution.assets.setup.sha256,
+  trustNote: publicDistribution.trustNote,
+  supportHours: legal.support.operationHours,
+  supportSla: legal.support.firstResponseSla,
+  supportEmail: legal.organization.email,
+  refundSummary: legal.refund.summary,
+  deliveryMethod: legal.delivery.method,
+  paymentTiming: legal.payment.timing,
+} as const
+
+export const homeAssets = {
+  hero: '/lp/screen-home-hero-v1.webp',
+  capture: '/lp/screen-home-capture-v1.webp',
+  shape: '/lp/screen-home-shape-v1.webp',
+  aiResult: '/lp/screen-home-ai-result-v1.webp',
+  materialBoard: '/lp/screen-home-material-board-v1.webp',
+  yymm4Reflect: '/lp/screen-home-ymm4-reflected-v1.webp',
+  free: '/lp/screen-home-free-v1.webp',
+  launcher: '/lp/screen-home-launcher-v1.webp',
+} as const
+
+export const heroContent = {
+  kicker: 'YMM4向け まとめ動画制作支援ソフト',
+  title: '記事・スレッドから、YMM4のタイムラインまで。',
+  lead:
+    '対応する記事・スレッドから本文やコメントを取り込み、話者の割り当て、台本整形、素材確認、YMM4への反映まで。毎回手作業で繰り返していた前準備を、一本の制作フローにします。',
+  primaryCta: 'Free版をダウンロード',
+  secondaryCta: '60秒の操作デモを見る',
+  microcopy: `${homeFacts.osLabel}｜${homeFacts.yymm4Label}｜Premium ${homeFacts.premiumPrice}・${homeFacts.billingLabel}`,
+  note: '前準備を効率化。仕上げの演出と確認はYMM4で。',
+} as const
+
+export const workflowSummary = [
+  {
+    label: '入力',
+    title: '記事URL・スレッドURL・下書き',
+  },
+  {
+    label: '整える',
+    title: '本文・コメント取得 / 台本整形 / 素材確認',
+  },
+  {
+    label: '反映',
+    title: 'YMM4',
+  },
+] as const
+
+export const beforeAfterRows = [
+  {
+    before: 'ページを行き来して本文やコメントをコピー',
+    after: '対応URLから取得候補を確認して取り込む',
+  },
+  {
+    before: '話者、タイトル読み、改行を毎回設定',
+    after: 'よく使うルールをプリセットで呼び出す',
+  },
+  {
+    before: '台本と素材フォルダを何度も往復',
+    after: 'ボードで素材の位置と不足を確認する',
+  },
+  {
+    before: 'YMM4で同じ内容を一から並べ直す',
+    after: '確認した台本と素材をYMM4へ反映する',
+  },
+] as const
+
+export const workflowSteps = [
+  {
+    id: 'capture',
+    step: '01',
+    title: 'URLでも、下書きでも始められる。',
+    body:
+      '対応する記事・スレッドのURL、手元の下書き、テーマから開始。URL取得では候補を確認し、使う本文やコメントを選びます。',
+    points: ['サイト選択', 'URL入力', '取得候補一覧', 'コメント取得ON/OFF'],
+    image: homeAssets.capture,
+    alt: '対応するサイトとURLを指定し、取得候補を確認する台本取得画面',
+  },
+  {
+    id: 'shape',
+    step: '02',
+    title: '話者・改行・タイトルを、動画の型に合わせる。',
+    body:
+      '話者の順番、タイトル読み、改行、禁止語変換、コメント取得などを設定。よく使う組み合わせはプリセットとして次の一本でも呼び出せます。',
+    points: ['プリセット', 'タイトルキャラクター', '話者順序', '禁止語変換', '改行設定'],
+    image: homeAssets.shape,
+    alt: '話者、改行、タイトル読みをプリセットで設定する画面',
+  },
+  {
+    id: 'generate',
+    step: '03',
+    title: 'AIの出力条件を決め、結果を見てから使う。',
+    body:
+      '構成、口調、折り返し、テーマ、目標文字数を指定して台本案を生成。プレビューで内容を確認し、必要な箇所を直してから台本編集へ送ります。',
+    points: ['AIプロバイダー', '口調', '折り返し', '構成', 'テーマ', '目標文字数', '生成結果'],
+    image: homeAssets.aiResult,
+    alt: '構成と文字量を指定し、AI台本の生成結果を確認する画面',
+  },
+  {
+    id: 'reflect',
+    step: '04',
+    title: '素材を確認し、YMM4へ反映する。',
+    body:
+      '台本と素材の配置を確認してYMM4へ反映。音声、字幕、間、演出、出典、公開前の最終確認はYMM4で行います。',
+    points: ['台本編集', '素材ボード', 'YMM4反映ボタン', '反映後の確認'],
+    image: homeAssets.yymm4Reflect,
+    alt: 'YMM4へ反映する台本と素材を確認する画面',
+  },
+] as const
+
+export type ProductFeature = {
+  id: string
+  eyebrow: string
+  title: string
+  body: string
+  bullets: readonly string[]
+  images: ReadonlyArray<{
+    src: string
+    alt: string
+    title: string
+    annotations: ReadonlyArray<{ x: number; y: number; label: string }>
+  }>
+}
+
+export const productFeatures: ProductFeature[] = [
+  {
+    id: 'capture',
+    eyebrow: '01 / CAPTURE',
+    title: '必要な本文とコメントだけ、取り込む。',
+    body:
+      'サイトとURLを指定すると、取得候補を一覧で確認できます。本文やコメントをそのまま流し込まず、使う内容を見てから取り込めます。',
+    bullets: ['対応サイトを選択', 'URLから候補を取得', 'コメント取得の有無を設定', '話者の割り当て方法を設定', 'URLなしでも下書きから開始'],
+    images: [
+      {
+        src: homeAssets.capture,
+        alt: '対応するサイトとURLを指定し、取得候補を確認する台本取得画面',
+        title: 'URLとサイトを指定する画面',
+        annotations: [
+          { x: 24, y: 12, label: 'URLとサイト' },
+          { x: 53, y: 37, label: '取り込み設定' },
+          { x: 50, y: 70, label: 'コメント設定' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'shape',
+    eyebrow: '02 / SHAPE',
+    title: 'いつもの話者・改行・構成を、プリセットで呼び出す。',
+    body:
+      'タイトル読み、話者の順番、改行、禁止語変換、構成、文字量。チャンネルでよく使う設定をプリセットにして、次の一本でも呼び出せます。',
+    bullets: ['話者順を連番・ランダム等で設定', 'タイトル用話者と読み上げを設定', '改行と文字量を揃える', '禁止語を置換', '台本の構成・口調を指定', 'AI生成結果を確認して編集'],
+    images: [
+      {
+        src: homeAssets.shape,
+        alt: '話者、改行、タイトル読みをプリセットで設定する画面',
+        title: '台本ルールを設定する画面',
+        annotations: [
+          { x: 40, y: 9, label: 'プリセット' },
+          { x: 62, y: 43, label: '台本ルール' },
+          { x: 48, y: 71, label: '生成条件' },
+        ],
+      },
+      {
+        src: homeAssets.aiResult,
+        alt: '構成と文字量を指定し、AI台本の生成結果を確認する画面',
+        title: '生成結果を確認する画面',
+        annotations: [
+          { x: 45, y: 18, label: 'プレビュー' },
+          { x: 34, y: 63, label: '結果確認' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'reflect',
+    eyebrow: '03 / REFLECT',
+    title: '素材の抜けを確認して、YMM4へ反映する。',
+    body:
+      '台本と素材の位置をボードで確認し、保存先や素材パスの行き来を減らします。確認した内容をYMM4へ反映し、最後はタイミングと演出に集中できます。',
+    bullets: ['台本行と素材の対応を確認', '不足素材を見つける', '保存先を揃える', 'YMM4へ反映', '音声、字幕、間、演出を最終調整'],
+    images: [
+      {
+        src: homeAssets.materialBoard,
+        alt: '台本行と素材の配置を一覧で確認する素材ボード',
+        title: '素材ボードの確認画面',
+        annotations: [
+          { x: 10, y: 17, label: '台本と素材' },
+          { x: 48, y: 56, label: '不足確認' },
+          { x: 82, y: 17, label: '保存先' },
+        ],
+      },
+      {
+        src: homeAssets.yymm4Reflect,
+        alt: 'YMM4へ反映する台本と素材を確認する画面',
+        title: 'YMM4へ反映する前の確認画面',
+        annotations: [
+          { x: 36, y: 12, label: '台本反映' },
+          { x: 62, y: 12, label: '動画作成' },
+          { x: 38, y: 32, label: '反映対象' },
+        ],
+      },
+    ],
+  },
+]
+
+export const demoTimeline = [
+  { time: '0〜4秒', screen: 'タイトル＋完成フロー', caption: '記事・スレッドから、YMM4のタイムラインまで。' },
+  { time: '4〜12秒', screen: 'サイト選択・URL入力・取得', caption: '対応URLから本文・コメント候補を取得' },
+  { time: '12〜20秒', screen: '候補選択・コメント設定', caption: '使う内容を確認して取り込む' },
+  { time: '20〜30秒', screen: 'プリセット・話者・改行', caption: '話者・改行・タイトルを動画の型に揃える' },
+  { time: '30〜40秒', screen: 'AI条件・生成結果', caption: '構成と文字量を指定し、結果を確認' },
+  { time: '40〜49秒', screen: '台本編集・素材ボード', caption: '台本と素材の抜けを確認' },
+  { time: '49〜57秒', screen: 'YMM4反映', caption: '確認した内容をYMM4へ反映' },
+  { time: '57〜60秒', screen: 'YMM4タイムライン', caption: '最後の演出と確認はYMM4で' },
+] as const
+
+export type SampleItem = {
+  id: 'reaction' | 'explainer' | 'shorts'
+  title: string
+  poster: string
+  video: string
+  input: string
+  supportScope: string
+  userScope: string
+}
+
+export const sampleItems: SampleItem[] = [
+  {
+    id: 'reaction',
+    title: 'コメントの順番と話者を整え、テンポはYMM4で仕上げる。',
+    poster: '/samples/sample-reaction-digest-thumbnail.png',
+    video: '/samples/sample-reaction-digest-preview.mp4',
+    input: 'スレッドURL / コメント',
+    supportScope: 'コメント取得、選定、話者割り当て、タイトル読み、改行',
+    userScope: '音声、間、立ち絵、効果音、最終字幕',
+  },
+  {
+    id: 'explainer',
+    title: '導入・本編・まとめの構成で、台本案を作る。',
+    poster: '/samples/sample-yukkuri-dialogue-thumbnail.png',
+    video: '/samples/sample-yukkuri-dialogue-preview.mp4',
+    input: 'テーマ / 下書き / 参考URL',
+    supportScope: '構成指定、AI台本案、話者、文字量、素材確認',
+    userScope: '事実・表現確認、演出、音声、最終編集',
+  },
+  {
+    id: 'shorts',
+    title: '冒頭・展開・締めに絞り、短尺向けの文字量へ。',
+    poster: '/samples/sample-short-drama-thumbnail.png',
+    video: '/samples/sample-short-drama-preview.mp4',
+    input: 'テーマ / 長文下書き',
+    supportScope: '構成圧縮、改行、文字量、素材配置',
+    userScope: '尺、テンポ、縦画面、強調字幕',
+  },
+]
+
+export const freeChecks = [
+  '自分のWindowsで起動できるか',
+  '台本の作り方と画面操作が合うか',
+  'YMM4へつなぐ制作フローが使えるか',
+] as const
+
+export type PlanComparisonRow = {
+  id: string
+  label: string
+  free: string
+  premium: string
+}
+
+export const comparisonRows: PlanComparisonRow[] = [
+  { id: 'price', label: '価格', free: '0円', premium: homeFacts.premiumPrice },
+  { id: 'billing', label: '課金', free: 'なし', premium: '買い切り / 月額なし' },
+  { id: 'fetch', label: 'URLからの台本取得', free: 'Free利用枠内で確認', premium: '台本取得の利用制限を解除' },
+  { id: 'ai-script', label: 'AI台本生成', free: 'Free利用枠内で確認', premium: 'AI台本生成の利用制限を解除' },
+  { id: 'editor', label: '台本編集', free: '操作確認可', premium: '継続制作で利用' },
+  { id: 'preset', label: 'プリセット', free: '基本設定を確認', premium: '制作ルールを継続利用' },
+  { id: 'materials', label: '素材ボード', free: '配置確認可', premium: '継続制作で利用' },
+  { id: 'save', label: 'プロジェクト保存', free: '保存先と形式を確認', premium: '継続制作で利用' },
+  { id: 'handoff', label: 'YMM4接続・反映', free: '前提と流れを確認', premium: '制作データの反映に利用' },
+  { id: 'account', label: '権限同期', free: 'Free状態', premium: 'GoogleログインにPremium権限を同期' },
+  { id: 'updates', label: 'アップデート', free: '公開配布版を利用', premium: '公開配布版を利用' },
+  { id: 'support', label: 'サポート', free: homeFacts.supportSla, premium: homeFacts.supportSla },
+]
+
+export const premiumFit = [
+  'YMM4でまとめ・反応集・解説動画を継続して作る。',
+  'URL取得、台本整形、話者設定を毎回繰り返している。',
+  '自分のプリセットと制作ルールを使い続けたい。',
+  '月額ではなく買い切りを選びたい。',
+  '最後の品質はYMM4で自分で仕上げたい。',
+] as const
+
+export const premiumMismatch = [
+  'Macまたはスマートフォンだけで使いたい。',
+  'YMM4を使わない。',
+  '完成・投稿まで自動で任せたい。',
+  'AI出力、出典、素材権利、最終編集を確認したくない。',
+  '再生数や収益化の保証を求めている。',
+] as const
+
+export const requirementRows = [
+  { label: '対応OS', value: homeFacts.osLabel },
+  { label: 'Mac', value: '非対応' },
+  { label: 'YMM4', value: '必須。反映後の仕上げはYMM4で行います。' },
+  { label: '配布ファイル', value: `${homeFacts.setupFileName} / 約${homeFacts.setupSizeMb}` },
+  { label: 'インターネット', value: 'ログイン、配布確認、URL取得、外部AI連携などで通信を使います。' },
+  { label: '対応入力', value: '記事URL、スレッドURL、下書き、テーマ。対応URLはFAQで確認してください。' },
+  { label: 'APIキー', value: 'YouTube分析など一部機能ではYouTube APIキーが必要です。' },
+  { label: 'サポート', value: `${homeFacts.supportHours} / ${homeFacts.supportSla}` },
+] as const
+
+export const responsibilityItems = [
+  '本文・コメントの取得支援',
+  '台本取得・生成・編集',
+  '話者・改行・構成等の設定',
+  '素材配置の確認',
+  'YMM4への反映',
+] as const
+
+export const userResponsibilityItems = [
+  'AI出力と事実の確認',
+  '引用、出典、素材権利の確認',
+  '音声、字幕、間、立ち絵、演出の最終調整',
+  'MP4出力',
+  '投稿・公開判断',
+] as const
+
+export const downloadTrustItems = [
+  { label: '現行バージョン', value: homeFacts.releaseVersion },
+  { label: '公開日', value: homeFacts.releaseDate },
+  { label: 'チャンネル', value: homeFacts.releaseChannel },
+  { label: 'ファイルサイズ', value: `約${homeFacts.setupSizeMb}` },
+  { label: 'SHA-256', value: homeFacts.setupSha256 },
+] as const
+
+export const homeFaqs = [
+  {
+    id: 'free',
+    question: 'Free版では何ができますか？',
+    answer:
+      'Free版では、起動、ログイン、台本編集、素材確認、YMM4連携の流れを確認できます。台本取得、AI台本生成、動画作成はFree利用枠内で試せます。',
+  },
+  {
+    id: 'premium',
+    question: 'Premiumにすると何が変わりますか？',
+    answer:
+      `台本取得、AI台本生成、動画作成などの利用制限を解除します。Premiumは${homeFacts.premiumPrice}の買い切りで、月額料金はありません。`,
+  },
+  {
+    id: 'auto-finish',
+    question: '動画は自動で完成しますか？',
+    answer:
+      '完成・投稿まで自動で進めるアプリではありません。本製品は台本・話者・素材を整え、YMM4へ反映するところまでを支援します。音声、字幕、間、演出、出典、公開前の確認はYMM4で行います。',
+  },
+  {
+    id: 'ymm4-required',
+    question: 'YMM4は必要ですか？',
+    answer:
+      'はい。YMM4へ反映し、最後はYMM4で仕上げるWindows向けアプリです。YMM4なしで編集を完結する設計ではありません。',
+  },
+  {
+    id: 'windows',
+    question: 'Macやスマートフォンで使えますか？',
+    answer: '使えません。Windows 10 / 11向けです。',
+  },
+  {
+    id: 'no-url',
+    question: 'URLがなくても始められますか？',
+    answer:
+      'はい。下書き、テーマ、素材メモなどから開始できます。URL取得を使う場合は、対応サイトと取得条件をご確認ください。',
+  },
+  {
+    id: 'sites',
+    question: 'どのサイトから取得できますか？',
+    answer:
+      '対応サイトと取得できる内容は、アプリ内のサイト選択とFAQで確認できます。対象外URLは取得できない場合があります。',
+  },
+  {
+    id: 'formats',
+    question: 'どのような動画に使えますか？',
+    answer:
+      '反応集、まとめ、解説、ショート、掛け合いなど、台本と素材をYMM4で組む動画に使えます。形式ごとの完成作例はサンプルページで確認できます。',
+  },
+  {
+    id: 'ai-review',
+    question: 'AIが作った台本はそのまま使えますか？',
+    answer:
+      '内容、事実、表現、出典、権利、文字量を確認してから使用してください。生成結果はプレビューと台本編集画面で修正できます。',
+  },
+  {
+    id: 'publish',
+    question: 'YouTubeなどへ自動投稿されますか？',
+    answer:
+      'されません。保存、YMM4反映、MP4出力、投稿・公開は利用者が確認して行います。',
+  },
+  {
+    id: 'license',
+    question: '1ライセンスで何台のPCに使えますか？',
+    answer:
+      'PC台数やPC変更、再認証ルールは購入前にお問い合わせください。決済後はGoogleログインに紐づくPremium権限を同期します。',
+  },
+  {
+    id: 'updates',
+    question: 'アップデートは料金に含まれますか？',
+    answer:
+      '公開配布版の更新情報はアップデートページで確認できます。提供範囲やメジャーアップデート条件は購入前に案内を確認してください。',
+  },
+  {
+    id: 'support',
+    question: 'サポートはありますか？',
+    answer:
+      `問い合わせ窓口を用意しています。受付は${homeFacts.supportHours}、一次回答は${homeFacts.supportSla}です。`,
+  },
+  {
+    id: 'refund',
+    question: '購入後に返金できますか？',
+    answer: `${homeFacts.refundSummary} 詳細は返金・キャンセルポリシーをご確認ください。`,
+  },
+  {
+    id: 'data',
+    question: '入力内容は外部サービスへ送信されますか？',
+    answer:
+      'URL取得、YouTube分析、外部AI連携など、使う機能によって通信先が変わります。個人情報や入力内容の扱いはプライバシーポリシーとアプリ内の案内を確認してください。',
+  },
+  {
+    id: 'results',
+    question: '収益化や再生数は保証されますか？',
+    answer:
+      '保証しません。本製品は制作前工程を効率化するツールであり、動画の成果を保証するものではありません。',
+  },
+] as const
