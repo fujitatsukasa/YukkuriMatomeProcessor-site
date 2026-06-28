@@ -5,7 +5,7 @@ import { decisionRecords, productFacts, readinessGates, releaseCandidateDistribu
 const primaryPages = [
   {
     path: '/',
-    heading: '素材集め、台本づくり、YMM4へ渡すところまで、ひとつの制作フローに。',
+    heading: '素材集め、台本づくり、YMM4へ渡すところまで、ひとつの制作フローに',
     ctas: ['Free版で流れを見る'],
   },
   {

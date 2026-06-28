@@ -83,6 +83,10 @@ function trackHomeEvent(name: string, payload: Record<string, string | number | 
   trackEvent(name, { ...getCommonParams(), ...payload })
 }
 
+function trimHeadingPeriod(text: string) {
+  return text.replace(/。$/, '')
+}
+
 const softwareApplicationLd = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
@@ -143,8 +147,8 @@ function SectionHead({
   align = 'split',
 }: {
   kicker: string
-  title: string
-  body?: string
+  title: ReactNode
+  body?: ReactNode
   align?: 'split' | 'center'
 }) {
   return (
@@ -156,6 +160,20 @@ function SectionHead({
       {body ? <p>{body}</p> : null}
     </div>
   )
+}
+
+function HomeEm({
+  children,
+  tone = 'gold',
+}: {
+  children: ReactNode
+  tone?: 'gold' | 'aqua' | 'white'
+}) {
+  return <strong className={`home-lp-em home-lp-em--${tone}`}>{children}</strong>
+}
+
+function HeadingEm({ children }: { children: ReactNode }) {
+  return <span className="home-lp-heading-em">{children}</span>
 }
 
 function HomeCta({
@@ -435,6 +453,69 @@ function LazySampleVideo({ item }: { item: SampleItem }) {
   )
 }
 
+function WorkflowStepBody({ step }: { step: (typeof workflowSteps)[number] }) {
+  if (step.id === 'capture') {
+    return (
+      <>
+        <HomeEm>記事URL・スレッドURL</HomeEm>を入れ、動画化に使う
+        <HomeEm tone="aqua">本文やコメント候補</HomeEm>を確認します。URLなしでも、下書きやテーマから始められます。
+      </>
+    )
+  }
+
+  if (step.id === 'shape') {
+    return (
+      <>
+        不要な行、話者、タイトル読み、改行、禁止語変換を見ながら、
+        <HomeEm>読み上げ前の台本下地</HomeEm>を整えます。
+      </>
+    )
+  }
+
+  if (step.id === 'generate') {
+    return (
+      <>
+        構成、口調、折り返し、テーマ、目標文字数を指定して台本案を生成できます。
+        <HomeEm tone="white">AIは任意機能</HomeEm>です。内容と事実を確認し、必要な箇所を直してから台本編集へ送ります。
+      </>
+    )
+  }
+
+  return (
+    <>
+      台本と素材の配置、保存先、素材パスを確認して<HomeEm tone="aqua">YMM4へ渡します</HomeEm>。
+      音声、字幕、間、演出、出典、公開前の<HomeEm tone="white">最終確認</HomeEm>はYMM4と利用者側で行います。
+    </>
+  )
+}
+
+function ProductFeatureBody({ feature }: { feature: ProductFeature }) {
+  if (feature.id === 'capture') {
+    return (
+      <>
+        サイトとURLを指定すると、<HomeEm>取得候補を一覧で確認</HomeEm>できます。
+        本文やコメントをそのまま流し込まず、使う内容を見てから取り込めます。
+      </>
+    )
+  }
+
+  if (feature.id === 'shape') {
+    return (
+      <>
+        タイトル読み、話者の順番、改行、禁止語変換、構成、文字量。
+        チャンネルでよく使う設定を<HomeEm>プリセット</HomeEm>にして、次の一本でも呼び出せます。
+      </>
+    )
+  }
+
+  return (
+    <>
+      台本と素材の位置を<HomeEm>ボードで確認</HomeEm>し、保存先や素材パスの行き来を減らします。
+      確認した内容をYMM4へ渡し、最後は<HomeEm tone="aqua">タイミングと演出</HomeEm>をYMM4で調整します。
+    </>
+  )
+}
+
 function ProductFeatureBlock({
   feature,
   index,
@@ -472,8 +553,10 @@ function ProductFeatureBlock({
     <article ref={featureRef} className="home-lp-feature" data-reverse={index % 2 === 1} data-reveal>
       <div className="home-lp-feature__copy">
         <p className="home-lp-kicker">{feature.eyebrow}</p>
-        <h2>{feature.title}</h2>
-        <p>{feature.body}</p>
+        <h2>{trimHeadingPeriod(feature.title)}</h2>
+        <p>
+          <ProductFeatureBody feature={feature} />
+        </p>
         <ul>
           {feature.bullets.map((item) => (
             <li key={item}>
@@ -602,9 +685,14 @@ function HomePageContent() {
               <h1 id="home-hero-heading">
                 <span>素材集め、台本づくり、</span>
                 <span>YMM4へ渡すところまで、</span>
-                <span>ひとつの制作フローに。</span>
+                <span>ひとつの制作フローに</span>
               </h1>
-              <p className="home-lp-hero__lead">{heroContent.lead}</p>
+              <p className="home-lp-hero__lead">
+                <HomeEm>記事・掲示板・スレッド・外部素材</HomeEm>から候補を集め、
+                <HomeEm tone="aqua">AI台本案</HomeEm>を確認し、ボードで
+                <HomeEm>セリフ・素材・字幕まわり</HomeEm>を整理。Project.json / YMMP /
+                <HomeEm tone="aqua">YMM4連携</HomeEm>へつなげる、Windows向けの制作支援アプリです。
+              </p>
               <div className="home-lp-hero__actions">
                 <HomeCta
                   id="home-hero-primary-cta"
@@ -669,8 +757,19 @@ function HomePageContent() {
           <div className="home-lp-container">
             <SectionHead
               kicker="BEFORE / AFTER"
-              title="素材取得、台本化、YMM4向け出力まで迷子にしない。"
-              body="本文やコメントの取得、AI台本、キャラ別セリフ、ボード上の素材確認、YMM4向け出力を制作フローとして扱います。最後の品質確認と公開判断は利用者が行います。"
+              title={
+                <>
+                  素材取得、台本化、<HeadingEm>YMM4向け出力</HeadingEm>まで迷子にしない
+                </>
+              }
+              body={
+                <>
+                  <HomeEm>本文やコメントの取得</HomeEm>、<HomeEm tone="aqua">AI台本</HomeEm>、
+                  キャラ別セリフ、<HomeEm>ボード上の素材確認</HomeEm>、
+                  <HomeEm tone="aqua">YMM4向け出力</HomeEm>を制作フローとして扱います。
+                  最後の<HomeEm tone="white">品質確認と公開判断</HomeEm>は利用者が行います。
+                </>
+              }
             />
             <div className="home-lp-change-table" data-reveal>
               <div className="home-lp-change-table__head">
@@ -692,16 +791,28 @@ function HomePageContent() {
           <div className="home-lp-container">
             <SectionHead
               kicker="WORKFLOW"
-              title="実画面で、制作フロー全体を確認する。"
-              body="URLから候補を見る。AI台本案を確認する。ボードでセリフ、画像、音声、字幕、立ち絵、効果を整理する。YMM4向け出力後の品質はYMM4と利用者側で確認します。"
+              title={
+                <>
+                  実画面で、<HeadingEm>制作フロー全体</HeadingEm>を確認する
+                </>
+              }
+              body={
+                <>
+                  <HomeEm>URLから候補を見る</HomeEm>。<HomeEm tone="aqua">AI台本案を確認する</HomeEm>。
+                  <HomeEm>ボードでセリフ、画像、音声、字幕、立ち絵、効果を整理する</HomeEm>。
+                  <HomeEm tone="white">YMM4向け出力後の品質</HomeEm>はYMM4と利用者側で確認します。
+                </>
+              }
             />
             <div className="home-lp-steps">
               {workflowSteps.map((step, index) => (
                 <article className="home-lp-step" key={step.id} data-reveal>
                   <div className="home-lp-step__copy">
                     <span>{step.step}</span>
-                    <h3>{step.title}</h3>
-                    <p>{step.body}</p>
+                    <h3>{trimHeadingPeriod(step.title)}</h3>
+                    <p>
+                      <WorkflowStepBody step={step} />
+                    </p>
                     <ul>
                       {step.points.map((item) => (
                         <li key={item}>{item}</li>
@@ -743,7 +854,12 @@ function HomePageContent() {
             <SectionHead
               kicker="FLOW GUIDE"
               title="画面で見る制作フロー解説"
-              body="現在の動画は、連続した操作記録ではなく制作フローの解説です。操作証跡や完成サンプルの証拠としては扱いません。"
+              body={
+                <>
+                  現在の動画は、連続した操作記録ではなく<HomeEm>制作フローの解説</HomeEm>です。
+                  操作証跡や完成サンプルの<HomeEm tone="white">証拠としては扱いません</HomeEm>。
+                </>
+              }
             />
             <DemoVideo />
           </div>
@@ -753,15 +869,25 @@ function HomePageContent() {
           <div className="home-lp-container">
             <SectionHead
               kicker="USE CASES"
-              title="動画の型に合わせて、台本の作り方を変える。"
-              body="反応集、解説、ショート。それぞれで入力、台本ルール、YMM4で仕上げる箇所が違います。掲載中の動画は用途説明用のサンプルで、完成品質の証拠としては扱いません。"
+              title={
+                <>
+                  動画の型に合わせて、<HeadingEm>台本の作り方</HeadingEm>を変える
+                </>
+              }
+              body={
+                <>
+                  <HomeEm>反応集、解説、ショート</HomeEm>。それぞれで入力、台本ルール、
+                  <HomeEm tone="aqua">YMM4で仕上げる箇所</HomeEm>が違います。
+                  掲載中の動画は用途説明用のサンプルで、完成品質の証拠としては扱いません。
+                </>
+              }
             />
             <div className="home-lp-samples">
               {sampleItems.map((item) => (
                 <article className="home-lp-sample-card" key={item.id} data-reveal>
                   <LazySampleVideo item={item} />
                   <div className="home-lp-sample-card__body">
-                    <h3>{item.title}</h3>
+                    <h3>{trimHeadingPeriod(item.title)}</h3>
                     <dl>
                       <div>
                         <dt>入力</dt>
@@ -793,10 +919,11 @@ function HomePageContent() {
           <div className="home-lp-container home-lp-free__grid">
             <div className="home-lp-free__copy" data-reveal>
               <p className="home-lp-kicker">TRY FREE</p>
-              <h2 id="home-free-heading">まずFreeで、自分の制作手順に合うか確認。</h2>
+              <h2 id="home-free-heading">まずFreeで、自分の制作手順に合うか確認</h2>
               <p>
-                いきなり購入する必要はありません。起動、少数URLでの確認、AI台本、ボード編集、YMM4向け出力まで、
-                自分の環境で流れを見てから判断できます。
+                いきなり購入する必要はありません。起動、<HomeEm>少数URLでの確認</HomeEm>、
+                <HomeEm tone="aqua">AI台本</HomeEm>、<HomeEm>ボード編集</HomeEm>、
+                <HomeEm tone="aqua">YMM4向け出力</HomeEm>まで、自分の環境で流れを見てから判断できます。
               </p>
               <div className="home-lp-free__actions">
                 <HomeCta
@@ -843,8 +970,19 @@ function HomePageContent() {
           <div className="home-lp-container">
             <SectionHead
               kicker="PRICING"
-              title="Premiumは39,800円（税込）。月額なしの買い切りです。"
-              body="Freeで起動、台本取得、AI台本、編集ボード、YMM4向け出力の流れを確認し、継続制作で必要になったらPremiumへ。確定済みの条件と、購入前に確認すべき条件を分けて表示します。"
+              title={
+                <>
+                  Premiumは<HeadingEm>39,800円（税込）</HeadingEm>、月額なしの買い切りです
+                </>
+              }
+              body={
+                <>
+                  Freeで起動、<HomeEm>台本取得</HomeEm>、<HomeEm tone="aqua">AI台本</HomeEm>、
+                  <HomeEm>編集ボード</HomeEm>、<HomeEm tone="aqua">YMM4向け出力</HomeEm>の流れを確認し、
+                  継続制作で必要になったらPremiumへ。<HomeEm tone="white">確定済みの条件</HomeEm>と、
+                  購入前に確認すべき条件を分けて表示します。
+                </>
+              }
               align="center"
             />
 
@@ -853,7 +991,10 @@ function HomePageContent() {
                 <span>まず制作フローを確認</span>
                 <h3>Free</h3>
                 <strong>0円</strong>
-                <p>自分のWindowsとYMM4環境で、台本取得、AI台本、編集ボード、YMM4向け出力の流れを確認するための無料版です。</p>
+                <p>
+                  自分のWindowsとYMM4環境で、<HomeEm>台本取得</HomeEm>、
+                  <HomeEm tone="aqua">AI台本</HomeEm>、編集ボード、YMM4向け出力の流れを確認するための無料版です。
+                </p>
                 <HomeCta
                   id="home-pricing-free-cta"
                   href={homeFacts.downloadUrl}
@@ -868,7 +1009,10 @@ function HomePageContent() {
                 <span>買い切り・月額なし</span>
                 <h3>Premium</h3>
                 <strong>{homeFacts.premiumPrice}</strong>
-                <p>Free版で流れを確認し、継続的に台本取得、AI台本、ボード編集、YMM4向け出力を使いたいと分かった段階で検討してください。</p>
+                <p>
+                  Free版で流れを確認し、継続的に<HomeEm>台本取得</HomeEm>、
+                  <HomeEm tone="aqua">AI台本</HomeEm>、ボード編集、YMM4向け出力を使いたいと分かった段階で検討してください。
+                </p>
                 <HomeCta
                   id="home-pricing-premium-cta"
                   href={homeFacts.purchaseUrl}
@@ -912,7 +1056,7 @@ function HomePageContent() {
             <div className="home-lp-condition-panel" data-reveal>
               <div>
                 <p className="home-lp-kicker">購入前確認</p>
-                <h3>39,800円を判断する前に、未確認の条件を確認してください。</h3>
+                <h3>39,800円を判断する前に、未確認の条件を確認してください</h3>
                 <p>このLPでは、確認できていない数値や契約条件を確定値として表示しません。</p>
               </div>
               <dl>
@@ -927,7 +1071,7 @@ function HomePageContent() {
 
             <div className="home-lp-fit-matrix" data-reveal>
               <div>
-                <h3>Premiumが向くのは、こんな人です。</h3>
+                <h3>Premiumが向くのは、こんな人です</h3>
                 <ul>
                   {premiumFit.map((item) => (
                     <li key={item}>{item}</li>
@@ -935,7 +1079,7 @@ function HomePageContent() {
                 </ul>
               </div>
               <div>
-                <h3>次に当てはまる場合は、購入前に仕様をご確認ください。</h3>
+                <h3>次に当てはまる場合は、購入前に仕様をご確認ください</h3>
                 <ul>
                   {premiumMismatch.map((item) => (
                     <li key={item}>{item}</li>
@@ -957,8 +1101,17 @@ function HomePageContent() {
           <div className="home-lp-container">
             <SectionHead
               kicker="SPECS"
-              title="本製品で整えること。YMM4で仕上げること。"
-              body="ゆっくりまとめプロセッサーは、YMM4を置き換えるツールではありません。YMM4で編集を始める前に、台本、話者、改行、素材パスを確認しやすくする前工程ツールです。"
+              title={
+                <>
+                  本製品で整えること、<HeadingEm>YMM4で仕上げること</HeadingEm>
+                </>
+              }
+              body={
+                <>
+                  ゆっくりまとめプロセッサーは、<HomeEm tone="white">YMM4を置き換えるツールではありません</HomeEm>。
+                  YMM4で編集を始める前に、台本、話者、改行、素材パスを確認しやすくする前工程ツールです。
+                </>
+              }
             />
             <div className="home-lp-requirements">
               <div className="home-lp-requirements__table" data-reveal>
@@ -998,7 +1151,7 @@ function HomePageContent() {
             <div className="home-lp-download-trust" data-reveal>
               <div>
                 <p className="home-lp-kicker">配布確認情報</p>
-                <h3>候補ファイル名・サイズ・SHA-256を確認できます。</h3>
+                <h3>候補ファイル名・サイズ・SHA-256を確認できます</h3>
                 <p>{homeFacts.trustNote}</p>
               </div>
               <dl>
@@ -1021,8 +1174,17 @@ function HomePageContent() {
           <div className="home-lp-container">
             <SectionHead
               kicker="FAQ"
-              title="料金と条件は、購入前に確認。"
-              body="Freeで何ができるか、Premiumで何が変わるか、YMM4が必要かを短く確認できます。"
+              title={
+                <>
+                  料金と条件は、<HeadingEm>購入前に確認</HeadingEm>
+                </>
+              }
+              body={
+                <>
+                  <HomeEm>Freeで何ができるか</HomeEm>、Premiumで何が変わるか、
+                  <HomeEm tone="aqua">YMM4が必要か</HomeEm>を短く確認できます。
+                </>
+              }
               align="center"
             />
             <div className="home-lp-faq-list">
@@ -1059,8 +1221,11 @@ function HomePageContent() {
           <div className="home-lp-container home-lp-final__grid">
             <div>
               <p className="home-lp-kicker">NEXT VIDEO</p>
-              <h2 id="home-final-heading">素材を集める。台本を作る。YMM4へつなぐ。</h2>
-              <p>Freeで、記事・スレッドまたは下書きから、AI台本、編集ボード、YMM4向け出力までの流れを確かめてください。</p>
+              <h2 id="home-final-heading">素材を集める、台本を作る、YMM4へつなぐ</h2>
+              <p>
+                Freeで、記事・スレッドまたは下書きから、<HomeEm tone="aqua">AI台本</HomeEm>、
+                <HomeEm>編集ボード</HomeEm>、YMM4向け出力までの流れを確かめてください。
+              </p>
               <span>{heroContent.microcopy}</span>
             </div>
             <div className="home-lp-final__actions">

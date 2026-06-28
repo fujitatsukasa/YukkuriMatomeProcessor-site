@@ -216,6 +216,91 @@
   }
 }
 
+@keyframes home-lux-line-sweep {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes home-lux-emphasis-flow {
+  0%,
+  100% {
+    background-position: 0% 92%;
+  }
+  48%,
+  62% {
+    background-position: 100% 92%;
+  }
+}
+
+.home-lp-em {
+  display: inline;
+  color: #ffe6a3;
+  font-family: inherit;
+  font-weight: 900;
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 223, 139, 0.72);
+  text-decoration-thickness: 0.11em;
+  text-underline-offset: 0.2em;
+  text-shadow:
+    0 0 14px rgba(237, 199, 95, 0.2),
+    0 1px 0 rgba(0, 0, 0, 0.42);
+  background:
+    linear-gradient(90deg, rgba(255, 232, 170, 0.1), rgba(105, 214, 255, 0.18), rgba(255, 232, 170, 0.1))
+      0% 92% / 220% 0.36em no-repeat;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  animation: home-lux-emphasis-flow 6.4s cubic-bezier(0.35, 0, 0.22, 1) infinite;
+}
+
+.home-lp-em--aqua {
+  color: #dff8ff;
+  text-decoration-color: rgba(105, 214, 255, 0.72);
+  text-shadow:
+    0 0 15px rgba(105, 214, 255, 0.18),
+    0 1px 0 rgba(0, 0, 0, 0.42);
+  background:
+    linear-gradient(90deg, rgba(105, 214, 255, 0.08), rgba(255, 232, 170, 0.2), rgba(105, 214, 255, 0.08))
+      0% 92% / 220% 0.36em no-repeat;
+}
+
+.home-lp-em--white {
+  color: #fff8ec;
+  text-decoration-color: rgba(255, 255, 255, 0.66);
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08), rgba(237, 199, 95, 0.2), rgba(255, 255, 255, 0.08))
+      0% 92% / 220% 0.36em no-repeat;
+}
+
+.home-lp-heading-em {
+  position: relative;
+  display: inline-block;
+  color: #fff2be;
+  -webkit-text-fill-color: #fff2be;
+  text-shadow:
+    0 0 18px rgba(237, 199, 95, 0.28),
+    0 2px 0 rgba(0, 0, 0, 0.22);
+}
+
+.home-lp-heading-em::after {
+  content: "";
+  position: absolute;
+  right: -0.08em;
+  bottom: 0.02em;
+  left: -0.08em;
+  height: 0.16em;
+  z-index: -1;
+  border-radius: 999px;
+  background:
+    linear-gradient(90deg, rgba(255, 232, 170, 0.34), rgba(105, 214, 255, 0.22), rgba(255, 232, 170, 0.34));
+  background-size: 220% 100%;
+  animation: home-lux-line-sweep 5.8s cubic-bezier(0.35, 0, 0.22, 1) infinite;
+}
+
 .home-lp .home-lp-kicker {
   display: inline-flex;
   align-items: center;
@@ -340,14 +425,16 @@
   position: absolute;
   left: 0;
   bottom: 0;
-  width: min(220px, 58%);
+  width: min(380px, 86%);
   height: 2px;
   border-radius: 999px;
   background:
     linear-gradient(90deg, rgba(255, 232, 170, 0.94), rgba(105, 214, 255, 0.62), transparent);
+  background-size: 220% 100%;
   box-shadow:
     0 0 14px rgba(237, 199, 95, 0.32),
     0 0 20px rgba(105, 214, 255, 0.12);
+  animation: home-lux-line-sweep 5.8s cubic-bezier(0.35, 0, 0.22, 1) infinite;
 }
 
 .home-lp-hero h1 span {
@@ -839,14 +926,16 @@
   position: absolute;
   left: 0;
   bottom: 0;
-  width: min(168px, 54%);
+  width: min(420px, 86%);
   height: 2px;
   border-radius: 999px;
   background:
     linear-gradient(90deg, rgba(255, 232, 170, 0.95), rgba(105, 214, 255, 0.74), transparent);
+  background-size: 220% 100%;
   box-shadow:
     0 0 14px rgba(237, 199, 95, 0.38),
     0 0 22px rgba(105, 214, 255, 0.14);
+  animation: home-lux-line-sweep 6.2s cubic-bezier(0.35, 0, 0.22, 1) infinite;
 }
 
 .home-lp-section-head--center h2 {
@@ -1036,11 +1125,13 @@
   position: absolute;
   left: 0;
   bottom: 0;
-  width: 54px;
+  width: min(118px, 76%);
   height: 1px;
   border-radius: 999px;
   background: linear-gradient(90deg, rgba(237, 199, 95, 0.92), rgba(255, 255, 255, 0.42), transparent);
+  background-size: 220% 100%;
   box-shadow: 0 0 12px rgba(237, 199, 95, 0.24);
+  animation: home-lux-line-sweep 6.8s cubic-bezier(0.35, 0, 0.22, 1) infinite;
 }
 
 .home-lp-step p {
@@ -1492,11 +1583,13 @@
   position: absolute;
   left: 0;
   bottom: 0;
-  width: 54px;
+  width: min(118px, 76%);
   height: 1px;
   border-radius: 999px;
   background: linear-gradient(90deg, rgba(237, 199, 95, 0.92), rgba(255, 255, 255, 0.42), transparent);
+  background-size: 220% 100%;
   box-shadow: 0 0 12px rgba(237, 199, 95, 0.24);
+  animation: home-lux-line-sweep 6.8s cubic-bezier(0.35, 0, 0.22, 1) infinite;
 }
 
 .home-lp-condition-panel p {
