@@ -60,11 +60,11 @@ export const homeAssets = {
 } as const
 
 export const heroContent = {
-  kicker: 'YMM4向け Windows制作支援アプリ',
-  title: '台本取得からAI台本、編集ボードとYMM4連携まで。',
+  kicker: 'YMM4向け ゆっくり動画制作支援アプリ',
+  title: '素材集め、台本づくり、YMM4へ渡すところまで、ひとつの制作フローに。',
   lead:
-    '記事・掲示板・スレッド・外部素材から台本化の材料を集め、AI台本、ボード編集、テンプレート運用、YMM4向け出力準備までをつなぎます。最終確認と仕上げはYMM4と利用者側で行います。',
-  primaryCta: 'Free版を試す',
+    '記事・掲示板・スレッド・外部素材から候補を集め、AI台本案を確認し、ボードでセリフ・素材・字幕まわりを整理。Project.json / YMMP / YMM4連携へつなげる、Windows向けの制作支援アプリです。',
+  primaryCta: 'Free版で流れを見る',
   secondaryCta: '実画面で流れを見る',
   microcopy: `${homeFacts.osLabel}｜${homeFacts.yymm4Label}｜Premium ${homeFacts.premiumPrice}・${homeFacts.billingLabel}｜${homeFacts.monthlyFeeLabel}`,
   productScope: '本製品で扱う：台本取得 / AI台本 / ボード編集 / テンプレート / YMM4向け出力',
@@ -74,19 +74,19 @@ export const heroContent = {
 
 export const workflowSummary = [
   {
-    label: '集める',
+    label: '素材を集める',
     title: '記事 / 掲示板 / スレッド / 外部素材',
   },
   {
-    label: '作る',
+    label: '台本を作る',
     title: 'AI台本 / キャラ別下書き / 構成',
   },
   {
-    label: '整える',
+    label: 'ボードで整える',
     title: 'ボード編集 / 画像 / 音声 / 字幕 / 立ち絵',
   },
   {
-    label: '渡す',
+    label: 'YMM4へ渡す',
     title: 'Project.json / YMMP / YMM4連携',
   },
 ] as const
@@ -248,7 +248,7 @@ export const productFeatures: ProductFeature[] = [
 ]
 
 export const demoTimeline = [
-  { time: '0〜4秒', screen: 'タイトル＋制作フロー', caption: '台本取得からAI台本、編集ボードとYMM4連携まで。' },
+  { time: '0〜4秒', screen: 'タイトル＋制作フロー', caption: '素材集め、台本づくり、YMM4へ渡すところまで、ひとつの制作フローに。' },
   { time: '4〜12秒', screen: 'サイト選択・URL入力・取得', caption: '対応URLから本文・コメント候補を取得' },
   { time: '12〜20秒', screen: '候補選択・コメント設定', caption: '使う内容を確認して取り込む' },
   { time: '20〜30秒', screen: 'プリセット・話者・改行', caption: '話者・改行・タイトルを動画の型に揃える' },

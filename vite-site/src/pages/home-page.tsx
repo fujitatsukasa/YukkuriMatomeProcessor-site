@@ -64,7 +64,7 @@ type LightboxImage = {
 const primaryCtaLabel = heroContent.primaryCta
 
 const metaDescription =
-  '記事、掲示板、スレッド、外部素材から台本化の材料を集め、AI台本、ボード編集、テンプレート運用、YMM4向け出力を支援するWindows向け制作支援アプリです。'
+  '記事、掲示板、スレッド、外部素材から候補を集め、AI台本案、編集ボード、テンプレート運用、YMM4連携へつなげるWindows向け制作支援アプリです。'
 
 const visibleHomeFaqs = homeFaqs.slice(0, 10)
 
@@ -599,8 +599,9 @@ function HomePageContent() {
             <div className="home-lp-hero__copy" data-reveal>
               <p className="home-lp-kicker">{heroContent.kicker}</p>
               <h1 id="home-hero-heading">
-                <span>台本取得からAI台本、</span>
-                <span>編集ボードとYMM4連携まで。</span>
+                <span>素材集め、台本づくり、</span>
+                <span>YMM4へ渡すところまで、</span>
+                <span>ひとつの制作フローに。</span>
               </h1>
               <p className="home-lp-hero__lead">{heroContent.lead}</p>
               <div className="home-lp-hero__actions">
@@ -624,12 +625,12 @@ function HomePageContent() {
               <ProductScreenshot
                 image={{
                   src: homeAssets.hero,
-                  alt: '台本取得からAI台本、編集ボード、YMM4連携まで確認できる実アプリ画面',
+                  alt: '素材集め、台本づくり、YMM4へ渡す流れを確認できる実アプリ画面',
                   title: '制作フローを確認する画面',
                   annotations: [
-                    { x: 20, y: 19, label: 'URLから候補を見る' },
-                    { x: 52, y: 24, label: 'AI台本・編集' },
-                    { x: 78, y: 12, label: 'YMM4連携' },
+                    { x: 20, y: 19, label: '素材を集める' },
+                    { x: 52, y: 24, label: '台本を作る' },
+                    { x: 78, y: 12, label: 'YMM4へ渡す' },
                   ],
                 }}
                 onZoom={setLightboxImage}
@@ -1082,7 +1083,7 @@ export function HomePage() {
   return (
     <>
       <PageMeta
-        title="ゆっくりまとめプロセッサー｜台本取得・AI台本・YMM4向け出力を支援"
+        title="ゆっくりまとめプロセッサー｜素材集め・台本づくり・YMM4連携を支援"
         description={metaDescription}
         keywords="ゆっくりまとめプロセッサー,YMM4,台本取得,AI台本,編集ボード,YMM4向け出力,記事URL,スレッドURL,反応集,解説動画,ショート動画,Windows,Free,Premium"
         image={homeAssets.hero}

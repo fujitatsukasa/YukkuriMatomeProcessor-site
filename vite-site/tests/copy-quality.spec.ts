@@ -5,8 +5,8 @@ import { decisionRecords, productFacts, readinessGates, releaseCandidateDistribu
 const primaryPages = [
   {
     path: '/',
-    heading: '台本取得からAI台本、編集ボードとYMM4連携まで。',
-    ctas: ['Free版を試す'],
+    heading: '素材集め、台本づくり、YMM4へ渡すところまで、ひとつの制作フローに。',
+    ctas: ['Free版で流れを見る'],
   },
   {
     path: '/download/',
