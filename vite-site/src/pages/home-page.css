@@ -307,10 +307,9 @@
   line-break: strict;
   overflow-wrap: normal;
   text-shadow:
-    0 1px 0 rgba(255, 246, 218, 0.18),
-    0 2px 1px rgba(0, 0, 0, 0.72),
-    0 10px 24px rgba(0, 0, 0, 0.54),
-    0 0 24px rgba(229, 190, 95, 0.16);
+    0 2px 0 rgba(0, 0, 0, 0.24),
+    0 14px 34px rgba(0, 0, 0, 0.58),
+    0 0 22px rgba(215, 181, 107, 0.16);
 }
 
 .home-lp-hero h1 span {
@@ -323,22 +322,18 @@
     background:
       linear-gradient(
         104deg,
-        #fffef7 0%,
-        #ffffff 16%,
-        #f9dfa0 30%,
-        #fff8d2 44%,
-        #f1cd76 57%,
-        #ffffff 74%,
-        #fff5e1 100%
+        #fff8e8 0%,
+        #ffffff 18%,
+        #e9c56b 35%,
+        #fff2bd 49%,
+        #c68b2b 61%,
+        #ffffff 77%,
+        #fff3d7 100%
       );
     background-size: 240% 100%;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    -webkit-text-stroke: 0.48px rgba(255, 252, 235, 0.3);
-    filter:
-      drop-shadow(0 2px 1px rgba(0, 0, 0, 0.64))
-      drop-shadow(0 8px 13px rgba(0, 0, 0, 0.38));
     animation: home-lux-title-shine 8.4s cubic-bezier(0.35, 0, 0.22, 1) infinite;
   }
 
