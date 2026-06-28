@@ -14985,6 +14985,20 @@ html {
   height: 40px;
 }
 
+.brand-logo--image {
+  min-width: 0;
+  gap: 0;
+}
+
+.brand-logo__image {
+  display: block;
+  width: auto;
+  height: clamp(48px, 4.6vw, 64px);
+  max-width: min(240px, 42vw);
+  object-fit: contain;
+  filter: drop-shadow(0 10px 22px rgba(60, 144, 255, 0.22));
+}
+
 .brand-logo .logo-title {
   font-size: 0.98rem;
 }

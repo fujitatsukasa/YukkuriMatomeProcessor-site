@@ -13,7 +13,6 @@ import {
   secondaryCta,
   siteDescription,
   siteOrigin,
-  siteTagline,
   siteTitle,
 } from '@/data/site-content'
 
@@ -225,14 +224,16 @@ export function SiteLayout() {
             }
           }}
         >
-          <Link className="logo brand-logo" to="/" discover="none" aria-label={`${siteTitle} ホーム`}>
-            <span className="logo-badge brand-logo__mark" aria-hidden="true">
-              <img className="logo-mark" src={media.logoMark} alt="" />
-            </span>
-            <span className="logo-text brand-logo__text">
-              <span className="logo-title">{siteTitle}</span>
-              <span className="logo-sub">{siteTagline}</span>
-            </span>
+          <Link className="logo brand-logo brand-logo--image" to="/" discover="none" aria-label={`${siteTitle} ホーム`}>
+            <img
+              className="brand-logo__image"
+              src={media.titleLogo}
+              alt=""
+              width={220}
+              height={92}
+              decoding="async"
+            />
+            <span className="sr-only">{siteTitle}</span>
           </Link>
 
           <button

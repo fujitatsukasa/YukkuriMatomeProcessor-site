@@ -24,6 +24,11 @@
   height: 32px;
 }
 
+.brand-header--home .brand-logo__image {
+  height: clamp(46px, 4.4vw, 62px);
+  max-width: min(232px, 42vw);
+}
+
 .brand-header--home .logo-title {
   font-size: 0.98rem;
 }

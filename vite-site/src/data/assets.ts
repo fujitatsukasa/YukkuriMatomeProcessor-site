@@ -1,5 +1,6 @@
 export const media = {
   logoMark: new URL('../../../assets/showcase/aurora/logo-mark.svg', import.meta.url).href,
+  titleLogo: '/brand/yukkuri-matome-title-logo-header.webp',
   heroPoster: new URL('../../../assets/showcase/aurora/hero-poster.webp', import.meta.url).href,
 }
 
