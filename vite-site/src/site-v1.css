@@ -9540,8 +9540,8 @@ html {
   .brand-header__inner {
     grid-template-columns: minmax(0, 1fr) auto;
     grid-template-areas: "logo toggle";
-    min-height: 64px;
-    padding-block: 8px;
+    min-height: 56px;
+    padding-block: 4px;
     gap: 0.75rem;
   }
 
@@ -9553,6 +9553,8 @@ html {
   .brand-logo--image {
     gap: 0;
     padding: 2px 0;
+    width: fit-content;
+    max-width: calc(100vw - 96px);
   }
 
   .brand-logo__image {
@@ -9604,11 +9606,11 @@ html {
     align-items: stretch;
     gap: 7px;
     padding: 12px;
-    border: 1px solid rgba(116, 160, 255, 0.18);
+    border: 1px solid rgba(237, 199, 95, 0.2);
     border-radius: 18px;
     background:
       linear-gradient(180deg, rgba(17, 22, 31, 0.98), rgba(8, 10, 14, 0.98)),
-      radial-gradient(circle at 12% 0%, rgba(91, 140, 255, 0.16), transparent 38%);
+      radial-gradient(circle at 12% 0%, rgba(237, 199, 95, 0.16), transparent 38%);
     box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
     backdrop-filter: blur(14px);
   }
@@ -15026,7 +15028,7 @@ html {
 .brand-header {
   background:
     linear-gradient(180deg, rgba(12, 14, 18, 0.95), rgba(9, 10, 14, 0.88)),
-    radial-gradient(circle at 14% 0%, rgba(91, 140, 255, 0.12), transparent 34%);
+    radial-gradient(circle at 14% 0%, rgba(237, 199, 95, 0.14), transparent 34%);
   box-shadow: 0 16px 42px rgba(0, 0, 0, 0.26);
 }
 
@@ -15041,7 +15043,11 @@ html {
 
 .brand-logo--image {
   position: relative;
+  justify-self: start;
+  width: fit-content;
+  max-width: max-content;
   min-width: 0;
+  flex: 0 0 auto;
   gap: 0;
   padding: 2px 4px;
   border-radius: 14px;
@@ -15058,8 +15064,8 @@ html {
   opacity: 0;
   transform: scale(0.62);
   background:
-    radial-gradient(circle at 34% 42%, rgba(86, 184, 255, 0.22), transparent 46%),
-    radial-gradient(circle at 70% 70%, rgba(174, 105, 255, 0.2), transparent 44%);
+    radial-gradient(circle at 34% 42%, rgba(237, 199, 95, 0.2), transparent 46%),
+    radial-gradient(circle at 70% 70%, rgba(224, 187, 125, 0.18), transparent 44%);
   transition: opacity 0.28s ease, transform 0.34s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
@@ -15070,7 +15076,7 @@ html {
   max-width: min(240px, 42vw);
   object-fit: contain;
   filter:
-    drop-shadow(0 10px 22px rgba(60, 144, 255, 0.22))
+    drop-shadow(0 10px 22px rgba(237, 199, 95, 0.18))
     drop-shadow(0 2px 6px rgba(0, 0, 0, 0.52));
   transition: transform 0.34s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.34s ease;
 }
@@ -15090,12 +15096,12 @@ html {
 .brand-logo--image:focus-visible .brand-logo__image {
   transform: translateY(-1px) scale(1.045);
   filter:
-    drop-shadow(0 18px 30px rgba(60, 144, 255, 0.34))
-    drop-shadow(0 0 16px rgba(150, 100, 255, 0.2));
+    drop-shadow(0 18px 30px rgba(237, 199, 95, 0.28))
+    drop-shadow(0 0 16px rgba(224, 187, 125, 0.22));
 }
 
 .brand-logo--image:focus-visible {
-  outline: 2px solid rgba(116, 160, 255, 0.78);
+  outline: 2px solid rgba(237, 199, 95, 0.78);
   outline-offset: 4px;
 }
 
@@ -15158,9 +15164,9 @@ html {
 .brand-nav a:focus-visible .brand-nav__icon,
 .brand-nav a.is-active .brand-nav__icon {
   transform: translateY(-2px) rotate(-3deg) scale(1.08);
-  background: rgba(91, 140, 255, 0.13);
+  background: rgba(237, 199, 95, 0.13);
   box-shadow:
-    inset 0 0 0 1px rgba(116, 160, 255, 0.22),
+    inset 0 0 0 1px rgba(237, 199, 95, 0.24),
     0 8px 16px rgba(0, 0, 0, 0.22);
 }
 
@@ -15186,7 +15192,7 @@ html {
 }
 
 .brand-nav-toggle {
-  border-color: rgba(116, 160, 255, 0.32);
+  border-color: rgba(237, 199, 95, 0.36);
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)),
     rgba(15, 18, 24, 0.92);
@@ -16324,11 +16330,9 @@ html {
 
 @media (max-width: 1200px) {
   .brand-header__inner {
-    grid-template-areas:
-      "logo toggle"
-      "nav nav";
-    min-height: 64px;
-    padding-block: 8px;
+    grid-template-areas: "logo toggle";
+    min-height: 56px;
+    padding-block: 4px;
   }
 
   .brand-header__actions--flush {
