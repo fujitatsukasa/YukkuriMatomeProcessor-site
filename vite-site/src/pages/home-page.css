@@ -458,7 +458,7 @@
 
 .home-lp-btn--primary::before {
   z-index: -1;
-  inset: -10px;
+  inset: -3px;
   padding: 3px;
   opacity: 0;
   background: conic-gradient(
@@ -511,7 +511,7 @@
 
 .home-lp-btn--secondary::before {
   z-index: -1;
-  inset: -8px;
+  inset: -2px;
   padding: 2px;
   opacity: 0;
   background: conic-gradient(
