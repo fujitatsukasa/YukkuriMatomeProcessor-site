@@ -11,7 +11,10 @@
 .brand-header--home {
   min-height: 68px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(9, 11, 14, 0.86);
+  background:
+    linear-gradient(180deg, rgba(12, 14, 18, 0.95), rgba(9, 11, 14, 0.86)),
+    radial-gradient(circle at 10% 0%, rgba(91, 140, 255, 0.14), transparent 34%);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(18px);
 }
 
@@ -42,11 +45,23 @@
 }
 
 .brand-header--home .brand-nav a {
-  min-height: 38px;
-  padding: 0 10px;
+  min-height: 44px;
+  gap: 6px;
+  padding: 5px 10px 5px 7px;
   border-radius: 8px;
   color: rgba(243, 245, 247, 0.76);
   font-size: 0.86rem;
+}
+
+.brand-header--home .brand-nav__icon {
+  width: 28px;
+  height: 28px;
+  flex-basis: 28px;
+}
+
+.brand-header--home .brand-nav__icon img {
+  width: 26px;
+  height: 26px;
 }
 
 .brand-header--home .brand-nav a:hover,
@@ -1520,7 +1535,7 @@
 
 @media (max-width: 1180px) {
   .brand-header--home .brand-nav a {
-    padding: 0 8px;
+    padding: 5px 8px 5px 6px;
   }
 
   .home-lp-hero__grid,
@@ -1620,6 +1635,29 @@
   .brand-header--home .brand-logo__mark {
     width: 30px;
     height: 30px;
+  }
+
+  .brand-header--home .brand-logo__image {
+    height: 46px;
+    max-width: min(132px, 48vw);
+  }
+
+  .brand-header--home .brand-nav a {
+    min-height: 56px;
+    gap: 10px;
+    padding: 0.54rem 0.72rem;
+    border-radius: 14px;
+  }
+
+  .brand-header--home .brand-nav__icon {
+    width: 40px;
+    height: 40px;
+    flex-basis: 40px;
+  }
+
+  .brand-header--home .brand-nav__icon img {
+    width: 36px;
+    height: 36px;
   }
 
   .brand-header--home .logo-title {

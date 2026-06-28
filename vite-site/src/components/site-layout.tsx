@@ -16,13 +16,34 @@ import {
   siteTitle,
 } from '@/data/site-content'
 
+const navIconByKey = {
+  home: '/brand/nav-icons/home.webp',
+  download: '/brand/nav-icons/download.webp',
+  instructions: '/brand/nav-icons/guide.webp',
+  samples: '/brand/nav-icons/samples.webp',
+  update: '/brand/nav-icons/update.webp',
+  faq: '/brand/nav-icons/faq.webp',
+  purchase: '/brand/nav-icons/pricing.webp',
+  contact: '/brand/nav-icons/contact.webp',
+  news: '/brand/nav-icons/update.webp',
+  blog: '/brand/nav-icons/guide.webp',
+} as const
+
 const homeHeaderNavItems = [
-  { label: '制作フロー', href: '#workflow' },
-  { label: '実画面', href: '#product' },
-  { label: '作例', href: '#samples' },
-  { label: '料金', href: '#pricing' },
-  { label: 'FAQ', href: '#faq' },
+  { label: '制作フロー', href: '#workflow', icon: '/brand/nav-icons/workflow.webp' },
+  { label: '実画面', href: '#product', icon: '/brand/nav-icons/product.webp' },
+  { label: '作例', href: '#samples', icon: '/brand/nav-icons/samples.webp' },
+  { label: '料金', href: '#pricing', icon: '/brand/nav-icons/pricing.webp' },
+  { label: 'FAQ', href: '#faq', icon: '/brand/nav-icons/faq.webp' },
 ] as const
+
+function NavIcon({ src }: { src: string }) {
+  return (
+    <span className="brand-nav__icon" aria-hidden="true">
+      <img src={src} alt="" width={32} height={32} loading="lazy" decoding="async" />
+    </span>
+  )
+}
 
 function buildBreadcrumbs(pathname: string) {
   const normalized = normalizePath(pathname)
@@ -260,7 +281,8 @@ export function SiteLayout() {
             {isHome
               ? homeHeaderNavItems.map((item) => (
                   <a key={item.href} href={item.href}>
-                    {item.label}
+                    <NavIcon src={item.icon} />
+                    <span className="brand-nav__label">{item.label}</span>
                   </a>
                 ))
               : headerNavItems.map((item) => (
@@ -271,7 +293,8 @@ export function SiteLayout() {
                     to={item.url}
                     discover="none"
                   >
-                    {item.label}
+                    <NavIcon src={navIconByKey[item.key]} />
+                    <span className="brand-nav__label">{item.label}</span>
                   </Link>
                 ))}
             <div className="brand-nav__cta-stack" aria-label="モバイルCTA">
