@@ -60,57 +60,57 @@ export const homeAssets = {
 } as const
 
 export const heroContent = {
-  kicker: 'YMM4向け Windows制作前工程ツール',
-  title: 'YMM4を開く前の、台本・話者・素材確認をひとまとめに。',
+  kicker: 'YMM4向け Windows制作支援アプリ',
+  title: '台本取得からAI台本、編集ボードとYMM4連携まで。',
   lead:
-    '記事URL・スレッドURL・下書きから、使う本文やコメントを選び、話者・改行・素材パスを確認。音声、字幕、間、演出、公開前確認はYMM4で仕上げます。',
-  primaryCta: 'Freeで制作前工程を試す',
+    '記事・掲示板・スレッド・外部素材から台本化の材料を集め、AI台本、ボード編集、テンプレート運用、YMM4向け出力準備までをつなぎます。最終確認と仕上げはYMM4と利用者側で行います。',
+  primaryCta: 'Free版を試す',
   secondaryCta: '実画面で流れを見る',
   microcopy: `${homeFacts.osLabel}｜${homeFacts.yymm4Label}｜Premium ${homeFacts.premiumPrice}・${homeFacts.billingLabel}｜${homeFacts.monthlyFeeLabel}`,
-  productScope: '本製品で整える：使う本文・コメント / 話者 / 改行 / 素材パス',
-  yymm4Scope: 'YMM4で仕上げる：音声 / 字幕 / 間 / 演出 / 公開前確認',
+  productScope: '本製品で扱う：台本取得 / AI台本 / ボード編集 / テンプレート / YMM4向け出力',
+  yymm4Scope: '利用者が確認：内容 / 権利 / 同期結果 / 音声・字幕・演出 / 公開判断',
   trustNote: `配布候補は約${homeFacts.setupSizeMb}です。D10確認が揃うまで実行ファイルの直接取得CTAは表示しません。`,
 } as const
 
 export const workflowSummary = [
   {
-    label: '入れる',
-    title: '記事URL / スレッドURL / 下書き / テーマ',
+    label: '集める',
+    title: '記事 / 掲示板 / スレッド / 外部素材',
   },
   {
-    label: '選ぶ',
-    title: '本文候補 / コメント / 使う行',
+    label: '作る',
+    title: 'AI台本 / キャラ別下書き / 構成',
   },
   {
     label: '整える',
-    title: '話者 / 改行 / タイトル読み / 素材パス',
+    title: 'ボード編集 / 画像 / 音声 / 字幕 / 立ち絵',
   },
   {
-    label: '仕上げる',
-    title: '音声・字幕・演出はYMM4で',
+    label: '渡す',
+    title: 'Project.json / YMMP / YMM4連携',
   },
 ] as const
 
 export const beforeAfterRows = [
   {
-    before: '記事やスレッドを開きっぱなしにして、使う本文を探す',
-    after: 'URLから候補を見て、使う本文だけ選ぶ',
+    before: '本文やコメント素材を手作業で探して貼る',
+    after: '記事・掲示板・スレッドから候補を見て選ぶ',
   },
   {
-    before: 'コメントを拾って台本に貼り直す',
-    after: '候補一覧から動画に使う行を確認する',
+    before: 'AI台本、キャラ別セリフ、構成の確認場所が散らばる',
+    after: '生成結果を確認して台本編集へ送る',
   },
   {
-    before: '話者、タイトル読み、改行を毎回直す',
-    after: '話者割り当てと読み上げ向けの区切りを確認する',
+    before: 'セリフ、画像、音声、字幕、立ち絵、効果を別々に追う',
+    after: 'ボード上で制作要素と素材パスを確認する',
   },
   {
-    before: '台本と素材フォルダを何度も往復',
-    after: '素材パスと不足を先に確認する',
+    before: 'YMM4形式やテンプレート反映を手作業で揃える',
+    after: 'Project.json / YMMP / YMM4連携の準備を支援する',
   },
   {
-    before: 'YMM4に入れてから素材や保存先の抜けに気づく',
-    after: 'YMM4を開く前に確認してから進む',
+    before: '台本取得、AI台本、素材、YMM4向け出力を別々に管理',
+    after: '取得から編集ボード、YMM4向け出力まで制作データとして確認する',
   },
   {
     before: '動画完成まで自動で任せられると思って迷う',
@@ -248,13 +248,13 @@ export const productFeatures: ProductFeature[] = [
 ]
 
 export const demoTimeline = [
-  { time: '0〜4秒', screen: 'タイトル＋制作フロー', caption: 'YMM4を開く前の、台本・話者・素材確認をひとまとめに。' },
+  { time: '0〜4秒', screen: 'タイトル＋制作フロー', caption: '台本取得からAI台本、編集ボードとYMM4連携まで。' },
   { time: '4〜12秒', screen: 'サイト選択・URL入力・取得', caption: '対応URLから本文・コメント候補を取得' },
   { time: '12〜20秒', screen: '候補選択・コメント設定', caption: '使う内容を確認して取り込む' },
   { time: '20〜30秒', screen: 'プリセット・話者・改行', caption: '話者・改行・タイトルを動画の型に揃える' },
   { time: '30〜40秒', screen: 'AI台本案', caption: '任意で台本案を作り、結果を確認' },
   { time: '40〜49秒', screen: '台本編集・素材ボード', caption: '台本と素材の抜けを確認' },
-  { time: '49〜57秒', screen: 'YMM4前準備', caption: 'YMM4で仕上げる前の材料を揃える' },
+  { time: '49〜57秒', screen: 'YMM4向け出力', caption: 'Project.json / YMMP / YMM4連携の準備を確認' },
   { time: '57〜59秒', screen: '仕上げ範囲', caption: '最後の音声・字幕・演出はYMM4で' },
 ] as const
 
@@ -301,8 +301,8 @@ export const sampleItems: SampleItem[] = [
 export const freeChecks = [
   '自分のWindowsで起動できるか',
   '少数URLや下書きで流れを確認できるか',
-  '台本編集と素材確認が自分の作業に合うか',
-  'YMM4前準備まで無理なく進められるか',
+  'AI台本とボード編集が自分の作業に合うか',
+  'YMM4向け出力まで無理なく進められるか',
 ] as const
 
 export type PlanComparisonRow = {
@@ -321,7 +321,7 @@ export const comparisonRows: PlanComparisonRow[] = [
   { id: 'preset', label: 'プリセット', free: '基本設定の流れを確認', premium: '制作ルールを保存して継続利用' },
   { id: 'materials', label: '素材ボード', free: '素材パスと不足確認の流れを確認', premium: '継続制作の素材確認に利用' },
   { id: 'save', label: 'プロジェクト保存', free: '保存先と形式を確認', premium: '保存条件を確認して継続利用' },
-  { id: 'handoff', label: 'YMM4前準備', free: 'YMM4パス設定と流れを確認', premium: '仕上げ前の準備条件を確認中' },
+  { id: 'handoff', label: 'YMM4向け出力', free: 'YMM4パス設定と流れを確認', premium: '出力準備の条件を確認中' },
   { id: 'account', label: '権限確認', free: 'Free状態を確認', premium: '購入後の権限反映を確認' },
   { id: 'updates', label: 'アップデート', free: '公開配布版を利用', premium: '公開配布版を利用' },
   { id: 'support', label: 'サポート', free: homeFacts.supportSla, premium: homeFacts.supportSla },
@@ -398,13 +398,13 @@ export const homeFaqs = [
     id: 'premium',
     question: 'Premiumにすると何が変わりますか？',
     answer:
-      `Premiumは${homeFacts.premiumPrice}の買い切りで、月額料金はありません。URL取得、AI台本案、保存、YMM4前準備などの継続利用条件は、購入前に料金ページと案内で確認してください。`,
+      `Premiumは${homeFacts.premiumPrice}の買い切りで、月額料金はありません。URL取得、AI台本案、保存、YMM4向け出力などの継続利用条件は、購入前に料金ページと案内で確認してください。`,
   },
   {
     id: 'auto-finish',
     question: '動画は自動で完成しますか？',
     answer:
-      '完成・投稿まで自動で進めるアプリではありません。本製品は台本・話者・素材を整え、YMM4へ反映するところまでを支援します。音声、字幕、間、演出、出典、公開前の確認はYMM4で行います。',
+      '完成・投稿まで自動で進めるアプリではありません。本製品は台本取得、AI台本、ボード編集、テンプレート、YMM4向け出力を支援します。音声、字幕、間、演出、出典、公開前の確認はYMM4と利用者側で行います。',
   },
   {
     id: 'ymm4-required',
@@ -480,6 +480,6 @@ export const homeFaqs = [
     id: 'results',
     question: '収益化や再生数は保証されますか？',
     answer:
-      '保証しません。本製品は制作前工程を効率化するツールであり、動画の成果を保証するものではありません。',
+      '保証しません。本製品は制作フローを支援するツールであり、動画の成果を保証するものではありません。',
   },
 ] as const
