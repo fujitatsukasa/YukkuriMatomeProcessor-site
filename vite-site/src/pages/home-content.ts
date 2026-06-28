@@ -76,18 +76,22 @@ export const workflowSummary = [
   {
     label: '素材を集める',
     title: '記事 / 掲示板 / スレッド / 外部素材',
+    image: '/lp/phase-materials-v1.webp',
   },
   {
     label: '台本を作る',
     title: 'AI台本 / キャラ別下書き / 構成',
+    image: '/lp/phase-script-v1.webp',
   },
   {
     label: 'ボードで整える',
     title: 'ボード編集 / 画像 / 音声 / 字幕 / 立ち絵',
+    image: '/lp/phase-board-v1.webp',
   },
   {
     label: 'YMM4へ渡す',
     title: 'Project.json / YMMP / YMM4連携',
+    image: '/lp/phase-handoff-v1.webp',
   },
 ] as const
 

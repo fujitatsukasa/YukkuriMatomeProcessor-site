@@ -3,6 +3,7 @@ import {
   useEffect,
   useRef,
   useState,
+  type CSSProperties,
   type ReactNode,
   type SyntheticEvent,
 } from 'react'
@@ -651,7 +652,10 @@ function HomePageContent() {
           <div className="home-lp-container">
             <div className="home-lp-flow-strip" aria-label="制作フロー要約" data-reveal>
               {workflowSummary.map((item, index) => (
-                <div key={item.label}>
+                <div
+                  key={item.label}
+                  style={{ '--phase-bg': `url(${item.image})` } as CSSProperties}
+                >
                   <span>{item.label}</span>
                   <strong>{item.title}</strong>
                   {index < workflowSummary.length - 1 ? <ArrowRight size={18} aria-hidden="true" /> : null}
