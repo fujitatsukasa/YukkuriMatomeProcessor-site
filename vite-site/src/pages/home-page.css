@@ -50,7 +50,10 @@
   padding: 5px 10px 5px 7px;
   border-radius: 8px;
   color: rgba(243, 245, 247, 0.76);
+  font-family: var(--font-base);
   font-size: 0.86rem;
+  font-weight: 850;
+  text-transform: uppercase;
 }
 
 .brand-header--home .brand-nav__icon {
@@ -131,6 +134,9 @@
   --home-amber: #f3b65a;
   --home-warning: #f3b65a;
   --home-error: #f07178;
+  --home-font-copy: var(--font-readable);
+  --home-font-heading: var(--font-display);
+  --home-font-label: var(--font-base);
   position: relative;
   isolation: isolate;
   overflow-x: clip;
@@ -138,7 +144,7 @@
   background:
     linear-gradient(132deg, rgba(237, 199, 95, 0.16) 0%, transparent 34%),
     linear-gradient(180deg, #090b0e 0%, #0d131b 42%, #090b0e 100%);
-  font-family: var(--font-base);
+  font-family: var(--home-font-copy);
 }
 
 .home-lp *,
@@ -155,6 +161,19 @@
 .home-lp dd {
   margin: 0;
   letter-spacing: 0;
+}
+
+.home-lp h1,
+.home-lp h2,
+.home-lp h3 {
+  font-family: var(--home-font-heading);
+}
+
+.home-lp p,
+.home-lp li,
+.home-lp dt,
+.home-lp dd {
+  font-family: var(--home-font-copy);
 }
 
 .home-lp-container {
@@ -197,18 +216,20 @@
   }
 }
 
-.home-lp-kicker {
+.home-lp .home-lp-kicker {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   width: fit-content;
   color: var(--home-mint);
+  font-family: var(--home-font-label);
   font-size: 0.9rem;
   font-weight: 800;
   line-height: 1.45;
+  text-transform: uppercase;
 }
 
-.home-lp-kicker::before {
+.home-lp .home-lp-kicker::before {
   content: "";
   width: 24px;
   height: 2px;
@@ -296,7 +317,9 @@
 }
 
 .home-lp-hero h1 {
+  position: relative;
   max-width: 13.8em;
+  padding-bottom: 16px;
   color: #fff8e8;
   font-family: var(--font-display);
   font-size: clamp(2.96rem, 3.45vw, 3.42rem);
@@ -310,6 +333,21 @@
     0 2px 0 rgba(0, 0, 0, 0.24),
     0 14px 34px rgba(0, 0, 0, 0.58),
     0 0 22px rgba(215, 181, 107, 0.16);
+}
+
+.home-lp-hero h1::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: min(220px, 58%);
+  height: 2px;
+  border-radius: 999px;
+  background:
+    linear-gradient(90deg, rgba(255, 232, 170, 0.94), rgba(105, 214, 255, 0.62), transparent);
+  box-shadow:
+    0 0 14px rgba(237, 199, 95, 0.32),
+    0 0 20px rgba(105, 214, 255, 0.12);
 }
 
 .home-lp-hero h1 span {
@@ -408,10 +446,12 @@
   gap: 9px;
   padding: 0 18px;
   border-radius: 10px;
+  font-family: var(--home-font-label);
   font-weight: 850;
   line-height: 1.2;
   text-align: center;
   text-decoration: none;
+  text-transform: uppercase;
   transition:
     transform 180ms ease,
     border-color 180ms ease,
@@ -776,12 +816,61 @@
 .home-lp-feature h2,
 .home-lp-free h2,
 .home-lp-final h2 {
-  color: var(--home-text);
-  font-family: var(--font-display);
+  position: relative;
+  width: fit-content;
+  padding-bottom: 14px;
+  color: #fff4dd;
+  font-family: var(--home-font-heading);
   font-size: clamp(2.35rem, 4vw, 3.35rem);
-  font-weight: 850;
+  font-weight: 900;
   line-height: 1.2;
   text-wrap: balance;
+  text-shadow:
+    0 2px 0 rgba(0, 0, 0, 0.24),
+    0 14px 30px rgba(0, 0, 0, 0.46),
+    0 0 20px rgba(215, 181, 107, 0.13);
+}
+
+.home-lp-section-head h2::after,
+.home-lp-feature h2::after,
+.home-lp-free h2::after,
+.home-lp-final h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: min(168px, 54%);
+  height: 2px;
+  border-radius: 999px;
+  background:
+    linear-gradient(90deg, rgba(255, 232, 170, 0.95), rgba(105, 214, 255, 0.74), transparent);
+  box-shadow:
+    0 0 14px rgba(237, 199, 95, 0.38),
+    0 0 22px rgba(105, 214, 255, 0.14);
+}
+
+.home-lp-section-head--center h2 {
+  justify-self: center;
+}
+
+.home-lp-section-head--center h2::after {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@supports ((background-clip: text) or (-webkit-background-clip: text)) {
+  .home-lp-section-head h2,
+  .home-lp-feature h2,
+  .home-lp-free h2,
+  .home-lp-final h2 {
+    color: transparent;
+    background:
+      linear-gradient(104deg, #fff8e8 0%, #ffffff 23%, #e9c56b 44%, #fff2bd 58%, #c68b2b 72%, #fff3d7 100%);
+    background-size: 180% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 }
 
 .home-lp-section-head p:not(.home-lp-kicker),
@@ -829,7 +918,9 @@
   background:
     linear-gradient(90deg, rgba(79, 209, 165, 0.13), rgba(237, 199, 95, 0.08)),
     rgba(79, 209, 165, 0.07);
+  font-family: var(--home-font-label);
   font-weight: 850;
+  text-transform: uppercase;
 }
 
 .home-lp-change-table__head span,
@@ -909,7 +1000,9 @@
   border-radius: 6px;
   color: #061124;
   background: var(--home-blue);
+  font-family: var(--home-font-label);
   font-weight: 850;
+  text-transform: uppercase;
 }
 
 .home-lp-step h3,
@@ -920,11 +1013,34 @@
 .home-lp-scope-grid h3,
 .home-lp-download-trust h3,
 .home-lp-free__checks h3 {
-  color: var(--home-text);
-  font-family: var(--font-display);
+  position: relative;
+  width: fit-content;
+  padding-bottom: 10px;
+  color: #fff6e4;
+  font-family: var(--home-font-heading);
   font-size: 1.28rem;
-  font-weight: 850;
+  font-weight: 900;
   line-height: 1.36;
+  text-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
+}
+
+.home-lp-step h3::after,
+.home-lp-sample-card h3::after,
+.home-lp-plan-card h3::after,
+.home-lp-comparison h3::after,
+.home-lp-fit-matrix h3::after,
+.home-lp-scope-grid h3::after,
+.home-lp-download-trust h3::after,
+.home-lp-free__checks h3::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 54px;
+  height: 1px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(237, 199, 95, 0.92), rgba(255, 255, 255, 0.42), transparent);
+  box-shadow: 0 0 12px rgba(237, 199, 95, 0.24);
 }
 
 .home-lp-step p {
@@ -1103,7 +1219,9 @@
   justify-content: center;
   gap: 8px;
   color: var(--home-text);
+  font-family: var(--home-font-label);
   font-weight: 850;
+  text-transform: uppercase;
 }
 
 .home-lp-demo-poster span svg,
@@ -1128,9 +1246,11 @@
   border-radius: 8px;
   color: var(--home-text);
   background: rgba(9, 11, 14, 0.86);
+  font-family: var(--home-font-label);
   font-size: 0.78rem;
   font-weight: 850;
   text-decoration: none;
+  text-transform: uppercase;
 }
 
 .home-lp-demo-timeline {
@@ -1154,8 +1274,10 @@
 
 .home-lp-demo-timeline time {
   color: var(--home-mint);
+  font-family: var(--home-font-label);
   font-size: 0.78rem;
   font-weight: 850;
+  text-transform: uppercase;
 }
 
 .home-lp-demo-timeline strong {
@@ -1307,13 +1429,17 @@
   border-radius: 8px;
   color: #061124;
   background: var(--home-mint);
+  font-family: var(--home-font-label);
   font-size: 0.82rem;
   font-weight: 850;
+  text-transform: uppercase;
 }
 
 .home-lp-plan-card > strong {
   color: var(--home-text);
+  font-family: var(--home-font-heading);
   font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 900;
   line-height: 1.05;
 }
 
@@ -1351,11 +1477,26 @@
 }
 
 .home-lp-condition-panel h3 {
+  position: relative;
+  width: fit-content;
+  padding-bottom: 10px;
   color: var(--home-text);
-  font-family: var(--font-display);
+  font-family: var(--home-font-heading);
   font-size: 1.28rem;
   font-weight: 850;
   line-height: 1.36;
+}
+
+.home-lp-condition-panel h3::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 54px;
+  height: 1px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(237, 199, 95, 0.92), rgba(255, 255, 255, 0.42), transparent);
+  box-shadow: 0 0 12px rgba(237, 199, 95, 0.24);
 }
 
 .home-lp-condition-panel p {
@@ -1382,8 +1523,10 @@
 
 .home-lp-condition-panel dt {
   color: var(--home-warning);
+  font-family: var(--home-font-label);
   font-weight: 850;
   line-height: 1.55;
+  text-transform: uppercase;
 }
 
 .home-lp-condition-panel dd {
@@ -1431,7 +1574,9 @@
 .home-lp-comparison__row--head {
   color: var(--home-mint);
   background: rgba(79, 209, 165, 0.07);
+  font-family: var(--home-font-label);
   font-weight: 850;
+  text-transform: uppercase;
 }
 
 .home-lp-comparison__row strong {
@@ -1450,8 +1595,10 @@
   display: none;
   margin-right: 8px;
   color: var(--home-mint);
+  font-family: var(--home-font-label);
   font-style: normal;
   font-weight: 850;
+  text-transform: none;
 }
 
 .home-lp-fit-matrix {
@@ -1509,6 +1656,8 @@
 .home-lp-requirements__table strong {
   color: var(--home-mint);
   background: rgba(79, 209, 165, 0.06);
+  font-family: var(--home-font-label);
+  text-transform: uppercase;
 }
 
 .home-lp-requirements__table span {
@@ -1557,8 +1706,10 @@
 
 .home-lp-download-trust dt {
   color: var(--home-mint);
+  font-family: var(--home-font-label);
   font-size: 0.78rem;
   font-weight: 850;
+  text-transform: uppercase;
 }
 
 .home-lp-download-trust dd {
@@ -2046,7 +2197,7 @@
     width: min(100% - 22px, 1220px);
   }
 
-  .home-lp-kicker {
+  .home-lp .home-lp-kicker {
     font-size: 0.86rem;
   }
 
