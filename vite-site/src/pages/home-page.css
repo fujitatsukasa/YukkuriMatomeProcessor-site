@@ -192,12 +192,6 @@
   display: block;
 }
 
-@media (min-width: 761px) {
-  .home-lp-hero h1 span {
-    white-space: nowrap;
-  }
-}
-
 .home-lp-hero__lead {
   max-width: 720px;
   color: rgba(243, 245, 247, 0.86);
@@ -366,7 +360,7 @@
 
 .home-lp-flow-strip {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1px;
   overflow: hidden;
   margin-top: -8px;

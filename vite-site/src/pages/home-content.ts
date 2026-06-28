@@ -60,49 +60,61 @@ export const homeAssets = {
 } as const
 
 export const heroContent = {
-  kicker: 'YMM4向け まとめ動画制作支援ソフト',
-  title: '記事・スレッドから、YMM4で仕上げる前準備まで。',
+  kicker: 'YMM4向け Windows制作前工程ツール',
+  title: 'YMM4を開く前の、台本・話者・素材確認をひとまとめに。',
   lead:
-    '記事URL・スレッドURL・下書きから、使う本文・コメントを選び、話者・改行・素材を整理。音声・字幕・間・演出はYMM4で仕上げます。',
-  primaryCta: 'Free版を試す',
-  secondaryCta: '制作フローを見る',
-  microcopy: `${homeFacts.osLabel}｜${homeFacts.yymm4Label}｜Premium ${homeFacts.premiumPrice}・${homeFacts.billingLabel}`,
-  productScope: '本製品で整える：本文・コメント / 話者 / 台本 / 素材',
-  yymm4Scope: 'YMM4で仕上げる：音声 / 字幕 / 間 / 演出 / 最終確認',
+    '記事URL・スレッドURL・下書きから、使う本文やコメントを選び、話者・改行・素材パスを確認。音声、字幕、間、演出、公開前確認はYMM4で仕上げます。',
+  primaryCta: 'Freeで制作前工程を試す',
+  secondaryCta: '実画面で流れを見る',
+  microcopy: `${homeFacts.osLabel}｜${homeFacts.yymm4Label}｜Premium ${homeFacts.premiumPrice}・${homeFacts.billingLabel}｜${homeFacts.monthlyFeeLabel}`,
+  productScope: '本製品で整える：使う本文・コメント / 話者 / 改行 / 素材パス',
+  yymm4Scope: 'YMM4で仕上げる：音声 / 字幕 / 間 / 演出 / 公開前確認',
   trustNote: `配布候補は約${homeFacts.setupSizeMb}です。D10確認が揃うまで実行ファイルの直接取得CTAは表示しません。`,
 } as const
 
 export const workflowSummary = [
   {
-    label: '入力',
-    title: '記事URL・スレッドURL・下書き',
+    label: '入れる',
+    title: '記事URL / スレッドURL / 下書き / テーマ',
+  },
+  {
+    label: '選ぶ',
+    title: '本文候補 / コメント / 使う行',
   },
   {
     label: '整える',
-    title: '本文・コメント取得 / 台本整形 / 素材確認',
+    title: '話者 / 改行 / タイトル読み / 素材パス',
   },
   {
-    label: '反映',
-    title: 'YMM4',
+    label: '仕上げる',
+    title: '音声・字幕・演出はYMM4で',
   },
 ] as const
 
 export const beforeAfterRows = [
   {
-    before: 'ページを行き来して本文やコメントをコピー',
-    after: '対応URLから取得候補を確認して取り込む',
+    before: '記事やスレッドを開きっぱなしにして、使う本文を探す',
+    after: 'URLから候補を見て、使う本文だけ選ぶ',
   },
   {
-    before: '話者、タイトル読み、改行を毎回設定',
-    after: 'よく使うルールをプリセットで呼び出す',
+    before: 'コメントを拾って台本に貼り直す',
+    after: '候補一覧から動画に使う行を確認する',
+  },
+  {
+    before: '話者、タイトル読み、改行を毎回直す',
+    after: '話者割り当てと読み上げ向けの区切りを確認する',
   },
   {
     before: '台本と素材フォルダを何度も往復',
-    after: 'ボードで素材の位置と不足を確認する',
+    after: '素材パスと不足を先に確認する',
   },
   {
-    before: 'YMM4で同じ内容を一から並べ直す',
-    after: '確認した台本と素材をYMM4へ反映する',
+    before: 'YMM4に入れてから素材や保存先の抜けに気づく',
+    after: 'YMM4を開く前に確認してから進む',
+  },
+  {
+    before: '動画完成まで自動で任せられると思って迷う',
+    after: '本製品で整える範囲とYMM4で仕上げる範囲を分けて判断する',
   },
 ] as const
 
@@ -110,20 +122,20 @@ export const workflowSteps = [
   {
     id: 'capture',
     step: '01',
-    title: 'URLでも、下書きでも始められる。',
+    title: 'URLから候補を見る。',
     body:
-      '対応する記事・スレッドのURL、手元の下書き、テーマから開始。URL取得では候補を確認し、使う本文やコメントを選びます。',
-    points: ['サイト選択', 'URL入力', '取得候補一覧', 'コメント取得ON/OFF'],
+      '記事URL・スレッドURLを入れ、動画化に使う本文やコメント候補を確認します。URLなしでも、下書きやテーマから始められます。',
+    points: ['対応URLを確認', 'URL入力', '候補一覧を見る', '使う本文を選ぶ'],
     image: homeAssets.capture,
     alt: '対応するサイトとURLを指定し、取得候補を確認する台本取得画面',
   },
   {
     id: 'shape',
     step: '02',
-    title: '話者・改行・タイトルを、動画の型に合わせる。',
+    title: '話者と改行を整える。',
     body:
-      '話者の順番、タイトル読み、改行、禁止語変換、コメント取得などを設定。よく使う組み合わせはプリセットとして次の一本でも呼び出せます。',
-    points: ['プリセット', 'タイトルキャラクター', '話者順序', '禁止語変換', '改行設定'],
+      '不要な行、話者、タイトル読み、改行、禁止語変換を見ながら、読み上げ前の台本下地を整えます。',
+    points: ['話者割り当て', 'タイトル読み', '改行設定', '禁止語変換', 'プリセット'],
     image: homeAssets.shape,
     alt: '話者、改行、タイトル読みをプリセットで設定する画面',
   },
@@ -140,10 +152,10 @@ export const workflowSteps = [
   {
     id: 'reflect',
     step: '04',
-    title: '素材と台本を確認し、YMM4で仕上げる。',
+    title: '素材パスと保存先を確認し、YMM4で仕上げる。',
     body:
-      '台本と素材の配置を確認してYMM4へ渡します。音声、字幕、間、演出、出典、公開前の最終確認はYMM4と利用者側で行います。',
-    points: ['台本編集', '素材ボード', '保存先確認', 'YMM4で最終調整'],
+      '台本と素材の配置、保存先、素材パスを確認してYMM4へ渡します。音声、字幕、間、演出、出典、公開前の最終確認はYMM4と利用者側で行います。',
+    points: ['台本編集', '素材ボード', '素材パス確認', '保存先確認', 'YMM4で最終調整'],
     image: homeAssets.materialBoard,
     alt: '台本行と素材の配置を一覧で確認する素材ボード',
   },
@@ -236,7 +248,7 @@ export const productFeatures: ProductFeature[] = [
 ]
 
 export const demoTimeline = [
-  { time: '0〜4秒', screen: 'タイトル＋制作フロー', caption: '記事・スレッドから、YMM4で仕上げる前準備まで。' },
+  { time: '0〜4秒', screen: 'タイトル＋制作フロー', caption: 'YMM4を開く前の、台本・話者・素材確認をひとまとめに。' },
   { time: '4〜12秒', screen: 'サイト選択・URL入力・取得', caption: '対応URLから本文・コメント候補を取得' },
   { time: '12〜20秒', screen: '候補選択・コメント設定', caption: '使う内容を確認して取り込む' },
   { time: '20〜30秒', screen: 'プリセット・話者・改行', caption: '話者・改行・タイトルを動画の型に揃える' },
@@ -288,8 +300,9 @@ export const sampleItems: SampleItem[] = [
 
 export const freeChecks = [
   '自分のWindowsで起動できるか',
-  '台本の作り方と画面操作が合うか',
-  'YMM4へつなぐ制作フローが使えるか',
+  '少数URLや下書きで流れを確認できるか',
+  '台本編集と素材確認が自分の作業に合うか',
+  'YMM4前準備まで無理なく進められるか',
 ] as const
 
 export type PlanComparisonRow = {

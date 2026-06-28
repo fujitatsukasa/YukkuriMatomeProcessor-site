@@ -64,7 +64,7 @@ type LightboxImage = {
 const primaryCtaLabel = heroContent.primaryCta
 
 const metaDescription =
-  '記事URL・スレッドURL・下書きから、台本下地・話者・改行・素材確認を整えるWindows 10 / 11向けツール。YMM4必須。Free版あり。Premiumは39,800円（税込）の買い切り。動画の完成・投稿は自動化しません。'
+  '記事URL・スレッドURL・下書きから、ゆっくり動画の台本下地、話者、改行、素材パスを確認。YMM4で仕上げる前の制作前工程をFreeで試せるWindows向けツールです。'
 
 const visibleHomeFaqs = homeFaqs.slice(0, 10)
 
@@ -554,9 +554,9 @@ function MobileStickyCta() {
 
   return (
     <div className="home-lp-sticky-cta">
-      <HomeCta href={homeFacts.downloadUrl} label="Free版を試す" location="mobile_sticky">
+      <HomeCta href={homeFacts.downloadUrl} label={primaryCtaLabel} location="mobile_sticky">
         <Download size={18} aria-hidden="true" />
-        Free版を試す
+        {primaryCtaLabel}
       </HomeCta>
     </div>
   )
@@ -599,8 +599,9 @@ function HomePageContent() {
             <div className="home-lp-hero__copy" data-reveal>
               <p className="home-lp-kicker">{heroContent.kicker}</p>
               <h1 id="home-hero-heading">
-                <span>記事・スレッドから、</span>
-                <span>YMM4で仕上げる前準備まで。</span>
+                <span>YMM4を開く前の、</span>
+                <span>台本・話者・素材確認を</span>
+                <span>ひとまとめに。</span>
               </h1>
               <p className="home-lp-hero__lead">{heroContent.lead}</p>
               <div className="home-lp-hero__actions">
@@ -613,7 +614,7 @@ function HomePageContent() {
                   <Download size={19} aria-hidden="true" />
                   {primaryCtaLabel}
                 </HomeCta>
-                <HomeCta href="#demo" label={heroContent.secondaryCta} location="hero" variant="secondary">
+                <HomeCta href="#product" label={heroContent.secondaryCta} location="hero" variant="secondary">
                   <Play size={18} aria-hidden="true" />
                   {heroContent.secondaryCta}
                 </HomeCta>
@@ -624,12 +625,12 @@ function HomePageContent() {
               <ProductScreenshot
                 image={{
                   src: homeAssets.hero,
-                  alt: '台本編集と素材確認の画面例',
-                  title: '台本編集と素材確認の画面例',
+                  alt: '記事URLから台本候補を取得し、YMM4前準備へ進む実アプリ画面',
+                  title: 'YMM4前の制作前工程を確認する画面',
                   annotations: [
-                    { x: 18, y: 19, label: 'URLを入力' },
-                    { x: 50, y: 24, label: '候補を確認' },
-                    { x: 78, y: 12, label: '台本準備へ' },
+                    { x: 20, y: 19, label: 'URLから候補を見る' },
+                    { x: 52, y: 24, label: '使う本文を選ぶ' },
+                    { x: 78, y: 12, label: 'YMM4前に確認' },
                   ],
                 }}
                 onZoom={setLightboxImage}
@@ -664,8 +665,8 @@ function HomePageContent() {
           <div className="home-lp-container">
             <SectionHead
               kicker="BEFORE / AFTER"
-              title="コピペ、話者分け、改行直し。一本ごとの繰り返しを減らす。"
-              body="コメントを拾う。不要な部分を外す。話者を割り当てる。改行と文字量を整える。素材の場所を確認する。最後にYMM4でもう一度組み直す。ゆっくりまとめプロセッサーは、この繰り返しを一つの制作データとしてつなぎます。"
+              title="毎回のコピペ、話者分け、改行直しを減らす。"
+              body="動画編集そのものより前に、本文選び、コメント整理、話者分け、素材確認で手が止まる。ゆっくりまとめプロセッサーは、そのYMM4前の繰り返しを一つの流れにまとめます。"
             />
             <div className="home-lp-change-table" data-reveal>
               <div className="home-lp-change-table__head">
@@ -687,8 +688,8 @@ function HomePageContent() {
           <div className="home-lp-container">
             <SectionHead
               kicker="WORKFLOW"
-              title="URL・下書きから、台本と素材を整えてYMM4へ。"
-              body="どこをアプリに任せ、どこを自分で確認するかが分かる流れです。AIに丸投げせず、最後の品質は自分で決められます。"
+              title="実画面で、YMM4前の流れを確認する。"
+              body="URLから候補を見る。使う本文を選ぶ。話者と改行を整える。素材パスを確認する。最後の品質はYMM4で自分で決められます。"
             />
             <div className="home-lp-steps">
               {workflowSteps.map((step, index) => (
@@ -715,11 +716,11 @@ function HomePageContent() {
               <HomeCta
                 id="home-workflow-primary-cta"
                 href={homeFacts.downloadUrl}
-                label="Free版でこの流れを試す"
+                label="Freeで制作前工程を試す"
                 location="workflow"
               >
                 <Download size={18} aria-hidden="true" />
-                Free版でこの流れを試す
+                Freeで制作前工程を試す
               </HomeCta>
             </div>
           </div>
@@ -788,10 +789,10 @@ function HomePageContent() {
           <div className="home-lp-container home-lp-free__grid">
             <div className="home-lp-free__copy" data-reveal>
               <p className="home-lp-kicker">TRY FREE</p>
-              <h2 id="home-free-heading">買う前に、自分の制作フローで確かめる。</h2>
+              <h2 id="home-free-heading">まずFreeで、自分の制作手順に合うか確認。</h2>
               <p>
-                Free版では、起動、ログイン、台本編集、素材確認、YMM4連携の流れを確認できます。
-                起動確認だけで終わらせず、台本編集とYMM4連携が自分の環境で使えるかを実際に確認してください。
+                いきなり購入する必要はありません。起動、少数URLでの確認、台本編集、素材確認、YMM4前準備まで、
+                自分の環境で流れを見てから判断できます。
               </p>
               <div className="home-lp-free__actions">
                 <HomeCta
@@ -839,16 +840,16 @@ function HomePageContent() {
             <SectionHead
               kicker="PRICING"
               title="Premiumは39,800円（税込）。月額なしの買い切りです。"
-              body="Freeで動作とYMM4連携を確かめ、継続利用が必要になったらPremiumへ。確定済みの条件と、購入前に確認すべき条件を分けて表示します。"
+              body="Freeで制作前工程を確認し、継続制作で必要になったらPremiumへ。確定済みの条件と、購入前に確認すべき条件を分けて表示します。"
               align="center"
             />
 
             <div className="home-lp-plan-grid" aria-label="FreeとPremiumの概要">
               <article className="home-lp-plan-card" data-reveal>
-                <span>まず制作フローを試す</span>
+                <span>まず制作前工程を確認</span>
                 <h3>Free</h3>
                 <strong>0円</strong>
-                <p>自分のWindowsとYMM4環境で、台本編集と連携の流れを確認するための無料版です。</p>
+                <p>自分のWindowsとYMM4環境で、台本編集、素材確認、YMM4前準備の流れを確認するための無料版です。</p>
                 <HomeCta
                   id="home-pricing-free-cta"
                   href={homeFacts.downloadUrl}
@@ -863,7 +864,7 @@ function HomePageContent() {
                 <span>買い切り・月額なし</span>
                 <h3>Premium</h3>
                 <strong>{homeFacts.premiumPrice}</strong>
-                <p>URL取得、AI台本案、プロジェクト保存、YMM4前準備を、購入前に確認した条件で継続利用したい方向けです。</p>
+                <p>Freeで制作前工程を確認し、継続的に台本取得やAI台本案を使いたいと分かった段階で検討してください。</p>
                 <HomeCta
                   id="home-pricing-premium-cta"
                   href={homeFacts.purchaseUrl}
@@ -907,7 +908,7 @@ function HomePageContent() {
             <div className="home-lp-condition-panel" data-reveal>
               <div>
                 <p className="home-lp-kicker">購入前確認</p>
-                <h3>39,800円を判断するために、未確認の条件は残さず確認してください。</h3>
+                <h3>39,800円を判断する前に、未確認の条件を確認してください。</h3>
                 <p>このLPでは、確認できていない数値や契約条件を確定値として表示しません。</p>
               </div>
               <dl>
@@ -952,8 +953,8 @@ function HomePageContent() {
           <div className="home-lp-container">
             <SectionHead
               kicker="SPECS"
-              title="使える環境と、アプリがやらないこと。"
-              body="使える環境、YMM4との関係、AI出力や素材確認の扱いを購入前に確認できます。"
+              title="本製品で整えること。YMM4で仕上げること。"
+              body="ゆっくりまとめプロセッサーは、YMM4を置き換えるツールではありません。YMM4で編集を始める前に、台本、話者、改行、素材パスを確認しやすくする前工程ツールです。"
             />
             <div className="home-lp-requirements">
               <div className="home-lp-requirements__table" data-reveal>
@@ -1054,8 +1055,8 @@ function HomePageContent() {
           <div className="home-lp-container home-lp-final__grid">
             <div>
               <p className="home-lp-kicker">NEXT VIDEO</p>
-              <h2 id="home-final-heading">次の一本は、台本のコピペから始めない。</h2>
-              <p>Free版で、記事・スレッドまたは下書きから、台本編集、素材確認、YMM4連携までの流れを確かめてください。</p>
+              <h2 id="home-final-heading">URLを貼る。使う本文を選ぶ。YMM4で仕上げる。</h2>
+              <p>Freeで、記事・スレッドまたは下書きから、台本編集、素材確認、YMM4前準備までの流れを確かめてください。</p>
               <span>{heroContent.microcopy}</span>
             </div>
             <div className="home-lp-final__actions">
@@ -1082,9 +1083,9 @@ export function HomePage() {
   return (
     <>
       <PageMeta
-        title="ゆっくりまとめプロセッサー｜記事・スレッドからYMM4前準備を支援"
+        title="ゆっくりまとめプロセッサー｜YMM4前の台本・素材確認を整えるWindowsツール"
         description={metaDescription}
-        keywords="ゆっくりまとめプロセッサー,YMM4,台本,素材,記事URL,スレッドURL,反応集,解説動画,ショート動画,Windows,Free,Premium"
+        keywords="ゆっくりまとめプロセッサー,YMM4,台本作成,素材確認,記事URL,スレッドURL,反応集,解説動画,ショート動画,Windows,Free,Premium"
         image={homeAssets.hero}
         path="/"
         structuredData={[softwareApplicationLd, faqPageLd]}

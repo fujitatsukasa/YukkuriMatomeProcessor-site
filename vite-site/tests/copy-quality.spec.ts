@@ -5,8 +5,8 @@ import { decisionRecords, productFacts, readinessGates, releaseCandidateDistribu
 const primaryPages = [
   {
     path: '/',
-    heading: '記事・スレッドから、YMM4で仕上げる前準備まで。',
-    ctas: ['Free版を試す'],
+    heading: 'YMM4を開く前の、台本・話者・素材確認をひとまとめに。',
+    ctas: ['Freeで制作前工程を試す'],
   },
   {
     path: '/download/',

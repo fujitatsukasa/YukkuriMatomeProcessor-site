@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test'
 
 const pages = [
-  { path: '/', heading: '記事・スレッドから、YMM4で仕上げる前準備まで。' },
+  { path: '/', heading: 'YMM4を開く前の、台本・話者・素材確認をひとまとめに。' },
   { path: '/download/', heading: '配布条件を確認してFree版を試す' },
   { path: '/instructions/', heading: '記事URLから台本を取得し、YMM4に渡す' },
   { path: '/samples/', heading: '実アプリ画面と動画サンプルで、使う前の流れを確認する' },
