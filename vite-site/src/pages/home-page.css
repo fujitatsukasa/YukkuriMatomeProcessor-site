@@ -307,9 +307,10 @@
   line-break: strict;
   overflow-wrap: normal;
   text-shadow:
-    0 2px 0 rgba(0, 0, 0, 0.24),
-    0 14px 34px rgba(0, 0, 0, 0.58),
-    0 0 22px rgba(215, 181, 107, 0.16);
+    0 1px 0 rgba(255, 246, 218, 0.18),
+    0 2px 1px rgba(0, 0, 0, 0.72),
+    0 10px 24px rgba(0, 0, 0, 0.54),
+    0 0 24px rgba(229, 190, 95, 0.16);
 }
 
 .home-lp-hero h1 span {
@@ -322,18 +323,22 @@
     background:
       linear-gradient(
         104deg,
-        #fff8e8 0%,
-        #ffffff 18%,
-        #e9c56b 35%,
-        #fff2bd 49%,
-        #c68b2b 61%,
-        #ffffff 77%,
-        #fff3d7 100%
+        #fffef7 0%,
+        #ffffff 16%,
+        #f9dfa0 30%,
+        #fff8d2 44%,
+        #f1cd76 57%,
+        #ffffff 74%,
+        #fff5e1 100%
       );
     background-size: 240% 100%;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 0.48px rgba(255, 252, 235, 0.3);
+    filter:
+      drop-shadow(0 2px 1px rgba(0, 0, 0, 0.64))
+      drop-shadow(0 8px 13px rgba(0, 0, 0, 0.38));
     animation: home-lux-title-shine 8.4s cubic-bezier(0.35, 0, 0.22, 1) infinite;
   }
 
@@ -434,28 +439,28 @@
 
 .home-lp-btn--primary {
   color: #1d1206;
-  border: 2px solid transparent;
+  border: 1px solid rgba(255, 229, 166, 0.72);
   text-shadow: 0 1px 0 rgba(255, 248, 225, 0.42);
   background:
     radial-gradient(circle at 18% 14%, rgba(255, 249, 219, 0.94), transparent 32%) padding-box,
     radial-gradient(circle at 82% 86%, rgba(146, 80, 17, 0.24), transparent 35%) padding-box,
-    linear-gradient(112deg, rgba(255, 245, 208, 0.92) 0%, rgba(213, 158, 48, 0.36) 25%, rgba(122, 70, 16, 0.18) 43%, rgba(255, 236, 170, 0.76) 58%, rgba(150, 89, 18, 0.28) 100%) padding-box,
-    linear-gradient(128deg, #8c5918 0%, #d7a645 28%, #fff0b0 48%, #b87622 68%, #f0ca6d 100%) border-box;
+    linear-gradient(112deg, rgba(255, 246, 214, 0.96) 0%, rgba(217, 162, 50, 0.44) 25%, rgba(128, 74, 18, 0.16) 43%, rgba(255, 238, 174, 0.8) 58%, rgba(160, 95, 22, 0.3) 100%) padding-box,
+    linear-gradient(128deg, #8b5817 0%, #d8a642 28%, #fff3bd 50%, #b87622 70%, #f3cf75 100%) border-box;
   background-size: 100% 100%, 100% 100%, 190% 190%, 100% 100%;
   box-shadow:
     inset 0 1px 0 rgba(255, 252, 235, 0.82),
     inset 0 -14px 20px rgba(102, 55, 11, 0.22),
-    inset 0 0 0 1px rgba(255, 238, 186, 0.25),
-    0 18px 34px -24px rgba(236, 188, 88, 0.78),
-    0 8px 18px rgba(83, 48, 12, 0.18);
+    inset 0 0 0 1px rgba(255, 238, 186, 0.18),
+    0 18px 34px -26px rgba(236, 188, 88, 0.62),
+    0 8px 18px rgba(83, 48, 12, 0.14);
   animation: home-lux-gold-flow 8.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 .home-lp-btn--primary::before {
   z-index: -1;
-  inset: -5px;
-  padding: 2px;
-  opacity: 0.28;
+  inset: -10px;
+  padding: 3px;
+  opacity: 0;
   background: conic-gradient(
     from var(--home-lux-border-angle),
     rgba(112, 220, 255, 0.88) 0deg,
@@ -475,19 +480,22 @@
     linear-gradient(#000 0 0);
   mask-composite: exclude;
   filter:
-    drop-shadow(0 0 5px rgba(105, 214, 255, 0.5))
-    drop-shadow(0 0 12px rgba(193, 137, 255, 0.34));
+    drop-shadow(0 0 8px rgba(105, 214, 255, 0.58))
+    drop-shadow(0 0 18px rgba(193, 137, 255, 0.38));
   animation: home-lux-border-spin 5s linear infinite;
   transition: opacity 180ms ease, filter 180ms ease;
 }
 
 .home-lp-btn--primary::after {
   z-index: -1;
-  inset: 4px;
-  border: 1px solid rgba(255, 248, 226, 0.24);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.46),
-    inset 0 -10px 16px rgba(118, 66, 16, 0.18);
+  inset: 1px;
+  opacity: 0.72;
+  background:
+    linear-gradient(110deg, transparent 12%, rgba(255, 255, 245, 0.28) 32%, transparent 48%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.22), transparent 48%);
+  background-size: 220% 100%, 100% 100%;
+  background-position: -120% 50%, 0 0;
+  animation: home-lux-gold-flow 9.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 .home-lp-btn--secondary {
@@ -503,8 +511,8 @@
 
 .home-lp-btn--secondary::before {
   z-index: -1;
-  inset: -4px;
-  padding: 1px;
+  inset: -8px;
+  padding: 2px;
   opacity: 0;
   background: conic-gradient(
     from var(--home-lux-border-angle),
@@ -522,8 +530,8 @@
     linear-gradient(#000 0 0);
   mask-composite: exclude;
   filter:
-    drop-shadow(0 0 5px rgba(105, 214, 255, 0.48))
-    drop-shadow(0 0 12px rgba(190, 135, 255, 0.32));
+    drop-shadow(0 0 7px rgba(105, 214, 255, 0.58))
+    drop-shadow(0 0 16px rgba(190, 135, 255, 0.38));
   animation: home-lux-border-spin 5.4s linear infinite;
   transition: opacity 180ms ease, filter 180ms ease;
 }
@@ -560,8 +568,8 @@
 .home-lp-btn--secondary:focus-visible::before {
   opacity: 1;
   filter:
-    drop-shadow(0 0 7px rgba(105, 214, 255, 0.72))
-    drop-shadow(0 0 18px rgba(193, 137, 255, 0.46));
+    drop-shadow(0 0 10px rgba(105, 214, 255, 0.82))
+    drop-shadow(0 0 26px rgba(193, 137, 255, 0.54));
 }
 
 .home-lp-btn--secondary:hover,
