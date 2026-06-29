@@ -3,7 +3,6 @@ import {
   useEffect,
   useRef,
   useState,
-  type CSSProperties,
   type ReactNode,
   type SyntheticEvent,
 } from 'react'
@@ -745,10 +744,7 @@ function HomePageContent() {
           <div className="home-lp-container">
             <div className="home-lp-flow-strip" aria-label="制作フロー要約" data-reveal>
               {workflowSummary.map((item, index) => (
-                <div
-                  key={item.label}
-                  style={{ '--phase-bg': `url(${item.image})` } as CSSProperties}
-                >
+                <div key={item.label} data-phase={index + 1}>
                   <span>{item.label}</span>
                   <strong>{item.title}</strong>
                   {index < workflowSummary.length - 1 ? <ArrowRight size={18} aria-hidden="true" /> : null}
@@ -758,7 +754,11 @@ function HomePageContent() {
           </div>
         </section>
 
-        <section className="home-lp-section home-lp-before-after" aria-labelledby="home-before-after-heading">
+        <section
+          className="home-lp-section home-lp-before-after"
+          data-chapter="compare"
+          aria-labelledby="home-before-after-heading"
+        >
           <div className="home-lp-container">
             <SectionHead
               kicker="BEFORE / AFTER"
@@ -792,7 +792,12 @@ function HomePageContent() {
           </div>
         </section>
 
-        <section id="workflow" className="home-lp-section home-lp-section--muted" aria-labelledby="home-workflow-heading">
+        <section
+          id="workflow"
+          className="home-lp-section home-lp-section--muted"
+          data-chapter="workflow"
+          aria-labelledby="home-workflow-heading"
+        >
           <div className="home-lp-container">
             <SectionHead
               kicker="WORKFLOW"
@@ -852,7 +857,7 @@ function HomePageContent() {
           </div>
         </section>
 
-        <section id="product" className="home-lp-section" aria-label="実画面で見る3つの価値">
+        <section id="product" className="home-lp-section" data-chapter="product" aria-label="実画面で見る3つの価値">
           <div className="home-lp-container home-lp-feature-stack">
             {productFeatures.map((feature, index) => (
               <ProductFeatureBlock key={feature.id} feature={feature} index={index} onZoom={setLightboxImage} />
@@ -860,7 +865,12 @@ function HomePageContent() {
           </div>
         </section>
 
-        <section id="demo" className="home-lp-section home-lp-section--muted home-lp-demo" aria-labelledby="home-demo-heading">
+        <section
+          id="demo"
+          className="home-lp-section home-lp-section--muted home-lp-demo"
+          data-chapter="demo"
+          aria-labelledby="home-demo-heading"
+        >
           <div className="home-lp-container">
             <SectionHead
               kicker="FLOW GUIDE"
@@ -876,7 +886,7 @@ function HomePageContent() {
           </div>
         </section>
 
-        <section id="samples" className="home-lp-section" aria-labelledby="home-samples-heading">
+        <section id="samples" className="home-lp-section" data-chapter="samples" aria-labelledby="home-samples-heading">
           <div className="home-lp-container">
             <SectionHead
               kicker="USE CASES"
@@ -929,7 +939,12 @@ function HomePageContent() {
           </div>
         </section>
 
-        <section id="free" className="home-lp-section home-lp-section--muted" aria-labelledby="home-free-heading">
+        <section
+          id="free"
+          className="home-lp-section home-lp-section--muted"
+          data-chapter="free"
+          aria-labelledby="home-free-heading"
+        >
           <div className="home-lp-container home-lp-free__grid">
             <div className="home-lp-free__copy" data-reveal>
               <p className="home-lp-kicker">TRY FREE</p>
@@ -979,6 +994,7 @@ function HomePageContent() {
           id="pricing"
           ref={pricingRef}
           className="home-lp-section home-lp-pricing"
+          data-chapter="pricing"
           aria-labelledby="home-pricing-heading"
         >
           <div className="home-lp-container">
@@ -1111,7 +1127,12 @@ function HomePageContent() {
           </div>
         </section>
 
-        <section id="specs" className="home-lp-section home-lp-section--muted" aria-labelledby="home-specs-heading">
+        <section
+          id="specs"
+          className="home-lp-section home-lp-section--muted"
+          data-chapter="specs"
+          aria-labelledby="home-specs-heading"
+        >
           <div className="home-lp-container">
             <SectionHead
               kicker="SPECS"
@@ -1184,7 +1205,7 @@ function HomePageContent() {
           </div>
         </section>
 
-        <section id="faq" className="home-lp-section" aria-labelledby="home-faq-heading">
+        <section id="faq" className="home-lp-section" data-chapter="faq" aria-labelledby="home-faq-heading">
           <div className="home-lp-container">
             <SectionHead
               kicker="FAQ"
@@ -1231,7 +1252,7 @@ function HomePageContent() {
           </div>
         </section>
 
-        <section className="home-lp-final" aria-labelledby="home-final-heading">
+        <section className="home-lp-final" data-chapter="final" aria-labelledby="home-final-heading">
           <div className="home-lp-container home-lp-final__grid">
             <div>
               <p className="home-lp-kicker">NEXT VIDEO</p>

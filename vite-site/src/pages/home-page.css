@@ -843,6 +843,11 @@
 }
 
 .home-lp-flow-strip div {
+  --phase-accent: 237, 199, 95;
+  --phase-secondary: 79, 209, 165;
+  --phase-pattern:
+    repeating-linear-gradient(0deg, transparent 0 20px, rgba(255, 255, 255, 0.08) 20px 21px),
+    linear-gradient(90deg, rgba(var(--phase-accent), 0.14), transparent 52%);
   position: relative;
   isolation: isolate;
   overflow: hidden;
@@ -857,14 +862,36 @@
   background-color: rgba(16, 22, 30, 0.97);
   background-image:
     linear-gradient(180deg, rgba(5, 7, 10, 0.04), rgba(5, 7, 10, 0.5) 66%, rgba(5, 7, 10, 0.76)),
-    linear-gradient(90deg, rgba(5, 7, 10, 0.1), transparent 48%, rgba(5, 7, 10, 0.22)),
-    var(--phase-bg);
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+    linear-gradient(135deg, rgba(var(--phase-accent), 0.15), transparent 42%),
+    linear-gradient(92deg, transparent 0 48%, rgba(var(--phase-secondary), 0.12), transparent 72%),
+    #10161e;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.1),
     0 24px 64px rgba(0, 0, 0, 0.34);
+}
+
+.home-lp-flow-strip div[data-phase="2"] {
+  --phase-accent: 255, 224, 142;
+  --phase-secondary: 237, 199, 95;
+  --phase-pattern:
+    repeating-linear-gradient(0deg, transparent 0 22px, rgba(255, 255, 255, 0.08) 22px 23px, transparent 23px 34px),
+    linear-gradient(115deg, transparent 0 52%, rgba(var(--phase-secondary), 0.1) 52% 53%, transparent 53%);
+}
+
+.home-lp-flow-strip div[data-phase="3"] {
+  --phase-accent: 79, 209, 165;
+  --phase-secondary: 105, 214, 255;
+  --phase-pattern:
+    repeating-linear-gradient(0deg, transparent 0 28px, rgba(var(--phase-accent), 0.08) 28px 30px, transparent 30px 44px),
+    linear-gradient(142deg, transparent 0 38%, rgba(var(--phase-secondary), 0.11) 38% 39%, transparent 39% 70%, rgba(var(--phase-accent), 0.09) 70% 71%, transparent 71%);
+}
+
+.home-lp-flow-strip div[data-phase="4"] {
+  --phase-accent: 105, 214, 255;
+  --phase-secondary: 237, 199, 95;
+  --phase-pattern:
+    repeating-linear-gradient(0deg, transparent 0 13px, rgba(var(--phase-accent), 0.09) 13px 15px, transparent 15px 24px),
+    linear-gradient(118deg, transparent 0 58%, rgba(var(--phase-secondary), 0.09) 58% 59%, transparent 59%);
 }
 
 .home-lp-flow-strip div::before {
@@ -873,13 +900,26 @@
   top: 0;
   right: 0;
   left: 0;
+  z-index: 2;
   height: 3px;
   background: linear-gradient(90deg, var(--home-blue), var(--home-mint));
 }
 
+.home-lp-flow-strip div::after {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  z-index: 0;
+  border-radius: 6px;
+  background: var(--phase-pattern);
+  opacity: 0.56;
+  -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.32), rgba(0, 0, 0, 0.82));
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.32), rgba(0, 0, 0, 0.82));
+}
+
 .home-lp-flow-strip span {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   color: var(--home-mint);
   font-size: 0.82rem;
   font-weight: 850;
@@ -888,7 +928,7 @@
 
 .home-lp-flow-strip strong {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   color: var(--home-text);
   font-size: 1rem;
   line-height: 1.5;
@@ -914,14 +954,102 @@
 .home-lp-section {
   scroll-margin-top: 86px;
   position: relative;
+  overflow: hidden;
   padding: 96px 0;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: #090d12;
 }
 
 .home-lp-section--muted {
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent),
     #0a0e13;
+}
+
+.home-lp-section > .home-lp-container {
+  position: relative;
+  z-index: 1;
+}
+
+.home-lp-section[data-chapter]::before,
+.home-lp-section[data-chapter]::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.home-lp-section[data-chapter]::before {
+  inset: 0;
+  z-index: 0;
+  opacity: var(--chapter-opacity, 0.72);
+  background: var(--chapter-scene);
+}
+
+.home-lp-section[data-chapter]::after {
+  right: 6%;
+  bottom: 28px;
+  left: 6%;
+  z-index: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(237, 199, 95, 0.38), rgba(79, 209, 165, 0.28), transparent);
+  opacity: 0.64;
+}
+
+.home-lp-section[data-chapter="compare"] {
+  --chapter-scene:
+    linear-gradient(90deg, rgba(237, 199, 95, 0.075), transparent 43%, rgba(255, 255, 255, 0.045) 49% 51%, transparent 57%, rgba(79, 209, 165, 0.055)),
+    repeating-linear-gradient(180deg, transparent 0 48px, rgba(255, 255, 255, 0.024) 48px 49px);
+}
+
+.home-lp-section[data-chapter="workflow"] {
+  --chapter-scene:
+    linear-gradient(118deg, rgba(237, 199, 95, 0.07) 0 18%, transparent 18% 56%, rgba(79, 209, 165, 0.065) 56% 72%, transparent 72%),
+    repeating-linear-gradient(180deg, transparent 0 74px, rgba(255, 255, 255, 0.024) 74px 75px),
+    linear-gradient(180deg, rgba(79, 209, 165, 0.045), transparent 54%);
+}
+
+.home-lp-section[data-chapter="product"] {
+  --chapter-scene:
+    linear-gradient(112deg, rgba(237, 199, 95, 0.075), transparent 38%, rgba(105, 214, 255, 0.055) 70%, transparent),
+    repeating-linear-gradient(146deg, transparent 0 118px, rgba(255, 255, 255, 0.022) 118px 120px);
+}
+
+.home-lp-section[data-chapter="demo"] {
+  --chapter-scene:
+    repeating-linear-gradient(90deg, rgba(237, 199, 95, 0.06) 0 22px, transparent 22px 48px),
+    linear-gradient(180deg, rgba(105, 214, 255, 0.045), transparent 64%),
+    linear-gradient(110deg, transparent 0 64%, rgba(79, 209, 165, 0.07));
+  --chapter-opacity: 0.58;
+}
+
+.home-lp-section[data-chapter="samples"] {
+  --chapter-scene:
+    repeating-linear-gradient(156deg, transparent 0 76px, rgba(237, 199, 95, 0.05) 76px 78px, transparent 78px 128px),
+    linear-gradient(90deg, rgba(105, 214, 255, 0.045), transparent 46%, rgba(237, 199, 95, 0.045));
+}
+
+.home-lp-section[data-chapter="free"] {
+  --chapter-scene:
+    linear-gradient(112deg, rgba(79, 209, 165, 0.09), transparent 44%),
+    repeating-linear-gradient(0deg, transparent 0 36px, rgba(79, 209, 165, 0.04) 36px 37px);
+}
+
+.home-lp-section[data-chapter="pricing"] {
+  --chapter-scene:
+    repeating-linear-gradient(0deg, transparent 0 34px, rgba(237, 199, 95, 0.045) 34px 35px),
+    linear-gradient(116deg, rgba(237, 199, 95, 0.07), transparent 34%, rgba(79, 209, 165, 0.052) 72%, transparent);
+}
+
+.home-lp-section[data-chapter="specs"] {
+  --chapter-scene:
+    repeating-linear-gradient(0deg, transparent 0 42px, rgba(255, 255, 255, 0.026) 42px 43px),
+    linear-gradient(110deg, rgba(105, 214, 255, 0.06), transparent 40%, rgba(237, 199, 95, 0.052) 76%, transparent);
+}
+
+.home-lp-section[data-chapter="faq"] {
+  --chapter-scene:
+    repeating-linear-gradient(0deg, transparent 0 62px, rgba(237, 199, 95, 0.044) 62px 63px, transparent 63px 94px),
+    linear-gradient(135deg, rgba(105, 214, 255, 0.052), transparent 48%, rgba(237, 199, 95, 0.05));
 }
 
 .home-lp-section-head {
@@ -1964,12 +2092,35 @@
     #090b0e;
 }
 
+.home-lp-final[data-chapter="final"] {
+  background:
+    linear-gradient(110deg, rgba(237, 199, 95, 0.2), rgba(79, 209, 165, 0.1)),
+    repeating-linear-gradient(145deg, transparent 0 96px, rgba(255, 255, 255, 0.026) 96px 98px),
+    linear-gradient(180deg, #0b0c0f, #090b0e);
+}
+
 .home-lp-final::before {
   content: "";
   position: absolute;
   inset: 18px 4% auto;
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(79, 209, 165, 0.45), rgba(237, 199, 95, 0.5), transparent);
+}
+
+.home-lp-final::after {
+  content: "";
+  position: absolute;
+  right: 8%;
+  bottom: 18px;
+  left: 8%;
+  height: 118px;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 18px, rgba(237, 199, 95, 0.075) 18px 19px),
+    linear-gradient(90deg, transparent, rgba(79, 209, 165, 0.08), transparent);
+  opacity: 0.56;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
 }
 
 .home-lp-final > * {
@@ -2268,12 +2419,26 @@
     min-height: 148px;
   }
 
+  .home-lp-flow-strip div::after {
+    opacity: 0.38;
+  }
+
   .home-lp-flow-strip svg {
     display: none;
   }
 
   .home-lp-section {
     padding: 76px 0;
+  }
+
+  .home-lp-section[data-chapter]::before {
+    opacity: 0.38;
+  }
+
+  .home-lp-section[data-chapter]::after {
+    right: 10%;
+    left: 10%;
+    opacity: 0.42;
   }
 
   .home-lp-section-head h2,
