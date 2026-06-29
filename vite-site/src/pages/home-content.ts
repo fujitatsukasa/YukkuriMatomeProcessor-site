@@ -61,9 +61,9 @@ export const homeAssets = {
 
 export const heroContent = {
   kicker: 'YMM4向け ゆっくり動画制作支援アプリ',
-  title: '素材集め、台本づくり、YMM4へ渡すところまで、ひとつの制作フローに。',
+  title: '素材集めから台本づくりとYMM4へ渡すところまでひとつの制作フローに。',
   lead:
-    '記事・掲示板・スレッド・外部素材から候補を集め、AI台本案を確認し、ボードでセリフ・素材・字幕まわりを整理。Project.json / YMMP / YMM4連携へつなげる、Windows向けの制作支援アプリです。',
+    '記事・掲示板・スレッド・外部素材から候補を集めてAI台本案を確認。ボードでセリフ・素材・字幕まわりを整理し、Project.json / YMMP / YMM4連携へつなげるWindows向けの制作支援アプリです。',
   primaryCta: 'Free版で流れを見る',
   secondaryCta: '実画面で流れを見る',
   microcopy: `${homeFacts.osLabel}｜${homeFacts.yymm4Label}｜Premium ${homeFacts.premiumPrice}・${homeFacts.billingLabel}｜${homeFacts.monthlyFeeLabel}`,
@@ -252,7 +252,7 @@ export const productFeatures: ProductFeature[] = [
 ]
 
 export const demoTimeline = [
-  { time: '0〜4秒', screen: 'タイトル＋制作フロー', caption: '素材集め、台本づくり、YMM4へ渡すところまで、ひとつの制作フローに。' },
+  { time: '0〜4秒', screen: 'タイトル＋制作フロー', caption: '素材集めから台本づくり。YMM4へ渡すところまでひとつの制作フローに。' },
   { time: '4〜12秒', screen: 'サイト選択・URL入力・取得', caption: '対応URLから本文・コメント候補を取得' },
   { time: '12〜20秒', screen: '候補選択・コメント設定', caption: '使う内容を確認して取り込む' },
   { time: '20〜30秒', screen: 'プリセット・話者・改行', caption: '話者・改行・タイトルを動画の型に揃える' },

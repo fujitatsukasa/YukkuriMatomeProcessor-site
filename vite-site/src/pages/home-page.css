@@ -206,35 +206,31 @@
 }
 
 @keyframes home-lux-title-shine {
-  0%,
-  100% {
+  0% {
     background-position: 0% 50%;
   }
-  45%,
-  58% {
+  100% {
     background-position: 100% 50%;
   }
 }
 
 @keyframes home-lux-line-sweep {
-  0%,
-  100% {
+  0% {
     background-position: 0% 50%;
   }
-  50% {
+  100% {
     background-position: 100% 50%;
   }
 }
 
 @keyframes home-lux-title-glow {
-  0%,
-  100% {
+  0% {
     filter:
       drop-shadow(0 1px 0 rgba(50, 30, 7, 0.34))
       drop-shadow(0 8px 14px rgba(0, 0, 0, 0.3))
       brightness(1);
   }
-  48% {
+  100% {
     filter:
       drop-shadow(0 1px 0 rgba(50, 30, 7, 0.36))
       drop-shadow(0 0 6px rgba(255, 230, 144, 0.12))
@@ -244,12 +240,10 @@
 }
 
 @keyframes home-lux-emphasis-flow {
-  0%,
-  100% {
+  0% {
     background-position: 0% 92%;
   }
-  48%,
-  62% {
+  100% {
     background-position: 100% 92%;
   }
 }
@@ -272,7 +266,7 @@
       0% 92% / 240% 0.34em no-repeat;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
-  animation: home-lux-emphasis-flow 3.2s cubic-bezier(0.35, 0, 0.22, 1) infinite;
+  animation: home-lux-emphasis-flow 3.2s linear infinite alternate;
 }
 
 .home-lp-em--aqua {
@@ -318,7 +312,7 @@
   background:
     linear-gradient(90deg, rgba(255, 219, 111, 0.34), rgba(255, 252, 210, 0.3), rgba(105, 214, 255, 0.14), rgba(255, 219, 111, 0.34));
   background-size: 220% 100%;
-  animation: home-lux-line-sweep 2.9s cubic-bezier(0.35, 0, 0.22, 1) infinite;
+  animation: home-lux-line-sweep 2.9s linear infinite alternate;
 }
 
 .home-lp .home-lp-kicker {
@@ -462,7 +456,7 @@
   box-shadow:
     0 0 14px rgba(237, 199, 95, 0.32),
     0 0 20px rgba(105, 214, 255, 0.12);
-  animation: home-lux-line-sweep 2.9s cubic-bezier(0.35, 0, 0.22, 1) infinite;
+  animation: home-lux-line-sweep 2.9s linear infinite alternate;
 }
 
 .home-lp-hero h1 span {
@@ -494,7 +488,7 @@
     text-shadow:
       0 0 8px rgba(255, 230, 154, 0.14),
       0 8px 18px rgba(0, 0, 0, 0.34);
-    animation: home-lux-title-shine 4s cubic-bezier(0.35, 0, 0.22, 1) infinite;
+    animation: home-lux-title-shine 4s linear infinite alternate;
   }
 
   .home-lp-hero h1 span:nth-child(2) {
@@ -615,7 +609,7 @@
     inset 0 0 0 1px rgba(255, 238, 186, 0.18),
     0 18px 34px -26px rgba(236, 188, 88, 0.62),
     0 8px 18px rgba(83, 48, 12, 0.14);
-  animation: home-lux-gold-flow 4.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation: home-lux-gold-flow 4.4s linear infinite;
 }
 
 .home-lp-btn--primary::before {
@@ -657,7 +651,7 @@
     linear-gradient(180deg, rgba(255, 255, 255, 0.22), transparent 48%);
   background-size: 220% 100%, 100% 100%;
   background-position: -120% 50%, 0 0;
-  animation: home-lux-gold-flow 4.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation: home-lux-gold-flow 4.6s linear infinite;
 }
 
 .home-lp-btn--secondary {
@@ -985,7 +979,7 @@
   box-shadow:
     0 0 8px rgba(255, 224, 128, 0.28),
     0 0 16px rgba(105, 214, 255, 0.08);
-  animation: home-lux-line-sweep 3.8s cubic-bezier(0.35, 0, 0.22, 1) infinite;
+  animation: home-lux-line-sweep 3.8s linear infinite alternate;
 }
 
 @supports ((background-clip: text) or (-webkit-background-clip: text)) {
@@ -1016,7 +1010,7 @@
     text-shadow:
       0 0 8px rgba(255, 230, 154, 0.16),
       0 8px 18px rgba(0, 0, 0, 0.34);
-    animation: home-lux-title-shine 4.4s cubic-bezier(0.35, 0, 0.22, 1) infinite;
+    animation: home-lux-title-shine 4.4s linear infinite alternate;
   }
 }
 
@@ -1197,7 +1191,7 @@
   box-shadow:
     0 0 7px rgba(255, 220, 120, 0.22),
     0 0 14px rgba(105, 214, 255, 0.08);
-  animation: home-lux-line-sweep 4s cubic-bezier(0.35, 0, 0.22, 1) infinite;
+  animation: home-lux-line-sweep 4s linear infinite alternate;
 }
 
 .home-lp-step p {
@@ -1661,7 +1655,7 @@
   box-shadow:
     0 0 7px rgba(255, 220, 120, 0.22),
     0 0 14px rgba(105, 214, 255, 0.08);
-  animation: home-lux-line-sweep 4s cubic-bezier(0.35, 0, 0.22, 1) infinite;
+  animation: home-lux-line-sweep 4s linear infinite alternate;
 }
 
 .home-lp-condition-panel p {
