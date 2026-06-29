@@ -39,7 +39,7 @@ const faqCategoryMeta: Record<
     cue: '困りごとを切り分ける',
   },
   'faq-purchase': {
-    lead: 'FreeとPremiumの違い、Stripe Checkout、返金条件をまとめています。',
+    lead: '配布状況とPremiumの違い、Stripe Checkout、返金条件をまとめています。',
     cue: '料金と返金を見る',
   },
 }
@@ -70,7 +70,7 @@ const faqHeroFacts = [
   },
   {
     label: '料金',
-    title: 'Freeで試してPremium条件を確認',
+    title: '配布状況とPremium条件を確認',
     body: 'Premiumは39,800円の買い切りです。月額自動更新はありません。具体的な利用条件は確定後に案内します。',
     href: '#faq-purchase',
   },
@@ -107,7 +107,7 @@ const priorityFaqQuestions = [
   'Macで使えますか？',
   'Windows専用ですか？',
   'YMM4は必須ですか？',
-  '無料版では何ができますか？',
+  '無料版はありますか？',
   'Premiumで何が変わりますか？',
   '外部APIキーは必要ですか？',
   '動画は自動で完成しますか？',
@@ -166,7 +166,7 @@ export function FaqPage() {
     <>
       <PageMeta
         title="FAQ｜導入前によくある質問"
-        description="Windows専用、Mac非対応、YMM4前提、無料版でできること、Premiumの価格と確認中条件、URL取得、APIキー、返金条件を導入前に確認できます。"
+        description="Windows専用、Mac非対応、YMM4前提、無料版の有無、Premiumの価格と確認中条件、URL取得、APIキー、返金条件を導入前に確認できます。"
         keywords="FAQ, Windows, Mac, YMM4, 無料版, Premium, 返金, URL取得, APIキー"
         path="/faq/"
         structuredData={faqPageStructuredData}
@@ -179,7 +179,7 @@ export function FaqPage() {
               <p className="brand-kicker">FAQ</p>
               <h1>導入前によくある質問</h1>
               <p className="brand-lead">
-                Windows専用か、YMM4は必要か、無料版で何ができるか、Premiumの価格と確認中条件を購入前に確認できます。
+                Windows専用か、YMM4は必要か、無料版はあるのか、Premiumの価格と確認中条件を購入前に確認できます。
               </p>
 
               <label className="utility-search">
@@ -278,12 +278,12 @@ export function FaqPage() {
               <span className="subpage-card__eyebrow">重要FAQ</span>
               <h2>導入前に確認されやすい質問</h2>
               <p>
-                Windows専用、YMM4前提、無料版とPremium、返金、収益化の約束がないことを先に確認できます。
+                Windows専用、YMM4前提、配布状況とPremium、返金、収益化の約束がないことを先に確認できます。
                 細かい内容は下のカテゴリと検索で続けて探せます。
               </p>
               <div className="faq-priority-actions">
                 <Link className="brand-btn brand-btn--primary" to="/download/">
-                  Free版を試す
+                  配布条件を確認
                 </Link>
                 <Link className="brand-btn brand-btn--ghost" to="/purchase/">
                   料金を見る

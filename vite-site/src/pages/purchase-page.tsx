@@ -8,13 +8,13 @@ import { Bot, CheckCircle2, CreditCard, FileSearch, RotateCcw, ShieldCheck } fro
 
 const planNarratives = [
   {
-    name: 'Free',
-    price: '¥0',
-    term: '0円のFree版',
-    title: 'まず手元のURLで試す',
-    body: '記事URLの取得、台本編集、CSV/.ymmpの前準備までを無料で確認できます。',
-    points: ['起動できるか見る', 'URLが取れるか見る', 'YMM4前準備まで試す'],
-    cta: { label: 'Free版を試す', href: '/download/' },
+    name: '配布確認',
+    price: '確認中',
+    term: '直接取得CTAは未表示',
+    title: '無料版とは案内しない',
+    body: '無料版として案内できる公開版は用意していません。配布可否と利用条件が確定するまで断定しません。',
+    points: ['配布可否を確認', '試用可否を確認', '直接取得CTAは未表示'],
+    cta: { label: '配布条件を確認', href: '/download/' },
   },
   {
     name: 'Premium',
@@ -30,8 +30,8 @@ const planNarratives = [
 const pricingFlow = [
   {
     eyebrow: '手順1',
-    title: 'Free で実際のURLを試す',
-    body: 'ダウンロードと使い方を見ながら、記事URLから台本下地までの流れを確認します。',
+    title: '配布条件と公開状況を確認する',
+    body: 'ダウンロードページで、配布候補、署名、SmartScreen、直接取得CTAの有無を確認します。',
   },
   {
     eyebrow: '手順2',
@@ -48,10 +48,10 @@ const pricingFlow = [
 const purchaseGoalCards = [
   {
     label: '購入前',
-    plan: 'Freeで確認',
-    title: '少数URLで一連の流れを通す',
-    body: 'まず無料で起動、URL取得、台本整理、CSV/.ymmp前準備まで触り、手元の題材で続けられるか確認します。',
-    checks: ['アプリが起動する', '候補一覧が出る', 'YMM4前準備まで試す'],
+    plan: '配布条件を確認',
+    title: '公開配布と試用可否を確認する',
+    body: '無料版としては案内しません。配布可否、試用可否、利用範囲を確定情報として確認します。',
+    checks: ['直接取得CTAの有無を確認', '配布候補の状態を確認', '公開済み条件だけで判断'],
   },
   {
     label: '購入時',
@@ -73,7 +73,7 @@ const premiumUnlocks = [
   {
     label: '台本取得',
     title: '対応URLからの台本取得条件を確認中',
-    body: 'FreeとPremiumの具体的な取得条件は、公開UI・料金・法務の一致確認後に案内します。',
+    body: '公開配布とPremiumの具体的な取得条件は、公開UI・料金・法務の一致確認後に案内します。',
     Icon: FileSearch,
   },
   {
@@ -107,10 +107,10 @@ const premiumCompletionGoals = [
 
 const purchaseDecisionMatrix = [
   {
-    label: 'まだFreeでよい',
-    title: '手元のURLで試している段階',
-    body: '起動、少数URL、台本整理、CSV/.ymmp前準備までを確認している段階なら、まだFreeで十分です。',
-    checks: ['対応URLを確認中', '少数URLで試したい', 'YMM4前準備まで触って判断したい'],
+    label: 'まだ購入しない',
+    title: '公開条件を確認している段階',
+    body: '配布可否、試用可否、利用範囲が未確定なら、Premium購入判断に進まないでください。',
+    checks: ['対応URL条件を確認中', '試用可否を確認中', 'YMM4前準備の範囲を確認中'],
     href: '/instructions/',
     cta: '使い方で確認を続ける',
     Icon: CheckCircle2,
@@ -168,9 +168,9 @@ export function PurchasePage() {
   return (
     <>
       <PageMeta
-        title="料金プラン｜Freeで試してPremium条件を確認"
-        description="Free版とPremium買い切り39,800円の前提を比較。YMM4前準備、Googleアカウント権限同期、返金条件、未確定の利用条件を購入前に確認できます。"
-        keywords="料金, 買い切り, Premium, 無料プラン, Stripe Checkout, 台本取得, AI台本生成"
+        title="料金プラン｜Premium条件と配布状況を確認"
+        description="Premium買い切り39,800円の前提、YMM4前準備、Googleアカウント権限同期、返金条件、未確定の利用条件を購入前に確認できます。"
+        keywords="料金, 買い切り, Premium, Stripe Checkout, 台本取得, AI台本生成"
         path="/purchase/"
       />
 
@@ -179,15 +179,15 @@ export function PurchasePage() {
           <div className="pricing-command-hero__shell">
             <div className="pricing-command-hero__copy">
               <p className="brand-kicker">料金プラン</p>
-              <h1>料金プラン｜Freeで試して、Premium条件を確認</h1>
+              <h1>料金プラン｜Premium条件と配布状況を確認</h1>
               <p className="brand-lead">
-                Freeで確認できる範囲と、39,800円の買い切りで確定済みの前提を比較できます。
+                39,800円の買い切りで確定済みの前提と、購入前に残っている確認条件を分けて確認できます。
               </p>
 
               <div className="pricing-command-hero__chips" role="list" aria-label="料金ページの前提">
                 <span role="listitem">買い切り</span>
                 <span role="listitem">月額なし</span>
-                <span role="listitem">Freeで流れを確認</span>
+                <span role="listitem">無料版は未用意</span>
                 <span role="listitem">Googleアカウントに権限を保持</span>
                 <span role="listitem">{legal.support.firstResponseSla}</span>
               </div>
@@ -204,7 +204,7 @@ export function PurchasePage() {
                   プラン比較を見る
                 </a>
                 <Link className="brand-btn brand-btn--ghost" to="/download/">
-                  Free版を試す
+                  配布条件を確認
                 </Link>
               </div>
             </div>
@@ -247,13 +247,13 @@ export function PurchasePage() {
           <div className="pricing-decision-matrix">
             <div className="subpage-section-head pricing-decision-matrix__head">
               <p>購入判断チェック</p>
-              <h2>まだFreeでよいか、Premiumを検討する段階かを分ける</h2>
+              <h2>まだ購入しない段階か、Premiumを検討する段階かを分ける</h2>
               <span>
-                先にFreeで実URLを試し、制作量と公開条件が合う場合だけPremiumを検討します。
+                先に配布可否と公開条件を確認し、制作量と条件が合う場合だけPremiumを検討します。
               </span>
             </div>
 
-            <div className="pricing-decision-matrix__grid" aria-label="FreeとPremiumの購入判断">
+            <div className="pricing-decision-matrix__grid" aria-label="購入前確認とPremiumの購入判断">
               {purchaseDecisionMatrix.map((item) => {
                 const DecisionIcon = item.Icon
                 return (
@@ -288,7 +288,7 @@ export function PurchasePage() {
         <Section className="pricing-reassurance-section">
           <div className="subpage-section-head pricing-decision-guide__head">
             <p>購入前後の到達目標</p>
-              <h2>Freeで試し、Premium条件を確認し、少数URLで再確認する</h2>
+              <h2>配布条件、Premium条件、購入後の確認順を分ける</h2>
             <span>
               料金だけで判断せず、購入前、購入時、購入後の確認を分けます。
               ここまで揃ってから件数を増やしてください。
@@ -317,7 +317,7 @@ export function PurchasePage() {
             <div className="pricing-clarity-board__head">
               <p>購入前の判断材料</p>
               <h2>Premiumの確認中条件、支払い条件、注意点を一画面で確認</h2>
-              <span>迷う場合はFreeで実URLを試し、台本取得とAI台本生成の利用量が増えてからPremiumへ進んでください。</span>
+              <span>迷う場合は、無料版がある前提にせず、公開済みの条件だけでPremiumを判断してください。</span>
             </div>
 
             <div className="pricing-unlock-grid" aria-label="Premiumの確認中条件">
@@ -465,7 +465,7 @@ export function PurchasePage() {
               </div>
               <div className="subpage-support-callout__actions">
                 <Link className="brand-btn brand-btn--ghost" to="/download/">
-                  Freeから確認する
+                  配布条件から確認する
                 </Link>
                 <Link className="brand-btn brand-btn--primary" to="/contact/">
                   導入相談をする

@@ -55,7 +55,7 @@ export const homeAssets = {
   aiResult: '/product_ai_script.webp',
   materialBoard: '/product_keyword_material.webp',
   yymm4Reflect: '/lp/screen-home-ymm4-reflected-v1.webp',
-  free: '/product_get_script.webp',
+  distribution: '/product_get_script.webp',
   launcher: '/lp/screen-home-launcher-v1.webp',
 } as const
 
@@ -64,8 +64,8 @@ export const heroContent = {
   title: '素材集めから台本づくりとYMM4前準備までひとつの制作フローに。',
   lead:
     '記事・掲示板・スレッド・外部素材から候補を集め、AI台本案を確認します。ボードでセリフ・素材・字幕まわりを整理し、保存先・素材パス・CSV/.ymmp前準備を確認します。YMM4で仕上げる前の準備を支える、Windows向けの制作支援アプリです。',
-  primaryCta: 'Free版で流れを見る',
-  secondaryCta: '実画面で流れを見る',
+  primaryCta: '配布条件を確認',
+  secondaryCta: '実画面を確認',
   microcopy: `${homeFacts.osLabel}｜${homeFacts.yymm4Label}｜Premium ${homeFacts.premiumPrice}・${homeFacts.billingLabel}｜${homeFacts.monthlyFeeLabel}`,
   productScope: '本製品で扱う：台本取得 / AI台本 / ボード編集 / テンプレート / YMM4前準備',
   yymm4Scope: '利用者が確認：内容 / 権利 / 同期結果 / 音声・字幕・演出 / 公開判断',
@@ -303,10 +303,10 @@ export const sampleItems: SampleItem[] = [
 ]
 
 export const freeChecks = [
-  '自分のWindowsで起動できるか',
-  '少数URLや下書きで流れを確認できるか',
-  'AI台本とボード編集が自分の作業に合うか',
-  'YMM4前準備まで無理なく進められるか',
+  '公開配布の可否と条件が確定しているか',
+  'Windows 10 / 11 とYMM4前提に合うか',
+  '直接取得CTAが表示できる状態か',
+  'Premium購入前に未確認条件が残っていないか',
 ] as const
 
 export type PlanComparisonRow = {
@@ -317,24 +317,24 @@ export type PlanComparisonRow = {
 }
 
 export const comparisonRows: PlanComparisonRow[] = [
-  { id: 'price', label: '価格', free: '0円', premium: homeFacts.premiumPrice },
-  { id: 'billing', label: '課金', free: 'なし', premium: '買い切り / 月額なし' },
-  { id: 'fetch', label: 'URLからの台本取得', free: '少数URLで動作確認', premium: '具体的な利用条件は公開前確認中' },
-  { id: 'ai-script', label: 'AI台本案（任意）', free: '任意機能として流れを確認', premium: '具体的な利用条件は公開前確認中' },
-  { id: 'editor', label: '台本編集', free: '画面操作と編集の流れを確認', premium: '自分の制作ルールで継続利用' },
-  { id: 'preset', label: 'プリセット', free: '基本設定の流れを確認', premium: '制作ルールを保存して継続利用' },
-  { id: 'materials', label: '素材ボード', free: '素材パスと不足確認の流れを確認', premium: '継続制作の素材確認に利用' },
-  { id: 'save', label: 'プロジェクト保存', free: '保存先と形式を確認', premium: '保存条件を確認して継続利用' },
-  { id: 'handoff', label: 'YMM4前準備', free: '保存先・素材パスの流れを確認', premium: '継続利用条件を確認中' },
-  { id: 'account', label: '権限確認', free: 'Free状態を確認', premium: '購入後の権限反映を確認' },
-  { id: 'updates', label: 'アップデート', free: '公開配布版を利用', premium: '公開配布版を利用' },
+  { id: 'price', label: '価格', free: '公開条件確認中', premium: homeFacts.premiumPrice },
+  { id: 'billing', label: '課金', free: '購入実行CTAなし', premium: '買い切り / 月額なし' },
+  { id: 'fetch', label: 'URLからの台本取得', free: '利用可否を確認中', premium: '具体的な利用条件は公開前確認中' },
+  { id: 'ai-script', label: 'AI台本案（任意）', free: '利用可否を確認中', premium: '具体的な利用条件は公開前確認中' },
+  { id: 'editor', label: '台本編集', free: '公開条件確認中', premium: '自分の制作ルールで継続利用' },
+  { id: 'preset', label: 'プリセット', free: '公開条件確認中', premium: '制作ルールを保存して継続利用' },
+  { id: 'materials', label: '素材ボード', free: '公開条件確認中', premium: '継続制作の素材確認に利用' },
+  { id: 'save', label: 'プロジェクト保存', free: '公開条件確認中', premium: '保存条件を確認して継続利用' },
+  { id: 'handoff', label: 'YMM4前準備', free: '公開条件確認中', premium: '継続利用条件を確認中' },
+  { id: 'account', label: '権限確認', free: '公開条件確認中', premium: '購入後の権限反映を確認' },
+  { id: 'updates', label: 'アップデート', free: '直接取得CTAは未表示', premium: '公開配布版を利用' },
   { id: 'support', label: 'サポート', free: homeFacts.supportSla, premium: homeFacts.supportSla },
 ]
 
 export const purchaseConditionRows = [
   { label: '利用可能PC台数', value: '公開条件の確定待ちです。確定するまで購入実行CTAは出しません。' },
   { label: 'PC変更・再認証', value: '公開条件の確定待ちです。確定後に料金ページへ反映します。' },
-  { label: 'FreeのURL取得・AI台本案・保存上限', value: '公開UI・料金・法務が一致するまで断定しません。' },
+  { label: '公開配布・試用可否', value: '公開UI・料金・法務が一致するまで無料版や試用可とは表示しません。' },
   { label: 'Premiumの上限・公正利用条件', value: '公開条件の確定待ちです。未確認のまま強い表現は使いません。' },
   { label: '返金条件', value: homeFacts.refundSummary },
   { label: 'サポート', value: `${homeFacts.supportHours} / ${homeFacts.supportSla}` },
@@ -394,9 +394,9 @@ export const downloadTrustItems = [
 export const homeFaqs = [
   {
     id: 'free',
-    question: 'Free版では何ができますか？',
+    question: '無料版はありますか？',
     answer:
-      'Free版では、起動、ログイン、台本編集、素材確認、YMM4前準備までの流れを確認できます。URL取得、AI台本案、保存などの上限は、アプリ内表示または購入前案内で確認してください。',
+      '現時点で無料版として案内できる公開版は用意していません。配布可否、試用可否、利用条件が確定するまで、無料版とは表示しません。',
   },
   {
     id: 'premium',

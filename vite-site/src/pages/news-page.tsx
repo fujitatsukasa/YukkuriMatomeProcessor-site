@@ -12,13 +12,13 @@ const newsActionRoutes = [
   {
     label: '更新確認',
     title: '最新版と更新前チェックを見る',
-    body: '配布ファイル、SHA256、更新後に少数URLで確認する流れを見ます。',
+    body: '配布ファイル、SHA256、更新後に確認する手順を見ます。',
     href: '/update/',
     Icon: RefreshCw,
   },
   {
     label: '導入',
-    title: '配布条件を確認してFree版を試す',
+    title: '配布条件と確認手順を見る',
     body: '配布条件、ファイル情報、初回起動の確認へ進みます。',
     href: '/download/',
     Icon: Download,
@@ -33,7 +33,7 @@ const newsActionRoutes = [
   {
     label: '実画面',
     title: '画面とサンプルで確認する',
-    body: '実アプリ画面とBefore/Afterで変更後の流れを確認します。',
+    body: '実アプリ画面とBefore/Afterで変更後の手順を確認します。',
     href: '/samples/',
     Icon: Monitor,
   },
@@ -82,7 +82,7 @@ export function NewsPage() {
                 <Link to="/instructions/">使い方</Link>
                 <Link to="/samples/">実画面・サンプル</Link>
                 <Link to="/faq/">FAQ</Link>
-                <Link to="/download/">Free版を試す</Link>
+                <Link to="/download/">配布条件を確認</Link>
               </div>
             </div>
 

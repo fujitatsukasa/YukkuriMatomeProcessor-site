@@ -207,7 +207,7 @@ export const decisionRecords: DecisionRecord[] = [
   },
   {
     id: 'D2',
-    title: 'Free機能、上限、単位、周期、上限到達時挙動',
+    title: '公開配布・試用可否、上限、単位、周期、上限到達時挙動',
     status: 'pending',
     decision: null,
     owner: '事業責任者',
@@ -393,11 +393,11 @@ export const decisionAnswerRequirements = [
   },
   {
     id: 'D2',
-    question: 'Freeで使える機能、上限、単位、周期、上限到達時の挙動は何か。',
-    requiredFields: [...requiredDecisionMetadata, 'Free機能', '上限値', '上限単位', 'リセット周期', '上限到達時挙動', 'ログイン要否'],
-    evidenceTypes: ['アプリ内Free表示', 'API/利用枠の実装根拠', '上限到達時の画面またはログ'],
+    question: '公開配布や試用を行うか、行う場合の機能、上限、単位、周期、上限到達時の挙動は何か。',
+    requiredFields: [...requiredDecisionMetadata, '公開配布・試用可否', '対象機能', '上限値', '上限単位', 'リセット周期', '上限到達時挙動', 'ログイン要否'],
+    evidenceTypes: ['アプリ内表示', 'API/利用枠の実装根拠', '上限到達時の画面またはログ'],
     approvalRoles: ['事業責任者', 'アプリ・リリース責任者'],
-    publicCopyRule: 'Freeの確認範囲を断定する場合は、上限値と到達時挙動も同時に表示する。',
+    publicCopyRule: '公開配布や試用の可否を未確定のまま、無料版・0円プランとして表示しない。',
     blocks: ['purchaseReady', 'publishReady'],
   },
   {
@@ -764,8 +764,8 @@ const purchaseCriteria: GateCriterion[] = [
     sourceRefs: [refs.legalData],
   },
   {
-    id: 'free-premium-rights',
-    label: 'Free/Premiumの権利差、上限、公正利用条件',
+    id: 'distribution-premium-rights',
+    label: '公開配布・試用可否とPremiumの権利差、上限、公正利用条件',
     satisfied: decisionIsConfirmed('D2') && decisionIsConfirmed('D3'),
     blockingDecisionIds: ['D2', 'D3'],
     sourceRefs: [refs.hundredPointDefinition],
@@ -870,7 +870,7 @@ const publishCriteria: GateCriterion[] = [
 export const productFacts = {
   ...baseFacts,
   purchaseReady: deriveGate('purchaseReady', 'Premium購入ゲート', purchaseCriteria),
-  downloadReady: deriveGate('downloadReady', 'Free配布ゲート', downloadCriteria),
+  downloadReady: deriveGate('downloadReady', '公開配布ゲート', downloadCriteria),
   publishReady: deriveGate('publishReady', 'LP公開ゲート', publishCriteria),
 } as const
 

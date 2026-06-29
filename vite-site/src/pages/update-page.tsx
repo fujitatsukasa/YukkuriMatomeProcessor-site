@@ -284,7 +284,7 @@ export function UpdatePage() {
               </div>
 
               <div className="utility-link-row">
-                <a href={downloadUrl}>Free版を試す</a>
+                <a href={downloadUrl}>配布条件を確認</a>
                 {downloadReady ? (
                   <>
                     <a href={publicDistribution.releaseNotesUrl} target="_blank" rel="noopener noreferrer">
@@ -344,7 +344,7 @@ export function UpdatePage() {
                     </a>
                   )}
                   <a className="brand-btn brand-btn--primary" href={downloadUrl}>
-                    Free版を試す
+                    配布条件を確認
                   </a>
                 </div>
               </InteractiveCard>

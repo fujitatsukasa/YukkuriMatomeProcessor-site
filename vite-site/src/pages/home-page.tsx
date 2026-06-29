@@ -50,7 +50,7 @@ type CtaLocation =
   | 'hero'
   | 'workflow'
   | 'free_section'
-  | 'pricing_free'
+  | 'pricing_distribution'
   | 'pricing_premium'
   | 'mobile_sticky'
   | 'final'
@@ -97,14 +97,7 @@ const softwareApplicationLd = {
   downloadUrl: `${homeFacts.siteOrigin}${homeFacts.downloadUrl}`,
   image: `${homeFacts.siteOrigin}${homeAssets.hero}`,
   description: metaDescription,
-  offers: [
-    {
-      '@type': 'Offer',
-      name: 'Free',
-      price: '0',
-      priceCurrency: homeFacts.currency,
-      url: `${homeFacts.siteOrigin}/download/`,
-    },
+    offers: [
     {
       '@type': 'Offer',
       name: 'Premium',
@@ -582,7 +575,7 @@ function MobileStickyCta() {
       'home-hero-primary-cta',
       'home-workflow-primary-cta',
       'home-free-primary-cta',
-      'home-pricing-free-cta',
+      'home-pricing-distribution-cta',
       'home-pricing-premium-cta',
       'home-final-cta',
     ]
@@ -718,7 +711,7 @@ function HomePageContent() {
               <ProductScreenshot
                 image={{
                   src: homeAssets.hero,
-                  alt: '素材集めから台本づくりとYMM4前準備の流れを確認できる実アプリ画面',
+                  alt: '素材集めから台本づくりとYMM4前準備の対応範囲を確認できる実アプリ画面',
                   title: '制作フローを確認する画面',
                   annotations: [
                     { x: 20, y: 19, label: '素材を集める' },
@@ -940,19 +933,19 @@ function HomePageContent() {
         </section>
 
         <section
-          id="free"
+          id="distribution"
           className="home-lp-section home-lp-section--muted"
-          data-chapter="free"
-          aria-labelledby="home-free-heading"
+          data-chapter="distribution"
+          aria-labelledby="home-distribution-heading"
         >
           <div className="home-lp-container home-lp-free__grid">
             <div className="home-lp-free__copy" data-reveal>
-              <p className="home-lp-kicker">TRY FREE</p>
-              <h2 id="home-free-heading">まずFreeで自分の制作手順に合うか確認</h2>
+              <p className="home-lp-kicker">DISTRIBUTION</p>
+              <h2 id="home-distribution-heading">配布条件が揃うまで、無料版とは案内しません</h2>
               <p>
-                いきなり購入する必要はありません。起動から<HomeEm>少数URLでの確認</HomeEm>・
-                <HomeEm tone="aqua">AI台本</HomeEm>・<HomeEm>ボード編集</HomeEm>・
-                <HomeEm tone="aqua">YMM4前準備</HomeEm>まで、自分の環境で流れを見てから判断できます。
+                現時点で<HomeEm>無料版として案内できる公開版</HomeEm>は用意していません。
+                配布候補、署名、SmartScreen、利用条件が揃うまで、
+                <HomeEm tone="aqua">直接取得CTA</HomeEm>は表示しません。
               </p>
               <div className="home-lp-free__actions">
                 <HomeCta
@@ -970,15 +963,15 @@ function HomePageContent() {
             <div className="home-lp-free__panel" data-reveal>
               <ProductScreenshot
                 image={{
-                  src: homeAssets.free,
-                  alt: 'Freeで最初に確認するURL取得入口の画面',
-                  title: 'Freeで確認するURL取得入口',
+                  src: homeAssets.distribution,
+                  alt: '配布条件を確認する前に見る実アプリ画面',
+                  title: '配布前に確認する実アプリ画面',
                   annotations: [],
                 }}
                 onZoom={setLightboxImage}
               />
               <div className="home-lp-free__checks">
-                <h3>Freeで確かめる3つ</h3>
+                <h3>配布前に確認すること</h3>
                 {freeChecks.map((item) => (
                   <div key={item}>
                     <CheckCircle2 size={18} aria-hidden="true" />
@@ -1007,29 +1000,28 @@ function HomePageContent() {
               }
               body={
                 <>
-                  Freeで起動・<HomeEm>台本取得</HomeEm>・<HomeEm tone="aqua">AI台本</HomeEm>・
-                  <HomeEm>編集ボード</HomeEm>・<HomeEm tone="aqua">YMM4前準備</HomeEm>の流れを確認。
-                  継続制作で必要になったらPremiumへ。<HomeEm tone="white">確定済みの条件</HomeEm>と
+                  現時点で無料版として案内できる公開版はありません。
+                  継続制作でPremiumを検討する前に、<HomeEm tone="white">確定済みの条件</HomeEm>と
                   購入前に確認すべき条件を分けて表示します。
                 </>
               }
               align="center"
             />
 
-            <div className="home-lp-plan-grid" aria-label="FreeとPremiumの概要">
+            <div className="home-lp-plan-grid" aria-label="配布状況とPremiumの概要">
               <article className="home-lp-plan-card" data-reveal>
-                <span>まず制作フローを確認</span>
-                <h3>Free</h3>
-                <strong>0円</strong>
+                <span>公開前の確認項目</span>
+                <h3>配布確認</h3>
+                <strong>確認中</strong>
                 <p>
-                  自分のWindowsとYMM4環境で<HomeEm>台本取得</HomeEm>・
-                  <HomeEm tone="aqua">AI台本</HomeEm>・編集ボード・YMM4前準備の流れを確認するための無料版です。
+                  無料版として案内できる公開版はまだ用意していません。
+                  配布条件、試用可否、利用範囲が確定するまで断定しません。
                 </p>
                 <HomeCta
-                  id="home-pricing-free-cta"
+                  id="home-pricing-distribution-cta"
                   href={homeFacts.downloadUrl}
                   label={primaryCtaLabel}
-                  location="pricing_free"
+                  location="pricing_distribution"
                 >
                   <Download size={18} aria-hidden="true" />
                   {primaryCtaLabel}
@@ -1040,7 +1032,7 @@ function HomePageContent() {
                 <h3>Premium</h3>
                 <strong>{homeFacts.premiumPrice}</strong>
                 <p>
-                  Free版で流れを確認し、継続的に<HomeEm>台本取得</HomeEm>・
+                  公開済み条件を確認し、継続的に<HomeEm>台本取得</HomeEm>・
                   <HomeEm tone="aqua">AI台本</HomeEm>・ボード編集・YMM4前準備を使いたいと分かった段階で検討してください。
                 </p>
                 <HomeCta
@@ -1059,19 +1051,19 @@ function HomePageContent() {
             <div className="home-lp-comparison" data-reveal>
               <div className="home-lp-comparison__head">
                 <MonitorPlay size={18} aria-hidden="true" />
-                <h3>Free / Premium 料金比較</h3>
+                <h3>配布確認 / Premium 条件比較</h3>
               </div>
               <div className="home-lp-comparison__table">
                 <div className="home-lp-comparison__row home-lp-comparison__row--head">
                   <span>項目</span>
-                  <span>Free</span>
+                  <span>配布確認</span>
                   <span>Premium</span>
                 </div>
                 {comparisonRows.map((row) => (
                   <div className="home-lp-comparison__row" key={row.id}>
                     <strong>{row.label}</strong>
                     <span>
-                      <em className="home-lp-comparison__mobile-label">Free</em>
+                      <em className="home-lp-comparison__mobile-label">配布確認</em>
                       {row.free}
                     </span>
                     <span>
@@ -1216,7 +1208,7 @@ function HomePageContent() {
               }
               body={
                 <>
-                  <HomeEm>Freeで何ができるか</HomeEm>・Premiumで何が変わるか・
+                  <HomeEm>無料版の有無</HomeEm>・Premiumで何が変わるか・
                   <HomeEm tone="aqua">YMM4が必要か</HomeEm>を短く確認できます。
                 </>
               }
@@ -1258,8 +1250,8 @@ function HomePageContent() {
               <p className="home-lp-kicker">NEXT VIDEO</p>
               <h2 id="home-final-heading">素材を集めて台本を作りYMM4前準備へ</h2>
               <p>
-                Freeで記事・スレッドまたは下書きから<HomeEm tone="aqua">AI台本</HomeEm>・
-                <HomeEm>編集ボード</HomeEm>・YMM4前準備までの流れを確かめてください。
+                記事・スレッドまたは下書きから<HomeEm tone="aqua">AI台本</HomeEm>・
+                <HomeEm>編集ボード</HomeEm>・YMM4前準備まで、本製品の対応範囲を確認してください。
               </p>
               <span>{heroContent.microcopy}</span>
             </div>
@@ -1289,7 +1281,7 @@ export function HomePage() {
       <PageMeta
         title="ゆっくりまとめプロセッサー｜素材集め・台本づくり・YMM4前準備を支援"
         description={metaDescription}
-        keywords="ゆっくりまとめプロセッサー,YMM4,台本取得,AI台本,編集ボード,YMM4前準備,CSV,.ymmp,記事URL,スレッドURL,反応集,解説動画,ショート動画,Windows,Free,Premium"
+        keywords="ゆっくりまとめプロセッサー,YMM4,台本取得,AI台本,編集ボード,YMM4前準備,CSV,.ymmp,記事URL,スレッドURL,反応集,解説動画,ショート動画,Windows,Premium"
         image={homeAssets.hero}
         path="/"
         structuredData={[softwareApplicationLd, faqPageLd]}

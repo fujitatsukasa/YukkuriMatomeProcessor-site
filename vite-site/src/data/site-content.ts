@@ -82,7 +82,7 @@ export const navItems: NavItem[] = [
 ]
 
 export const primaryCta: ActionItem = {
-  label: 'Free版を試す',
+  label: '配布条件を確認',
   href: '/download/',
   variant: 'primary',
 }
@@ -113,11 +113,10 @@ export const legal = {
   ],
   pricing: {
     plans: [
-      { name: 'Free', price: '¥0', priceTax: '無料', term: '0円のFree版', description: '起動と基本フローを確認' },
       { name: 'Premium', price: '¥39,800', priceTax: '税込 39,800円', term: '買い切り', description: '購入条件の確定後に案内' },
     ],
     productName: 'ゆっくりまとめプロセッサー',
-    modelLabel: '無料プラン + 39,800円の買い切りライセンス',
+    modelLabel: '39,800円の買い切りライセンス',
     additionalFees: '標準導線では送料・追加手数料なし',
     unitPrice: '39800',
     currency: 'JPY',
@@ -153,7 +152,7 @@ export const legal = {
   },
   cancellation: {
     subscription:
-      'Premium は買い切りのため解約予約や自動更新はありません。返金が成立した場合は Premium 権限を停止し、Free 状態へ戻ります。',
+      'Premium は買い切りのため解約予約や自動更新はありません。返金が成立した場合は Premium 権限を停止します。',
   },
   support: {
     operationHours: '平日 10:00-18:00（土日祝・年末年始を除く）',
@@ -244,14 +243,9 @@ export const faqGroups: FaqGroup[] = [
           '完成・投稿まで自動で進めるツールではありません。台本下地、話者、素材確認などを整え、音声、字幕、間合い、演出、権利確認、投稿判断はYMM4と利用者側で行います。',
       },
       {
-        question: '無料で試せますか？',
+        question: '無料版はありますか？',
         answer:
-          'はい。Freeプランで起動、初期設定、台本編集、素材確認、YMM4で仕上げる前準備の流れを確認できます。',
-      },
-      {
-        question: '無料版では何ができますか？',
-        answer:
-          'Freeプランでは、起動、初期設定、台本編集、素材確認、YMM4前準備の流れを確認できます。具体的な利用上限は公開条件が確定するまで断定しません。',
+          '現時点で、無料版として案内できる公開版は用意していません。配布可否、試用可否、利用条件が確定するまで、無料版とは表示しません。',
       },
       { question: '想定ユーザーは誰ですか？', answer: 'YMM4で反応集、解説、ショート、まとめ、ゆっくり動画を作る個人・チームを想定しています。' },
       {
@@ -315,7 +309,7 @@ export const faqGroups: FaqGroup[] = [
     id: 'faq-purchase',
     label: '購入・契約',
     items: [
-      { question: '料金プランはどう分かれていますか？', answer: 'Free（¥0）と Premium（買い切り39,800円）の2つです。まずはFreeで起動、台本編集、素材確認、YMM4前準備の流れを確認してください。' },
+      { question: '料金プランはどう分かれていますか？', answer: '現時点で外向きに案内できる価格は、Premiumの買い切り39,800円です。無料版は用意していません。' },
       { question: '月額料金はありますか？', answer: 'いいえ。Premiumは39,800円税込の買い切りで、月額自動更新はありません。' },
       { question: '購入申し込みはどのように進めますか？', answer: 'アプリ内の購入画面から Stripe Checkout を開き、買い切りライセンスを一度払いで購入します。' },
       { question: '購入後の権限はどう反映されますか？', answer: '決済完了後、Googleログインに紐づく課金状態と利用枠を同期します。現在、公開LPでは具体的な上限値を未確定値として扱っています。' },

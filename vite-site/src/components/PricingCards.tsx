@@ -25,20 +25,20 @@ type PricingPlan = {
 const pricingPlans: PricingPlan[] = [
   {
     key: 'free',
-    name: 'Free',
-    eyebrow: '初回導入の入口',
-    price: '¥0',
-    term: '0円のFree版',
-    bestFor: 'まず手元のURLで使えるか見たい',
-    summary: '起動、基本編集、素材確認、YMM4で仕上げる前準備までを見て、続けて使えそうか確かめる入口プランです。',
-    note: '初回導入や動作確認、無料での試運転に最適',
+    name: '配布確認',
+    eyebrow: '公開前の確認項目',
+    price: '確認中',
+    term: '直接取得CTAは未表示',
+    bestFor: '配布可否と導入条件を先に確認したい',
+    summary: '無料版として案内できる公開版はまだ用意していません。配布条件、署名、SmartScreen、利用条件が揃うまで直接取得CTAは表示しません。',
+    note: '無料版として案内せず、配布条件を確認する段階です。',
     badge: null,
     features: [
-      { label: '対応サイトからの台本取得を試用', active: true },
-      { label: '基本編集とYMM4前準備の確認', active: true },
-      { label: 'デフォルトプリセットで編集開始', active: true },
-      { label: '内蔵操作ガイド', active: true },
-      { label: '導入前の動作検証', active: true },
+      { label: '配布候補のファイル情報を確認', active: true },
+      { label: '署名・SmartScreenの確認待ち', active: true },
+      { label: '動作環境とYMM4前提を確認', active: true },
+      { label: '公開前の利用条件を確認', active: true },
+      { label: '直接ダウンロードは未表示', active: true },
       { label: '公開前確認中のPremium条件', active: false },
     ],
   },
@@ -48,12 +48,12 @@ const pricingPlans: PricingPlan[] = [
     eyebrow: '買い切り / 条件確認中',
     price: '¥39,800',
     term: '買い切り / 税込',
-    bestFor: 'Freeで流れを確認し、公開済み条件を見てから買い切りを判断したい',
+    bestFor: '公開済み条件を見てから買い切りを判断したい',
     summary: 'Premiumは月額なしの買い切りです。具体的な利用枠、PC台数、更新範囲は公開条件の確定後に案内します。',
     note: '未確認の条件を強く売らないため、購入実行は条件確定後に案内',
     badge: '買い切り',
     features: [
-      { label: 'Freeプランの全機能', active: true },
+      { label: '公開済み条件に基づく利用', active: true },
       { label: 'CSV/.ymmpとフォーマット管理', active: true, emphasis: true },
       { label: '具体的なURL取得条件は確認中', active: true, emphasis: true },
       { label: 'AI台本案の利用条件は確認中', active: true, emphasis: true },
@@ -68,23 +68,23 @@ const pricingPlans: PricingPlan[] = [
 const comparisonRows = [
   {
     label: '導入フェーズ',
-    values: ['まず動作確認', '購入条件の確認後に案内'],
+    values: ['配布条件を確認', '購入条件の確認後に案内'],
   },
   {
     label: '主な強み',
-    values: ['手元のURLで確認', '買い切りで Premium 権限を保持'],
+    values: ['直接取得CTAは未表示', '買い切りで Premium 権限を保持'],
   },
   {
     label: 'CSV/.ymmp管理',
-    values: ['入口の確認', '継続投稿で本格利用'],
+    values: ['公開条件の確認', '継続投稿で本格利用'],
   },
   {
     label: 'AI補助 / AI台本',
-    values: ['基本確認中心', '具体的な利用条件は確認中'],
+    values: ['利用可否を確認中', '具体的な利用条件は確認中'],
   },
   {
     label: '向いている規模感',
-    values: ['導入検証', '継続利用を検討する人'],
+    values: ['公開前確認', '継続利用を検討する人'],
   },
   {
     label: 'サポート密度',
@@ -102,7 +102,7 @@ export function PricingCards() {
           <strong>Premiumの購入条件は最終確認中です</strong>
           <p>
             39,800円（税込）の買い切り、月額なし、Stripe Checkoutの一度払いは確認済みです。
-            Free/Premiumの具体的な利用枠、PC台数、再認証、更新範囲が揃うまで購入実行CTAは表示しません。
+            配布可否、Premiumの具体的な利用枠、PC台数、再認証、更新範囲が揃うまで購入実行CTAは表示しません。
           </p>
         </div>
       ) : null}
@@ -158,9 +158,9 @@ export function PricingCards() {
         <div className="pricing-comparison-board__head">
           <h3>プラン差分を一目で把握</h3>
           <p>
-            Freeで確認できる範囲と、Premiumで確定待ちの条件を分けて整理しています。
+            公開配布で確認できる範囲と、Premiumで確定待ちの条件を分けて整理しています。
           </p>
-          <span className="pricing-comparison-board__hint">モバイルでも各値にFree / Premiumラベルを表示します。</span>
+          <span className="pricing-comparison-board__hint">モバイルでも各値に配布確認 / Premiumラベルを表示します。</span>
         </div>
 
         <div className="pricing-comparison-table-scroll">
@@ -194,7 +194,7 @@ export function PricingCards() {
         </div>
         <div className="trust-badge-bar__item">
           <CheckCircle2 size={20} color="#4CAF50" />
-          <span>無料プランあり</span>
+          <span>配布条件を確認中</span>
         </div>
         <div className="trust-badge-bar__item">
           <Clock size={20} color="#e0c184" />

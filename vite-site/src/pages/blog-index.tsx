@@ -22,7 +22,7 @@ function estimateReadMinutes(content: string) {
 const blogReadingPaths = [
   {
     title: 'まず作り方の全体像を掴む',
-    body: '記事URLやスレッドURLを、台本下地とYMM4前準備へつなげる流れを確認します。',
+    body: '記事URLやスレッドURLを、台本下地とYMM4前準備へつなげる手順を確認します。',
     href: '/blog/how-to-make-yukkuri-video-automatically/',
     Icon: BookOpen,
   },
@@ -44,7 +44,7 @@ const blogDecisionRoutes = [
   {
     label: '導入前提',
     title: 'Windows / YMM4前提を確認する',
-    body: 'Mac不可、YMM4前提、無料版で試せる範囲など、導入前の不安はFAQで確認します。',
+    body: 'Mac不可、YMM4前提、配布条件で確認する範囲など、導入前の不安はFAQで確認します。',
     href: '/faq/',
   },
   {
@@ -61,8 +61,8 @@ const blogDecisionRoutes = [
   },
   {
     label: '料金確認',
-    title: 'Freeで試してPremiumを確認する',
-    body: '無料で試し、台本取得とAI台本案の公開条件が合う場合だけPremiumを確認します。',
+    title: '配布状況とPremium条件を確認する',
+    body: '公開条件を確認し、台本取得とAI台本案の公開条件が合う場合だけPremiumを確認します。',
     href: '/purchase/',
   },
 ] as const
@@ -70,7 +70,7 @@ const blogDecisionRoutes = [
 const blogReaderChecks = [
   '記事は一般論ではなく、YMM4前準備に関係するものから読む',
   'AI出力や収益化は保証ではなく、確認が必要な下書きとして扱う',
-  '読んだ後は実画面、使い方、Free動作確認で自分の環境に合うか見る',
+  '読んだ後は実画面、使い方、配布条件の確認で自分の環境に合うか見る',
 ] as const
 
 export function BlogIndex() {
@@ -128,7 +128,7 @@ export function BlogIndex() {
     <>
       <PageMeta
         title={`オフィシャルブログ | ${siteTitle}`}
-        description="ゆっくり解説、反応集、YMM4、台本下地、素材・著作権、YMM4前準備に関する公式ブログ。記事を読んだ後に実画面、使い方、無料版で確認できます。"
+        description="ゆっくり解説、反応集、YMM4、台本下地、素材・著作権、YMM4前準備に関する公式ブログ。記事を読んだ後に実画面、使い方、配布条件を確認できます。"
         keywords="ブログ,ゆっくり解説,動画編集,YMM4,YMM4前準備,制作手順"
         path="/blog/"
       />
@@ -237,10 +237,10 @@ export function BlogIndex() {
           <InteractiveCard className="release-panel premium-glass blog-reader-gate">
             <div className="blog-reader-gate__copy">
               <span className="subpage-card__eyebrow">読む目的</span>
-              <h2>記事を読んだら、実画面と無料版で自分の環境に合うか確認する</h2>
+              <h2>記事を読んだら、実画面と配布状況で自分の環境に合うか確認する</h2>
               <p>
                 ブログは検索流入用の記事置き場ではなく、導入前に迷いやすい前提を整理する入口です。
-                最後は実画面、使い方、Free動作確認で判断してください。
+                最後は実画面、使い方、配布条件の確認で判断してください。
               </p>
               <ul>
                 {blogReaderChecks.map((item) => (
@@ -262,7 +262,7 @@ export function BlogIndex() {
 
             <div className="blog-reader-gate__actions">
               <Link className="brand-btn brand-btn--primary" to={downloadUrl}>
-                Free版を試す
+                配布条件を確認
               </Link>
               <Link className="brand-btn brand-btn--ghost" to="/samples/">
                 実画面を見る

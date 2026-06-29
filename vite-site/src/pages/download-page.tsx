@@ -35,7 +35,7 @@ const supportBundle = [
 ] as const
 
 const downloadMetrics = [
-  { value: 'Free', label: '無料で動作確認', detail: '記事URLから台本下地まで試せる' },
+  { value: '確認中', label: '公開配布の可否', detail: '無料版としては案内しない' },
   { value: '6手順', label: '最初に触る順番', detail: '解凍 -> 起動 -> 設定 -> URL入力 -> 出力確認' },
   { value: 'YMM4', label: '後工程の手戻りを削減', detail: '保存先、CSV、連携パスの整合を先に揃える' },
 ] as const
@@ -63,7 +63,7 @@ const instructionPrepCards = [
   },
   {
     label: '入力',
-    title: '試すURLを1から3件',
+    title: '確認するURLを1から3件',
     body: '最初は大量取得せず、対応していそうな記事URL・スレッドURLを少数だけ入れて候補一覧を確認します。',
     check: '候補タイトルとURLが並ぶ',
     Icon: FileSearch,
@@ -118,7 +118,7 @@ const instructionFeatureGoalMap = [
   {
     step: '02',
     title: 'URL取得',
-    goal: '記事URL・スレッドURLを少数で試す',
+    goal: '記事URL・スレッドURLを少数で確認する',
     success: '候補一覧にタイトル、URL、サムネイルが並ぶ',
     image: '/product_get_script.webp',
     alt: '記事URLから候補一覧を取得する実アプリ画面',
@@ -168,7 +168,7 @@ const instructionFeatureGoalMap = [
 ] as const
 
 const completionChecks = [
-  'Freeプランで一連の流れを試した',
+  '配布可否と公開条件を確認した',
   '対象URLの取得可否を少数件で確認した',
   '台本下地をそのまま使わず内容確認した',
   'CSV/.ymmp前準備の保存先を確認した',
@@ -214,7 +214,7 @@ const completionGateItems = [
   },
   {
     id: 'decision',
-    title: 'Freeで足りるか判断した',
+    title: '購入しない段階か判断した',
     body: 'Premiumが必要な場合だけ検討し、購入前に料金と返金条件を確認した。',
     href: '/purchase/',
   },
@@ -768,7 +768,7 @@ const downloadScenes: readonly GuideScene[] = [
     key: 'collect',
     eyebrow: '手順2',
     title: '対応サイトから記事とスレッドを取得する',
-    body: 'まずは少ない件数で、記事取得 -> 候補選択 -> 台本化の流れを一度通して、手元の題材で続けられるか確認します。',
+    body: 'まずは少ない件数で、記事取得、候補選択、台本化の手順を確認し、手元の題材で続けられるか見ます。',
     image: '/product_get_script.webp',
     alt: '対応サイトから記事候補を取得する画面',
     checkpoint: 'URL から台本取得までの入口が通る',
@@ -779,7 +779,7 @@ const downloadScenes: readonly GuideScene[] = [
     key: 'shape',
     eyebrow: '手順3',
     title: '台本整形と AI 補助の使いどころを掴む',
-    body: '取得した台本をそのまま流さず、改行補助、感情分析、役割整理で「使える下書き」に寄せる流れを確認します。',
+    body: '取得した台本をそのまま使わず、改行補助、感情分析、役割整理で「使える下書き」に寄せる手順を確認します。',
     image: '/product_edit_script.webp',
     alt: '台本整形と編集の画面',
     checkpoint: 'AI 補助をどこで入れるか判断できる',
@@ -911,7 +911,7 @@ function InstructionCompletionChecklist() {
           </span>
           <h2>この8項目が埋まったら、YMM4側の編集へ進めます</h2>
           <p>
-            Freeで触る段階でも、ここまで確認できれば「使ってできる」状態です。
+            公開配布後に触る段階では、ここまで確認できれば「使ってできる」状態です。
             途中で止まった項目は、右端のリンクから該当手順へ戻れます。
           </p>
         </div>
@@ -965,7 +965,7 @@ export function DownloadPage() {
   return (
     <>
       <PageMeta
-        title="ダウンロード｜配布条件とFree版の確認"
+        title="ダウンロード｜配布条件と公開状況の確認"
         description="ゆっくりまとめプロセッサーの配布条件、ファイル名、サイズ、SHA256、初回起動、YMM4パス設定、導入完了判定を確認できます。"
         keywords="ダウンロード, Windows, YMM4, 台本取得, CSV, .ymmp, ゆっくりまとめプロセッサー"
         path="/download/"
@@ -974,8 +974,8 @@ export function DownloadPage() {
       <main className="brand-shell">
         <PageIntro
           kicker="ダウンロード"
-          title="配布条件を確認してFree版を試す"
-          lead="Windows環境で、記事URLから台本下地とYMM4前準備まで試せます"
+          title="配布条件と公開状況を確認する"
+          lead="Windows環境で使う前に、配布候補、署名、直接取得CTAの有無、YMM4前提を確認します"
           actions={[
             { label: '配布情報を見る', href: '#distribution-files', variant: 'primary' },
             { label: '使い方を見る', href: '/instructions/', variant: 'ghost' },
@@ -1120,7 +1120,7 @@ export function DownloadPage() {
 
         <Section alt>
           <GuideSceneSwitcher
-            title="導入の流れ"
+            title="導入手順"
             lead="解凍して起動し、YMM4パスを設定してからURLを入力する"
             scenes={downloadScenes}
             ariaLabel="ダウンロード後の確認手順"
@@ -1187,7 +1187,7 @@ export function InstructionsPage() {
           title="記事URLから台本を取得し、YMM4に渡すまでの手順"
           lead="ダウンロード、解凍、起動、YMM4パス設定、URL入力、台本整理、CSV/.ymmp前準備、YMM4確認の順に進めます"
           actions={[
-            { label: 'Free版を試す', href: downloadUrl, variant: 'primary' },
+            { label: '配布条件を確認', href: downloadUrl, variant: 'primary' },
             { label: 'FAQを見る', href: '/faq/', variant: 'ghost' },
           ]}
           flowLinks={[
@@ -1256,7 +1256,7 @@ export function InstructionsPage() {
               </p>
             </div>
 
-            <div className="instruction-practice-path__grid" aria-label="初回30分で確認する流れ">
+            <div className="instruction-practice-path__grid" aria-label="初回30分で確認する手順">
               {instructionPracticePath.map((item) => {
                 const PracticeIcon = item.Icon
                 return (

@@ -6,27 +6,27 @@ const primaryPages = [
   {
     path: '/',
     heading: '素材集めから台本づくりYMM4前準備までひとつの制作フローに',
-    ctas: ['Free版で流れを見る'],
+    ctas: ['配布条件を確認'],
   },
   {
     path: '/download/',
-    heading: '配布条件を確認してFree版を試す',
+    heading: '配布条件と公開状況を確認する',
     ctas: ['配布情報を見る', '使い方を見る'],
   },
   {
     path: '/instructions/',
     heading: '記事URLから台本を取得し、YMM4に渡すまでの手順',
-    ctas: ['Free版を試す', 'FAQを見る'],
+    ctas: ['配布条件を確認', 'FAQを見る'],
   },
   {
     path: '/samples/',
-    heading: '実アプリ画面と動画サンプルで、使う前の流れを確認する',
-    ctas: ['Free版を試す', '使い方を見る'],
+    heading: '実アプリ画面と動画サンプルで、使う前の対応範囲を確認する',
+    ctas: ['配布条件を確認', '使い方を見る'],
   },
   {
     path: '/purchase/',
-    heading: '料金プラン｜Freeで試して、Premium条件を確認',
-    ctas: ['プラン比較を見る', 'Free版を試す'],
+    heading: '料金プラン｜Premium条件と配布状況を確認',
+    ctas: ['プラン比較を見る', '配布条件を確認'],
   },
   {
     path: '/faq/',
@@ -36,7 +36,7 @@ const primaryPages = [
   {
     path: '/update/',
     heading: '配布候補の確認と更新前チェック',
-    ctas: ['Free版を試す'],
+    ctas: ['配布条件を確認'],
   },
 ]
 

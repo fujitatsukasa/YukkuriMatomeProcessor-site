@@ -217,7 +217,7 @@ export function SiteLayout() {
   const customPrimaryCta = useMemo(
     () =>
       isHome
-        ? { label: 'Free版を試す', href: downloadUrl, variant: 'primary' as const }
+        ? { label: '配布条件を確認', href: downloadUrl, variant: 'primary' as const }
         : primaryCta,
     [isHome],
   )
@@ -365,7 +365,7 @@ export function SiteLayout() {
             <section>
               <h3>クイックリンク</h3>
               <ul>
-                <li><Link to="/download/">Free版を試す</Link></li>
+                <li><Link to="/download/">配布条件を確認</Link></li>
                 <li><Link to="/samples/">実画面・サンプル</Link></li>
                 <li><Link to="/purchase/">料金を確認</Link></li>
                 <li><Link to="/news/">最新のお知らせ</Link></li>

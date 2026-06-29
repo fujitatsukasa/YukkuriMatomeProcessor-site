@@ -94,7 +94,7 @@ const sampleDecisionCards = [
     Icon: Sparkles,
   },
   {
-    title: 'Freeで動作確認',
+    title: '配布条件を確認',
     body: '見た後は少数URLで、候補取得、保存先、CSV/.ymmp前準備まで実際に通します。',
     link: '/download/',
     linkLabel: '配布物を確認',
@@ -222,7 +222,7 @@ export function SamplesPage() {
   return (
     <>
       <PageMeta
-        title="実画面・動画サンプル｜使う前の流れを確認"
+        title="実画面・動画サンプル｜使う前の対応範囲を確認"
         description="ゆっくりまとめプロセッサーの実アプリ画面、URLを貼ってから台本整理、YMM4前準備までのBefore/After、短い動画プレビューを専用ギャラリーで確認できます。"
         keywords="実画面, サンプル, Before After, YMM4, 台本作成, ゆっくりまとめプロセッサー"
         image="/product_edit_script.webp"
@@ -233,10 +233,10 @@ export function SamplesPage() {
       <main className="brand-shell">
         <PageIntro
           kicker="実画面・サンプルギャラリー"
-          title="実アプリ画面と動画サンプルで、使う前の流れを確認する"
-          lead="URLを貼る、台本を直す、CSV/.ymmp前準備まで。実アプリ画面、Before/After、短い動画プレビューで、無料で試す前に流れを確認できます。"
+          title="実アプリ画面と動画サンプルで、使う前の対応範囲を確認する"
+          lead="URLを貼る、台本を直す、CSV/.ymmp前準備まで。実アプリ画面、Before/After、短い動画プレビューで、実画面で対応範囲を確認できます。"
           actions={[
-            { label: 'Free版を試す', href: downloadUrl, variant: 'primary' },
+            { label: '配布条件を確認', href: downloadUrl, variant: 'primary' },
             { label: '使い方を見る', href: '/instructions/', variant: 'ghost' },
           ]}
           flowLinks={[
@@ -251,8 +251,8 @@ export function SamplesPage() {
                 alt="台本編集とYMM4前準備を確認する実アプリ画面"
               />
               <div className="page-visual-card__meta">
-                <strong>実アプリ画面を中心に、操作の流れを確認</strong>
-                <span>まず画面で流れを見て、無料版で自分のURLを試してください。</span>
+                <strong>実アプリ画面を中心に、操作手順を確認</strong>
+                <span>まず画面で対応範囲を見て、公開条件が揃ってから自分のURLで確認してください。</span>
               </div>
             </InteractiveCard>
           }
@@ -538,16 +538,16 @@ export function SamplesPage() {
           <InteractiveCard className="sample-final-cta premium-glass">
             <div>
               <span className="subpage-card__eyebrow">次にやること</span>
-              <h2>自分のURLで、実画面と同じ流れを確認する</h2>
+              <h2>自分のURLで、実画面と同じ手順を確認する</h2>
               <p>
-                まずはFreeで起動し、URL取得、台本整理、YMM4前準備まで進めてください。
+                まずは配布条件を確認し、公開後にURL取得、台本整理、YMM4前準備まで進めてください。
                 Premiumが必要かは、実際の制作手順に合うと分かってから確認できます。
               </p>
             </div>
             <div className="subpage-support-callout__actions">
               <Link className="brand-btn brand-btn--primary" to={downloadUrl}>
                 <Download size={18} />
-                Free版を試す
+                配布条件を確認
               </Link>
               <Link className="brand-btn brand-btn--ghost" to="/download/">
                 <FileText size={18} />
