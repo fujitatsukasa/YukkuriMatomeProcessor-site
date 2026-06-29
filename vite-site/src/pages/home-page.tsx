@@ -65,7 +65,7 @@ type LightboxImage = {
 const primaryCtaLabel = heroContent.primaryCta
 
 const metaDescription =
-  '記事、掲示板、スレッド、外部素材から候補を集め、AI台本案、編集ボード、テンプレート運用、YMM4連携へつなげるWindows向け制作支援アプリです。'
+  '記事、掲示板、スレッド、外部素材から候補を集め、AI台本案を確認し、編集ボードで整理してYMM4連携へつなげるWindows向け制作支援アプリです。'
 
 const visibleHomeFaqs = homeFaqs.slice(0, 10)
 
@@ -688,10 +688,15 @@ function HomePageContent() {
                 <span>ひとつの制作フローに</span>
               </h1>
               <p className="home-lp-hero__lead">
-                <HomeEm>記事・掲示板・スレッド・外部素材</HomeEm>から候補を集めて
-                <HomeEm tone="aqua">AI台本案</HomeEm>を確認。ボードで
-                <HomeEm>セリフ・素材・字幕まわり</HomeEm>を整理。Project.json / YMMP /
-                <HomeEm tone="aqua">YMM4連携</HomeEm>へつなげるWindows向けの制作支援アプリです。
+                <span className="home-lp-hero__lead-line">
+                  <HomeEm>記事・掲示板・スレッド・外部素材</HomeEm>から候補を集め、<HomeEm tone="aqua">AI台本案</HomeEm>を確認します。
+                </span>
+                <span className="home-lp-hero__lead-line">
+                  ボードで<HomeEm>セリフ・素材・字幕まわり</HomeEm>を整理し、Project.json / YMMP / <HomeEm tone="aqua">YMM4連携</HomeEm>へつなげます。
+                </span>
+                <span className="home-lp-hero__lead-line">
+                  YMM4を開く前の準備を支える、Windows向けの制作支援アプリです。
+                </span>
               </p>
               <div className="home-lp-hero__actions">
                 <HomeCta
@@ -798,9 +803,15 @@ function HomePageContent() {
               }
               body={
                 <>
-                  <HomeEm>URLから候補を見る</HomeEm>。<HomeEm tone="aqua">AI台本案を確認する</HomeEm>。
-                  <HomeEm>ボードでセリフ・画像・音声・字幕・立ち絵・効果を整理する</HomeEm>。
-                  <HomeEm tone="white">YMM4向け出力後の品質</HomeEm>はYMM4と利用者側で確認します。
+                  <span className="home-lp-copy-line">
+                    <HomeEm>URLから候補を見て</HomeEm>、<HomeEm tone="aqua">AI台本案を確認します</HomeEm>。
+                  </span>
+                  <span className="home-lp-copy-line">
+                    ボードで<HomeEm>セリフ・画像・音声・字幕・立ち絵・効果</HomeEm>を整理します。
+                  </span>
+                  <span className="home-lp-copy-line">
+                    <HomeEm tone="white">YMM4向け出力後の品質</HomeEm>はYMM4と利用者側で確認します。
+                  </span>
                 </>
               }
             />
@@ -876,9 +887,12 @@ function HomePageContent() {
               }
               body={
                 <>
-                  <HomeEm>反応集・解説・ショート</HomeEm>。それぞれで入力・台本ルール・
-                  <HomeEm tone="aqua">YMM4で仕上げる箇所</HomeEm>が違います。
-                  掲載中の動画は用途説明用のサンプルで、完成品質の証拠としては扱いません。
+                  <span className="home-lp-copy-line">
+                    <HomeEm>反応集・解説・ショート</HomeEm>では、入力・台本ルール・<HomeEm tone="aqua">YMM4で仕上げる箇所</HomeEm>が変わります。
+                  </span>
+                  <span className="home-lp-copy-line">
+                    掲載中の動画は用途説明用のサンプルで、完成品質の証拠としては扱いません。
+                  </span>
                 </>
               }
             />

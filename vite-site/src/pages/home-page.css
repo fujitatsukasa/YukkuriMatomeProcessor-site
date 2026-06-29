@@ -508,6 +508,16 @@
   line-height: 1.78;
 }
 
+.home-lp-hero__lead-line,
+.home-lp-copy-line {
+  display: block;
+}
+
+.home-lp-hero__lead-line + .home-lp-hero__lead-line,
+.home-lp-copy-line + .home-lp-copy-line {
+  margin-top: 0.14em;
+}
+
 .home-lp-hero__actions,
 .home-lp-free__actions,
 .home-lp-final__actions,
