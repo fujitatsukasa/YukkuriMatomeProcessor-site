@@ -64,7 +64,7 @@ type LightboxImage = {
 const primaryCtaLabel = heroContent.primaryCta
 
 const metaDescription =
-  '記事、掲示板、スレッド、外部素材から候補を集め、AI台本案を確認し、編集ボードで整理してYMM4連携へつなげるWindows向け制作支援アプリです。'
+  '記事、掲示板、スレッド、外部素材から候補を集め、AI台本案を確認し、編集ボードで整理してYMM4前準備まで確認できるWindows向け制作支援アプリです。'
 
 const visibleHomeFaqs = homeFaqs.slice(0, 10)
 
@@ -395,7 +395,7 @@ function DemoVideo() {
           </video>
         ) : (
           <button className="home-lp-demo-poster" type="button" onClick={handlePlayClick}>
-            <img src={homeAssets.hero} alt="台本取得からYMM4向け出力までの制作フローポスター" loading="lazy" decoding="async" />
+            <img src={homeAssets.hero} alt="台本取得からYMM4前準備までの制作フローポスター" loading="lazy" decoding="async" />
             <span>
               <Play size={20} aria-hidden="true" />
               制作フローを再生
@@ -482,7 +482,7 @@ function WorkflowStepBody({ step }: { step: (typeof workflowSteps)[number] }) {
 
   return (
     <>
-      台本と素材の配置、保存先、素材パスを確認して<HomeEm tone="aqua">YMM4へ渡します</HomeEm>。
+      台本と素材の配置、保存先、素材パスを確認して<HomeEm tone="aqua">YMM4前準備</HomeEm>を整えます。
       音声、字幕、間、演出、出典、公開前の<HomeEm tone="white">最終確認</HomeEm>はYMM4と利用者側で行います。
     </>
   )
@@ -510,7 +510,7 @@ function ProductFeatureBody({ feature }: { feature: ProductFeature }) {
   return (
     <>
       台本と素材の位置を<HomeEm>ボードで確認</HomeEm>し、保存先や素材パスの行き来を減らします。
-      確認した内容をYMM4へ渡し、最後は<HomeEm tone="aqua">タイミングと演出</HomeEm>をYMM4で調整します。
+      YMM4で仕上げる前に必要な準備を揃え、最後は<HomeEm tone="aqua">タイミングと演出</HomeEm>をYMM4で調整します。
     </>
   )
 }
@@ -683,7 +683,7 @@ function HomePageContent() {
               <p className="home-lp-kicker">{heroContent.kicker}</p>
               <h1 id="home-hero-heading">
                 <span>素材集めから台本づくり</span>
-                <span>YMM4へ渡すところまで</span>
+                <span>YMM4前準備まで</span>
                 <span>ひとつの制作フローに</span>
               </h1>
               <p className="home-lp-hero__lead">
@@ -691,10 +691,10 @@ function HomePageContent() {
                   <HomeEm>記事・掲示板・スレッド・外部素材</HomeEm>から候補を集め、<HomeEm tone="aqua">AI台本案</HomeEm>を確認します。
                 </span>
                 <span className="home-lp-hero__lead-line">
-                  ボードで<HomeEm>セリフ・素材・字幕まわり</HomeEm>を整理し、Project.json / YMMP / <HomeEm tone="aqua">YMM4連携</HomeEm>へつなげます。
+                  ボードで<HomeEm>セリフ・素材・字幕まわり</HomeEm>を整理し、<HomeEm tone="aqua">保存先・素材パス・CSV/.ymmp前準備</HomeEm>を確認します。
                 </span>
                 <span className="home-lp-hero__lead-line">
-                  YMM4を開く前の準備を支える、Windows向けの制作支援アプリです。
+                  YMM4で仕上げる前の準備を支える、Windows向けの制作支援アプリです。
                 </span>
               </p>
               <div className="home-lp-hero__actions">
@@ -718,12 +718,12 @@ function HomePageContent() {
               <ProductScreenshot
                 image={{
                   src: homeAssets.hero,
-                  alt: '素材集めから台本づくりとYMM4へ渡す流れを確認できる実アプリ画面',
+                  alt: '素材集めから台本づくりとYMM4前準備の流れを確認できる実アプリ画面',
                   title: '制作フローを確認する画面',
                   annotations: [
                     { x: 20, y: 19, label: '素材を集める' },
                     { x: 52, y: 24, label: '台本を作る' },
-                    { x: 78, y: 12, label: 'YMM4へ渡す' },
+                    { x: 78, y: 12, label: 'YMM4前準備' },
                   ],
                 }}
                 onZoom={setLightboxImage}
@@ -764,14 +764,14 @@ function HomePageContent() {
               kicker="BEFORE / AFTER"
               title={
                 <>
-                  素材取得から台本化と<HeadingEm>YMM4向け出力</HeadingEm>まで迷子にしない
+                  素材取得から台本化と<HeadingEm>YMM4前準備</HeadingEm>まで迷子にしない
                 </>
               }
               body={
                 <>
                   <HomeEm>本文やコメントの取得</HomeEm>・<HomeEm tone="aqua">AI台本</HomeEm>・
                   キャラ別セリフ・<HomeEm>ボード上の素材確認</HomeEm>・
-                  <HomeEm tone="aqua">YMM4向け出力</HomeEm>を制作フローとして扱います。
+                  <HomeEm tone="aqua">YMM4前準備</HomeEm>を制作フローとして扱います。
                   最後の<HomeEm tone="white">品質確認と公開判断</HomeEm>は利用者が行います。
                 </>
               }
@@ -815,7 +815,7 @@ function HomePageContent() {
                     ボードで<HomeEm>セリフ・画像・音声・字幕・立ち絵・効果</HomeEm>を整理します。
                   </span>
                   <span className="home-lp-copy-line">
-                    <HomeEm tone="white">YMM4向け出力後の品質</HomeEm>はYMM4と利用者側で確認します。
+                    <HomeEm tone="white">仕上げ段階の品質</HomeEm>はYMM4と利用者側で確認します。
                   </span>
                 </>
               }
@@ -952,7 +952,7 @@ function HomePageContent() {
               <p>
                 いきなり購入する必要はありません。起動から<HomeEm>少数URLでの確認</HomeEm>・
                 <HomeEm tone="aqua">AI台本</HomeEm>・<HomeEm>ボード編集</HomeEm>・
-                <HomeEm tone="aqua">YMM4向け出力</HomeEm>まで、自分の環境で流れを見てから判断できます。
+                <HomeEm tone="aqua">YMM4前準備</HomeEm>まで、自分の環境で流れを見てから判断できます。
               </p>
               <div className="home-lp-free__actions">
                 <HomeCta
@@ -1008,7 +1008,7 @@ function HomePageContent() {
               body={
                 <>
                   Freeで起動・<HomeEm>台本取得</HomeEm>・<HomeEm tone="aqua">AI台本</HomeEm>・
-                  <HomeEm>編集ボード</HomeEm>・<HomeEm tone="aqua">YMM4向け出力</HomeEm>の流れを確認。
+                  <HomeEm>編集ボード</HomeEm>・<HomeEm tone="aqua">YMM4前準備</HomeEm>の流れを確認。
                   継続制作で必要になったらPremiumへ。<HomeEm tone="white">確定済みの条件</HomeEm>と
                   購入前に確認すべき条件を分けて表示します。
                 </>
@@ -1023,7 +1023,7 @@ function HomePageContent() {
                 <strong>0円</strong>
                 <p>
                   自分のWindowsとYMM4環境で<HomeEm>台本取得</HomeEm>・
-                  <HomeEm tone="aqua">AI台本</HomeEm>・編集ボード・YMM4向け出力の流れを確認するための無料版です。
+                  <HomeEm tone="aqua">AI台本</HomeEm>・編集ボード・YMM4前準備の流れを確認するための無料版です。
                 </p>
                 <HomeCta
                   id="home-pricing-free-cta"
@@ -1041,7 +1041,7 @@ function HomePageContent() {
                 <strong>{homeFacts.premiumPrice}</strong>
                 <p>
                   Free版で流れを確認し、継続的に<HomeEm>台本取得</HomeEm>・
-                  <HomeEm tone="aqua">AI台本</HomeEm>・ボード編集・YMM4向け出力を使いたいと分かった段階で検討してください。
+                  <HomeEm tone="aqua">AI台本</HomeEm>・ボード編集・YMM4前準備を使いたいと分かった段階で検討してください。
                 </p>
                 <HomeCta
                   id="home-pricing-premium-cta"
@@ -1256,10 +1256,10 @@ function HomePageContent() {
           <div className="home-lp-container home-lp-final__grid">
             <div>
               <p className="home-lp-kicker">NEXT VIDEO</p>
-              <h2 id="home-final-heading">素材を集めて台本を作りYMM4へつなぐ</h2>
+              <h2 id="home-final-heading">素材を集めて台本を作りYMM4前準備へ</h2>
               <p>
                 Freeで記事・スレッドまたは下書きから<HomeEm tone="aqua">AI台本</HomeEm>・
-                <HomeEm>編集ボード</HomeEm>・YMM4向け出力までの流れを確かめてください。
+                <HomeEm>編集ボード</HomeEm>・YMM4前準備までの流れを確かめてください。
               </p>
               <span>{heroContent.microcopy}</span>
             </div>
@@ -1287,9 +1287,9 @@ export function HomePage() {
   return (
     <>
       <PageMeta
-        title="ゆっくりまとめプロセッサー｜素材集め・台本づくり・YMM4連携を支援"
+        title="ゆっくりまとめプロセッサー｜素材集め・台本づくり・YMM4前準備を支援"
         description={metaDescription}
-        keywords="ゆっくりまとめプロセッサー,YMM4,台本取得,AI台本,編集ボード,YMM4向け出力,記事URL,スレッドURL,反応集,解説動画,ショート動画,Windows,Free,Premium"
+        keywords="ゆっくりまとめプロセッサー,YMM4,台本取得,AI台本,編集ボード,YMM4前準備,CSV,.ymmp,記事URL,スレッドURL,反応集,解説動画,ショート動画,Windows,Free,Premium"
         image={homeAssets.hero}
         path="/"
         structuredData={[softwareApplicationLd, faqPageLd]}
