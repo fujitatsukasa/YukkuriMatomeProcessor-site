@@ -25,7 +25,6 @@ import {
   beforeAfterRows,
   comparisonRows,
   demoTimeline,
-  downloadTrustItems,
   freeChecks,
   heroContent,
   homeAssets,
@@ -475,7 +474,7 @@ function WorkflowStepBody({ step }: { step: (typeof workflowSteps)[number] }) {
   return (
     <>
       台本と素材の配置、保存先、素材パスを確認して<HomeEm tone="aqua">YMM4連携</HomeEm>へ進めます。
-      音声、字幕、間、演出、出典、公開前の<HomeEm tone="white">最終確認</HomeEm>はYMM4と利用者側で行います。
+      YMM4で音声・字幕・間・演出を調整しやすい状態に整えます。
     </>
   )
 }
@@ -722,7 +721,7 @@ function HomePageContent() {
 
             <div className="home-lp-hero__facts" data-reveal>
               <p className="home-lp-hero__microcopy">{heroContent.microcopy}</p>
-              <div className="home-lp-hero__scope" aria-label="本製品とYMM4の役割分担">
+              <div className="home-lp-hero__scope" aria-label="制作支援の要点">
                 <p>{heroContent.productScope}</p>
                 <p>{heroContent.yymm4Scope}</p>
               </div>
@@ -761,7 +760,7 @@ function HomePageContent() {
                   <HomeEm>本文やコメントの取得</HomeEm>・<HomeEm tone="aqua">AI台本</HomeEm>・
                   キャラ別セリフ・<HomeEm>ボード上の素材確認</HomeEm>・
                   <HomeEm tone="aqua">YMM4連携</HomeEm>を制作フローとして扱います。
-                  最後の<HomeEm tone="white">品質確認と公開判断</HomeEm>は利用者が行います。
+                  作業が散らばらないので、YMM4で仕上げる前の見通しが立ちやすくなります。
                 </>
               }
             />
@@ -804,7 +803,7 @@ function HomePageContent() {
                     ボードで<HomeEm>セリフ・画像・音声・字幕・立ち絵・効果</HomeEm>を整理します。
                   </span>
                   <span className="home-lp-copy-line">
-                    <HomeEm tone="white">仕上げ段階の品質</HomeEm>はYMM4と利用者側で確認します。
+                    <HomeEm tone="white">YMM4で仕上げやすい形</HomeEm>まで、制作データをまとめます。
                   </span>
                 </>
               }
@@ -1158,7 +1157,7 @@ function HomePageContent() {
                   </ul>
                 </div>
                 <div>
-                  <h3>利用者 / YMM4</h3>
+                  <h3>YMM4で仕上げる</h3>
                   <ul>
                     {userResponsibilityItems.map((item) => (
                       <li key={item}>
@@ -1169,22 +1168,6 @@ function HomePageContent() {
                   </ul>
                 </div>
               </div>
-            </div>
-
-            <div className="home-lp-download-trust" data-reveal>
-              <div>
-                <p className="home-lp-kicker">DOWNLOAD</p>
-                <h3>ダウンロード前にファイル情報を確認できます</h3>
-                <p>ファイル名、サイズ、SHA-256を確認し、公式サイトから入手してください。</p>
-              </div>
-              <dl>
-                {downloadTrustItems.map((item) => (
-                  <div key={item.label}>
-                    <dt>{item.label}</dt>
-                    <dd>{item.value}</dd>
-                  </div>
-                ))}
-              </dl>
             </div>
 
             <p className="home-lp-trademark-note">

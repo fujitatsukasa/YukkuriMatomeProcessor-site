@@ -1,7 +1,6 @@
 import {
   downloadUrl,
   legal,
-  publicDistribution,
   siteOrigin,
   siteTitle,
 } from '@/data/site-content'
@@ -10,10 +9,6 @@ const premiumPriceNumber = Number(legal.pricing.unitPrice)
 const premiumPrice = `${premiumPriceNumber.toLocaleString('ja-JP')}円（税込）`
 const corporatePriceNumber = Number(legal.pricing.corporateUnitPrice)
 const corporatePrice = `${corporatePriceNumber.toLocaleString('ja-JP')}円（税込）`
-const setupSizeMb = `${(publicDistribution.assets.setup.sizeBytes / 1000 / 1000).toLocaleString('ja-JP', {
-  maximumFractionDigits: 1,
-})} MB`
-
 export const homeFacts = {
   productName: siteTitle,
   siteOrigin,
@@ -36,13 +31,6 @@ export const homeFacts = {
   privacyUrl: '/legal/privacy/',
   commercialTransactionsUrl: '/legal/commercial-transactions/',
   refundUrl: '/legal/refund-policy/',
-  releaseVersion: publicDistribution.versionLabel,
-  releaseDate: publicDistribution.checkedAtLabel,
-  releaseChannel: publicDistribution.channel,
-  setupFileName: publicDistribution.assets.setup.fileName,
-  setupSizeMb,
-  setupSha256: publicDistribution.assets.setup.sha256,
-  trustNote: publicDistribution.trustNote,
   supportHours: legal.support.operationHours,
   supportSla: legal.support.firstResponseSla,
   supportEmail: legal.organization.email,
@@ -71,9 +59,9 @@ export const heroContent = {
   primaryCta: 'ダウンロードを見る',
   secondaryCta: '実画面を確認',
   microcopy: `${homeFacts.osLabel}｜${homeFacts.yymm4Label}｜法人 ${homeFacts.corporatePrice}・Premium ${homeFacts.premiumPrice}｜${homeFacts.monthlyFeeLabel}`,
-  productScope: '本製品で扱う：台本取得 / AI台本 / ボード編集 / テンプレート / YMM4連携',
-  yymm4Scope: '利用者が確認：内容 / 権利 / 同期結果 / 音声・字幕・演出 / 公開判断',
-  trustNote: `法人プランは${homeFacts.corporatePrice}、個人向けPremiumは${homeFacts.premiumPrice}の買い切りです。購入前に返金条件と動作環境を確認してください。`,
+  productScope: 'URL取得・AI台本案・素材ボード・YMM4連携をひとつに整理',
+  yymm4Scope: 'セリフ、素材、字幕まわりを見通しよくまとめて制作時間を削減',
+  trustNote: `法人 ${homeFacts.corporatePrice} / Premium ${homeFacts.premiumPrice} / 買い切り・月額なし`,
 } as const
 
 export const workflowSummary = [
@@ -162,7 +150,7 @@ export const workflowSteps = [
     step: '04',
     title: '素材パスと保存先を確認し、YMM4へ渡す形に整える。',
     body:
-      '台本と素材の配置、保存先、素材パスを確認して、YMM4へ渡す制作データとして整えます。音声、字幕、間、演出、出典、公開前の最終確認はYMM4と利用者側で行います。',
+      '台本と素材の配置、保存先、素材パスを確認して、YMM4で仕上げやすい制作データに整えます。',
     points: ['台本編集', '素材ボード', '素材パス確認', '保存先確認', 'YMM4連携'],
     image: homeAssets.materialBoard,
     alt: '台本行と素材の配置を一覧で確認する素材ボード',
@@ -365,8 +353,8 @@ export const premiumMismatch = [
 export const requirementRows = [
   { label: '対応OS', value: homeFacts.osLabel },
   { label: 'Mac', value: '非対応' },
-  { label: 'YMM4', value: '必須。反映後の仕上げはYMM4で行います。' },
-  { label: 'ファイル情報', value: `${homeFacts.setupFileName} / 約${homeFacts.setupSizeMb}` },
+  { label: 'YMM4', value: '必須。CSV/.ymmpと素材パスを確認しながら連携します。' },
+  { label: '料金', value: `法人 ${homeFacts.corporatePrice} / Premium ${homeFacts.premiumPrice} / 月額なし` },
   { label: 'インターネット', value: 'ログイン、権限同期、URL取得、外部AI連携などで通信を使います。' },
   { label: '対応入力', value: '記事URL、スレッドURL、下書き、テーマ。対応URLはFAQで確認してください。' },
   { label: 'APIキー', value: '外部API連携など一部機能ではAPIキーが必要です。' },
@@ -374,27 +362,19 @@ export const requirementRows = [
 ] as const
 
 export const responsibilityItems = [
-  '本文・コメントの取得支援',
-  '台本取得・生成・編集',
-  '話者・改行・構成等の設定',
-  '素材配置の確認',
-  'YMM4への反映',
+  'URLから素材候補を集める',
+  'AI台本案を作る',
+  'セリフ・素材・字幕まわりを整理',
+  '保存先・素材パスを確認',
+  'YMM4連携用データを作る',
 ] as const
 
 export const userResponsibilityItems = [
-  'AI出力と事実の確認',
-  '引用、出典、素材権利の確認',
-  '音声、字幕、間、立ち絵、演出の最終調整',
-  'MP4出力',
-  '投稿・公開判断',
-] as const
-
-export const downloadTrustItems = [
-  { label: '候補バージョン', value: homeFacts.releaseVersion },
-  { label: '確認日', value: homeFacts.releaseDate },
-  { label: 'チャンネル', value: homeFacts.releaseChannel },
-  { label: 'ファイルサイズ', value: `約${homeFacts.setupSizeMb}` },
-  { label: 'SHA-256', value: homeFacts.setupSha256 },
+  '音声・字幕・間の調整',
+  '立ち絵と演出の仕上げ',
+  '完成動画の書き出し',
+  '投稿前の最終チェック',
+  '自分の動画テンポに合わせる',
 ] as const
 
 export const homeFaqs = [
@@ -414,7 +394,7 @@ export const homeFaqs = [
     id: 'auto-finish',
     question: '動画は自動で完成しますか？',
     answer:
-      '完成・投稿まで自動で進めるアプリではありません。本製品は台本取得、AI台本、ボード編集、テンプレート、YMM4連携を支援します。音声、字幕、間、演出、出典、公開前の確認はYMM4と利用者側で行います。',
+      '完成・投稿まで自動で進めるアプリではありません。台本取得、AI台本案、ボード編集、テンプレート、YMM4連携をまとめて支援します。',
   },
   {
     id: 'ymm4-required',
@@ -455,7 +435,7 @@ export const homeFaqs = [
     id: 'publish',
     question: 'YouTubeなどへ自動投稿されますか？',
     answer:
-      'されません。保存、YMM4反映、MP4出力、投稿・公開は利用者が確認して行います。',
+      '自動投稿機能はありません。作成したデータをYMM4で仕上げてから、通常の投稿手順で公開します。',
   },
   {
     id: 'license',
