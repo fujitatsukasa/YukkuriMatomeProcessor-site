@@ -10,7 +10,7 @@ type PlanFeature = {
 }
 
 type PricingPlan = {
-  key: 'free' | 'premium'
+  key: 'free' | 'premium' | 'corporate'
   name: string
   eyebrow: string
   price: string
@@ -23,6 +23,25 @@ type PricingPlan = {
 }
 
 const pricingPlans: PricingPlan[] = [
+  {
+    key: 'corporate',
+    name: '法人プラン',
+    eyebrow: '法人・チーム向け / 買い切り',
+    price: '¥220,000',
+    term: '買い切り / 税込',
+    bestFor: '法人利用やチーム導入の契約条件を大きく確認したい',
+    summary: '法人プランは220,000円（税込）の買い切りです。PC台数、権限管理、更新・保守範囲、請求書対応などは購入前に確認します。',
+    note: '業務利用はこの法人プランを基準に、導入相談で条件を確認',
+    badge: '法人向け',
+    features: [
+      { label: '法人・チーム利用の契約条件', active: true, emphasis: true },
+      { label: '220,000円（税込）の買い切り', active: true, emphasis: true },
+      { label: 'PC台数・再認証条件は確認中', active: true, emphasis: true },
+      { label: '更新・保守範囲は確認中', active: true, emphasis: true },
+      { label: '請求書・領収書まわりを確認', active: true },
+      { label: '導入前に権利範囲を確認', active: true },
+    ],
+  },
   {
     key: 'free',
     name: '配布確認',
@@ -45,11 +64,11 @@ const pricingPlans: PricingPlan[] = [
   {
     key: 'premium',
     name: 'Premium',
-    eyebrow: '買い切り / 条件確認中',
+    eyebrow: '個人向け / 条件確認中',
     price: '¥39,800',
     term: '買い切り / 税込',
-    bestFor: '公開済み条件を見てから買い切りを判断したい',
-    summary: 'Premiumは月額なしの買い切りです。具体的な利用枠、PC台数、更新範囲は公開条件の確定後に案内します。',
+    bestFor: '個人利用で公開済み条件を見てから買い切りを判断したい',
+    summary: '個人向けPremiumは39,800円（税込）、月額なしの買い切りです。具体的な利用枠、PC台数、更新範囲は公開条件の確定後に案内します。',
     note: '未確認の条件を強く売らないため、購入実行は条件確定後に案内',
     badge: '買い切り',
     features: [
@@ -68,27 +87,27 @@ const pricingPlans: PricingPlan[] = [
 const comparisonRows = [
   {
     label: '導入フェーズ',
-    values: ['配布条件を確認', '購入条件の確認後に案内'],
+    values: ['法人条件の確認後に案内', '配布条件を確認', '個人向け条件の確認後に案内'],
   },
   {
     label: '主な強み',
-    values: ['直接取得CTAは未表示', '買い切りで Premium 権限を保持'],
+    values: ['法人・チーム利用の契約条件を確認', '直接取得CTAは未表示', '買い切りで Premium 権限を保持'],
   },
   {
     label: 'CSV/.ymmp管理',
-    values: ['公開条件の確認', '継続投稿で本格利用'],
+    values: ['業務利用条件として確認', '公開条件の確認', '継続投稿で本格利用'],
   },
   {
     label: 'AI補助 / AI台本',
-    values: ['利用可否を確認中', '具体的な利用条件は確認中'],
+    values: ['法人利用条件として確認', '利用可否を確認中', '具体的な利用条件は確認中'],
   },
   {
     label: '向いている規模感',
-    values: ['公開前確認', '継続利用を検討する人'],
+    values: ['法人・チーム導入', '公開前確認', '個人の継続利用'],
   },
   {
     label: 'サポート密度',
-    values: ['基本案内', '購入者向けサポート'],
+    values: ['導入相談で確認', '基本案内', '購入者向けサポート'],
   },
 ] as const
 
@@ -99,10 +118,10 @@ export function PricingCards() {
     <>
       {!purchaseReady ? (
         <div className="pricing-gate-notice pricing-layer" role="status">
-          <strong>Premiumの購入条件は最終確認中です</strong>
+          <strong>法人プランとPremiumの購入条件は最終確認中です</strong>
           <p>
-            39,800円（税込）の買い切り、月額なし、Stripe Checkoutの一度払いは確認済みです。
-            配布可否、Premiumの具体的な利用枠、PC台数、再認証、更新範囲が揃うまで購入実行CTAは表示しません。
+            法人プランは220,000円（税込）、個人向けPremiumは39,800円（税込）の買い切りです。
+            配布可否、具体的な利用枠、PC台数、再認証、更新範囲が揃うまで購入実行CTAは表示しません。
           </p>
         </div>
       ) : null}
@@ -158,9 +177,9 @@ export function PricingCards() {
         <div className="pricing-comparison-board__head">
           <h3>プラン差分を一目で把握</h3>
           <p>
-            公開配布で確認できる範囲と、Premiumで確定待ちの条件を分けて整理しています。
+            法人プラン、個人向けPremium、公開配布で確認できる範囲を分けて整理しています。
           </p>
-          <span className="pricing-comparison-board__hint">モバイルでも各値に配布確認 / Premiumラベルを表示します。</span>
+          <span className="pricing-comparison-board__hint">モバイルでも各値に法人プラン / 配布確認 / Premiumラベルを表示します。</span>
         </div>
 
         <div className="pricing-comparison-table-scroll">

@@ -71,7 +71,7 @@ const faqHeroFacts = [
   {
     label: '料金',
     title: '配布状況とPremium条件を確認',
-    body: 'Premiumは39,800円の買い切りです。月額自動更新はありません。具体的な利用条件は確定後に案内します。',
+    body: '法人プランは220,000円税込、個人向けPremiumは39,800円税込の買い切りです。月額自動更新はありません。',
     href: '#faq-purchase',
   },
 ] as const
@@ -90,8 +90,8 @@ const faqDecisionCards = [
     Icon: Sparkles,
   },
   {
-    title: 'Premiumは買い切りです',
-    body: '39,800円税込、月額なし、Stripe Checkoutの一度払いです。利用枠やPC台数は公開条件の確定待ちです。',
+    title: '法人プランもPremiumも買い切りです',
+    body: '法人プランは220,000円税込、個人向けPremiumは39,800円税込、月額なしの一度払いです。利用枠やPC台数は公開条件の確定待ちです。',
     note: '購入実行CTAは条件確定後に案内',
     Icon: CreditCard,
   },

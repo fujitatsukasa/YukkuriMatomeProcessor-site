@@ -8,6 +8,8 @@ import {
 
 const premiumPriceNumber = Number(legal.pricing.unitPrice)
 const premiumPrice = `${premiumPriceNumber.toLocaleString('ja-JP')}円（税込）`
+const corporatePriceNumber = Number(legal.pricing.corporateUnitPrice)
+const corporatePrice = `${corporatePriceNumber.toLocaleString('ja-JP')}円（税込）`
 const setupSizeMb = `${(publicDistribution.assets.setup.sizeBytes / 1000 / 1000).toLocaleString('ja-JP', {
   maximumFractionDigits: 1,
 })} MB`
@@ -20,6 +22,8 @@ export const homeFacts = {
   yymm4Label: 'YMM4必須',
   premiumPrice,
   premiumPriceValue: legal.pricing.unitPrice,
+  corporatePrice,
+  corporatePriceValue: legal.pricing.corporateUnitPrice,
   currency: legal.pricing.currency,
   billingLabel: '買い切り',
   monthlyFeeLabel: '月額なし',
@@ -66,7 +70,7 @@ export const heroContent = {
     '記事・掲示板・スレッド・外部素材から候補を集め、AI台本案を確認します。ボードでセリフ・素材・字幕まわりを整理し、保存先・素材パス・CSV/.ymmp前準備を確認します。YMM4で仕上げる前の準備を支える、Windows向けの制作支援アプリです。',
   primaryCta: '配布条件を確認',
   secondaryCta: '実画面を確認',
-  microcopy: `${homeFacts.osLabel}｜${homeFacts.yymm4Label}｜Premium ${homeFacts.premiumPrice}・${homeFacts.billingLabel}｜${homeFacts.monthlyFeeLabel}`,
+  microcopy: `${homeFacts.osLabel}｜${homeFacts.yymm4Label}｜法人 ${homeFacts.corporatePrice}・Premium ${homeFacts.premiumPrice}｜${homeFacts.monthlyFeeLabel}`,
   productScope: '本製品で扱う：台本取得 / AI台本 / ボード編集 / テンプレート / YMM4前準備',
   yymm4Scope: '利用者が確認：内容 / 権利 / 同期結果 / 音声・字幕・演出 / 公開判断',
   trustNote: `配布候補は約${homeFacts.setupSizeMb}です。D10確認が揃うまで実行ファイルの直接取得CTAは表示しません。`,
@@ -314,21 +318,22 @@ export type PlanComparisonRow = {
   label: string
   free: string
   premium: string
+  corporate: string
 }
 
 export const comparisonRows: PlanComparisonRow[] = [
-  { id: 'price', label: '価格', free: '公開条件確認中', premium: homeFacts.premiumPrice },
-  { id: 'billing', label: '課金', free: '購入実行CTAなし', premium: '買い切り / 月額なし' },
-  { id: 'fetch', label: 'URLからの台本取得', free: '利用可否を確認中', premium: '具体的な利用条件は公開前確認中' },
-  { id: 'ai-script', label: 'AI台本案（任意）', free: '利用可否を確認中', premium: '具体的な利用条件は公開前確認中' },
-  { id: 'editor', label: '台本編集', free: '公開条件確認中', premium: '自分の制作ルールで継続利用' },
-  { id: 'preset', label: 'プリセット', free: '公開条件確認中', premium: '制作ルールを保存して継続利用' },
-  { id: 'materials', label: '素材ボード', free: '公開条件確認中', premium: '継続制作の素材確認に利用' },
-  { id: 'save', label: 'プロジェクト保存', free: '公開条件確認中', premium: '保存条件を確認して継続利用' },
-  { id: 'handoff', label: 'YMM4前準備', free: '公開条件確認中', premium: '継続利用条件を確認中' },
-  { id: 'account', label: '権限確認', free: '公開条件確認中', premium: '購入後の権限反映を確認' },
-  { id: 'updates', label: 'アップデート', free: '直接取得CTAは未表示', premium: '公開配布版を利用' },
-  { id: 'support', label: 'サポート', free: homeFacts.supportSla, premium: homeFacts.supportSla },
+  { id: 'price', label: '価格', free: '公開条件確認中', premium: homeFacts.premiumPrice, corporate: homeFacts.corporatePrice },
+  { id: 'billing', label: '課金', free: '購入実行CTAなし', premium: '買い切り / 月額なし', corporate: '買い切り / 月額なし' },
+  { id: 'fetch', label: 'URLからの台本取得', free: '利用可否を確認中', premium: '具体的な利用条件は公開前確認中', corporate: '法人利用条件として確認' },
+  { id: 'ai-script', label: 'AI台本案（任意）', free: '利用可否を確認中', premium: '具体的な利用条件は確認中', corporate: '業務利用条件として確認' },
+  { id: 'editor', label: '台本編集', free: '公開条件確認中', premium: '自分の制作ルールで継続利用', corporate: 'チーム運用前提で確認' },
+  { id: 'preset', label: 'プリセット', free: '公開条件確認中', premium: '制作ルールを保存して継続利用', corporate: '制作ルール共有を確認' },
+  { id: 'materials', label: '素材ボード', free: '公開条件確認中', premium: '継続制作の素材確認に利用', corporate: '複数案件の素材確認を想定' },
+  { id: 'save', label: 'プロジェクト保存', free: '公開条件確認中', premium: '保存条件を確認して継続利用', corporate: '保存・管理条件を確認' },
+  { id: 'handoff', label: 'YMM4前準備', free: '公開条件確認中', premium: '継続利用条件を確認中', corporate: '法人制作の前工程に合わせて確認' },
+  { id: 'account', label: '権限確認', free: '公開条件確認中', premium: '購入後の権限反映を確認', corporate: '法人アカウント運用を確認' },
+  { id: 'updates', label: 'アップデート', free: '直接取得CTAは未表示', premium: '公開配布版を利用', corporate: '保守・更新範囲を確認' },
+  { id: 'support', label: 'サポート', free: homeFacts.supportSla, premium: homeFacts.supportSla, corporate: homeFacts.supportSla },
 ]
 
 export const purchaseConditionRows = [
@@ -345,6 +350,7 @@ export const premiumFit = [
   'URL取得、台本整形、話者設定を毎回繰り返している。',
   '自分のプリセットと制作ルールを使い続けたい。',
   '月額ではなく買い切りを選びたい。',
+  '法人・チーム利用では、220,000円税込の契約条件を確認したい。',
   '最後の品質はYMM4で自分で仕上げたい。',
 ] as const
 
@@ -402,7 +408,7 @@ export const homeFaqs = [
     id: 'premium',
     question: 'Premiumにすると何が変わりますか？',
     answer:
-      `Premiumは${homeFacts.premiumPrice}の買い切りで、月額料金はありません。URL取得、AI台本案、保存、YMM4前準備などの継続利用条件は、購入前に料金ページと案内で確認してください。`,
+      `法人プランは${homeFacts.corporatePrice}、個人向けPremiumは${homeFacts.premiumPrice}の買い切りで、月額料金はありません。URL取得、AI台本案、保存、YMM4前準備などの継続利用条件は、購入前に料金ページと案内で確認してください。`,
   },
   {
     id: 'auto-finish',

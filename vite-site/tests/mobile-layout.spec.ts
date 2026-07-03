@@ -6,7 +6,7 @@ const pages = [
   { path: '/instructions/', heading: '記事URLから台本を取得し、YMM4に渡す' },
   { path: '/samples/', heading: '実アプリ画面と動画サンプルで、使う前の対応範囲を確認する' },
   { path: '/faq/', heading: '導入前によくある質問' },
-  { path: '/purchase/', heading: '料金プラン｜Premium条件と配布状況を確認' },
+  { path: '/purchase/', heading: '料金プラン｜法人220,000円とPremium条件を確認' },
   { path: '/legal/commercial-transactions/', heading: '特定商取引法に基づく表記' },
 ]
 
@@ -147,12 +147,13 @@ test.describe('mobile layout', () => {
     await expect(page.locator('.home-lp-sticky-cta')).toHaveCount(0)
   })
 
-  test('home pricing comparison keeps distribution and Premium labels on mobile cards', async ({ page }) => {
+  test('home pricing comparison keeps distribution, Premium, and corporate labels on mobile cards', async ({ page }) => {
     await page.goto('/', { waitUntil: 'networkidle' })
     await page.locator('#pricing').scrollIntoViewIfNeeded()
 
     const labels = await page.locator('.home-lp-comparison__mobile-label').allInnerTexts()
     expect(labels).toContain('配布確認')
     expect(labels).toContain('Premium')
+    expect(labels).toContain('法人')
   })
 })

@@ -113,12 +113,14 @@ export const legal = {
   ],
   pricing: {
     plans: [
+      { name: '法人プラン', price: '¥220,000', priceTax: '税込 220,000円', term: '買い切り', description: '法人・チーム利用の契約条件として案内' },
       { name: 'Premium', price: '¥39,800', priceTax: '税込 39,800円', term: '買い切り', description: '購入条件の確定後に案内' },
     ],
     productName: 'ゆっくりまとめプロセッサー',
-    modelLabel: '39,800円の買い切りライセンス',
+    modelLabel: '法人 220,000円（税込） / 個人 Premium 39,800円（税込）の買い切りライセンス',
     additionalFees: '標準導線では送料・追加手数料なし',
     unitPrice: '39800',
+    corporateUnitPrice: '220000',
     currency: 'JPY',
   },
   payment: {
@@ -309,11 +311,11 @@ export const faqGroups: FaqGroup[] = [
     id: 'faq-purchase',
     label: '購入・契約',
     items: [
-      { question: '料金プランはどう分かれていますか？', answer: '現時点で外向きに案内できる価格は、Premiumの買い切り39,800円です。無料版は用意していません。' },
-      { question: '月額料金はありますか？', answer: 'いいえ。Premiumは39,800円税込の買い切りで、月額自動更新はありません。' },
+      { question: '料金プランはどう分かれていますか？', answer: '法人プランは220,000円税込、個人向けPremiumは39,800円税込の買い切りです。無料版は用意していません。' },
+      { question: '月額料金はありますか？', answer: 'いいえ。法人プランもPremiumも買い切りで、月額自動更新はありません。' },
       { question: '購入申し込みはどのように進めますか？', answer: 'アプリ内の購入画面から Stripe Checkout を開き、買い切りライセンスを一度払いで購入します。' },
       { question: '購入後の権限はどう反映されますか？', answer: '決済完了後、Googleログインに紐づく課金状態と利用枠を同期します。現在、公開LPでは具体的な上限値を未確定値として扱っています。' },
-      { question: 'Premiumで何が変わりますか？', answer: 'Premiumは39,800円税込の買い切りで、月額料金はありません。具体的な利用条件、PC台数、更新範囲は公開条件が確定するまで断定しません。' },
+      { question: 'Premiumで何が変わりますか？', answer: '個人向けPremiumは39,800円税込、法人プランは220,000円税込の買い切りです。具体的な利用条件、PC台数、更新範囲は公開条件が確定するまで断定しません。' },
       { question: '返金条件は何ですか？', answer: '購入後7日以内を原則受付とし、返金成立時はPremium権限を停止します。詳細は返金・キャンセルポリシーを確認してください。' },
       { question: '収益化は約束されますか？', answer: 'いいえ。動画の品質、投稿頻度、チャンネル状況、各プラットフォームの審査に左右されるため、収益化は約束していません。' },
       { question: '契約・請求に関する相談先は？', answer: '記録の残るメール窓口を推奨します。詳細はお問い合わせページを参照してください。' },

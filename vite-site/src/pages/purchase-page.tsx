@@ -8,6 +8,15 @@ import { Bot, CheckCircle2, CreditCard, FileSearch, RotateCcw, ShieldCheck } fro
 
 const planNarratives = [
   {
+    name: '法人プラン',
+    price: '¥220,000',
+    term: '買い切り / 税込',
+    title: '法人・チーム利用はここを基準に確認する',
+    body: '法人プランは220,000円税込の買い切りです。PC台数、権限管理、更新・保守範囲、請求書対応は購入前に確認します。',
+    points: ['220,000円税込', '法人・チーム利用', '契約条件を導入前に確認'],
+    cta: { label: '法人条件を見る', href: '#pricing-cards' },
+  },
+  {
     name: '配布確認',
     price: '確認中',
     term: '直接取得CTAは未表示',
@@ -20,8 +29,8 @@ const planNarratives = [
     name: 'Premium',
     price: '¥39,800',
     term: '買い切り / 税込',
-    title: '公開条件を確認してから判断する',
-    body: '月額なしの買い切り価格は確認済みです。利用枠、PC台数、更新範囲は公開条件の確定後に案内します。',
+    title: '個人利用は公開条件を確認してから判断する',
+    body: '個人向けPremiumは月額なしの買い切り価格です。利用枠、PC台数、更新範囲は公開条件の確定後に案内します。',
     points: ['39,800円税込', '月額なし', 'Googleアカウントに権限を同期'],
     cta: { label: '確認中の条件を見る', href: '#pricing-cards' },
   },
@@ -35,8 +44,8 @@ const pricingFlow = [
   },
   {
     eyebrow: '手順2',
-    title: 'Premium を買い切りで購入',
-    body: 'アプリ内の購入画面から Stripe Checkout を開き、一度払いでライセンスを購入します。',
+    title: '法人プランまたはPremiumを買い切りで購入',
+    body: '法人利用は220,000円税込、個人向けPremiumは39,800円税込を前提に、アプリ内または案内された導線から一度払いで購入します。',
   },
   {
     eyebrow: '手順3',
@@ -56,9 +65,9 @@ const purchaseGoalCards = [
   {
     label: '購入時',
     plan: 'Stripe Checkout',
-    title: 'アプリ内の購入導線から一度払いする',
-    body: 'Premiumはサイト単体ではなく、アプリ内の購入画面からStripe Checkoutを開いて購入します。',
-    checks: ['39,800円税込', '月額なし', '購入後7日以内の返金条件を確認'],
+    title: '法人プランまたはPremiumを一度払いする',
+    body: '法人プランは220,000円税込、個人向けPremiumは39,800円税込の買い切りです。購入導線と契約条件は案内で確認します。',
+    checks: ['法人 220,000円税込', 'Premium 39,800円税込', '購入後7日以内の返金条件を確認'],
   },
   {
     label: '購入後',
@@ -116,7 +125,7 @@ const purchaseDecisionMatrix = [
     Icon: CheckCircle2,
   },
   {
-    label: 'Premium検討',
+    label: '法人 / Premium検討',
     title: '公開済み条件で納得できた段階',
     body: '台本取得やAI台本案の利用量が増え、公開済み条件で納得できると分かったら検討します。',
     checks: ['取得条件を確認したい', 'AI台本案の条件を確認したい', 'Googleアカウントで権限を保持したい'],
@@ -127,7 +136,7 @@ const purchaseDecisionMatrix = [
   {
     label: '購入前に確認',
     title: '返金条件と注意点を先に読む',
-    body: '39,800円の買い切りなので、購入前に返金条件、動作環境、Premiumで保証しない範囲を確認します。',
+    body: '法人プランは220,000円、個人向けPremiumは39,800円の買い切りなので、購入前に返金条件、動作環境、保証しない範囲を確認します。',
     checks: ['購入後7日以内を原則受付', '動画完成や収益化は保証外', '素材利用条件は自分で確認'],
     href: '/legal/refund-policy/',
     cta: '返金条件を見る',
@@ -137,9 +146,15 @@ const purchaseDecisionMatrix = [
 
 const purchaseFactCards = [
   {
-    label: '価格',
+    label: '法人価格',
+    title: '220,000円 / 税込',
+    body: '法人プランは買い切りです。月額自動更新や毎月の解約予約はありません。',
+    Icon: CheckCircle2,
+  },
+  {
+    label: '個人価格',
     title: '39,800円 / 税込',
-    body: 'Premiumは買い切りです。月額自動更新や毎月の解約予約はありません。',
+    body: '個人向けPremiumも買い切りです。月額自動更新や毎月の解約予約はありません。',
     Icon: CheckCircle2,
   },
   {
@@ -168,9 +183,9 @@ export function PurchasePage() {
   return (
     <>
       <PageMeta
-        title="料金プラン｜Premium条件と配布状況を確認"
-        description="Premium買い切り39,800円の前提、YMM4前準備、Googleアカウント権限同期、返金条件、未確定の利用条件を購入前に確認できます。"
-        keywords="料金, 買い切り, Premium, Stripe Checkout, 台本取得, AI台本生成"
+        title="料金プラン｜法人220,000円とPremium条件を確認"
+        description="法人プラン220,000円税込、個人向けPremium 39,800円税込の買い切り前提、YMM4前準備、権限同期、返金条件、未確定の利用条件を購入前に確認できます。"
+        keywords="料金, 法人プラン, 買い切り, Premium, Stripe Checkout, 台本取得, AI台本生成"
         path="/purchase/"
       />
 
@@ -179,13 +194,16 @@ export function PurchasePage() {
           <div className="pricing-command-hero__shell">
             <div className="pricing-command-hero__copy">
               <p className="brand-kicker">料金プラン</p>
-              <h1>料金プラン｜Premium条件と配布状況を確認</h1>
+              <h1>料金プラン｜法人220,000円とPremium条件を確認</h1>
               <p className="brand-lead">
-                39,800円の買い切りで確定済みの前提と、購入前に残っている確認条件を分けて確認できます。
+                法人・チーム利用は220,000円税込、個人向けPremiumは39,800円税込の買い切りです。
+                価格と、購入前に残っている確認条件を分けて確認できます。
               </p>
 
               <div className="pricing-command-hero__chips" role="list" aria-label="料金ページの前提">
                 <span role="listitem">買い切り</span>
+                <span role="listitem">法人 220,000円税込</span>
+                <span role="listitem">Premium 39,800円税込</span>
                 <span role="listitem">月額なし</span>
                 <span role="listitem">無料版は未用意</span>
                 <span role="listitem">Googleアカウントに権限を保持</span>
@@ -194,7 +212,7 @@ export function PurchasePage() {
 
               {!productFacts.purchaseReady.value ? (
                 <div className="pricing-command-hero__notice" role="status">
-                  Premiumの利用枠、PC台数、再認証、更新範囲は公開条件の確定待ちです。
+                  法人プランとPremiumの利用枠、PC台数、再認証、更新範囲は公開条件の確定待ちです。
                   確定するまで購入実行CTAは表示しません。
                 </div>
               ) : null}
@@ -247,9 +265,9 @@ export function PurchasePage() {
           <div className="pricing-decision-matrix">
             <div className="subpage-section-head pricing-decision-matrix__head">
               <p>購入判断チェック</p>
-              <h2>まだ購入しない段階か、Premiumを検討する段階かを分ける</h2>
+              <h2>まだ購入しない段階か、法人プランを検討する段階かを分ける</h2>
               <span>
-                先に配布可否と公開条件を確認し、制作量と条件が合う場合だけPremiumを検討します。
+                先に配布可否と公開条件を確認し、法人・チーム利用や制作量に条件が合う場合だけ購入を検討します。
               </span>
             </div>
 
@@ -316,8 +334,8 @@ export function PurchasePage() {
           <div className="pricing-clarity-board">
             <div className="pricing-clarity-board__head">
               <p>購入前の判断材料</p>
-              <h2>Premiumの確認中条件、支払い条件、注意点を一画面で確認</h2>
-              <span>迷う場合は、無料版がある前提にせず、公開済みの条件だけでPremiumを判断してください。</span>
+              <h2>法人プランとPremiumの確認中条件、支払い条件、注意点を一画面で確認</h2>
+              <span>迷う場合は、無料版がある前提にせず、公開済みの条件だけで法人プランまたはPremiumを判断してください。</span>
             </div>
 
             <div className="pricing-unlock-grid" aria-label="Premiumの確認中条件">
@@ -338,11 +356,11 @@ export function PurchasePage() {
 
             <div className="pricing-clarity-board__head pricing-clarity-board__head--compact">
               <p>条件確定後の完了判定</p>
-              <h2>Premium後に「できた」と言える状態</h2>
+              <h2>購入後に「できた」と言える状態</h2>
               <span>購入後も、まず少数URLで台本取得、台本編集、出力確認までを通します。</span>
             </div>
 
-            <div className="pricing-unlock-goal-grid" aria-label="Premium後の完了判定">
+            <div className="pricing-unlock-goal-grid" aria-label="購入後の完了判定">
               {premiumCompletionGoals.map((item) => (
                 <article key={item.title} className="pricing-unlock-goal-card">
                   <CheckCircle2 size={17} />
@@ -373,7 +391,7 @@ export function PurchasePage() {
             <aside className="pricing-caution-panel" aria-label="購入前の注意点">
               <div>
                 <span className="subpage-card__eyebrow">注意点</span>
-                <h3>Premiumは制作前工程の買い切り権限です</h3>
+                <h3>法人プランとPremiumは制作前工程の買い切り権限です</h3>
               </div>
               <ul>
                 {purchaseCautions.map((item) => (
@@ -431,7 +449,7 @@ export function PurchasePage() {
                 </div>
               </dl>
               <p className="pricing-trust-card__note">
-                Premium は買い切りのため、日割り差額請求やダウングレード予約はありません。
+                法人プランとPremiumは買い切りのため、日割り差額請求やダウングレード予約はありません。
               </p>
               <LegalLinksBlock note={legalContactNote} />
             </InteractiveCard>

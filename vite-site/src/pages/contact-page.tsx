@@ -529,7 +529,7 @@ export function ContactPage() {
               <span className="subpage-card__eyebrow">契約・返金・法務</span>
               <h2>購入前後の条件は、法務ページで確認できます</h2>
               <p>
-                Premiumは買い切りライセンスです。返金条件、利用規約、特定商取引法に基づく表記は購入前に確認してください。
+                法人プランとPremiumは買い切りライセンスです。返金条件、利用規約、特定商取引法に基づく表記は購入前に確認してください。
               </p>
             </div>
             <div className="contact-legal-panel__links">

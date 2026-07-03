@@ -1691,7 +1691,7 @@
 
 .home-lp-plan-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1.35fr) repeat(2, minmax(0, 0.9fr));
   gap: 18px;
   margin-bottom: 18px;
 }
@@ -1707,6 +1707,33 @@
   background:
     linear-gradient(135deg, rgba(237, 199, 95, 0.2), rgba(79, 209, 165, 0.07) 46%, rgba(255, 255, 255, 0.025)),
     var(--home-surface);
+}
+
+.home-lp-plan-card--corporate {
+  border-color: rgba(255, 216, 132, 0.76);
+  background:
+    radial-gradient(circle at 18% 12%, rgba(255, 238, 188, 0.22), transparent 34%),
+    linear-gradient(140deg, rgba(237, 199, 95, 0.28), rgba(79, 209, 165, 0.06) 52%, rgba(255, 255, 255, 0.03)),
+    var(--home-surface);
+  box-shadow:
+    0 24px 72px rgba(0, 0, 0, 0.28),
+    0 0 0 1px rgba(255, 224, 148, 0.12),
+    0 0 36px rgba(237, 199, 95, 0.12);
+}
+
+.home-lp-plan-card--corporate > span {
+  color: #241807;
+  background: linear-gradient(135deg, #fff0bd, #eac15d 64%, #fff8d8);
+  box-shadow: 0 0 18px rgba(255, 216, 132, 0.22);
+}
+
+.home-lp-plan-card--corporate > strong {
+  font-size: clamp(2.8rem, 5.2vw, 4.35rem);
+  color: #ffe9a9;
+  text-shadow:
+    0 1px 0 rgba(70, 40, 8, 0.58),
+    0 0 18px rgba(255, 226, 145, 0.2),
+    0 18px 32px rgba(0, 0, 0, 0.36);
 }
 
 .home-lp-plan-card > span {
@@ -1849,7 +1876,7 @@
 
 .home-lp-comparison__row {
   display: grid;
-  grid-template-columns: minmax(170px, 0.5fr) minmax(0, 0.75fr) minmax(0, 0.85fr);
+  grid-template-columns: minmax(160px, 0.46fr) minmax(0, 0.64fr) minmax(0, 0.7fr) minmax(0, 0.82fr);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 

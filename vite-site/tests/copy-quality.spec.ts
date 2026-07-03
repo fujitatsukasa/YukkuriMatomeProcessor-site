@@ -25,7 +25,7 @@ const primaryPages = [
   },
   {
     path: '/purchase/',
-    heading: '料金プラン｜Premium条件と配布状況を確認',
+    heading: '料金プラン｜法人220,000円とPremium条件を確認',
     ctas: ['プラン比較を見る', '配布条件を確認'],
   },
   {
@@ -269,7 +269,7 @@ test.describe('primary page copy quality', () => {
   test('purchase page suppresses execution purchase CTA while Premium conditions are pending', async ({ page }) => {
     await page.goto('/purchase/', { waitUntil: 'networkidle' })
 
-    await expect(page.getByText('Premiumの購入条件は最終確認中です')).toBeVisible()
+    await expect(page.getByText('法人プランとPremiumの購入条件は最終確認中です')).toBeVisible()
     await expect(page.getByText('購入実行CTAは表示しません').first()).toBeVisible()
     await expect(page.getByRole('link', { name: /購入する|決済|Checkout|今すぐ購入/ })).toHaveCount(0)
   })

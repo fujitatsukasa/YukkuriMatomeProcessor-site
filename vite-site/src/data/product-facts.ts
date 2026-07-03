@@ -595,6 +595,17 @@ const baseFacts = {
     validForAppVersion: null,
     validForSiteCommit: currentSiteCommit,
   },
+  corporatePrice: {
+    value: 220000,
+    status: 'confirmed',
+    source: 'user instruction / site legal data',
+    sourceRefs: [refs.legalData],
+    lastVerifiedAt: verifiedAt,
+    owner: '法務・データ責任者',
+    approvedBy: null,
+    validForAppVersion: null,
+    validForSiteCommit: currentSiteCommit,
+  },
   currency: {
     value: 'JPY',
     status: 'confirmed',
@@ -757,6 +768,7 @@ const purchaseCriteria: GateCriterion[] = [
     label: '価格、税込表示、通貨、買い切り、支払方法の表示',
     satisfied:
       factIsConfirmed(baseFacts.premiumPrice) &&
+      factIsConfirmed(baseFacts.corporatePrice) &&
       factIsConfirmed(baseFacts.currency) &&
       factIsConfirmed(baseFacts.billingType) &&
       factIsConfirmed(baseFacts.paymentMethod),

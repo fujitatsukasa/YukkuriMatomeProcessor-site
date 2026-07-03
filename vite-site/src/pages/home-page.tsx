@@ -51,6 +51,7 @@ type CtaLocation =
   | 'workflow'
   | 'free_section'
   | 'pricing_distribution'
+  | 'pricing_corporate'
   | 'pricing_premium'
   | 'mobile_sticky'
   | 'final'
@@ -97,7 +98,14 @@ const softwareApplicationLd = {
   downloadUrl: `${homeFacts.siteOrigin}${homeFacts.downloadUrl}`,
   image: `${homeFacts.siteOrigin}${homeAssets.hero}`,
   description: metaDescription,
-    offers: [
+  offers: [
+    {
+      '@type': 'Offer',
+      name: '法人プラン',
+      price: homeFacts.corporatePriceValue,
+      priceCurrency: homeFacts.currency,
+      url: `${homeFacts.siteOrigin}/purchase/`,
+    },
     {
       '@type': 'Offer',
       name: 'Premium',
@@ -576,6 +584,7 @@ function MobileStickyCta() {
       'home-workflow-primary-cta',
       'home-free-primary-cta',
       'home-pricing-distribution-cta',
+      'home-pricing-corporate-cta',
       'home-pricing-premium-cta',
       'home-final-cta',
     ]
@@ -995,20 +1004,38 @@ function HomePageContent() {
               kicker="PRICING"
               title={
                 <>
-                  Premiumは<HeadingEm>39,800円（税込）</HeadingEm> 月額なしの買い切りです
+                  法人利用は<HeadingEm>220,000円（税込）</HeadingEm> を前提に確認します
                 </>
               }
               body={
                 <>
                   現時点で無料版として案内できる公開版はありません。
-                  継続制作でPremiumを検討する前に、<HomeEm tone="white">確定済みの条件</HomeEm>と
-                  購入前に確認すべき条件を分けて表示します。
+                  法人・チーム利用は<HomeEm tone="white">220,000円（税込）</HomeEm>、個人向けPremiumは
+                  <HomeEm tone="aqua">39,800円（税込）</HomeEm>として、購入前に確認すべき条件を分けて表示します。
                 </>
               }
               align="center"
             />
 
-            <div className="home-lp-plan-grid" aria-label="配布状況とPremiumの概要">
+            <div className="home-lp-plan-grid" aria-label="配布状況と法人プラン、Premiumの概要">
+              <article className="home-lp-plan-card home-lp-plan-card--corporate" data-reveal>
+                <span>法人・チーム向け</span>
+                <h3>法人プラン</h3>
+                <strong>{homeFacts.corporatePrice}</strong>
+                <p>
+                  業務利用やチーム導入では、法人向け買い切り価格を主軸に検討してください。
+                  PC台数、権限管理、更新・保守範囲は購入前に確認します。
+                </p>
+                <HomeCta
+                  id="home-pricing-corporate-cta"
+                  href={homeFacts.purchaseUrl}
+                  label="法人料金を見る"
+                  location="pricing_corporate"
+                >
+                  <FileCheck2 size={18} aria-hidden="true" />
+                  法人料金を見る
+                </HomeCta>
+              </article>
               <article className="home-lp-plan-card" data-reveal>
                 <span>公開前の確認項目</span>
                 <h3>配布確認</h3>
@@ -1029,7 +1056,7 @@ function HomePageContent() {
               </article>
               <article className="home-lp-plan-card home-lp-plan-card--premium" data-reveal>
                 <span>買い切り・月額なし</span>
-                <h3>Premium</h3>
+                <h3>個人向けPremium</h3>
                 <strong>{homeFacts.premiumPrice}</strong>
                 <p>
                   公開済み条件を確認し、継続的に<HomeEm>台本取得</HomeEm>・
@@ -1051,13 +1078,14 @@ function HomePageContent() {
             <div className="home-lp-comparison" data-reveal>
               <div className="home-lp-comparison__head">
                 <MonitorPlay size={18} aria-hidden="true" />
-                <h3>配布確認 / Premium 条件比較</h3>
+                <h3>配布確認 / Premium / 法人プラン 条件比較</h3>
               </div>
               <div className="home-lp-comparison__table">
                 <div className="home-lp-comparison__row home-lp-comparison__row--head">
                   <span>項目</span>
                   <span>配布確認</span>
                   <span>Premium</span>
+                  <span>法人プラン</span>
                 </div>
                 {comparisonRows.map((row) => (
                   <div className="home-lp-comparison__row" key={row.id}>
@@ -1070,6 +1098,10 @@ function HomePageContent() {
                       <em className="home-lp-comparison__mobile-label">Premium</em>
                       {row.premium}
                     </span>
+                    <span>
+                      <em className="home-lp-comparison__mobile-label">法人</em>
+                      {row.corporate}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -1078,7 +1110,7 @@ function HomePageContent() {
             <div className="home-lp-condition-panel" data-reveal>
               <div>
                 <p className="home-lp-kicker">購入前確認</p>
-                <h3>39,800円を判断する前に、未確認の条件を確認してください</h3>
+                <h3>法人220,000円を判断する前に、未確認の条件を確認してください</h3>
                 <p>このLPでは、確認できていない数値や契約条件を確定値として表示しません。</p>
               </div>
               <dl>
@@ -1260,9 +1292,9 @@ function HomePageContent() {
                 <Download size={19} aria-hidden="true" />
                 {primaryCtaLabel}
               </HomeCta>
-              <HomeCta href="#pricing" label="Premiumの料金を見る" location="final" variant="secondary">
+              <HomeCta href="#pricing" label="法人料金を見る" location="final" variant="secondary">
                 <FileCheck2 size={18} aria-hidden="true" />
-                Premiumの料金を見る
+                法人料金を見る
               </HomeCta>
             </div>
           </div>
