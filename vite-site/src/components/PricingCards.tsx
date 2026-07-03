@@ -10,7 +10,7 @@ type PlanFeature = {
 }
 
 type PricingPlan = {
-  key: 'free' | 'premium' | 'corporate'
+  key: 'premium' | 'corporate'
   name: string
   eyebrow: string
   price: string
@@ -36,48 +36,28 @@ const pricingPlans: PricingPlan[] = [
     features: [
       { label: '法人・チーム利用の契約条件', active: true, emphasis: true },
       { label: '220,000円（税込）の買い切り', active: true, emphasis: true },
-      { label: 'PC台数・再認証条件は確認中', active: true, emphasis: true },
-      { label: '更新・保守範囲は確認中', active: true, emphasis: true },
+      { label: 'PC台数・再認証条件を導入前に確認', active: true, emphasis: true },
+      { label: '更新・保守範囲を導入前に確認', active: true, emphasis: true },
       { label: '請求書・領収書まわりを確認', active: true },
       { label: '導入前に権利範囲を確認', active: true },
     ],
   },
   {
-    key: 'free',
-    name: '配布確認',
-    eyebrow: '公開前の確認項目',
-    price: '確認中',
-    term: '直接取得CTAは未表示',
-    bestFor: '配布可否と導入条件を先に確認したい',
-    summary: '無料版として案内できる公開版はまだ用意していません。配布条件、署名、SmartScreen、利用条件が揃うまで直接取得CTAは表示しません。',
-    note: '無料版として案内せず、配布条件を確認する段階です。',
-    badge: null,
-    features: [
-      { label: '配布候補のファイル情報を確認', active: true },
-      { label: '署名・SmartScreenの確認待ち', active: true },
-      { label: '動作環境とYMM4前提を確認', active: true },
-      { label: '公開前の利用条件を確認', active: true },
-      { label: '直接ダウンロードは未表示', active: true },
-      { label: '公開前確認中のPremium条件', active: false },
-    ],
-  },
-  {
     key: 'premium',
     name: 'Premium',
-    eyebrow: '個人向け / 条件確認中',
+    eyebrow: '個人向け / 買い切り',
     price: '¥39,800',
     term: '買い切り / 税込',
-    bestFor: '個人利用で公開済み条件を見てから買い切りを判断したい',
-    summary: '個人向けPremiumは39,800円（税込）、月額なしの買い切りです。具体的な利用枠、PC台数、更新範囲は公開条件の確定後に案内します。',
-    note: '未確認の条件を強く売らないため、購入実行は条件確定後に案内',
+    bestFor: '個人利用で台本取得、AI台本、編集ボード、YMM4連携を継続したい',
+    summary: '個人向けPremiumは39,800円（税込）、月額なしの買い切りです。購入前にPC台数、再認証、更新範囲、返金条件を確認してください。',
+    note: '個人制作はPremiumを基準に、必要な機能と契約条件を確認',
     badge: '買い切り',
     features: [
-      { label: '公開済み条件に基づく利用', active: true },
+      { label: '台本取得とAI台本案の継続利用', active: true },
       { label: 'CSV/.ymmpとフォーマット管理', active: true, emphasis: true },
-      { label: '具体的なURL取得条件は確認中', active: true, emphasis: true },
-      { label: 'AI台本案の利用条件は確認中', active: true, emphasis: true },
-      { label: 'PC台数・再認証条件は確認中', active: true, emphasis: true },
-      { label: '更新範囲は確認中', active: true, emphasis: true },
+      { label: '編集ボードとYMM4連携', active: true, emphasis: true },
+      { label: 'PC台数・再認証条件を購入前に確認', active: true, emphasis: true },
+      { label: '更新範囲を購入前に確認', active: true, emphasis: true },
       { label: 'Googleアカウントへの権限保持', active: true, emphasis: true },
       { label: '購入者向けサポート', active: true, emphasis: true },
     ],
@@ -86,28 +66,28 @@ const pricingPlans: PricingPlan[] = [
 
 const comparisonRows = [
   {
-    label: '導入フェーズ',
-    values: ['法人条件の確認後に案内', '配布条件を確認', '個人向け条件の確認後に案内'],
+    label: '価格',
+    values: ['220,000円（税込）', '39,800円（税込）'],
   },
   {
     label: '主な強み',
-    values: ['法人・チーム利用の契約条件を確認', '直接取得CTAは未表示', '買い切りで Premium 権限を保持'],
+    values: ['法人・チーム利用の契約条件を確認', '買い切りでPremium権限を保持'],
   },
   {
     label: 'CSV/.ymmp管理',
-    values: ['業務利用条件として確認', '公開条件の確認', '継続投稿で本格利用'],
+    values: ['業務利用の制作フローで確認', '継続投稿の制作ルールに利用'],
   },
   {
     label: 'AI補助 / AI台本',
-    values: ['法人利用条件として確認', '利用可否を確認中', '具体的な利用条件は確認中'],
+    values: ['法人利用条件として確認', '個人制作の下書き補助として利用'],
   },
   {
     label: '向いている規模感',
-    values: ['法人・チーム導入', '公開前確認', '個人の継続利用'],
+    values: ['法人・チーム導入', '個人の継続利用'],
   },
   {
     label: 'サポート密度',
-    values: ['導入相談で確認', '基本案内', '購入者向けサポート'],
+    values: ['導入相談で確認', '購入者向けサポート'],
   },
 ] as const
 
@@ -117,11 +97,11 @@ export function PricingCards() {
   return (
     <>
       {!purchaseReady ? (
-        <div className="pricing-gate-notice pricing-layer" role="status">
-          <strong>法人プランとPremiumの購入条件は最終確認中です</strong>
+        <div className="pricing-gate-notice pricing-layer" role="note">
+          <strong>購入前に契約条件を確認してください</strong>
           <p>
             法人プランは220,000円（税込）、個人向けPremiumは39,800円（税込）の買い切りです。
-            配布可否、具体的な利用枠、PC台数、再認証、更新範囲が揃うまで購入実行CTAは表示しません。
+            PC台数、再認証、更新範囲、請求書対応、返金条件を確認してから手続きを進めてください。
           </p>
         </div>
       ) : null}
@@ -157,7 +137,7 @@ export function PricingCards() {
               {plan.features.map((feature) => (
                 <div
                   key={feature.label}
-                  className={`premium-pricing-feature-row${feature.active ? ' active' : ' inactive'}${plan.key === 'free' ? ' free' : ''}`}
+                  className={`premium-pricing-feature-row${feature.active ? ' active' : ' inactive'}`}
                 >
                   <span className="check-icon">{feature.active ? '✓' : ''}</span>
                   {feature.emphasis ? <strong>{feature.label}</strong> : <span>{feature.label}</span>}
@@ -175,11 +155,11 @@ export function PricingCards() {
 
       <div className="pricing-comparison-board pricing-layer">
         <div className="pricing-comparison-board__head">
-          <h3>プラン差分を一目で把握</h3>
+          <h3>法人と個人向けPremiumの違い</h3>
           <p>
-            法人プラン、個人向けPremium、公開配布で確認できる範囲を分けて整理しています。
+            価格、向いている利用規模、確認すべき契約条件を分けて整理しています。
           </p>
-          <span className="pricing-comparison-board__hint">モバイルでも各値に法人プラン / 配布確認 / Premiumラベルを表示します。</span>
+          <span className="pricing-comparison-board__hint">モバイルでも各値に法人プラン / Premiumラベルを表示します。</span>
         </div>
 
         <div className="pricing-comparison-table-scroll">
@@ -213,7 +193,7 @@ export function PricingCards() {
         </div>
         <div className="trust-badge-bar__item">
           <CheckCircle2 size={20} color="#4CAF50" />
-          <span>配布条件を確認中</span>
+          <span>購入前条件を確認</span>
         </div>
         <div className="trust-badge-bar__item">
           <Clock size={20} color="#e0c184" />

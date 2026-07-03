@@ -5,28 +5,28 @@ import { decisionRecords, productFacts, readinessGates, releaseCandidateDistribu
 const primaryPages = [
   {
     path: '/',
-    heading: '素材集めから台本づくりYMM4前準備までひとつの制作フローに',
-    ctas: ['配布条件を確認'],
+    heading: '素材集めから台本づくりYMM4連携までひとつの制作フローに',
+    ctas: ['ダウンロードを見る'],
   },
   {
     path: '/download/',
-    heading: '配布条件と公開状況を確認する',
-    ctas: ['配布情報を見る', '使い方を見る'],
+    heading: 'ダウンロードと導入情報を確認する',
+    ctas: ['ファイル情報を見る', '使い方を見る'],
   },
   {
     path: '/instructions/',
     heading: '記事URLから台本を取得し、YMM4に渡すまでの手順',
-    ctas: ['配布条件を確認', 'FAQを見る'],
+    ctas: ['ダウンロードを見る', 'FAQを見る'],
   },
   {
     path: '/samples/',
     heading: '実アプリ画面と動画サンプルで、使う前の対応範囲を確認する',
-    ctas: ['配布条件を確認', '使い方を見る'],
+    ctas: ['ダウンロードを見る', '使い方を見る'],
   },
   {
     path: '/purchase/',
     heading: '料金プラン｜法人220,000円とPremium条件を確認',
-    ctas: ['プラン比較を見る', '配布条件を確認'],
+    ctas: ['プラン比較を見る', 'ダウンロードを見る'],
   },
   {
     path: '/faq/',
@@ -35,8 +35,8 @@ const primaryPages = [
   },
   {
     path: '/update/',
-    heading: '配布候補の確認と更新前チェック',
-    ctas: ['配布条件を確認'],
+    heading: 'ファイル情報と更新前チェック',
+    ctas: ['ダウンロードを見る'],
   },
 ]
 
@@ -169,10 +169,10 @@ test.describe('primary page copy quality', () => {
     }
   })
 
-  test('pending distribution facts stay candidate-scoped until D10 is confirmed', () => {
+  test('download facts stay file-info scoped while release gates are pending', () => {
     expect(publicDistribution).toBe(releaseCandidateDistribution)
     expect(publicDistribution.status).toBe('pending')
-    expect(publicDistribution.statusLabel).toContain('D10確認中')
+    expect(publicDistribution.statusLabel).toContain('ファイル情報')
     expect(productFacts.publicVersion.status).toBe('pending')
     expect(productFacts.publicVersion.value).toBe(releaseCandidateDistribution.version)
     expect(productFacts.downloadReady.value).toBe(false)
@@ -181,13 +181,13 @@ test.describe('primary page copy quality', () => {
     expect(releasePost).toBeTruthy()
 
     const releaseCopy = JSON.stringify(releasePost)
-    expect(releaseCopy).toContain('配布候補')
+    expect(releaseCopy).toContain('ファイル情報')
     expect(releaseCopy).not.toContain('公開しました')
     expect(releaseCopy).not.toContain('公開に合わせ')
   })
 
   test('pending fact values do not leak as confirmed copy in inspectable surfaces', async ({ page }) => {
-    const safePendingMarkers = ['候補', '確認中', '未確定', 'D10', 'No-Go', '表示しません', '最終確認中']
+    const safePendingMarkers = ['候補', 'pending', 'D10', 'No-Go', '表示しません', 'ファイル情報', 'ダウンロード情報']
     const pendingFacts = Object.entries(productFacts).flatMap(([key, fact]) => {
       if (fact.status !== 'pending') return []
       if (typeof fact.value !== 'string' && typeof fact.value !== 'number') return []
@@ -269,8 +269,8 @@ test.describe('primary page copy quality', () => {
   test('purchase page suppresses execution purchase CTA while Premium conditions are pending', async ({ page }) => {
     await page.goto('/purchase/', { waitUntil: 'networkidle' })
 
-    await expect(page.getByText('法人プランとPremiumの購入条件は最終確認中です')).toBeVisible()
-    await expect(page.getByText('購入実行CTAは表示しません').first()).toBeVisible()
+    await expect(page.getByText('購入前に契約条件を確認してください')).toBeVisible()
+    await expect(page.getByText('PC台数、再認証、更新範囲、請求書対応、返金条件を確認してから手続きを進めてください。')).toBeVisible()
     await expect(page.getByRole('link', { name: /購入する|決済|Checkout|今すぐ購入/ })).toHaveCount(0)
   })
 })

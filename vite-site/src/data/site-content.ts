@@ -67,7 +67,7 @@ export const siteTitle = 'ゆっくりまとめプロセッサー'
 export const siteSubtitle = 'Yukkuri Matome Processor'
 export const siteTagline = 'YMM4向け台本・素材準備ツール'
 export const siteDescription =
-  '対応する記事URL・スレッドURLや下書きから、台本・話者・素材を整え、YMM4で仕上げる前準備を支援するWindows向け制作支援アプリ。'
+  '対応する記事URL・スレッドURLや下書きから、台本・話者・素材を整え、YMM4へ渡す制作データを支援するWindows向け制作支援アプリ。'
 
 export const navItems: NavItem[] = [
   { key: 'home', label: 'ホーム', url: '/' },
@@ -82,7 +82,7 @@ export const navItems: NavItem[] = [
 ]
 
 export const primaryCta: ActionItem = {
-  label: '配布条件を確認',
+  label: 'ダウンロードを見る',
   href: '/download/',
   variant: 'primary',
 }
@@ -237,7 +237,7 @@ export const faqGroups: FaqGroup[] = [
       {
         question: 'ゆっくりまとめプロセッサーは何を解決するツールですか？',
         answer:
-          '対応する記事URL・スレッドURLや下書きから、台本・話者・素材を整え、YMM4で仕上げる前準備を支援するWindows向け制作支援アプリです。',
+          '対応する記事URL・スレッドURLや下書きから、台本・話者・素材を整え、YMM4へ渡す制作データを支援するWindows向け制作支援アプリです。',
       },
       {
         question: '動画は自動で完成しますか？',
@@ -245,9 +245,9 @@ export const faqGroups: FaqGroup[] = [
           '完成・投稿まで自動で進めるツールではありません。台本下地、話者、素材確認などを整え、音声、字幕、間合い、演出、権利確認、投稿判断はYMM4と利用者側で行います。',
       },
       {
-        question: '無料版はありますか？',
+        question: '価格はいくらですか？',
         answer:
-          '現時点で、無料版として案内できる公開版は用意していません。配布可否、試用可否、利用条件が確定するまで、無料版とは表示しません。',
+          '法人プランは220,000円税込、個人向けPremiumは39,800円税込の買い切りです。月額料金はありません。',
       },
       { question: '想定ユーザーは誰ですか？', answer: 'YMM4で反応集、解説、ショート、まとめ、ゆっくり動画を作る個人・チームを想定しています。' },
       {
@@ -261,7 +261,7 @@ export const faqGroups: FaqGroup[] = [
     id: 'faq-onboarding',
     label: '導入',
     items: [
-      { question: '導入時に最初にやるべきことは？', answer: '配布ページで公開条件を確認し、YMM4実行パス、保存先フォルダ、必要に応じて外部APIキーを設定してください。' },
+      { question: '導入時に最初にやるべきことは？', answer: 'ダウンロードページでファイル情報を確認し、YMM4実行パス、保存先フォルダ、必要に応じて外部APIキーを設定してください。' },
       { question: '対応OSは何ですか？', answer: 'Windows 10 / 11環境での利用を前提に設計しています。' },
       { question: 'Windows専用ですか？', answer: 'はい。現時点ではWindows 10 / 11専用です。Mac、スマホ、ブラウザだけで完結するツールではありません。' },
       { question: 'Macで使えますか？', answer: '現時点ではMac版はありません。YMM4を使うWindows環境を前提にしています。' },
@@ -282,7 +282,7 @@ export const faqGroups: FaqGroup[] = [
       { question: '取得した台本は再編集できますか？', answer: 'はい。不要行削除、見出し整理、読み上げ向け調整、感情や役割の微修正が可能です。' },
       { question: 'URLエラーで取得できない場合は？', answer: 'URL形式、対象サイトの対応状況、ネットワークの順で確認してください。' },
       { question: '対応していないURLは取得できますか？', answer: '対応外URLは取得できない場合があります。対象サイト、URL形式、ログの内容を確認してください。' },
-      { question: '取得件数が多いときはどう進めますか？', answer: 'まず少数のURLで取得、台本整理、CSV/.ymmp前準備まで通し、保存先とYMM4側の確認が済んでから件数を増やしてください。' },
+      { question: '取得件数が多いときはどう進めますか？', answer: 'まず少数のURLで取得、台本整理、CSV/.ymmpまで通し、保存先とYMM4側の確認が済んでから件数を増やしてください。' },
     ],
   },
   {
@@ -311,11 +311,11 @@ export const faqGroups: FaqGroup[] = [
     id: 'faq-purchase',
     label: '購入・契約',
     items: [
-      { question: '料金プランはどう分かれていますか？', answer: '法人プランは220,000円税込、個人向けPremiumは39,800円税込の買い切りです。無料版は用意していません。' },
+      { question: '料金プランはどう分かれていますか？', answer: '法人プランは220,000円税込、個人向けPremiumは39,800円税込の買い切りです。どちらも月額ではありません。' },
       { question: '月額料金はありますか？', answer: 'いいえ。法人プランもPremiumも買い切りで、月額自動更新はありません。' },
       { question: '購入申し込みはどのように進めますか？', answer: 'アプリ内の購入画面から Stripe Checkout を開き、買い切りライセンスを一度払いで購入します。' },
-      { question: '購入後の権限はどう反映されますか？', answer: '決済完了後、Googleログインに紐づく課金状態と利用枠を同期します。現在、公開LPでは具体的な上限値を未確定値として扱っています。' },
-      { question: 'Premiumで何が変わりますか？', answer: '個人向けPremiumは39,800円税込、法人プランは220,000円税込の買い切りです。具体的な利用条件、PC台数、更新範囲は公開条件が確定するまで断定しません。' },
+      { question: '購入後の権限はどう反映されますか？', answer: '決済完了後、Googleログインに紐づく課金状態と利用枠を同期します。PC台数、再認証、更新範囲は購入前に確認してください。' },
+      { question: 'Premiumで何が変わりますか？', answer: '個人向けPremiumは39,800円税込、法人プランは220,000円税込の買い切りです。台本取得、AI台本案、保存、編集ボード、YMM4連携の利用範囲を購入前に確認できます。' },
       { question: '返金条件は何ですか？', answer: '購入後7日以内を原則受付とし、返金成立時はPremium権限を停止します。詳細は返金・キャンセルポリシーを確認してください。' },
       { question: '収益化は約束されますか？', answer: 'いいえ。動画の品質、投稿頻度、チャンネル状況、各プラットフォームの審査に左右されるため、収益化は約束していません。' },
       { question: '契約・請求に関する相談先は？', answer: '記録の残るメール窓口を推奨します。詳細はお問い合わせページを参照してください。' },
@@ -328,30 +328,30 @@ export const newsPosts: NewsPost[] = [
     path: '/2026-06-01-windows-release-0018/',
     date: '2026-06-01T14:06:24+09:00',
     dateLabel: '2026年06月01日',
-    title: `お知らせ: Windows配布候補 ${publicDistribution.versionLabel} の確認情報を整理しました`,
-    subtitle: 'インストーラー候補、ポータブルZIP候補、更新フィードをwin-x64-stable向けに確認しています。',
+    title: `お知らせ: Windows版 ${publicDistribution.versionLabel} のファイル情報を整理しました`,
+    subtitle: 'インストーラー、ポータブルZIP、更新フィードをwin-x64-stable向けに確認しています。',
     summary:
-      `Windows向け配布候補 ${publicDistribution.versionLabel} の確認情報として、ダウンロードページとアップデート履歴の案内を更新しました。`,
+      `Windows向け ${publicDistribution.versionLabel} のファイル情報として、ダウンロードページとアップデート履歴の案内を更新しました。`,
     seoDescription:
-      `ゆっくりまとめプロセッサー Windows配布候補 ${publicDistribution.versionLabel} の確認情報です。インストーラー候補、ポータブルZIP候補、更新フィード、SmartScreen確認項目を案内します。`,
+      `ゆっくりまとめプロセッサー Windows版 ${publicDistribution.versionLabel} のファイル情報です。インストーラー、ポータブルZIP、更新フィード、SmartScreen確認項目を案内します。`,
     seoImage: '/product_get_script.webp',
-    heroImageAlt: 'Windows配布候補の確認情報イメージ',
+    heroImageAlt: 'Windows版ファイル情報の確認イメージ',
     body: [
-      `Windows向け配布候補 ${publicDistribution.versionLabel} の確認情報を整理しました。候補チャンネルは ${publicDistribution.channel} です。`,
-      'ダウンロードページでは、候補ファイル名、サイズ、SHA256を確認できます。D10確認が揃うまで実行ファイルの直接取得CTAは表示しません。',
-      '署名状態、発行者表示、SmartScreen実測は配布ゲートで別途確認します。未確認の状態で正式公開済みとは扱いません。',
-      '更新後は、まず起動、台本編集、素材整理、YMM4前準備まで通るか確認してください。詳しい手順はダウンロード、使い方、アップデート履歴にまとめています。',
+      `Windows向け ${publicDistribution.versionLabel} のファイル情報を整理しました。チャンネルは ${publicDistribution.channel} です。`,
+      'ダウンロードページでは、ファイル名、サイズ、SHA256を確認できます。公式サイトの案内とファイル情報を照合してから取得してください。',
+      '署名状態、発行者表示、SmartScreen実測は導入前の確認項目として案内します。',
+      '更新後は、まず起動、台本編集、素材整理、YMM4連携まで通るか確認してください。詳しい手順はダウンロード、使い方、アップデート履歴にまとめています。',
     ],
   },
   {
     path: '/2026-01-15-download-guide/',
     date: '2026-01-15T18:30:00+09:00',
     dateLabel: '2026年01月15日',
-    title: 'お知らせ: 配布確認手順を更新しました',
+    title: 'お知らせ: 導入確認手順を更新しました',
     subtitle: '導入前の確認項目を整理し、配布ページまでの到達導線を短縮しました。',
     summary:
-      '配布確認手順の更新内容をお知らせします。導入時の確認項目も合わせて見直し、迷わず開始できる内容に整えています。',
-    seoDescription: '配布確認手順の更新内容をお知らせします。',
+      '導入確認手順の更新内容をお知らせします。導入時の確認項目も合わせて見直し、迷わず開始できる内容に整えています。',
+    seoDescription: '導入確認手順の更新内容をお知らせします。',
     seoImage: '/product_guide.webp',
     heroImageAlt: 'ダウンロード手順更新のお知らせイメージ',
     body: [

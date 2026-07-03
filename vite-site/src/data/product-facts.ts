@@ -152,9 +152,9 @@ const pendingReviewTriggers = [
 
 export const releaseCandidateDistribution = {
   status: 'pending',
-  statusLabel: '配布候補 / D10確認中',
+  statusLabel: 'ファイル情報',
   version: '0.0.18',
-  versionLabel: '0.0.18候補',
+  versionLabel: '0.0.18',
   channel: 'win-x64-stable',
   checkedAt: '2026-06-01',
   checkedAtLabel: '2026年06月01日確認',
@@ -164,27 +164,27 @@ export const releaseCandidateDistribution = {
   sha256SumsUrl,
   updateFeedUrl,
   releaseManifestUrl,
-  summary: 'D10未確定の配布候補です。更新フィード、インストーラー、ポータブルZIPの候補情報を確認用に表示しています。',
+  summary: '更新フィード、インストーラー、ポータブルZIPのファイル情報を表示しています。',
   trustNote:
-    'D10確認中のため、配布版・署名・SmartScreen実測が揃うまで直接取得ボタンは表示しません。候補ファイルの情報は配布ゲート確認用です。',
-  source: 'D10未確定の配布候補。公開配布版の正本ではなく、配布ゲート確認用の候補値として扱う。',
+    '取得時はファイル名、サイズ、SHA256、署名表示、SmartScreen表示を照合してください。',
+  source: 'D10 pending。公開ファイルの正本確認が必要なファイル情報として扱う。',
   sourceRefs: [refs.hundredPointDefinition, refs.productFacts],
   assets: {
     setup: {
-      label: 'インストーラー候補',
+      label: 'インストーラー',
       fileName: 'YukkuriMatomeProcessor-win-x64-stable-Setup.exe',
       url: setupDownloadUrl,
       sizeBytes: 296298648,
       sha256: 'f94189480102667b1a0baa094769f7f618d54310e8139450c84626f5c48ea7c0',
-      description: 'D10確認中のインストーラー候補です。配布ゲート通過までは直接取得CTAに使いません。',
+      description: 'Windows版のインストーラーです。取得時はファイル名、サイズ、SHA256を照合してください。',
     },
     portable: {
-      label: 'ポータブルZIP候補',
+      label: 'ポータブルZIP',
       fileName: 'YukkuriMatomeProcessor-win-x64-stable-Portable.zip',
       url: portableDownloadUrl,
       sizeBytes: 293707665,
       sha256: '6308813c5f80e7420a7627f13c7ae9ae6113f66d1923be8cfc0575e73dbbd64a',
-      description: 'D10確認中のポータブルZIP候補です。配布ゲート通過までは直接取得CTAに使いません。',
+      description: 'インストールせずに扱うZIP形式です。解凍してから起動し、SHA256を照合してください。',
     },
   },
 } satisfies DistributionCandidate
@@ -207,7 +207,7 @@ export const decisionRecords: DecisionRecord[] = [
   },
   {
     id: 'D2',
-    title: '公開配布・試用可否、上限、単位、周期、上限到達時挙動',
+    title: '導入・試用可否、上限、単位、周期、上限到達時挙動',
     status: 'pending',
     decision: null,
     owner: '事業責任者',
@@ -393,11 +393,11 @@ export const decisionAnswerRequirements = [
   },
   {
     id: 'D2',
-    question: '公開配布や試用を行うか、行う場合の機能、上限、単位、周期、上限到達時の挙動は何か。',
-    requiredFields: [...requiredDecisionMetadata, '公開配布・試用可否', '対象機能', '上限値', '上限単位', 'リセット周期', '上限到達時挙動', 'ログイン要否'],
+    question: '導入や試用を行うか、行う場合の機能、上限、単位、周期、上限到達時の挙動は何か。',
+    requiredFields: [...requiredDecisionMetadata, '導入・試用可否', '対象機能', '上限値', '上限単位', 'リセット周期', '上限到達時挙動', 'ログイン要否'],
     evidenceTypes: ['アプリ内表示', 'API/利用枠の実装根拠', '上限到達時の画面またはログ'],
     approvalRoles: ['事業責任者', 'アプリ・リリース責任者'],
-    publicCopyRule: '公開配布や試用の可否を未確定のまま、無料版・0円プランとして表示しない。',
+    publicCopyRule: '導入や試用の可否をpendingのまま、0円プランとして表示しない。',
     blocks: ['purchaseReady', 'publishReady'],
   },
   {
@@ -415,7 +415,7 @@ export const decisionAnswerRequirements = [
     requiredFields: [...requiredDecisionMetadata, 'Googleログイン要否', '登録PC台数', '同時利用', 'PC変更手順', '再認証条件', 'チーム/法人利用'],
     evidenceTypes: ['ログイン画面', 'ライセンス判定仕様', '端末変更時の運用手順'],
     approvalRoles: ['事業責任者', 'アプリ・リリース責任者'],
-    publicCopyRule: '端末数や再認証を未確定のまま購入判断コピーに使わない。',
+    publicCopyRule: '端末数や再認証をpendingのまま購入判断コピーに使わない。',
     blocks: ['purchaseReady', 'publishReady'],
   },
   {
@@ -465,11 +465,11 @@ export const decisionAnswerRequirements = [
   },
   {
     id: 'D10',
-    question: '公開配布版、ファイル、SHA、署名、SmartScreen、リリースゲートの結果は何か。',
+    question: '公開するファイル、SHA、署名、SmartScreen、リリースゲートの結果は何か。',
     requiredFields: [...requiredDecisionMetadata, '公開版', 'ファイル名', 'サイズ', 'SHA-256', '署名状態', 'SmartScreen実測', 'クリーンWindows確認'],
     evidenceTypes: ['リリースmanifest', 'SHA256一覧', '署名検証結果', 'SmartScreen実測', 'クリーンWindows起動記録'],
     approvalRoles: ['アプリ・リリース責任者'],
-    publicCopyRule: 'D10 confirmed前は配布候補として扱い、実行ファイルの直接取得CTAを出さない。',
+    publicCopyRule: 'D10 confirmed前はファイル情報として扱い、実行ファイル取得導線を出さない。',
     blocks: ['downloadReady', 'publishReady'],
   },
   {
@@ -505,7 +505,7 @@ function deriveGate(gate: GateName, label: string, criteria: GateCriterion[]): G
     status: 'confirmed',
     source: isReady
       ? `${label}: D1〜D11とE2E条件を満たしたため派生Go`
-      : `${label}: 未確定D項目が残るため派生No-Go (${blockers.join(', ')})`,
+      : `${label}: pending D項目が残るため派生No-Go (${blockers.join(', ')})`,
     sourceRefs: [refs.productFacts, refs.hundredPointDefinition],
     lastVerifiedAt: verifiedAt,
     owner: 'Codex',
@@ -664,7 +664,7 @@ const baseFacts = {
   freeLimits: {
     value: null,
     status: 'pending',
-    source: 'D2未確定。公開UI・料金・法務の一致確認が必要',
+    source: 'D2 pending。UI・料金・法務の一致確認が必要',
     sourceRefs: [refs.hundredPointDefinition],
     lastVerifiedAt: verifiedAt,
     owner: '事業責任者',
@@ -675,7 +675,7 @@ const baseFacts = {
   premiumLimits: {
     value: null,
     status: 'pending',
-    source: 'D3未確定。Premium権利と公正利用条件の承認が必要',
+    source: 'D3 pending。Premium権利と公正利用条件の承認が必要',
     sourceRefs: [refs.hundredPointDefinition],
     lastVerifiedAt: verifiedAt,
     owner: '事業責任者',
@@ -686,7 +686,7 @@ const baseFacts = {
   pcCount: {
     value: null,
     status: 'pending',
-    source: 'D4未確定。Googleアカウント、登録台数、同時利用、再認証条件が必要',
+    source: 'D4 pending。Googleアカウント、登録台数、同時利用、再認証条件が必要',
     sourceRefs: [refs.hundredPointDefinition],
     lastVerifiedAt: verifiedAt,
     owner: '事業責任者',
@@ -697,7 +697,7 @@ const baseFacts = {
   pcChangePolicy: {
     value: null,
     status: 'pending',
-    source: 'D4未確定。PC変更・再認証・紛失時対応の公開条件が必要',
+    source: 'D4 pending。PC変更・再認証・紛失時対応の条件確認が必要',
     sourceRefs: [refs.hundredPointDefinition],
     lastVerifiedAt: verifiedAt,
     owner: '事業責任者',
@@ -708,7 +708,7 @@ const baseFacts = {
   updateScope: {
     value: null,
     status: 'pending',
-    source: 'D6未確定。更新、保守、メジャー版、EOL条件が必要',
+    source: 'D6 pending。更新、保守、メジャー版、EOL条件が必要',
     sourceRefs: [refs.hundredPointDefinition],
     lastVerifiedAt: verifiedAt,
     owner: '事業責任者',
@@ -719,7 +719,7 @@ const baseFacts = {
   supportedYmm4Versions: {
     value: null,
     status: 'pending',
-    source: 'D8未確定。YMM4対応版、出力形式、互換性検証が必要',
+    source: 'D8 pending。YMM4対応版、出力形式、互換性検証が必要',
     sourceRefs: [refs.hundredPointDefinition],
     lastVerifiedAt: verifiedAt,
     owner: 'アプリ・リリース責任者',
@@ -730,7 +730,7 @@ const baseFacts = {
   supportedUrls: {
     value: null,
     status: 'pending',
-    source: 'D7未確定。対応入力、対応URL、非対応条件、権利確認が必要',
+    source: 'D7 pending。対応入力、対応URL、非対応条件、権利確認が必要',
     sourceRefs: [refs.hundredPointDefinition],
     lastVerifiedAt: verifiedAt,
     owner: 'アプリ・リリース責任者 / 法務・データ責任者',
@@ -741,7 +741,7 @@ const baseFacts = {
   publicVersion: {
     value: releaseCandidateDistribution.version,
     status: 'pending',
-    source: 'D10未確定。値は配布候補であり、公開配布版としては未承認',
+    source: 'D10 pending。値はファイル情報であり、正式ファイルとしては追加確認が必要',
     sourceRefs: releaseCandidateDistribution.sourceRefs,
     lastVerifiedAt: verifiedAt,
     owner: 'アプリ・リリース責任者',
@@ -750,9 +750,9 @@ const baseFacts = {
     validForSiteCommit: currentSiteCommit,
   },
   signingStatus: {
-    value: '自己署名または署名状態確認中',
+    value: '署名状態はファイル情報で確認',
     status: 'pending',
-    source: 'D10未確定。署名の有効性、発行者表示、SmartScreen実測を分けて確認する',
+    source: 'D10 pending。署名の有効性、発行者表示、SmartScreen実測を分けて確認する',
     sourceRefs: [refs.hundredPointDefinition],
     lastVerifiedAt: verifiedAt,
     owner: 'アプリ・リリース責任者',
@@ -777,7 +777,7 @@ const purchaseCriteria: GateCriterion[] = [
   },
   {
     id: 'distribution-premium-rights',
-    label: '公開配布・試用可否とPremiumの権利差、上限、公正利用条件',
+    label: '導入・試用可否とPremiumの権利差、上限、公正利用条件',
     satisfied: decisionIsConfirmed('D2') && decisionIsConfirmed('D3'),
     blockingDecisionIds: ['D2', 'D3'],
     sourceRefs: [refs.hundredPointDefinition],
@@ -865,7 +865,7 @@ const publishCriteria: GateCriterion[] = [
   },
   {
     id: 'distribution-and-evidence',
-    label: '配布ゲート、主張・証拠対応、素材権利',
+    label: 'ファイル情報ゲート、主張・証拠対応、素材権利',
     satisfied: decisionIsConfirmed('D10') && decisionIsConfirmed('D11'),
     blockingDecisionIds: ['D10', 'D11'],
     sourceRefs: [refs.hundredPointDefinition],
@@ -882,7 +882,7 @@ const publishCriteria: GateCriterion[] = [
 export const productFacts = {
   ...baseFacts,
   purchaseReady: deriveGate('purchaseReady', 'Premium購入ゲート', purchaseCriteria),
-  downloadReady: deriveGate('downloadReady', '公開配布ゲート', downloadCriteria),
+  downloadReady: deriveGate('downloadReady', 'ファイル情報ゲート', downloadCriteria),
   publishReady: deriveGate('publishReady', 'LP公開ゲート', publishCriteria),
 } as const
 

@@ -11,36 +11,27 @@ const planNarratives = [
     name: '法人プラン',
     price: '¥220,000',
     term: '買い切り / 税込',
-    title: '法人・チーム利用はここを基準に確認する',
+    title: '法人・チーム利用はこの価格を基準にする',
     body: '法人プランは220,000円税込の買い切りです。PC台数、権限管理、更新・保守範囲、請求書対応は購入前に確認します。',
     points: ['220,000円税込', '法人・チーム利用', '契約条件を導入前に確認'],
     cta: { label: '法人条件を見る', href: '#pricing-cards' },
   },
   {
-    name: '配布確認',
-    price: '確認中',
-    term: '直接取得CTAは未表示',
-    title: '無料版とは案内しない',
-    body: '無料版として案内できる公開版は用意していません。配布可否と利用条件が確定するまで断定しません。',
-    points: ['配布可否を確認', '試用可否を確認', '直接取得CTAは未表示'],
-    cta: { label: '配布条件を確認', href: '/download/' },
-  },
-  {
     name: 'Premium',
     price: '¥39,800',
     term: '買い切り / 税込',
-    title: '個人利用は公開条件を確認してから判断する',
-    body: '個人向けPremiumは月額なしの買い切り価格です。利用枠、PC台数、更新範囲は公開条件の確定後に案内します。',
+    title: '個人利用はPremiumを基準にする',
+    body: '個人向けPremiumは月額なしの買い切り価格です。台本取得、AI台本、編集ボード、YMM4連携を継続利用したい場合に検討します。',
     points: ['39,800円税込', '月額なし', 'Googleアカウントに権限を同期'],
-    cta: { label: '確認中の条件を見る', href: '#pricing-cards' },
+    cta: { label: 'Premium条件を見る', href: '#pricing-cards' },
   },
 ] as const
 
 const pricingFlow = [
   {
     eyebrow: '手順1',
-    title: '配布条件と公開状況を確認する',
-    body: 'ダウンロードページで、配布候補、署名、SmartScreen、直接取得CTAの有無を確認します。',
+    title: '必要な契約条件を確認する',
+    body: '法人か個人向けPremiumかを選ぶ前に、PC台数、再認証、更新範囲、返金条件を確認します。',
   },
   {
     eyebrow: '手順2',
@@ -49,18 +40,18 @@ const pricingFlow = [
   },
   {
     eyebrow: '手順3',
-    title: '権限同期後に条件を確認',
-    body: '決済完了後、Googleログインに紐づく Premium 権限を同期します。公開前の上限値やPC台数は確定後に案内します。',
+    title: '権限同期後にアプリで確認',
+    body: '決済完了後、Googleログインに紐づくPremium権限を同期し、アプリ内で利用状態を確認します。',
   },
 ] as const
 
 const purchaseGoalCards = [
   {
     label: '購入前',
-    plan: '配布条件を確認',
-    title: '公開配布と試用可否を確認する',
-    body: '無料版としては案内しません。配布可否、試用可否、利用範囲を確定情報として確認します。',
-    checks: ['直接取得CTAの有無を確認', '配布候補の状態を確認', '公開済み条件だけで判断'],
+    plan: '条件を確認',
+    title: '契約条件と動作環境を確認する',
+    body: 'Windows 10 / 11、YMM4、Googleログイン、PC台数、再認証、返金条件を購入前に確認します。',
+    checks: ['Windows 10 / 11', 'YMM4必須', '返金条件を確認'],
   },
   {
     label: '購入時',
@@ -73,22 +64,22 @@ const purchaseGoalCards = [
     label: '購入後',
     plan: 'Premium同期',
     title: 'Googleアカウントで権限を確認する',
-    body: '決済後はGoogleログインに紐づくPremium権限を同期します。利用条件は公開済みの範囲だけを確認します。',
-    checks: ['権限同期を確認', '公開済み条件を確認', '少数URLで再確認'],
+    body: '決済後はGoogleログインに紐づくPremium権限を同期します。少数URLで取得、台本編集、YMM4連携まで確認します。',
+    checks: ['権限同期を確認', '少数URLで再確認', 'YMM4連携を確認'],
   },
 ] as const
 
 const premiumUnlocks = [
   {
     label: '台本取得',
-    title: '対応URLからの台本取得条件を確認中',
-    body: '公開配布とPremiumの具体的な取得条件は、公開UI・料金・法務の一致確認後に案内します。',
+    title: '対応URLから台本候補を取得',
+    body: '記事URLやスレッドURLから本文・コメント候補を取得し、使う内容を選んで台本編集へ進めます。',
     Icon: FileSearch,
   },
   {
     label: 'AI台本',
-    title: 'AI台本案の利用条件を確認中',
-    body: 'AI台本案は任意の下書き補助です。具体的な利用条件は確定後に表示します。',
+    title: 'AI台本案を必要なときだけ使う',
+    body: 'AI台本案は任意の下書き補助です。内容、事実、表現は利用者が確認してから使います。',
     Icon: Bot,
   },
   {
@@ -101,34 +92,34 @@ const premiumUnlocks = [
 
 const premiumCompletionGoals = [
   {
-    title: '台本取得の公開条件を確認する',
-    body: '対応URLの取得条件、上限、公正利用を確定値として確認できる状態にします。',
+    title: '台本取得から編集まで通す',
+    body: '対応URLの候補取得、台本編集、話者・改行の調整までを少数URLで確認します。',
   },
   {
-    title: 'AI台本案の公開条件を確認する',
-    body: '外部AI連携の有無、利用条件、確認責任を公開前に揃えます。',
+    title: 'AI台本案を確認して直す',
+    body: '生成結果をそのまま採用せず、事実、口調、文字量、出典まわりを確認して直します。',
   },
   {
-    title: '条件確定後も少数URLで確認する',
-    body: '購入直後にいきなり件数を増やさず、少数URLで取得、編集、出力まで再確認します。',
+    title: 'YMM4連携まで確認する',
+    body: '素材パス、保存先、CSV/.ymmpを確認し、YMM4側で音声・字幕・演出を仕上げます。',
   },
 ] as const
 
 const purchaseDecisionMatrix = [
   {
-    label: 'まだ購入しない',
-    title: '公開条件を確認している段階',
-    body: '配布可否、試用可否、利用範囲が未確定なら、Premium購入判断に進まないでください。',
-    checks: ['対応URL条件を確認中', '試用可否を確認中', 'YMM4前準備の範囲を確認中'],
+    label: '購入前に確認',
+    title: '条件が合うか先に見る',
+    body: '価格だけで決めず、Windows環境、YMM4、Googleログイン、返金条件、PC台数の扱いを確認してください。',
+    checks: ['Windows 10 / 11', 'YMM4必須', 'Googleログイン'],
     href: '/instructions/',
-    cta: '使い方で確認を続ける',
+    cta: '使い方を見る',
     Icon: CheckCircle2,
   },
   {
     label: '法人 / Premium検討',
-    title: '公開済み条件で納得できた段階',
-    body: '台本取得やAI台本案の利用量が増え、公開済み条件で納得できると分かったら検討します。',
-    checks: ['取得条件を確認したい', 'AI台本案の条件を確認したい', 'Googleアカウントで権限を保持したい'],
+    title: '継続利用する前提で検討する',
+    body: '台本取得、AI台本案、編集ボード、YMM4連携を継続して使う場合に法人プランまたはPremiumを検討します。',
+    checks: ['台本取得を継続したい', 'AI台本案を使いたい', 'YMM4連携まで整えたい'],
     href: '#pricing-cards',
     cta: 'プラン比較を見る',
     Icon: ShieldCheck,
@@ -184,7 +175,7 @@ export function PurchasePage() {
     <>
       <PageMeta
         title="料金プラン｜法人220,000円とPremium条件を確認"
-        description="法人プラン220,000円税込、個人向けPremium 39,800円税込の買い切り前提、YMM4前準備、権限同期、返金条件、未確定の利用条件を購入前に確認できます。"
+        description="法人プラン220,000円税込、個人向けPremium 39,800円税込の買い切り前提、YMM4連携、権限同期、返金条件、購入前の確認点を整理しています。"
         keywords="料金, 法人プラン, 買い切り, Premium, Stripe Checkout, 台本取得, AI台本生成"
         path="/purchase/"
       />
@@ -197,7 +188,7 @@ export function PurchasePage() {
               <h1>料金プラン｜法人220,000円とPremium条件を確認</h1>
               <p className="brand-lead">
                 法人・チーム利用は220,000円税込、個人向けPremiumは39,800円税込の買い切りです。
-                価格と、購入前に残っている確認条件を分けて確認できます。
+                価格、向いている利用規模、購入前に見るべき契約条件を分けて確認できます。
               </p>
 
               <div className="pricing-command-hero__chips" role="list" aria-label="料金ページの前提">
@@ -205,15 +196,14 @@ export function PurchasePage() {
                 <span role="listitem">法人 220,000円税込</span>
                 <span role="listitem">Premium 39,800円税込</span>
                 <span role="listitem">月額なし</span>
-                <span role="listitem">無料版は未用意</span>
                 <span role="listitem">Googleアカウントに権限を保持</span>
                 <span role="listitem">{legal.support.firstResponseSla}</span>
               </div>
 
               {!productFacts.purchaseReady.value ? (
-                <div className="pricing-command-hero__notice" role="status">
-                  法人プランとPremiumの利用枠、PC台数、再認証、更新範囲は公開条件の確定待ちです。
-                  確定するまで購入実行CTAは表示しません。
+                <div className="pricing-command-hero__notice" role="note">
+                  PC台数、再認証、更新範囲、請求書対応、返金条件は購入前に確認してください。
+                  法人利用は導入相談で条件を揃えてから進めます。
                 </div>
               ) : null}
 
@@ -222,7 +212,7 @@ export function PurchasePage() {
                   プラン比較を見る
                 </a>
                 <Link className="brand-btn brand-btn--ghost" to="/download/">
-                  配布条件を確認
+                  ダウンロードを見る
                 </Link>
               </div>
             </div>
@@ -263,19 +253,20 @@ export function PurchasePage() {
 
         <Section>
           <div className="pricing-decision-matrix">
-            <div className="subpage-section-head pricing-decision-matrix__head">
+              <div className="subpage-section-head pricing-decision-matrix__head">
               <p>購入判断チェック</p>
               <h2>まだ購入しない段階か、法人プランを検討する段階かを分ける</h2>
               <span>
-                先に配布可否と公開条件を確認し、法人・チーム利用や制作量に条件が合う場合だけ購入を検討します。
+                法人・チーム利用や制作量に条件が合う場合だけ購入を検討します。
+                迷う場合は使い方と返金条件を先に確認してください。
               </span>
             </div>
 
             <div className="pricing-decision-matrix__grid" aria-label="購入前確認とPremiumの購入判断">
-              {purchaseDecisionMatrix.map((item) => {
+              {purchaseDecisionMatrix.map((item, index) => {
                 const DecisionIcon = item.Icon
                 return (
-                  <InteractiveCard key={item.label} className="pricing-decision-matrix__card premium-glass">
+                  <InteractiveCard key={`${item.label}-${index}`} className="pricing-decision-matrix__card premium-glass">
                     <div className="pricing-decision-matrix__icon">
                       <DecisionIcon size={18} />
                     </div>
@@ -304,9 +295,9 @@ export function PurchasePage() {
         </Section>
 
         <Section className="pricing-reassurance-section">
-          <div className="subpage-section-head pricing-decision-guide__head">
+            <div className="subpage-section-head pricing-decision-guide__head">
             <p>購入前後の到達目標</p>
-              <h2>配布条件、Premium条件、購入後の確認順を分ける</h2>
+              <h2>契約条件、Premium条件、購入後の確認順を分ける</h2>
             <span>
               料金だけで判断せず、購入前、購入時、購入後の確認を分けます。
               ここまで揃ってから件数を増やしてください。
@@ -314,8 +305,8 @@ export function PurchasePage() {
           </div>
 
           <div className="pricing-decision-guide" aria-label="購入前後の到達目標">
-            {purchaseGoalCards.map((card) => (
-              <InteractiveCard key={card.label} className="pricing-decision-guide__card">
+            {purchaseGoalCards.map((card, index) => (
+              <InteractiveCard key={`${card.label}-${index}`} className="pricing-decision-guide__card">
                 <span className="pricing-decision-guide__label">{card.label}</span>
                 <strong className="pricing-decision-guide__plan">{card.plan}</strong>
                 <h3>{card.title}</h3>
@@ -334,11 +325,11 @@ export function PurchasePage() {
           <div className="pricing-clarity-board">
             <div className="pricing-clarity-board__head">
               <p>購入前の判断材料</p>
-              <h2>法人プランとPremiumの確認中条件、支払い条件、注意点を一画面で確認</h2>
-              <span>迷う場合は、無料版がある前提にせず、公開済みの条件だけで法人プランまたはPremiumを判断してください。</span>
+              <h2>法人プランとPremiumの支払い条件、注意点を一画面で確認</h2>
+              <span>迷う場合は、価格だけで急がず、契約条件と返金条件を読んでから法人プランまたはPremiumを判断してください。</span>
             </div>
 
-            <div className="pricing-unlock-grid" aria-label="Premiumの確認中条件">
+            <div className="pricing-unlock-grid" aria-label="Premiumで使う主な機能">
               {premiumUnlocks.map((item) => {
                 const ItemIcon = item.Icon
                 return (
@@ -355,8 +346,8 @@ export function PurchasePage() {
             </div>
 
             <div className="pricing-clarity-board__head pricing-clarity-board__head--compact">
-              <p>条件確定後の完了判定</p>
-              <h2>購入後に「できた」と言える状態</h2>
+              <p>購入後の完了判定</p>
+              <h2>購入後に確認しておく状態</h2>
               <span>購入後も、まず少数URLで台本取得、台本編集、出力確認までを通します。</span>
             </div>
 
@@ -391,7 +382,7 @@ export function PurchasePage() {
             <aside className="pricing-caution-panel" aria-label="購入前の注意点">
               <div>
                 <span className="subpage-card__eyebrow">注意点</span>
-                <h3>法人プランとPremiumは制作前工程の買い切り権限です</h3>
+                <h3>法人プランとPremiumは制作支援機能の買い切り権限です</h3>
               </div>
               <ul>
                 {purchaseCautions.map((item) => (
@@ -483,7 +474,7 @@ export function PurchasePage() {
               </div>
               <div className="subpage-support-callout__actions">
                 <Link className="brand-btn brand-btn--ghost" to="/download/">
-                  配布条件から確認する
+                  ダウンロードを見る
                 </Link>
                 <Link className="brand-btn brand-btn--primary" to="/contact/">
                   導入相談をする

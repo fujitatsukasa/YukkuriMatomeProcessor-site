@@ -35,7 +35,7 @@ const supportBundle = [
 ] as const
 
 const downloadMetrics = [
-  { value: '確認中', label: '公開配布の可否', detail: '無料版としては案内しない' },
+  { value: 'Windows', label: '導入前の確認', detail: 'OS、YMM4、保存先を先に揃える' },
   { value: '6手順', label: '最初に触る順番', detail: '解凍 -> 起動 -> 設定 -> URL入力 -> 出力確認' },
   { value: 'YMM4', label: '後工程の手戻りを削減', detail: '保存先、CSV、連携パスの整合を先に揃える' },
 ] as const
@@ -97,9 +97,9 @@ const instructionGoalCards = [
     Icon: Bot,
   },
   {
-    title: 'YMM4前準備まで通す',
-    body: 'CSV/.ymmp前準備、素材パス、保存先を確認して、YMM4側の編集へ進める状態にします。',
-    done: ['CSV/.ymmp前準備を出力', '素材パスを確認', 'YMM4で開く前の確認を終える'],
+    title: 'YMM4連携まで通す',
+    body: 'CSV/.ymmp、素材パス、保存先を確認して、YMM4側の編集へ進める状態にします。',
+    done: ['CSV/.ymmpを出力', '素材パスを確認', 'YMM4で開く前の確認を終える'],
     Icon: FolderCog,
   },
 ] as const
@@ -137,11 +137,11 @@ const instructionFeatureGoalMap = [
   },
   {
     step: '04',
-    title: 'CSV/.ymmp前準備',
+    title: 'CSV/.ymmp',
     goal: 'フォーマット、キャラ設定、出力名を決める',
-    success: '保存先に編集前準備ファイルを作れる',
+    success: '保存先に編集用データファイルを作れる',
     image: '/product_format_list.webp',
-    alt: 'CSVと.ymmp前準備のフォーマット管理画面',
+    alt: 'CSVと.ymmpのフォーマット管理画面',
     href: '#instruction-step-05',
     Icon: FolderCog,
   },
@@ -161,17 +161,17 @@ const instructionFeatureGoalMap = [
     goal: '素材パス、保存先、キャラ設定を見直す',
     success: 'YMM4側で最終編集へ進める',
     image: '/product_keyword_material.webp',
-    alt: '素材パスとYMM4前準備を確認する実アプリ画面',
+    alt: '素材パスとYMM4連携を確認する実アプリ画面',
     href: '#instruction-step-06',
     Icon: Send,
   },
 ] as const
 
 const completionChecks = [
-  '配布可否と公開条件を確認した',
+  'OS、YMM4、保存先を確認した',
   '対象URLの取得可否を少数件で確認した',
   '台本下地をそのまま使わず内容確認した',
-  'CSV/.ymmp前準備の保存先を確認した',
+  'CSV/.ymmpの保存先を確認した',
   'YMM4側で最終編集が必要な前提を理解した',
 ] as const
 
@@ -202,8 +202,8 @@ const completionGateItems = [
   },
   {
     id: 'export',
-    title: 'CSV/.ymmp前準備を出力した',
-    body: '保存先に編集前準備のファイルが作成され、次の編集へ渡せる状態にした。',
+    title: 'CSV/.ymmpを出力した',
+    body: '保存先に編集用データのファイルが作成され、次の編集へ渡せる状態にした。',
     href: '#instruction-step-05',
   },
   {
@@ -242,7 +242,7 @@ const downloadSupportCards = [
   {
     eyebrow: '次に見るページ',
     title: '導入後に進むべきページ',
-    body: '使い方で操作手順、料金で確認中条件、FAQで詰まりどころを確認できます。',
+    body: '使い方で操作手順、料金で購入前条件、FAQで詰まりどころを確認できます。',
     links: [
       { label: '使い方を見る', href: '/instructions/' },
       { label: '料金を確認', href: '/purchase/' },
@@ -253,12 +253,12 @@ const downloadSupportCards = [
 
 const distributionChecks = [
   {
-    title: '候補リンク',
-    body: '配布候補は Cloudflare Workers/R2 のインストーラー候補とポータブルZIP候補です。D10確認が揃うまで直接取得CTAは表示しません。',
+    title: 'ファイル情報',
+    body: 'Cloudflare Workers/R2 のインストーラーとポータブルZIPのファイル名、サイズ、SHA256を確認します。',
   },
   {
     title: '初回起動前',
-    body: '配布ゲート通過後に取得する場合、インストーラーはそのまま実行、ポータブルZIPは解凍してから起動します。Windowsの警告が出た場合は、配布元URL、ファイル名、SHA256を確認してください。',
+    body: '案内に沿って取得する場合、インストーラーはそのまま実行、ポータブルZIPは解凍してから起動します。Windowsの警告が出た場合は、配布元URL、ファイル名、SHA256を確認してください。',
   },
   {
     title: '起動後に確認',
@@ -273,8 +273,8 @@ const distributionChecks = [
 const distributionReadinessCards = [
   {
     title: '取得前に見る情報',
-    body: 'D10確認中の候補バージョン、確認日、ファイル名、サイズ、SHA256、配布元候補を確認します。',
-    done: ['インストーラー候補名を確認', 'ポータブルZIP候補の有無を確認', 'サイズとSHA256を確認'],
+    body: 'バージョン、確認日、ファイル名、サイズ、SHA256、配布元を確認します。',
+    done: ['インストーラー名を確認', 'ポータブルZIPの有無を確認', 'サイズとSHA256を確認'],
     Icon: FileSearch,
   },
   {
@@ -298,7 +298,7 @@ const distributionReadinessCards = [
 ] as const
 
 const distributionCompletionChecks = [
-  '配布ページで候補ファイル情報を確認した',
+  'ダウンロードページでファイル情報を確認した',
   'ポータブルZIPは解凍してから起動した',
   'Windows警告が出た場合に配布元とSHA256を確認した',
   'YMM4.exeと保存先を保存した',
@@ -307,22 +307,22 @@ const distributionCompletionChecks = [
 
 const downloadChoiceCards = [
   {
-    label: '候補ファイル',
-    title: 'インストーラー候補',
+    label: 'ファイル',
+    title: 'インストーラー',
     fileName: publicDistribution.assets.setup.fileName,
     shortName: 'Setup.exe',
-    body: 'Windowsアプリとして入れる形式の候補です。D10確認完了までは直接取得CTAに使いません。',
-    goodFor: ['候補ファイル名の確認', 'サイズ確認', 'SHA256照合'],
+    body: 'Windowsアプリとして入れる形式です。ファイル名、サイズ、SHA256を照合して扱います。',
+    goodFor: ['ファイル名の確認', 'サイズ確認', 'SHA256照合'],
     href: publicDistribution.assets.setup.url,
     Icon: Download,
   },
   {
-    label: '候補ファイル',
-    title: 'ポータブルZIP候補',
+    label: 'ファイル',
+    title: 'ポータブルZIP',
     fileName: publicDistribution.assets.portable.fileName,
     shortName: 'Portable.zip',
-    body: 'インストールせずに確認する形式の候補です。D10確認完了までは直接取得CTAに使いません。',
-    goodFor: ['候補ファイル名の確認', '解凍手順の確認', 'SHA256照合'],
+    body: 'インストールせずに扱う形式です。解凍してから起動し、保存先と素材パスを確認します。',
+    goodFor: ['ファイル名の確認', '解凍手順の確認', 'SHA256照合'],
     href: publicDistribution.assets.portable.url,
     Icon: Wrench,
   },
@@ -362,7 +362,7 @@ const fallbackDistributionInfo: PublicDistributionInfo = {
 
 function formatReleaseDate(isoDate: string) {
   const date = new Date(isoDate)
-  if (Number.isNaN(date.getTime())) return '確認中'
+  if (Number.isNaN(date.getTime())) return '日付未取得'
 
   return new Intl.DateTimeFormat('ja-JP', {
     year: 'numeric',
@@ -456,7 +456,7 @@ function ReleaseIntegrityPanel() {
 
   const statusLabel =
     !downloadReady
-      ? 'D10確認中 / 配布候補'
+      ? 'ファイル情報'
       : release.source === 'live'
         ? '配布ノート取得済み'
       : release.source === 'error'
@@ -469,10 +469,10 @@ function ReleaseIntegrityPanel() {
     <InteractiveCard as="section" className="release-integrity-panel premium-glass">
       <div className="release-integrity-panel__top">
         <div>
-          <span className="subpage-card__eyebrow">配布候補情報</span>
-          <h2>候補ファイル名・サイズ・SHA256を確認できます</h2>
+          <span className="subpage-card__eyebrow">ファイル情報</span>
+          <h2>ファイル名・サイズ・SHA256を確認できます</h2>
           <p>
-            配布条件が確定したら、Cloudflare Workers/R2 の配布ファイルへ案内します。取得前後にファイル名とハッシュを確認すると、
+            Cloudflare Workers/R2 のファイル情報を確認します。取得前後にファイル名とハッシュを確認すると、
             別URLや古い配布物との取り違えを避けやすくなります。
           </p>
         </div>
@@ -493,7 +493,7 @@ function ReleaseIntegrityPanel() {
           <dd>{publicDistribution.channel}</dd>
         </div>
         <div>
-          <dt>候補配布元</dt>
+          <dt>配布元</dt>
           <dd>Cloudflare Workers/R2</dd>
         </div>
       </dl>
@@ -541,8 +541,8 @@ function ReleaseIntegrityPanel() {
             </a>
           </>
         ) : (
-          <div className="download-gate-note" role="status">
-            配布バージョン、署名状態、公開ゲートの確認中です。確認が揃うまで、このページでは実行ファイルの直接取得ボタンを表示しません。
+          <div className="download-gate-note" role="note">
+            実行ファイルの取得は、公式案内とファイル情報を照合してから進めてください。
           </div>
         )}
         {downloadReady ? (
@@ -550,7 +550,7 @@ function ReleaseIntegrityPanel() {
             SHA256一覧を見る
           </a>
         ) : (
-          <span className="download-choice-card__pending">SHA256一覧はD10確認完了後に外部リンクとして表示します</span>
+          <span className="download-choice-card__pending">SHA256はファイル情報として確認できます</span>
         )}
       </div>
     </InteractiveCard>
@@ -563,7 +563,7 @@ const instructionSteps = [
     title: '配布ページを確認する',
     image: '/product_guide.webp',
     alt: '初期設定とガイドの画面',
-    action: '配布条件とファイル情報を確認します。取得できる状態になったら作業しやすいフォルダで起動準備をします。',
+    action: 'ダウンロード情報とファイル情報を確認します。取得できる状態になったら作業しやすいフォルダで起動準備をします。',
     input: '入力なし。まずは配布ファイル名、配布元URL、保存先だけ確認します。',
     click: '解凍後、アプリ本体を起動します。',
     success: 'アプリ画面が開き、初期設定へ進める状態です。',
@@ -608,13 +608,13 @@ const instructionSteps = [
   },
   {
     number: '05',
-    title: 'CSV/.ymmp前準備を出力する',
+    title: 'CSV/.ymmpを出力する',
     image: '/product_format_list.webp',
-    alt: 'フォーマット管理とYMM4前準備の画面',
-    action: '台本をCSVや.ymmp前準備として残し、次の編集へ渡せる形にします。',
+    alt: 'フォーマット管理とYMM4連携の画面',
+    action: '台本をCSVや.ymmpとして残し、次の編集へ渡せる形にします。',
     input: 'フォーマット、キャラ設定、出力ファイル名、保存先。',
     click: 'CSV出力、.ymmp関連の出力、フォーマット保存を実行します。',
-    success: '保存先に編集前準備のファイルが作成されます。',
+    success: '保存先に編集用データのファイルが作成されます。',
     trouble: ['保存先の空き容量と権限を確認', 'ファイル名ルールを先に固定'],
     Icon: FolderCog,
   },
@@ -622,7 +622,7 @@ const instructionSteps = [
     number: '06',
     title: 'YMM4で開く前に最終確認する',
     image: '/product_keyword_material.webp',
-    alt: '素材整理とYMM4前準備の画面',
+    alt: '素材整理とYMM4連携の画面',
     action: 'CSV、キャラ設定、立ち絵パス、素材フォルダを確認してからYMM4側へ進みます。',
     input: '素材フォルダ、キャラ設定、立ち絵パス、読み方が気になる語句。',
     click: '必要に応じてパス変更、読み方監査、保存を行います。',
@@ -668,7 +668,7 @@ const instructionQuickRoute = [
   {
     href: '#instruction-step-05',
     step: '05',
-    title: 'CSV/.ymmp前準備',
+    title: 'CSV/.ymmp',
     result: '保存先に作成',
     image: '/product_format_list.webp',
     Icon: FolderCog,
@@ -676,7 +676,7 @@ const instructionQuickRoute = [
   {
     href: '#instruction-step-06',
     step: '06',
-    title: 'YMM4前の確認',
+    title: 'YMM4連携確認',
     result: '素材とパスを確認',
     image: '/product_keyword_material.webp',
     Icon: Send,
@@ -713,10 +713,10 @@ const instructionPracticePath = [
   },
   {
     time: '5分',
-    title: 'CSV/.ymmp前準備を出す',
+    title: 'CSV/.ymmpを出す',
     screen: 'フォーマット / 素材確認',
     do: '出力形式、キャラ設定、保存先、素材パスを確認し、YMM4を開く前の準備ファイルを作ります。',
-    done: '保存先に編集前準備ファイルができる',
+    done: '保存先に編集用データファイルができる',
     href: '#instruction-step-05',
     Icon: FolderCog,
   },
@@ -789,10 +789,10 @@ const downloadScenes: readonly GuideScene[] = [
   {
     key: 'handoff',
     eyebrow: '手順4',
-    title: 'YMM4 前準備まで確認する',
+    title: 'YMM4連携まで確認する',
     body: 'CSV、キャラ設定、立ち絵パス変更など、編集前に揃えるべきものをここで整理しておくと、後工程の手戻りを減らせます。',
     image: '/product_keyword_material.webp',
-    alt: 'YMM4 前準備と素材整理の画面',
+    alt: 'YMM4連携と素材整理の画面',
     checkpoint: '編集に入る前の準備が揃う',
     points: ['CSV 出力と保存先を確認', 'キャラ設定や立ち絵パスの整合を確認', 'YMM4 に渡す前の最終チェックを固定する'],
     Icon: Send,
@@ -911,7 +911,7 @@ function InstructionCompletionChecklist() {
           </span>
           <h2>この8項目が埋まったら、YMM4側の編集へ進めます</h2>
           <p>
-            公開配布後に触る段階では、ここまで確認できれば「使ってできる」状態です。
+            実際に触る段階では、ここまで確認できれば「使ってできる」状態です。
             途中で止まった項目は、右端のリンクから該当手順へ戻れます。
           </p>
         </div>
@@ -965,8 +965,8 @@ export function DownloadPage() {
   return (
     <>
       <PageMeta
-        title="ダウンロード｜配布条件と公開状況の確認"
-        description="ゆっくりまとめプロセッサーの配布条件、ファイル名、サイズ、SHA256、初回起動、YMM4パス設定、導入完了判定を確認できます。"
+        title="ダウンロード｜導入情報とファイル確認"
+        description="ゆっくりまとめプロセッサーのダウンロード情報、ファイル名、サイズ、SHA256、初回起動、YMM4パス設定、導入完了判定を確認できます。"
         keywords="ダウンロード, Windows, YMM4, 台本取得, CSV, .ymmp, ゆっくりまとめプロセッサー"
         path="/download/"
       />
@@ -974,10 +974,10 @@ export function DownloadPage() {
       <main className="brand-shell">
         <PageIntro
           kicker="ダウンロード"
-          title="配布条件と公開状況を確認する"
-          lead="Windows環境で使う前に、配布候補、署名、直接取得CTAの有無、YMM4前提を確認します"
+          title="ダウンロードと導入情報を確認する"
+          lead="Windows環境で使う前に、ファイル情報、保存先、YMM4連携を確認します"
           actions={[
-            { label: '配布情報を見る', href: '#distribution-files', variant: 'primary' },
+            { label: 'ファイル情報を見る', href: '#distribution-files', variant: 'primary' },
             { label: '使い方を見る', href: '/instructions/', variant: 'ghost' },
           ]}
           flowLinks={[
@@ -1089,7 +1089,7 @@ export function DownloadPage() {
                 <h2>ここまで確認できたら、使い方ページの手順へ進めます</h2>
                 <p>
                   ダウンロードページでは「安全確認」と「初回起動」までを扱います。URL取得、台本整理、
-                  CSV/.ymmp前準備の細かい操作は、次に使い方ページで確認してください。
+                  CSV/.ymmpの細かい操作は、次に使い方ページで確認してください。
                 </p>
               </div>
               <ul className="distribution-completion-list">
@@ -1176,7 +1176,7 @@ export function InstructionsPage() {
     <>
       <PageMeta
         title="使い方｜記事URLから台本を取得しYMM4に渡す手順"
-        description="記事URL・スレッドURLから台本を取得し、YMM4パス設定、台本整理、CSV/.ymmp前準備、YMM4確認、導入完了セルフチェックまでを実画面付きの手順書として解説します。"
+        description="記事URL・スレッドURLから台本を取得し、YMM4パス設定、台本整理、CSV/.ymmp、YMM4確認、導入完了セルフチェックまでを実画面付きの手順書として解説します。"
         keywords="使い方, 初期設定, YMM4, 台本取得, CSV, .ymmp, AI補助, 手順"
         path="/instructions/"
       />
@@ -1185,9 +1185,9 @@ export function InstructionsPage() {
         <PageIntro
           kicker="使い方ガイド"
           title="記事URLから台本を取得し、YMM4に渡すまでの手順"
-          lead="ダウンロード、解凍、起動、YMM4パス設定、URL入力、台本整理、CSV/.ymmp前準備、YMM4確認の順に進めます"
+          lead="ダウンロード、解凍、起動、YMM4パス設定、URL入力、台本整理、CSV/.ymmp、YMM4確認の順に進めます"
           actions={[
-            { label: '配布条件を確認', href: downloadUrl, variant: 'primary' },
+            { label: 'ダウンロードを見る', href: downloadUrl, variant: 'primary' },
             { label: 'FAQを見る', href: '/faq/', variant: 'ghost' },
           ]}
           flowLinks={[
@@ -1353,7 +1353,7 @@ export function InstructionsPage() {
               </span>
               <h2>各機能で「できた」と言える状態を先に決める</h2>
               <p>
-                画面を眺めるだけで終わらせず、設定、URL取得、台本整理、CSV/.ymmp前準備、
+                画面を眺めるだけで終わらせず、設定、URL取得、台本整理、CSV/.ymmp、
                 題材確認、YMM4確認までを順番に照合します。
               </p>
             </div>
@@ -1414,7 +1414,7 @@ export function InstructionsPage() {
               </span>
               <h2>ここまで確認できたら、YMM4側の編集へ進めます</h2>
               <p>
-                ゆっくりまとめプロセッサーは動画完成を保証する道具ではなく、YMM4を開く前の前工程を揃える道具です。
+                ゆっくりまとめプロセッサーは動画完成を保証する道具ではなく、YMM4へ渡す台本・素材・字幕まわりの制作データを揃える道具です。
                 下の項目が揃えば、次はYMM4側で音声、字幕、立ち絵、間合いを確認します。
               </p>
             </div>

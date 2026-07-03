@@ -424,7 +424,7 @@
 
 .home-lp-hero h1 {
   position: relative;
-  max-width: 13.8em;
+  max-width: 14.8em;
   padding-bottom: 16px;
   color: #ffe7a3;
   font-family: var(--font-display);
@@ -432,9 +432,9 @@
   font-weight: 900;
   line-height: 1.1;
   text-wrap: balance;
-  word-break: normal;
+  word-break: keep-all;
   line-break: strict;
-  overflow-wrap: normal;
+  overflow-wrap: anywhere;
   text-shadow:
     0 1px 0 rgba(60, 35, 7, 0.42),
     0 10px 26px rgba(0, 0, 0, 0.54),
@@ -497,6 +497,10 @@
 
   .home-lp-hero h1 span:nth-child(3) {
     animation-delay: 0.56s;
+  }
+
+  .home-lp-hero h1 span:nth-child(4) {
+    animation-delay: 0.84s;
   }
 }
 
@@ -846,8 +850,9 @@
   --phase-accent: 237, 199, 95;
   --phase-secondary: 79, 209, 165;
   --phase-pattern:
-    repeating-linear-gradient(0deg, transparent 0 20px, rgba(255, 255, 255, 0.08) 20px 21px),
-    linear-gradient(90deg, rgba(var(--phase-accent), 0.14), transparent 52%);
+    radial-gradient(circle at 18% 20%, rgba(255, 244, 202, 0.16), transparent 0.9rem),
+    linear-gradient(90deg, rgba(var(--phase-accent), 0.16), transparent 52%),
+    repeating-linear-gradient(0deg, transparent 0 20px, rgba(255, 255, 255, 0.065) 20px 21px);
   position: relative;
   isolation: isolate;
   overflow: hidden;
@@ -861,9 +866,10 @@
   border-radius: 8px;
   background-color: rgba(16, 22, 30, 0.97);
   background-image:
-    linear-gradient(180deg, rgba(5, 7, 10, 0.04), rgba(5, 7, 10, 0.5) 66%, rgba(5, 7, 10, 0.76)),
-    linear-gradient(135deg, rgba(var(--phase-accent), 0.15), transparent 42%),
-    linear-gradient(92deg, transparent 0 48%, rgba(var(--phase-secondary), 0.12), transparent 72%),
+    linear-gradient(180deg, rgba(5, 7, 10, 0.02), rgba(5, 7, 10, 0.42) 62%, rgba(5, 7, 10, 0.82)),
+    linear-gradient(135deg, rgba(var(--phase-accent), 0.2), transparent 44%),
+    linear-gradient(92deg, transparent 0 42%, rgba(var(--phase-secondary), 0.16), transparent 78%),
+    radial-gradient(circle at 86% 16%, rgba(255, 255, 255, 0.08), transparent 18%),
     #10161e;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.1),
@@ -874,24 +880,27 @@
   --phase-accent: 255, 224, 142;
   --phase-secondary: 237, 199, 95;
   --phase-pattern:
-    repeating-linear-gradient(0deg, transparent 0 22px, rgba(255, 255, 255, 0.08) 22px 23px, transparent 23px 34px),
-    linear-gradient(115deg, transparent 0 52%, rgba(var(--phase-secondary), 0.1) 52% 53%, transparent 53%);
+    radial-gradient(circle at 76% 28%, rgba(255, 244, 202, 0.16), transparent 1rem),
+    repeating-linear-gradient(0deg, transparent 0 22px, rgba(255, 255, 255, 0.07) 22px 23px, transparent 23px 34px),
+    linear-gradient(115deg, transparent 0 52%, rgba(var(--phase-secondary), 0.12) 52% 53.5%, transparent 53.5%);
 }
 
 .home-lp-flow-strip div[data-phase="3"] {
   --phase-accent: 79, 209, 165;
   --phase-secondary: 105, 214, 255;
   --phase-pattern:
-    repeating-linear-gradient(0deg, transparent 0 28px, rgba(var(--phase-accent), 0.08) 28px 30px, transparent 30px 44px),
-    linear-gradient(142deg, transparent 0 38%, rgba(var(--phase-secondary), 0.11) 38% 39%, transparent 39% 70%, rgba(var(--phase-accent), 0.09) 70% 71%, transparent 71%);
+    radial-gradient(circle at 22% 70%, rgba(159, 239, 199, 0.12), transparent 1.2rem),
+    repeating-linear-gradient(0deg, transparent 0 28px, rgba(var(--phase-accent), 0.09) 28px 30px, transparent 30px 44px),
+    linear-gradient(142deg, transparent 0 38%, rgba(var(--phase-secondary), 0.13) 38% 39.5%, transparent 39.5% 70%, rgba(var(--phase-accent), 0.1) 70% 71.5%, transparent 71.5%);
 }
 
 .home-lp-flow-strip div[data-phase="4"] {
   --phase-accent: 105, 214, 255;
   --phase-secondary: 237, 199, 95;
   --phase-pattern:
-    repeating-linear-gradient(0deg, transparent 0 13px, rgba(var(--phase-accent), 0.09) 13px 15px, transparent 15px 24px),
-    linear-gradient(118deg, transparent 0 58%, rgba(var(--phase-secondary), 0.09) 58% 59%, transparent 59%);
+    radial-gradient(circle at 82% 74%, rgba(190, 235, 255, 0.13), transparent 1.15rem),
+    repeating-linear-gradient(0deg, transparent 0 13px, rgba(var(--phase-accent), 0.1) 13px 15px, transparent 15px 24px),
+    linear-gradient(118deg, transparent 0 58%, rgba(var(--phase-secondary), 0.12) 58% 59.5%, transparent 59.5%);
 }
 
 .home-lp-flow-strip div::before {
@@ -981,75 +990,112 @@
 .home-lp-section[data-chapter]::before {
   inset: 0;
   z-index: 0;
-  opacity: var(--chapter-opacity, 0.72);
-  background: var(--chapter-scene);
+  opacity: var(--chapter-opacity, 0.84);
+  background:
+    radial-gradient(circle at var(--chapter-light-x, 18%) var(--chapter-light-y, 22%), rgba(255, 236, 172, 0.13), transparent 24%),
+    radial-gradient(circle at var(--chapter-cool-x, 82%) var(--chapter-cool-y, 78%), rgba(105, 214, 255, 0.08), transparent 26%),
+    var(--chapter-scene);
 }
 
 .home-lp-section[data-chapter]::after {
-  right: 6%;
-  bottom: 28px;
-  left: 6%;
+  right: 5%;
+  bottom: 26px;
+  left: 5%;
   z-index: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(237, 199, 95, 0.38), rgba(79, 209, 165, 0.28), transparent);
-  opacity: 0.64;
+  height: 118px;
+  border-radius: 999px;
+  background:
+    linear-gradient(90deg, transparent, rgba(237, 199, 95, 0.26), rgba(255, 245, 211, 0.2), rgba(79, 209, 165, 0.16), transparent),
+    repeating-linear-gradient(90deg, transparent 0 64px, rgba(255, 255, 255, 0.055) 64px 65px);
+  opacity: 0.5;
+  filter: blur(0.2px);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
 }
 
 .home-lp-section[data-chapter="compare"] {
+  --chapter-light-x: 28%;
+  --chapter-light-y: 18%;
+  --chapter-cool-x: 78%;
+  --chapter-cool-y: 68%;
   --chapter-scene:
-    linear-gradient(90deg, rgba(237, 199, 95, 0.075), transparent 43%, rgba(255, 255, 255, 0.045) 49% 51%, transparent 57%, rgba(79, 209, 165, 0.055)),
-    repeating-linear-gradient(180deg, transparent 0 48px, rgba(255, 255, 255, 0.024) 48px 49px);
+    linear-gradient(90deg, rgba(237, 199, 95, 0.1), transparent 38%, rgba(255, 255, 255, 0.06) 49% 51%, transparent 62%, rgba(79, 209, 165, 0.08)),
+    repeating-linear-gradient(180deg, transparent 0 46px, rgba(255, 255, 255, 0.028) 46px 47px),
+    repeating-linear-gradient(90deg, transparent 0 160px, rgba(237, 199, 95, 0.03) 160px 162px);
 }
 
 .home-lp-section[data-chapter="workflow"] {
+  --chapter-light-x: 14%;
+  --chapter-light-y: 22%;
+  --chapter-cool-x: 86%;
+  --chapter-cool-y: 76%;
   --chapter-scene:
-    linear-gradient(118deg, rgba(237, 199, 95, 0.07) 0 18%, transparent 18% 56%, rgba(79, 209, 165, 0.065) 56% 72%, transparent 72%),
-    repeating-linear-gradient(180deg, transparent 0 74px, rgba(255, 255, 255, 0.024) 74px 75px),
-    linear-gradient(180deg, rgba(79, 209, 165, 0.045), transparent 54%);
+    linear-gradient(118deg, rgba(237, 199, 95, 0.11) 0 16%, transparent 16% 54%, rgba(79, 209, 165, 0.1) 54% 68%, transparent 68%),
+    linear-gradient(90deg, transparent 0 14%, rgba(255, 255, 255, 0.05) 14% 14.3%, transparent 14.3% 32%, rgba(255, 255, 255, 0.04) 32% 32.3%, transparent 32.3%),
+    repeating-linear-gradient(180deg, transparent 0 70px, rgba(255, 255, 255, 0.03) 70px 71px),
+    linear-gradient(180deg, rgba(79, 209, 165, 0.052), transparent 54%);
 }
 
 .home-lp-section[data-chapter="product"] {
+  --chapter-light-x: 80%;
+  --chapter-light-y: 18%;
   --chapter-scene:
-    linear-gradient(112deg, rgba(237, 199, 95, 0.075), transparent 38%, rgba(105, 214, 255, 0.055) 70%, transparent),
-    repeating-linear-gradient(146deg, transparent 0 118px, rgba(255, 255, 255, 0.022) 118px 120px);
+    linear-gradient(112deg, rgba(237, 199, 95, 0.1), transparent 34%, rgba(105, 214, 255, 0.08) 68%, transparent),
+    repeating-linear-gradient(146deg, transparent 0 116px, rgba(255, 255, 255, 0.03) 116px 118px),
+    repeating-linear-gradient(90deg, transparent 0 220px, rgba(255, 236, 172, 0.026) 220px 222px);
 }
 
 .home-lp-section[data-chapter="demo"] {
   --chapter-scene:
-    repeating-linear-gradient(90deg, rgba(237, 199, 95, 0.06) 0 22px, transparent 22px 48px),
-    linear-gradient(180deg, rgba(105, 214, 255, 0.045), transparent 64%),
-    linear-gradient(110deg, transparent 0 64%, rgba(79, 209, 165, 0.07));
-  --chapter-opacity: 0.58;
+    repeating-linear-gradient(90deg, rgba(237, 199, 95, 0.066) 0 20px, transparent 20px 48px),
+    linear-gradient(180deg, rgba(105, 214, 255, 0.058), transparent 64%),
+    linear-gradient(110deg, transparent 0 62%, rgba(79, 209, 165, 0.1));
+  --chapter-opacity: 0.68;
 }
 
 .home-lp-section[data-chapter="samples"] {
+  --chapter-light-x: 18%;
+  --chapter-light-y: 78%;
   --chapter-scene:
-    repeating-linear-gradient(156deg, transparent 0 76px, rgba(237, 199, 95, 0.05) 76px 78px, transparent 78px 128px),
-    linear-gradient(90deg, rgba(105, 214, 255, 0.045), transparent 46%, rgba(237, 199, 95, 0.045));
+    repeating-linear-gradient(156deg, transparent 0 74px, rgba(237, 199, 95, 0.065) 74px 76px, transparent 76px 128px),
+    linear-gradient(90deg, rgba(105, 214, 255, 0.06), transparent 46%, rgba(237, 199, 95, 0.06));
 }
 
-.home-lp-section[data-chapter="free"] {
+.home-lp-section[data-chapter="distribution"] {
+  --chapter-light-x: 24%;
+  --chapter-light-y: 18%;
   --chapter-scene:
-    linear-gradient(112deg, rgba(79, 209, 165, 0.09), transparent 44%),
-    repeating-linear-gradient(0deg, transparent 0 36px, rgba(79, 209, 165, 0.04) 36px 37px);
+    linear-gradient(112deg, rgba(79, 209, 165, 0.1), transparent 42%),
+    linear-gradient(90deg, transparent 0 22%, rgba(237, 199, 95, 0.06) 22% 22.4%, transparent 22.4% 58%, rgba(255, 255, 255, 0.04) 58% 58.4%, transparent 58.4%),
+    repeating-linear-gradient(0deg, transparent 0 36px, rgba(79, 209, 165, 0.05) 36px 37px);
 }
 
 .home-lp-section[data-chapter="pricing"] {
+  --chapter-light-x: 54%;
+  --chapter-light-y: 14%;
+  --chapter-cool-x: 82%;
+  --chapter-cool-y: 72%;
   --chapter-scene:
-    repeating-linear-gradient(0deg, transparent 0 34px, rgba(237, 199, 95, 0.045) 34px 35px),
-    linear-gradient(116deg, rgba(237, 199, 95, 0.07), transparent 34%, rgba(79, 209, 165, 0.052) 72%, transparent);
+    repeating-linear-gradient(0deg, transparent 0 34px, rgba(237, 199, 95, 0.055) 34px 35px),
+    repeating-linear-gradient(90deg, transparent 0 180px, rgba(255, 255, 255, 0.024) 180px 181px),
+    linear-gradient(116deg, rgba(237, 199, 95, 0.12), transparent 34%, rgba(79, 209, 165, 0.07) 72%, transparent);
 }
 
 .home-lp-section[data-chapter="specs"] {
+  --chapter-light-x: 18%;
+  --chapter-light-y: 28%;
   --chapter-scene:
-    repeating-linear-gradient(0deg, transparent 0 42px, rgba(255, 255, 255, 0.026) 42px 43px),
-    linear-gradient(110deg, rgba(105, 214, 255, 0.06), transparent 40%, rgba(237, 199, 95, 0.052) 76%, transparent);
+    repeating-linear-gradient(0deg, transparent 0 42px, rgba(255, 255, 255, 0.032) 42px 43px),
+    repeating-linear-gradient(90deg, transparent 0 150px, rgba(105, 214, 255, 0.035) 150px 151px),
+    linear-gradient(110deg, rgba(105, 214, 255, 0.075), transparent 40%, rgba(237, 199, 95, 0.065) 76%, transparent);
 }
 
 .home-lp-section[data-chapter="faq"] {
+  --chapter-light-x: 50%;
+  --chapter-light-y: 22%;
   --chapter-scene:
-    repeating-linear-gradient(0deg, transparent 0 62px, rgba(237, 199, 95, 0.044) 62px 63px, transparent 63px 94px),
-    linear-gradient(135deg, rgba(105, 214, 255, 0.052), transparent 48%, rgba(237, 199, 95, 0.05));
+    repeating-linear-gradient(0deg, transparent 0 62px, rgba(237, 199, 95, 0.055) 62px 63px, transparent 63px 94px),
+    linear-gradient(135deg, rgba(105, 214, 255, 0.064), transparent 48%, rgba(237, 199, 95, 0.065));
 }
 
 .home-lp-section-head {
@@ -1696,6 +1742,10 @@
   margin-bottom: 18px;
 }
 
+.home-lp-plan-grid--two {
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.9fr);
+}
+
 .home-lp-plan-card {
   display: grid;
   gap: 14px;
@@ -1878,6 +1928,10 @@
   display: grid;
   grid-template-columns: minmax(160px, 0.46fr) minmax(0, 0.64fr) minmax(0, 0.7fr) minmax(0, 0.82fr);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.home-lp-comparison__row--two {
+  grid-template-columns: minmax(170px, 0.48fr) minmax(0, 0.7fr) minmax(0, 0.82fr);
 }
 
 .home-lp-comparison__row:last-child {

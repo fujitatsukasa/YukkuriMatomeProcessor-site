@@ -65,15 +65,15 @@ export const homeAssets = {
 
 export const heroContent = {
   kicker: 'YMM4向け ゆっくり動画制作支援アプリ',
-  title: '素材集めから台本づくりとYMM4前準備までひとつの制作フローに。',
+  title: '素材集めから台本づくりとYMM4連携までひとつの制作フローに。',
   lead:
-    '記事・掲示板・スレッド・外部素材から候補を集め、AI台本案を確認します。ボードでセリフ・素材・字幕まわりを整理し、保存先・素材パス・CSV/.ymmp前準備を確認します。YMM4で仕上げる前の準備を支える、Windows向けの制作支援アプリです。',
-  primaryCta: '配布条件を確認',
+    '記事・掲示板・スレッド・外部素材から候補を集め、AI台本案を確認します。ボードでセリフ・素材・字幕まわりを整理し、保存先・素材パス・CSV/.ymmpを確認します。YMM4へ渡す制作データまで整える、Windows向けの制作支援アプリです。',
+  primaryCta: 'ダウンロードを見る',
   secondaryCta: '実画面を確認',
   microcopy: `${homeFacts.osLabel}｜${homeFacts.yymm4Label}｜法人 ${homeFacts.corporatePrice}・Premium ${homeFacts.premiumPrice}｜${homeFacts.monthlyFeeLabel}`,
-  productScope: '本製品で扱う：台本取得 / AI台本 / ボード編集 / テンプレート / YMM4前準備',
+  productScope: '本製品で扱う：台本取得 / AI台本 / ボード編集 / テンプレート / YMM4連携',
   yymm4Scope: '利用者が確認：内容 / 権利 / 同期結果 / 音声・字幕・演出 / 公開判断',
-  trustNote: `配布候補は約${homeFacts.setupSizeMb}です。D10確認が揃うまで実行ファイルの直接取得CTAは表示しません。`,
+  trustNote: `法人プランは${homeFacts.corporatePrice}、個人向けPremiumは${homeFacts.premiumPrice}の買い切りです。購入前に返金条件と動作環境を確認してください。`,
 } as const
 
 export const workflowSummary = [
@@ -93,8 +93,8 @@ export const workflowSummary = [
     image: '/lp/phase-board-v1.webp',
   },
   {
-    label: 'YMM4前準備',
-    title: '保存先 / 素材パス / CSV・.ymmp確認',
+    label: 'YMM4連携',
+    title: '保存先 / 素材パス / CSV・.ymmp',
     image: '/lp/phase-handoff-v1.webp',
   },
 ] as const
@@ -114,11 +114,11 @@ export const beforeAfterRows = [
   },
   {
     before: '保存先、素材パス、YMM4で使う形式を手作業で揃える',
-    after: 'CSV/.ymmp前準備と素材パス確認を同じ流れで扱う',
+    after: 'CSV/.ymmpと素材パス確認を同じ流れで扱う',
   },
   {
-    before: '台本取得、AI台本、素材、YMM4前準備を別々に管理',
-    after: '取得から編集ボード、YMM4前準備まで制作データとして確認する',
+    before: '台本取得、AI台本、素材、YMM4連携を別々に管理',
+    after: '取得から編集ボード、YMM4連携まで制作データとして確認する',
   },
   {
     before: '動画完成まで自動で任せられると思って迷う',
@@ -160,10 +160,10 @@ export const workflowSteps = [
   {
     id: 'reflect',
     step: '04',
-    title: '素材パスと保存先を確認し、YMM4で仕上げる前準備を整える。',
+    title: '素材パスと保存先を確認し、YMM4へ渡す形に整える。',
     body:
-      '台本と素材の配置、保存先、素材パスを確認して、YMM4で仕上げる前の状態を整えます。音声、字幕、間、演出、出典、公開前の最終確認はYMM4と利用者側で行います。',
-    points: ['台本編集', '素材ボード', '素材パス確認', '保存先確認', 'YMM4前準備'],
+      '台本と素材の配置、保存先、素材パスを確認して、YMM4へ渡す制作データとして整えます。音声、字幕、間、演出、出典、公開前の最終確認はYMM4と利用者側で行います。',
+    points: ['台本編集', '素材ボード', '素材パス確認', '保存先確認', 'YMM4連携'],
     image: homeAssets.materialBoard,
     alt: '台本行と素材の配置を一覧で確認する素材ボード',
   },
@@ -238,8 +238,8 @@ export const productFeatures: ProductFeature[] = [
     eyebrow: '03 / REFLECT',
     title: '素材の抜けを確認して、YMM4で仕上げる。',
     body:
-      '台本と素材の位置をボードで確認し、保存先や素材パスの行き来を減らします。YMM4で開く前に必要な準備を揃え、最後はタイミングと演出をYMM4で調整します。',
-    bullets: ['台本行と素材の対応を確認', '不足素材を見つける', '保存先を揃える', 'YMM4で仕上げる前の準備', '音声、字幕、間、演出を最終調整'],
+      '台本と素材の位置をボードで確認し、保存先や素材パスの行き来を減らします。YMM4へ渡す形を整え、最後はタイミングと演出をYMM4で調整します。',
+    bullets: ['台本行と素材の対応を確認', '不足素材を見つける', '保存先を揃える', 'YMM4へ渡す形に整える', '音声、字幕、間、演出を最終調整'],
     images: [
       {
         src: homeAssets.materialBoard,
@@ -256,13 +256,13 @@ export const productFeatures: ProductFeature[] = [
 ]
 
 export const demoTimeline = [
-  { time: '0〜4秒', screen: 'タイトル＋制作フロー', caption: '素材集めから台本づくり。YMM4前準備までひとつの制作フローに。' },
+  { time: '0〜4秒', screen: 'タイトル＋制作フロー', caption: '素材集めから台本づくり。YMM4連携までひとつの制作フローに。' },
   { time: '4〜12秒', screen: 'サイト選択・URL入力・取得', caption: '対応URLから本文・コメント候補を取得' },
   { time: '12〜20秒', screen: '候補選択・コメント設定', caption: '使う内容を確認して取り込む' },
   { time: '20〜30秒', screen: 'プリセット・話者・改行', caption: '話者・改行・タイトルを動画の型に揃える' },
   { time: '30〜40秒', screen: 'AI台本案', caption: '任意で台本案を作り、結果を確認' },
   { time: '40〜49秒', screen: '台本編集・素材ボード', caption: '台本と素材の抜けを確認' },
-  { time: '49〜57秒', screen: 'YMM4前準備', caption: '保存先・素材パス・CSV/.ymmp前準備を確認' },
+  { time: '49〜57秒', screen: 'YMM4連携', caption: '保存先・素材パス・CSV/.ymmpを確認' },
   { time: '57〜59秒', screen: '仕上げ範囲', caption: '最後の音声・字幕・演出はYMM4で' },
 ] as const
 
@@ -307,10 +307,10 @@ export const sampleItems: SampleItem[] = [
 ]
 
 export const freeChecks = [
-  '公開配布の可否と条件が確定しているか',
-  'Windows 10 / 11 とYMM4前提に合うか',
-  '直接取得CTAが表示できる状態か',
-  'Premium購入前に未確認条件が残っていないか',
+  'Windows 10 / 11 とYMM4連携に合うか',
+  '保存先と素材パスを先に決めたか',
+  'Googleログインと権限同期の流れを確認したか',
+  '返金条件とサポート窓口を読んだか',
 ] as const
 
 export type PlanComparisonRow = {
@@ -322,25 +322,25 @@ export type PlanComparisonRow = {
 }
 
 export const comparisonRows: PlanComparisonRow[] = [
-  { id: 'price', label: '価格', free: '公開条件確認中', premium: homeFacts.premiumPrice, corporate: homeFacts.corporatePrice },
-  { id: 'billing', label: '課金', free: '購入実行CTAなし', premium: '買い切り / 月額なし', corporate: '買い切り / 月額なし' },
-  { id: 'fetch', label: 'URLからの台本取得', free: '利用可否を確認中', premium: '具体的な利用条件は公開前確認中', corporate: '法人利用条件として確認' },
-  { id: 'ai-script', label: 'AI台本案（任意）', free: '利用可否を確認中', premium: '具体的な利用条件は確認中', corporate: '業務利用条件として確認' },
-  { id: 'editor', label: '台本編集', free: '公開条件確認中', premium: '自分の制作ルールで継続利用', corporate: 'チーム運用前提で確認' },
-  { id: 'preset', label: 'プリセット', free: '公開条件確認中', premium: '制作ルールを保存して継続利用', corporate: '制作ルール共有を確認' },
-  { id: 'materials', label: '素材ボード', free: '公開条件確認中', premium: '継続制作の素材確認に利用', corporate: '複数案件の素材確認を想定' },
-  { id: 'save', label: 'プロジェクト保存', free: '公開条件確認中', premium: '保存条件を確認して継続利用', corporate: '保存・管理条件を確認' },
-  { id: 'handoff', label: 'YMM4前準備', free: '公開条件確認中', premium: '継続利用条件を確認中', corporate: '法人制作の前工程に合わせて確認' },
-  { id: 'account', label: '権限確認', free: '公開条件確認中', premium: '購入後の権限反映を確認', corporate: '法人アカウント運用を確認' },
-  { id: 'updates', label: 'アップデート', free: '直接取得CTAは未表示', premium: '公開配布版を利用', corporate: '保守・更新範囲を確認' },
-  { id: 'support', label: 'サポート', free: homeFacts.supportSla, premium: homeFacts.supportSla, corporate: homeFacts.supportSla },
+  { id: 'price', label: '価格', free: '', premium: homeFacts.premiumPrice, corporate: homeFacts.corporatePrice },
+  { id: 'billing', label: '課金', free: '', premium: '買い切り / 月額なし', corporate: '買い切り / 月額なし' },
+  { id: 'fetch', label: 'URLからの台本取得', free: '', premium: '個人制作で継続利用', corporate: '法人利用条件として確認' },
+  { id: 'ai-script', label: 'AI台本案（任意）', free: '', premium: '個人制作の下書き補助', corporate: '業務利用条件として確認' },
+  { id: 'editor', label: '台本編集', free: '', premium: '自分の制作ルールで継続利用', corporate: 'チーム運用前提で確認' },
+  { id: 'preset', label: 'プリセット', free: '', premium: '制作ルールを保存して継続利用', corporate: '制作ルール共有を確認' },
+  { id: 'materials', label: '素材ボード', free: '', premium: '継続制作の素材確認に利用', corporate: '複数案件の素材確認を想定' },
+  { id: 'save', label: 'プロジェクト保存', free: '', premium: '保存条件を確認して継続利用', corporate: '保存・管理条件を確認' },
+  { id: 'handoff', label: 'YMM4連携', free: '', premium: 'CSV/.ymmpと素材パスを確認', corporate: '法人制作フローに合わせて確認' },
+  { id: 'account', label: '権限確認', free: '', premium: '購入後の権限反映を確認', corporate: '法人アカウント運用を確認' },
+  { id: 'updates', label: 'アップデート', free: '', premium: '提供範囲を購入前に確認', corporate: '保守・更新範囲を確認' },
+  { id: 'support', label: 'サポート', free: '', premium: homeFacts.supportSla, corporate: homeFacts.supportSla },
 ]
 
 export const purchaseConditionRows = [
-  { label: '利用可能PC台数', value: '公開条件の確定待ちです。確定するまで購入実行CTAは出しません。' },
-  { label: 'PC変更・再認証', value: '公開条件の確定待ちです。確定後に料金ページへ反映します。' },
-  { label: '公開配布・試用可否', value: '公開UI・料金・法務が一致するまで無料版や試用可とは表示しません。' },
-  { label: 'Premiumの上限・公正利用条件', value: '公開条件の確定待ちです。未確認のまま強い表現は使いません。' },
+  { label: '利用可能PC台数', value: '法人利用は導入相談で確認します。個人向けPremiumも購入前に確認してください。' },
+  { label: 'PC変更・再認証', value: '端末変更や再認証の扱いは購入前に確認してください。' },
+  { label: 'YMM4連携', value: 'CSV/.ymmp、素材パス、保存先を整え、YMM4側で最終確認します。' },
+  { label: 'Premiumの利用範囲', value: '台本取得、AI台本案、保存、編集ボード、YMM4連携の利用範囲を確認します。' },
   { label: '返金条件', value: homeFacts.refundSummary },
   { label: 'サポート', value: `${homeFacts.supportHours} / ${homeFacts.supportSla}` },
 ] as const
@@ -366,8 +366,8 @@ export const requirementRows = [
   { label: '対応OS', value: homeFacts.osLabel },
   { label: 'Mac', value: '非対応' },
   { label: 'YMM4', value: '必須。反映後の仕上げはYMM4で行います。' },
-  { label: '配布候補', value: `${homeFacts.setupFileName} / 約${homeFacts.setupSizeMb}` },
-  { label: 'インターネット', value: 'ログイン、配布確認、URL取得、外部AI連携などで通信を使います。' },
+  { label: 'ファイル情報', value: `${homeFacts.setupFileName} / 約${homeFacts.setupSizeMb}` },
+  { label: 'インターネット', value: 'ログイン、権限同期、URL取得、外部AI連携などで通信を使います。' },
   { label: '対応入力', value: '記事URL、スレッドURL、下書き、テーマ。対応URLはFAQで確認してください。' },
   { label: 'APIキー', value: '外部API連携など一部機能ではAPIキーが必要です。' },
   { label: 'サポート', value: `${homeFacts.supportHours} / ${homeFacts.supportSla}` },
@@ -400,21 +400,21 @@ export const downloadTrustItems = [
 export const homeFaqs = [
   {
     id: 'free',
-    question: '無料版はありますか？',
+    question: '価格はいくらですか？',
     answer:
-      '現時点で無料版として案内できる公開版は用意していません。配布可否、試用可否、利用条件が確定するまで、無料版とは表示しません。',
+      `法人プランは${homeFacts.corporatePrice}、個人向けPremiumは${homeFacts.premiumPrice}の買い切りです。月額料金はありません。`,
   },
   {
     id: 'premium',
     question: 'Premiumにすると何が変わりますか？',
     answer:
-      `法人プランは${homeFacts.corporatePrice}、個人向けPremiumは${homeFacts.premiumPrice}の買い切りで、月額料金はありません。URL取得、AI台本案、保存、YMM4前準備などの継続利用条件は、購入前に料金ページと案内で確認してください。`,
+      `法人プランは${homeFacts.corporatePrice}、個人向けPremiumは${homeFacts.premiumPrice}の買い切りで、月額料金はありません。URL取得、AI台本案、保存、YMM4連携などの継続利用条件は、購入前に料金ページと案内で確認してください。`,
   },
   {
     id: 'auto-finish',
     question: '動画は自動で完成しますか？',
     answer:
-      '完成・投稿まで自動で進めるアプリではありません。本製品は台本取得、AI台本、ボード編集、テンプレート、YMM4前準備を支援します。音声、字幕、間、演出、出典、公開前の確認はYMM4と利用者側で行います。',
+      '完成・投稿まで自動で進めるアプリではありません。本製品は台本取得、AI台本、ボード編集、テンプレート、YMM4連携を支援します。音声、字幕、間、演出、出典、公開前の確認はYMM4と利用者側で行います。',
   },
   {
     id: 'ymm4-required',
@@ -461,13 +461,13 @@ export const homeFaqs = [
     id: 'license',
     question: '1ライセンスで何台のPCに使えますか？',
     answer:
-      'PC台数、PC変更、再認証ルールは公開条件の確定待ちです。確定するまで購入実行CTAは出さず、未確認の台数を表示しません。',
+      'PC台数、PC変更、再認証ルールは購入前に確認してください。法人利用は導入相談で運用条件を確認します。',
   },
   {
     id: 'updates',
     question: 'アップデートは料金に含まれますか？',
     answer:
-      '公開配布版の更新情報はアップデートページで確認できます。提供範囲やメジャーアップデート条件は購入前に案内を確認してください。',
+      '更新情報はアップデートページで確認できます。提供範囲やメジャーアップデート条件は購入前に案内を確認してください。',
   },
   {
     id: 'support',

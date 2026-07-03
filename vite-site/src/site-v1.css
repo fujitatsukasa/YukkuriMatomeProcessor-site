@@ -4472,12 +4472,12 @@ html {
 .pricing-comparison-table {
   display: grid;
   gap: 0.75rem;
-  min-width: 820px;
+  min-width: 680px;
 }
 
 .pricing-comparison-table__row {
   display: grid;
-  grid-template-columns: minmax(180px, 1.05fr) repeat(3, minmax(0, 1fr));
+  grid-template-columns: minmax(180px, 1.05fr) repeat(2, minmax(0, 1fr));
   gap: 0.8rem;
   align-items: stretch;
 }
@@ -5177,10 +5177,10 @@ html {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
   gap: 1.5rem;
   width: 100%;
-  max-width: 1200px;
+  max-width: 980px;
   margin: 0 auto;
   align-items: start;
 }
@@ -5189,10 +5189,10 @@ html {
   position: relative;
   z-index: 10;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
   gap: 2rem;
   width: 100%;
-  max-width: 1100px;
+  max-width: 980px;
   margin: 0 auto;
   align-items: stretch;
 }

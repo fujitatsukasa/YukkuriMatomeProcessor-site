@@ -18,15 +18,15 @@ const newsActionRoutes = [
   },
   {
     label: '導入',
-    title: '配布条件と確認手順を見る',
-    body: '配布条件、ファイル情報、初回起動の確認へ進みます。',
+    title: 'ダウンロード情報と確認手順を見る',
+    body: 'ダウンロード情報、ファイル情報、初回起動の確認へ進みます。',
     href: '/download/',
     Icon: Download,
   },
   {
     label: '手順',
     title: '使い方で成功状態を見る',
-    body: 'URL入力、台本整理、CSV/.ymmp前準備、YMM4確認の順に確認します。',
+    body: 'URL入力、台本整理、CSV/.ymmp、YMM4確認の順に確認します。',
     href: '/instructions/',
     Icon: FileText,
   },
@@ -82,7 +82,7 @@ export function NewsPage() {
                 <Link to="/instructions/">使い方</Link>
                 <Link to="/samples/">実画面・サンプル</Link>
                 <Link to="/faq/">FAQ</Link>
-                <Link to="/download/">配布条件を確認</Link>
+                <Link to="/download/">ダウンロードを見る</Link>
               </div>
             </div>
 

@@ -32,7 +32,7 @@ const channelPriority = {
   },
   'X (Twitter)': {
     label: '告知確認',
-    use: '短い質問、更新告知、公開情報の確認',
+    use: '短い質問、更新告知、導入情報の確認',
     note: '個人情報や決済情報を含む内容はメールへ送ってください。',
   },
   Discord: {
@@ -186,7 +186,7 @@ const mailTemplateItems = [
       'YMM4の利用有無:',
       '作りたい動画形式:',
       '試したいURLの種類:',
-      '公開配布・試用条件で確認済みの範囲:',
+      '導入情報として確認済みの範囲:',
       '相談したいこと:',
     ],
   },
@@ -274,7 +274,7 @@ export function ContactPage() {
               <img
                 className="page-visual-card__image"
                 src="/product_edit_script.webp"
-                alt="台本編集とYMM4前準備の実アプリ画面"
+                alt="台本編集とYMM4連携の実アプリ画面"
               />
               <div className="contact-hero-card__body">
                 <strong>画面の状態が分かる情報があると切り分けが速くなります</strong>

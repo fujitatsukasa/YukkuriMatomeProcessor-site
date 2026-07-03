@@ -17,18 +17,18 @@ const screenGallery = [
     title: '台本下地を編集する',
     body: '不要行を削り、役割、感情、読み上げ向けの文量を見ながら整えます。',
     goal: '読み上げ前に確認できる台本下地になる',
-    next: 'CSV/.ymmp前準備へ渡す内容を確定する',
+    next: 'CSV/.ymmpへ渡す内容を確定する',
     image: '/product_edit_script.webp',
     alt: '取得した台本下地を編集する実アプリ画面',
     tags: ['台本編集', '感情補助', '読み上げ調整'],
   },
   {
-    title: 'YMM4前準備を確認する',
+    title: 'YMM4連携を確認する',
     body: 'CSV、キャラ設定、立ち絵パス、保存先を確認してからYMM4側の編集へ移れます。',
     goal: '素材パスと保存先を確認し、編集前の不整合を減らす',
     next: 'YMM4側で音声、字幕、立ち絵を確認する',
     image: '/product_keyword_material.webp',
-    alt: 'YMM4前準備と素材整理を確認する実アプリ画面',
+    alt: 'YMM4連携と素材整理を確認する実アプリ画面',
     tags: ['CSV', '.ymmp', '素材パス'],
   },
   {
@@ -53,10 +53,10 @@ const screenGallery = [
     title: 'フォーマットを追加する',
     body: 'CSV/.ymmpに渡しやすい形を残し、次の動画でも同じ流れを使いやすくします。',
     goal: '形式と命名ルールを再利用できる状態にする',
-    next: '次回の動画でも同じ前工程を使う',
+    next: '次回の動画でも同じ制作ルールを使う',
     image: '/product_format_list.webp',
-    alt: 'フォーマット管理とYMM4前準備の実アプリ画面',
-    tags: ['フォーマット', '再利用', '前工程'],
+    alt: 'フォーマット管理とYMM4連携の実アプリ画面',
+    tags: ['フォーマット', '再利用', '制作ルール'],
   },
 ] as const
 
@@ -72,7 +72,7 @@ const sampleGoalCards = [
     checks: ['不要行を削除', '役割と感情を確認', '長い行を分割'],
   },
   {
-    title: 'YMM4前準備の成功',
+    title: 'YMM4連携の成功',
     body: 'CSV/.ymmp、保存先、素材パスを確認して、YMM4側の編集に入れる状態にします。',
     checks: ['保存先を固定', '素材パスを確認', 'YMM4側で最終編集'],
   },
@@ -81,7 +81,7 @@ const sampleGoalCards = [
 const sampleDecisionCards = [
   {
     title: '実アプリ画面で確認',
-    body: 'URL取得、台本編集、YMM4前準備の画面が手元の題材に合うかを確認します。',
+    body: 'URL取得、台本編集、YMM4連携の画面が手元の題材に合うかを確認します。',
     link: '#sample-screen-gallery',
     linkLabel: '画面を見る',
     Icon: MonitorPlay,
@@ -94,8 +94,8 @@ const sampleDecisionCards = [
     Icon: Sparkles,
   },
   {
-    title: '配布条件を確認',
-    body: '見た後は少数URLで、候補取得、保存先、CSV/.ymmp前準備まで実際に通します。',
+    title: 'ダウンロードを見る',
+    body: '見た後は少数URLで、候補取得、保存先、CSV/.ymmpまで実際に通します。',
     link: '/download/',
     linkLabel: '配布物を確認',
     Icon: Download,
@@ -153,7 +153,7 @@ const beforeAfterItems = [
   {
     title: '台本整理',
     before: ['不要行を探す', '会話の順番を直す', '読み上げ量を調整する'],
-    after: ['台本画面で編集', '役割と感情を確認', 'CSV/.ymmp前準備へ進む'],
+    after: ['台本画面で編集', '役割と感情を確認', 'CSV/.ymmpへ進む'],
   },
   {
     title: 'YMM4へ渡す前',
@@ -223,7 +223,7 @@ export function SamplesPage() {
     <>
       <PageMeta
         title="実画面・動画サンプル｜使う前の対応範囲を確認"
-        description="ゆっくりまとめプロセッサーの実アプリ画面、URLを貼ってから台本整理、YMM4前準備までのBefore/After、短い動画プレビューを専用ギャラリーで確認できます。"
+        description="ゆっくりまとめプロセッサーの実アプリ画面、URLを貼ってから台本整理、YMM4連携までのBefore/After、短い動画プレビューを専用ギャラリーで確認できます。"
         keywords="実画面, サンプル, Before After, YMM4, 台本作成, ゆっくりまとめプロセッサー"
         image="/product_edit_script.webp"
         path="/samples/"
@@ -234,9 +234,9 @@ export function SamplesPage() {
         <PageIntro
           kicker="実画面・サンプルギャラリー"
           title="実アプリ画面と動画サンプルで、使う前の対応範囲を確認する"
-          lead="URLを貼る、台本を直す、CSV/.ymmp前準備まで。実アプリ画面、Before/After、短い動画プレビューで、実画面で対応範囲を確認できます。"
+          lead="URLを貼る、台本を直す、CSV/.ymmpまで。実アプリ画面、Before/After、短い動画プレビューで、実画面で対応範囲を確認できます。"
           actions={[
-            { label: '配布条件を確認', href: downloadUrl, variant: 'primary' },
+            { label: 'ダウンロードを見る', href: downloadUrl, variant: 'primary' },
             { label: '使い方を見る', href: '/instructions/', variant: 'ghost' },
           ]}
           flowLinks={[
@@ -248,11 +248,11 @@ export function SamplesPage() {
               <img
                 className="page-visual-card__image"
                 src="/product_edit_script.webp"
-                alt="台本編集とYMM4前準備を確認する実アプリ画面"
+                alt="台本編集とYMM4連携を確認する実アプリ画面"
               />
               <div className="page-visual-card__meta">
                 <strong>実アプリ画面を中心に、操作手順を確認</strong>
-                <span>まず画面で対応範囲を見て、公開条件が揃ってから自分のURLで確認してください。</span>
+                <span>まず画面で対応範囲を見て、自分のURLで少数から確認してください。</span>
               </div>
             </InteractiveCard>
           }
@@ -380,7 +380,7 @@ export function SamplesPage() {
         <Section alt id="sample-screen-gallery">
           <div className="subpage-section-head sample-gallery-head">
             <p>実アプリ画面</p>
-            <h2>URL取得からYMM4前準備までを画面で見る</h2>
+            <h2>URL取得からYMM4連携までを画面で見る</h2>
           </div>
 
           <div className="sample-screen-grid">
@@ -540,18 +540,18 @@ export function SamplesPage() {
               <span className="subpage-card__eyebrow">次にやること</span>
               <h2>自分のURLで、実画面と同じ手順を確認する</h2>
               <p>
-                まずは配布条件を確認し、公開後にURL取得、台本整理、YMM4前準備まで進めてください。
+                まずはダウンロード情報を確認し、URL取得、台本整理、YMM4連携まで実画面で見てください。
                 Premiumが必要かは、実際の制作手順に合うと分かってから確認できます。
               </p>
             </div>
             <div className="subpage-support-callout__actions">
               <Link className="brand-btn brand-btn--primary" to={downloadUrl}>
                 <Download size={18} />
-                配布条件を確認
+                ダウンロードを見る
               </Link>
               <Link className="brand-btn brand-btn--ghost" to="/download/">
                 <FileText size={18} />
-                配布候補を確認する
+                ファイル情報を見る
               </Link>
               <Link className="brand-btn brand-btn--ghost" to="/purchase/">
                 料金を見る

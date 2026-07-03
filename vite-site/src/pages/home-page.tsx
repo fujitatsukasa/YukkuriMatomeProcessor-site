@@ -65,7 +65,7 @@ type LightboxImage = {
 const primaryCtaLabel = heroContent.primaryCta
 
 const metaDescription =
-  '記事、掲示板、スレッド、外部素材から候補を集め、AI台本案を確認し、編集ボードで整理してYMM4前準備まで確認できるWindows向け制作支援アプリです。'
+  '記事、掲示板、スレッド、外部素材から候補を集め、AI台本案を確認し、編集ボードで整理してYMM4連携まで進められるWindows向け制作支援アプリです。'
 
 const visibleHomeFaqs = homeFaqs.slice(0, 10)
 
@@ -261,15 +261,6 @@ function ProductScreenshot({
         decoding="async"
         fetchPriority={priority ? 'high' : undefined}
       />
-      {image.annotations.map((annotation) => (
-        <span
-          key={`${image.title}-${annotation.label}`}
-          className="home-lp-annotation"
-          style={{ left: `${annotation.x}%`, top: `${annotation.y}%` }}
-        >
-          {annotation.label}
-        </span>
-      ))}
       <span className="home-lp-zoom-cue">
         <Focus size={16} aria-hidden="true" />
         拡大
@@ -396,7 +387,7 @@ function DemoVideo() {
           </video>
         ) : (
           <button className="home-lp-demo-poster" type="button" onClick={handlePlayClick}>
-            <img src={homeAssets.hero} alt="台本取得からYMM4前準備までの制作フローポスター" loading="lazy" decoding="async" />
+            <img src={homeAssets.hero} alt="台本取得からYMM4連携までの制作フローポスター" loading="lazy" decoding="async" />
             <span>
               <Play size={20} aria-hidden="true" />
               制作フローを再生
@@ -483,7 +474,7 @@ function WorkflowStepBody({ step }: { step: (typeof workflowSteps)[number] }) {
 
   return (
     <>
-      台本と素材の配置、保存先、素材パスを確認して<HomeEm tone="aqua">YMM4前準備</HomeEm>を整えます。
+      台本と素材の配置、保存先、素材パスを確認して<HomeEm tone="aqua">YMM4連携</HomeEm>へ進めます。
       音声、字幕、間、演出、出典、公開前の<HomeEm tone="white">最終確認</HomeEm>はYMM4と利用者側で行います。
     </>
   )
@@ -583,7 +574,6 @@ function MobileStickyCta() {
       'home-hero-primary-cta',
       'home-workflow-primary-cta',
       'home-free-primary-cta',
-      'home-pricing-distribution-cta',
       'home-pricing-corporate-cta',
       'home-pricing-premium-cta',
       'home-final-cta',
@@ -684,8 +674,9 @@ function HomePageContent() {
             <div className="home-lp-hero__copy" data-reveal>
               <p className="home-lp-kicker">{heroContent.kicker}</p>
               <h1 id="home-hero-heading">
-                <span>素材集めから台本づくり</span>
-                <span>YMM4前準備まで</span>
+                <span>素材集めから</span>
+                <span>台本づくり</span>
+                <span>YMM4連携まで</span>
                 <span>ひとつの制作フローに</span>
               </h1>
               <p className="home-lp-hero__lead">
@@ -693,10 +684,10 @@ function HomePageContent() {
                   <HomeEm>記事・掲示板・スレッド・外部素材</HomeEm>から候補を集め、<HomeEm tone="aqua">AI台本案</HomeEm>を確認します。
                 </span>
                 <span className="home-lp-hero__lead-line">
-                  ボードで<HomeEm>セリフ・素材・字幕まわり</HomeEm>を整理し、<HomeEm tone="aqua">保存先・素材パス・CSV/.ymmp前準備</HomeEm>を確認します。
+                  ボードで<HomeEm>セリフ・素材・字幕まわり</HomeEm>を整理し、<HomeEm tone="aqua">保存先・素材パス・CSV/.ymmp</HomeEm>を確認します。
                 </span>
                 <span className="home-lp-hero__lead-line">
-                  YMM4で仕上げる前の準備を支える、Windows向けの制作支援アプリです。
+                  YMM4へ渡す制作データまで整える、Windows向けの制作支援アプリです。
                 </span>
               </p>
               <div className="home-lp-hero__actions">
@@ -720,13 +711,9 @@ function HomePageContent() {
               <ProductScreenshot
                 image={{
                   src: homeAssets.hero,
-                  alt: '素材集めから台本づくりとYMM4前準備の対応範囲を確認できる実アプリ画面',
+                  alt: '素材集めから台本づくりとYMM4連携の対応範囲を確認できる実アプリ画面',
                   title: '制作フローを確認する画面',
-                  annotations: [
-                    { x: 20, y: 19, label: '素材を集める' },
-                    { x: 52, y: 24, label: '台本を作る' },
-                    { x: 78, y: 12, label: 'YMM4前準備' },
-                  ],
+                  annotations: [],
                 }}
                 onZoom={setLightboxImage}
                 priority
@@ -766,14 +753,14 @@ function HomePageContent() {
               kicker="BEFORE / AFTER"
               title={
                 <>
-                  素材取得から台本化と<HeadingEm>YMM4前準備</HeadingEm>まで迷子にしない
+                  素材取得から台本化と<HeadingEm>YMM4連携</HeadingEm>まで迷子にしない
                 </>
               }
               body={
                 <>
                   <HomeEm>本文やコメントの取得</HomeEm>・<HomeEm tone="aqua">AI台本</HomeEm>・
                   キャラ別セリフ・<HomeEm>ボード上の素材確認</HomeEm>・
-                  <HomeEm tone="aqua">YMM4前準備</HomeEm>を制作フローとして扱います。
+                  <HomeEm tone="aqua">YMM4連携</HomeEm>を制作フローとして扱います。
                   最後の<HomeEm tone="white">品質確認と公開判断</HomeEm>は利用者が行います。
                 </>
               }
@@ -949,12 +936,12 @@ function HomePageContent() {
         >
           <div className="home-lp-container home-lp-free__grid">
             <div className="home-lp-free__copy" data-reveal>
-              <p className="home-lp-kicker">DISTRIBUTION</p>
-              <h2 id="home-distribution-heading">配布条件が揃うまで、無料版とは案内しません</h2>
+              <p className="home-lp-kicker">SETUP</p>
+              <h2 id="home-distribution-heading">導入前に、環境と保存先を揃える</h2>
               <p>
-                現時点で<HomeEm>無料版として案内できる公開版</HomeEm>は用意していません。
-                配布候補、署名、SmartScreen、利用条件が揃うまで、
-                <HomeEm tone="aqua">直接取得CTA</HomeEm>は表示しません。
+                Windows 10 / 11、YMM4、保存先フォルダ、素材パスを先に確認します。
+                法人利用は<HomeEm>220,000円（税込）</HomeEm>、個人向けPremiumは
+                <HomeEm tone="aqua">39,800円（税込）</HomeEm>の買い切りです。
               </p>
               <div className="home-lp-free__actions">
                 <HomeCta
@@ -966,21 +953,21 @@ function HomePageContent() {
                   <Download size={18} aria-hidden="true" />
                   {primaryCtaLabel}
                 </HomeCta>
-                <span>{homeFacts.osLabel}｜YMM4必須｜配布候補 約{homeFacts.setupSizeMb}</span>
+                <span>{homeFacts.osLabel}｜YMM4必須｜月額なし</span>
               </div>
             </div>
             <div className="home-lp-free__panel" data-reveal>
               <ProductScreenshot
                 image={{
                   src: homeAssets.distribution,
-                  alt: '配布条件を確認する前に見る実アプリ画面',
+                  alt: 'ダウンロード前に見る実アプリ画面',
                   title: '配布前に確認する実アプリ画面',
                   annotations: [],
                 }}
                 onZoom={setLightboxImage}
               />
               <div className="home-lp-free__checks">
-                <h3>配布前に確認すること</h3>
+                <h3>導入前に確認すること</h3>
                 {freeChecks.map((item) => (
                   <div key={item}>
                     <CheckCircle2 size={18} aria-hidden="true" />
@@ -1009,15 +996,15 @@ function HomePageContent() {
               }
               body={
                 <>
-                  現時点で無料版として案内できる公開版はありません。
                   法人・チーム利用は<HomeEm tone="white">220,000円（税込）</HomeEm>、個人向けPremiumは
-                  <HomeEm tone="aqua">39,800円（税込）</HomeEm>として、購入前に確認すべき条件を分けて表示します。
+                  <HomeEm tone="aqua">39,800円（税込）</HomeEm>です。
+                  買い切り価格、向いている利用規模、購入前に見るべき条件を分けて表示します。
                 </>
               }
               align="center"
             />
 
-            <div className="home-lp-plan-grid" aria-label="配布状況と法人プラン、Premiumの概要">
+            <div className="home-lp-plan-grid home-lp-plan-grid--two" aria-label="法人プランとPremiumの概要">
               <article className="home-lp-plan-card home-lp-plan-card--corporate" data-reveal>
                 <span>法人・チーム向け</span>
                 <h3>法人プラン</h3>
@@ -1036,31 +1023,13 @@ function HomePageContent() {
                   法人料金を見る
                 </HomeCta>
               </article>
-              <article className="home-lp-plan-card" data-reveal>
-                <span>公開前の確認項目</span>
-                <h3>配布確認</h3>
-                <strong>確認中</strong>
-                <p>
-                  無料版として案内できる公開版はまだ用意していません。
-                  配布条件、試用可否、利用範囲が確定するまで断定しません。
-                </p>
-                <HomeCta
-                  id="home-pricing-distribution-cta"
-                  href={homeFacts.downloadUrl}
-                  label={primaryCtaLabel}
-                  location="pricing_distribution"
-                >
-                  <Download size={18} aria-hidden="true" />
-                  {primaryCtaLabel}
-                </HomeCta>
-              </article>
               <article className="home-lp-plan-card home-lp-plan-card--premium" data-reveal>
                 <span>買い切り・月額なし</span>
                 <h3>個人向けPremium</h3>
                 <strong>{homeFacts.premiumPrice}</strong>
                 <p>
-                  公開済み条件を確認し、継続的に<HomeEm>台本取得</HomeEm>・
-                  <HomeEm tone="aqua">AI台本</HomeEm>・ボード編集・YMM4前準備を使いたいと分かった段階で検討してください。
+                  個人制作で継続的に<HomeEm>台本取得</HomeEm>・
+                  <HomeEm tone="aqua">AI台本</HomeEm>・ボード編集・YMM4連携を使いたいと分かった段階で検討してください。
                 </p>
                 <HomeCta
                   id="home-pricing-premium-cta"
@@ -1078,22 +1047,17 @@ function HomePageContent() {
             <div className="home-lp-comparison" data-reveal>
               <div className="home-lp-comparison__head">
                 <MonitorPlay size={18} aria-hidden="true" />
-                <h3>配布確認 / Premium / 法人プラン 条件比較</h3>
+                <h3>Premium / 法人プラン 条件比較</h3>
               </div>
               <div className="home-lp-comparison__table">
-                <div className="home-lp-comparison__row home-lp-comparison__row--head">
+                <div className="home-lp-comparison__row home-lp-comparison__row--head home-lp-comparison__row--two">
                   <span>項目</span>
-                  <span>配布確認</span>
                   <span>Premium</span>
                   <span>法人プラン</span>
                 </div>
                 {comparisonRows.map((row) => (
-                  <div className="home-lp-comparison__row" key={row.id}>
+                  <div className="home-lp-comparison__row home-lp-comparison__row--two" key={row.id}>
                     <strong>{row.label}</strong>
-                    <span>
-                      <em className="home-lp-comparison__mobile-label">配布確認</em>
-                      {row.free}
-                    </span>
                     <span>
                       <em className="home-lp-comparison__mobile-label">Premium</em>
                       {row.premium}
@@ -1110,8 +1074,8 @@ function HomePageContent() {
             <div className="home-lp-condition-panel" data-reveal>
               <div>
                 <p className="home-lp-kicker">購入前確認</p>
-                <h3>法人220,000円を判断する前に、未確認の条件を確認してください</h3>
-                <p>このLPでは、確認できていない数値や契約条件を確定値として表示しません。</p>
+                <h3>法人220,000円を判断する前に、契約条件を確認してください</h3>
+                <p>価格だけで急がず、PC台数、再認証、更新範囲、返金条件を先に見ます。</p>
               </div>
               <dl>
                 {purchaseConditionRows.map((row) => (
@@ -1168,7 +1132,7 @@ function HomePageContent() {
               body={
                 <>
                   ゆっくりまとめプロセッサーは<HomeEm tone="white">YMM4を置き換えるツールではありません</HomeEm>。
-                  YMM4で編集を始める前に、台本・話者・改行・素材パスを確認しやすくする前工程ツールです。
+                  台本・話者・改行・素材パスを整え、YMM4へ渡す制作データを扱いやすくする支援ツールです。
                 </>
               }
             />
@@ -1209,9 +1173,9 @@ function HomePageContent() {
 
             <div className="home-lp-download-trust" data-reveal>
               <div>
-                <p className="home-lp-kicker">配布確認情報</p>
-                <h3>候補ファイル名・サイズ・SHA-256を確認できます</h3>
-                <p>{homeFacts.trustNote}</p>
+                <p className="home-lp-kicker">DOWNLOAD</p>
+                <h3>ダウンロード前にファイル情報を確認できます</h3>
+                <p>ファイル名、サイズ、SHA-256を確認し、公式サイトから入手してください。</p>
               </div>
               <dl>
                 {downloadTrustItems.map((item) => (
@@ -1240,7 +1204,7 @@ function HomePageContent() {
               }
               body={
                 <>
-                  <HomeEm>無料版の有無</HomeEm>・Premiumで何が変わるか・
+                  <HomeEm>法人価格</HomeEm>・Premiumで何が変わるか・
                   <HomeEm tone="aqua">YMM4が必要か</HomeEm>を短く確認できます。
                 </>
               }
@@ -1280,10 +1244,10 @@ function HomePageContent() {
           <div className="home-lp-container home-lp-final__grid">
             <div>
               <p className="home-lp-kicker">NEXT VIDEO</p>
-              <h2 id="home-final-heading">素材を集めて台本を作りYMM4前準備へ</h2>
+              <h2 id="home-final-heading">素材を集めて台本を作りYMM4連携へ</h2>
               <p>
                 記事・スレッドまたは下書きから<HomeEm tone="aqua">AI台本</HomeEm>・
-                <HomeEm>編集ボード</HomeEm>・YMM4前準備まで、本製品の対応範囲を確認してください。
+                <HomeEm>編集ボード</HomeEm>・YMM4連携まで、本製品の対応範囲を確認してください。
               </p>
               <span>{heroContent.microcopy}</span>
             </div>
@@ -1311,9 +1275,9 @@ export function HomePage() {
   return (
     <>
       <PageMeta
-        title="ゆっくりまとめプロセッサー｜素材集め・台本づくり・YMM4前準備を支援"
+        title="ゆっくりまとめプロセッサー｜素材集め・台本づくり・YMM4連携を支援"
         description={metaDescription}
-        keywords="ゆっくりまとめプロセッサー,YMM4,台本取得,AI台本,編集ボード,YMM4前準備,CSV,.ymmp,記事URL,スレッドURL,反応集,解説動画,ショート動画,Windows,Premium"
+        keywords="ゆっくりまとめプロセッサー,YMM4,台本取得,AI台本,編集ボード,YMM4連携,CSV,.ymmp,記事URL,スレッドURL,反応集,解説動画,ショート動画,Windows,Premium"
         image={homeAssets.hero}
         path="/"
         structuredData={[softwareApplicationLd, faqPageLd]}

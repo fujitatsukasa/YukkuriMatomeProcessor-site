@@ -172,7 +172,7 @@ export function ArticleActions() {
   return (
     <div className="brand-inline-actions">
       <Link className="brand-btn brand-btn--primary" to="/download/">
-        配布条件を確認
+        ダウンロードを見る
       </Link>
       <Link className="brand-btn brand-btn--ghost" to="/contact/">
         導入について問い合わせる

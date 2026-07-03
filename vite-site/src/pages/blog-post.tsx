@@ -83,7 +83,7 @@ export function BlogPost() {
       {
         label: '向いている読者',
         title: meta?.tags?.slice(0, 2).join(' / ') || '制作フロー改善',
-        body: '単発ノウハウで終わらせず、YMM4 前準備や次の制作手順へ戻したい人向けです。',
+        body: '単発ノウハウで終わらせず、YMM4連携や次の制作手順へ戻したい人向けです。',
       },
       {
         label: 'この記事で掴むこと',
@@ -319,16 +319,16 @@ export function BlogPost() {
             <InteractiveCard className="release-panel premium-glass blog-conversion-panel">
               <div>
                 <span className="subpage-card__eyebrow">次にやること</span>
-                <h2>読んだ内容を、配布条件で手元のURLに戻す</h2>
+                <h2>読んだ内容を、ダウンロード情報で手元のURLに戻す</h2>
                 <p>
-                  記事で確認した考え方を、対応サイト取得、台本整理、YMM4前準備の画面で試せます。
-                  まずは配布条件で、手元の題材が取れるか確認してください。
+                  記事で確認した考え方を、対応サイト取得、台本整理、YMM4連携の画面で試せます。
+                  まずはダウンロード情報で、手元の題材が取れるか確認してください。
                 </p>
               </div>
               <div className="blog-conversion-panel__actions">
                 <Link className="brand-btn brand-btn--primary" to="/download/">
                   <Download size={18} />
-                  配布条件を確認
+                  ダウンロードを見る
                 </Link>
                 <Link className="brand-btn brand-btn--ghost" to="/instructions/">
                   <BookOpen size={18} />

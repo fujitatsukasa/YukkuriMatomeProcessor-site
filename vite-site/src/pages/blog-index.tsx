@@ -22,7 +22,7 @@ function estimateReadMinutes(content: string) {
 const blogReadingPaths = [
   {
     title: 'まず作り方の全体像を掴む',
-    body: '記事URLやスレッドURLを、台本下地とYMM4前準備へつなげる手順を確認します。',
+    body: '記事URLやスレッドURLを、台本下地とYMM4連携へつなげる手順を確認します。',
     href: '/blog/how-to-make-yukkuri-video-automatically/',
     Icon: BookOpen,
   },
@@ -43,34 +43,34 @@ const blogReadingPaths = [
 const blogDecisionRoutes = [
   {
     label: '導入前提',
-    title: 'Windows / YMM4前提を確認する',
-    body: 'Mac不可、YMM4前提、配布条件で確認する範囲など、導入前の不安はFAQで確認します。',
+    title: 'Windows / YMM4環境を確認する',
+    body: 'Mac不可、YMM4連携、ダウンロード情報で確認する範囲など、導入前の不安はFAQで確認します。',
     href: '/faq/',
   },
   {
     label: '操作確認',
-    title: 'URL入力からYMM4前準備まで見る',
+    title: 'URL入力からYMM4連携まで見る',
     body: '記事で流れを読んだ後は、実際の手順で押す場所、入力するもの、成功状態を確認します。',
     href: '/instructions/',
   },
   {
     label: '実画面',
     title: '画面とBefore/Afterを見る',
-    body: 'URL取得、台本整理、YMM4前準備の実画面とサンプルで確認します。',
+    body: 'URL取得、台本整理、YMM4連携の実画面とサンプルで確認します。',
     href: '/samples/',
   },
   {
     label: '料金確認',
-    title: '配布状況とPremium条件を確認する',
-    body: '公開条件を確認し、台本取得とAI台本案の公開条件が合う場合だけPremiumを確認します。',
+    title: '法人価格とPremium条件を確認する',
+    body: '法人220,000円税込、個人向けPremium 39,800円税込を確認し、台本取得とAI台本案の利用範囲が合う場合だけ検討します。',
     href: '/purchase/',
   },
 ] as const
 
 const blogReaderChecks = [
-  '記事は一般論ではなく、YMM4前準備に関係するものから読む',
+  '記事は一般論ではなく、YMM4連携に関係するものから読む',
   'AI出力や収益化は保証ではなく、確認が必要な下書きとして扱う',
-  '読んだ後は実画面、使い方、配布条件の確認で自分の環境に合うか見る',
+  '読んだ後は実画面、使い方、ダウンロード情報の確認で自分の環境に合うか見る',
 ] as const
 
 export function BlogIndex() {
@@ -128,8 +128,8 @@ export function BlogIndex() {
     <>
       <PageMeta
         title={`オフィシャルブログ | ${siteTitle}`}
-        description="ゆっくり解説、反応集、YMM4、台本下地、素材・著作権、YMM4前準備に関する公式ブログ。記事を読んだ後に実画面、使い方、配布条件を確認できます。"
-        keywords="ブログ,ゆっくり解説,動画編集,YMM4,YMM4前準備,制作手順"
+        description="ゆっくり解説、反応集、YMM4、台本下地、素材・著作権、YMM4連携に関する公式ブログ。記事を読んだ後に実画面、使い方、ダウンロードを見るできます。"
+        keywords="ブログ,ゆっくり解説,動画編集,YMM4,YMM4連携,制作手順"
         path="/blog/"
       />
 
@@ -138,9 +138,9 @@ export function BlogIndex() {
           <div className="editorial-hero__shell">
             <div className="editorial-hero__copy">
               <p className="brand-kicker">公式ブログ</p>
-              <h1>ゆっくり動画制作の手順とYMM4前準備を読む</h1>
+              <h1>ゆっくり動画制作の手順とYMM4連携を読む</h1>
               <p className="brand-lead">
-                記事URLから台本下地を作る流れ、素材・著作権、YMM4で確認する前工程までを検索とタグで横断できます。
+                記事URLから台本下地を作る流れ、素材・著作権、YMM4連携までを検索とタグで横断できます。
               </p>
 
               <label className="utility-search blog-index-search">
@@ -169,7 +169,7 @@ export function BlogIndex() {
 
               <p className="editorial-hero__meta">
                 {searchTerm || activeTag ? '絞り込み結果' : '公開中の記事'} <strong>{filteredPosts.length}</strong> 本
-                <span>YMM4前準備と制作手順に関係する記事を整理しています。</span>
+                <span>YMM4連携と制作手順に関係する記事を整理しています。</span>
               </p>
             </div>
 
@@ -240,7 +240,7 @@ export function BlogIndex() {
               <h2>記事を読んだら、実画面と配布状況で自分の環境に合うか確認する</h2>
               <p>
                 ブログは検索流入用の記事置き場ではなく、導入前に迷いやすい前提を整理する入口です。
-                最後は実画面、使い方、配布条件の確認で判断してください。
+                最後は実画面、使い方、ダウンロード情報の確認で判断してください。
               </p>
               <ul>
                 {blogReaderChecks.map((item) => (
@@ -262,7 +262,7 @@ export function BlogIndex() {
 
             <div className="blog-reader-gate__actions">
               <Link className="brand-btn brand-btn--primary" to={downloadUrl}>
-                配布条件を確認
+                ダウンロードを見る
               </Link>
               <Link className="brand-btn brand-btn--ghost" to="/samples/">
                 実画面を見る

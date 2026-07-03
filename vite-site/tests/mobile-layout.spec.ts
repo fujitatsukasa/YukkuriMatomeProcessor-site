@@ -1,8 +1,8 @@
 import { expect, test } from '@playwright/test'
 
 const pages = [
-  { path: '/', heading: '素材集めから台本づくりYMM4前準備までひとつの制作フローに' },
-  { path: '/download/', heading: '配布条件と公開状況を確認する' },
+  { path: '/', heading: '素材集めから台本づくりYMM4連携までひとつの制作フローに' },
+  { path: '/download/', heading: 'ダウンロードと導入情報を確認する' },
   { path: '/instructions/', heading: '記事URLから台本を取得し、YMM4に渡す' },
   { path: '/samples/', heading: '実アプリ画面と動画サンプルで、使う前の対応範囲を確認する' },
   { path: '/faq/', heading: '導入前によくある質問' },
@@ -143,16 +143,15 @@ test.describe('mobile layout', () => {
     await page.locator('#product').scrollIntoViewIfNeeded()
     await expect(page.locator('.home-lp-sticky-cta')).toBeVisible()
 
-    await page.locator('#home-pricing-distribution-cta').scrollIntoViewIfNeeded()
+    await page.locator('#home-pricing-premium-cta').scrollIntoViewIfNeeded()
     await expect(page.locator('.home-lp-sticky-cta')).toHaveCount(0)
   })
 
-  test('home pricing comparison keeps distribution, Premium, and corporate labels on mobile cards', async ({ page }) => {
+  test('home pricing comparison keeps Premium and corporate labels on mobile cards', async ({ page }) => {
     await page.goto('/', { waitUntil: 'networkidle' })
     await page.locator('#pricing').scrollIntoViewIfNeeded()
 
     const labels = await page.locator('.home-lp-comparison__mobile-label').allInnerTexts()
-    expect(labels).toContain('配布確認')
     expect(labels).toContain('Premium')
     expect(labels).toContain('法人')
   })
