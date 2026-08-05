@@ -17,5 +17,8 @@ jobs:
     env:
       GH_TOKEN: ${{ github.token }}
     steps:
-      - name: Cancel superseded recovery run
-        run: gh api -X POST "repos/$GITHUB_REPOSITORY/actions/runs/30997871453/cancel" || true
+      - name: Cancel superseded recovery and fixed-row selection runs
+        run: |
+          for run in 30997871453 30999453465; do
+            gh api -X POST "repos/$GITHUB_REPOSITORY/actions/runs/$run/cancel" || true
+          done
