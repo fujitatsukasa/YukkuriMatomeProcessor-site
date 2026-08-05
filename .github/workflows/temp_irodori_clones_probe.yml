@@ -1,0 +1,50 @@
+name: Temporary Irodori clones repository probe
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    if: startsWith(github.head_ref, 'tmp/irodori-clones-probe-')
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --upgrade huggingface_hub hf_xet pyarrow
+      - name: Probe repository tree and selected speaker files
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from huggingface_hub import HfApi
+
+          repo = 'SynDataLab/irodori-clones-3m'
+          api = HfApi()
+          info = api.dataset_info(repo, files_metadata=True)
+          selected = {'speaker_08458','speaker_03183','speaker_09784','speaker_04428','speaker_02022','speaker_01635','speaker_01639','speaker_01281','speaker_00526','speaker_09925','speaker_03333','speaker_00703','speaker_02196','speaker_02829','speaker_00162','speaker_09137'}
+          siblings=[]
+          matches=[]
+          for s in info.siblings or []:
+              name=s.rfilename
+              row={'name':name,'size':getattr(s,'size',None),'lfs':getattr(s,'lfs',None)}
+              siblings.append(row)
+              if any(spk in name for spk in selected):
+                  matches.append(row)
+          out=Path('probe_output'); out.mkdir()
+          (out/'summary.json').write_text(json.dumps({'repo':repo,'sha':info.sha,'files':len(siblings),'matches':matches,'first_100':siblings[:100]},ensure_ascii=False,indent=2,default=str),encoding='utf-8')
+          print(json.dumps({'sha':info.sha,'files':len(siblings),'matches':matches},ensure_ascii=False,indent=2,default=str))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: irodori-clones-probe
+          path: probe_output/
+          if-no-files-found: error
+          retention-days: 1
