@@ -1,4 +1,4 @@
-name: Temporary Irodori clones repository probe
+name: Temporary Irodori clones sample parquet probe
 
 on:
   pull_request:
@@ -12,39 +12,45 @@ jobs:
   probe:
     if: startsWith(github.head_ref, 'tmp/irodori-clones-probe-')
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
+    env:
+      HF_XET_HIGH_PERFORMANCE: '1'
+      HF_HUB_DISABLE_PROGRESS_BARS: '1'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
       - run: python -m pip install --upgrade huggingface_hub hf_xet pyarrow
-      - name: Probe repository tree and selected speaker files
+      - name: Download one exact speaker file and inspect schema and emotion cues
         run: |
           python - <<'PY'
           import json
           from pathlib import Path
-          from huggingface_hub import HfApi
+          import pyarrow.parquet as pq
+          from huggingface_hub import hf_hub_download
 
-          repo = 'SynDataLab/irodori-clones-3m'
-          api = HfApi()
-          info = api.dataset_info(repo, files_metadata=True)
-          selected = {'speaker_08458','speaker_03183','speaker_09784','speaker_04428','speaker_02022','speaker_01635','speaker_01639','speaker_01281','speaker_00526','speaker_09925','speaker_03333','speaker_00703','speaker_02196','speaker_02829','speaker_00162','speaker_09137'}
-          siblings=[]
-          matches=[]
-          for s in info.siblings or []:
-              name=s.rfilename
-              row={'name':name,'size':getattr(s,'size',None),'lfs':getattr(s,'lfs',None)}
-              siblings.append(row)
-              if any(spk in name for spk in selected):
-                  matches.append(row)
-          out=Path('probe_output'); out.mkdir()
-          (out/'summary.json').write_text(json.dumps({'repo':repo,'sha':info.sha,'files':len(siblings),'matches':matches,'first_100':siblings[:100]},ensure_ascii=False,indent=2,default=str),encoding='utf-8')
-          print(json.dumps({'sha':info.sha,'files':len(siblings),'matches':matches},ensure_ascii=False,indent=2,default=str))
+          repo='SynDataLab/irodori-clones-3m'
+          filename='data/train-02195-of-10000.parquet'
+          path=Path(hf_hub_download(repo_id=repo,repo_type='dataset',filename=filename,local_dir='probe_download'))
+          pf=pq.ParquetFile(path)
+          table=pq.read_table(path)
+          rows=table.to_pylist()
+          emojis=['😊','😆','😠','😒','😭','🥺','😰','😱','😪','🥱','😴','🫶','😟','🐢','📖','🤭','😮‍💨','😌','🙏','👌']
+          counts={e:sum(e in str(r.get('text','')) for r in rows) for e in emojis}
+          samples={e:[str(r.get('text','')) for r in rows if e in str(r.get('text',''))][:5] for e in emojis}
+          first=rows[0].copy() if rows else None
+          if isinstance(first,dict) and 'audio' in first:
+              audio=first['audio']
+              first['audio']={'type':type(audio).__name__,'keys':list(audio) if isinstance(audio,dict) else None}
+          payload={'file':filename,'size':path.stat().st_size,'schema':str(pf.schema_arrow),'rows':len(rows),'first_row':first,'emoji_counts':counts,'emoji_samples':samples,'all_texts':[str(r.get('text','')) for r in rows]}
+          out=Path('probe_output'); out.mkdir(exist_ok=True)
+          (out/'sample_parquet_probe.json').write_text(json.dumps(payload,ensure_ascii=False,indent=2,default=str),encoding='utf-8')
+          print(json.dumps({k:payload[k] for k in ['file','size','schema','rows','first_row','emoji_counts']},ensure_ascii=False,indent=2,default=str))
           PY
       - uses: actions/upload-artifact@v4
         with:
-          name: irodori-clones-probe
+          name: irodori-clones-sample-probe
           path: probe_output/
           if-no-files-found: error
           retention-days: 1
