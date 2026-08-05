@@ -48,21 +48,20 @@ VOICES = [
     (24, "24_非常に高い・鋭い・感情的", "speaker_09137"),
 ]
 
-# Candidate rows were chosen from the common 299-line script bank by reading the
-# actual source text and emoji annotations. Each category has several backups;
-# the final row is selected independently for every voice by audio quality and
-# Japanese ASR agreement. The displayed filename uses the actual selected line.
+# Every speaker has a different 299-line script set. Therefore categories are
+# determined from the actual text and emoji annotations inside that speaker's
+# own Parquet file; fixed row numbers must never be reused across speakers.
 CATEGORIES: list[dict[str, Any]] = [
-    {"number": 1, "label": "穏やかに懐かしむ話し方", "rows": [88, 84, 177, 190, 196]},
-    {"number": 2, "label": "自然な日常会話", "rows": [52, 53, 54, 55, 56]},
-    {"number": 3, "label": "明るくうれしい話し方", "rows": [122, 123, 124, 137, 139, 176]},
-    {"number": 4, "label": "怒りと不満を抑えた話し方", "rows": [16, 14, 21, 23, 142, 147, 162, 262]},
-    {"number": 5, "label": "悲しく弱った話し方", "rows": [293, 275, 280, 285, 294, 57, 78, 87]},
-    {"number": 6, "label": "怖がって慌てた話し方", "rows": [66, 67, 68, 89, 92, 93, 103, 119]},
-    {"number": 7, "label": "眠く力の抜けた話し方", "rows": [38, 36, 40, 42, 44, 45, 50, 51]},
-    {"number": 8, "label": "やさしく親密に話す声", "rows": [30, 32, 34, 35, 289, 293]},
-    {"number": 9, "label": "ゆったりした独り言", "rows": [190, 177, 182, 192, 195, 196]},
-    {"number": 10, "label": "笑い混じりの話し方", "rows": [238, 109, 111, 127, 129, 131, 133, 232, 233, 241]},
+    {"number": 1, "label": "穏やかに落ち着いて話す声", "kind": "calm"},
+    {"number": 2, "label": "自然な日常会話", "kind": "natural"},
+    {"number": 3, "label": "明るくうれしい話し方", "kind": "happy"},
+    {"number": 4, "label": "怒りと不満を抑えた話し方", "kind": "angry"},
+    {"number": 5, "label": "悲しく弱った話し方", "kind": "sad"},
+    {"number": 6, "label": "怖がって慌てた話し方", "kind": "fear"},
+    {"number": 7, "label": "眠く力の抜けた話し方", "kind": "sleepy"},
+    {"number": 8, "label": "やさしく親密に話す声", "kind": "gentle"},
+    {"number": 9, "label": "ゆったりした独り言", "kind": "monologue"},
+    {"number": 10, "label": "笑い混じりの話し方", "kind": "laugh"},
 ]
 
 voice_number, voice_folder, speaker_id = VOICES[VOICE_INDEX]
@@ -104,7 +103,6 @@ def safe_component(value: str, limit: int = 52) -> str:
 def remove_emojis(value: str) -> str:
     text = unicodedata.normalize("NFKC", str(value))
     text = re.sub(r"[\U00010000-\U0010ffff]", "", text)
-    # Remove standalone annotation symbols used by the source corpus.
     return text.replace("⏩", "").replace("⏸️", "").strip()
 
 
@@ -127,6 +125,82 @@ def write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
         writer = csv.DictWriter(file, fieldnames=fields or ["empty"], extrasaction="ignore")
         writer.writeheader()
         writer.writerows(rows)
+
+
+def emoji_count(text: str, emojis: str) -> int:
+    return sum(text.count(char) for char in emojis)
+
+
+def keyword_count(text: str, words: list[str]) -> int:
+    return sum(1 for word in words if word in text)
+
+
+def semantic_score(kind: str, text: str) -> float:
+    """Score the actual script/emoji content for one visible acting label."""
+    raw = str(text)
+    plain = remove_emojis(raw)
+    short_bonus = max(0.0, 2.0 - max(0, len(plain) - 58) / 25.0)
+    angry = emoji_count(raw, "😠😒💥")
+    fear = emoji_count(raw, "😰😱🫣")
+    sad = emoji_count(raw, "😭🥺😟")
+    happy = emoji_count(raw, "😊😆🎵")
+    laugh = emoji_count(raw, "🤭😆")
+    sleepy = emoji_count(raw, "🥱😪😴")
+    calm = emoji_count(raw, "😌🐢") + raw.count("😮‍💨")
+    high_arousal = angry + fear + happy + laugh
+
+    if kind == "calm":
+        score = 2.2 * calm + 1.7 * keyword_count(plain, ["落ち着", "静か", "ゆっくり", "ほっと", "懐か", "思い出", "よかった", "安心", "穏やか"])
+        score -= 2.0 * (angry + fear) + 0.9 * happy
+        return score + short_bonus
+    if kind == "natural":
+        score = 4.0 if high_arousal + sad + sleepy == 0 else max(0.0, 2.5 - 1.4 * (high_arousal + sad + sleepy))
+        score += 1.1 * keyword_count(plain, ["今日", "夕飯", "帰", "そういえば", "えっと", "あれ", "どうしよう", "かな", "だよね", "じゃん"])
+        score -= 1.2 * keyword_count(plain, ["怖", "泣", "怒", "眠", "叫", "最悪", "限界"])
+        return score + short_bonus
+    if kind == "happy":
+        score = 3.4 * happy + 1.5 * laugh + 1.9 * keyword_count(plain, ["嬉", "うれ", "楽しい", "楽しみ", "やった", "幸せ", "最高", "おめでとう", "会え", "当選"])
+        score -= 2.3 * angry + 2.0 * sad + 1.5 * fear
+        return score + short_bonus
+    if kind == "angry":
+        score = 3.8 * angry + 1.9 * keyword_count(plain, ["怒", "腹立", "いい加減", "うるさ", "最悪", "我慢", "限界", "イライラ", "やめて", "頭にくる", "舌打ち"])
+        score -= 1.6 * happy + 1.4 * sad
+        return score + short_bonus
+    if kind == "sad":
+        score = 4.0 * raw.count("😭") + 2.2 * raw.count("🥺") + 1.2 * raw.count("😮‍💨")
+        score += 2.0 * keyword_count(plain, ["悲", "寂", "泣", "つら", "苦し", "会いた", "いなく", "涙", "後悔", "ごめん", "胸が"])
+        score -= 1.8 * happy + 1.2 * angry
+        return score + short_bonus
+    if kind == "fear":
+        score = 4.0 * fear + 1.0 * emoji_count(raw, "👂🌬️")
+        score += 2.0 * keyword_count(plain, ["怖", "震", "誰か", "だれか", "音", "逃げ", "待って", "やばい", "真っ暗", "心臓", "びっくり"])
+        score -= 1.5 * happy + 0.8 * angry
+        return score + short_bonus
+    if kind == "sleepy":
+        sleep_words = keyword_count(plain, ["眠", "ねむ", "寝", "布団", "目覚まし", "起き", "ぼーっと", "寝足り", "うたた寝", "まぶた", "しょぼしょぼ", "あと5分", "あと少し"])
+        score = 4.5 * sleepy + 1.6 * raw.count("🐢") + 1.0 * raw.count("😮‍💨") + 3.0 * sleep_words
+        if sleep_words == 0:
+            score -= 8.0
+        score -= 1.7 * (angry + fear + happy)
+        return score + short_bonus
+    if kind == "gentle":
+        score = 2.0 * emoji_count(raw, "🥺😌🙏🫶😊") + 0.7 * raw.count("😮‍💨")
+        score += 2.1 * keyword_count(plain, ["大丈夫", "無理しない", "むりしない", "そば", "休ん", "やすん", "ありがとう", "おやすみ", "声聞", "心配", "幸せ", "会いたい", "頑張れる", "ほっこり"])
+        score -= 2.0 * angry + 1.2 * fear
+        return score + short_bonus
+    if kind == "monologue":
+        score = 1.8 * calm + 1.8 * keyword_count(plain, ["懐か", "昔", "思い出", "だな", "かな", "なんだろう", "ひとり", "一人", "ゆっくり", "静か", "あの頃", "今思う", "帰ってきて"])
+        score += 1.0 if "…" in raw or "..." in raw else 0.0
+        score -= 1.8 * (angry + fear) + 0.9 * happy
+        return score + short_bonus
+    if kind == "laugh":
+        laugh_words = keyword_count(plain, ["笑", "吹き出", "おかし", "面白", "爆笑", "ふふ", "あは", "こらえる", "笑える"])
+        score = 4.0 * raw.count("🤭") + 2.8 * raw.count("😆") + 3.0 * laugh_words
+        if raw.count("🤭") + raw.count("😆") + laugh_words == 0:
+            score -= 10.0
+        score -= 1.4 * angry + 1.0 * sad
+        return score + short_bonus
+    return 0.0
 
 
 def decode_audio_cell(value: Any) -> tuple[np.ndarray, int, str]:
@@ -152,10 +226,7 @@ def decode_audio_cell(value: Any) -> tuple[np.ndarray, int, str]:
         source.write_bytes(payload)
         process = subprocess.run(
             ["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", str(source), "-vn", "-ac", "1", "-ar", str(TARGET_SR), "-c:a", "pcm_s24le", str(destination)],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True,
-            timeout=180,
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, timeout=180,
         )
         if process.returncode != 0:
             raise RuntimeError(f"audio decode failed: {process.stderr[-700:]}")
@@ -207,14 +278,10 @@ def audio_metrics(signal: np.ndarray) -> dict[str, float]:
         flatness = float(np.mean(np.exp(np.mean(np.log(power), axis=1)) / np.maximum(np.mean(power, axis=1), 1e-12)))
         high_ratio = float(np.mean(power[:, frequencies >= 7000].sum(axis=1) / totals))
     return {
-        "duration_sec": duration,
-        "peak_dbfs": 20 * math.log10(max(peak, 1e-12)),
-        "rms_dbfs": 20 * math.log10(max(rms, 1e-12)),
-        "clip_ratio": clip_ratio,
-        "silence_ratio": silence_ratio,
-        "spectral_centroid_hz": centroid,
-        "spectral_flatness": flatness,
-        "high_frequency_ratio": high_ratio,
+        "duration_sec": duration, "peak_dbfs": 20 * math.log10(max(peak, 1e-12)),
+        "rms_dbfs": 20 * math.log10(max(rms, 1e-12)), "clip_ratio": clip_ratio,
+        "silence_ratio": silence_ratio, "spectral_centroid_hz": centroid,
+        "spectral_flatness": flatness, "high_frequency_ratio": high_ratio,
     }
 
 
@@ -333,30 +400,38 @@ def main() -> None:
         candidate_records: list[dict[str, Any]] = []
 
         for category in CATEGORIES:
+            ranked_scripts = sorted(
+                [
+                    {"row_index": index, "semantic_score": semantic_score(str(category["kind"]), str(row["text"])), "text": str(row["text"])}
+                    for index, row in enumerate(rows)
+                    if index not in used_rows
+                ],
+                key=lambda item: (float(item["semantic_score"]), -len(remove_emojis(str(item["text"])))),
+                reverse=True,
+            )
+            # Decode only the strongest script matches instead of trusting the same row number across speakers.
             candidates: list[dict[str, Any]] = []
-            for row_index in category["rows"]:
-                if row_index in used_rows:
-                    continue
+            for script in ranked_scripts[:12]:
+                row_index = int(script["row_index"])
                 row = rows[row_index]
                 signal, sample_rate, source_path = decode_audio_cell(row["audio"])
                 signal = trim_silence(resample_mono(signal, sample_rate))
                 metrics = audio_metrics(signal)
                 valid = bool(1.0 <= metrics["duration_sec"] <= 12.0 and -38 <= metrics["rms_dbfs"] <= -8 and metrics["clip_ratio"] <= 0.0002 and metrics["spectral_flatness"] <= 0.50)
                 record = {
-                    "voice": voice_folder, "speaker_id": speaker_id, "category": category["label"],
-                    "row_index": row_index, "source_text": row["text"], "source_path": source_path,
-                    **metrics, "quality_score": quality_score(metrics, str(row["text"])), "signal": signal,
-                    "valid": valid,
+                    "voice": voice_folder, "speaker_id": speaker_id, "category": category["label"], "category_kind": category["kind"],
+                    "row_index": row_index, "semantic_score": script["semantic_score"], "source_text": row["text"], "source_path": source_path,
+                    **metrics, "quality_score": quality_score(metrics, str(row["text"])), "signal": signal, "valid": valid,
                 }
-                candidate_records.append({k: v for k, v in record.items() if k != "signal"})
+                candidate_records.append({key: value for key, value in record.items() if key != "signal"})
                 if valid:
                     candidates.append(record)
             if not candidates:
                 raise RuntimeError(f"no valid candidates: {category['label']}")
-            candidates.sort(key=lambda item: float(item["quality_score"]), reverse=True)
+            candidates.sort(key=lambda item: (float(item["semantic_score"]), float(item["quality_score"])), reverse=True)
 
             evaluated: list[dict[str, Any]] = []
-            for candidate in candidates[:3]:
+            for candidate in candidates[:4]:
                 temp_path = WORK / f"asr_{int(category['number']):02d}_{int(candidate['row_index']):03d}.wav"
                 aligned, transcript, asr_ratio = align_to_text(candidate["signal"], str(candidate["source_text"]), whisper, temp_path)
                 final_metrics = audio_metrics(aligned)
@@ -367,15 +442,20 @@ def main() -> None:
                     **{f"final_{key}": value for key, value in final_metrics.items()},
                 })
                 evaluated.append(candidate)
-            evaluated.sort(key=lambda item: (float(item["asr_ratio"]), float(item["final_quality_score"])), reverse=True)
+            evaluated.sort(
+                key=lambda item: (
+                    float(item["semantic_score"]), float(item["asr_ratio"]), float(item["final_quality_score"])
+                ),
+                reverse=True,
+            )
             selected = evaluated[0]
-            # Source rows and ASR must broadly agree. Because expressive Japanese ASR is imperfect,
-            # allow a lower ratio only when partial matching remains high and there is no evidence of a long tail.
             target = to_hiragana(str(selected["source_text"]))
             actual = to_hiragana(str(selected["transcript"]))
             partial = fuzz.partial_ratio(target, actual) / 100.0 if actual else 0.0
             if float(selected["asr_ratio"]) < 0.68 and partial < 0.82:
                 raise RuntimeError(f"ASR mismatch {category['label']}: {selected['transcript']!r} / {selected['source_text']!r}")
+            if float(selected["semantic_score"]) < 1.0:
+                raise RuntimeError(f"acting label has no matching script: {category['label']} / {selected['source_text']!r}")
 
             used_rows.add(int(selected["row_index"]))
             clean_text = remove_emojis(str(selected["source_text"]))
@@ -384,14 +464,13 @@ def main() -> None:
             sf.write(output_path, selected["signal"], TARGET_SR, subtype="PCM_24")
             wav_check = validate_wav(output_path)
             selected_rows.append({
-                "voice": voice_folder, "speaker_id": speaker_id,
-                "number": category["number"], "label": category["label"],
-                "row_index": selected["row_index"], "source_text": selected["source_text"],
-                "visible_text": clean_text, "transcript": selected["transcript"],
+                "voice": voice_folder, "speaker_id": speaker_id, "number": category["number"], "label": category["label"],
+                "category_kind": category["kind"], "row_index": selected["row_index"], "semantic_score": selected["semantic_score"],
+                "source_text": selected["source_text"], "visible_text": clean_text, "transcript": selected["transcript"],
                 "asr_ratio": selected["asr_ratio"], "asr_partial_ratio": partial,
                 "quality_score": selected["final_quality_score"], **wav_check,
             })
-            log(f"selected {category['number']:02d} {category['label']} row={selected['row_index']} ASR={selected['asr_ratio']:.3f}")
+            log(f"selected {category['number']:02d} {category['label']} row={selected['row_index']} semantic={selected['semantic_score']:.2f} ASR={selected['asr_ratio']:.3f}")
 
         selected_rows.sort(key=lambda item: int(item["number"]))
         if len(list(WAV_DIR.glob("*.wav"))) != 10:
@@ -400,8 +479,8 @@ def main() -> None:
         write_csv(VALIDATION_DIR / "採用10本検査.csv", selected_rows)
         summary = {
             "voice_index": VOICE_INDEX, "voice": voice_folder, "speaker_id": speaker_id,
-            "source_dataset": DATASET, "source_parquet": parquet_name,
-            "wav_count": 10, "rows": [{k: item[k] for k in ("number", "label", "row_index", "source_text", "transcript", "asr_ratio", "quality_score")} for item in selected_rows],
+            "source_dataset": DATASET, "source_parquet": parquet_name, "wav_count": 10,
+            "rows": [{key: item[key] for key in ("number", "label", "category_kind", "row_index", "semantic_score", "source_text", "transcript", "asr_ratio", "quality_score")} for item in selected_rows],
         }
         (VALIDATION_DIR / "集計.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
         log("complete 10 WAV")
