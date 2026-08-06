@@ -1,0 +1,121 @@
+name: Temporary Irodori v4 failed-voice recovery
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: read
+
+jobs:
+  recover:
+    if: startsWith(github.head_ref, 'tmp/irodori-v4-recovery-')
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        voice: [6, 13]
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    env:
+      VOICE_INDEX: ${{ matrix.voice }}
+      PILOT: '0'
+      HF_XET_HIGH_PERFORMANCE: '1'
+      HF_HUB_DISABLE_PROGRESS_BARS: '1'
+      HF_HUB_DOWNLOAD_TIMEOUT: '1200'
+      TOKENIZERS_PARALLELISM: 'false'
+      OMP_NUM_THREADS: '4'
+      MKL_NUM_THREADS: '4'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Restore pinned v4 scripts and patch the missing-aligned-file selector bug
+        run: |
+          mkdir -p tools
+          base64 -d assets/irodori_v4_payload/generate.py.gz.b64 | gzip -dc > tools/irodori_v4_remaster_generate.py
+          base64 -d assets/irodori_v4_payload/select.py.gz.b64 | gzip -dc > tools/irodori_v4_remaster_select.py
+          cat assets/irodori_v4_payload/spec.part00.b64 assets/irodori_v4_payload/spec.part01.b64 \
+            | base64 -d | gzip -dc > tools/irodori_v4_remaster16_spec.json
+          python - <<'PY'
+          from pathlib import Path
+          import json
+
+          generate = Path('tools/irodori_v4_remaster_generate.py')
+          text = generate.read_text(encoding='utf-8')
+          replacements = {
+              'anchors = ANCHORS[:1] if PILOT else ANCHORS': 'anchors = ANCHORS[:1] if PILOT else ANCHORS[:2]',
+              'candidates_per_anchor = 1 if PILOT else 3': 'candidates_per_anchor = 1 if PILOT else 2',
+              'steps = 8 if PILOT else 24': 'steps = 8 if PILOT else 20',
+              'candidate_count = 1 if PILOT else 4': 'candidate_count = 1 if PILOT else 3',
+              'steps = 8 if PILOT else 40': 'steps = 8 if PILOT else 32',
+              'multipliers = [0.94, 1.00, 1.06, 1.12]': 'multipliers = [0.96, 1.00, 1.04]',
+          }
+          for old, new in replacements.items():
+              if old not in text:
+                  raise SystemExit(f'missing generate patch target: {old}')
+              text = text.replace(old, new)
+          generate.write_text(text, encoding='utf-8')
+
+          selector = Path('tools/irodori_v4_remaster_select.py')
+          text = selector.read_text(encoding='utf-8')
+          old = '            signal, sr = sf.read(aligned, dtype="float32", always_2d=True)'
+          new = '''            if not aligned.exists():
+                name_parts = aligned.stem.split("_")
+                if len(name_parts) < 4:
+                    raise RuntimeError(f"aligned fallback path cannot be parsed: {aligned}")
+                fallback_style = int(name_parts[1])
+                fallback_candidate = int(name_parts[3])
+                fallback_matches = list((WORK / "generated").glob(
+                    f"{fallback_style:02d}_*/candidate_{fallback_candidate:02d}.wav"
+                ))
+                if len(fallback_matches) != 1:
+                    raise RuntimeError(
+                        f"aligned file missing and raw fallback is not unique: {aligned} / {fallback_matches}"
+                    )
+                aligned = fallback_matches[0]
+            signal, sr = sf.read(aligned, dtype="float32", always_2d=True)'''
+          if old not in text:
+              raise SystemExit('missing selector patch target')
+          text = text.replace(old, new)
+          selector.write_text(text, encoding='utf-8')
+
+          spec = json.loads(Path('tools/irodori_v4_remaster16_spec.json').read_text(encoding='utf-8'))
+          assert len(spec['voices']) == 16
+          assert all(len(voice['styles']) == 10 for voice in spec['voices'])
+          PY
+          python -m py_compile tools/irodori_v4_remaster_generate.py tools/irodori_v4_remaster_select.py
+
+      - name: Install official current Irodori v4 and validators
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg libsndfile1 git
+          python -m pip install --upgrade pip uv
+          git clone --depth 1 https://github.com/Aratako/Irodori-TTS.git Irodori-TTS
+          cd Irodori-TTS
+          uv sync --extra cpu
+          uv pip install 'setuptools<81' faster-whisper rapidfuzz pykakasi scipy soundfile \
+            huggingface_hub hf_xet pyarrow resemblyzer webrtcvad librosa torchaudio
+
+      - name: Regenerate and select the exact failed original voice with v4-Small
+        run: |
+          cd Irodori-TTS
+          uv run --no-sync python ../tools/irodori_v4_remaster_generate.py
+          uv run --no-sync python ../tools/irodori_v4_remaster_select.py
+          test "$(find ../v4_remaster_output/voice_*/WAV -type f -name '*.wav' | wc -l)" -eq 10
+          grep -q 'Aratako/Irodori-TTS-v4-Small' ../v4_remaster_output/voice_*/検証/summary.json
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: irodori-v4-recovery-voice-${{ matrix.voice }}
+          path: |
+            v4_remaster_output/voice_*/
+            v4_remaster_work/voice_*/meta/
+          if-no-files-found: warn
+          retention-days: 3
+          compression-level: 0
