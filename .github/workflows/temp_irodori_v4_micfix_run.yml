@@ -1,4 +1,4 @@
-name: Temporary Irodori v4 microphone-quality run
+name: Temporary Irodori v4 same-16-voices microphone-quality rebuild
 
 on:
   pull_request:
@@ -8,16 +8,250 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: irodori-v4-micfix-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+env:
+  HF_XET_HIGH_PERFORMANCE: '1'
+  HF_HUB_DISABLE_PROGRESS_BARS: '1'
+  HF_HUB_DOWNLOAD_TIMEOUT: '1200'
+  TOKENIZERS_PARALLELISM: 'false'
+  OMP_NUM_THREADS: '4'
+  MKL_NUM_THREADS: '4'
+
 jobs:
-  smoke:
+  pilot:
     if: startsWith(github.head_ref, 'tmp/irodori-v4-micfix-run-')
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 100
+    env:
+      VOICE_INDEX: '0'
+      PILOT: '1'
     steps:
       - uses: actions/checkout@v4
-      - name: Test public raw access to the existing exact-voice generator
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Restore pinned scripts and exact 16-voice specification
         run: |
-          curl -fsSL 'https://raw.githubusercontent.com/fujitatsukasa/kanjou_bunseki/tmp/irodori-v4-same16-micfix-20260806/tools/irodori_v4_micfix_wrapper.py' -o /tmp/wrapper.py
-          curl -fsSL 'https://raw.githubusercontent.com/fujitatsukasa/kanjou_bunseki/tmp/irodori-fix16-20260805/tools/generate_irodori_fix16_voice.py' -o /tmp/base.py
-          wc -c /tmp/wrapper.py /tmp/base.py
-          python -m py_compile /tmp/wrapper.py /tmp/base.py
+          mkdir -p tools
+          base64 -d assets/irodori_v4_payload/generate.py.gz.b64 | gzip -dc > tools/irodori_v4_remaster_generate.py
+          base64 -d assets/irodori_v4_payload/select.py.gz.b64 | gzip -dc > tools/irodori_v4_remaster_select.py
+          base64 -d assets/irodori_v4_payload/package.py.gz.b64 | gzip -dc > tools/irodori_v4_remaster_package.py
+          cat assets/irodori_v4_payload/spec.part00.b64 assets/irodori_v4_payload/spec.part01.b64 \
+            | base64 -d | gzip -dc > tools/irodori_v4_remaster16_spec.json
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          path = Path('tools/irodori_v4_remaster_generate.py')
+          text = path.read_text(encoding='utf-8')
+          replacements = {
+              'anchors = ANCHORS[:1] if PILOT else ANCHORS': 'anchors = ANCHORS[:1] if PILOT else ANCHORS[:2]',
+              'candidates_per_anchor = 1 if PILOT else 3': 'candidates_per_anchor = 1 if PILOT else 2',
+              'steps = 8 if PILOT else 24': 'steps = 8 if PILOT else 20',
+              'candidate_count = 1 if PILOT else 4': 'candidate_count = 1 if PILOT else 3',
+              'steps = 8 if PILOT else 40': 'steps = 8 if PILOT else 32',
+              'multipliers = [0.94, 1.00, 1.06, 1.12]': 'multipliers = [0.96, 1.00, 1.04]',
+          }
+          for old, new in replacements.items():
+              if old not in text:
+                  raise SystemExit(f'missing patch target: {old}')
+              text = text.replace(old, new)
+          path.write_text(text, encoding='utf-8')
+          spec = json.loads(Path('tools/irodori_v4_remaster16_spec.json').read_text(encoding='utf-8'))
+          assert len(spec['voices']) == 16
+          assert all(len(voice['styles']) == 10 for voice in spec['voices'])
+          PY
+          python -m py_compile \
+            tools/irodori_v4_remaster_generate.py \
+            tools/irodori_v4_remaster_select.py \
+            tools/irodori_v4_remaster_package.py
+
+      - name: Install official current Irodori and validators
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg libsndfile1 git
+          python -m pip install --upgrade pip uv
+          git clone --depth 1 https://github.com/Aratako/Irodori-TTS.git Irodori-TTS
+          cd Irodori-TTS
+          uv sync --extra cpu
+          uv pip install 'setuptools<81' faster-whisper rapidfuzz pykakasi scipy soundfile \
+            huggingface_hub hf_xet pyarrow resemblyzer webrtcvad librosa torchaudio
+
+      - name: Smoke-test v4 reference remaster and two acted lines
+        run: |
+          cd Irodori-TTS
+          uv run --no-sync python ../tools/irodori_v4_remaster_generate.py
+          uv run --no-sync python ../tools/irodori_v4_remaster_select.py
+          test "$(find ../v4_remaster_output/voice_00/WAV -type f -name '*.wav' | wc -l)" -eq 2
+          grep -q 'Aratako/Irodori-TTS-v4-Small' ../v4_remaster_output/voice_00/検証/summary.json
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: irodori-v4-micfix-pilot
+          path: |
+            v4_remaster_output/voice_00/
+            v4_remaster_work/voice_00/meta/
+          if-no-files-found: warn
+          retention-days: 3
+          compression-level: 0
+
+  rebuild:
+    if: startsWith(github.head_ref, 'tmp/irodori-v4-micfix-run-')
+    needs: pilot
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix:
+        voice: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    env:
+      VOICE_INDEX: ${{ matrix.voice }}
+      PILOT: '0'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Restore pinned scripts and exact 16-voice specification
+        run: |
+          mkdir -p tools
+          base64 -d assets/irodori_v4_payload/generate.py.gz.b64 | gzip -dc > tools/irodori_v4_remaster_generate.py
+          base64 -d assets/irodori_v4_payload/select.py.gz.b64 | gzip -dc > tools/irodori_v4_remaster_select.py
+          base64 -d assets/irodori_v4_payload/package.py.gz.b64 | gzip -dc > tools/irodori_v4_remaster_package.py
+          cat assets/irodori_v4_payload/spec.part00.b64 assets/irodori_v4_payload/spec.part01.b64 \
+            | base64 -d | gzip -dc > tools/irodori_v4_remaster16_spec.json
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          path = Path('tools/irodori_v4_remaster_generate.py')
+          text = path.read_text(encoding='utf-8')
+          replacements = {
+              'anchors = ANCHORS[:1] if PILOT else ANCHORS': 'anchors = ANCHORS[:1] if PILOT else ANCHORS[:2]',
+              'candidates_per_anchor = 1 if PILOT else 3': 'candidates_per_anchor = 1 if PILOT else 2',
+              'steps = 8 if PILOT else 24': 'steps = 8 if PILOT else 20',
+              'candidate_count = 1 if PILOT else 4': 'candidate_count = 1 if PILOT else 3',
+              'steps = 8 if PILOT else 40': 'steps = 8 if PILOT else 32',
+              'multipliers = [0.94, 1.00, 1.06, 1.12]': 'multipliers = [0.96, 1.00, 1.04]',
+          }
+          for old, new in replacements.items():
+              if old not in text:
+                  raise SystemExit(f'missing patch target: {old}')
+              text = text.replace(old, new)
+          path.write_text(text, encoding='utf-8')
+          spec = json.loads(Path('tools/irodori_v4_remaster16_spec.json').read_text(encoding='utf-8'))
+          assert len(spec['voices']) == 16
+          assert all(len(voice['styles']) == 10 for voice in spec['voices'])
+          PY
+          python -m py_compile \
+            tools/irodori_v4_remaster_generate.py \
+            tools/irodori_v4_remaster_select.py \
+            tools/irodori_v4_remaster_package.py
+
+      - name: Install official current Irodori and independent validators
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg libsndfile1 git
+          python -m pip install --upgrade pip uv
+          git clone --depth 1 https://github.com/Aratako/Irodori-TTS.git Irodori-TTS
+          cd Irodori-TTS
+          uv sync --extra cpu
+          uv pip install 'setuptools<81' faster-whisper rapidfuzz pykakasi scipy soundfile \
+            huggingface_hub hf_xet pyarrow resemblyzer webrtcvad librosa torchaudio
+
+      - name: Rebuild one exact original voice with Irodori v4-Small
+        run: |
+          cd Irodori-TTS
+          uv run --no-sync python ../tools/irodori_v4_remaster_generate.py
+          uv run --no-sync python ../tools/irodori_v4_remaster_select.py
+          test "$(find ../v4_remaster_output/voice_*/WAV -type f -name '*.wav' | wc -l)" -eq 10
+          grep -q 'Aratako/Irodori-TTS-v4-Small' ../v4_remaster_output/voice_*/検証/summary.json
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: irodori-v4-same16-voice-${{ matrix.voice }}
+          path: |
+            v4_remaster_output/voice_*/
+            v4_remaster_work/voice_*/meta/
+          if-no-files-found: warn
+          retention-days: 3
+          compression-level: 0
+
+  package:
+    if: always() && startsWith(github.head_ref, 'tmp/irodori-v4-micfix-run-')
+    needs: rebuild
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Restore pinned packaging script
+        run: |
+          mkdir -p tools
+          base64 -d assets/irodori_v4_payload/package.py.gz.b64 | gzip -dc > tools/irodori_v4_remaster_package.py
+          python -m py_compile tools/irodori_v4_remaster_package.py
+
+      - name: Install final independent WAV validators
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg libsndfile1
+          python -m pip install --upgrade pip soundfile
+
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: irodori-v4-same16-voice-*
+          path: downloaded_v4_remaster
+
+      - name: Require all 16 voices, decode all 160 WAVs, and build Japanese WAV-only ZIPs
+        run: python tools/irodori_v4_remaster_package.py
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: irodori-v4-same16-all160
+          path: v4_remaster_package_output/Irodori_v4_同じ16声_演技維持・マイク音質再生成_全160WAV.zip
+          if-no-files-found: warn
+          retention-days: 3
+          compression-level: 0
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: irodori-v4-same16-mid80
+          path: v4_remaster_package_output/Irodori_v4_同じ中くらい8声_演技維持・マイク音質再生成_80WAV.zip
+          if-no-files-found: warn
+          retention-days: 3
+          compression-level: 0
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: irodori-v4-same16-high80
+          path: v4_remaster_package_output/Irodori_v4_同じ高め8声_演技維持・マイク音質再生成_80WAV.zip
+          if-no-files-found: warn
+          retention-days: 3
+          compression-level: 0
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: irodori-v4-same16-validation
+          path: |
+            v4_remaster_package_output/Irodori_v4_同じ16声_生成・ASR・話者・音質検証資料.zip
+            v4_remaster_package_output/最終検証結果.json
+            v4_remaster_package_output/SHA256SUMS.txt
+          if-no-files-found: warn
+          retention-days: 3
+          compression-level: 0
