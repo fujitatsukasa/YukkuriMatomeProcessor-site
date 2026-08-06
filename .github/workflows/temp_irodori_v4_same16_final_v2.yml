@@ -1,0 +1,210 @@
+name: Temporary Irodori v4 same-16-voices final microphone-quality rebuild
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: irodori-v4-same16-final-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+env:
+  HF_XET_HIGH_PERFORMANCE: '1'
+  HF_HUB_DISABLE_PROGRESS_BARS: '1'
+  HF_HUB_DOWNLOAD_TIMEOUT: '1200'
+  TOKENIZERS_PARALLELISM: 'false'
+  OMP_NUM_THREADS: '4'
+  MKL_NUM_THREADS: '4'
+
+jobs:
+  pilot:
+    if: startsWith(github.head_ref, 'tmp/irodori-v4-micfix-run-')
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      VOICE_INDEX: '0'
+      PILOT: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Download the exact existing voice, lines, and acting references
+        uses: actions/download-artifact@v4
+        with:
+          name: irodori-clone16-curated-voice-0
+          path: source_voice
+          github-token: ${{ github.token }}
+          repository: fujitatsukasa/YukkuriMatomeProcessor-site
+          run-id: '31000615518'
+
+      - name: Install official current Irodori and independent validators
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg libsndfile1 git
+          python -m pip install --upgrade pip uv
+          git clone --depth 1 https://github.com/Aratako/Irodori-TTS.git Irodori-TTS
+          cd Irodori-TTS
+          uv sync --extra cpu
+          uv pip install 'setuptools<81' faster-whisper rapidfuzz pykakasi scipy soundfile huggingface_hub hf_xet pyarrow resemblyzer webrtcvad librosa
+
+      - name: Pilot two lines with Irodori v4-Small
+        run: |
+          cd Irodori-TTS
+          uv run --no-sync python ../tools/v4_same16_rebuild_v2.py
+          test "$(find ../v4_same16_output/voice_00/WAV -type f -name '*.wav' | wc -l)" -eq 2
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: irodori-v4-same16-final-pilot
+          path: |
+            v4_same16_output/voice_00/
+            v4_same16_work/voice_00/v4基準参照/
+          if-no-files-found: warn
+          retention-days: 3
+          compression-level: 0
+
+  rebuild:
+    if: startsWith(github.head_ref, 'tmp/irodori-v4-micfix-run-')
+    needs: pilot
+    strategy:
+      fail-fast: false
+      max-parallel: 16
+      matrix:
+        voice: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    env:
+      VOICE_INDEX: ${{ matrix.voice }}
+      PILOT: '0'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Download existing exact voice artifact
+        if: matrix.voice != 14
+        uses: actions/download-artifact@v4
+        with:
+          name: irodori-clone16-curated-voice-${{ matrix.voice }}
+          path: source_voice
+          github-token: ${{ github.token }}
+          repository: fujitatsukasa/YukkuriMatomeProcessor-site
+          run-id: '31000615518'
+
+      - name: Download recovered exact voice 23 artifact
+        if: matrix.voice == 14
+        uses: actions/download-artifact@v4
+        with:
+          name: irodori-clone16-curated-voice-14-recovery
+          path: source_voice
+          github-token: ${{ github.token }}
+          repository: fujitatsukasa/YukkuriMatomeProcessor-site
+          run-id: '31003937632'
+
+      - name: Install official current Irodori and independent validators
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg libsndfile1 git
+          python -m pip install --upgrade pip uv
+          git clone --depth 1 https://github.com/Aratako/Irodori-TTS.git Irodori-TTS
+          cd Irodori-TTS
+          uv sync --extra cpu
+          uv pip install 'setuptools<81' faster-whisper rapidfuzz pykakasi scipy soundfile huggingface_hub hf_xet pyarrow resemblyzer webrtcvad librosa
+
+      - name: Rebuild this exact voice and ten existing performances with v4-Small
+        run: |
+          cd Irodori-TTS
+          uv run --no-sync python ../tools/v4_same16_rebuild_v2.py
+          test "$(find ../v4_same16_output/voice_*/WAV -type f -name '*.wav' | wc -l)" -eq 10
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: irodori-v4-same16-final-voice-${{ matrix.voice }}
+          path: |
+            v4_same16_output/voice_*/
+            v4_same16_work/voice_*/v4基準参照/
+          if-no-files-found: warn
+          retention-days: 3
+          compression-level: 0
+
+  package:
+    if: startsWith(github.head_ref, 'tmp/irodori-v4-micfix-run-')
+    needs: rebuild
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install final WAV validators
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg libsndfile1
+          python -m pip install --upgrade pip soundfile
+
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: irodori-v4-same16-final-voice-*
+          path: downloaded_v4_same16
+
+      - name: Require all 160 WAVs and build Japanese WAV-only ZIPs
+        run: python tools/v4_same16_package_v2.py
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: irodori-v4-same16-final-all160
+          path: v4_same16_package_output/Irodori_v4_同じ16声_演技維持・マイク音質再生成_全160WAV.zip
+          if-no-files-found: error
+          retention-days: 3
+          compression-level: 0
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: irodori-v4-same16-final-mid80
+          path: v4_same16_package_output/Irodori_v4_同じ中くらい8声_演技維持・マイク音質再生成_80WAV.zip
+          if-no-files-found: error
+          retention-days: 3
+          compression-level: 0
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: irodori-v4-same16-final-high80
+          path: v4_same16_package_output/Irodori_v4_同じ高め8声_演技維持・マイク音質再生成_80WAV.zip
+          if-no-files-found: error
+          retention-days: 3
+          compression-level: 0
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: irodori-v4-same16-final-validation
+          path: |
+            v4_same16_package_output/Irodori_v4_同じ16声_生成・ASR・話者・音質検証資料.zip
+            v4_same16_package_output/最終検証結果.json
+            v4_same16_package_output/SHA256SUMS.txt
+          if-no-files-found: error
+          retention-days: 3
+          compression-level: 0
