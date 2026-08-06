@@ -15,4 +15,9 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-      - run: echo 'runner-ready'
+      - name: Test public raw access to the existing exact-voice generator
+        run: |
+          curl -fsSL 'https://raw.githubusercontent.com/fujitatsukasa/kanjou_bunseki/tmp/irodori-v4-same16-micfix-20260806/tools/irodori_v4_micfix_wrapper.py' -o /tmp/wrapper.py
+          curl -fsSL 'https://raw.githubusercontent.com/fujitatsukasa/kanjou_bunseki/tmp/irodori-fix16-20260805/tools/generate_irodori_fix16_voice.py' -o /tmp/base.py
+          wc -c /tmp/wrapper.py /tmp/base.py
+          python -m py_compile /tmp/wrapper.py /tmp/base.py
