@@ -64,21 +64,7 @@ jobs:
           selector = Path('tools/irodori_v4_remaster_select.py')
           text = selector.read_text(encoding='utf-8')
           old = '            signal, sr = sf.read(aligned, dtype="float32", always_2d=True)'
-          new = '''            if not aligned.exists():
-                name_parts = aligned.stem.split("_")
-                if len(name_parts) < 4:
-                    raise RuntimeError(f"aligned fallback path cannot be parsed: {aligned}")
-                fallback_style = int(name_parts[1])
-                fallback_candidate = int(name_parts[3])
-                fallback_matches = list((WORK / "generated").glob(
-                    f"{fallback_style:02d}_*/candidate_{fallback_candidate:02d}.wav"
-                ))
-                if len(fallback_matches) != 1:
-                    raise RuntimeError(
-                        f"aligned file missing and raw fallback is not unique: {aligned} / {fallback_matches}"
-                    )
-                aligned = fallback_matches[0]
-            signal, sr = sf.read(aligned, dtype="float32", always_2d=True)'''
+          new = '            signal, sr = sf.read(aligned if aligned.exists() else next((WORK / "generated").glob(f"{int(aligned.stem.split(chr(95))[1]):02d}_*/candidate_{int(aligned.stem.split(chr(95))[3]):02d}.wav")), dtype="float32", always_2d=True)'
           if old not in text:
               raise SystemExit('missing selector patch target')
           text = text.replace(old, new)
