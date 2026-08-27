@@ -12,14 +12,30 @@ permissions:
 jobs:
   fetch-media:
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     steps:
-      - name: Create test artifact
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            tools/chatgpt_media_fetch.py
+          sparse-checkout-cone-mode: false
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install tools
         run: |
-          mkdir -p output
-          printf 'media fetch path is working\n' > output/test.txt
-      - name: Upload test artifact
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils ffmpeg
+          python -m pip install --upgrade pip
+          pip install requests beautifulsoup4 lxml pillow yt-dlp
+      - name: Fetch public source media
+        run: python tools/chatgpt_media_fetch.py
+      - name: Upload collected media
         uses: actions/upload-artifact@v4
         with:
           name: fukuoka-assembly-media
           path: output/
+          if-no-files-found: error
+          compression-level: 6
           retention-days: 1
