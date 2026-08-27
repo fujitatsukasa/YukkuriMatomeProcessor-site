@@ -1,0 +1,25 @@
+name: ChatGPT media fetch
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.chatgpt_media_trigger'
+
+permissions:
+  contents: read
+
+jobs:
+  fetch-media:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create test artifact
+        run: |
+          mkdir -p output
+          printf 'media fetch path is working\n' > output/test.txt
+      - name: Upload test artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: fukuoka-assembly-media
+          path: output/
+          retention-days: 1
