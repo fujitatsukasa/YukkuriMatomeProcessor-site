@@ -1,0 +1,52 @@
+name: Temporary Rechallenge Tokyo real-media collection
+
+on:
+  push:
+    branches:
+      - 'chatgpt/rechallenge-media-public-20260827'
+    paths:
+      - 'scripts/chatgpt_collect_rechallenge_media.py'
+      - '.github/workflows/chatgpt_rechallenge_media_temp.yml'
+      - '.chatgpt_rechallenge_media_trigger'
+
+permissions:
+  contents: read
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Sparse checkout collector
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            scripts/chatgpt_collect_rechallenge_media.py
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install collection tools
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils ffmpeg
+          python -m pip install --upgrade pip
+          pip install requests beautifulsoup4 lxml pillow yt-dlp playwright
+          python -m playwright install chromium --with-deps || true
+      - name: Validate collector syntax
+        run: python -m py_compile scripts/chatgpt_collect_rechallenge_media.py
+      - name: Collect public real media
+        run: python scripts/chatgpt_collect_rechallenge_media.py
+      - name: Upload collected media
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rechallenge-tokyo-media-public
+          path: output/
+          if-no-files-found: error
+          compression-level: 6
+          retention-days: 1
