@@ -1,0 +1,51 @@
+name: Temporary Rechallenge Tokyo video collection
+
+on:
+  push:
+    branches:
+      - 'chatgpt/rechallenge-media-public-20260827'
+    paths:
+      - 'scripts/chatgpt_fetch_rechallenge_videos.py'
+      - '.github/workflows/chatgpt_rechallenge_videos_temp.yml'
+      - '.chatgpt_rechallenge_video_trigger'
+
+permissions:
+  contents: read
+
+jobs:
+  collect-videos:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Sparse checkout video collector
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            scripts/chatgpt_fetch_rechallenge_videos.py
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install video tools
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          python -m pip install --upgrade pip
+          pip install requests urllib3 yt-dlp
+      - name: Validate video collector
+        run: python -m py_compile scripts/chatgpt_fetch_rechallenge_videos.py
+      - name: Fetch actual public news videos
+        run: python scripts/chatgpt_fetch_rechallenge_videos.py
+      - name: Upload video artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rechallenge-tokyo-videos-public
+          path: video_output/
+          if-no-files-found: error
+          compression-level: 6
+          retention-days: 1
