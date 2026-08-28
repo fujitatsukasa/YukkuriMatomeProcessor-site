@@ -1,0 +1,108 @@
+name: Temporary Irodori same-16-voices curated acting pack
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: read
+
+jobs:
+  select:
+    if: startsWith(github.head_ref, 'tmp/irodori-clone16-curated-')
+    strategy:
+      fail-fast: false
+      max-parallel: 16
+      matrix:
+        voice: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      VOICE_INDEX: ${{ matrix.voice }}
+      HF_XET_HIGH_PERFORMANCE: '1'
+      HF_HUB_DISABLE_PROGRESS_BARS: '1'
+      HF_HUB_DOWNLOAD_TIMEOUT: '600'
+      TOKENIZERS_PARALLELISM: 'false'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install extraction and Japanese ASR tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg libsndfile1
+          python -m pip install --upgrade pip
+          python -m pip install huggingface_hub hf_xet pyarrow numpy scipy soundfile faster-whisper rapidfuzz pykakasi
+
+      - name: Select ten actual matching performances from the exact original speaker
+        run: python tools/select_irodori_clone_styles.py
+
+      - name: Upload this exact voice and validation
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: irodori-clone16-curated-voice-${{ matrix.voice }}
+          path: clone16_output/voice_*/
+          if-no-files-found: warn
+          retention-days: 3
+          compression-level: 0
+
+  package:
+    if: always() && startsWith(github.head_ref, 'tmp/irodori-clone16-curated-')
+    needs: select
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install final validation tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg libsndfile1
+          python -m pip install --upgrade pip soundfile
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: irodori-clone16-curated-voice-*
+          path: downloaded_clone16
+      - name: Require all 16 voices and create WAV-only Japanese ZIPs
+        run: python tools/package_irodori_clone16_curated.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: irodori-clone16-curated-all160
+          path: clone16_package_output/Irodori_同じ16声_セリフ・演技一致版_全160WAV.zip
+          if-no-files-found: warn
+          retention-days: 3
+          compression-level: 0
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: irodori-clone16-curated-mid80
+          path: clone16_package_output/Irodori_同じ中くらい8声_セリフ・演技一致版_80WAV.zip
+          if-no-files-found: warn
+          retention-days: 3
+          compression-level: 0
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: irodori-clone16-curated-high80
+          path: clone16_package_output/Irodori_同じ高め8声_セリフ・演技一致版_80WAV.zip
+          if-no-files-found: warn
+          retention-days: 3
+          compression-level: 0
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: irodori-clone16-curated-validation
+          path: |
+            clone16_package_output/Irodori_同じ16声_セリフ・演技・ASR検証資料.zip
+            clone16_package_output/最終集計.json
+            clone16_package_output/SHA256SUMS.txt
+          if-no-files-found: warn
+          retention-days: 3
+          compression-level: 0
