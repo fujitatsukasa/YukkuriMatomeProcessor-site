@@ -1,0 +1,24 @@
+name: Temporary cancel superseded Irodori site runs
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  cancel:
+    if: startsWith(github.head_ref, 'tmp/cancel-old-irodori-site-runs-')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Cancel superseded recovery and fixed-row selection runs
+        run: |
+          for run in 30997871453 30999453465; do
+            gh api -X POST "repos/$GITHUB_REPOSITORY/actions/runs/$run/cancel" || true
+          done
