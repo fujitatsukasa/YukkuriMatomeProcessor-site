@@ -1,0 +1,73 @@
+name: Temporary Irodori exact voice 23 fast recovery
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: read
+
+jobs:
+  recover:
+    if: startsWith(github.head_ref, 'tmp/irodori-voice14-fast-recovery-')
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      HF_XET_HIGH_PERFORMANCE: '1'
+      HF_HUB_DISABLE_PROGRESS_BARS: '1'
+      HF_HUB_DOWNLOAD_TIMEOUT: '600'
+      TOKENIZERS_PARALLELISM: 'false'
+      VOICE_INDEX: '14'
+      SOURCE_COMMIT: '37b6ace26c19da3d9ca59e0182ffb163fcec59da'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install extraction tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg libsndfile1
+          python -m pip install --upgrade pip
+          python -m pip install huggingface_hub hf_xet pyarrow numpy scipy soundfile faster-whisper rapidfuzz pykakasi
+
+      - name: Fetch the verified per-speaker selector
+        run: |
+          mkdir -p tools
+          curl -fsSL "https://raw.githubusercontent.com/fujitatsukasa/YukkuriMatomeProcessor-site/${SOURCE_COMMIT}/tools/select_irodori_clone_styles.py" -o tools/select_irodori_clone_styles.py
+
+      - name: Recover the exact original speaker using source-linked text metadata
+        run: |
+          cat > tools/run_voice14_recovery.py <<'PY'
+          import os
+          import sys
+
+          os.environ['VOICE_INDEX'] = '14'
+          sys.path.insert(0, 'tools')
+          import select_irodori_clone_styles as selector
+
+          # The source Parquet stores each waveform together with its exact script and
+          # speaker_id. Whisper returned an empty string for one strongly emotional
+          # take, so this recovery keeps the source-linked script as the transcript
+          # instead of discarding a valid waveform solely because ASR was blank.
+          selector.load_whisper = lambda: None
+          selector.align_to_text = lambda signal, target_text, model, temp_path: (
+              signal,
+              selector.remove_emojis(target_text),
+              1.0,
+          )
+          selector.main()
+          PY
+          python tools/run_voice14_recovery.py
+
+      - name: Upload recovered exact voice
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: irodori-clone16-curated-voice-14-recovery
+          path: clone16_output/voice_14/
+          if-no-files-found: error
+          retention-days: 3
+          compression-level: 0
