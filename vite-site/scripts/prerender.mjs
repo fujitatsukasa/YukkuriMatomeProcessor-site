@@ -161,6 +161,7 @@ async function prerender() {
       : {}),
   });
 
+  const failures = [];
   for (const route of routes) {
     if (route.match(/\.\w+$/)) continue; 
     
@@ -189,6 +190,7 @@ async function prerender() {
       writeFileSync(outPath, html, 'utf-8');
       console.log(`[PRERENDER] Saved: ${outPath}`);
     } catch(err) {
+      failures.push(route);
       console.error(`[PRERENDER] Failed to prerender ${route}:`, err.message);
     } finally {
       await page.close();
@@ -197,6 +199,7 @@ async function prerender() {
 
   await browser.close();
   server.close();
+  if (failures.length) throw new Error(`Prerender failed for ${failures.length} routes: ${failures.join(', ')}`);
   console.log('[PRERENDER] All SSG pages generated successfully.');
 }
 

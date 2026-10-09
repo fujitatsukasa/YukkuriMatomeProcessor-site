@@ -2,6 +2,8 @@ import { Suspense, lazy, useEffect } from 'react'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { SiteLayout } from '@/components/site-layout'
 import { CompanyPage } from '@/pages/company-page'
+import { CompanyAboutPage, CompanyServicesPage, CompanyPortfolioPage, CompanyWorkPage, CompanyInquiryPage, CompanyPrivacyPage } from '@/pages/company-documents'
+import { companyWorks } from '@/data/company'
 import { normalizePath, newsPosts } from '@/data/site-content'
 
 const HomePage = lazy(() => import('@/pages/home-page').then((module) => ({ default: module.HomePage })))
@@ -55,6 +57,12 @@ function App() {
     <Suspense fallback={<div className="route-loading" aria-hidden="true" />}>
     <Routes>
       <Route path="/" element={<CompanyPage />} />
+      <Route path="/about/" element={<CompanyAboutPage />} />
+      <Route path="/services/" element={<CompanyServicesPage />} />
+      <Route path="/portfolio/" element={<CompanyPortfolioPage />} />
+      {companyWorks.map((work) => <Route key={work.slug} path={`/portfolio/${work.slug}/`} element={<CompanyWorkPage slug={work.slug} />} />)}
+      <Route path="/inquiry/" element={<CompanyInquiryPage />} />
+      <Route path="/privacy/" element={<CompanyPrivacyPage />} />
       <Route caseSensitive path="/Instructions" element={<Navigate to="/instructions/" replace />} />
       <Route caseSensitive path="/Instructions/" element={<Navigate to="/instructions/" replace />} />
       <Route caseSensitive path="/FAQ" element={<Navigate to="/faq/" replace />} />
