@@ -2,6 +2,7 @@ import { Suspense, lazy, useEffect } from 'react'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { SiteLayout } from '@/components/site-layout'
 import { CompanyPage } from '@/pages/company-page'
+import { CompanyMissionPage, CompanyTechnologyPage } from '@/pages/company-purpose'
 import { CompanyAboutPage, CompanyServicesPage, CompanyPortfolioPage, CompanyWorkPage, CompanyInquiryPage, CompanyPrivacyPage } from '@/pages/company-documents'
 import { companyWorks } from '@/data/company'
 import { normalizePath, newsPosts } from '@/data/site-content'
@@ -57,6 +58,8 @@ function App() {
     <Suspense fallback={<div className="route-loading" aria-hidden="true" />}>
     <Routes>
       <Route path="/" element={<CompanyPage />} />
+      <Route path="/mission/" element={<CompanyMissionPage />} />
+      <Route path="/technology/" element={<CompanyTechnologyPage />} />
       <Route path="/about/" element={<CompanyAboutPage />} />
       <Route path="/services/" element={<CompanyServicesPage />} />
       <Route path="/portfolio/" element={<CompanyPortfolioPage />} />

@@ -15,7 +15,7 @@ export const company = {
   corporateNumberAssigned: '2023年7月20日',
   nationalTaxRecordUrl: 'https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=1021001079599',
   description:
-    'OTM株式会社は、ソフトウェアの企画・開発、AI活用・業務自動化、自社プロダクトの開発に取り組む会社です。Webとデスクトップの技術で、仕事と創作を支える仕組みをつくります。',
+    'OTM株式会社は、Web・WindowsアプリとAIを組み合わせ、仕事と創作の手間を減らすソフトウェアを開発する会社です。自社プロダクトの企画・開発・運用と、AI活用・業務自動化に取り組んでいます。',
   productPath: '/products/ymp/',
 } as const
 
@@ -47,9 +47,17 @@ export const companyServices = [
 ] as const
 
 export const companyNavigation = [
-  { href: '/about/', label: '会社案内' },
+  { href: '/mission/', label: '目指すもの' },
   { href: '/services/', label: '事業紹介' },
+  { href: '/technology/', label: 'AIと技術' },
   { href: '/portfolio/', label: '制作実績' },
+  { href: '/about/', label: '会社案内' },
+] as const
+
+export const companyContributions = [
+  { number: '01', label: 'FOR CREATORS', title: '創る前の手間を減らす。', text: '素材の取得、台本の準備、編集データの整理。制作の前準備をつなぎ、構成や表現を考える時間を増やす。', example: '自社製品：ゆっくりまとめプロセッサー', href: '/portfolio/ymp/', link: '製品開発の事例を見る', kind: '公開済みの自社プロダクト' },
+  { number: '02', label: 'FOR EVERYDAY WORK', title: '散らばった情報を、使える形へ。', text: '文書の検索・要約やデータ処理など、繰り返す作業にAIとソフトウェアを組み合わせる。人の確認を残しながら、仕事の流れを整える。', example: '開発テーマ：文書検索・データ整理・外部API連携', href: '/technology/', link: 'AI活用と技術を見る', kind: '相談できる開発テーマ' },
+  { number: '03', label: 'FOR SMALL TEAMS', title: '必要な道具を、小さく始める。', text: '大きな仕組みを一度につくる前に、一つの作業で試す。WebアプリやWindowsツールを目的に合わせて設計し、使いながら育てる。', example: '開発テーマ：専用ツール・管理画面・既存機能の改善', href: '/services/', link: 'ソフトウェア開発を見る', kind: '相談できる開発テーマ' },
 ] as const
 
 export const companyWorks = [
@@ -71,9 +79,9 @@ export const companyWorks = [
     description: 'OTM株式会社の事業・会社情報・制作例を紹介する公式サイト。情報設計からビジュアル、動き、実装までをまとめています。',
     role: '情報設計・アートディレクション・フロントエンド実装',
     tags: ['React / TypeScript', 'Responsive design', 'Motion graphics', 'Accessibility'],
-    image: '/company/architecture-art.webp', imageAlt: '黒と銀の構造体に朱色を合わせたOTMのオリジナルブランドアート',
+    image: '/company/creative-work.webp', imageAlt: '創作に使う時間を増やすというOTMの目的を表現したストーリーボードのコンセプトビジュアル',
     challenge: '製品単体の案内から、ソフトウェア開発会社として何に取り組んでいるかを伝えるサイトへ広げる。',
-    solution: '会社案内、事業紹介、制作実績、お問い合わせを独立したページに整理。日本語と英字の字体を分け、コードによる動きとオリジナルの3D素材を組み合わせました。',
+    solution: '目指す価値、事業、AIと技術、制作実績、会社案内を独立したページに整理。仕事と創作の活用場面を画像で示し、情報が道具へつながる流れをコードによるモーションで表現しました。',
     deliverables: ['会社サイトと制作例の詳細ページ', 'PC・タブレット・スマートフォンへの対応', '読みやすさを優先した文字と配色の設計', '静的HTML・構造化データ・動きを減らす設定への対応'],
     scope: 'この公式サイト自体を紹介する自社制作事例です。第三者からの受託案件ではありません。',
   },
@@ -91,4 +99,4 @@ export const companyWorks = [
   },
 ] as const
 
-export const corporateRoutes = ['/', '/about/', '/services/', '/portfolio/', ...companyWorks.map((work) => `/portfolio/${work.slug}/`), '/inquiry/', '/privacy/']
+export const corporateRoutes = ['/', '/mission/', '/about/', '/services/', '/technology/', '/portfolio/', ...companyWorks.map((work) => `/portfolio/${work.slug}/`), '/inquiry/', '/privacy/']

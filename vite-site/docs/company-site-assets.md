@@ -4,13 +4,13 @@
 
 ## アートディレクションと実時間グラフィック
 
-会社サイトはアイボリー・深緑・ライムを基本色にし、英字の大きな組版と立体の素材感を組み合わせた。英字見出しは [Barlow Condensed](https://fonts.google.com/specimen/Barlow+Condensed)、斜体は [Bodoni Moda](https://fonts.google.com/specimen/Bodoni+Moda)、小さなラベルは IBM Plex Mono、日本語見出しは [Zen Kaku Gothic Antique](https://fonts.google.com/specimen/Zen+Kaku+Gothic+Antique)、本文は Noto Sans JP。
+会社サイトは黒・コバルト・コーラル・暖かい白を基本色にし、「面倒を減らす。創る時間を増やす。」を日本語の大きな見出しで伝える。事業の価値、公開中の製品、開発相談のテーマ、会社の目標をページと画像で説明する。英字見出しは [Barlow Condensed](https://fonts.google.com/specimen/Barlow+Condensed)、斜体は [Bodoni Moda](https://fonts.google.com/specimen/Bodoni+Moda)、小さなラベルは IBM Plex Mono、日本語見出しは [Zen Kaku Gothic Antique](https://fonts.google.com/specimen/Zen+Kaku+Gothic+Antique)、本文は Noto Sans JP。
 
-トップの金属リボンは `src/components/company-motion.tsx` の手続き的メッシュとWebGLシェーダーによる実時間描画。独自の交差するリボン形状に反射・ライム色の帯・奥行き・ポインターに応じた角度変化を与える。静止画像や既存モデルを拡大して動かす実装ではない。以下のBlender作品とは別のWeb表現で、顧客案件や製品の証拠として扱わない。
+トップの金属リボンは `src/components/company-motion.tsx` の手続き的メッシュとWebGLシェーダーによる実時間描画。反射・コーラルの帯・奥行き・ポインターに応じた角度変化を与える。SVGの文書・データ移動・出力と合わせ、入力→ソフトウェアとAI→使える成果物という考え方を示す。以下のBlender作品とは別のWeb表現で、顧客案件や製品の証拠として扱わない。
 
-描画は約30fps、モバイルは約20fpsと低い解像度上限を使用する。画面外・非表示タブでは連続描画を止め、利用者の停止操作と `prefers-reduced-motion` に対応する。停止操作はスクロールする英字帯も止める。WebGLが利用できない場合やコンテキスト喪失時にはSVGを表示する。JavaScriptなしでも静的本文とSVGを表示する。
+描画は約30fps、モバイルは約20fpsと低い解像度上限を使用する。画面外・非表示タブではWebGLの連続描画を止め、停止操作と `prefers-reduced-motion` に対応する。停止操作はSVGのデータ移動と英字帯も止める。WebGLが利用できない場合やコンテキスト喪失時にはSVGを表示する。JavaScriptなしでも静的本文とSVGを表示する。
 
-文字は短い段階的な登場、下部の内容はスクロールに応じた表示を使う。構造・導線・会社情報は会社サイトの9ページを維持し、製品の既存ページへ接続する。画像とBlender作品の来歴は以下のとおり。
+文字は短い段階的な登場、下部の内容はスクロールに応じた表示を使う。会社サイトは目標と技術のページを加えた11ページで、製品の既存ページへ接続する。画像とBlender作品の来歴は以下のとおり。
 
 ## 公開会社情報
 
@@ -22,9 +22,29 @@
 
 ## Claude Startupsへの申請準備
 
-[公式条件](https://claude.com/programs/startups)には、直近5年の設立または直近2年の資金調達、Claude Consoleアカウント、Webサイトのドメインと一致する会社メール、開発内容の説明がある。申請は審査される。サイトの制作だけで採択を保証しない。
+[公式案内](https://claude.com/programs/startups)を2026-10-09に再確認した。現在は、無料1年のClaude Teamと$1,000 APIクレジットの申請が提供枠を超え、プログラムを再構成し、申請を再審査すると案内している。過去に確認した条件を現行の必須条件として断定しない。Claude Codeが全員無料になる制度とは記載しない。サイトの制作だけで採択を保証しない。
 
-本作業では会社情報、事業、製品・制作例、連絡先を公開した。会社ドメインのメールアドレス、正確な設立日または該当する資金調達、Consoleのアカウント状態は未確認。公開の連絡先は確認できた既存のGmailを維持し、未作成のメールボックスを掲載しない。申請送信は行っていない。
+本作業では会社情報、目的、事業、AIの設計方針、製品・制作例、連絡先を整えた。会社ドメインのメールアドレス、正確な設立日、資金調達、Consoleのアカウント状態は未確認。公開の連絡先は承認済みのGmailを使用し、未作成のメールボックスを掲載しない。申請送信は行っていない。説明文と確認項目は [申請準備資料](claude-startups-preparation.md) に記録する。
+
+## 仕事と創作のコンセプト画像（今回の追加）
+
+実行モード: Codex組み込み `image_gen` / generate。参照画像なし・背景透明なし。画像は会社の価値を説明するオリジナルのコンセプト表現で、実際の社員、オフィス、顧客案件の写真ではない。掲載箇所に `VISUAL CONCEPT` と記載する。最終素材はFFmpegでWebP quality 86へ変換。
+
+- `public/company/creative-work.webp`: 1672×941、151,426 bytes。元PNG: `C:/Users/takas/.codex/generated_images/01a11e15-8624-7241-a2a3-a6e70464778f/exec-cde912a3-50c3-40f6-bf59-d86c52c1355c.png`。
+- `public/company/connected-work.webp`: 1536×1024、129,328 bytes。元PNG: `C:/Users/takas/.codex/generated_images/01a11e15-8624-7241-a2a3-a6e70464778f/exec-8ff9cea9-7ae5-43e4-8095-7030008bdb79.png`。
+- 元画像の保存先: `D:/YMPArtifacts/yukkurimatomeprocessor_Ver2_VITE/run_artifacts/otm-company-site/20261009-purpose/`。
+
+プロンプトセット（制作仕様）:
+
+```text
+Use case: photorealistic-natural
+Asset: Creative work / original company website concept visual
+Create an editorial photograph-like visual of adult hands arranging physical storyboard sheets on a charcoal worktable. Show a pencil, the cropped back of an unbranded laptop, a cobalt ruler, and coral paper tabs. Arrange the rough materials and a cleaner sequence diagonally to express preparation leading to creative work. Cinematic natural light; tactile paper and tabletop; charcoal, warm white, cobalt and coral. This is an illustrative concept, not an actual company office, employee or client project. No legible text, fake UI, logos, neon, robots or copyrighted characters.
+
+Use case: photorealistic-natural
+Asset: Connected work / original company website concept visual
+Create a bright top-down editorial photograph-like visual of two adults' hands diagramming a work process on physical cobalt blue paper on a warm white table. White input paper rectangles lead to a coral central element and three coral outputs. Include a pencil and only the edge of a closed unbranded laptop. Crisp daylight shadows and physical paper texture. Express scattered information becoming one usable workflow. This is an illustrative concept, not an actual company office, employee or client project. No legible text, numbers, interfaces, logos, robots or neon.
+```
 
 ## ブランド画像
 

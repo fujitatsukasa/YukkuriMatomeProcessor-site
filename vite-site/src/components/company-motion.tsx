@@ -49,7 +49,7 @@ vec3 rotate(vec3 p) {
 }
 void main() {
   vec3 p=rotate(position);
-  p.y+=.08*sin(time*.7);
+  p.y+=.13*sin(time*1.2);
   vPosition=p; vNormal=rotate(normal); vTrack=track;
   float lens=7.5/(7.5-p.z);
   gl_Position=vec4(p.x*.295*lens/aspect,p.y*.295*lens,-p.z*.1,1.);
@@ -71,12 +71,12 @@ void main() {
   vec3 chrome=vec3(.12,.14,.13)+vec3(.57,.59,.56)*sky+vec3(.72)*softbox+vec3(.65)*window+vec3(.18)*edge;
   float paint=smoothstep(.68,.69,vTrack)*(1.-smoothstep(.84,.85,vTrack));
   float diffuse=.7+.3*max(dot(n,normalize(vec3(-.5,.8,1.))),0.);
-  vec3 acid=vec3(.79,.94,.13)*diffuse+vec3(.4)*softbox;
+  vec3 acid=vec3(1.,.32,.22)*diffuse+vec3(.4)*softbox;
   vec3 color=mix(chrome,acid,paint);
   gl_FragColor=vec4(pow(color,vec3(.88)),1.);
 }`
 
-export function CompanyMotion() {
+export function CompanyMotion({ flow = false }: { flow?: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const sceneRef = useRef<HTMLDivElement>(null)
   const elapsed = useRef(0)
@@ -132,7 +132,7 @@ export function CompanyMotion() {
       const seconds = preference.matches ? 0 : elapsed.current / 1000
       gl.viewport(0, 0, canvas.width, canvas.height); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
       gl.uniform1f(aspect, canvas.width / canvas.height); gl.uniform1f(time, seconds)
-      gl.uniform2f(rotation, .65 + seconds * .12 + pointer.x * .2, -.45 + Math.sin(seconds * .18) * .15 + pointer.y * .15)
+      gl.uniform2f(rotation, .65 + seconds * .27 + pointer.x * .35, -.45 + Math.sin(seconds * .44) * .19 + pointer.y * .25)
       gl.drawElements(gl.TRIANGLES, geometry.indices.length, gl.UNSIGNED_SHORT, 0)
       canvas.dataset.rendered = 'true'; scene.dataset.renderer = 'webgl'; scene.dataset.frame = String(++painted)
     }
@@ -177,11 +177,17 @@ export function CompanyMotion() {
   return <div className="company-motion-wrap">
     <div className="company-motion-scene" ref={sceneRef} aria-hidden="true">
       <div className="company-motion-shadow" />
-      <svg className="company-motion-fallback" viewBox="0 0 600 600" fill="none"><path d="M140 270C100 90 450 65 450 280S110 500 135 300 440 110 445 310 115 480 140 270" stroke="#b1b6a9" strokeWidth="48" /><path d="M140 270C100 90 450 65 450 280S110 500 135 300 440 110 445 310 115 480 140 270" stroke="#3b443a" strokeWidth="24" /><path d="M448 252C465 395 275 480 182 399" stroke="#d7fa43" strokeWidth="25" /></svg>
+      <svg className="company-motion-fallback" viewBox="0 0 600 600" fill="none"><path d="M140 270C100 90 450 65 450 280S110 500 135 300 440 110 445 310 115 480 140 270" stroke="#c7cbd7" strokeWidth="48" /><path d="M140 270C100 90 450 65 450 280S110 500 135 300 440 110 445 310 115 480 140 270" stroke="#586179" strokeWidth="24" /><path d="M448 252C465 395 275 480 182 399" stroke="#ff795b" strokeWidth="25" /></svg>
       <canvas ref={canvasRef} className="company-motion-canvas" />
-      <span className="company-motion-coordinate">FORM 01 — CONTINUOUS THINKING</span><span className="company-motion-note">CHANGE YOUR PERSPECTIVE ↗</span>
+      {flow && <svg className="company-flow-overlay" viewBox="0 0 600 460" fill="none">
+        <path className="company-flow-guide" d="M42 160C140 160 140 230 220 230M42 230H220M42 300C140 300 140 230 220 230M385 230H560" />
+        {[0, 1, 2].map((index) => <g className={`company-flow-source company-flow-source--${index}`} key={index} transform={`translate(42 ${145 + index * 70})`}><path d="M-20-24H10L22-12V24H-20Z" /><path d="M10-24V-12H22M-10-2H10M-10 8H10" /></g>)}
+        {[0, 1, 2].map((index) => <g key={index} className={`company-flow-packet company-flow-packet--${index}`} style={{ animationDelay: `${index * -2.4}s` }}><rect x="-8" y="-8" width="16" height="16" /><path d="M-3 0H3" /></g>)}
+        <g className="company-flow-output" transform="translate(544 230)"><rect x="-32" y="-58" width="64" height="116" /><path d="M-21-37H21M-21-16H7M-21 5H21M-21 26H12" /><rect x="-21" y="38" width="42" height="8" /></g>
+      </svg>}
+      <span className="company-motion-coordinate">{flow ? 'INPUT → SOFTWARE + AI → CREATION' : 'FORM 01 — CONTINUOUS THINKING'}</span><span className="company-motion-note">{flow ? 'WORKFLOW CONCEPT / OTM' : 'CHANGE YOUR PERSPECTIVE ↗'}</span>
     </div>
-    <div className="company-motion-caption"><span><i /> MADE OF POSSIBILITIES</span><button type="button" className="company-motion-toggle" aria-label={paused ? 'モーショングラフィックを再生' : 'モーショングラフィックを停止'} aria-pressed={paused} onClick={() => setPaused((value) => !value)}>{paused ? <Play size={13} /> : <Pause size={13} />}<span>{paused ? 'PLAY' : 'PAUSE'}</span></button></div>
+    <div className="company-motion-caption"><span><i /> {flow ? '情報をつなぎ、使える道具へ。' : 'MADE OF POSSIBILITIES'}</span><button type="button" className="company-motion-toggle" aria-label={paused ? 'モーショングラフィックを再生' : 'モーショングラフィックを停止'} aria-pressed={paused} onClick={() => setPaused((value) => !value)}>{paused ? <Play size={13} /> : <Pause size={13} />}<span>{paused ? 'PLAY' : 'PAUSE'}</span></button></div>
   </div>
 }
 

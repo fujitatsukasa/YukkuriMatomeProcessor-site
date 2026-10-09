@@ -22,7 +22,7 @@ const server = createServer(async (request, response) => {
 })
 await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve))
 const origin = process.argv[3] || `http://127.0.0.1:${server.address().port}`
-const corporate = ['/', '/about/', '/services/', '/portfolio/', '/portfolio/ymp/', '/portfolio/otm-website/', '/portfolio/3d-study/', '/inquiry/', '/privacy/']
+const corporate = ['/', '/mission/', '/about/', '/services/', '/technology/', '/portfolio/', '/portfolio/ymp/', '/portfolio/otm-website/', '/portfolio/3d-study/', '/inquiry/', '/privacy/']
 const browser = await chromium.launch({ headless: true })
 const report = { origin, capturePolicy: { foregroundFocusUsed: false, osWindowCaptureUsed: false }, viewports: [], routes: [], motion: {}, errors: [], assetFailures: [] }
 const filename = (route) => route === '/' ? 'home' : route.replaceAll('/', '-').replace(/^-|-$/g, '')
@@ -46,6 +46,11 @@ async function checkPage(page, width, route) {
   }))
   assert(metrics.scrollWidth <= width + 1, `Horizontal overflow: ${route}, ${width}px, ${metrics.scrollWidth}px`)
   assert.deepEqual(metrics.clippedHeadings, [], `Clipped heading: ${route}, ${width}px`)
+  for (const visual of await page.locator('.company-work-media--software').all()) {
+    const flow = await visual.locator('.company-work-flow').boundingBox()
+    const caption = await visual.locator('.company-work-visual-caption').boundingBox()
+    assert(flow && caption && flow.y + flow.height + 4 <= caption.y, `${route}, ${width}px: software workflow overlaps its caption`)
+  }
   assert.equal(metrics.organization.name, 'OTM株式会社')
   assert.equal(metrics.organization.identifier, '1021001079599')
   await page.evaluate(async () => {
@@ -116,15 +121,17 @@ try {
       assert((await canvas.screenshot()).equals(stopped), 'Paused WebGL frame changed')
       assert.equal(await scene.getAttribute('data-frame'), stoppedFrame)
       assert.equal(await page.locator('.company-ticker-track').evaluate((node) => getComputedStyle(node).animationPlayState), 'paused')
+      assert.equal(await page.locator('.company-flow-packet').first().evaluate((node) => getComputedStyle(node).animationPlayState), 'paused')
       await page.getByRole('button', { name: 'モーショングラフィックを再生', exact: true }).click()
       await page.waitForTimeout(300)
       assert.notEqual(await scene.getAttribute('data-frame'), stoppedFrame)
+      assert.equal(await page.locator('.company-flow-packet').first().evaluate((node) => getComputedStyle(node).animationPlayState), 'running')
       await page.locator('#business').scrollIntoViewIfNeeded()
       await page.waitForTimeout(150)
       const offscreenFrame = await scene.getAttribute('data-frame')
       await page.waitForTimeout(300)
       assert.equal(await scene.getAttribute('data-frame'), offscreenFrame, 'Offscreen WebGL kept rendering')
-      report.motion = { canvasAdvances: true, pauseFreezesFrame: true, tickerPauses: true, resumes: true, offscreenRenderingStops: true, fonts: await page.evaluate(() => ({ display: document.fonts.check('700 40px "Zen Kaku Gothic Antique"'), latin: document.fonts.check('600 40px "Barlow Condensed"'), italic: document.fonts.check('italic 400 40px "Bodoni Moda"'), mono: document.fonts.check('400 12px "IBM Plex Mono"'), body: document.fonts.check('400 16px "Noto Sans JP"') })) }
+      report.motion = { canvasAdvances: true, pauseFreezesFrame: true, tickerPauses: true, workflowPacketsPause: true, resumes: true, offscreenRenderingStops: true, fonts: await page.evaluate(() => ({ display: document.fonts.check('700 40px "Zen Kaku Gothic Antique"'), latin: document.fonts.check('600 40px "Barlow Condensed"'), italic: document.fonts.check('italic 400 40px "Bodoni Moda"'), mono: document.fonts.check('400 12px "IBM Plex Mono"'), body: document.fonts.check('400 16px "Noto Sans JP"') })) }
       assert(Object.values(report.motion.fonts).every(Boolean))
       await canvas.scrollIntoViewIfNeeded()
       const canLoseContext = await canvas.evaluate((node) => {
@@ -153,7 +160,7 @@ try {
       await page.screenshot({ path: path.join(output, 'blender-video-playing.png') })
     }
     await context.close()
-    console.log(`PASS: ${width}px, all 9 company pages and product navigation`)
+    console.log(`PASS: ${width}px, all ${corporate.length} company pages and product navigation`)
   }
   const reduced = await browser.newContext({ reducedMotion: 'reduce', viewport: { width: 1512, height: 982 } })
   const reducedPage = await reduced.newPage()
@@ -202,5 +209,5 @@ try {
   assert.deepEqual(report.errors, [], 'Browser errors occurred')
   assert.deepEqual(report.assetFailures, [], 'Company assets missing')
   await writeFile(path.join(output, 'result.json'), JSON.stringify(report, null, 2))
-  console.log(`PASS: 45 responsive pages, 14 static routes, motion controls, Blender playback, fonts, reduced motion, navigation. Evidence: ${output}`)
+  console.log(`PASS: ${report.viewports.length} responsive pages, ${report.routes.length} static routes, motion controls, Blender playback, fonts, reduced motion, navigation. Evidence: ${output}`)
 } finally { await browser.close(); await new Promise((resolve) => server.close(resolve)) }

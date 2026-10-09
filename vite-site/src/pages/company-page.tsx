@@ -1,68 +1,58 @@
 import { Link } from 'react-router-dom'
-import { ArrowDown, ArrowUpRight } from 'lucide-react'
+import { ArrowDown, ArrowUpRight, Check } from 'lucide-react'
 import { CompanyLayout, CompanyContactBand } from '@/components/company-layout'
-import { CompanyMotion, ServiceGraphic } from '@/components/company-motion'
+import { CompanyMotion } from '@/components/company-motion'
 import { CompanyWorkCards } from '@/components/company-work'
-import { company, companyServices } from '@/data/company'
+import { company, companyContributions, companyServices } from '@/data/company'
 
 export function CompanyPage() {
-  return <CompanyLayout title={`${company.name}｜ソフトウェア開発・AI活用・自社プロダクト`}>
-    <section className="company-hero" aria-labelledby="company-hero-title">
-      <div className="company-hero-topline"><span><i /> INDEPENDENT SOFTWARE COMPANY</span><span>IDEAS, BUILT TO MOVE. / JAPAN</span></div>
-      <div className="company-hero-stage">
-        <div className="company-hero-type" aria-hidden="true"><span data-intro>Make</span><span className="company-hero-italic" data-intro>it<span className="company-type-star">✳</span></span><span className="company-hero-move" data-intro>move<span>.</span></span></div>
-        <CompanyMotion />
-      </div>
-      <div className="company-hero-content">
-        <div className="company-hero-copy">
-          <h1 id="company-hero-title" data-intro>構想を、<br />動くソフトウェアへ。</h1>
+  return <CompanyLayout title={`${company.name}｜仕事と創作を支えるソフトウェア・AI開発`}>
+    <section className="purpose-hero" aria-labelledby="company-hero-title">
+      <div className="purpose-hero-top"><span><i /> OTM / SOFTWARE &amp; AI DEVELOPMENT</span><span>BUILD TO MAKE A DIFFERENCE.</span></div>
+      <div className="purpose-hero-grid">
+        <div className="purpose-hero-copy">
+          <p className="purpose-kicker" data-intro>仕事と創作を支える、ソフトウェア開発会社。</p>
+          <h1 id="company-hero-title"><span data-intro>面倒を減らす。</span><span data-intro>創る時間を<span className="purpose-emphasis">増やす。</span></span></h1>
+          <p className="purpose-hero-lead" data-intro>Web・Windowsアプリ・AIを組み合わせ、<br className="purpose-desktop-break" />情報の整理から制作の前準備まで、<br className="purpose-desktop-break" />日々の作業をつなぐ道具を開発する。OTM株式会社。</p>
+          <div className="company-actions" data-intro><Link className="company-button company-button--light" to="/portfolio/ymp/">開発している製品を見る <ArrowUpRight size={18} /></Link><Link className="company-text-link" to="/mission/">私たちが目指すもの <ArrowUpRight size={17} /></Link></div>
+          <p className="purpose-hero-proof"><span><Check size={14} /> 自社ソフトウェアを開発・公開</span><span>WEB / WINDOWS / AI</span></p>
         </div>
-        <div className="company-hero-detail"><p className="company-hero-description" data-intro>Web、デスクトップ、AI。<br />技術をつなぎ、仕事と創作の可能性を広げる。<br />アイデアを使える仕組みに変える、OTM株式会社。</p><div className="company-actions" data-intro><Link className="company-button company-button--light" to="/services/">私たちがつくるもの <ArrowUpRight size={19} aria-hidden="true" /></Link><Link className="company-text-link" to="/inquiry/">開発について相談する <ArrowUpRight size={16} aria-hidden="true" /></Link></div></div>
-      </div>
-      <div className="company-hero-bottom"><span>DESIGN <b>/</b> DEVELOP <b>/</b> IMPROVE</span><a href="#about">SCROLL TO EXPLORE <ArrowDown size={16} aria-hidden="true" /></a></div>
-    </section>
-
-    <div className="company-ticker" aria-hidden="true"><div className="company-ticker-track">{[0, 1, 2, 3].map((copy) => <span key={copy}>SOFTWARE <i>with a purpose.</i><b>✳</b> IDEAS <i>in motion.</i><b>✳</b></span>)}</div></div>
-
-    <section id="about" className="company-section company-about" aria-labelledby="company-about-title">
-      <div className="company-section-label"><span>01 / ABOUT US</span><span>私たちについて</span></div>
-      <div className="company-about-content">
-            <h2 id="company-about-title" data-company-reveal>そのアイデアに、<br /><span>動き出す力を。</span></h2>
-        <div className="company-about-copy" data-company-reveal>
-          <p>アイデアがある。解決したい手間がある。<br />それを日々使える仕組みに変えるのが、私たちの仕事です。</p>
-          <p>OTM株式会社は、Web・デスクトップアプリケーションの開発と、AIを活用した機能づくりに取り組んでいます。使う人の流れを考え、必要な機能を設計し、実際の利用を見ながら改善を重ねます。</p>
-          <div className="company-english-summary" lang="en"><span>OTM AT A GLANCE</span><p>OTM Corporation is a software company based in Japan. We develop web and desktop applications, AI-assisted workflows, and our own software products for work and creative production.</p></div>
-          <Link className="company-text-link" to="/about/">OTMについて <ArrowUpRight size={16} aria-hidden="true" /></Link>
+        <div className="purpose-hero-lab" aria-label="素材・データを整理し、AIとソフトウェアを通して仕事・創作に使える道具へつなぐ流れ">
+          <div className="purpose-lab-header"><span>FROM INFORMATION</span><span>TO <i>CREATION.</i></span></div>
+          <CompanyMotion flow />
+          <div className="purpose-lab-stages"><span><b>01</b> 素材・データ</span><i>→</i><span><b>02</b> 整理・接続</span><i>→</i><span><b>03</b> 仕事・創作へ</span></div>
         </div>
       </div>
-      <div className="company-workflow" data-step="0" aria-label="企画・設計、開発・接続、運用・改善の開発工程">
-        <div className="company-workflow-track" aria-hidden="true"><span /></div>
-        {[
-          { english: 'DESIGN', japanese: '課題をほどき、設計する。', detail: '使う人の目的から、必要な機能を考える。' },
-          { english: 'DEVELOP', japanese: '技術をつなぎ、形にする。', detail: '画面、データ、AIを一つの仕組みへ。' },
-          { english: 'IMPROVE', japanese: '使いながら、育てていく。', detail: '日々の利用に合わせて、改善を重ねる。' },
-        ].map((step, index) => <div className="company-workflow-step" key={step.english} data-company-reveal><span className="company-workflow-index">0{index + 1}</span><h3>{step.english}</h3><p>{step.japanese}</p><small>{step.detail}</small></div>)}
+      <div className="purpose-hero-bottom"><span>私たちがつくるのは、次の一歩を支える道具。</span><a href="#about">EXPLORE OTM <ArrowDown size={16} /></a></div>
+    </section>
+
+    <div className="company-ticker purpose-ticker" aria-hidden="true"><div className="company-ticker-track">{[0, 1, 2, 3].map((copy) => <span key={copy}>LESS FRICTION.<i> More creation.</i><b>↗</b> SOFTWARE<i> that works for you.</i><b>↗</b></span>)}</div></div>
+
+    <section id="about" className="company-section purpose-mission" aria-labelledby="purpose-mission-title">
+      <div className="company-section-label"><span>01 / WHY WE BUILD</span><span>何を目指す会社か</span></div>
+      <div className="purpose-mission-grid">
+        <div data-company-reveal><p className="purpose-overline">OUR MISSION</p><h2 id="purpose-mission-title">人が考え、つくる<br /><em>時間を増やす。</em></h2><p>集める。整える。何度も転記する。<br />必要だけれど、手間のかかる作業がある。</p><p>私たちは、その間をソフトウェアでつなぎます。人が判断し、工夫し、表現するところに時間を使えるように。大きな組織だけでなく、一人のクリエイターや小さなチームにも、使える道具を届けたいと考えています。</p><Link className="company-text-link" to="/mission/">目指す価値と開発の考え方 <ArrowUpRight size={17} /></Link></div>
+        <figure className="purpose-photo purpose-photo--creative" data-company-reveal><img src="/company/creative-work.webp" alt="創作に集中する時間を表現した、紙のストーリーボードを組み立てるコンセプトビジュアル" width={1672} height={941} loading="lazy" /><figcaption><span>MORE ROOM TO CREATE.</span><span>VISUAL CONCEPT</span></figcaption></figure>
       </div>
+      <div className="purpose-statement" data-company-reveal><span>整理の先に、<em>創造を。</em></span><span>FROM THE TASK<br />TO THE POSSIBILITY.</span></div>
     </section>
 
-    <section id="business" className="company-section company-business" aria-labelledby="company-business-title">
-      <div className="company-section-label"><span>02 / WHAT WE DO</span><span>事業内容</span></div>
-      <div className="company-section-heading" data-company-reveal><h2 id="company-business-title">ソフトウェアで、<br />できることを増やす。</h2><p>画面、データ、AI、外部サービス。<br />別々の技術を、使う人のための一つの体験へ。</p></div>
-      <div className="company-service-list">{companyServices.map((service, index) => <article key={service.number} className="company-service" data-company-reveal><div className="company-service-top"><span className="company-service-number">{service.number}</span><ArrowUpRight size={23} strokeWidth={1} aria-hidden="true" /></div><ServiceGraphic variant={index} /><div className="company-service-title"><p>{service.label}</p><h3>{service.title}</h3></div><div className="company-service-description"><p>{service.description}</p><ul>{service.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul></div></article>)}</div>
-      <Link className="company-text-link company-section-more" to="/services/">事業と開発の進め方 <ArrowUpRight size={17} aria-hidden="true" /></Link>
+    <section id="impact" className="company-section purpose-impact" aria-labelledby="purpose-impact-title">
+      <div className="company-section-label"><span>02 / WHERE WE CONTRIBUTE</span><span>どんな課題に貢献するか</span></div>
+      <div className="company-section-heading" data-company-reveal><h2 id="purpose-impact-title">つくる人に。<br />働く人に。</h2><p>ソフトウェアを、日々の作業に届く形へ。<br />公開済みの自社製品と、相談できる開発テーマをご紹介します。</p></div>
+      <div className="purpose-impact-list">{companyContributions.map((item) => <article key={item.number} className="purpose-impact-row" data-company-reveal><div className="purpose-impact-index">{item.number}<span>{item.label}</span></div><div><span className="purpose-case-kind">{item.kind}</span><h3>{item.title}</h3><p>{item.text}</p></div><div className="purpose-impact-example"><p>{item.example}</p><Link className="company-text-link" to={item.href}>{item.link} <ArrowUpRight size={18} /></Link></div></article>)}</div>
     </section>
 
-    <section id="portfolio" className="company-section company-products" aria-labelledby="company-portfolio-title">
-      <div className="company-section-label"><span>03 / SELECTED WORK</span><span>制作実績</span></div>
-      <div className="company-section-heading" data-company-reveal><h2 id="company-portfolio-title">つくる。その先まで。</h2><p>自社プロダクト、Web、3D。<br />制作したものと、その背景をご紹介します。</p></div>
-      <CompanyWorkCards />
-      <Link className="company-text-link company-section-more" to="/portfolio/">ポートフォリオを見る <ArrowUpRight size={17} aria-hidden="true" /></Link>
+    <section id="business" className="company-section purpose-business" aria-labelledby="company-business-title">
+      <div className="company-section-label"><span>03 / WHAT WE BUILD</span><span>何を開発する会社か</span></div>
+      <div className="purpose-business-grid"><div><h2 id="company-business-title" data-company-reveal>技術を選ぶ。<br />つなぐ。<br /><em>使える形にする。</em></h2><p data-company-reveal>画面だけ、AIだけで終わらせない。<br />データ処理、外部サービス、利用者の確認まで、<br />一つの流れとして設計します。</p><Link className="company-text-link" to="/technology/">AIとソフトウェアの設計方針 <ArrowUpRight size={17} /></Link></div><div className="purpose-service-list">{companyServices.map((service) => <Link key={service.number} to="/services/" className="purpose-service-link" data-company-reveal><span>{service.number} / {service.label}</span><h3>{service.title}<ArrowUpRight size={26} /></h3><p>{service.description}</p><small>{service.tags.join(' / ')}</small></Link>)}</div></div>
     </section>
 
-    <section id="company" className="company-section company-profile" aria-labelledby="company-profile-title">
-      <div className="company-section-label"><span>04 / COMPANY</span><span>会社概要</span></div>
-      <div className="company-profile-grid"><div data-company-reveal><h2 id="company-profile-title">OTM株式会社</h2><p lang="en">OTM CORPORATION</p><p className="company-profile-statement">ソフトウェアで、<br />次の一歩をつくる。</p><Link className="company-text-link" to="/about/">会社案内を見る <ArrowUpRight size={16} aria-hidden="true" /></Link></div><dl data-company-reveal><div><dt>会社名</dt><dd>{company.name}</dd></div><div><dt>代表者</dt><dd>{company.representative}</dd></div><div><dt>所在地</dt><dd>{company.postalCode}<br />{company.address}</dd></div><div><dt>事業内容</dt><dd>ソフトウェアの企画・設計・開発<br />AI活用・業務自動化<br />自社プロダクトの開発・運用</dd></div><div><dt>法人番号</dt><dd>{company.corporateNumber}</dd></div></dl></div>
-    </section>
+    <section className="purpose-build-banner" aria-labelledby="purpose-build-title"><figure><img src="/company/connected-work.webp" alt="複数の入力を使いやすい仕事の流れにつなぐことを表現したコンセプトビジュアル" width={1536} height={1024} loading="lazy" /><figcaption>CONNECTED WORK / VISUAL CONCEPT</figcaption></figure><div data-company-reveal><span className="purpose-overline">HOW WE BUILD</span><h2 id="purpose-build-title">小さく試す。<br />使って確かめる。<br /><em>育てていく。</em></h2><p>課題を整理し、一つの作業で試せる形へ。<br />必要な機能から開発し、実際の利用に合わせて改善する。</p><Link className="company-text-link" to="/services/">開発の進め方を見る <ArrowUpRight size={17} /></Link></div></section>
+
+    <section id="portfolio" className="company-section company-products purpose-selected" aria-labelledby="company-portfolio-title"><div className="company-section-label"><span>04 / BUILT BY OTM</span><span>実際につくっているもの</span></div><div className="company-section-heading" data-company-reveal><h2 id="company-portfolio-title">考えるだけで、<br />終わらせない。</h2><p>自社ソフトウェアの開発・公開から、Webと3Dの制作まで。<br />目的・担当範囲・成果物を事例として紹介します。</p></div><CompanyWorkCards /><Link className="company-text-link company-section-more" to="/portfolio/">制作実績と開発の背景 <ArrowUpRight size={18} /></Link></section>
+
+    <section id="company" className="company-section company-profile purpose-company" aria-labelledby="company-profile-title"><div className="company-section-label"><span>05 / COMPANY</span><span>会社と連絡先</span></div><div className="company-profile-grid"><div data-company-reveal><h2 id="company-profile-title">OTM株式会社</h2><p lang="en">OTM CORPORATION / JAPAN</p><p className="purpose-company-summary" lang="en">We develop web and Windows software that connects everyday work with creative production. Our own product helps creators prepare materials and scripts. We also develop AI-assisted workflows with human review and integration into existing tools.</p><Link className="company-text-link" to="/about/">会社情報を見る <ArrowUpRight size={17} /></Link></div><dl data-company-reveal><div><dt>代表者</dt><dd>{company.representative}</dd></div><div><dt>所在地</dt><dd>{company.postalCode}<br />{company.address}</dd></div><div><dt>事業</dt><dd>Web・Windows向けソフトウェア開発<br />AI活用・業務自動化<br />自社プロダクトの企画・開発・運用</dd></div><div><dt>法人番号</dt><dd>{company.corporateNumber}</dd></div></dl></div></section>
     <CompanyContactBand />
   </CompanyLayout>
 }

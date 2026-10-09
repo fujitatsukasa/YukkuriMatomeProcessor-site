@@ -4,10 +4,11 @@
 
 ## 会社ホームページ
 
-`/` は OTM株式会社の公式会社サイトです。ソフトウェア開発、AI活用・業務自動化、自社プロダクトの事業紹介と、会社概要・メール問い合わせを掲載しています。
+`/` は OTM株式会社の公式会社サイトです。「面倒を減らす。創る時間を増やす。」を軸に、目指す価値、貢献する領域、ソフトウェア開発、AI活用、自社製品、会社情報を紹介します。会社サイトは11ページ、製品を含むサイトマップは39ページです。
 
 - Company page: `vite-site/src/pages/company-page.tsx`
-- Company stylesheet: `vite-site/src/pages/company-page.css`
+- Mission / Technology: `vite-site/src/pages/company-purpose.tsx`
+- Company stylesheet: `vite-site/src/pages/company-purpose.css`（共通CSSの後に適用）
 - Company content: `vite-site/src/data/company.ts`
 - Motion graphics: `vite-site/src/components/company-motion.tsx`（Canvasの立体メッシュとSVG図版）
 - 会社情報・メールの共有元: `vite-site/src/data/site-content.ts` の `legal.organization`
@@ -18,7 +19,7 @@
 
 会社サイトの表示・導線・静的HTMLを確認するには、ビルド後に `node scripts/verify-company-site.mjs <Dドライブ上の検証保存先の絶対パス>` を `vite-site/` で実行します。スクリーンショットと結果JSONが指定先へ保存されます。動きの録画は `node scripts/record-company-motion.mjs <ローカルプレビューURL> <Dドライブ上の検証保存先>`。Playwrightでブラウザ描画を12fpsで取得し、PATH上のFFmpegで28秒のMP4に保存します。実OSの画面撮影やフォーカス操作は使いません。
 
-日本語見出しは Zen Kaku Gothic Antique、本文は Noto Sans JP、英字見出しは Barlow Condensed、斜体は Bodoni Moda、ラベルは IBM Plex Mono。アイボリー・深緑・ライムの配色と大きな組版に、WebGLの金属リボンを組み合わせています。立体の回転・反射・ポインターに応じた角度変化と、英字帯のスクロールは一時停止できます。画面外や非表示タブでは連続描画を止め、`prefers-reduced-motion` では静止します。JavaScriptなしやWebGLが使えない環境でも本文とSVGの代替図を表示します。検証スクリプトは5画面幅の表示、フォント読込、描画の変化・停止・復旧、動きを減らす設定、静的HTMLも確認します。
+日本語見出しは Zen Kaku Gothic Antique、本文は Noto Sans JP、英字見出しは Barlow Condensed、斜体は Bodoni Moda、ラベルは IBM Plex Mono。黒・コバルト・コーラル・白の配色に、創作と情報整理のコンセプト画像、情報が道具へつながるWebGL / SVGの動きを組み合わせています。立体、データの移動、英字帯は一時停止できます。画面外や非表示タブではWebGLの連続描画を止め、`prefers-reduced-motion` では静止します。JavaScriptなしやWebGLが使えない環境でも本文とSVGを表示します。検証スクリプトは11ページ×5画面幅、フォント読込、描画の変化・停止・復旧、静的HTMLを確認します。
 
 ## ローカル確認
 
