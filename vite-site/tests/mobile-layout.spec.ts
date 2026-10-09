@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test'
 
 const pages = [
-  { path: '/', heading: '素材集めから台本づくりYMM4連携までひとつの制作フローに' },
+  { path: '/products/ymp/', heading: '素材集めから台本づくりYMM4連携までひとつの制作フローに' },
   { path: '/download/', heading: 'ダウンロードと導入情報を確認する' },
   { path: '/instructions/', heading: '記事URLから台本を取得し、YMM4に渡す' },
   { path: '/samples/', heading: '実アプリ画面と動画サンプルで、使う前の対応範囲を確認する' },
@@ -113,7 +113,7 @@ test.describe('mobile layout', () => {
   })
 
   test('home hero shows the product screen before long conditions on the first viewport', async ({ page }) => {
-    await page.goto('/', { waitUntil: 'networkidle' })
+    await page.goto('/products/ymp/', { waitUntil: 'networkidle' })
 
     const metrics = await page.evaluate(() => {
       const heroImage = document.querySelector<HTMLImageElement>('.home-lp-hero__visual img')
@@ -137,7 +137,7 @@ test.describe('mobile layout', () => {
   })
 
   test('home sticky CTA is removed while inline CTAs are visible', async ({ page }) => {
-    await page.goto('/', { waitUntil: 'networkidle' })
+    await page.goto('/products/ymp/', { waitUntil: 'networkidle' })
     await expect(page.locator('.home-lp-sticky-cta')).toHaveCount(0)
 
     await page.locator('#product').scrollIntoViewIfNeeded()
@@ -148,7 +148,7 @@ test.describe('mobile layout', () => {
   })
 
   test('home pricing comparison keeps Premium and corporate labels on mobile cards', async ({ page }) => {
-    await page.goto('/', { waitUntil: 'networkidle' })
+    await page.goto('/products/ymp/', { waitUntil: 'networkidle' })
     await page.locator('#pricing').scrollIntoViewIfNeeded()
 
     const labels = await page.locator('.home-lp-comparison__mobile-label').allInnerTexts()

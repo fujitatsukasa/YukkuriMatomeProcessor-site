@@ -4,7 +4,7 @@ import { decisionRecords, productFacts, readinessGates, releaseCandidateDistribu
 
 const primaryPages = [
   {
-    path: '/',
+    path: '/products/ymp/',
     heading: '素材集めから台本づくりYMM4連携までひとつの制作フローに',
     ctas: ['ダウンロードを見る'],
   },
@@ -233,7 +233,7 @@ test.describe('primary page copy quality', () => {
   }
 
   test('home keeps unverified proof claims out of visible copy and structured data', async ({ page }) => {
-    await page.goto('/', { waitUntil: 'networkidle' })
+    await page.goto('/products/ymp/', { waitUntil: 'networkidle' })
 
     const visibleText = await collectInspectableCopy(page)
     for (const phrase of unsafeMarketingCopy) {
@@ -255,7 +255,7 @@ test.describe('primary page copy quality', () => {
   })
 
   test('home and download CTAs do not link directly to executable archives while distribution is gated', async ({ page }) => {
-    for (const path of ['/', '/download/']) {
+    for (const path of ['/products/ymp/', '/download/']) {
       await page.goto(path, { waitUntil: 'networkidle' })
 
       const riskyLinks = await page.locator('a[href$=".exe"], a[href$=".zip"], a[href*="Setup.exe"], a[href*="Portable.zip"]').evaluateAll(

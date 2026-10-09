@@ -1,6 +1,7 @@
 import { Suspense, lazy, useEffect } from 'react'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { SiteLayout } from '@/components/site-layout'
+import { CompanyPage } from '@/pages/company-page'
 import { normalizePath, newsPosts } from '@/data/site-content'
 
 const HomePage = lazy(() => import('@/pages/home-page').then((module) => ({ default: module.HomePage })))
@@ -45,7 +46,7 @@ function App() {
     const path = normalizePath(location.pathname)
     document.documentElement.lang = 'ja'
     document.body.classList.add('brand-body')
-    const isHome = path === '/'
+    const isHome = path === '/products/ymp/'
     document.body.classList.toggle('brand-home', isHome)
     document.documentElement.classList.toggle('brand-home', isHome)
   }, [location.pathname])
@@ -53,6 +54,7 @@ function App() {
   return (
     <Suspense fallback={<div className="route-loading" aria-hidden="true" />}>
     <Routes>
+      <Route path="/" element={<CompanyPage />} />
       <Route caseSensitive path="/Instructions" element={<Navigate to="/instructions/" replace />} />
       <Route caseSensitive path="/Instructions/" element={<Navigate to="/instructions/" replace />} />
       <Route caseSensitive path="/FAQ" element={<Navigate to="/faq/" replace />} />
@@ -65,8 +67,9 @@ function App() {
       <Route path="/billing/cancel" element={<BillingCancelPage />} />
       <Route path="/billing/cancel/" element={<BillingCancelPage />} />
 
-      <Route path="/" element={<SiteLayout />}>
-        <Route index element={<HomePage />} />
+      <Route element={<SiteLayout />}>
+        <Route path="products/ymp" element={<HomePage />} />
+        <Route path="products/ymp/" element={<HomePage />} />
         <Route path="download" element={<DownloadPage />} />
         <Route path="download/" element={<DownloadPage />} />
         <Route path="instructions" element={<InstructionsPage />} />

@@ -70,7 +70,7 @@ export const siteDescription =
   '対応する記事URL・スレッドURLや下書きから、台本・話者・素材を整え、YMM4へ渡す制作データを支援するWindows向け制作支援アプリ。'
 
 export const navItems: NavItem[] = [
-  { key: 'home', label: 'ホーム', url: '/' },
+  { key: 'home', label: '製品紹介', url: '/products/ymp/' },
   { key: 'download', label: 'ダウンロード', url: '/download/' },
   { key: 'instructions', label: '使い方', url: '/instructions/' },
   { key: 'samples', label: 'サンプル', url: '/samples/' },
@@ -395,7 +395,8 @@ export const newsPosts: NewsPost[] = [
 ]
 
 export const pageRegistry: Record<string, PageEntry> = {
-  '/': { label: 'ホーム', navKey: 'home', hideBreadcrumbs: true },
+  '/': { label: 'OTM株式会社', hideBreadcrumbs: true },
+  '/products/ymp/': { label: 'ゆっくりまとめプロセッサー', navKey: 'home', hideBreadcrumbs: true },
   '/download/': { label: 'ダウンロード', navKey: 'download', parent: '/' },
   '/instructions/': { label: '使い方', navKey: 'instructions', parent: '/' },
   '/samples/': { label: '実画面・サンプル', navKey: 'samples', parent: '/' },

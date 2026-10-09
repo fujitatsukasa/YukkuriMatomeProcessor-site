@@ -1,6 +1,21 @@
-# ゆっくりまとめプロセッサー サイト管理リポジトリ
+# OTM株式会社 / ゆっくりまとめプロセッサー サイト管理リポジトリ
 
 公開サイト本体は `vite-site/` の Vite + React 実装です。現在のサイトバージョンは **V1.4** として定義しています。
+
+## 会社ホームページ
+
+`/` は OTM株式会社の公式会社サイトです。ソフトウェア開発、AI活用・業務自動化、自社プロダクトの事業紹介と、会社概要・メール問い合わせを掲載しています。
+
+- Company page: `vite-site/src/pages/company-page.tsx`
+- Company stylesheet: `vite-site/src/pages/company-page.css`
+- Company content: `vite-site/src/data/company.ts`
+- 会社情報・メールの共有元: `vite-site/src/data/site-content.ts` の `legal.organization`
+- YMP製品紹介: `/products/ymp/`（以前のトップページ）
+- ダウンロード、使い方、料金、製品サポート、法務のURLは維持しています。
+
+会社メールを変更する場合は `legal.organization.email` を更新します。会社サイトの連絡先と構造化データが連動します。既存の `supportChannels` のメール導線も同時に確認してください。
+
+会社サイトの表示・導線・静的HTMLを確認するには、ビルド後に `node scripts/verify-company-site.mjs <Dドライブ上の検証保存先の絶対パス>` を `vite-site/` で実行します。スクリーンショットとPlaywright動画、結果JSONが指定先へ保存されます。
 
 ## ローカル確認
 

@@ -14,7 +14,7 @@ const testDir = dirname(fileURLToPath(import.meta.url))
 const srcDir = resolve(testDir, '../src')
 
 const auditPages = [
-  '/',
+  '/products/ymp/',
   '/download/',
   '/instructions/',
   '/samples/',
@@ -145,7 +145,7 @@ test.describe('LP operational readiness audit', () => {
       expect(audit.robots).toBe('index,follow')
       expect(audit.h1Count).toBe(1)
       expect(audit.jsonLdResults.every((entry) => entry.ok && entry.type && entry.context === 'https://schema.org')).toBeTruthy()
-      if (route !== '/') {
+      if (route !== '/products/ymp/') {
         expect(audit.jsonLdResults.some((entry) => entry.type === 'BreadcrumbList')).toBeTruthy()
       }
 

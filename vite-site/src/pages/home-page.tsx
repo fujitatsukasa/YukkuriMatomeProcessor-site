@@ -93,7 +93,7 @@ const softwareApplicationLd = {
   applicationCategory: 'MultimediaApplication',
   operatingSystem: homeFacts.os.join(', '),
   softwareRequirements: `${homeFacts.osLabel}、YMM4必須`,
-  url: `${homeFacts.siteOrigin}/`,
+  url: `${homeFacts.siteOrigin}/products/ymp/`,
   downloadUrl: `${homeFacts.siteOrigin}${homeFacts.downloadUrl}`,
   image: `${homeFacts.siteOrigin}${homeAssets.hero}`,
   description: metaDescription,
@@ -1262,7 +1262,7 @@ export function HomePage() {
         description={metaDescription}
         keywords="ゆっくりまとめプロセッサー,YMM4,台本取得,AI台本,編集ボード,YMM4連携,CSV,.ymmp,記事URL,スレッドURL,反応集,解説動画,ショート動画,Windows,Premium"
         image={homeAssets.hero}
-        path="/"
+        path="/products/ymp/"
         structuredData={[softwareApplicationLd, faqPageLd]}
       />
       <HomePageContent />

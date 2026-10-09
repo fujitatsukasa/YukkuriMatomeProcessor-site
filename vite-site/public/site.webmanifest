@@ -1,10 +1,10 @@
 {
-  "name": "ゆっくりまとめプロセッサー",
-  "short_name": "YMP",
+  "name": "OTM株式会社",
+  "short_name": "OTM",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0a090c",
-  "theme_color": "#0a090c",
+  "background_color": "#f5f6f2",
+  "theme_color": "#111714",
   "icons": [
     {
       "src": "/favicon.ico",

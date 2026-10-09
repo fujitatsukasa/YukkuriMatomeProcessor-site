@@ -5,7 +5,6 @@ import {
   useRef,
   useState,
 } from 'react'
-import { Helmet } from 'react-helmet-async'
 import { Link } from 'react-router-dom'
 import {
   type ActionItem,
@@ -98,7 +97,7 @@ export function PageMeta({
     : []
 
   return (
-    <Helmet>
+    <>
       <title>{pageTitle}</title>
       <meta name="description" content={metaDescription} />
       <meta name="application-name" content={siteTitle} />
@@ -122,7 +121,7 @@ export function PageMeta({
           {serializeJsonLd(entry)}
         </script>
       ))}
-    </Helmet>
+    </>
   )
 }
 

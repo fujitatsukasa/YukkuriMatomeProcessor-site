@@ -188,7 +188,7 @@ export function SiteLayout() {
     [],
   )
   const normalizedPath = normalizePath(location.pathname)
-  const isHome = normalizedPath === '/'
+  const isHome = normalizedPath === '/products/ymp/'
   const activeEntry = pageRegistry[normalizedPath]
   const activeKey = activeEntry?.navKey
   const isBlogArticle = normalizedPath.startsWith('/blog/') && normalizedPath !== '/blog/'
@@ -245,7 +245,7 @@ export function SiteLayout() {
             }
           }}
         >
-          <Link className="logo brand-logo brand-logo--image" to="/" discover="none" aria-label={`${siteTitle} ホーム`}>
+          <Link className="logo brand-logo brand-logo--image" to="/products/ymp/" discover="none" aria-label={`${siteTitle} ホーム`}>
             <img
               className="brand-logo__image"
               src={media.titleLogo}
@@ -365,6 +365,7 @@ export function SiteLayout() {
             <section>
               <h3>クイックリンク</h3>
               <ul>
+                <li><Link to="/">運営会社 OTM株式会社</Link></li>
                 <li><Link to="/download/">ダウンロードを見る</Link></li>
                 <li><Link to="/samples/">実画面・サンプル</Link></li>
                 <li><Link to="/purchase/">料金を確認</Link></li>
