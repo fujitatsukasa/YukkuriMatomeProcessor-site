@@ -3,13 +3,13 @@
   "short_name": "OTM",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#f5f6f2",
-  "theme_color": "#111714",
+  "background_color": "#121313",
+  "theme_color": "#121313",
   "icons": [
     {
-      "src": "/favicon.ico",
-      "sizes": "48x48",
-      "type": "image/x-icon"
+      "src": "/company/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
     }
   ]
 }

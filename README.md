@@ -9,13 +9,16 @@
 - Company page: `vite-site/src/pages/company-page.tsx`
 - Company stylesheet: `vite-site/src/pages/company-page.css`
 - Company content: `vite-site/src/data/company.ts`
+- Motion graphics: `vite-site/src/components/company-motion.tsx`（Canvasの立体メッシュとSVG図版）
 - 会社情報・メールの共有元: `vite-site/src/data/site-content.ts` の `legal.organization`
 - YMP製品紹介: `/products/ymp/`（以前のトップページ）
 - ダウンロード、使い方、料金、製品サポート、法務のURLは維持しています。
 
 会社メールを変更する場合は `legal.organization.email` を更新します。会社サイトの連絡先と構造化データが連動します。既存の `supportChannels` のメール導線も同時に確認してください。
 
-会社サイトの表示・導線・静的HTMLを確認するには、ビルド後に `node scripts/verify-company-site.mjs <Dドライブ上の検証保存先の絶対パス>` を `vite-site/` で実行します。スクリーンショットとPlaywright動画、結果JSONが指定先へ保存されます。
+会社サイトの表示・導線・静的HTMLを確認するには、ビルド後に `node scripts/verify-company-site.mjs <Dドライブ上の検証保存先の絶対パス>` を `vite-site/` で実行します。スクリーンショットと結果JSONが指定先へ保存されます。動きの録画は `node scripts/record-company-motion.mjs <ローカルプレビューURL> <Dドライブ上の検証保存先>`。Playwrightでブラウザ描画を12fpsで取得し、PATH上のFFmpegで28秒のMP4に保存します。実OSの画面撮影やフォーカス操作は使いません。
+
+見出しは Zen Kaku Gothic New、本文は Noto Sans JP、英字は Manrope。トップのメッシュは形状を連続的に変化させ、一時停止に対応しています。画面外や非表示タブでは描画を止め、`prefers-reduced-motion` では静止します。スクロール演出は内容を隠す前提にせず、JavaScriptなしでも本文とSVGの代替図を表示します。検証スクリプトは5画面幅の表示、フォント読込、描画の変化・停止、動きを減らす設定、静的HTMLも確認します。
 
 ## ローカル確認
 

@@ -27,13 +27,12 @@ const server = createServer(async (request, response) => {
 await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve))
 const origin = `http://127.0.0.1:${server.address().port}`
 const browser = await chromium.launch({ headless: true })
-const report = { capturePolicy: { foregroundFocusUsed: false, osWindowCaptureUsed: false }, viewports: [], routes: [], errors: [] }
+const report = { capturePolicy: { foregroundFocusUsed: false, osWindowCaptureUsed: false }, viewports: [], routes: [], motion: {}, errors: [] }
 
 try {
   for (const width of [1512, 1024, 768, 390, 320]) {
     const context = await browser.newContext({
       viewport: { width, height: width > 800 ? 982 : 844 },
-      ...(width === 1512 ? { recordVideo: { dir: path.join(output, 'video'), size: { width: 1512, height: 982 } } } : {}),
     })
     const page = await context.newPage()
     page.on('pageerror', (error) => report.errors.push({ width, message: error.message }))
@@ -54,7 +53,28 @@ try {
     assert.deepEqual(metrics.clippedHeadings, [], `Clipped heading at ${width}px`)
     assert.equal(metrics.canonical, 'https://yukkurimatomeprocessor.com/')
     assert.equal(metrics.company, 'OTM株式会社')
+    await page.evaluate(() => document.fonts.ready)
+    await page.waitForTimeout(1200)
     report.viewports.push({ width, ...metrics })
+    if (width === 1512) {
+      const canvas = page.locator('.company-motion-canvas')
+      await page.locator('.company-motion-canvas[data-rendered="true"]').waitFor()
+      const frame = await canvas.evaluate((node) => node.toDataURL())
+      await page.waitForTimeout(500)
+      assert.notEqual(await canvas.evaluate((node) => node.toDataURL()), frame, 'Motion graphic is not advancing')
+      await page.getByRole('button', { name: 'モーショングラフィックを停止', exact: true }).click()
+      await page.waitForTimeout(100)
+      const stopped = await canvas.evaluate((node) => node.toDataURL())
+      await page.waitForTimeout(400)
+      assert.equal(await canvas.evaluate((node) => node.toDataURL()), stopped, 'Pause did not freeze the motion graphic')
+      await page.getByRole('button', { name: 'モーショングラフィックを再生', exact: true }).click()
+      for (let index = 0; index < 4; index++) {
+        await page.screenshot({ path: path.join(output, `motion-frame-${index}.png`) })
+        await page.waitForTimeout(3500)
+      }
+      report.motion = { canvasAdvances: true, pauseFreezesFrame: true, fonts: await page.evaluate(() => ({ display: document.fonts.check('900 40px "Zen Kaku Gothic New"'), latin: document.fonts.check('800 40px Manrope'), body: document.fonts.check('400 16px "Noto Sans JP"') })) }
+      assert(Object.values(report.motion.fonts).every(Boolean), 'Designed fonts failed to load')
+    }
     if (width <= 800) {
       const toggle = page.locator('#company-menu-toggle')
       await toggle.click()
@@ -67,12 +87,16 @@ try {
       assert.match(page.url(), /#company$/)
     }
     for (const id of ['about', 'business', 'products', 'company', 'contact']) {
-      await page.locator(`#${id}`).scrollIntoViewIfNeeded()
-      await page.waitForTimeout(width === 1512 ? 800 : 100)
+      if (width === 1512) await page.locator(`#${id}`).evaluate((element) => element.scrollIntoView({ behavior: 'smooth', block: 'start' }))
+      else await page.locator(`#${id}`).scrollIntoViewIfNeeded()
+      await page.waitForTimeout(width === 1512 ? 1700 : 1100)
+      assert.equal(await page.locator(`#${id} h2`).evaluate((node) => getComputedStyle(node).opacity), '1', `Section heading is hidden: ${id}`)
+      if (width === 1512) await page.screenshot({ path: path.join(output, `section-${id}.png`) })
     }
     await page.locator('.company-product-visual').scrollIntoViewIfNeeded()
     assert(await page.locator('.company-product-visual img').evaluate((image) => image.complete && image.naturalWidth > 0), 'Product screenshot did not load')
     await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }))
+    await page.waitForTimeout(150)
     if (width === 1512 || width === 390 || width === 320) {
       await page.screenshot({ path: path.join(output, `company-${width}.png`), fullPage: true })
       if (width === 1512) await page.screenshot({ path: path.join(output, 'company-desktop-first-view.png') })
@@ -95,18 +119,36 @@ try {
     await context.close()
     console.log(`PASS: ${width}px layout and company/product navigation`)
   }
+  const reduced = await browser.newContext({ reducedMotion: 'reduce', viewport: { width: 1512, height: 982 } })
+  const reducedPage = await reduced.newPage()
+  await reducedPage.goto(origin, { waitUntil: 'networkidle' })
+  const still = await reducedPage.locator('.company-motion-canvas').evaluate((node) => node.toDataURL())
+  await reducedPage.waitForTimeout(500)
+  assert.equal(await reducedPage.locator('.company-motion-canvas').evaluate((node) => node.toDataURL()), still, 'Reduced motion graphic is not static')
+  assert.equal(await reducedPage.locator('.company-motion-scene').getAttribute('data-motion'), 'reduced')
+  assert.equal(await reducedPage.locator('.company-motion-toggle').isVisible(), false)
+  assert.equal(await reducedPage.locator('.company-site').evaluate((node) => node.getAnimations({ subtree: true }).filter((animation) => animation.playState === 'running').length), 0)
+  report.motion.reducedMotionStatic = true
+  await reduced.close()
   const noJs = await browser.newContext({ javaScriptEnabled: false })
   const page = await noJs.newPage()
   for (const route of ['/', '/products/ymp/', '/download/', '/purchase/', '/contact/', '/legal/privacy/']) {
     const response = await page.goto(`${origin}${route}`)
     assert.equal(response.status(), 200, `Route missing: ${route}`)
     assert.equal(await page.locator('h1').count(), 1, `Static content missing: ${route}`)
+    if (route === '/') {
+      assert(await page.locator('.company-motion-fallback').isVisible(), 'No-JavaScript graphic fallback is missing')
+      assert.equal(await page.locator('h1').evaluate((node) => getComputedStyle(node).opacity), '1')
+      assert(await page.locator('#about h2').evaluate((node) => getComputedStyle(node).opacity === '1'))
+      assert(await page.locator('#business .company-service').evaluateAll((nodes) => nodes.every((node) => getComputedStyle(node).opacity === '1')))
+      report.motion.noJsFallback = true
+    }
     report.routes.push({ route, status: response.status(), staticHeading: await page.locator('h1').innerText() })
   }
   await noJs.close()
   assert.deepEqual(report.errors, [], 'Browser errors occurred')
   await writeFile(path.join(output, 'result.json'), JSON.stringify(report, null, 2))
-  console.log(`PASS: 5 viewport sizes, mobile navigation, product routing, email links, 6 static routes. Evidence: ${output}`)
+  console.log(`PASS: 5 viewports, animated canvas, pause, reduced motion, designed fonts, mobile navigation, product routing, 6 static routes. Evidence: ${output}`)
 } finally {
   await browser.close()
   await new Promise((resolve) => server.close(resolve))
