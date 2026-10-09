@@ -1,0 +1,218 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Bodoni+Moda:ital,wght@1,400;1,500&family=IBM+Plex+Mono:wght@400;500&family=Zen+Kaku+Gothic+Antique:wght@500;700;900&display=swap');
+
+.company-site { --company-paper: #f2f2e9; --company-ink: #20281f; --company-dark: #20281f; --company-accent: #d7fa43; --company-muted: #60695c; }
+.company-site h1, .company-site h2, .company-site h3 { font-family: 'Zen Kaku Gothic Antique', 'Noto Sans JP', sans-serif; font-weight: 700; letter-spacing: -.055em; }
+.company-title-word { display: inline-block; }
+.company-site .company-eyebrow, .company-site .company-section-label > span:first-child, .company-site .company-hero-topline, .company-site .company-hero-bottom, .company-site .company-breadcrumb, .company-site .company-motion-caption, .company-site .company-motion-coordinate, .company-site .company-motion-note { font-family: 'IBM Plex Mono', monospace; letter-spacing: .025em; font-weight: 400; }
+.company-site .company-header { min-height: 84px; padding: 20px 5.3%; background: #f2f2e9f7; color: var(--company-ink); border-bottom: 1px solid #20281f30; }
+.company-site .company-header::after { background: var(--company-ink); }
+.company-site .company-wordmark > span { font-family: 'Barlow Condensed', sans-serif; font-size: 48px; font-weight: 600; letter-spacing: -.06em; }
+.company-site .company-wordmark-dot { color: #657b25; }
+.company-site .company-wordmark small { font-size: 10px; }
+.company-site .company-navigation a { font-size: 11px; }
+.company-site .company-navigation .company-nav-contact { background: var(--company-ink); color: var(--company-paper); border-color: var(--company-ink); padding: 12px 21px; }
+.company-site .company-navigation .company-nav-contact:hover { background: #3b4734; }
+.company-site .company-navigation a[aria-current='page'] { color: #536714; }
+.company-site .company-navigation a::after { background: var(--company-ink); }
+.company-site a:focus-visible, .company-site button:focus-visible { outline-color: #607723; }
+.company-site .company-button { min-height: 52px; border: 1px solid #20281f; padding: 13px 22px; }
+.company-site .company-button--light { background: var(--company-ink); color: var(--company-paper); }
+.company-site .company-button--light:hover { background: #394b28; color: var(--company-accent); }
+.company-site .company-button svg { width: 18px; }
+.company-site .company-section { padding-top: 110px; padding-bottom: 120px; }
+.company-site .company-section-label { margin-bottom: 62px; font-size: 10px; padding-bottom: 20px; }
+.company-site .company-section-label > span:first-child { font-size: 10px; }
+.company-site .company-section-label > span:first-child::before { border-radius: 50%; background: currentColor; width: 4px; height: 4px; }
+.company-site h2 { font-size: clamp(34px, 3.7vw, 60px); line-height: 1.55; }
+
+/* The opening is a type composition with a live material study, not a framed illustration. */
+.company-home .company-hero { padding: 27px 5.3% 25px; background: var(--company-paper); color: var(--company-ink); }
+.company-home .company-hero-topline { font-size: 9px; color: #4a5542; }
+.company-home .company-hero-topline i { background: var(--company-ink); border-radius: 50%; }
+.company-hero-stage { position: relative; height: clamp(510px, 39.5vw, 680px); margin-top: 8px; }
+.company-hero-type { position: absolute; top: 0; left: 0; z-index: 2; width: 55%; pointer-events: none; color: var(--company-ink); transform: translateY(calc(var(--hero-shift, 0px) * -.25)); }
+.company-hero-type > span { display: block; width: fit-content; font: 600 clamp(140px, 17.6vw, 300px)/.77 'Barlow Condensed', sans-serif; letter-spacing: -.04em; }
+.company-hero-type > .company-hero-italic { font: italic 400 clamp(105px, 12.6vw, 215px)/.82 'Bodoni Moda', serif; letter-spacing: -.07em; padding-left: 28%; margin-top: 4px; display: flex; align-items: center; gap: .16em; }
+.company-hero-type .company-type-star { display: block; font: 400 .6em/1 'Barlow Condensed', sans-serif; color: #a5bc32; transform: rotate(-12deg); }
+.company-hero-type > .company-hero-move { margin-left: 10%; }
+.company-hero-move > span { color: #9db62d; }
+.company-home .company-motion-wrap { position: absolute; width: 58%; height: 100%; top: -20px; right: -1.5%; margin: 0; transform: none; }
+.company-home .company-motion-scene { width: 100%; height: calc(100% - 28px); aspect-ratio: auto; background: none; }
+.company-motion-shadow { position: absolute; width: 48%; height: 7%; left: 28%; bottom: 12%; background: #28332229; filter: blur(25px); border-radius: 50%; }
+.company-motion-scene[data-renderer='webgl'] .company-motion-fallback { display: none; }
+.company-motion-scene:not([data-renderer='webgl']) .company-motion-canvas { visibility: hidden; }
+.company-home .company-motion-coordinate { left: 14%; top: 21px; font-size: 8px; color: #59654e; }
+.company-home .company-motion-note { right: 6%; bottom: 14px; color: #59654e; font-size: 8px; }
+.company-home .company-motion-caption { margin-left: 15%; margin-right: 5%; color: #435039; padding: 8px 0; border-color: #20281f30; font-size: 8px; }
+.company-home .company-motion-toggle { padding: 3px 0 3px 8px; min-height: 24px; color: #37452e; }
+.company-home .company-motion-toggle > span { font-family: 'IBM Plex Mono', monospace; font-size: 8px; }
+.company-home .company-hero-content { padding: 10px 0 30px; min-height: 0; grid-template-columns: 1fr 1fr; gap: 9%; align-items: center; }
+.company-home .company-hero h1 { font-size: clamp(29px, 3.25vw, 52px); line-height: 1.5; font-weight: 700; white-space: normal; letter-spacing: -.05em; }
+.company-home .company-hero-description { margin-top: 0 !important; color: #526047; font-size: 12px; line-height: 2; }
+.company-home .company-actions { margin-top: 20px; gap: 25px; }
+.company-home .company-hero-bottom { color: #495540; border-color: #20281f30; font-size: 8px; padding-top: 17px; }
+.company-home .company-hero-bottom > a svg { color: #20281f; }
+.company-ticker { overflow: hidden; background: var(--company-ink); color: var(--company-paper); padding: 22px 0 27px; }
+.company-ticker-track { display: flex; width: max-content; animation: company-ticker 45s linear infinite; }
+.company-ticker-track > span { flex: none; display: flex; align-items: center; gap: 35px; padding-right: 35px; font: 500 65px/1 'Barlow Condensed', sans-serif; letter-spacing: -.015em; }
+.company-ticker-track i { font: italic 400 .73em/1 'Bodoni Moda', serif; }
+.company-ticker-track b { color: var(--company-accent); font: 400 .68em/1 'Barlow Condensed', sans-serif; }
+@keyframes company-ticker { to { transform: translateX(-50%); } }
+.company-site[data-motion-paused='true'] .company-ticker-track { animation-play-state: paused; }
+
+.company-home .company-about { background: var(--company-paper); }
+.company-home .company-about-content { grid-template-columns: 1.2fr 1fr; gap: 9%; }
+.company-home .company-about h2 { font-size: clamp(36px, 4.2vw, 65px); }
+.company-home .company-about h2 > span { color: #6c7b5e; }
+.company-site .company-workflow-step h3 { font: 600 62px/.95 'Barlow Condensed', sans-serif; letter-spacing: -.02em; }
+.company-site .company-workflow-index { font-family: 'IBM Plex Mono', monospace; background: var(--company-paper); }
+.company-home .company-business { background: var(--company-ink); color: var(--company-paper); }
+.company-home .company-business .company-section-label { color: #d0d9c5; border-color: #ffffff2a; }
+.company-home .company-business .company-section-heading > p { color: #b6c3a7; }
+.company-home .company-service-list { display: block; border-color: #ffffff35; }
+.company-home .company-service { display: grid; grid-template-columns: 55px 1.02fr .9fr 1.15fr; gap: 35px; align-items: center; border-left: 0; border-top: 1px solid #ffffff35; padding: 42px 0; }
+.company-home .company-service:first-child { border-top: 0; }
+.company-home .company-service-top { grid-column: 1; grid-row: 1; align-self: start; padding-top: 7px; color: #a3b58d; }
+.company-home .company-service-top > svg { display: none; }
+.company-home .company-service-number { font: 500 54px/1 'Barlow Condensed', sans-serif; color: #d7fa43; }
+.company-home .company-service-title { grid-column: 2; grid-row: 1; margin: 0; }
+.company-home .company-service-title > p { font: 400 9px 'IBM Plex Mono', monospace; color: #b6c3a7; margin-bottom: 17px; letter-spacing: 0; }
+.company-home .company-service-title h3 { font-size: 29px; margin: 0; }
+.company-home .company-service-graphic { grid-column: 3; grid-row: 1; height: 185px; margin: 0; }
+.company-home .company-service-description { grid-column: 4; grid-row: 1; }
+.company-home .company-service-description > p { color: #bac5ad; font-size: 12px; }
+.company-home .company-service-description li { border-color: #ffffff35; color: #c7d2bb; font-size: 9px; }
+.company-home .company-business .company-text-link { border-color: #a8b49b; }
+.company-site .company-graphic-outline { stroke: #808d70; stroke-width: 1.3; }
+.company-site .company-graphic-accent { stroke: #455c1b; stroke-width: 2.5; }
+.company-home .company-graphic-accent { stroke: #d7fa43; }
+.company-site .company-graphic-dot { fill: #607920; }
+.company-home .company-graphic-dot { fill: #d7fa43; }
+.company-site .company-graphic-signal { stroke: #66861d; stroke-width: 2.5; stroke-dasharray: 50 450; }
+.company-home .company-graphic-signal { stroke: #d7fa43; }
+.company-home .company-products { background: var(--company-paper); color: var(--company-ink); }
+.company-home .company-products .company-section-label { color: var(--company-ink); border-color: #20281f30; }
+.company-home .company-products .company-section-heading > p, .company-home .company-products .company-work-card-meta, .company-home .company-products .company-work-card > a > p { color: #60695c; }
+.company-home .company-work-grid { grid-template-columns: 1fr 1fr; gap: 68px 45px; }
+.company-home .company-work-card:first-child { grid-column: 1 / -1; padding-bottom: 60px; border-bottom: 1px solid #20281f30; }
+.company-home .company-work-card:first-child > a { display: grid; grid-template-columns: .75fr 1.25fr; gap: 20px 8%; align-items: start; }
+.company-home .company-work-card:first-child .company-work-media { grid-column: 2; grid-row: 1 / 5; aspect-ratio: 1.65 / 1; }
+.company-home .company-work-card:first-child .company-work-card-meta { grid-column: 1; margin: 15px 0 0; }
+.company-home .company-work-card:first-child h3 { font-size: clamp(30px, 3.15vw, 48px); }
+.company-home .company-work-card:first-child > a > p { align-self: start; font-size: 13px; margin: 0; }
+.company-site .company-work-card h3 { font-size: 26px; letter-spacing: -.04em; }
+.company-site .company-work-card-meta { font-size: 10px; }
+.company-site .company-work-symbol { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: clamp(100px, 9vw, 150px); letter-spacing: -.04em; }
+.company-site .company-work-symbol > span { color: #d7fa43; }
+.company-site .company-work-media--software { background: repeating-linear-gradient(90deg, transparent 0, transparent calc(25% - 1px), #ffffff0c calc(25% - 1px), #ffffff0c 25%), #20281f; }
+.company-site .company-work-visual-label, .company-site .company-work-visual-caption { font-family: 'IBM Plex Mono', monospace; color: #c3cfb4; }
+.company-site .company-profile { background: #e9edde; }
+.company-site .company-profile-grid h2 { font-size: 46px; }
+.company-site .company-profile-grid .company-profile-statement { color: #69775d; }
+.company-site .company-contact { background: var(--company-accent); color: var(--company-ink); }
+.company-site .company-contact-display { font: 500 clamp(70px, 13.5vw, 210px)/1 'Barlow Condensed', sans-serif; letter-spacing: -.025em; margin-bottom: 60px !important; }
+.company-contact-display > i { font: italic 400 .9em 'Bodoni Moda', serif; letter-spacing: -.06em; padding-right: .08em; }
+.company-site .company-contact-grid p { color: #465526; }
+.company-site .company-contact-link { border-color: #20281f55; }
+.company-site .company-contact-link:hover { color: #3a5320; }
+.company-site .company-footer { background: var(--company-ink); }
+.company-site .company-footer .company-wordmark-dot { color: var(--company-accent); }
+.company-site .company-footer-top > p { color: #b7c5a5; }
+.company-site .company-footer-bottom { color: #b7c5a5; }
+.company-site .company-document-hero { background: var(--company-ink); }
+.company-site .company-document-hero > .company-eyebrow { color: var(--company-accent); }
+.company-site .company-document-hero h1 { font-weight: 700; line-height: 1.5; }
+.company-site .company-document-description { color: #c6d1ba; }
+.company-site .company-breadcrumb { color: #b4c5a0; }
+.company-site .company-development-process, .company-site .company-case-body, .company-site .company-inquiry aside { background: #e9edde; }
+.company-site .company-process-grid h3 { font: 600 48px 'Barlow Condensed', sans-serif; }
+.company-site .company-case-visual, .company-site .company-case-animation { background: var(--company-ink); }
+.company-site .company-case-type { color: #c4d0b8; }
+
+@media (min-width: 1800px) { .company-hero-stage { height: 620px; } }
+@media (max-width: 1100px) {
+  .company-hero-stage { height: 45vw; }
+  .company-home .company-hero-content { gap: 5%; }
+  .company-home .company-hero h1 { font-size: 34px; }
+  .company-home .company-service { grid-template-columns: 45px 1fr 1fr; gap: 28px; }
+  .company-home .company-service-graphic { grid-column: 3; grid-row: 1 / 3; height: 190px; }
+  .company-home .company-service-description { grid-column: 2; grid-row: 2; }
+  .company-home .company-service-title h3 { font-size: 28px; }
+  .company-site .company-workflow-step h3 { font-size: 48px; }
+}
+@media (max-width: 800px) {
+  .company-site .company-header { min-height: 70px; padding: 12px 6%; }
+  .company-site .company-wordmark > span { font-size: 40px; }
+  .company-site .company-menu-toggle { color: var(--company-ink); }
+  .company-site .company-navigation { background: var(--company-paper); border-color: #20281f40; }
+  .company-site .company-navigation a { font-size: 13px; }
+  .company-home .company-hero { padding: 22px 6%; }
+  .company-home .company-hero-topline { font-size: 8px; }
+  .company-home .company-hero-topline > span:last-child { display: none; }
+  .company-hero-stage { height: clamp(300px, 52vw, 420px); }
+  .company-hero-type { width: 59%; top: 16px; }
+  .company-hero-type > span { font-size: 24vw; }
+  .company-hero-type > .company-hero-italic { font-size: 17vw; padding-left: 25%; }
+  .company-home .company-motion-wrap { width: 60%; right: -5%; top: 25px; height: 88%; }
+  .company-home .company-motion-coordinate { display: none; }
+  .company-home .company-motion-caption { position: absolute; bottom: -12px; right: 5%; border: 0; font-size: 7px; margin: 0; padding: 0; }
+  .company-home .company-motion-caption > span { display: none; }
+  .company-home .company-motion-toggle { min-height: 34px; padding: 5px 0 5px 8px; }
+  .company-home .company-motion-caption > span { gap: 5px; }
+  .company-home .company-motion-note { display: none; }
+  .company-home .company-hero-content { grid-template-columns: 1fr; gap: 20px; padding: 0 0 30px; }
+  .company-home .company-hero h1 { font-size: 34px; line-height: 1.5; }
+  .company-home .company-hero-description { font-size: 12px; }
+  .company-home .company-actions { gap: 18px; margin-top: 22px; }
+  .company-home .company-hero-bottom { font-size: 7px; }
+  .company-home .company-hero-bottom > a { font-size: 7px; }
+  .company-ticker { padding: 16px 0 20px; }
+  .company-ticker-track > span { font-size: 44px; gap: 22px; padding-right: 22px; }
+  .company-site .company-section { padding: 65px 6% 80px; }
+  .company-site .company-section-label { margin-bottom: 40px; font-size: 9px; }
+  .company-site .company-section-label > span:first-child { font-size: 8px; }
+  .company-home .company-about-content { grid-template-columns: 1fr; gap: 30px; }
+  .company-home .company-about h2 { font-size: 36px; }
+  .company-home .company-service { grid-template-columns: 34px 1fr; gap: 20px; padding: 32px 0; }
+  .company-home .company-service-top { grid-column: 1; grid-row: 1; }
+  .company-home .company-service-number { font-size: 36px; }
+  .company-home .company-service-title { grid-column: 2; grid-row: 1; }
+  .company-home .company-service-title h3 { font-size: 26px; }
+  .company-home .company-service-graphic { grid-column: 1 / -1; grid-row: 2; height: 180px; width: min(100%, 400px); margin: auto; }
+  .company-home .company-service-description { grid-column: 2; grid-row: 3; }
+  .company-home .company-service-description > p { font-size: 13px; }
+  .company-home .company-work-grid { grid-template-columns: 1fr; gap: 40px; }
+  .company-home .company-work-card:first-child { padding-bottom: 0; border: 0; }
+  .company-home .company-work-card:first-child > a { display: block; }
+  .company-home .company-work-card:first-child .company-work-media { aspect-ratio: 4 / 3; }
+  .company-home .company-work-card:first-child .company-work-card-meta { margin-top: 23px; }
+  .company-home .company-work-card:first-child h3 { font-size: 28px; margin-top: 16px; }
+  .company-home .company-work-card:first-child > a > p { margin-top: 17px; }
+  .company-site .company-work-symbol { font-size: 125px; }
+  .company-site .company-workflow-step h3 { font-size: 38px; }
+  .company-site .company-profile-grid h2 { font-size: 34px; }
+  .company-site .company-contact-display { font-size: 13.3vw; margin-bottom: 35px !important; }
+  .company-site .company-contact-grid h2 { font-size: 29px; }
+  .company-site .company-contact-link { font-size: 23px; }
+  .company-site .company-process-grid h3 { font-size: 38px; }
+}
+@media (max-width: 480px) {
+  .company-hero-stage { height: clamp(250px, 78vw, 350px); margin-top: 14px; }
+  .company-hero-type { top: 6px; }
+  .company-hero-type > span { font-size: 31vw; }
+  .company-hero-type > .company-hero-italic { font-size: 22vw; margin-top: 7px; }
+  .company-home .company-motion-wrap { width: 70%; height: 82%; top: 33px; right: 0; }
+  .company-home .company-motion-caption { bottom: -14px; right: 0; }
+  .company-home .company-motion-toggle { margin-left: auto; font-size: 7px; }
+  .company-home .company-hero h1 { font-size: clamp(28px, 7.7vw, 30px); }
+  .company-site .company-button { padding: 12px 17px; min-height: 48px; font-size: 11px; gap: 20px; }
+  .company-home .company-actions { gap: 17px; }
+  .company-home .company-hero-bottom > span b { margin: 0 4px; }
+  .company-site .company-contact-link { font-size: 20px; }
+  .company-site .company-document-hero h1 { font-size: 32px; }
+  .company-site .company-wordmark small { font-size: 9px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .company-ticker-track { animation: none; }
+  .company-hero-type { transform: none; }
+}

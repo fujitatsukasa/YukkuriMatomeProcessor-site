@@ -4,6 +4,7 @@ import { ArrowUpRight, Menu, X } from 'lucide-react'
 import { company, companyNavigation } from '@/data/company'
 import '@/pages/company-page.css'
 import '@/pages/company-documents.css'
+import '@/pages/company-art-direction.css'
 
 export const companyInquiry = `mailto:${company.email}?subject=${encodeURIComponent('OTM株式会社へのお問い合わせ')}`
 
@@ -21,7 +22,7 @@ export function CompanyLayout({ children, title, description = company.descripti
     const animations: Animation[] = []
     const enter = (node: HTMLElement, delay = 0) => {
       node.dataset.entered = 'true'
-      if (!reduced.matches) animations.push(node.animate([{ opacity: 0, transform: 'translateY(30px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 950, delay, easing: 'cubic-bezier(.16,1,.3,1)', fill: 'backwards' }))
+      if (!reduced.matches) animations.push(node.animate([{ opacity: 0, transform: 'translateY(38px)', clipPath: 'inset(0 0 25% 0)' }, { opacity: 1, transform: 'translateY(0)', clipPath: 'inset(0)' }], { duration: 1000, delay, easing: 'cubic-bezier(.16,1,.3,1)', fill: 'backwards' }))
     }
     element.querySelectorAll<HTMLElement>('[data-intro]').forEach((node, index) => enter(node, index * 90))
     const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
@@ -55,8 +56,8 @@ export function CompanyLayout({ children, title, description = company.descripti
     return () => document.removeEventListener('keydown', escape)
   }, [menu])
 
-  return <div className="company-site" ref={root}>
-    <title>{title}</title><meta name="description" content={description} /><meta name="application-name" content={company.name} /><meta name="theme-color" content="#121313" /><meta name="robots" content="index,follow" />
+  return <div className={`company-site${pathname === '/' ? ' company-home' : ''}`} ref={root}>
+    <title>{title}</title><meta name="description" content={description} /><meta name="application-name" content={company.name} /><meta name="theme-color" content="#f2f2e9" /><meta name="robots" content="index,follow" />
     <link rel="canonical" href={canonical} /><link rel="icon" type="image/svg+xml" href="/company/favicon.svg" />
     <meta property="og:site_name" content={company.name} /><meta property="og:title" content={title} /><meta property="og:description" content={description} /><meta property="og:url" content={canonical} /><meta property="og:locale" content="ja_JP" /><meta property="og:type" content="website" /><meta property="og:image" content={`${company.origin}/company/interconnected-forms.webp`} />
     <meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content={title} /><meta name="twitter:description" content={description} /><meta name="twitter:image" content={`${company.origin}/company/interconnected-forms.webp`} />
@@ -73,5 +74,5 @@ export function CompanyLayout({ children, title, description = company.descripti
 }
 
 export function CompanyContactBand() {
-  return <section className="company-section company-contact" aria-labelledby="company-band-title"><div className="company-section-label"><span>LET’S TALK</span><span>お問い合わせ</span></div><p className="company-contact-display" aria-hidden="true" data-company-reveal>LET’S BUILD<span>↗</span></p><div className="company-contact-grid"><div data-company-reveal><h2 id="company-band-title">次につくるものを、<br />一緒に考えましょう。</h2><p>アイデアの段階から、既存の仕組みの改善まで。<br />目的と課題を整理するところからお話しできます。</p></div><Link className="company-contact-link" to="/inquiry/"><span><small>CONTACT OTM</small>開発について相談する</span><ArrowUpRight aria-hidden="true" /></Link></div></section>
+  return <section className="company-section company-contact" aria-labelledby="company-band-title"><div className="company-section-label"><span>YOUR NEXT STARTS HERE</span><span>お問い合わせ</span></div><p className="company-contact-display" aria-hidden="true" data-company-reveal>Have a <i>next?</i><span>↗</span></p><div className="company-contact-grid"><div data-company-reveal><h2 id="company-band-title">次につくるものを、<br />一緒に考えましょう。</h2><p>アイデアの段階から、既存の仕組みの改善まで。<br />目的と課題を整理するところからお話しできます。</p></div><Link className="company-contact-link" to="/inquiry/"><span><small>CONTACT OTM</small>開発について相談する</span><ArrowUpRight aria-hidden="true" /></Link></div></section>
 }

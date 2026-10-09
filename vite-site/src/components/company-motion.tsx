@@ -1,173 +1,194 @@
 import { useEffect, useRef, useState } from 'react'
 import { Pause, Play } from 'lucide-react'
 
-type Point = { x: number; y: number; z: number }
-const TAU = Math.PI * 2
-const mix = (a: number, b: number, amount: number) => a + (b - a) * amount
-const smooth = (value: number) => value * value * (3 - 2 * value)
+type Vector = [number, number, number]
+const tau = Math.PI * 2
+const unit = (v: Vector): Vector => { const n = Math.hypot(...v); return v.map((x) => x / n) as Vector }
+const cross = (a: Vector, b: Vector): Vector => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]]
+const center = (u: number): Vector => [(1.7 + .58 * Math.cos(3 * u)) * Math.cos(2 * u), (1.7 + .58 * Math.cos(3 * u)) * Math.sin(2 * u), .88 * Math.sin(3 * u)]
 
-// A single mesh becomes a field of ideas, a connected system, then a finished form.
-function formPoint(u: number, v: number, phase: number): Point {
-  const ring = { x: (1.45 + .56 * Math.cos(v)) * Math.cos(u), y: (1.45 + .56 * Math.cos(v)) * Math.sin(u), z: .56 * Math.sin(v) }
-  const sphere = { x: 1.8 * Math.sin(v / 2) * Math.cos(u), y: 1.8 * Math.sin(v / 2) * Math.sin(u), z: 1.8 * Math.cos(v / 2) }
-  const field = { x: ring.x * (1 + .28 * Math.sin(u * 3)), y: ring.y * (1 + .25 * Math.cos(v * 2)), z: ring.z + .55 * Math.sin(u * 2 + v) }
-  const forms = [field, sphere, ring, field]
-  const index = Math.floor(phase)
-  const amount = smooth(phase - index)
-  return { x: mix(forms[index].x, forms[index + 1].x, amount), y: mix(forms[index].y, forms[index + 1].y, amount), z: mix(forms[index].z, forms[index + 1].z, amount) }
+function ribbonGeometry(segments: number) {
+  const vertices: number[] = []
+  const indices: number[] = []
+  const sides = 12
+  for (let i = 0; i <= segments; i++) {
+    const u = i / segments * tau
+    const c = center(u), next = center(u + .001), previous = center(u - .001)
+    const tangent = unit(next.map((v, j) => v - previous[j]) as Vector)
+    const n = unit(cross(tangent, [0, 0, 1])), b = unit(cross(tangent, n))
+    const twist = .3 * Math.sin(u * 3)
+    const normal = n.map((v, j) => v * Math.cos(twist) + b[j] * Math.sin(twist)) as Vector
+    const binormal = b.map((v, j) => v * Math.cos(twist) - n[j] * Math.sin(twist)) as Vector
+    for (let j = 0; j <= sides; j++) {
+      const v = j / sides * tau, x = .43 * Math.cos(v), y = .13 * Math.sin(v)
+      const position = c.map((value, k) => value + normal[k] * x + binormal[k] * y)
+      const surface = unit(normal.map((value, k) => value * Math.cos(v) / .43 + binormal[k] * Math.sin(v) / .13) as Vector)
+      vertices.push(...position, ...surface, i / segments)
+      if (i < segments && j < sides) { const a = i * (sides + 1) + j; indices.push(a, a + sides + 1, a + 1, a + 1, a + sides + 1, a + sides + 2) }
+    }
+  }
+  return { vertices: new Float32Array(vertices), indices: new Uint16Array(indices) }
 }
+
+const vertexSource = `
+attribute vec3 position;
+attribute vec3 normal;
+attribute float track;
+uniform vec2 rotation;
+uniform float time;
+uniform float aspect;
+varying vec3 vNormal;
+varying vec3 vPosition;
+varying float vTrack;
+vec3 rotate(vec3 p) {
+  float a=rotation.x, b=rotation.y;
+  p=vec3(p.x*cos(a)+p.z*sin(a),p.y,-p.x*sin(a)+p.z*cos(a));
+  p=vec3(p.x,p.y*cos(b)-p.z*sin(b),p.y*sin(b)+p.z*cos(b));
+  float c=-.32;
+  return vec3(p.x*cos(c)-p.y*sin(c),p.x*sin(c)+p.y*cos(c),p.z);
+}
+void main() {
+  vec3 p=rotate(position);
+  p.y+=.08*sin(time*.7);
+  vPosition=p; vNormal=rotate(normal); vTrack=track;
+  float lens=7.5/(7.5-p.z);
+  gl_Position=vec4(p.x*.295*lens/aspect,p.y*.295*lens,-p.z*.1,1.);
+}`
+
+const fragmentSource = `
+precision highp float;
+varying vec3 vNormal;
+varying vec3 vPosition;
+varying float vTrack;
+void main() {
+  vec3 n=normalize(vNormal), eye=normalize(vec3(0.,0.,7.5)-vPosition);
+  if(!gl_FrontFacing) n=-n;
+  vec3 r=reflect(-eye,n);
+  float sky=smoothstep(-.5,.75,r.y);
+  float softbox=pow(max(dot(r,normalize(vec3(-.6,.8,1.))),0.),18.);
+  float window=(smoothstep(.32,.38,r.x)-smoothstep(.68,.74,r.x))*smoothstep(-.4,.2,r.y);
+  float edge=pow(1.-max(dot(n,eye),0.),3.);
+  vec3 chrome=vec3(.12,.14,.13)+vec3(.57,.59,.56)*sky+vec3(.72)*softbox+vec3(.65)*window+vec3(.18)*edge;
+  float paint=smoothstep(.68,.69,vTrack)*(1.-smoothstep(.84,.85,vTrack));
+  float diffuse=.7+.3*max(dot(n,normalize(vec3(-.5,.8,1.))),0.);
+  vec3 acid=vec3(.79,.94,.13)*diffuse+vec3(.4)*softbox;
+  vec3 color=mix(chrome,acid,paint);
+  gl_FragColor=vec4(pow(color,vec3(.88)),1.);
+}`
 
 export function CompanyMotion() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const sceneRef = useRef<HTMLDivElement>(null)
-  const elapsedRef = useRef(0)
+  const elapsed = useRef(0)
+  const pausedRef = useRef(false)
+  const updateRef = useRef<(() => void) | null>(null)
   const [paused, setPaused] = useState(false)
+  const [generation, setGeneration] = useState(0)
 
   useEffect(() => {
-    const canvas = canvasRef.current
-    const scene = sceneRef.current
-    const context = canvas?.getContext('2d')
-    if (!canvas || !scene || !context) return
-    const preference = matchMedia('(prefers-reduced-motion: reduce)')
-    let frame = 0
-    let lastPaint = 0
-    let time = elapsedRef.current
-    let visible = true
-    let width = 0
-    let height = 0
-    const columns = 52
-    const rows = 20
-
-    const draw = () => {
-      context.fillStyle = '#121313'
-      context.fillRect(0, 0, width, height)
-      const phase = preference.matches ? 2 : (time / 7000 + 2) % 3
-      scene.dataset.phase = String(Math.floor(phase))
-      scene.dataset.motion = preference.matches ? 'reduced' : paused ? 'paused' : 'playing'
-      const rotation = time / 21000 + .22
-      const tilt = .75
-      const scale = Math.min(width, height) * .19
-      const points: (Point & { size: number })[] = []
-      for (let column = 0; column <= columns; column++) {
-        for (let row = 0; row <= rows; row++) {
-          const point = formPoint(column / columns * TAU, row / rows * TAU, phase)
-          const x = point.x * Math.cos(rotation) + point.z * Math.sin(rotation)
-          const z = -point.x * Math.sin(rotation) + point.z * Math.cos(rotation)
-          const y = point.y * Math.cos(tilt) - z * Math.sin(tilt)
-          const depth = point.y * Math.sin(tilt) + z * Math.cos(tilt)
-          const angle = -.3
-          const perspective = 5.5 / (5.5 - depth)
-          points.push({ x: width / 2 + (x * Math.cos(angle) - y * Math.sin(angle)) * scale * perspective, y: height / 2 + (x * Math.sin(angle) + y * Math.cos(angle)) * scale * perspective, z: depth, size: perspective })
-        }
-      }
-      for (let column = 0; column < columns; column++) {
-        for (let row = 0; row < rows; row++) {
-          const index = column * (rows + 1) + row
-          const point = points[index]
-          const alpha = Math.max(.08, (point.z + 2.3) / 5.6)
-          context.lineWidth = .6 * point.size
-          context.strokeStyle = `rgba(230,231,224,${alpha * .52})`
-          context.beginPath()
-          context.moveTo(point.x, point.y)
-          context.lineTo(points[index + 1].x, points[index + 1].y)
-          context.moveTo(point.x, point.y)
-          context.lineTo(points[index + rows + 1].x, points[index + rows + 1].y)
-          context.stroke()
-          if ((column + row) % 5 === 0) {
-            context.fillStyle = `rgba(246,244,233,${alpha})`
-            context.beginPath()
-            context.arc(point.x, point.y, .9 * point.size, 0, TAU)
-            context.fill()
-          }
-        }
-      }
-      // Two streams travel along the mesh rather than blinking randomly.
-      for (const stream of [0, 1]) {
-        const row = stream === 0 ? 4 : 14
-        const head = Math.floor((time / 140 + stream * 26) % columns)
-        for (let tail = 10; tail >= 0; tail--) {
-          const column = (head - tail + columns) % columns
-          const point = points[column * (rows + 1) + row]
-          const next = points[(column + 1) * (rows + 1) + row]
-          context.strokeStyle = `rgba(255,101,61,${(1 - tail / 11) * .9})`
-          context.lineWidth = 1.9 * point.size
-          context.beginPath()
-          context.moveTo(point.x, point.y)
-          context.lineTo(next.x, next.y)
-          context.stroke()
-        }
-        const point = points[head * (rows + 1) + row]
-        context.fillStyle = '#ff653d'
-        context.shadowColor = '#ff653d'
-        context.shadowBlur = 13
-        context.beginPath()
-        context.arc(point.x, point.y, 3.5 * point.size, 0, TAU)
-        context.fill()
-        context.shadowBlur = 0
-      }
-      canvas.dataset.rendered = 'true'
-    }
-
-    const resize = () => {
-      const rect = scene.getBoundingClientRect()
-      width = rect.width
-      height = rect.height
-      const ratio = Math.min(devicePixelRatio || 1, 1.5)
-      canvas.width = Math.round(width * ratio)
-      canvas.height = Math.round(height * ratio)
-      context.setTransform(ratio, 0, 0, ratio, 0, 0)
-      draw()
-    }
-    const tick = (now: number) => {
-      if (visible && !document.hidden && !paused && !preference.matches && now - lastPaint > 32) {
-        time += Math.min(now - lastPaint, 60)
-        elapsedRef.current = time
-        lastPaint = now
-        draw()
-      } else if (!visible || document.hidden || paused || preference.matches) {
-        lastPaint = now
-      }
-      frame = requestAnimationFrame(tick)
-    }
-    const resizeObserver = new ResizeObserver(resize)
-    resizeObserver.observe(scene)
-    const observer = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting })
-    observer.observe(scene)
-    preference.addEventListener('change', draw)
-    resize()
-    frame = requestAnimationFrame(tick)
-    return () => {
-      cancelAnimationFrame(frame)
-      resizeObserver.disconnect()
-      observer.disconnect()
-      preference.removeEventListener('change', draw)
-    }
+    pausedRef.current = paused
+    const site = sceneRef.current?.closest<HTMLElement>('.company-site')
+    if (site) site.dataset.motionPaused = String(paused)
+    updateRef.current?.()
   }, [paused])
 
-  return (
-    <div className="company-motion-wrap">
-      <div className="company-motion-scene" ref={sceneRef} aria-hidden="true">
-        <div className="company-motion-cross company-motion-cross--top" />
-        <div className="company-motion-cross company-motion-cross--bottom" />
-        <span className="company-motion-coordinate">OTM / FORM EXPLORATION</span>
-        <svg className="company-motion-fallback" viewBox="0 0 500 500" fill="none"><ellipse cx="250" cy="250" rx="160" ry="90" stroke="#73746f" transform="rotate(-25 250 250)" /><ellipse cx="250" cy="250" rx="132" ry="70" stroke="#999a92" transform="rotate(-25 250 250)" /><ellipse cx="250" cy="250" rx="105" ry="52" stroke="#ff653d" transform="rotate(-25 250 250)" /></svg>
-        <canvas ref={canvasRef} className="company-motion-canvas" />
-        <span className="company-motion-note">ONE IDEA. MANY POSSIBILITIES.</span>
-      </div>
-      <div className="company-motion-caption">
-        <span><i /> IDEAS IN MOTION</span>
-        <button type="button" className="company-motion-toggle" aria-label={paused ? 'モーショングラフィックを再生' : 'モーショングラフィックを停止'} aria-pressed={paused} onClick={() => setPaused((value) => !value)}>{paused ? <Play size={13} /> : <Pause size={13} />}<span>{paused ? 'PLAY' : 'PAUSE'}</span></button>
-      </div>
+  useEffect(() => {
+    const canvas = canvasRef.current, scene = sceneRef.current
+    if (!canvas || !scene) return
+    const gl = canvas.getContext('webgl', { alpha: true, antialias: true, preserveDrawingBuffer: false })
+    scene.dataset.renderer = 'fallback'
+    if (!gl) return
+    const shaders: WebGLShader[] = []
+    const shader = (type: number, source: string) => {
+      const item = gl.createShader(type)!
+      shaders.push(item); gl.shaderSource(item, source); gl.compileShader(item)
+      if (!gl.getShaderParameter(item, gl.COMPILE_STATUS)) throw new Error('Graphic shader unavailable')
+      return item
+    }
+    const program = gl.createProgram()!
+    try {
+      gl.attachShader(program, shader(gl.VERTEX_SHADER, vertexSource)); gl.attachShader(program, shader(gl.FRAGMENT_SHADER, fragmentSource)); gl.linkProgram(program)
+      if (!gl.getProgramParameter(program, gl.LINK_STATUS)) throw new Error('Graphic program unavailable')
+    } catch {
+      shaders.forEach((item) => gl.deleteShader(item)); gl.deleteProgram(program); return
+    }
+    const geometry = ribbonGeometry(innerWidth < 800 ? 180 : 280)
+    const vertexBuffer = gl.createBuffer(), indexBuffer = gl.createBuffer()
+    gl.useProgram(program)
+    gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer); gl.bufferData(gl.ARRAY_BUFFER, geometry.vertices, gl.STATIC_DRAW)
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer); gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, geometry.indices, gl.STATIC_DRAW)
+    for (const [name, size, offset] of [['position', 3, 0], ['normal', 3, 12], ['track', 1, 24]] as const) {
+      const attribute = gl.getAttribLocation(program, name)
+      gl.enableVertexAttribArray(attribute); gl.vertexAttribPointer(attribute, size, gl.FLOAT, false, 28, offset)
+    }
+    gl.enable(gl.DEPTH_TEST); gl.clearColor(0, 0, 0, 0)
+    const rotation = gl.getUniformLocation(program, 'rotation'), time = gl.getUniformLocation(program, 'time'), aspect = gl.getUniformLocation(program, 'aspect')
+    const preference = matchMedia('(prefers-reduced-motion: reduce)')
+    let frame = 0, last = 0, painted = 0, visible = true, lost = false
+    const target = { x: 0, y: 0 }, pointer = { x: 0, y: 0 }
+    const draw = () => {
+      if (lost) return
+      scene.dataset.motion = preference.matches ? 'reduced' : pausedRef.current ? 'paused' : 'playing'
+      const seconds = preference.matches ? 0 : elapsed.current / 1000
+      gl.viewport(0, 0, canvas.width, canvas.height); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
+      gl.uniform1f(aspect, canvas.width / canvas.height); gl.uniform1f(time, seconds)
+      gl.uniform2f(rotation, .65 + seconds * .12 + pointer.x * .2, -.45 + Math.sin(seconds * .18) * .15 + pointer.y * .15)
+      gl.drawElements(gl.TRIANGLES, geometry.indices.length, gl.UNSIGNED_SHORT, 0)
+      canvas.dataset.rendered = 'true'; scene.dataset.renderer = 'webgl'; scene.dataset.frame = String(++painted)
+    }
+    const tick = (now: number) => {
+      frame = 0
+      if (now - last >= (innerWidth < 800 ? 48 : 32)) {
+        elapsed.current += Math.min(now - last, 60); last = now
+        pointer.x += (target.x - pointer.x) * .07; pointer.y += (target.y - pointer.y) * .07
+        draw()
+      }
+      if (visible && !document.hidden && !pausedRef.current && !preference.matches && !lost) frame = requestAnimationFrame(tick)
+    }
+    const schedule = () => {
+      cancelAnimationFrame(frame); frame = 0; last = performance.now(); draw()
+      if (visible && !document.hidden && !pausedRef.current && !preference.matches && !lost) frame = requestAnimationFrame(tick)
+    }
+    const resize = () => {
+      const rect = scene.getBoundingClientRect(), ratio = Math.min(devicePixelRatio || 1, innerWidth < 800 ? 1.25 : 1.5)
+      canvas.width = Math.max(1, Math.round(rect.width * ratio)); canvas.height = Math.max(1, Math.round(rect.height * ratio)); draw()
+    }
+    const move = (event: PointerEvent) => { const rect = scene.getBoundingClientRect(); target.x = (event.clientX - rect.left) / rect.width - .5; target.y = (event.clientY - rect.top) / rect.height - .5 }
+    const leave = () => { target.x = 0; target.y = 0 }
+    const contextLost = (event: Event) => { event.preventDefault(); lost = true; scene.dataset.renderer = 'fallback'; cancelAnimationFrame(frame) }
+    const restored = () => setGeneration((value) => value + 1)
+    const resizeObserver = new ResizeObserver(resize)
+    const observer = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; schedule() })
+    resizeObserver.observe(scene); observer.observe(scene)
+    scene.addEventListener('pointermove', move); scene.addEventListener('pointerleave', leave)
+    canvas.addEventListener('webglcontextlost', contextLost); canvas.addEventListener('webglcontextrestored', restored)
+    document.addEventListener('visibilitychange', schedule); preference.addEventListener('change', schedule)
+    updateRef.current = schedule
+    resize(); schedule()
+    return () => {
+      cancelAnimationFrame(frame); resizeObserver.disconnect(); observer.disconnect(); updateRef.current = null
+      scene.removeEventListener('pointermove', move); scene.removeEventListener('pointerleave', leave)
+      canvas.removeEventListener('webglcontextlost', contextLost); canvas.removeEventListener('webglcontextrestored', restored)
+      document.removeEventListener('visibilitychange', schedule); preference.removeEventListener('change', schedule)
+      gl.deleteBuffer(vertexBuffer); gl.deleteBuffer(indexBuffer); shaders.forEach((item) => gl.deleteShader(item)); gl.deleteProgram(program)
+    }
+  }, [generation])
+
+  return <div className="company-motion-wrap">
+    <div className="company-motion-scene" ref={sceneRef} aria-hidden="true">
+      <div className="company-motion-shadow" />
+      <svg className="company-motion-fallback" viewBox="0 0 600 600" fill="none"><path d="M140 270C100 90 450 65 450 280S110 500 135 300 440 110 445 310 115 480 140 270" stroke="#b1b6a9" strokeWidth="48" /><path d="M140 270C100 90 450 65 450 280S110 500 135 300 440 110 445 310 115 480 140 270" stroke="#3b443a" strokeWidth="24" /><path d="M448 252C465 395 275 480 182 399" stroke="#d7fa43" strokeWidth="25" /></svg>
+      <canvas ref={canvasRef} className="company-motion-canvas" />
+      <span className="company-motion-coordinate">FORM 01 — CONTINUOUS THINKING</span><span className="company-motion-note">CHANGE YOUR PERSPECTIVE ↗</span>
     </div>
-  )
+    <div className="company-motion-caption"><span><i /> MADE OF POSSIBILITIES</span><button type="button" className="company-motion-toggle" aria-label={paused ? 'モーショングラフィックを再生' : 'モーショングラフィックを停止'} aria-pressed={paused} onClick={() => setPaused((value) => !value)}>{paused ? <Play size={13} /> : <Pause size={13} />}<span>{paused ? 'PLAY' : 'PAUSE'}</span></button></div>
+  </div>
 }
 
 export function ServiceGraphic({ variant }: { variant: number }) {
-  return (
-    <svg className={`company-service-graphic company-service-graphic--${variant}`} viewBox="0 0 300 160" fill="none" aria-hidden="true">
-      {variant === 0 && <><path d="M99 40 50 80l49 40M201 40l49 40-49 40" className="company-graphic-outline" /><path d="m167 24-34 112" className="company-graphic-accent" /><path d="M115 80h70" className="company-graphic-signal" /><circle cx="150" cy="80" r="4" className="company-graphic-dot" /></>}
-      {variant === 1 && <><path d="M30 40h70l50 40 50-40h70M30 120h70l50-40 50 40h70" className="company-graphic-outline" /><rect x="127" y="57" width="46" height="46" rx="4" className="company-graphic-accent" /><path d="M30 40h70l50 40 50 40h70" className="company-graphic-signal" /><circle cx="150" cy="80" r="4" className="company-graphic-dot" /></>}
-      {variant === 2 && <>{[0, 1, 2].map((row) => [0, 1, 2, 3, 4].map((column) => <rect key={`${row}-${column}`} x={54 + column * 40} y={24 + row * 40} width="30" height="30" rx="2" className={column === 2 && row === 1 ? 'company-graphic-accent' : 'company-graphic-outline'} />))}<path d="M69 79h160" className="company-graphic-signal" /></>}
-    </svg>
-  )
+  return <svg className={`company-service-graphic company-service-graphic--${variant}`} viewBox="0 0 320 190" fill="none" aria-hidden="true">
+    {variant === 0 && <>{[0, 1, 2, 3, 4].map((level) => <path key={level} d={`M50 ${70 + level * 15} 157 ${22 + level * 15} 270 ${70 + level * 15} 161 ${120 + level * 15}Z`} className={level === 2 ? 'company-graphic-accent' : 'company-graphic-outline'} />)}<path d="M50 100 157 52 270 100 161 150Z" className="company-graphic-signal" /></>}
+    {variant === 1 && <>{Array.from({ length: 16 }, (_, row) => <path key={row} d={`M25 ${25 + row * 9}C100 ${170 - row * 6} 210 ${-20 + row * 11} 295 ${25 + row * 9}`} className={row === 8 ? 'company-graphic-accent' : 'company-graphic-outline'} />)}<path d="M25 97C100 122 210 68 295 97" className="company-graphic-signal" /></>}
+    {variant === 2 && <>{Array.from({ length: 9 }, (_, i) => <rect key={i} x={75 + i * 8} y={12 + i * 8} width={165 - i * 16} height={165 - i * 16} transform={`rotate(${i * 5} 157 95)`} className={i === 4 ? 'company-graphic-accent' : 'company-graphic-outline'} />)}<circle cx="157" cy="95" r="5" className="company-graphic-dot" /></>}
+  </svg>
 }

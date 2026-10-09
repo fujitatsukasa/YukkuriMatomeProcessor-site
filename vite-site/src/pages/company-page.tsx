@@ -8,24 +8,26 @@ import { company, companyServices } from '@/data/company'
 export function CompanyPage() {
   return <CompanyLayout title={`${company.name}｜ソフトウェア開発・AI活用・自社プロダクト`}>
     <section className="company-hero" aria-labelledby="company-hero-title">
-      <div className="company-hero-topline"><span><i /> SOFTWARE DEVELOPMENT COMPANY</span><span>JAPAN / OTM CORPORATION</span></div>
-      <div className="company-hero-backdrop" aria-hidden="true">MAKE IT<br /><span>WORK.</span></div>
+      <div className="company-hero-topline"><span><i /> INDEPENDENT SOFTWARE COMPANY</span><span>IDEAS, BUILT TO MOVE. / JAPAN</span></div>
+      <div className="company-hero-stage">
+        <div className="company-hero-type" aria-hidden="true"><span data-intro>Make</span><span className="company-hero-italic" data-intro>it<span className="company-type-star">✳</span></span><span className="company-hero-move" data-intro>move<span>.</span></span></div>
+        <CompanyMotion />
+      </div>
       <div className="company-hero-content">
         <div className="company-hero-copy">
-          <p className="company-eyebrow" data-intro>IDEAS INTO REALITY.</p>
-          <h1 id="company-hero-title"><span data-intro>構想を、</span><span data-intro><em>動く</em>ソフトウェアへ。</span></h1>
-          <p className="company-hero-description" data-intro>Web、デスクトップ、AI。<br />技術をつなぎ、仕事と創作の可能性を広げる。<br />OTMは、アイデアを使える仕組みに変える会社です。</p>
-          <div className="company-actions" data-intro><Link className="company-button company-button--light" to="/services/">私たちがつくるもの <ArrowUpRight size={19} aria-hidden="true" /></Link><Link className="company-text-link" to="/inquiry/">開発について相談する <ArrowUpRight size={16} aria-hidden="true" /></Link></div>
+          <h1 id="company-hero-title" data-intro>構想を、<br />動くソフトウェアへ。</h1>
         </div>
-        <CompanyMotion />
+        <div className="company-hero-detail"><p className="company-hero-description" data-intro>Web、デスクトップ、AI。<br />技術をつなぎ、仕事と創作の可能性を広げる。<br />アイデアを使える仕組みに変える、OTM株式会社。</p><div className="company-actions" data-intro><Link className="company-button company-button--light" to="/services/">私たちがつくるもの <ArrowUpRight size={19} aria-hidden="true" /></Link><Link className="company-text-link" to="/inquiry/">開発について相談する <ArrowUpRight size={16} aria-hidden="true" /></Link></div></div>
       </div>
       <div className="company-hero-bottom"><span>DESIGN <b>/</b> DEVELOP <b>/</b> IMPROVE</span><a href="#about">SCROLL TO EXPLORE <ArrowDown size={16} aria-hidden="true" /></a></div>
     </section>
 
+    <div className="company-ticker" aria-hidden="true"><div className="company-ticker-track">{[0, 1, 2, 3].map((copy) => <span key={copy}>SOFTWARE <i>with a purpose.</i><b>✳</b> IDEAS <i>in motion.</i><b>✳</b></span>)}</div></div>
+
     <section id="about" className="company-section company-about" aria-labelledby="company-about-title">
       <div className="company-section-label"><span>01 / ABOUT US</span><span>私たちについて</span></div>
       <div className="company-about-content">
-        <h2 id="company-about-title" data-company-reveal>そのアイデアに、<br /><span>動き出す力を。</span></h2>
+            <h2 id="company-about-title" data-company-reveal>そのアイデアに、<br /><span>動き出す力を。</span></h2>
         <div className="company-about-copy" data-company-reveal>
           <p>アイデアがある。解決したい手間がある。<br />それを日々使える仕組みに変えるのが、私たちの仕事です。</p>
           <p>OTM株式会社は、Web・デスクトップアプリケーションの開発と、AIを活用した機能づくりに取り組んでいます。使う人の流れを考え、必要な機能を設計し、実際の利用を見ながら改善を重ねます。</p>

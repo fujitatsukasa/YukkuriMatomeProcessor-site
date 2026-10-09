@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ArrowUpRight, Mail } from 'lucide-react'
 import { CompanyLayout, CompanyContactBand, companyInquiry } from '@/components/company-layout'
-import { CompanyWorkCards, CompanyWorkVisual } from '@/components/company-work'
+import { CompanyWorkCards, CompanyWorkTitle, CompanyWorkVisual } from '@/components/company-work'
 import { ServiceGraphic } from '@/components/company-motion'
 import { company, companyServices, companyWorks } from '@/data/company'
 
@@ -49,7 +49,7 @@ export function CompanyPortfolioPage() {
 export function CompanyWorkPage({ slug }: { slug: string }) {
   const work = companyWorks.find((item) => item.slug === slug)!
   return <CompanyLayout title={`${work.title}｜制作事例｜OTM株式会社`} description={work.description}>
-    <section className="company-document-hero company-case-hero"><nav className="company-breadcrumb" aria-label="パンくずリスト"><Link to="/">HOME</Link><span>/</span><Link to="/portfolio/">WORK</Link><span>/</span><span>{work.number}</span></nav><p className="company-eyebrow" data-intro>{work.category}</p><h1 data-intro>{work.title}</h1><p className="company-document-description" data-intro>{work.subtitle}</p><p className="company-case-type">{work.type}</p></section>
+    <section className="company-document-hero company-case-hero"><nav className="company-breadcrumb" aria-label="パンくずリスト"><Link to="/">HOME</Link><span>/</span><Link to="/portfolio/">WORK</Link><span>/</span><span>{work.number}</span></nav><p className="company-eyebrow" data-intro>{work.category}</p><h1 data-intro><CompanyWorkTitle work={work} /></h1><p className="company-document-description" data-intro>{work.subtitle}</p><p className="company-case-type">{work.type}</p></section>
     <div className="company-case-visual"><CompanyWorkVisual work={work} /></div>
     <section className="company-section company-case-overview"><div data-company-reveal><p className="company-eyebrow">OVERVIEW</p><h2>{work.subtitle}</h2><p>{work.description}</p></div><dl data-company-reveal><div><dt>制作区分</dt><dd>{work.type}</dd></div><div><dt>担当範囲</dt><dd>{work.role}</dd></div><div><dt>技術・領域</dt><dd>{work.tags.join(' / ')}</dd></div></dl></section>
     <section className="company-section company-case-body"><div className="company-case-story" data-company-reveal><span>01 / CONTEXT</span><h2>何のためにつくったか。</h2><p>{work.challenge}</p></div><div className="company-case-story" data-company-reveal><span>02 / APPROACH</span><h2>どのように形にしたか。</h2><p>{work.solution}</p></div><div className="company-case-story" data-company-reveal><span>03 / DELIVERABLES</span><h2>制作したもの。</h2><ul>{work.deliverables.map((item) => <li key={item}>{item}</li>)}</ul></div></section>

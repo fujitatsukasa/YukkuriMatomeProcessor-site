@@ -2,6 +2,16 @@
 
 確認日: 2026-10-09
 
+## アートディレクションと実時間グラフィック
+
+会社サイトはアイボリー・深緑・ライムを基本色にし、英字の大きな組版と立体の素材感を組み合わせた。英字見出しは [Barlow Condensed](https://fonts.google.com/specimen/Barlow+Condensed)、斜体は [Bodoni Moda](https://fonts.google.com/specimen/Bodoni+Moda)、小さなラベルは IBM Plex Mono、日本語見出しは [Zen Kaku Gothic Antique](https://fonts.google.com/specimen/Zen+Kaku+Gothic+Antique)、本文は Noto Sans JP。
+
+トップの金属リボンは `src/components/company-motion.tsx` の手続き的メッシュとWebGLシェーダーによる実時間描画。独自の交差するリボン形状に反射・ライム色の帯・奥行き・ポインターに応じた角度変化を与える。静止画像や既存モデルを拡大して動かす実装ではない。以下のBlender作品とは別のWeb表現で、顧客案件や製品の証拠として扱わない。
+
+描画は約30fps、モバイルは約20fpsと低い解像度上限を使用する。画面外・非表示タブでは連続描画を止め、利用者の停止操作と `prefers-reduced-motion` に対応する。停止操作はスクロールする英字帯も止める。WebGLが利用できない場合やコンテキスト喪失時にはSVGを表示する。JavaScriptなしでも静的本文とSVGを表示する。
+
+文字は短い段階的な登場、下部の内容はスクロールに応じた表示を使う。構造・導線・会社情報は会社サイトの9ページを維持し、製品の既存ページへ接続する。画像とBlender作品の来歴は以下のとおり。
+
 ## 公開会社情報
 
 - 法人名、住所、法人番号: [Gビズインフォ](https://info.gbiz.go.jp/hojin/ichiran?hojinBango=1021001079599)。既存サイトの住所と一致。

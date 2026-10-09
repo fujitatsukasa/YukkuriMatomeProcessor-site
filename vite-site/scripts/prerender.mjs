@@ -27,6 +27,12 @@ function sanitizePrerenderedHtml(html, route, localOrigins = internalOrigins) {
   }
   sanitized = keepFirstTitle(sanitized);
 
+  // A captured canvas has no pixels in HTML. Keep the SVG visible until the
+  // visitor's browser has actually rendered its own WebGL frame.
+  sanitized = sanitized.replace(/<(?:div|canvas)\b[^>]*\bclass="[^"]*\bcompany-motion-(?:scene|canvas)\b[^"]*"[^>]*>/g, (tag) =>
+    tag.replace(/\sdata-(?:renderer|rendered|motion|frame)="[^"]*"/g, '')
+  );
+
   if (/https?:\/\/(?:127\.0\.0\.1|localhost)(?::\d+)?/i.test(sanitized)) {
     throw new Error(`Local preview URL leaked into prerendered HTML for ${route}`);
   }

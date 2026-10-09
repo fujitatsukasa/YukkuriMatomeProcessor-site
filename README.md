@@ -18,7 +18,7 @@
 
 会社サイトの表示・導線・静的HTMLを確認するには、ビルド後に `node scripts/verify-company-site.mjs <Dドライブ上の検証保存先の絶対パス>` を `vite-site/` で実行します。スクリーンショットと結果JSONが指定先へ保存されます。動きの録画は `node scripts/record-company-motion.mjs <ローカルプレビューURL> <Dドライブ上の検証保存先>`。Playwrightでブラウザ描画を12fpsで取得し、PATH上のFFmpegで28秒のMP4に保存します。実OSの画面撮影やフォーカス操作は使いません。
 
-見出しは Zen Kaku Gothic New、本文は Noto Sans JP、英字は Manrope。トップのメッシュは形状を連続的に変化させ、一時停止に対応しています。画面外や非表示タブでは描画を止め、`prefers-reduced-motion` では静止します。スクロール演出は内容を隠す前提にせず、JavaScriptなしでも本文とSVGの代替図を表示します。検証スクリプトは5画面幅の表示、フォント読込、描画の変化・停止、動きを減らす設定、静的HTMLも確認します。
+日本語見出しは Zen Kaku Gothic Antique、本文は Noto Sans JP、英字見出しは Barlow Condensed、斜体は Bodoni Moda、ラベルは IBM Plex Mono。アイボリー・深緑・ライムの配色と大きな組版に、WebGLの金属リボンを組み合わせています。立体の回転・反射・ポインターに応じた角度変化と、英字帯のスクロールは一時停止できます。画面外や非表示タブでは連続描画を止め、`prefers-reduced-motion` では静止します。JavaScriptなしやWebGLが使えない環境でも本文とSVGの代替図を表示します。検証スクリプトは5画面幅の表示、フォント読込、描画の変化・停止・復旧、動きを減らす設定、静的HTMLも確認します。
 
 ## ローカル確認
 

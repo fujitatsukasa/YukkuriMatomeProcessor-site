@@ -4,6 +4,12 @@ import { companyWorks } from '@/data/company'
 
 export type CompanyWork = (typeof companyWorks)[number]
 
+export function CompanyWorkTitle({ work }: { work: CompanyWork }) {
+  const boundary = work.slug === 'ymp' ? work.title.indexOf('プロセッサー') : -1
+  if (boundary < 0) return work.title
+  return <><span className="company-title-word">{work.title.slice(0, boundary)}</span><wbr /><span className="company-title-word">{work.title.slice(boundary)}</span></>
+}
+
 export function CompanyWorkVisual({ work }: { work: CompanyWork }) {
   if (work.image) return <div className={`company-work-media${work.slug === '3d-study' ? ' company-work-media--sculpture' : ''}`}><img src={work.image} alt={work.imageAlt} width={work.slug === '3d-study' ? 1200 : 1672} height={work.slug === '3d-study' ? 900 : 941} loading="lazy" decoding="async" /></div>
   return <div className="company-work-media company-work-media--software" aria-label="ゆっくりまとめプロセッサーの制作ワークフローを表す図版">
@@ -15,5 +21,5 @@ export function CompanyWorkVisual({ work }: { work: CompanyWork }) {
 }
 
 export function CompanyWorkCards() {
-  return <div className="company-work-grid">{companyWorks.map((work) => <article className="company-work-card" key={work.slug} data-company-reveal><Link className="company-work-card-link" to={`/portfolio/${work.slug}/`} aria-label={`${work.title}の制作事例を見る`}><CompanyWorkVisual work={work} /><div className="company-work-card-meta"><span>{work.type}</span><ArrowUpRight size={22} aria-hidden="true" /></div><h3>{work.title}</h3><p>{work.subtitle}</p></Link></article>)}</div>
+  return <div className="company-work-grid">{companyWorks.map((work) => <article className="company-work-card" key={work.slug} data-company-reveal><Link className="company-work-card-link" to={`/portfolio/${work.slug}/`} aria-label={`${work.title}の制作事例を見る`}><CompanyWorkVisual work={work} /><div className="company-work-card-meta"><span>{work.type}</span><ArrowUpRight size={22} aria-hidden="true" /></div><h3><CompanyWorkTitle work={work} /></h3><p>{work.subtitle}</p></Link></article>)}</div>
 }
